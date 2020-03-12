@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
+
+/* ------------------------------------------------
+    Button Default
+--------------------------------------------------- */
+
+.btn        { @apply text-white rounded-md px-3 py-2; }
+.btn:focus  { @apply outline-none shadow-outline; }
+
+
+/* ------------------------------------------------
+    Button Colors
+--------------------------------------------------- */
+
+.btn-blue             { @apply bg-blue-500; }
+.btn-blue:hover       { @apply bg-blue-600; }
+.btn-blue:active      { @apply bg-blue-600; }
+
+.btn-gray             { @apply bg-gray-500; }
+.btn-gray:hover       { @apply bg-gray-600; }
+.btn-gray:active      { @apply bg-gray-600; }
+
+.btn-green            { @apply bg-green-500; }
+.btn-green:hover      { @apply bg-green-600; }
+.btn-green:active     { @apply bg-green-600; }
+
+.btn-indigo           { @apply bg-indigo-500; }
+.btn-indigo:hover     { @apply bg-indigo-600; }
+.btn-indigo:active    { @apply bg-indigo-600; }
+
+.btn-orange           { @apply bg-orange-500; }
+.btn-orange:hover     { @apply bg-orange-600; }
+.btn-orange:active    { @apply bg-orange-600; }
+
+.btn-red              { @apply bg-red-500; }
+.btn-red:hover        { @apply bg-red-600; }
+.btn-red:active       { @apply bg-red-600; }
+
+.btn-turquoise        { @apply bg-turquoise-500; }
+.btn-turquoise:hover  { @apply bg-turquoise-600; }
+.btn-turquoise:active { @apply bg-turquoise-600; }
+
+.btn-yellow           { @apply bg-yellow-500; }
+.btn-yellow:hover     { @apply bg-yellow-600; }
+.btn-yellow:active    { @apply bg-yellow-600; }
+
+
 @tailwind utilities;
