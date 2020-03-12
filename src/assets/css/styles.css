@@ -5,7 +5,7 @@
     Button Default
 --------------------------------------------------- */
 
-.btn        { @apply text-white rounded-md px-3 py-2; }
+.btn        { @apply text-white rounded-md px-3 py-2 transition duration-300; }
 .btn:focus  { @apply outline-none shadow-outline; }
 
 
@@ -45,5 +45,12 @@
 .btn-yellow:hover     { @apply bg-yellow-600; }
 .btn-yellow:active    { @apply bg-yellow-600; }
 
+
+/* ------------------------------------------------
+    App Tab
+--------------------------------------------------- */
+
+.app-tab { @apply text-white bg-gray-800 rounded-l-md px-3 py-2 mb-2 w-full transition duration-300; }
+.app-tab:hover { @apply bg-gray-700; }
 
 @tailwind utilities;
