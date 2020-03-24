@@ -9,9 +9,32 @@
       <router-link to="/config" class="app-tab">Config</router-link>
       <router-link to="/utilities" class="app-tab">Utilities</router-link>
       <router-link to="/accounts" class="app-tab">Accounts</router-link>
+      <Logout></Logout>
     </div>
     <div class="w-11/12 rounded-lg bg-gray-100">
       <router-view/>
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+import { AUTH_LOGOUT } from './store/actions/auth'
+import Logout from './components/auth/Logout'
+
+export default {
+  components: {
+    Logout
+  },
+  created: function () {
+    axios.interceptors.response.use(undefined, function (err) {
+      return new Promise(function (resolve, reject) {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch(AUTH_LOGOUT)
+        }
+        throw err
+      })
+    })
+  }
+}
+</script>
