@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/auth/login.vue')
   },
   {
     path: '/login',
@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: '/analytics',
-    name: 'Analyics',
+    name: 'Analytics',
     component: () => import('../views/Analytics.vue'),
     meta: {
       requiresAuth: true
@@ -50,7 +50,16 @@ const routes = [
   {
     path: '/relationships',
     name: 'Relationships',
-    component: () => import('../views/Relationships.vue'),
+    component: () => import('../views/relationships/index.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/client/:id',
+    name: 'Client',
+    props: true,
+    component: () => import('../views/relationships/client.vue'),
     meta: {
       requiresAuth: true
     }
@@ -64,9 +73,29 @@ const routes = [
     }
   },
   {
-    path: '/accounts',
+    path: '/accounts/',
     name: 'Accounts',
-    component: () => import('../views/Accounts.vue')
+    component: () => import('../views/accounts/index.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/accounts/create',
+    name: 'AccountCreate',
+    component: () => import('../views/accounts/create.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/accounts/:id/',
+    name: 'Account',
+    component: () => import('../views/accounts/account.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 

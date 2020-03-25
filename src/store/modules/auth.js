@@ -17,7 +17,7 @@ const actions = {
       commit(AUTH_REQUEST)
       axios({ url: 'http://neutron.localhost:8000/api/accounts/login/', data: user, method: 'POST' })
         .then(resp => {
-          const token = resp.data.key
+          const token = 'Token ' + resp.data.key
           localStorage.setItem('user-token', token)
           axios.defaults.headers.common.Authorization = token
           commit(AUTH_SUCCESS, token)
