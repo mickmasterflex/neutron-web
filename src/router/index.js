@@ -51,7 +51,7 @@ const routes = [
     }
   },
   {
-    path: '/client/:id',
+    path: '/relationships/client/:id',
     name: 'Client',
     props: true,
     component: () => import('../views/relationships/client.vue'),

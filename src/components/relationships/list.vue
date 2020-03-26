@@ -2,7 +2,7 @@
   <ul v-if="clients">
     <li v-for="client in clients" v-bind:key="client.id">
       <router-link :to="{name: 'Client', params: {id:client.id}}" class="underline text-blue-500">
-        {{ client.name }}
+        {{client.id}} - {{client.name}} - {{client.buyercontract_set.length}} - {{client.partnercontract_set.length}}
       </router-link>
     </li>
   </ul>
