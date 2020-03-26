@@ -11,17 +11,14 @@ const routes = [
     component: () => import('../views/Dashboard.vue'),
     meta: {
       requiresAuth: true
+
     }
   },
   {
     path: '/login',
     name: 'Login',
+    meta: { layout: 'simple-layout' },
     component: () => import('../views/auth/login.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
   },
   {
     path: '/analytics',
