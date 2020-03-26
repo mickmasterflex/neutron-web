@@ -1,6 +1,8 @@
 <template>
   <div>
-    {{output}}
+    <h1>{{account.email}}</h1>
+    <h2>{{account.first_name}} {{account.last_name}}</h2>
+    <p>Staff: {{account.is_staff}}</p>
   </div>
 </template>
 
@@ -11,8 +13,14 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://neutron.localhost:8000/api',
-      output: null
+      apiBaseUrl: 'http://proton.localhost:8000/api',
+      output: null,
+      account: {
+        email: '',
+        first_name: '',
+        last_name: '',
+        is_staff: null
+      }
     }
   },
   props: ['id'],
@@ -22,6 +30,7 @@ export default {
         .get(`${this.apiBaseUrl}/users/${this.id}/`)
         .then(response => {
           this.output = response
+          this.account = response.data
         })
         .catch(error => {
           this.output = error
