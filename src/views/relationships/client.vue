@@ -13,11 +13,15 @@
         * {{partnercontract.name}}
       </li>
     </ul>
+    <delete-client v-bind:id="id"></delete-client>
+    <update-client v-bind:id="id"></update-client>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import deleteClient from '../../components/clients/delete'
+import updateClient from '../../components/clients/update'
 
 export default {
   data () {
@@ -35,7 +39,8 @@ export default {
   },
   props: ['id'],
   components: {
-    deleteClient
+    deleteClient,
+    updateClient
   },
   methods: {
     fetchForm () {
