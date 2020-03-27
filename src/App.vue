@@ -20,7 +20,7 @@
 <script>
 import axios from 'axios'
 import { AUTH_LOGOUT } from './store/actions/auth'
-import logoutButton from './components/auth/Logout'
+import logoutButton from './components/auth/logout'
 
 export default {
   components: {
