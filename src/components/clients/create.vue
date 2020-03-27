@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="createClient">
+  <form @submit.prevent="create">
     <label for="name">Client Name</label>
     <input type="text" v-model="name" required id="name">
     <label for="slug">Slug</label>
@@ -14,7 +14,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      apiBaseUrl: 'http://neutron.localhost:8000/api',
+      apiBaseUrl: 'http://proton.localhost:8000/api',
       name: '',
       slug: '',
       buyercontract_set: [],

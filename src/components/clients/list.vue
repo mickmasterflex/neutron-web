@@ -15,7 +15,7 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://neutron.localhost:8000/api',
+      apiBaseUrl: 'http://proton.localhost:8000/api',
       clients: null
     }
   },

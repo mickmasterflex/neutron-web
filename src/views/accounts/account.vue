@@ -3,11 +3,13 @@
     <h1>{{account.email}}</h1>
     <h2>{{account.first_name}} {{account.last_name}}</h2>
     <p>Staff: {{account.is_staff}}</p>
+    <delete-user v-bind:id="id"></delete-user>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import deleteUser from '../../components/accounts/delete'
 
 export default {
   data () {
@@ -24,6 +26,9 @@ export default {
     }
   },
   props: ['id'],
+  components: {
+    deleteUser
+  },
   methods: {
     getUser () {
       axios

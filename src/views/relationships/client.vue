@@ -2,13 +2,15 @@
   <div>
     <h1>{{client.name}}</h1>
     <ul v-if="client.buyercontract_set">
+      Buyer Contract Set
       <li v-for="buyercontract in client.buyercontract_set" v-bind:key="buyercontract.key">
-        {{buyercontract.name}}
+        * {{buyercontract.name}}
       </li>
     </ul>
     <ul v-if="client.partnercontract_set">
+      Partner Contract Set
       <li v-for="partnercontract in client.partnercontract_set" v-bind:key="partnercontract.key">
-        {{partnercontract.name}}
+        * {{partnercontract.name}}
       </li>
     </ul>
   </div>
@@ -32,6 +34,9 @@ export default {
     }
   },
   props: ['id'],
+  components: {
+    deleteClient
+  },
   methods: {
     fetchForm () {
       axios

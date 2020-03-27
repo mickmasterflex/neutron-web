@@ -11,7 +11,6 @@
       <input type="checkbox" v-model="is_staff" id="isStaff">
       <button type="submit" class="btn btn-green">Submit</button>
     </form>
-    {{output}}
   </div>
 </template>
 
@@ -41,6 +40,7 @@ export default {
         .then(response => {
           this.output = response
           console.log(response)
+          this.$router.push({ name: 'Accounts' })
         })
         .catch(error => {
           this.output = error

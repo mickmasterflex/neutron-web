@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import clientList from '../../components/relationships/list'
-import createClient from '../../components/relationships/createClient'
+import clientList from '../../components/clients/list'
+import createClient from '../../components/clients/create'
 
 export default {
   data () {
