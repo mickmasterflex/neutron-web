@@ -17,7 +17,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      apiBaseUrl: 'http://proton.localhost:8000/api',
+      apiBaseUrl: 'http://127.0.0.1:8000/api',
       name: '',
       slug: '',
       buyercontract_set: [],

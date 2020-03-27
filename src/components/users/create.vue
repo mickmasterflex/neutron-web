@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://neutron.localhost:8000/api',
+      apiBaseUrl: 'http://127.0.0.1:8000/api',
       first_name: '',
       last_name: '',
       email: '',
