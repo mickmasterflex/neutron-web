@@ -43,7 +43,7 @@ export default {
     updateClient
   },
   methods: {
-    fetchForm () {
+    getClient () {
       axios
         .get(`${this.apiBaseUrl}/clients/${this.id}/`)
         .then(response => {
@@ -57,7 +57,7 @@ export default {
     }
   },
   created () {
-    this.fetchForm()
+    this.getClient()
   }
 }
 </script>
