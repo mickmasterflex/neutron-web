@@ -68,25 +68,25 @@ const routes = [
     }
   },
   {
-    path: '/accounts/',
-    name: 'Accounts',
-    component: () => import('../views/accounts/index.vue'),
+    path: '/users/',
+    name: 'Users',
+    component: () => import('../views/users/index.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/accounts/create',
-    name: 'AccountCreate',
-    component: () => import('../views/accounts/create.vue'),
+    path: '/users/create',
+    name: 'UserCreate',
+    component: () => import('../views/users/create.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/accounts/:id/',
-    name: 'Account',
-    component: () => import('../views/accounts/account.vue'),
+    path: '/users/:id/',
+    name: 'User',
+    component: () => import('../views/users/user.vue'),
     props: true,
     meta: {
       requiresAuth: true

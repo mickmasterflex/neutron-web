@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="user in users" v-bind:key="user.email">
-      <router-link :to="{name: 'Account', params: {id:user.id}}" class="underline text-blue-500">
+      <router-link :to="{name: 'User', params: {id:user.id}}" class="underline text-blue-500">
         {{ user.email }}
       </router-link>
     </li>

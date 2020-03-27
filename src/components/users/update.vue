@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="bold">Edit Account</p>
+    <p class="bold">Edit User</p>
     <form @submit.prevent="updateUser">
       <label for="firstName">First Name</label>
       <input type="text" v-model="user.first_name" required id="firstName">
@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://proton.localhost:8000/api',
+      apiBaseUrl: 'http://neutron.localhost:8000/api',
       user: {
         first_name: '',
         last_name: '',
@@ -44,7 +44,7 @@ export default {
         .then(response => {
           this.output = response
           console.log(response)
-          this.$router.push({ name: 'Accounts' })
+          this.$router.push({ name: 'Users' })
         })
         .catch(error => {
           this.output = error

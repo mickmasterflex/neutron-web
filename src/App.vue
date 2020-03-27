@@ -8,7 +8,7 @@
       <router-link :to="{name: 'Products'}" class="app-tab">Products</router-link>
       <router-link :to="{name: 'Config'}" class="app-tab">Config</router-link>
       <router-link :to="{name: 'Utilities'}" class="app-tab">Utilities</router-link>
-      <router-link :to="{name: 'Accounts'}" class="app-tab">Accounts</router-link>
+      <router-link :to="{name: 'Users'}" class="app-tab">Users</router-link>
       <logout-button></logout-button>
     </div>
     <div class="w-11/12 rounded-lg bg-gray-100">

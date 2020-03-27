@@ -40,7 +40,7 @@ export default {
         .then(response => {
           this.output = response
           console.log(response)
-          this.$router.push({ name: 'Accounts' })
+          this.$router.push({ name: 'Users' })
         })
         .catch(error => {
           this.output = error
