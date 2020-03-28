@@ -47,6 +47,15 @@
 
 
 /* ------------------------------------------------
+    Tables
+--------------------------------------------------- */
+.td, .th { @apply font-normal px-2 py-1; }
+.th { @apply text-left text-white bg-gray-900 }
+.th:first-child { @apply rounded-l-sm }
+.th:last-child { @apply rounded-r-sm }
+
+
+/* ------------------------------------------------
     App Tab
 --------------------------------------------------- */
 

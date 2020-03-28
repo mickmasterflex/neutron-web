@@ -11,7 +11,7 @@
       <router-link :to="{name: 'Users'}" class="app-tab">Users</router-link>
       <logout-button></logout-button>
     </div>
-    <div class="w-11/12 rounded-lg bg-gray-100">
+    <div class="w-11/12 rounded-lg bg-gray-100 p-5">
       <router-view/>
     </div>
   </div>

@@ -1,40 +1,29 @@
 <template>
-  <ul v-if="clients">
-    <li v-for="client in clients" v-bind:key="client.id">
-      <router-link :to="{name: 'Client', params: {id:client.id}}" class="underline text-blue-500">
-        {{client.id}} - {{client.name}} - {{client.buyercontract_set.length}} - {{client.partnercontract_set.length}}
-      </router-link>
-    </li>
-  </ul>
+  <div>
+    <table v-if="clients" class="w-full">
+      <tr class="th-row">
+        <th class="th">Name</th>
+        <th class="th">ID</th>
+        <th class="th">Buyer Contracts</th>
+        <th class="th">Partner Contracts</th>
+      </tr>
+      <tr v-for="client in clients" v-bind:key="client.id">
+        <td class="td">
+          <router-link :to="{name: 'Client', params: {id:client.id}}" class="underline text-blue-500">{{client.name}}</router-link>
+        </td>
+        <td class="td">{{client.id}}</td>
+        <td class="td">{{client.buyercontract_set.length}}</td>
+        <td class="td">{{client.partnercontract_set.length}}</td>
+      </tr>
+    </table>
+    <div v-else>
+      ...Loading...
+    </div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
-      clients: null
-    }
-  },
-  methods: {
-    getClients () {
-      axios
-        .get(`${this.apiBaseUrl}/clients/`)
-        .then(response => {
-          console.log(response)
-          this.clients = response.data
-        })
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-        })
-    }
-  },
-  created () {
-    this.getClients()
-  }
+  props: ['clients']
 }
 </script>
