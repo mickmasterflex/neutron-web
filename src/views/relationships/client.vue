@@ -13,8 +13,8 @@
         * {{partnercontract.name}}
       </li>
     </ul>
-    <delete-client v-bind:id="id"></delete-client>
-    <update-client v-bind:id="id"></update-client>
+    <delete-client v-bind:id="client.id"></delete-client>
+    <update-client v-bind:id="client.id"></update-client>
   </div>
 </template>
 
@@ -31,13 +31,14 @@ export default {
       client: {
         name: null,
         slug: null,
+        id: null,
         buyercontract_set: [],
         partnercontract_set: []
       },
       output: null
     }
   },
-  props: ['id'],
+  props: ['slug'],
   components: {
     deleteClient,
     updateClient
@@ -45,10 +46,10 @@ export default {
   methods: {
     getClient () {
       axios
-        .get(`${this.apiBaseUrl}/clients/${this.id}/`)
+        .get(`${this.apiBaseUrl}/clients/?slug=${this.slug}/`)
         .then(response => {
           this.output = response
-          this.client = response.data
+          this.client = response.data[0]
         })
         .catch(error => {
           this.output = error
