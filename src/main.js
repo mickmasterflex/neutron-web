@@ -4,10 +4,12 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import simpleLayout from './layouts/simpleLayout'
+import appLayout from './layouts/appLayout'
 import './assets/css/styles.css'
 
 Vue.config.productionTip = false
 Vue.component('simple-layout', simpleLayout)
+Vue.component('app-layout', appLayout)
 
 const token = localStorage.getItem('user-token')
 
