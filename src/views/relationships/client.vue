@@ -1,20 +1,24 @@
 <template>
   <div>
-    <h1>{{client.name}}</h1>
-    <ul v-if="client.buyercontract_set">
-      Buyer Contract Set
-      <li v-for="buyercontract in client.buyercontract_set" v-bind:key="buyercontract.key">
-        * {{buyercontract.name}}
-      </li>
-    </ul>
-    <ul v-if="client.partnercontract_set">
-      Partner Contract Set
-      <li v-for="partnercontract in client.partnercontract_set" v-bind:key="partnercontract.key">
-        * {{partnercontract.name}}
-      </li>
-    </ul>
-    <delete-client v-bind:id="client.id"></delete-client>
+    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+      <h1 class="text-white text-4xl font-hairline">{{client.name}}</h1>
+      <div>
+        <stat-card v-bind:data="partnerContractCount" v-bind:title="`Partner Contracts`" v-bind:color="`teal`"></stat-card>
+        <stat-card v-bind:data="buyerContractCount" v-bind:title="`Buyer Contracts`" v-bind:color="`teal`"></stat-card>
+      </div>
+    </div>
+
+    <h3 class="text-2xl font-hairline mt-5 mb-2">Buyer Contracts</h3>
+    <buyer-contracts v-bind:contracts="client.buyercontract_set"></buyer-contracts>
+
+    <h3 class="text-2xl font-hairline mt-5 mb-2">Partner Contracts</h3>
+    <buyer-contracts v-bind:contracts="client.partnercontract_set"></buyer-contracts>
+
+    <h3 class="text-2xl font-hairline mt-5 mb-2">Edit Client</h3>
     <update-client v-bind:id="client.id"></update-client>
+
+    <h3 class="text-2xl font-hairline mt-5 mb-2">Delete Client</h3>
+    <delete-client v-bind:id="client.id"></delete-client>
   </div>
 </template>
 
@@ -22,6 +26,8 @@
 import axios from 'axios'
 import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
+import buyerContracts from '../../components/contracts/list'
+import statCard from '../../components/cards/stat-card'
 
 export default {
   data () {
@@ -39,9 +45,19 @@ export default {
     }
   },
   props: ['slug'],
+  computed: {
+    partnerContractCount: function () {
+      return this.client.partnercontract_set.length
+    },
+    buyerContractCount: function () {
+      return this.client.buyercontract_set.length
+    }
+  },
   components: {
     deleteClient,
-    updateClient
+    updateClient,
+    buyerContracts,
+    statCard
   },
   methods: {
     getClient () {

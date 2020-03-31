@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p class="bold">Edit Client</p>
     <form @submit.prevent="updateClient">
       <label for="name">Client Name</label>
       <input type="text" v-model="name" required id="name">
