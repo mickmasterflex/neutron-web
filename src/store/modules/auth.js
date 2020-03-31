@@ -1,5 +1,5 @@
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/auth'
-import axios from 'axios'
+import axios from '../../axios'
 
 const state = {
   token: localStorage.getItem('user-token') || '',

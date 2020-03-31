@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p class="bold">Edit Client</p>
     <form @submit.prevent="updateClient">
       <label for="name">Client Name</label>
       <input type="text" v-model="name" required id="name">
@@ -12,12 +11,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 
 export default {
   data () {
     return {
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       name: '',
       slug: '',
       buyercontract_set: [],
@@ -28,7 +26,7 @@ export default {
   props: ['id'],
   methods: {
     updateClient () {
-      axios.put(`${this.apiBaseUrl}/clients/${this.id}/`, {
+      axios.put(`/clients/${this.id}/`, {
         name: this.name,
         slug: this.slug,
         buyercontract_set: this.buyercontract_set,

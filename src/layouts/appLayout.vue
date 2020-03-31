@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="h-screen flex flex-row p-5">
+  <div class="h-screen flex flex-row p-5">
     <div id="nav" class="w-1/12 h-screen flex flex-col items-center justify-center">
 <!--<div class="pr-5 mb-5"><img alt="Proton Logo" class="w-full h-auto" src="../public/images/logo.png"></div>-->
       <router-link :to="{name: 'Dashboard'}" class="app-tab">Dashboard</router-link>
@@ -11,7 +11,7 @@
       <router-link :to="{name: 'Users'}" class="app-tab">Users</router-link>
       <logout-button></logout-button>
     </div>
-    <div class="w-11/12 rounded-lg bg-gray-100">
+    <div class="w-11/12 rounded-lg bg-gray-100 p-5">
       <slot/>
     </div>
   </div>
@@ -22,7 +22,7 @@ import logoutButton from '../components/auth/logout'
 
 export default {
   components: {
-    logoutButton
+    'logout-button': logoutButton
   }
 }
 

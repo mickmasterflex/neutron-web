@@ -9,12 +9,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 
 export default {
   data () {
     return {
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       name: '',
       slug: '',
       buyercontract_set: [],
@@ -24,7 +23,7 @@ export default {
   },
   methods: {
     createClient () {
-      axios.post(`${this.apiBaseUrl}/clients/`, {
+      axios.post('/clients/', {
         name: this.name,
         slug: this.slug,
         buyercontract_set: this.buyercontract_set,

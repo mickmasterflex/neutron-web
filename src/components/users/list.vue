@@ -9,13 +9,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 
 export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       users: null,
       error: null
     }
@@ -23,9 +22,8 @@ export default {
   methods: {
     getUsers () {
       axios
-        .get(`${this.apiBaseUrl}/users/`)
+        .get('/users/')
         .then(response => {
-          console.log(response)
           this.users = response.data
         })
         .catch(error => {

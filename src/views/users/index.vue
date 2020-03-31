@@ -10,7 +10,7 @@ import userList from '../../components/users/list'
 
 export default {
   components: {
-    userList
+    'user-list': userList
   }
 }
 </script>

@@ -93,6 +93,13 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/*',
+    component: () => import('../views/error/404.vue'),
+    meta: {
+      title: '404 - Uh Oh'
+    }
   }
 ]
 

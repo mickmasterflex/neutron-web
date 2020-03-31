@@ -15,13 +15,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 
 export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       first_name: '',
       last_name: '',
       email: '',
@@ -31,7 +30,7 @@ export default {
   },
   methods: {
     createUser () {
-      axios.post(`${this.apiBaseUrl}/users/`, {
+      axios.post('/users/', {
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
