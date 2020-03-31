@@ -10,7 +10,7 @@ import loginForm from '../../components/auth/login'
 export default {
   name: 'login',
   components: {
-    loginForm
+    'login-form': loginForm
   }
 }
 </script>

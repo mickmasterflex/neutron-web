@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from './axios'
 import { AUTH_LOGOUT } from './store/actions/auth'
 const appLayout = 'app'
 

@@ -16,13 +16,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 
 export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       user: {
         first_name: '',
         last_name: '',
@@ -35,7 +34,7 @@ export default {
   props: ['id'],
   methods: {
     updateUser () {
-      axios.put(`${this.apiBaseUrl}/users/${this.id}/`, {
+      axios.put(`/users/${this.id}/`, {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
         email: this.user.email,

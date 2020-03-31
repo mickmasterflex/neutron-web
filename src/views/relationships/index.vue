@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 import clientList from '../../components/clients/list'
 import createClient from '../../components/clients/create'
 import statCard from '../../components/cards/stat-card'
@@ -21,14 +21,13 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       clients: null
     }
   },
   components: {
-    clientList,
-    createClient,
-    statCard
+    'client-list': clientList,
+    'create-client': createClient,
+    'stat-card': statCard
   },
   computed: {
     clientCount: function () {
@@ -38,7 +37,7 @@ export default {
   methods: {
     getClients () {
       axios
-        .get(`${this.apiBaseUrl}/clients/`)
+        .get('/clients/')
         .then(response => {
           console.log(response)
           this.clients = response.data

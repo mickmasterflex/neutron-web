@@ -22,7 +22,7 @@ import logoutButton from '../components/auth/logout'
 
 export default {
   components: {
-    logoutButton
+    'logout-button': logoutButton
   }
 }
 

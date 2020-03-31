@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 import deleteUser from '../../components/users/delete'
 import updateUser from '../../components/users/update'
 
@@ -17,7 +17,6 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       output: null,
       user: {
         email: '',
@@ -29,13 +28,13 @@ export default {
   },
   props: ['id'],
   components: {
-    deleteUser,
-    updateUser
+    'delete-user': deleteUser,
+    'update-user': updateUser
   },
   methods: {
     getUser () {
       axios
-        .get(`${this.apiBaseUrl}/users/${this.id}/`)
+        .get(`/users/${this.id}/`)
         .then(response => {
           this.output = response
           this.user = response.data

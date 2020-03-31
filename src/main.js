@@ -2,10 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from 'axios'
 import simpleLayout from './layouts/simpleLayout'
 import appLayout from './layouts/appLayout'
 import './assets/css/styles.css'
+import axios from './axios'
 
 Vue.config.productionTip = false
 Vue.component('simple-layout', simpleLayout)

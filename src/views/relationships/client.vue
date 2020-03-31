@@ -9,10 +9,10 @@
     </div>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Buyer Contracts</h3>
-    <buyer-contracts v-bind:contracts="client.buyercontract_set"></buyer-contracts>
+    <contract-list v-bind:contracts="client.buyercontract_set"></contract-list>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Partner Contracts</h3>
-    <buyer-contracts v-bind:contracts="client.partnercontract_set"></buyer-contracts>
+    <contract-list v-bind:contracts="client.partnercontract_set"></contract-list>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Edit Client</h3>
     <update-client v-bind:id="client.id"></update-client>
@@ -23,17 +23,16 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../../axios'
 import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
-import buyerContracts from '../../components/contracts/list'
+import contractList from '../../components/contracts/list'
 import statCard from '../../components/cards/stat-card'
 
 export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
       client: {
         name: null,
         slug: null,
@@ -44,7 +43,7 @@ export default {
       output: null
     }
   },
-  props: ['slug'],
+  props: ['id'],
   computed: {
     partnerContractCount: function () {
       return this.client.partnercontract_set.length
@@ -54,18 +53,18 @@ export default {
     }
   },
   components: {
-    deleteClient,
-    updateClient,
-    buyerContracts,
-    statCard
+    'delete-client': deleteClient,
+    'update-client': updateClient,
+    'contract-list': contractList,
+    'stat-card': statCard
   },
   methods: {
     getClient () {
       axios
-        .get(`${this.apiBaseUrl}/clients/?slug=${this.slug}/`)
+        .get(`/clients/${this.id}/`)
         .then(response => {
           this.output = response
-          this.client = response.data[0]
+          this.client = response.data
         })
         .catch(error => {
           this.output = error
