@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="font-bold mt-5">Partner Contracts</h1>
     <form @submit.prevent="createPartnerContract">
       <label for="name">Name</label>
       <input type="text" v-model="name" id="name" class="base-field">
