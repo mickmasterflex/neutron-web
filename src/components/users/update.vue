@@ -1,22 +1,21 @@
 <template>
   <div>
-    <p class="bold">Edit User</p>
     <form @submit.prevent="updateUser">
       <label for="firstName">First Name</label>
-      <input type="text" v-model="user.first_name" required id="firstName">
+      <input type="text" v-model="user.first_name" id="firstName" class="base-field" required>
       <label for="lastName">Last Name</label>
-      <input type="text" v-model="user.last_name" required id="lastName">
+      <input type="text" v-model="user.last_name" id="lastName" class="base-field" required>
       <label for="email">Email</label>
-      <input type="text" v-model="user.email" required id="email">
-      <label for="isStaff">Staff</label>
-      <input type="checkbox" v-model="user.is_staff" id="isStaff">
-      <button type="submit" class="btn btn-green">Submit</button>
+      <input type="text" v-model="user.email" id="email" class="base-field" required>
+      <single-checkbox v-bind:label="'Staff'" v-bind:model="user.is_staff" v-bind:id="'isStaff'"></single-checkbox>
+      <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
 import axios from '../../axios'
+import singleCheckbox from '../utilities/forms/singleCheckbox'
 
 export default {
   data () {
@@ -32,6 +31,9 @@ export default {
     }
   },
   props: ['id'],
+  components: {
+    'single-checkbox': singleCheckbox
+  },
   methods: {
     updateUser () {
       axios.put(`/users/${this.id}/`, {
