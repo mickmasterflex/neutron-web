@@ -34,7 +34,6 @@ export default {
       })
         .then(response => {
           this.output = response
-          console.log(response)
           this.$router.push({ name: 'Relationships' })
         })
         .catch(error => {

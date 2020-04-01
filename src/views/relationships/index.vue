@@ -21,7 +21,8 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      clients: null
+      clients: null,
+      output: ''
     }
   },
   components: {
@@ -39,11 +40,10 @@ export default {
       axios
         .get('/clients/')
         .then(response => {
-          console.log(response)
           this.clients = response.data
         })
         .catch(error => {
-          console.log(error)
+          this.output = error
           this.errored = true
         })
     }
