@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import simpleLayout from './layouts/simpleLayout'
 import appLayout from './layouts/appLayout'
+import simpleLayout from './layouts/simpleLayout'
 import './assets/css/styles.css'
 import axios from './axios'
 
@@ -19,6 +19,7 @@ if (token) {
 
 new Vue({
   router,
+
   store,
   render: h => h(App)
 }).$mount('#app')
