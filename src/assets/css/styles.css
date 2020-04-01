@@ -62,4 +62,17 @@
 .app-tab { @apply text-white bg-gray-800 rounded-l-md px-3 py-2 mb-2 w-full transition duration-300; }
 .app-tab:hover { @apply bg-gray-700; }
 
+
+/* ------------------------------------------------
+    Form Fields
+--------------------------------------------------- */
+
+.select-field { @apply appearance-none; }
+.select-field-wrap { @apply relative w-64 }
+
+.base-field { @apply block w-64 bg-white border border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight; }
+.base-field:hover { @apply border-gray-500 }
+.base-field:focus { @apply outline-none shadow-outline }
+
+
 @tailwind utilities;
