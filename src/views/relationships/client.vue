@@ -12,7 +12,7 @@
     <contract-list v-bind:contracts="client.buyercontract_set"></contract-list>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Partner Contracts</h3>
-    <contract-list v-bind:contracts="client.partnercontract_set"></contract-list>
+    <partner-contract-list v-bind:contracts="client.partnercontract_set"></partner-contract-list>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Edit Client</h3>
     <update-client v-bind:id="client.id"></update-client>
@@ -29,6 +29,7 @@
 import axios from '../../axios'
 import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
+import partnerContractList from '../../components/contracts/partner/list'
 import contractList from '../../components/contracts/list'
 import createPartnerContract from '../../components/contracts/partner/create'
 import statCard from '../../components/utilities/cards/stat-card'
@@ -61,6 +62,7 @@ export default {
     'delete-client': deleteClient,
     'update-client': updateClient,
     'contract-list': contractList,
+    'partner-contract-list': partnerContractList,
     'create-partner-contract': createPartnerContract
   },
   methods: {
