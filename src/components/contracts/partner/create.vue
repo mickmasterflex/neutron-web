@@ -40,7 +40,6 @@ export default {
           this.output = response
         })
         .catch(error => {
-          console.log(error)
           this.output = error
         })
     }
