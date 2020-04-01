@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="createClient">
     <label for="name">Client Name</label>
-    <input type="text" v-model="name" required id="name">
+    <input type="text" v-model="name" id="name" class="base-field" required>
     <label for="slug">Slug</label>
-    <input type="text" v-model="slug" required id="slug">
-    <button type="submit" class="btn btn-green">Submit</button>
+    <input type="text" v-model="slug" id="slug" class="base-field" required>
+    <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>
 </template>
 
