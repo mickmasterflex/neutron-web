@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen flex flex-row p-5">
-    <div id="nav" class="w-1/12 h-screen flex flex-col items-center justify-center">
+  <div class="min-h-screen flex flex-row p-5">
+    <div id="nav" class="w-1/12 min-h-screen flex flex-col items-center justify-center">
 <!--<div class="pr-5 mb-5"><img alt="Proton Logo" class="w-full h-auto" src="../public/images/logo.png"></div>-->
       <router-link :to="{name: 'Dashboard'}" class="app-tab">Dashboard</router-link>
       <router-link :to="{name: 'Analytics'}" class="app-tab">Analytics</router-link>

@@ -27,7 +27,7 @@ import axios from '../../axios'
 import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
 import contractList from '../../components/contracts/list'
-import statCard from '../../components/cards/stat-card'
+import statCard from '../../components/utilities/cards/stat-card'
 
 export default {
   data () {

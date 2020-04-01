@@ -15,7 +15,7 @@
 import axios from '../../axios'
 import clientList from '../../components/clients/list'
 import createClient from '../../components/clients/create'
-import statCard from '../../components/cards/stat-card'
+import statCard from '../../components/utilities/cards/stat-card'
 
 export default {
   data () {
