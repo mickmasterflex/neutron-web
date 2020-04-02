@@ -2,14 +2,20 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import simpleLayout from './layouts/simpleLayout'
-import appLayout from './layouts/appLayout'
-import './assets/css/styles.css'
 import axios from './axios'
 
-Vue.config.productionTip = false
-Vue.component('simple-layout', simpleLayout)
-Vue.component('app-layout', appLayout)
+import './assets/css/styles.css'
+import simpleLayout from './layouts/simpleLayout'
+import appLayout from './layouts/appLayout'
+
+import statCard from './components/global/cards/stat-card'
+import selectFieldStacked from './components/global/forms/stacked/select_field'
+import textFieldStacked from './components/global/forms/stacked/text_field'
+import checkboxSingle from './components/global/forms/checkbox_single'
+
+/* -----------------------------------------------
+  Authentication
+-------------------------------------------------- */
 
 const token = localStorage.getItem('user-token')
 
@@ -17,11 +23,26 @@ if (token) {
   axios.defaults.headers.common.Authorization = token
 }
 
-Vue.filter('capitalize', function (value) {
-  if (!value) return ''
-  value = value.toString()
-  return value.charAt(0).toUpperCase() + value.slice(1)
-})
+/* -----------------------------------------------
+  Layouts
+-------------------------------------------------- */
+
+Vue.config.productionTip = false
+Vue.component('simple-layout', simpleLayout)
+Vue.component('app-layout', appLayout)
+
+/* -----------------------------------------------
+  Global Components
+-------------------------------------------------- */
+
+Vue.component('stat-card', statCard)
+Vue.component('select-field-stacked', selectFieldStacked)
+Vue.component('text-field-stacked', textFieldStacked)
+Vue.component('checkbox-single', checkboxSingle)
+
+/* -----------------------------------------------
+  Root Vue Instance
+-------------------------------------------------- */
 
 new Vue({
   router,

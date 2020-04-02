@@ -62,7 +62,7 @@ const routes = [
     }
   },
   {
-    path: '/utilities',
+    path: '/global',
     name: 'Utilities',
     component: () => import('../views/Utilities.vue'),
     meta: {

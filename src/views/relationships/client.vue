@@ -32,7 +32,6 @@ import updateClient from '../../components/clients/update'
 import partnerContractList from '../../components/contracts/partner/list'
 import contractList from '../../components/contracts/list'
 import createPartnerContract from '../../components/contracts/partner/create'
-import statCard from '../../components/utilities/cards/stat-card'
 
 export default {
   data () {
@@ -58,7 +57,6 @@ export default {
     }
   },
   components: {
-    'stat-card': statCard,
     'delete-client': deleteClient,
     'update-client': updateClient,
     'contract-list': contractList,

@@ -17,7 +17,6 @@
 import axios from '../../axios'
 import clientList from '../../components/clients/list'
 import createClient from '../../components/clients/create'
-import statCard from '../../components/utilities/cards/stat-card'
 
 export default {
   data () {
@@ -29,8 +28,7 @@ export default {
   },
   components: {
     'client-list': clientList,
-    'create-client': createClient,
-    'stat-card': statCard
+    'create-client': createClient
   },
   computed: {
     clientCount: function () {
