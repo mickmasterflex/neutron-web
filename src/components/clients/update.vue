@@ -1,14 +1,13 @@
 <template>
   <form @submit.prevent="updateClient">
-    <text-field v-model="name" field_id="clientName" label="Client Name" :required="true"></text-field>
-    <text-field v-model="slug" field_id="clientSlug" label="Slug" :required="true"></text-field>
+    <text-field-stacked v-model="name" field_id="clientName" label="Client Name" :required="true"></text-field-stacked>
+    <text-field-stacked v-model="slug" field_id="clientSlug" label="Slug" :required="true"></text-field-stacked>
     <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>
 </template>
 
 <script>
 import axios from '../../axios'
-import textField from '../utilities/forms/stacked/text_field'
 
 export default {
   data () {
@@ -19,9 +18,6 @@ export default {
     }
   },
   props: ['id'],
-  components: {
-    'text-field': textField
-  },
   methods: {
     updateClient () {
       axios.put(`/clients/${this.id}/`, {

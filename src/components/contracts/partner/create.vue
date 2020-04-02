@@ -1,15 +1,13 @@
 <template>
   <form @submit.prevent="createPartnerContract">
-    <text-field v-model="name" field_id="name" label="Name" :required="true"></text-field>
-    <select-field v-model="parent" :options="partnerContracts" field_id="parent" label="Parent"></select-field>
+    <text-field-stacked v-model="name" field_id="name" label="Name" :required="true"></text-field-stacked>
+    <select-field-stacked v-model="parent" :options="partnerContracts" field_id="parent" label="Parent"></select-field-stacked>
     <button class="btn btn-green mt-5">Create Partner Contract</button>
   </form>
 </template>
 
 <script>
 import axios from '../../../axios'
-import selectField from '../../utilities/forms/stacked/select_field'
-import textField from '../../utilities/forms/stacked/text_field'
 
 export default {
   data () {
@@ -20,10 +18,6 @@ export default {
     }
   },
   props: ['client', 'partnerContracts'],
-  components: {
-    'select-field': selectField,
-    'text-field': textField
-  },
   methods: {
     createPartnerContract () {
       axios.post('/partners/', {
