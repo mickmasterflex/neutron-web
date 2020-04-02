@@ -4,7 +4,7 @@
       <tr class="th-row">
         <th class="th">Name</th>
       </tr>
-      <tr v-for="contract in contracts" v-bind:key="contract.id">
+      <tr v-for="contract in contracts" :key="contract.id">
         <td class="td">
           <router-link :to="{name: 'BuyerContract', params: {contract:contract.id}}" class="underline text-blue-500">{{contract.name}}</router-link>
         </td>

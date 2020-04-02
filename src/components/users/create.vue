@@ -1,21 +1,17 @@
 <template>
-  <div>
-    <form @submit.prevent="createUser">
-      <label for="firstName">First Name</label>
-      <input type="text" v-model="first_name" id="firstName" class="base-field" required>
-      <label for="lastName">Last Name</label>
-      <input type="text" v-model="last_name" id="lastName" class="base-field" required>
-      <label for="email">Email</label>
-      <input type="text" v-model="email" id="email" class="base-field" required>
-      <single-checkbox v-bind:label="'Staff'" v-bind:model="user.is_staff" v-bind:id="'isStaff'"></single-checkbox>
-      <button type="submit" class="btn btn-green mt-5">Submit</button>
-    </form>
-  </div>
+  <form @submit.prevent="createUser">
+    <text-field v-model="first_name" :field_id="`first_name`" :label="`First Name`" :required="true"></text-field>
+    <text-field v-model="last_name" :field_id="`last_name`" :label="`Last Name`" :required="true"></text-field>
+    <text-field v-model="email" :field_id="`email`" :label="`Email`" :required="true"></text-field>
+    <checkbox-single v-model="is_staff" :field_id="`is_staff`" :label="`Staff`"></checkbox-single>
+    <button type="submit" class="btn btn-green mt-5">Submit</button>
+  </form>
 </template>
 
 <script>
 import axios from '../../axios'
-import singleCheckbox from '../utilities/forms/checkbox_single'
+import checkboxSingle from '../utilities/forms/checkbox_single'
+import textField from '../utilities/forms/stacked/text_field'
 
 export default {
   data () {
@@ -29,7 +25,8 @@ export default {
     }
   },
   components: {
-    'single-checkbox': singleCheckbox
+    'checkbox-single': checkboxSingle,
+    'text-field': textField
   },
   methods: {
     createUser () {
@@ -41,7 +38,6 @@ export default {
       })
         .then(response => {
           this.output = response
-          console.log(response)
           this.$router.push({ name: 'Users' })
         })
         .catch(error => {
