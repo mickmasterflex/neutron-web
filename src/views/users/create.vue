@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-2xl font-hairline mb-2">Create User</h3>
+    <h3 class="h3 mb-2">Create User</h3>
     <create-user></create-user>
   </div>
 </template>
