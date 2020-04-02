@@ -5,13 +5,14 @@ import store from './store'
 import axios from './axios'
 
 import './assets/css/styles.css'
+
 import simpleLayout from './layouts/simpleLayout'
 import appLayout from './layouts/appLayout'
 
 import statCard from './components/global/cards/stat-card'
-import selectFieldStacked from './components/global/forms/stacked/select_field'
-import textFieldStacked from './components/global/forms/stacked/text_field'
-import checkboxSingle from './components/global/forms/checkbox_single'
+import selectFieldStacked from './components/global/forms/stacked/select-field'
+import textFieldStacked from './components/global/forms/stacked/text-field'
+import checkboxSingle from './components/global/forms/checkbox-single'
 
 /* -----------------------------------------------
   Authentication
