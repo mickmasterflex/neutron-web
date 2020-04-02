@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="createClient">
-    <text-field v-model="name" :field_id="`clientName`" :label="`Client Name`" required="true"></text-field>
-    <text-field v-model="slug" :field_id="`clientSlug`" :label="`Slug`" required="true"></text-field>
+    <text-field v-model="name" field_id="clientName" label="Client Name" required="true"></text-field>
+    <text-field v-model="slug" field_id="clientSlug" label="Slug" required="true"></text-field>
     <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>
 </template>
@@ -29,7 +29,6 @@ export default {
       })
         .then(response => {
           this.output = response
-          console.log(response)
         })
         .catch(error => {
           this.output = error
