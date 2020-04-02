@@ -1,17 +1,14 @@
 <template>
-  <div>
-    <form @submit.prevent="updateClient">
-      <label for="name">Client Name</label>
-      <input type="text" v-model="name" id="name" class="base-field" required>
-      <label for="slug">Slug</label>
-      <input type="text" v-model="slug" id="slug" class="base-field" required>
-      <button type="submit" class="btn btn-green mt-5">Submit</button>
-    </form>
-  </div>
+  <form @submit.prevent="updateClient">
+    <text-field v-model="name" field_id="clientName" label="Client Name" :required="true"></text-field>
+    <text-field v-model="slug" field_id="clientSlug" label="Slug" :required="true"></text-field>
+    <button type="submit" class="btn btn-green mt-5">Submit</button>
+  </form>
 </template>
 
 <script>
 import axios from '../../axios'
+import textField from '../utilities/forms/stacked/text_field'
 
 export default {
   data () {
@@ -22,6 +19,9 @@ export default {
     }
   },
   props: ['id'],
+  components: {
+    'text-field': textField
+  },
   methods: {
     updateClient () {
       axios.put(`/clients/${this.id}/`, {

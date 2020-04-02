@@ -8,7 +8,7 @@
         <th class="th">Buyer Contracts</th>
         <th class="th">Partner Contracts</th>
       </tr>
-      <tr v-for="client in clients" v-bind:key="client.id">
+      <tr v-for="client in clients" :key="client.id">
         <td class="td">
           <router-link :to="{name: 'Client', params: {id:client.id}}" class="underline text-blue-500">{{client.name}}</router-link>
         </td>

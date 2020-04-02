@@ -3,10 +3,10 @@
     <h1>{{user.email}}</h1>
     <h2>{{user.first_name}} {{user.last_name}}</h2>
     <p>Staff: {{user.is_staff}}</p>
-    <h3 class="text-2xl font-hairline mb-2 mt-3">Delete User</h3>
-    <delete-user v-bind:id="id"></delete-user>
-    <h3 class="text-2xl font-hairline mb-2 mt-3">Update User</h3>
-    <update-user v-bind:id="id"></update-user>
+    <h3 class="h3 mb-2 mt-3">Delete User</h3>
+    <delete-user :id="id"></delete-user>
+    <h3 class="h3 mb-2 mt-3">Update User</h3>
+    <update-user :id="id"></update-user>
   </div>
 </template>
 

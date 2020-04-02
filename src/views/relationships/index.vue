@@ -8,7 +8,7 @@
     </div>
     <client-list v-bind:clients="clients" class="mt-5"></client-list>
 
-    <h3 class="text-2xl font-hairline mt-5 mb-2">Create Client</h3>
+    <h3 class="h3 mt-5 mb-2">Create Client</h3>
     <create-client></create-client>
   </div>
 </template>
