@@ -84,5 +84,8 @@
 .base-field:hover { @apply border-gray-500 }
 .base-field:focus { @apply outline-none shadow-outline }
 
+/* Groups */
+.stacked-field { @apply mt-2 }
+
 
 @tailwind utilities;
