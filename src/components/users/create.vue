@@ -15,7 +15,7 @@
 
 <script>
 import axios from '../../axios'
-import singleCheckbox from '../utilities/forms/singleCheckbox'
+import singleCheckbox from '../utilities/forms/checkbox_single'
 
 export default {
   data () {
