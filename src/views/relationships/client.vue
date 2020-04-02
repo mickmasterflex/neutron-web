@@ -12,13 +12,16 @@
     <contract-list v-bind:contracts="client.buyercontract_set"></contract-list>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Partner Contracts</h3>
-    <contract-list v-bind:contracts="client.partnercontract_set"></contract-list>
+    <partner-contract-list v-bind:contracts="client.partnercontract_set"></partner-contract-list>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Edit Client</h3>
     <update-client v-bind:id="client.id"></update-client>
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Delete Client</h3>
     <delete-client v-bind:id="client.id"></delete-client>
+
+    <h3 class="text-2xl font-hairline mt-5 mb-2">Create Partner Contract</h3>
+    <create-partner-contract v-bind:client="client.id" v-bind:partner-contracts="client.partnercontract_set"></create-partner-contract>
   </div>
 </template>
 
@@ -26,8 +29,10 @@
 import axios from '../../axios'
 import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
+import partnerContractList from '../../components/contracts/partner/list'
 import contractList from '../../components/contracts/list'
-import statCard from '../../components/cards/stat-card'
+import createPartnerContract from '../../components/contracts/partner/create'
+import statCard from '../../components/utilities/cards/stat-card'
 
 export default {
   data () {
@@ -53,10 +58,12 @@ export default {
     }
   },
   components: {
+    'stat-card': statCard,
     'delete-client': deleteClient,
     'update-client': updateClient,
     'contract-list': contractList,
-    'stat-card': statCard
+    'partner-contract-list': partnerContractList,
+    'create-partner-contract': createPartnerContract
   },
   methods: {
     getClient () {
