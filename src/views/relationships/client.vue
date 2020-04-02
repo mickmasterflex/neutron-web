@@ -22,6 +22,9 @@
 
     <h3 class="text-2xl font-hairline mt-5 mb-2">Create Partner Contract</h3>
     <create-partner-contract v-bind:client="client.id" v-bind:partner-contracts="client.partnercontract_set"></create-partner-contract>
+
+    <h3 class="text-2xl font-hairline mt-5 mb-2">Create Buyer Contract</h3>
+    <create-buyer-contract v-bind:client="client.id" v-bind:buyer-contracts="client.buyercontract_set"></create-buyer-contract>
   </div>
 </template>
 
@@ -31,6 +34,7 @@ import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
 import contractList from '../../components/contracts/list'
 import createPartnerContract from '../../components/contracts/partner/create'
+import createBuyerContract from '../../components/contracts/buyer/create'
 import statCard from '../../components/utilities/cards/stat-card'
 
 export default {
@@ -61,7 +65,8 @@ export default {
     'delete-client': deleteClient,
     'update-client': updateClient,
     'contract-list': contractList,
-    'create-partner-contract': createPartnerContract
+    'create-partner-contract': createPartnerContract,
+    'create-buyer-contract': createBuyerContract
   },
   methods: {
     getClient () {
