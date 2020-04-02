@@ -18,8 +18,6 @@ export default {
     return {
       name: '',
       slug: '',
-      buyercontract_set: [],
-      partnercontract_set: [],
       output: ''
     }
   },
@@ -28,9 +26,7 @@ export default {
     updateClient () {
       axios.put(`/clients/${this.id}/`, {
         name: this.name,
-        slug: this.slug,
-        buyercontract_set: this.buyercontract_set,
-        partnercontract_set: this.partnercontract_set
+        slug: this.slug
       })
         .then(response => {
           this.output = response

@@ -21,12 +21,10 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      user: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        is_staff: ''
-      },
+      first_name: '',
+      last_name: '',
+      email: '',
+      is_staff: '',
       output: ''
     }
   },
