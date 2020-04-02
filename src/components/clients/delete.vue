@@ -18,7 +18,6 @@ export default {
       axios.delete(`/clients/${this.id}/`)
         .then(response => {
           this.output = response
-          console.log(response)
           this.$router.push({ name: 'Relationships' })
         })
         .catch(error => {

@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <form @submit.prevent="createUser">
-      <label for="firstName">First Name</label>
-      <input type="text" v-model="first_name" required id="firstName">
-      <label for="lastName">Last Name</label>
-      <input type="text" v-model="last_name" required id="lastName">
-      <label for="email">Email</label>
-      <input type="text" v-model="email" required id="email">
-      <label for="isStaff">Staff</label>
-      <input type="checkbox" v-model="is_staff" id="isStaff">
-      <button type="submit" class="btn btn-green">Submit</button>
-    </form>
-  </div>
+  <form @submit.prevent="createUser">
+    <text-field-stacked v-model="first_name" field_id="first_name" label="First Name" :required="true"></text-field-stacked>
+    <text-field-stacked v-model="last_name" field_id="last_name" label="Last Name" :required="true"></text-field-stacked>
+    <text-field-stacked v-model="email" field_id="email" label="Email" :required="true"></text-field-stacked>
+    <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
+    <button type="submit" class="btn btn-green mt-5">Submit</button>
+  </form>
 </template>
 
 <script>
@@ -38,7 +32,6 @@ export default {
       })
         .then(response => {
           this.output = response
-          console.log(response)
           this.$router.push({ name: 'Users' })
         })
         .catch(error => {
