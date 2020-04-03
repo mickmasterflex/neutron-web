@@ -1,4 +1,4 @@
-<<template>
+<template>
   <form @submit.prevent="createBuyerContract">
     <text-field-stacked v-model="name" field_id="name" label="Name" :required="true"></text-field-stacked>
     <select-field-stacked v-model="parent" :options="buyerContracts" field_id="parent" label="Parent"></select-field-stacked>
