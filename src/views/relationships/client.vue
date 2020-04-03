@@ -3,28 +3,28 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">{{client.name}}</h1>
       <div>
-        <stat-card v-bind:data="partnerContractCount" v-bind:title="`Partner Contracts`" v-bind:color="`teal`"></stat-card>
-        <stat-card v-bind:data="buyerContractCount" v-bind:title="`Buyer Contracts`" v-bind:color="`teal`"></stat-card>
+        <stat-card :data="partnerContractCount" :title="`Partner Contracts`" :color="`teal`"></stat-card>
+        <stat-card :data="buyerContractCount" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
 
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
-    <buyer-contract-list v-bind:contracts="client.buyercontract_set"></buyer-contract-list>
+    <buyer-contract-list :contracts="client.buyercontract_set"></buyer-contract-list>
 
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
-    <partner-contract-list v-bind:contracts="client.partnercontract_set"></partner-contract-list>
+    <partner-contract-list :contracts="client.partnercontract_set"></partner-contract-list>
 
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
-    <update-client v-bind:id="client.id"></update-client>
+    <update-client :id="client.id"></update-client>
 
     <h3 class="h3 mt-5 mb-2">Delete Client</h3>
-    <delete-client v-bind:id="client.id"></delete-client>
+    <delete-client :id="client.id"></delete-client>
 
     <h3 class="h3 mt-5 mb-2">Create Partner Contract</h3>
-    <create-partner-contract v-bind:client="client.id" v-bind:partner-contracts="client.partnercontract_set"></create-partner-contract>
+    <create-partner-contract :client="client.id" :partner-contracts="client.partnercontract_set"></create-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Create Buyer Contract</h3>
-    <create-buyer-contract v-bind:client="client.id" v-bind:buyer-contracts="client.buyercontract_set"></create-buyer-contract>
+    <create-buyer-contract :client="client.id" :buyer-contracts="client.buyercontract_set"></create-buyer-contract>
   </div>
 </template>
 

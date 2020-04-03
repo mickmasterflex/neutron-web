@@ -1,9 +1,9 @@
 <template>
-  <button class="btn btn-red" @click="deleteClient">Delete Client</button>
+  <button class="btn btn-red" @click="deletePartnerContract">Delete Contract</button>
 </template>
 
 <script>
-import axios from '../../axios'
+import axios from '../../../axios'
 
 export default {
   data () {
@@ -12,17 +12,16 @@ export default {
       output: null
     }
   },
-  props: ['id'],
+  props: ['client', 'id'],
   methods: {
-    deleteClient () {
-      axios.delete(`/clients/${this.id}/`)
+    deletePartnerContract () {
+      axios.delete(`/partners/${this.id}/`)
         .then(response => {
           this.output = response
-          this.$router.push({ name: 'Relationships' })
+          this.$router.push({ name: 'Client', params: { id: this.client } })
         })
         .catch(error => {
           this.output = error
-          this.errored = true
         })
     }
   }
