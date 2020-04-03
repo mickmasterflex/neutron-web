@@ -20,7 +20,7 @@ export default {
   props: ['client', 'buyerContracts'],
   methods: {
     createBuyerContract () {
-      axios.post('/buyer/', {
+      axios.post('/buyers/', {
         name: this.name,
         parent: this.parent,
         client: this.$props.client
