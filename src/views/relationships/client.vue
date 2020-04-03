@@ -9,7 +9,7 @@
     </div>
 
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
-    <contract-list :contracts="client.buyercontract_set"></contract-list>
+    <buyer-contract-list :contracts="client.buyercontract_set"></buyer-contract-list>
 
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
     <partner-contract-list :contracts="client.partnercontract_set"></partner-contract-list>
@@ -22,6 +22,9 @@
 
     <h3 class="h3 mt-5 mb-2">Create Partner Contract</h3>
     <create-partner-contract :client="client.id" :partner-contracts="client.partnercontract_set"></create-partner-contract>
+
+    <h3 class="h3 mt-5 mb-2">Create Buyer Contract</h3>
+    <create-buyer-contract :client="client.id" :buyer-contracts="client.buyercontract_set"></create-buyer-contract>
   </div>
 </template>
 
@@ -30,8 +33,9 @@ import axios from '../../axios'
 import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
 import partnerContractList from '../../components/contracts/partner/list'
-import contractList from '../../components/contracts/list'
+import buyerContractList from '../../components/contracts/buyer/list'
 import createPartnerContract from '../../components/contracts/partner/create'
+import createBuyerContract from '../../components/contracts/buyer/create'
 
 export default {
   data () {
@@ -59,9 +63,10 @@ export default {
   components: {
     'delete-client': deleteClient,
     'update-client': updateClient,
-    'contract-list': contractList,
     'partner-contract-list': partnerContractList,
-    'create-partner-contract': createPartnerContract
+    'buyer-contract-list': buyerContractList,
+    'create-partner-contract': createPartnerContract,
+    'create-buyer-contract': createBuyerContract
   },
   methods: {
     getClient () {
