@@ -34,7 +34,6 @@ import deleteClient from '../../components/clients/delete'
 import updateClient from '../../components/clients/update'
 import partnerContractList from '../../components/contracts/partner/list'
 import buyerContractList from '../../components/contracts/buyer/list'
-import contractList from '../../components/contracts/list'
 import createPartnerContract from '../../components/contracts/partner/create'
 import createBuyerContract from '../../components/contracts/buyer/create'
 
@@ -64,7 +63,6 @@ export default {
   components: {
     'delete-client': deleteClient,
     'update-client': updateClient,
-    'contract-list': contractList,
     'partner-contract-list': partnerContractList,
     'buyer-contract-list': buyerContractList,
     'create-partner-contract': createPartnerContract,
