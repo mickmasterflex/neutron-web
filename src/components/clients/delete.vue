@@ -22,6 +22,7 @@ export default {
         })
         .catch(error => {
           this.output = error
+          this.errored = true
         })
     }
   }
