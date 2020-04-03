@@ -18,7 +18,7 @@ const routes = [
     path: '/login',
     name: 'Login',
     meta: { layout: 'simple' },
-    component: () => import('../views/auth/login.vue')
+    component: () => import('../views/authentication/login.vue')
   },
   {
     path: '/analytics',
