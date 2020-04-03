@@ -45,7 +45,7 @@ const routes = [
     }
   },
   {
-    path: '/relationships',
+    path: '/relationships/clients',
     name: 'Relationships',
     component: () => import('../views/relationships/index.vue'),
     meta: {
@@ -53,7 +53,16 @@ const routes = [
     }
   },
   {
-    path: '/relationships/client/:id',
+    path: '/relationships/clients/:id',
+    name: 'Client',
+    props: true,
+    component: () => import('../views/relationships/client.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/relationships/clients/:id/',
     name: 'Client',
     props: true,
     component: () => import('../views/relationships/client.vue'),
