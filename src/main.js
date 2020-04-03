@@ -47,7 +47,6 @@ Vue.component('checkbox-single', checkboxSingle)
 
 new Vue({
   router,
-
   store,
   render: h => h(App)
 }).$mount('#app')
