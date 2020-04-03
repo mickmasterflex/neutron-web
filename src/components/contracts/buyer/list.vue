@@ -10,7 +10,7 @@
           <router-link :to="{name: 'BuyerContract', params: {contract:contract.id}}" class="underline text-blue-500">{{contract.name}}</router-link>
         </td>
         <td>
-          {{ contract.parent}}
+          {{ contract.parent }}
         </td>
       </tr>
     </table>
@@ -22,6 +22,6 @@
 
 <script>
 export default {
-props: ['contracts']
+  props: ['contracts']
 }
 </script>
