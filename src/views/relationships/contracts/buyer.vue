@@ -16,8 +16,8 @@
 </template>
 <script>
 import axios from '../../../axios'
-import deleteBuyerContract from '../../../components/contracts/partner/delete'
-import updateBuyerContract from '../../../components/contracts/partner/update'
+import deleteBuyerContract from '../../../components/contracts/buyer/delete'
+import updateBuyerContract from '../../../components/contracts/buyer/update'
 
 export default {
   data () {
@@ -39,7 +39,7 @@ export default {
   methods: {
     getContract () {
       axios
-        .get(`/partners/${this.id}/`)
+        .get(`/buyers/${this.id}/`)
         .then(response => {
           this.contract = response.data
         }).catch(error => {
