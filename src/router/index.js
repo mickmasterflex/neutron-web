@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: () => import('@/views/Dashboard.vue'),
     meta: {
       requiresAuth: true
 
@@ -18,12 +18,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     meta: { layout: 'simple' },
-    component: () => import('../views/authentication/login.vue')
+    component: () => import('@/views/authentication/login.vue')
   },
   {
     path: '/analytics',
     name: 'Analytics',
-    component: () => import('../views/Analytics.vue'),
+    component: () => import('@/views/Analytics.vue'),
     meta: {
       requiresAuth: true
     }
@@ -31,7 +31,7 @@ const routes = [
   {
     path: '/config',
     name: 'Config',
-    component: () => import('../views/Config.vue'),
+    component: () => import('@/views/Config.vue'),
     meta: {
       requiresAuth: true
     }
@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/products',
     name: 'Products',
-    component: () => import('../views/Products.vue'),
+    component: () => import('@/views/Products.vue'),
     meta: {
       requiresAuth: true
     }
@@ -47,7 +47,7 @@ const routes = [
   {
     path: '/relationships/clients',
     name: 'Relationships',
-    component: () => import('../views/relationships/index.vue'),
+    component: () => import('@/views/relationships/index.vue'),
     meta: {
       requiresAuth: true
     }
@@ -56,7 +56,7 @@ const routes = [
     path: '/relationships/clients/:id',
     name: 'Client',
     props: true,
-    component: () => import('../views/relationships/client.vue'),
+    component: () => import('@/views/relationships/client.vue'),
     meta: {
       requiresAuth: true
     }
@@ -65,7 +65,7 @@ const routes = [
     path: '/relationships/clients/:client/partner-contracts/:id/',
     name: 'PartnerContract',
     props: true,
-    component: () => import('../views/relationships/contracts/partner.vue'),
+    component: () => import('@/views/relationships/contracts/partner.vue'),
     meta: {
       requiresAuth: true
     }
@@ -82,7 +82,7 @@ const routes = [
   {
     path: '/utilities',
     name: 'Utilities',
-    component: () => import('../views/Utilities.vue'),
+    component: () => import('@/views/Utilities.vue'),
     meta: {
       requiresAuth: true
     }
@@ -90,7 +90,7 @@ const routes = [
   {
     path: '/users/',
     name: 'Users',
-    component: () => import('../views/users/index.vue'),
+    component: () => import('@/views/users/index.vue'),
     meta: {
       requiresAuth: true
     }
@@ -98,7 +98,7 @@ const routes = [
   {
     path: '/users/create',
     name: 'UserCreate',
-    component: () => import('../views/users/create.vue'),
+    component: () => import('@/views/users/create.vue'),
     meta: {
       requiresAuth: true
     }
@@ -106,7 +106,7 @@ const routes = [
   {
     path: '/users/:id/',
     name: 'User',
-    component: () => import('../views/users/user.vue'),
+    component: () => import('@/views/users/user.vue'),
     props: true,
     meta: {
       requiresAuth: true
@@ -114,7 +114,7 @@ const routes = [
   },
   {
     path: '/*',
-    component: () => import('../views/error/404.vue'),
+    component: () => import('@/views/error/404.vue'),
     meta: {
       title: '404 - Uh Oh'
     }

@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import axios from '../../axios'
-import clientList from '../../components/clients/list'
-import createClient from '../../components/clients/create'
+import axios from '@/axios'
+import clientList from '@/components/clients/list'
+import createClient from '@/components/clients/create'
 
 export default {
   data () {

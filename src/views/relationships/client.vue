@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import axios from '../../axios'
-import deleteClient from '../../components/clients/delete'
-import updateClient from '../../components/clients/update'
-import partnerContractList from '../../components/contracts/partner/list'
-import buyerContractList from '../../components/contracts/buyer/list'
-import createPartnerContract from '../../components/contracts/partner/create'
-import createBuyerContract from '../../components/contracts/buyer/create'
+import axios from '@/axios'
+import deleteClient from '@/components/clients/delete'
+import updateClient from '@/components/clients/update'
+import partnerContractList from '@/components/contracts/partner/list'
+import buyerContractList from '@/components/contracts/buyer/list'
+import createPartnerContract from '@/components/contracts/partner/create'
+import createBuyerContract from '@/components/contracts/buyer/create'
 
 export default {
   data () {
