@@ -71,6 +71,15 @@ const routes = [
     }
   },
   {
+    path: '/relationships/clients/:client/buyer-contracts/:id/',
+    name: 'BuyerContract',
+    props: true,
+    component: () => import('../views/relationships/contracts/buyer.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/utilities',
     name: 'Utilities',
     component: () => import('@/views/Utilities.vue'),
