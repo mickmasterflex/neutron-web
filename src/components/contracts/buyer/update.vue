@@ -8,9 +8,47 @@
 
 <script>
 import axios from '../../../axios'
-  expoer default {
+
+export default {
   data () {
-    return
+    return {
+      name: '',
+      parent: '',
+      siblings: [],
+      output: null
+    }
+  },
+  props: ['client', 'id'],
+  methods: {
+    updateBuyerContract () {
+      axios
+        .put(`/buyer/${this.id}/`, {
+          name: this.name,
+          parent: this.parent,
+          client: this.client
+        })
+        .then(response => {
+          this.output = response
+          this.$router.push({ name: 'Client', params: { id: this.output.data.client } })
+        })
+        .catch(error => {
+          this.output = error
+          this.errored = true
+        })
+    },
+    getSiblingContracts () {
+      axios.get(`/clients/${this.$props.client}/`)
+        .then(response => {
+          this.siblings = response.data.buyercontract_set
+        })
+        .catch(error => {
+          this.output = error
+          this.errored = true
+        })
+    }
+  },
+  mounted () {
+    this.getSiblingContracts()
   }
 }
 </script>
