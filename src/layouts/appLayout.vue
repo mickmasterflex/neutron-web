@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import logoutButton from '../components/authentication/logout'
+import logoutButton from '@/components/authentication/logout'
 
 export default {
   components: {

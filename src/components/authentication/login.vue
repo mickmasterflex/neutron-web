@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { AUTH_REQUEST } from '../../store/actions/authentication'
+import { AUTH_REQUEST } from '@/store/actions/authentication'
 
 export default {
   data () {

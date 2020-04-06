@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import axios from '../../axios'
-import deleteUser from '../../components/users/delete'
-import updateUser from '../../components/users/update'
+import axios from '@/axios'
+import deleteUser from '@/components/users/delete'
+import updateUser from '@/components/users/update'
 
 export default {
   data () {
