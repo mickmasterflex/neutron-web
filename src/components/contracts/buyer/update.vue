@@ -22,7 +22,7 @@ export default {
   methods: {
     updateBuyerContract () {
       axios
-        .put(`/buyer/${this.id}/`, {
+        .put(`/buyers/${this.id}/`, {
           name: this.name,
           parent: this.parent,
           client: this.client
