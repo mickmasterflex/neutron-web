@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import userList from '../../components/users/list'
+import userList from '@/components/users/list'
 
 export default {
   components: {

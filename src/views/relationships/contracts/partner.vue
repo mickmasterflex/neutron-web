@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import axios from '../../../axios'
-import deletePartnerContract from '../../../components/contracts/partner/delete'
-import updatePartnerContract from '../../../components/contracts/partner/update'
+import axios from '@/axios'
+import deletePartnerContract from '@/components/contracts/partner/delete'
+import updatePartnerContract from '@/components/contracts/partner/update'
 
 export default {
   data () {

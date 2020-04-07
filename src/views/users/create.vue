@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import createUser from '../../components/users/create'
+import createUser from '@/components/users/create'
 
 export default {
   name: 'CreateUser',
