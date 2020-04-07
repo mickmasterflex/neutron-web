@@ -74,7 +74,7 @@ const routes = [
     path: '/relationships/clients/:client/buyer-contracts/:id/',
     name: 'BuyerContract',
     props: true,
-    component: () => import('../views/relationships/contracts/buyer.vue'),
+    component: () => import('@/views/relationships/contracts/buyer.vue'),
     meta: {
       requiresAuth: true
     }
