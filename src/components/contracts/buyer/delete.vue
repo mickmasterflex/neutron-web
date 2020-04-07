@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-red" @click="deleteBuyerContract">Delete Buyer Contract></button>
+  <button class="btn btn-red" @click="deleteBuyerContract">Delete Buyer Contract</button>
 </template>
 
 <script>
@@ -12,11 +12,11 @@ export default {
       output: null
     }
   },
-  props: ['client', id],
+  props: ['client', 'id'],
   methods: {
     deleteBuyerContract () {
       axios.delete(`/buyers/${this.id}/`)
-        .then(reponse => {
+        .then(response => {
           this.output = response
           this.$router.push({ name: 'Client', params: { id: this.client } })
         })
