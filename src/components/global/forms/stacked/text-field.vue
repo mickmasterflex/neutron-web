@@ -5,7 +5,8 @@
       v-on:input="handleInput($event.target.value)"
       class="base-field"
       :type="type"
-      :id="field_id">
+      :id="field_id"
+      :required="required">
   </div>
 </template>
 
@@ -18,7 +19,11 @@ export default {
       type: String,
       default: 'text'
     },
-    value: String
+    value: String,
+    required: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     handleInput (value) {
