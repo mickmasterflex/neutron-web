@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuelidate from 'vuelidate'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -40,6 +41,12 @@ Vue.component('stat-card', statCard)
 Vue.component('select-field-stacked', selectFieldStacked)
 Vue.component('text-field-stacked', textFieldStacked)
 Vue.component('checkbox-single', checkboxSingle)
+
+/* -----------------------------------------------
+  Validation
+-------------------------------------------------- */
+
+Vue.use(Vuelidate)
 
 /* -----------------------------------------------
   Root Vue Instance

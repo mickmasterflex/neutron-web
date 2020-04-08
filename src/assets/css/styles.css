@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 
+/* ------------------------------------------------
+    Utilities
+--------------------------------------------------- */
+
+.shadow-outline-red { box-shadow: 0 0 0 3px rgba(229, 71, 41, 0.5); }
+
 
 /* ------------------------------------------------
     Typography
@@ -85,7 +91,12 @@
 .base-field:focus { @apply outline-none shadow-outline }
 
 /* Groups */
-.stacked-field { @apply mt-2 }
+.stacked-field:not(:first-child) { @apply mt-2 }
+
+/* Errors */
+.form-group--error .base-field { @apply border-red-500 }
+.form-group--error .base-field:focus { @apply shadow-outline-red }
+.field-error { @apply text-red-500 }
 
 
 @tailwind utilities;
