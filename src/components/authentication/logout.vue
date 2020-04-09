@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <button class="btn btn-red" v-on:click="logout">Logout</button>
-  </div>
+  <button class="btn btn-red" v-on:click="logout">Logout</button>
 </template>
 
 <script>

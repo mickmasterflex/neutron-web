@@ -1,9 +1,11 @@
 <template>
-  <form @submit.prevent="updatePartnerContract">
-    <v-text-field v-model="name" rules="required" id="partnerName" label="Name"></v-text-field>
-    <select-field v-model="parent" :options="siblings" id="parent" label="Parent"></select-field>
-    <button type="submit" class="btn btn-green mt-5">Submit</button>
-  </form>
+  <validation-observer v-slot="{ handleSubmit }">
+    <form @submit.prevent="handleSubmit(updatePartnerContract)">
+      <v-text-field v-model="name" rules="required" id="partnerName" label="Name"></v-text-field>
+      <select-field v-model="parent" :options="siblings" id="parent" label="Parent"></select-field>
+      <button type="submit" class="btn btn-green mt-5">Submit</button>
+    </form>
+  </validation-observer>
 </template>
 
 <script>

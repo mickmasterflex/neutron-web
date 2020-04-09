@@ -1,11 +1,13 @@
 <template>
-  <form @submit.prevent="updateUser">
-    <v-text-field v-model="first_name" rules="required" id="first_name" label="First Name"></v-text-field>
-    <v-text-field v-model="last_name" rules="required" id="last_name" label="Last Name"></v-text-field>
-    <v-text-field v-model="email" rules="required|email" id="email" label="Email" type="email"></v-text-field>
-    <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
-    <button type="submit" class="btn btn-green mt-5">Submit</button>
-  </form>
+  <validation-observer v-slot="{ handleSubmit }">
+    <form @submit.prevent="handleSubmit(updateUser)">
+      <v-text-field v-model="first_name" rules="required" id="first_name" label="First Name"></v-text-field>
+      <v-text-field v-model="last_name" rules="required" id="last_name" label="Last Name"></v-text-field>
+      <v-text-field v-model="email" rules="required|email" id="email" label="Email" type="email"></v-text-field>
+      <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
+      <button type="submit" class="btn btn-green mt-5">Submit</button>
+    </form>
+  </validation-observer>
 </template>
 
 <script>
