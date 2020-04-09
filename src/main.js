@@ -18,7 +18,7 @@ import appLayout from '@/layouts/appLayout'
 /* Components */
 import statCard from '@/components/global/cards/stat-card'
 import selectFieldStacked from '@/components/global/forms/stacked/select-field'
-import checkboxSingle from '@/components/global/forms/checkbox-single'
+import checkboxSingle from '@/components/global/forms/base_fields/checkbox-single'
 import textField from '@/components/global/forms/validation_fields/text_field'
 
 /* -----------------------------------------------
