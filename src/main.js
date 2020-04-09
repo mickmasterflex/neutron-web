@@ -20,7 +20,7 @@ import statCard from '@/components/global/cards/stat-card'
 import checkboxSingle from '@/components/global/forms/base_fields/checkbox-single'
 import selectField from '@/components/global/forms/base_fields/select-field'
 import textField from '@/components/global/forms/base_fields/text-field'
-import vTextField from '@/components/global/forms/validation_fields/text_field'
+import vTextField from '@/components/global/forms/validation_fields/text-field'
 import vSelectField from '@/components/global/forms/validation_fields/select-field'
 
 /* -----------------------------------------------
