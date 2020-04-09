@@ -9,115 +9,102 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: () => import('@/views/Dashboard.vue'),
-    meta: {
-      requiresAuth: true
-
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/login',
+    path: '/login/',
     name: 'Login',
+    component: () => import('@/views/authentication/login.vue'),
     meta: { layout: 'simple' },
-    component: () => import('@/views/authentication/login.vue')
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/analytics',
+    path: '/analytics/',
     name: 'Analytics',
     component: () => import('@/views/Analytics.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/config',
+    path: '/config/',
     name: 'Config',
     component: () => import('@/views/Config.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/products',
+    path: '/products/',
     name: 'Products',
     component: () => import('@/views/Products.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/relationships/clients',
+    path: '/relationships/clients/',
     name: 'Relationships',
     component: () => import('@/views/relationships/index.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/relationships/clients/:id',
+    path: '/relationships/clients/:id/',
     name: 'Client',
     props: true,
     component: () => import('@/views/relationships/client.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/relationships/clients/:client/partner-contracts/:id/',
     name: 'PartnerContract',
     props: true,
     component: () => import('@/views/relationships/contracts/partner.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/relationships/clients/:client/buyer-contracts/:id/',
     name: 'BuyerContract',
     props: true,
     component: () => import('@/views/relationships/contracts/buyer.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/utilities',
+    path: '/utilities/',
     name: 'Utilities',
     component: () => import('@/views/Utilities.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/users/',
     name: 'Users',
     component: () => import('@/views/users/index.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/users/create',
+    path: '/users/create/',
     name: 'UserCreate',
     component: () => import('@/views/users/create.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/users/:id/',
     name: 'User',
     component: () => import('@/views/users/user.vue'),
     props: true,
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/*',
+    path: '/*/',
     component: () => import('@/views/error/404.vue'),
-    meta: {
-      title: '404 - Uh Oh'
-    }
+    meta: { layout: 'simple' },
+    pathToRegexpOptions: { strict: true }
   }
 ]
 
