@@ -94,8 +94,8 @@
 .stacked-field:not(:first-child) { @apply mt-2 }
 
 /* Errors */
-.form-group--error .base-field { @apply border-red-500 }
-.form-group--error .base-field:focus { @apply shadow-outline-red }
+.is-invalid .base-field { @apply border-red-500 }
+.is-invalid .base-field:focus { @apply shadow-outline-red }
 .field-error { @apply text-red-500 }
 
 

@@ -1,9 +1,11 @@
 import Vue from 'vue'
-import Vuelidate from 'vuelidate'
 import App from './App.vue'
+
 import router from './router'
 import store from './store'
 import axios from './axios'
+import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
+import { required, email } from 'vee-validate/dist/rules'
 
 import './assets/css/styles.css'
 
@@ -46,7 +48,21 @@ Vue.component('checkbox-single', checkboxSingle)
   Validation
 -------------------------------------------------- */
 
-Vue.use(Vuelidate)
+extend('email', { ...email, message: 'Invalid email address' })
+extend('required', { ...required, message: 'Required field' })
+Vue.component('validation-provider', ValidationProvider)
+Vue.component('validation-observer', ValidationObserver)
+configure({
+  classes: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+    dirty: 'is-dirty',
+    touched: 'is-touched',
+    untouched: 'is-untouched',
+    pristine: 'is-pristine',
+    required: 'is-required'
+  }
+})
 
 /* -----------------------------------------------
   Root Vue Instance
