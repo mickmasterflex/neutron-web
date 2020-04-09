@@ -1,21 +1,22 @@
 import Vue from 'vue'
-import App from './App.vue'
-
-import router from './router'
-import store from './store'
-import axios from './axios'
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 import { required, email } from 'vee-validate/dist/rules'
 
-import './assets/css/styles.css'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
+import axios from '@/axios'
+import '@/assets/css/styles.css'
 
-import simpleLayout from './layouts/simpleLayout'
-import appLayout from './layouts/appLayout'
+/* Layouts */
+import simpleLayout from '@/layouts/simpleLayout'
+import appLayout from '@/layouts/appLayout'
 
-import statCard from './components/global/cards/stat-card'
-import selectFieldStacked from './components/global/forms/stacked/select-field'
-import textFieldStacked from './components/global/forms/stacked/text-field'
-import checkboxSingle from './components/global/forms/checkbox-single'
+/* Components */
+import statCard from '@/components/global/cards/stat-card'
+import selectFieldStacked from '@/components/global/forms/stacked/select-field'
+import textFieldStacked from '@/components/global/forms/stacked/text-field'
+import checkboxSingle from '@/components/global/forms/checkbox-single'
 import textField from '@/components/global/forms/validation_fields/text_field'
 
 /* -----------------------------------------------
