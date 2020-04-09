@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="createClient">
-    <text-field-stacked v-model="name" field_id="clientName" label="Client Name" required="true"></text-field-stacked>
-    <text-field-stacked v-model="slug" field_id="clientSlug" label="Slug" required="true"></text-field-stacked>
+    <text-field v-model="name" rules="required" id="clientName" label="Client Name"></text-field>
+    <text-field v-model="slug" rules="required" id="clientSlug" label="Slug"></text-field>
     <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>
 </template>

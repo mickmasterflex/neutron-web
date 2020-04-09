@@ -1,7 +1,10 @@
 import Vue from 'vue'
+
+/* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 import { required, email } from 'vee-validate/dist/rules'
 
+/* App */
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
@@ -15,7 +18,6 @@ import appLayout from '@/layouts/appLayout'
 /* Components */
 import statCard from '@/components/global/cards/stat-card'
 import selectFieldStacked from '@/components/global/forms/stacked/select-field'
-import textFieldStacked from '@/components/global/forms/stacked/text-field'
 import checkboxSingle from '@/components/global/forms/checkbox-single'
 import textField from '@/components/global/forms/validation_fields/text_field'
 
@@ -43,7 +45,6 @@ Vue.component('app-layout', appLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('select-field-stacked', selectFieldStacked)
-Vue.component('text-field-stacked', textFieldStacked)
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('text-field', textField)
 

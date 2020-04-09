@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="updateUser">
-    <text-field-stacked v-model="first_name" field_id="first_name" label="First Name" :required="true"></text-field-stacked>
-    <text-field-stacked v-model="last_name" field_id="last_name" label="Last Name" :required="true"></text-field-stacked>
-    <text-field-stacked v-model="email" field_id="email" label="Email" :required="true"></text-field-stacked>
+    <text-field v-model="first_name" rules="required" id="first_name" label="First Name"></text-field>
+    <text-field v-model="last_name" rules="required" id="last_name" label="Last Name"></text-field>
+    <text-field v-model="email" rules="required|email" id="email" label="Email" type="email"></text-field>
     <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
     <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>

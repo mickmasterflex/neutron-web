@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="updatePartnerContract">
-    <text-field-stacked v-model="name" field_id="partnerContractName" label="Name" :required="true"></text-field-stacked>
+    <text-field v-model="name" rules="required" id="partnerName" label="Name"></text-field>
     <select-field-stacked v-model="parent" :options="siblings" field_id="partnerParent" label="Parent"></select-field-stacked>
     <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>
