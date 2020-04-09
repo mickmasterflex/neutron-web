@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="createBuyerContract">
-    <text-field v-model="name" rules="required" id="buyerName" label="Name"></text-field>
-    <select-field-stacked v-model="parent" :options="buyerContracts" field_id="parent" label="Parent"></select-field-stacked>
+    <v-text-field v-model="name" rules="required" id="buyerName" label="Name"></v-text-field>
+    <select-field v-model="parent" :options="buyerContracts" id="parent" label="Parent"></select-field>
     <button class="btn btn-green mt-5">Create Buyer Contract</button>
   </form>
 </template>

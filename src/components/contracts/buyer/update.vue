@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="updateBuyerContract">
-    <text-field v-model="name" rules="required" id="buyerName" label="Name"></text-field>
-    <select-field-stacked v-model="parent" :options="siblings" field_id="buyerParent" label="Parent"></select-field-stacked>
+    <v-text-field v-model="name" rules="required" id="buyerName" label="Name"></v-text-field>
+    <select-field v-model="parent" :options="siblings" id="parent" label="Parent"></select-field>
     <button type="submit" class="btn btn-green mt-5">Submit</button>
   </form>
   </template>

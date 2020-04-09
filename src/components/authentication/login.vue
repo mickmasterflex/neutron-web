@@ -3,8 +3,8 @@
     <h1>Sign in</h1>
     <validation-observer v-slot="{ handleSubmit }">
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(login)">
-        <text-field v-model="username" rules="required|email" id="username" label="Email" type="email"></text-field>
-        <text-field v-model="password" rules="required" id="password" label="Password" type="password"></text-field>
+        <v-text-field v-model="username" rules="required|email" id="username" label="Email" type="email"></v-text-field>
+        <v-text-field v-model="password" rules="required" id="password" label="Password" type="password"></v-text-field>
         <button type="submit" class="btn btn-green mt-3">Login</button>
       </form>
     </validation-observer>

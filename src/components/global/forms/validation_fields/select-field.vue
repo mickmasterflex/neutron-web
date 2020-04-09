@@ -1,6 +1,6 @@
 <template>
   <validation-provider :rules="rules" v-slot="{ errors, classes }">
-    <text-field v-model="innerValue" :class="classes" v-bind="$attrs"></text-field>
+    <select-field v-model="innerValue" :class="classes" v-bind="$attrs"></select-field>
     <span class="field-error">{{ errors[0] }}</span>
   </validation-provider>
 </template>
