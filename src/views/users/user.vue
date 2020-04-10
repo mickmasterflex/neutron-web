@@ -1,12 +1,11 @@
 <template>
   <div>
-    <h1>{{user.email}}</h1>
-    <h2>{{user.first_name}} {{user.last_name}}</h2>
-    <p>Staff: {{user.is_staff}}</p>
-    <h3 class="h3 mb-2 mt-3">Delete User</h3>
-    <delete-user :id="id"></delete-user>
-    <h3 class="h3 mb-2 mt-3">Update User</h3>
-    <update-user :id="id"></update-user>
+    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <h1 class="h1 text-white">{{user.name}}</h1>
+      <div>
+      <stat-card :data="userCount" :title="`Users`" :color="`teal`"></stat-card>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -29,26 +28,28 @@ export default {
     }
   },
   props: ['id'],
-  components: {
-    'delete-user': deleteUser,
-    'update-user': updateUser
-  },
-  methods: {
-    getUser () {
-      axios
-        .get(`/users/${this.id}/`)
-        .then(response => {
-          this.output = response
-          this.user = response.data
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
-        })
+  computed: {
+    userCount: function () {
+      return this.user.length
+    },
+    components: {
+      'delete-user': deleteUser,
+      'update-user': updateUser
+    },
+    methods: {
+      getUser () {
+        axios
+          .get(`/users/${this.id}/`)
+          .then(response => {
+            this.output = response
+            this.user = response.data
+          })
+          .catch(error => {
+            this.output = error
+            this.errored = true
+          })
+      }
     }
-  },
-  created () {
-    this.getUser()
   }
 }
 </script>
