@@ -1,11 +1,13 @@
 <template>
-  <form @submit.prevent="createUser">
-    <text-field-stacked v-model="first_name" field_id="first_name" label="First Name" :required="true"></text-field-stacked>
-    <text-field-stacked v-model="last_name" field_id="last_name" label="Last Name" :required="true"></text-field-stacked>
-    <text-field-stacked v-model="email" field_id="email" label="Email" :required="true"></text-field-stacked>
-    <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
-    <button type="submit" class="btn btn-green mt-5">Submit</button>
-  </form>
+  <validation-observer v-slot="{ handleSubmit }">
+    <form @submit.prevent="handleSubmit(createUser)">
+      <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name" class="field-group"></v-text-field>
+      <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name" class="field-group"></v-text-field>
+      <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email" class="field-group"></v-text-field>
+      <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
+      <button type="submit" class="btn btn-green mt-5">Submit</button>
+    </form>
+  </validation-observer>
 </template>
 
 <script>
