@@ -120,7 +120,7 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    next('login')
+    next({ name: 'Login' })
   } else {
     next()
   }
