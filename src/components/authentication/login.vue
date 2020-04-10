@@ -3,14 +3,8 @@
     <h1>Sign in</h1>
     <validation-observer v-slot="{ handleSubmit }">
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(login)">
-        <validation-provider class="form-group" rules="email|required" v-slot="{ errors, classes }">
-          <text-field-stacked v-model="username" field_id="username" label="Email" :class="classes"></text-field-stacked>
-          <span class="field-error">{{ errors[0] }}</span>
-        </validation-provider>
-        <validation-provider class="form-group" rules="required" v-slot="{ errors, classes }">
-          <text-field-stacked v-model="password" field_id="password" label="Password" type="password" :class="classes"></text-field-stacked>
-          <span class="field-error">{{ errors[0] }}</span>
-        </validation-provider>
+        <v-text-field v-model="username" rules="required|email" field_id="username" field_label="Email" field_type="email" class="field-group"></v-text-field>
+        <v-text-field v-model="password" rules="required" field_id="password" field_label="Password" field_type="password" class="field-group"></v-text-field>
         <button type="submit" class="btn btn-green mt-3">Login</button>
       </form>
     </validation-observer>
@@ -35,7 +29,7 @@ export default {
         username,
         password
       }).then(() => {
-        this.$router.push('/')
+        this.$router.push({ name: 'Dashboard' })
       })
     }
   }
