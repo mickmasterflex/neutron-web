@@ -1,11 +1,19 @@
 <template>
-  <ul>
-    <li v-for="user in users" v-bind:key="user.email">
-      <router-link :to="{name: 'User', params: {id:user.id}}" class="underline text-blue-500">
-        {{ user.email }}
-      </router-link>
-    </li>
-  </ul>
+  <table v-if="users" class="w-full">
+    <tr class="th-row">
+      <th class="th">Name</th>
+      <th class="th">Id</th>
+      <th class="th">Email</th>
+    </tr>
+    <tr v-for="user in users" :key="user.id">
+      <td>{{ user.first_name }} {{ user.last_name }}</td>
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+  </table>
+  <div v-else>
+    ...Loading...
+  </div>
 </template>
 
 <script>
