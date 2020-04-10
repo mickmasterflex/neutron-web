@@ -1,8 +1,8 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(createBuyerContract)">
-      <v-text-field v-model="name" rules="required" id="buyerName" label="Name"></v-text-field>
-      <select-field v-model="parent" :options="buyerContracts" id="parent" label="Parent"></select-field>
+      <v-text-field v-model="name" rules="required" field_id="buyerName" field_label="Name" class="field-group"></v-text-field>
+      <select-field v-model="parent" :options="buyerContracts" field_id="parent" field_label="Parent" class="field-group"></select-field>
       <button class="btn btn-green mt-5">Create Buyer Contract</button>
     </form>
   </validation-observer>

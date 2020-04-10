@@ -1,11 +1,11 @@
 <template>
-  <div :class="$attrs.field_style ? $attrs.field_style : 'stacked-field'">
-    <label v-if="$attrs.label" :for="$attrs.id">{{$attrs.label}}</label>
+  <div>
+    <label v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div class="relative w-64">
       <select
         @input="handleInput($event.target.value)"
         class="appearance-none base-field"
-        :id="$attrs.id">
+        :id="$attrs.field_id">
         <option value="">----------</option>
         <option v-for="option in $attrs.options" :key="option.id" :value="`${option.id}`">{{option.name}}</option>
       </select>

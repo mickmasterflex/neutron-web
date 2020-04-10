@@ -1,11 +1,11 @@
 <template>
-  <div :class="$attrs.field_style ? $attrs.field_style : 'stacked-field'">
-    <label v-if="$attrs.label" :for="$attrs.id">{{$attrs.label}}</label>
+  <div>
+    <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <input
       @input="handleInput($event.target.value)"
       class="base-field"
-      :type="$attrs.type ? $attrs.type : 'text'"
-      :id="$attrs.id">
+      :type="$attrs.field_type ? $attrs.field_type : 'text'"
+      :id="$attrs.field_id">
   </div>
 </template>
 
