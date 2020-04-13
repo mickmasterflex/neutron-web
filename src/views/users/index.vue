@@ -32,8 +32,6 @@ export default {
   },
   computed: {
     userCount: function () {
-      console.log(this.users.length)
-      console.log(this.users)
       return this.users.length
     }
   },
