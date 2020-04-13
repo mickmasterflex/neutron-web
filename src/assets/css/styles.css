@@ -6,6 +6,7 @@
 --------------------------------------------------- */
 
 .shadow-outline-red { box-shadow: 0 0 0 3px rgba(229, 71, 41, 0.5); }
+.shadow-outline-green { box-shadow: 0 0 0 3px rgba(139, 198, 80, 0.5); }
 
 
 /* ------------------------------------------------
@@ -91,11 +92,19 @@
 .base-field:focus { @apply outline-none shadow-outline }
 
 /* Groups */
-.stacked-field:not(:first-child) { @apply mt-2 }
+.field-group:not(:first-child) { @apply mt-2 }
+.field-group { @apply block }
 
 /* Errors */
 .is-invalid .base-field { @apply border-red-500 }
 .is-invalid .base-field:focus { @apply shadow-outline-red }
+.is-valid .base-field:focus { @apply shadow-outline-green border-green-500 }
+
+.is-required .field-label::after {
+    content: ' *';
+    @apply text-red-500;
+}
+
 .field-error { @apply text-red-500 }
 
 

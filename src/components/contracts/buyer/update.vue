@@ -1,10 +1,12 @@
 <template>
-  <form @submit.prevent="updateBuyerContract">
-    <text-field-stacked v-model="name" field_id="BuyerContractName" label="Name" :required="true"></text-field-stacked>
-    <select-field-stacked v-model="parent" :options="siblings" field_id="buyerParent" label="Parent"></select-field-stacked>
-    <button type="submit" class="btn btn-green mt-5">Submit</button>
-  </form>
-  </template>
+  <validation-observer v-slot="{ handleSubmit }">
+    <form @submit.prevent="handleSubmit(updateBuyerContract)">
+      <v-text-field v-model="name" rules="required" field_id="buyerName" field_label="Name" class="field-group"></v-text-field>
+      <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent" class="field-group"></select-field>
+      <button type="submit" class="btn btn-green mt-5">Submit</button>
+    </form>
+  </validation-observer>
+</template>
 
 <script>
 import axios from '@/axios'

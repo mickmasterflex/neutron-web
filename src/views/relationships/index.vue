@@ -3,10 +3,10 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="text-white text-4xl font-hairline">All Clients</h1>
       <div>
-        <stat-card v-bind:data="clientCount" v-bind:title="`Clients`" v-bind:color="`teal`"></stat-card>
+        <stat-card :data="clientCount" :title="`Clients`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <client-list v-bind:clients="clients" class="mt-5"></client-list>
+    <client-list :clients="clients" class="mt-5"></client-list>
 
     <h3 class="h3 mt-5 mb-2">Create Client</h3>
     <create-client></create-client>

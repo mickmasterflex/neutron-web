@@ -1,21 +1,27 @@
 import Vue from 'vue'
-import App from './App.vue'
 
-import router from './router'
-import store from './store'
-import axios from './axios'
+/* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 import { required, email } from 'vee-validate/dist/rules'
 
-import './assets/css/styles.css'
+/* App */
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
+import axios from '@/axios'
+import '@/assets/css/styles.css'
 
-import simpleLayout from './layouts/simpleLayout'
-import appLayout from './layouts/appLayout'
+/* Layouts */
+import simpleLayout from '@/layouts/simpleLayout'
+import appLayout from '@/layouts/appLayout'
 
-import statCard from './components/global/cards/stat-card'
-import selectFieldStacked from './components/global/forms/stacked/select-field'
-import textFieldStacked from './components/global/forms/stacked/text-field'
-import checkboxSingle from './components/global/forms/checkbox-single'
+/* Components */
+import statCard from '@/components/global/cards/stat-card'
+import checkboxSingle from '@/components/global/forms/base_fields/checkbox-single'
+import selectField from '@/components/global/forms/base_fields/select-field'
+import textField from '@/components/global/forms/base_fields/text-field'
+import vTextField from '@/components/global/forms/validation_fields/text-field'
+import vSelectField from '@/components/global/forms/validation_fields/select-field'
 
 /* -----------------------------------------------
   Authentication
@@ -40,9 +46,11 @@ Vue.component('app-layout', appLayout)
 -------------------------------------------------- */
 
 Vue.component('stat-card', statCard)
-Vue.component('select-field-stacked', selectFieldStacked)
-Vue.component('text-field-stacked', textFieldStacked)
 Vue.component('checkbox-single', checkboxSingle)
+Vue.component('text-field', textField)
+Vue.component('v-text-field', vTextField)
+Vue.component('select-field', selectField)
+Vue.component('v-select-field', vSelectField)
 
 /* -----------------------------------------------
   Validation
