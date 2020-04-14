@@ -7,46 +7,29 @@
       </div>
     </div>
     <client-list :clients="clients" class="mt-5"></client-list>
-
     <h3 class="h3 mt-5 mb-2">Create Client</h3>
     <create-client></create-client>
   </div>
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapGetters, mapActions } from 'vuex'
 import clientList from '@/components/clients/list'
 import createClient from '@/components/clients/create'
 
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      clients: [],
-      output: ''
-    }
-  },
   components: {
     'client-list': clientList,
     'create-client': createClient
   },
   computed: {
-    clientCount: function () {
-      return this.clients.length
-    }
+    ...mapGetters({
+      clients: 'allClients',
+      clientCount: 'clientCount'
+    })
   },
   methods: {
-    getClients () {
-      axios
-        .get('/clients/')
-        .then(response => {
-          this.clients = response.data
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
-        })
-    }
+    ...mapActions({ getClients: 'getClients' })
   },
   created () {
     this.getClients()

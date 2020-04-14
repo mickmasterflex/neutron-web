@@ -23,7 +23,7 @@ export default {
     }
   },
   methods: {
-    login: function () {
+    login () {
       const { username, password } = this
       this.$store.dispatch(AUTH_REQUEST, {
         username,
