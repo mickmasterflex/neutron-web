@@ -56,7 +56,6 @@ const routes = [
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
-      props.client = +props.client
       return props
     }
   },
@@ -69,6 +68,7 @@ const routes = [
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
+      props.client = +props.client
       return props
     }
   },
