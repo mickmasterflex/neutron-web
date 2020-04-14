@@ -21,7 +21,10 @@ export default {
   methods: {
     ...mapActions({ create: 'createClient' }),
     submitForm () {
-      this.create({ name: this.name, slug: this.slug })
+      this.create({
+        name: this.name,
+        slug: this.slug
+      })
     }
   }
 }

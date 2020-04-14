@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-red" @click="runAction">Delete Client</button>
+  <button class="btn btn-red" @click="runDelete">Delete Client</button>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     ...mapActions({ delete: 'deleteClient' }),
-    runAction () {
+    runDelete () {
       this.delete(this.id)
         .then(() => {
           this.$router.push({ name: 'Relationships' })

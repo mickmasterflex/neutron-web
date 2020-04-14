@@ -1,9 +1,9 @@
 <template>
-  <button class="btn btn-red" @click="deletePartnerContract">Delete Contract</button>
+  <button class="btn btn-red" @click="runDelete">Delete Contract</button>
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -14,14 +14,11 @@ export default {
   },
   props: ['client', 'id'],
   methods: {
-    deletePartnerContract () {
-      axios.delete(`/partners/${this.id}/`)
-        .then(response => {
-          this.output = response
+    ...mapActions({ delete: 'deletePartnerContract' }),
+    runDelete () {
+      this.delete(this.id)
+        .then(() => {
           this.$router.push({ name: 'Client', params: { id: this.client } })
-        })
-        .catch(error => {
-          this.output = error
         })
     }
   }

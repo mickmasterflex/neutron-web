@@ -56,16 +56,21 @@ const routes = [
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
+      props.client = +props.client
       return props
     }
   },
   {
     path: '/relationships/clients/:client/contracts/partners/:id/',
     name: 'PartnerContract',
-    props: true,
     component: () => import('@/views/relationships/contracts/partner.vue'),
     meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',

@@ -27,7 +27,11 @@ export default {
   methods: {
     ...mapActions({ update: 'updateClient' }),
     submitForm () {
-      this.update({ name: this.name, slug: this.slug, id: this.$props.id })
+      this.update({
+        name: this.name,
+        slug: this.slug,
+        id: this.$props.id
+      })
     }
   }
 }
