@@ -90,13 +90,6 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/users/create/',
-    name: 'UserCreate',
-    component: () => import('@/views/users/create.vue'),
-    meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
     path: '/users/:id/',
     name: 'User',
     component: () => import('@/views/users/user.vue'),
