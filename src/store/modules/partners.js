@@ -10,6 +10,9 @@ const getters = {
   },
   getPartnersByClient: (state) => (clientId) => {
     return state.partners.filter(partner => partner.client === clientId)
+  },
+  getPartnerById: (state) => (id) => {
+    return state.partners.find(partner => partner.id === id)
   }
 }
 

@@ -1,7 +1,6 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
-      {{name}}
       <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name" class="field-group"></v-text-field>
       <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent" class="field-group"></select-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
