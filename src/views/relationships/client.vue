@@ -3,7 +3,7 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">{{client.name}}</h1>
       <div>
-        <stat-card :data="partnerContractCount" :title="`Partner Contracts`" :color="`teal`"></stat-card>
+        <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
         <stat-card :data="buyerContractCount" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
@@ -12,9 +12,6 @@
     <buyer-contract-list :contracts="client.buyercontract_set"></buyer-contract-list>
 
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
-    <partner-contract-list :contracts="client.partnercontract_set"></partner-contract-list>
-
-    <h3 class="h3 mt-5 mb-2">Partner Contracts New</h3>
     <partner-contract-list :contracts="partners"></partner-contract-list>
 
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
@@ -65,9 +62,6 @@ export default {
     },
     partners: function () {
       return this.getPartnersByClient(this.id)
-    },
-    partnerContractCount: function () {
-      return this.client.partnercontract_set.length
     },
     buyerContractCount: function () {
       return this.client.buyercontract_set.length

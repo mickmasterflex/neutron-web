@@ -5,6 +5,9 @@ const state = {
 }
 const getters = {
   allPartners: state => state.partners,
+  allPartnersCount: (state) => {
+    return state.partners.length
+  },
   getPartnersByClient: (state) => (clientId) => {
     return state.partners.filter(partner => partner.client === clientId)
   }
