@@ -6,11 +6,11 @@ const state = {
 
 const getters = {
   allClients: state => state.clients,
-  getClientById: (state, getters) => (id) => {
-    return getters.allClients.find(client => client.id === id)
+  getClientById: (state) => (id) => {
+    return state.clients.find(client => client.id === id)
   },
-  clientCount: (state, getters) => {
-    return getters.allClients.length
+  clientCount: (state) => {
+    return state.clients.length
   }
 }
 
