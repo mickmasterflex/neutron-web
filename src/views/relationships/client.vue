@@ -53,7 +53,10 @@ export default {
     'create-buyer-contract': createBuyerContract
   },
   computed: {
-    ...mapGetters({ getClient: 'getClientById' }),
+    ...mapGetters({
+      getClient: 'getClientById',
+      partners: 'allPartners'
+    }),
     client: function () {
       return this.getClient(this.id)
     },
@@ -65,10 +68,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ getClients: 'getClients' })
+    ...mapActions({
+      getClients: 'getClients',
+      getPartners: 'getPartners'
+    })
   },
   created () {
     this.getClients()
+    this.getPartners()
   }
 }
 </script>

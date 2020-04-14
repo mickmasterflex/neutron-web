@@ -3,9 +3,20 @@ import axios from '@/axios'
 const state = {
   partners: []
 }
-const getters = {}
+const getters = {
+  allPartners: state => state.partners
+  // getPartnersByClient: (state, getters) => (id) => {
+  //   return
+  // }
+}
 
 const actions = {
+  async getPartners ({ commit }) {
+    await axios.get('/partners/')
+      .then(response => {
+        commit('setPartners', response.data)
+      })
+  },
   async createPartnerContract ({ commit }, partner) {
     await axios.post('/partners/', partner)
       .then(response => {
@@ -25,7 +36,9 @@ const actions = {
       })
   }
 }
-const mutations = {}
+const mutations = {
+  setPartners: (state, partners) => (state.partners = partners)
+}
 
 export default {
   state,
