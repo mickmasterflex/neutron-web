@@ -4,10 +4,10 @@ const state = {
   partners: []
 }
 const getters = {
-  allPartners: state => state.partners
-  // getPartnersByClient: (state, getters) => (id) => {
-  //   return
-  // }
+  allPartners: state => state.partners,
+  getPartnersByClient: (state) => (clientId) => {
+    return state.partners.filter(partner => partner.client === clientId)
+  }
 }
 
 const actions = {

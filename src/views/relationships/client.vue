@@ -14,6 +14,9 @@
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
     <partner-contract-list :contracts="client.partnercontract_set"></partner-contract-list>
 
+    <h3 class="h3 mt-5 mb-2">Partner Contracts New</h3>
+    <partner-contract-list :contracts="partners"></partner-contract-list>
+
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
     <update-client :id="client.id"></update-client>
 
@@ -55,10 +58,13 @@ export default {
   computed: {
     ...mapGetters({
       getClient: 'getClientById',
-      partners: 'allPartners'
+      getPartnersByClient: 'getPartnersByClient'
     }),
     client: function () {
       return this.getClient(this.id)
+    },
+    partners: function () {
+      return this.getPartnersByClient(this.id)
     },
     partnerContractCount: function () {
       return this.client.partnercontract_set.length
