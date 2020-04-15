@@ -38,7 +38,7 @@ export default {
         name: this.name,
         parent: this.parent,
         client: this.client,
-        id: this.$props.id
+        id: this.id
       })
     },
     getSiblingContracts () {

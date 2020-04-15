@@ -32,7 +32,7 @@ const actions = {
   async updatePartnerContract ({ commit }, updatedPartner) {
     await axios.put(`/partners/${updatedPartner.id}/`, updatedPartner)
       .then(response => {
-        // commit('updatePartner')
+        commit('updatePartner', updatedPartner)
       })
   },
   async deletePartnerContract ({ commit }, id) {
@@ -43,7 +43,13 @@ const actions = {
   }
 }
 const mutations = {
-  setPartners: (state, partners) => (state.partners = partners)
+  setPartners: (state, partners) => (state.partners = partners),
+  updatePartner: (state, updatedPartner) => {
+    const index = state.partners.findIndex(partner => partner.id === updatedPartner.id)
+    if (index !== -1) {
+      state.partners.splice(index, 1, updatedPartner)
+    }
+  }
 }
 
 export default {
