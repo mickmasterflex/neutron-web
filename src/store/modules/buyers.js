@@ -4,20 +4,20 @@ const state = {
   buyers: []
 }
 const getters = {
-  allBuyers: state => state.buyers,
-  allBuyersCount: (state) => {
+  getAllBuyers: state => state.buyers,
+  getAllBuyersCount: (state) => {
     return state.buyers.length
   },
   getBuyersByClient: (state) => (clientId) => {
     return state.buyers.filter(buyer => buyer.client === clientId)
   },
-  getBuyersById: (state) => (id) => {
+  getBuyerById: (state) => (id) => {
     return state.buyers.find(buyer => buyer.id === id)
   }
 }
 
 const actions = {
-  async getBuyer ({ commit }) {
+  async fetchBuyers ({ commit }) {
     await axios.get('/buyers/')
       .then(response => {
         commit('setBuyers', response.data)

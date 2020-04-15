@@ -7,12 +7,12 @@
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">All Buyer</h3>
-    <buyers-contract-list :contracts="buyers"></buyers-contract-list>
+    <buyers-list :contracts="buyers"></buyers-list>
   </div>
 </template>
 
 <script>
-import buyersContractList from '@/components/contracts/buyers/list'
+import buyersList from '@/components/contracts/buyers/list'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -23,10 +23,13 @@ export default {
     }
   },
   components: {
-    'buyers-contract-list': buyersContractList
+    'buyers-list': buyersList
   },
   computed: {
-    ...mapGetters({ buyers: 'getAllBuyers', count: 'getAllBuyersCount' })
+    ...mapGetters({
+      buyers: 'getAllBuyers',
+      count: 'getAllBuyersCount'
+    })
   },
   methods: {
     ...mapActions({

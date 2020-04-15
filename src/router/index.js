@@ -86,7 +86,7 @@ const routes = [
   },
   {
     path: '/relationships/contracts/buyers',
-    name: 'BuyerContract',
+    name: 'BuyerContracts',
     component: () => import('@/views/relationships/buyers/index.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true },
@@ -98,7 +98,7 @@ const routes = [
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',
-    name: 'PartnerContract',
+    name: 'BuyerContract',
     component: () => import('@/views/relationships/buyers/buyer.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true },

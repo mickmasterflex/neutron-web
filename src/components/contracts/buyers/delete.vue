@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-red" @click="deleteBuyerContract">Delete Buyer Contract</button>
+  <button class="btn btn-red" @click="runDelete">Delete Contract</button>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'Buyers', params: { id: this.client } })
+          this.$router.push({ name: 'Client', params: { id: this.client } })
         })
     }
   }
