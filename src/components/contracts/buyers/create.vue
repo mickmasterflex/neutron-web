@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -21,19 +21,13 @@ export default {
   },
   props: ['client', 'buyerContracts'],
   methods: {
-    createBuyerContract () {
-      axios.post('/buyers/', {
+    ...mapActions({ create: 'createBuyerContract' }),
+    submitForm () {
+      this.create({
         name: this.name,
         parent: this.parent,
         client: this.$props.client
       })
-        .then(response => {
-          this.output = response
-        })
-        .catch(error => {
-          this.errored = true
-          this.output = error
-        })
     }
   }
 }

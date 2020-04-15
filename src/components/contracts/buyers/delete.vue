@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -14,14 +14,11 @@ export default {
   },
   props: ['client', 'id'],
   methods: {
-    deleteBuyerContract () {
-      axios.delete(`/buyers/${this.id}/`)
-        .then(response => {
-          this.output = response
-          this.$router.push({ name: 'Client', params: { id: this.client } })
-        })
-        .catch(error => {
-          this.output = error
+    ...mapActions({ delete: 'deleteBuyerContract' }),
+    runDelete () {
+      this.delete(this.id)
+        .then(() => {
+          this.$router.push({ name: 'Buyers', params: { id: this.client } })
         })
     }
   }

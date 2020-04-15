@@ -10,6 +10,7 @@
 
 <script>
 import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -20,32 +21,30 @@ export default {
       output: null
     }
   },
-  props: ['client', 'id'],
+  props: {
+    id: {
+      type: Number,
+      default: null
+    },
+    client: {
+      type: Number,
+      default: null
+    }
+  },
   methods: {
-    updateBuyerContract () {
-      axios
-        .put(`/buyers/${this.id}/`, {
-          name: this.name,
-          parent: this.parent,
-          client: this.client
-        })
-        .then(response => {
-          this.output = response
-          this.$router.push({ name: 'Client', params: { id: this.output.data.client } })
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
-        })
+    ...mapActions({ update: 'updateBuyerContract', getSiblings: 'getSiblingsContracts' }),
+    submitForm () {
+      this.update({
+        name: this.name,
+        parents: this.parent,
+        client: this.client,
+        id: this.id
+      })
     },
     getSiblingContracts () {
       axios.get(`/clients/${this.$props.client}/`)
         .then(response => {
           this.siblings = response.data.buyercontract_set
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
         })
     }
   },
