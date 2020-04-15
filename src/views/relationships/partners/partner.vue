@@ -45,11 +45,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      getPartners: 'getPartners'
+      fetchPartners: 'fetchPartners'
     })
   },
   created () {
-    this.getPartners()
+    this.fetchPartners()
   }
 }
 </script>

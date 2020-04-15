@@ -3,7 +3,7 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="text-white text-4xl font-hairline">All Clients</h1>
       <div>
-        <stat-card :data="clientCount" :title="`Clients`" :color="`teal`"></stat-card>
+        <stat-card :data="getAllClientsCount" :title="`Clients`" :color="`teal`"></stat-card>
       </div>
     </div>
     <client-list :clients="clients" class="mt-5"></client-list>
@@ -24,15 +24,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      clients: 'allClients',
-      clientCount: 'clientCount'
+      clients: 'getAllClients',
+      getAllClientsCount: 'getAllClientsCount'
     })
   },
   methods: {
-    ...mapActions({ getClients: 'getClients' })
+    ...mapActions({ fetchClients: 'fetchClients' })
   },
   created () {
-    this.getClients()
+    this.fetchClients()
   }
 }
 </script>

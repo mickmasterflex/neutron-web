@@ -26,15 +26,15 @@ export default {
     'partner-contract-list': partnerContractList
   },
   computed: {
-    ...mapGetters({ partners: 'allPartners', count: 'allPartnersCount' })
+    ...mapGetters({ partners: 'getAllPartners', count: 'getAllPartnersCount' })
   },
   methods: {
     ...mapActions({
-      getPartners: 'getPartners'
+      fetchPartners: 'fetchPartners'
     })
   },
   created () {
-    this.getPartners()
+    this.fetchPartners()
   }
 }
 </script>

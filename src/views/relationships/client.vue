@@ -69,13 +69,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      getClients: 'getClients',
-      getPartners: 'getPartners'
+      fetchClients: 'fetchClients',
+      fetchPartners: 'fetchPartners'
     })
   },
   created () {
-    this.getClients()
-    this.getPartners()
+    this.fetchClients()
+    this.fetchPartners()
   }
 }
 </script>
