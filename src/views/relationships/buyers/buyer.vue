@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
-      <h1 class="h1 text-white">{{contract.name}}</h1>
+      <h1 class="h1 text-white">{{buyer.name}}</h1>
       <div>
-        <stat-card v-if="contract.parent" v-bind:data="contract.parent" :title="`Parent`" :color="`teal`"></stat-card>
-        <stat-card :data="contract.client" :title="`Client`" :color="`teal`"></stat-card>
+        <stat-card v-if="buyer.parent" v-bind:data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
+        <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
@@ -15,41 +15,40 @@
   </div>
 </template>
 <script>
-import axios from '@/axios'
+import { mapActions, mapGetters } from 'vuex'
 import deleteBuyerContract from '@/components/contracts/buyers/delete'
 import updateBuyerContract from '@/components/contracts/buyers/update'
 
 export default {
-  data () {
-    return {
-      contract: {
-        name: null,
-        client: null,
-        parent: null,
-        form: null
-      },
-      output: null
+  props: {
+    id: {
+      type: Number,
+      default: null
+    },
+    client: {
+      type: Number,
+      default: null
     }
   },
-  props: ['client', 'id'],
   components: {
     'delete-buyer-contract': deleteBuyerContract,
     'update-buyer-contract': updateBuyerContract
   },
-  methods: {
-    getContract () {
-      axios
-        .get(`/buyers/${this.id}/`)
-        .then(response => {
-          this.contract = response.data
-        }).catch(error => {
-          this.output = error
-          this.errored = true
-        })
+  computed: {
+    ...mapGetters({
+      getBuyer: 'getBuyerById'
+    }),
+    partner: function () {
+      return this.getBuyer(this.id)
     }
   },
+  methods: {
+    ...mapActions({
+      fetchBuyers: 'fetchBuyers'
+    })
+  },
   created () {
-    this.getContract()
+    this.fetchBuyers()
   }
 }
 </script>

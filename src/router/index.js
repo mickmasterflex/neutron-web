@@ -85,12 +85,29 @@ const routes = [
     }
   },
   {
-    path: '/relationships/clients/:client/contracts/buyers/:id/',
+    path: '/relationships/contracts/buyers',
     name: 'BuyerContract',
-    props: true,
-    component: () => import('@/views/relationships/contracts/buyer.vue'),
+    component: () => import('@/views/relationships/buyers/index.vue'),
     meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/buyers/:id/',
+    name: 'PartnerContract',
+    component: () => import('@/views/relationships/buyers/buyer.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      props.client = +props.client
+      return props
+    }
   },
   {
     path: '/utilities/',
