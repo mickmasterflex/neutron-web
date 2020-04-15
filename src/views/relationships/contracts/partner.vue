@@ -17,8 +17,8 @@
 
 <script>
 import axios from '@/axios'
-import deletePartnerContract from '@/components/contracts/partner/delete'
-import updatePartnerContract from '@/components/contracts/partner/update'
+import deletePartnerContract from '@/components/contracts/partners/delete'
+import updatePartnerContract from '@/components/contracts/partners/update'
 
 export default {
   data () {

@@ -56,7 +56,7 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/relationships/clients/:client/partner-contracts/:id/',
+    path: '/relationships/clients/:client/contracts/partners/:id/',
     name: 'PartnerContract',
     props: true,
     component: () => import('@/views/relationships/contracts/partner.vue'),
@@ -64,7 +64,7 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/relationships/clients/:client/buyer-contracts/:id/',
+    path: '/relationships/clients/:client/contracts/buyers/:id/',
     name: 'BuyerContract',
     props: true,
     component: () => import('@/views/relationships/contracts/buyer.vue'),
