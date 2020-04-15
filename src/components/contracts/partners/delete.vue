@@ -14,7 +14,7 @@ export default {
   },
   props: ['client', 'id'],
   methods: {
-    ...mapActions({ delete: 'deletePartnerContract' }),
+    ...mapActions({ delete: 'deletePartner' }),
     runDelete () {
       this.delete(this.id)
         .then(() => {

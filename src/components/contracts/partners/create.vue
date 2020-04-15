@@ -21,7 +21,7 @@ export default {
   },
   props: ['client', 'partnerContracts'],
   methods: {
-    ...mapActions({ create: 'createPartnerContract' }),
+    ...mapActions({ create: 'createPartner' }),
     submitForm () {
       this.create({
         name: this.name,

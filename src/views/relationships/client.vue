@@ -34,7 +34,7 @@ import deleteClient from '@/components/clients/delete'
 import updateClient from '@/components/clients/update'
 import partnerContractList from '@/components/contracts/partners/list'
 import buyerContractList from '@/components/contracts/buyers/list'
-import createPartnerContract from '@/components/contracts/partners/create'
+import createPartner from '@/components/contracts/partners/create'
 import createBuyerContract from '@/components/contracts/buyers/create'
 
 export default {
@@ -49,7 +49,7 @@ export default {
     'update-client': updateClient,
     'partner-contract-list': partnerContractList,
     'buyer-contract-list': buyerContractList,
-    'create-partner-contract': createPartnerContract,
+    'create-partner-contract': createPartner,
     'create-buyer-contract': createBuyerContract
   },
   computed: {
