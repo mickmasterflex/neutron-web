@@ -1,16 +1,18 @@
 <template>
-  <button class="btn btn-red" v-on:click="logout">Logout</button>
+  <button class="btn btn-red" @click="logout">Logout</button>
 </template>
 
 <script>
-import { AUTH_LOGOUT } from '@/store/actions/authentication'
+import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    logout: function () {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => {
-        this.$router.push({ name: 'Login' })
-      })
+    ...mapActions({ authLogout: 'authLogout' }),
+    logout () {
+      this.authLogout()
+        .then(() => {
+          this.$router.push({ name: 'Login' })
+        })
     }
   }
 }

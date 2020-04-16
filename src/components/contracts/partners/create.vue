@@ -15,8 +15,7 @@ export default {
   data () {
     return {
       name: '',
-      parent: '',
-      output: ''
+      parent: ''
     }
   },
   props: ['client', 'partnerContracts'],

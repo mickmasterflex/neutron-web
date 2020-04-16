@@ -1,4 +1,3 @@
-import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '@/store/actions/authentication'
 import axios from '@/axios'
 
 const state = {
@@ -8,31 +7,32 @@ const state = {
 
 const getters = {
   isAuthenticated: state => !!state.token,
-  authStatus: state => state.status
+  getAuthStatus: state => state.status
 }
 
 const actions = {
-  [AUTH_REQUEST]: ({ commit, dispatch }, user) => {
+  authLogin: ({ commit, dispatch }, user) => {
     return new Promise((resolve, reject) => {
-      commit(AUTH_REQUEST)
+      commit('SET_AUTH_LOADING')
       axios({ url: '/accounts/login/', data: user, method: 'POST' })
         .then(resp => {
           const token = 'Token ' + resp.data.key
           localStorage.setItem('user-token', token)
           axios.defaults.headers.common.Authorization = token
-          commit(AUTH_SUCCESS, token)
+          commit('SET_AUTH_TOKEN', token)
+          commit('SET_AUTH_SUCCESS')
           resolve(resp)
         })
         .catch(err => {
-          commit(AUTH_ERROR, err)
+          commit('SET_AUTH_ERROR', err)
           localStorage.removeItem('user-token')
           reject(err)
         })
     })
   },
-  [AUTH_LOGOUT]: ({ commit, dispatch }) => {
-    return new Promise((resolve, reject) => {
-      commit(AUTH_LOGOUT)
+  authLogout: ({ commit }) => {
+    return new Promise((resolve) => {
+      commit('RESET_AUTH_STATE')
       localStorage.removeItem('user-token')
       delete axios.defaults.headers.common.Authorization
       resolve()
@@ -41,17 +41,11 @@ const actions = {
 }
 
 const mutations = {
-  [AUTH_REQUEST]: (state) => {
-    state.status = 'loading'
-  },
-  [AUTH_SUCCESS]: (state, token) => {
-    state.status = 'success'
-    state.token = token
-  },
-  [AUTH_ERROR]: (state) => {
-    state.status = 'error'
-  },
-  [AUTH_LOGOUT]: (state) => {
+  SET_AUTH_LOADING: (state) => (state.status = 'loading'),
+  SET_AUTH_ERROR: (state) => (state.status = 'error'),
+  SET_AUTH_SUCCESS: (state) => (state.status = 'success'),
+  SET_AUTH_TOKEN: (state, token) => (state.token = token),
+  RESET_AUTH_STATE: (state) => {
     state.status = ''
     state.token = ''
   }
