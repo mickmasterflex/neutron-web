@@ -20,12 +20,10 @@ export default {
   },
   props: {
     client: {
-      type: Number,
-      default: null
+      type: Number
     },
     partnerContracts: {
-      type: Array,
-      default: null
+      type: Array
     }
   },
   methods: {

@@ -18,8 +18,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {
