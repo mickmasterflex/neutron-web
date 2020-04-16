@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -24,23 +24,21 @@ export default {
       output: ''
     }
   },
-  props: ['id'],
+  props: {
+    id: {
+      type: Number,
+      default: null
+    }
+  },
   methods: {
-    updateUser () {
-      axios.put(`/users/${this.id}/`, {
+    ...mapActions({ update: 'updateUser' }),
+    submitForm () {
+      this.update({
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
         is_staff: this.is_staff
       })
-        .then(response => {
-          this.output = response
-          console.log(response)
-          this.$router.push({ name: 'Users' })
-        })
-        .catch(error => {
-          this.output = error
-        })
     }
   }
 }

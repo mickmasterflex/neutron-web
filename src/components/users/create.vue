@@ -1,6 +1,6 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
-    <form @submit.prevent="handleSubmit(createUser)">
+    <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name" class="field-group"></v-text-field>
       <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name" class="field-group"></v-text-field>
       <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email" class="field-group"></v-text-field>
@@ -11,12 +11,11 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
       first_name: '',
       last_name: '',
       email: '',
@@ -25,8 +24,9 @@ export default {
     }
   },
   methods: {
-    createUser () {
-      axios.post('/users/', {
+    ...mapActions({ create: 'createUser' }),
+    submitForm () {
+      this.create({
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
