@@ -18,7 +18,16 @@ export default {
       parent: ''
     }
   },
-  props: ['client', 'partnerContracts'],
+  props: {
+    client: {
+      type: Number,
+      default: null
+    },
+    partnerContracts: {
+      type: Array,
+      default: null
+    }
+  },
   methods: {
     ...mapActions({ create: 'createPartner' }),
     submitForm () {

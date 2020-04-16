@@ -12,7 +12,16 @@ export default {
       output: null
     }
   },
-  props: ['client', 'id'],
+  props: {
+    client: {
+      type: Number,
+      default: null
+    },
+    id: {
+      type: Number,
+      default: null
+    }
+  },
   methods: {
     ...mapActions({ delete: 'deletePartner' }),
     runDelete () {
