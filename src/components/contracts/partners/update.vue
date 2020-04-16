@@ -9,30 +9,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import axios from '@/axios'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
       name: '',
-      parent: '',
-      siblings: [],
-      output: null
+      parent: ''
     }
   },
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     },
     client: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   methods: {
-    ...mapActions({ update: 'updatePartnerContract', getSiblings: 'getSiblingContracts' }),
+    ...mapActions({ update: 'updatePartner' }),
     submitForm () {
       this.update({
         name: this.name,
@@ -40,16 +35,8 @@ export default {
         client: this.client,
         id: this.id
       })
-    },
-    getSiblingContracts () {
-      axios.get(`/clients/${this.$props.client}/`)
-        .then(response => {
-          this.siblings = response.data.partnercontract_set
-        })
     }
   },
-  mounted () {
-    this.getSiblingContracts()
-  }
+  computed: { ...mapGetters({ siblings: 'getPartnerSiblings' }) }
 }
 </script>

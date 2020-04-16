@@ -17,39 +17,30 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import deletePartnerContract from '@/components/contracts/partners/delete'
-import updatePartnerContract from '@/components/contracts/partners/update'
+import deletePartner from '@/components/contracts/partners/delete'
+import updatePartner from '@/components/contracts/partners/update'
 
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     },
     client: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {
-    'delete-partner-contract': deletePartnerContract,
-    'update-partner-contract': updatePartnerContract
+    'delete-partner-contract': deletePartner,
+    'update-partner-contract': updatePartner
   },
   computed: {
-    ...mapGetters({
-      getPartner: 'getPartnerById'
-    }),
-    partner: function () {
-      return this.getPartner(this.id)
-    }
+    ...mapGetters({ partner: 'getCurrentPartner' })
   },
   methods: {
-    ...mapActions({
-      fetchPartners: 'fetchPartners'
-    })
+    ...mapActions({ fetchCurrentPartner: 'fetchCurrentPartner' })
   },
   created () {
-    this.fetchPartners()
+    this.fetchCurrentPartner(this.id)
   }
 }
 </script>

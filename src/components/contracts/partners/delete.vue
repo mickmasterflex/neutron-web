@@ -6,15 +6,16 @@
 import { mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      output: null
+  props: {
+    client: {
+      type: Number
+    },
+    id: {
+      type: Number
     }
   },
-  props: ['client', 'id'],
   methods: {
-    ...mapActions({ delete: 'deletePartnerContract' }),
+    ...mapActions({ delete: 'deletePartner' }),
     runDelete () {
       this.delete(this.id)
         .then(() => {

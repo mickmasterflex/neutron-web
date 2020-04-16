@@ -15,13 +15,19 @@ export default {
   data () {
     return {
       name: '',
-      parent: '',
-      output: ''
+      parent: ''
     }
   },
-  props: ['client', 'partnerContracts'],
+  props: {
+    client: {
+      type: Number
+    },
+    partnerContracts: {
+      type: Array
+    }
+  },
   methods: {
-    ...mapActions({ create: 'createPartnerContract' }),
+    ...mapActions({ create: 'createPartner' }),
     submitForm () {
       this.create({
         name: this.name,

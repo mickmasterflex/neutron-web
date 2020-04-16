@@ -1,14 +1,13 @@
 import axios from '@/axios'
 
 const state = {
-  clients: []
+  clients: [],
+  current_client: {}
 }
 
 const getters = {
   getAllClients: state => state.clients,
-  getClientById: (state) => (id) => {
-    return state.clients.find(client => client.id === id)
-  },
+  getCurrentClient: state => state.current_client,
   getAllClientsCount: (state) => {
     return state.clients.length
   }
@@ -21,6 +20,12 @@ const actions = {
         commit('SET_CLIENTS', response.data)
       })
   },
+  async fetchCurrentClient ({ commit }, id) {
+    await axios.get(`/clients/${id}/`)
+      .then(response => {
+        commit('SET_CURRENT_CLIENT', response.data)
+      })
+  },
   async createClient ({ commit }, client) {
     await axios.post('/clients/', client)
       .then(response => {
@@ -31,6 +36,7 @@ const actions = {
     await axios.put(`/clients/${updatedClient.id}/`, updatedClient)
       .then(() => {
         commit('UPDATE_CLIENT', updatedClient)
+        commit('SET_CURRENT_CLIENT', updatedClient)
       })
   },
   async deleteClient ({ commit }, id) {
@@ -43,6 +49,7 @@ const actions = {
 
 const mutations = {
   SET_CLIENTS: (state, clients) => (state.clients = clients),
+  SET_CURRENT_CLIENT: (state, client) => (state.current_client = client),
   ADD_CLIENT: (state, client) => state.clients.unshift(client),
   UPDATE_CLIENT: (state, updatedClient) => {
     const index = state.clients.findIndex(client => client.id === updatedClient.id)
