@@ -1,18 +1,25 @@
 import axios from '@/axios'
 
 const state = {
-  partners: []
+  partners: [],
+  current_partner: {}
 }
 const getters = {
   getAllPartners: state => state.partners,
+  getCurrentPartner: state => state.current_partner,
   getAllPartnersCount: (state) => {
     return state.partners.length
   },
   getPartnersByClient: (state) => (clientId) => {
     return state.partners.filter(partner => partner.client === clientId)
   },
-  getPartnerById: (state) => (id) => {
-    return state.partners.find(partner => partner.id === id)
+  getPartnerSiblings: (state, getters) => {
+    const siblings = getters.getPartnersByClient(state.current_partner.client)
+    const index = siblings.findIndex(partner => partner.id === state.current_partner.id)
+    if (index !== -1) {
+      siblings.splice(index, 1)
+    }
+    return siblings
   }
 }
 
@@ -23,19 +30,26 @@ const actions = {
         commit('SET_PARTNERS', response.data)
       })
   },
-  async createPartnerContract ({ commit }, partner) {
+  async fetchCurrentPartner ({ commit }, id) {
+    await axios.get(`/partners/${id}/`)
+      .then(response => {
+        commit('SET_CURRENT_PARTNER', response.data)
+      })
+  },
+  async createPartner ({ commit }, partner) {
     await axios.post('/partners/', partner)
       .then(response => {
         commit('ADD_PARTNER', response.data)
       })
   },
-  async updatePartnerContract ({ commit }, updatedPartner) {
+  async updatePartner ({ commit }, updatedPartner) {
     await axios.put(`/partners/${updatedPartner.id}/`, updatedPartner)
       .then(() => {
         commit('UPDATE_PARTNER', updatedPartner)
+        commit('SET_CURRENT_PARTNER', updatedPartner)
       })
   },
-  async deletePartnerContract ({ commit }, id) {
+  async deletePartner ({ commit }, id) {
     await axios.delete(`/partners/${id}/`)
       .then(() => {
         commit('REMOVE_PARTNER', id)
@@ -44,6 +58,7 @@ const actions = {
 }
 const mutations = {
   SET_PARTNERS: (state, partners) => (state.partners = partners),
+  SET_CURRENT_PARTNER: (state, partner) => (state.current_partner = partner),
   ADD_PARTNER: (state, partner) => state.partners.unshift(partner),
   UPDATE_PARTNER: (state, updatedPartner) => {
     const index = state.partners.findIndex(partner => partner.id === updatedPartner.id)

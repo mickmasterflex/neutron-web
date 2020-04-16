@@ -4,7 +4,6 @@
       <h1 class="h1 text-white">{{client.name}}</h1>
       <div>
         <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
-        <stat-card :data="buyerContractCount" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
 
@@ -34,14 +33,13 @@ import deleteClient from '@/components/clients/delete'
 import updateClient from '@/components/clients/update'
 import partnerContractList from '@/components/contracts/partners/list'
 import buyerContractList from '@/components/contracts/buyers/list'
-import createPartnerContract from '@/components/contracts/partners/create'
+import createPartner from '@/components/contracts/partners/create'
 import createBuyerContract from '@/components/contracts/buyers/create'
 
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {
@@ -49,32 +47,26 @@ export default {
     'update-client': updateClient,
     'partner-contract-list': partnerContractList,
     'buyer-contract-list': buyerContractList,
-    'create-partner-contract': createPartnerContract,
+    'create-partner-contract': createPartner,
     'create-buyer-contract': createBuyerContract
   },
   computed: {
     ...mapGetters({
-      getClient: 'getClientById',
+      client: 'getCurrentClient',
       getPartnersByClient: 'getPartnersByClient'
     }),
-    client: function () {
-      return this.getClient(this.id)
-    },
     partners: function () {
       return this.getPartnersByClient(this.id)
-    },
-    buyerContractCount: function () {
-      return this.client.buyercontract_set.length
     }
   },
   methods: {
     ...mapActions({
-      fetchClients: 'fetchClients',
-      fetchPartners: 'fetchPartners'
+      fetchPartners: 'fetchPartners',
+      fetchCurrentClient: 'fetchCurrentClient'
     })
   },
   created () {
-    this.fetchClients()
+    this.fetchCurrentClient(this.id)
     this.fetchPartners()
   }
 }

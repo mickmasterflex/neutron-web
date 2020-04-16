@@ -20,8 +20,7 @@ export default {
   },
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   methods: {
