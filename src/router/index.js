@@ -50,21 +50,42 @@ const routes = [
   {
     path: '/relationships/clients/:id/',
     name: 'Client',
-    props: true,
     component: () => import('@/views/relationships/client.vue'),
     meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
   },
   {
-    path: '/relationships/clients/:client/partner-contracts/:id/',
-    name: 'PartnerContract',
-    props: true,
-    component: () => import('@/views/relationships/contracts/partner.vue'),
+    path: '/relationships/contracts/partners/',
+    name: 'PartnerContracts',
+    component: () => import('@/views/relationships/partners/index.vue'),
     meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
   },
   {
-    path: '/relationships/clients/:client/buyer-contracts/:id/',
+    path: '/relationships/clients/:client/contracts/partners/:id/',
+    name: 'PartnerContract',
+    component: () => import('@/views/relationships/partners/partner.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      props.client = +props.client
+      return props
+    }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/buyers/:id/',
     name: 'BuyerContract',
     props: true,
     component: () => import('@/views/relationships/contracts/buyer.vue'),
@@ -82,13 +103,6 @@ const routes = [
     path: '/users/',
     name: 'Users',
     component: () => import('@/views/users/index.vue'),
-    meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
-    path: '/users/create/',
-    name: 'UserCreate',
-    component: () => import('@/views/users/create.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true }
   },
