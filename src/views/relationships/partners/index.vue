@@ -32,9 +32,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      fetchPartners: 'fetchPartners'
-    })
+    ...mapActions({ fetchPartners: 'fetchPartners' })
   },
   created () {
     this.fetchPartners()

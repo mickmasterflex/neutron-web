@@ -7,13 +7,7 @@ import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions({ authLogout: 'authLogout' }),
-    logout () {
-      this.authLogout()
-        .then(() => {
-          this.$router.push({ name: 'Login' })
-        })
-    }
+    ...mapActions({ logout: 'authLogout' })
   }
 }
 </script>

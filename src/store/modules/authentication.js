@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import router from '@/router'
 
 const state = {
   token: localStorage.getItem('user-token') || '',
@@ -11,7 +12,7 @@ const getters = {
 }
 
 const actions = {
-  authLogin: ({ commit, dispatch }, user) => {
+  async authLogin ({ commit, dispatch }, user) {
     return new Promise((resolve, reject) => {
       commit('SET_AUTH_LOADING')
       axios({ url: '/accounts/login/', data: user, method: 'POST' })
@@ -30,12 +31,14 @@ const actions = {
         })
     })
   },
-  authLogout: ({ commit }) => {
+  async authLogout ({ commit }) {
     return new Promise((resolve) => {
       commit('RESET_AUTH_STATE')
       localStorage.removeItem('user-token')
       delete axios.defaults.headers.common.Authorization
       resolve()
+    }).then(() => {
+      router.push({ name: 'Login' })
     })
   }
 }
