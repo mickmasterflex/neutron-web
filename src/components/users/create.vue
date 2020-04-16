@@ -32,13 +32,6 @@ export default {
         email: this.email,
         is_staff: this.is_staff
       })
-        .then(response => {
-          this.output = response
-          this.$router.push({ name: 'Users' })
-        })
-        .catch(error => {
-          this.output = error
-        })
     }
   }
 }

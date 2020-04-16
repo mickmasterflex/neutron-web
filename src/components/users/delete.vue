@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-red" @click="deleteUser">Delete User</button>
+  <button class="btn btn-red" @click="runDelete">Delete User</button>
 </template>
 
 <script>

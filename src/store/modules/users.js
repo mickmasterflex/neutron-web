@@ -1,15 +1,14 @@
 import axios from '@/axios'
 
 const state = {
-  users: []
+  users: [],
+  current_user: {}
 }
 
 const getters = {
   getAllUsers: state => state.users,
-  getUserById: (state) => (id) => {
-    return state.users.find(user => user.id === id)
-  },
-  getAllUsersCount: (state) => {
+  getCurrentUser: state => state.current_user,
+  getAllUserCount: (state) => {
     return state.users.length
   }
 }
@@ -21,8 +20,14 @@ const actions = {
         commit('SET_USERS', response.data)
       })
   },
+  async fetchCurrentUser ({ commit }, id) {
+    await axios.get(`/users/${id}/`)
+      .then(response => {
+        commit('SET_CURRENT_USER', response.data)
+      })
+  },
   async createUser ({ commit }, user) {
-    await axios.post('/clients/', user)
+    await axios.post('/users/', user)
       .then(response => {
         commit('ADD_USER', response.data)
       })
@@ -31,6 +36,7 @@ const actions = {
     await axios.put(`/users/${updatedUser.id}/`, updatedUser)
       .then(() => {
         commit('UPDATE_USER', updatedUser)
+        commit('SET_CURRENT_USER')
       })
   },
   async deleteUser ({ commit }, id) {
