@@ -36,6 +36,7 @@ const actions = {
     await axios.put(`/clients/${updatedClient.id}/`, updatedClient)
       .then(() => {
         commit('UPDATE_CLIENT', updatedClient)
+        commit('SET_CURRENT_CLIENT', updatedClient)
       })
   },
   async deleteClient ({ commit }, id) {
