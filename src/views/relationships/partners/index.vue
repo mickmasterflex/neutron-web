@@ -7,17 +7,17 @@
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">All Partners</h3>
-    <partner-contract-list :contracts="partners"></partner-contract-list>
+    <partner-list :contracts="partners"></partner-list>
   </div>
 </template>
 
 <script>
-import partnerContractList from '@/components/contracts/partners/list'
+import partnerList from '@/components/contracts/partners/list'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'partner-contract-list': partnerContractList
+    'partner-list': partnerList
   },
   computed: {
     ...mapGetters({
