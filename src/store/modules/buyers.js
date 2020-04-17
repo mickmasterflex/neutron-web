@@ -14,9 +14,9 @@ const getters = {
   getBuyersByClient: (state) => (clientId) => {
     return state.buyers.filter(buyer => buyer.client === clientId)
   },
-  getUserSiblings: (state, getters) => {
+  getBuyerSiblings: (state, getters) => {
     const siblings = getters.getBuyersByClient(state.current_buyer.client)
-    const index = siblings.findIndex(user => user.id === state.current_buyer.id)
+    const index = siblings.findIndex(buyer => buyer.id === state.current_buyer.id)
     if (index !== -1) {
       siblings.splice(index, 1)
     }
@@ -48,6 +48,9 @@ const actions = {
       .then(() => {
         commit('UPDATE_BUYER', updatedBuyer)
         commit('SET_CURRENT_BUYER', updatedBuyer)
+      })
+      .catch(error => {
+        console.log(error)
       })
   },
   async deleteBuyer ({ commit }, id) {

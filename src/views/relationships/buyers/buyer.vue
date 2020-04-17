@@ -41,7 +41,7 @@ export default {
     ...mapActions({ fetchCurrentBuyer: 'fetchCurrentBuyer' })
   },
   created () {
-    this.fetchBuyers(this.id)
+    this.fetchCurrentBuyer(this.id)
   }
 }
 </script>

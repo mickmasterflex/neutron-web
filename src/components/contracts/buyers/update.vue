@@ -15,9 +15,7 @@ export default {
   data () {
     return {
       name: '',
-      parent: '',
-      siblings: [],
-      output: null
+      parent: ''
     }
   },
   props: {
@@ -39,6 +37,6 @@ export default {
       })
     }
   },
-  computed: { ...mapGetters({ siblings: 'getUserSiblings' }) }
+  computed: { ...mapGetters({ siblings: 'getBuyerSiblings' }) }
 }
 </script>
