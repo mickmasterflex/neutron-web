@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
       <h1 class="text-white text-4xl font-hairline">All Users</h1>
     <div>
       <stat-card v-bind:data="userCount" v-bind:title="`Users`" v-bind:color="`teal`"></stat-card>

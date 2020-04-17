@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
     <h1 class="h1 text-white">{{user.first_name}}</h1>
       <div>
     </div>
