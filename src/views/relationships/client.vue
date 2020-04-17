@@ -39,8 +39,7 @@ import createBuyerContract from '@/components/contracts/buyers/create'
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {

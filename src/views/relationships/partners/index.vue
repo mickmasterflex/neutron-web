@@ -16,12 +16,6 @@ import partnerContractList from '@/components/contracts/partners/list'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    id: {
-      type: Number,
-      default: null
-    }
-  },
   components: {
     'partner-contract-list': partnerContractList
   },

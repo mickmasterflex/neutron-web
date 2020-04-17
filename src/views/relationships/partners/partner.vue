@@ -23,12 +23,10 @@ import updatePartner from '@/components/contracts/partners/update'
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     },
     client: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {

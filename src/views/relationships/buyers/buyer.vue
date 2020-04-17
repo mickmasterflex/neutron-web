@@ -16,8 +16,8 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import deleteBuyerContract from '@/components/contracts/buyers/delete'
-import updateBuyerContract from '@/components/contracts/buyers/update'
+import deleteBuyer from '@/components/contracts/buyers/delete'
+import updateBuyer from '@/components/contracts/buyers/update'
 
 export default {
   props: {
@@ -31,24 +31,17 @@ export default {
     }
   },
   components: {
-    'delete-buyer-contract': deleteBuyerContract,
-    'update-buyer-contract': updateBuyerContract
+    'delete-buyer-contract': deleteBuyer,
+    'update-buyer-contract': updateBuyer
   },
   computed: {
-    ...mapGetters({
-      getBuyer: 'getBuyerById'
-    }),
-    buyer: function () {
-      return this.getBuyer(this.id)
-    }
+    ...mapGetters({ buyer: 'getCurrentBuyer' })
   },
   methods: {
-    ...mapActions({
-      fetchBuyers: 'fetchBuyers'
-    })
+    ...mapActions({ fetchCurrentBuyer: 'fetchCurrentBuyer' })
   },
   created () {
-    this.fetchBuyers()
+    this.fetchBuyers(this.id)
   }
 }
 </script>

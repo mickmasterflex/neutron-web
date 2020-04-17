@@ -6,20 +6,12 @@
 import { mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      output: null
-    }
-  },
   props: {
     client: {
-      type: Number,
-      default: null
+      type: Number
     },
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   methods: {
