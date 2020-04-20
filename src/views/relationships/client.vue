@@ -4,11 +4,12 @@
       <h1 class="h1 text-white">{{client.name}}</h1>
       <div>
         <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
+        <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
 
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
-    <buyer-contract-list :contracts="client.buyercontract_set"></buyer-contract-list>
+    <buyer-contract-list :contracts="buyers"></buyer-contract-list>
 
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
     <partner-contract-list :contracts="partners"></partner-contract-list>
@@ -20,10 +21,10 @@
     <delete-client :id="client.id"></delete-client>
 
     <h3 class="h3 mt-5 mb-2">Create Partner Contract</h3>
-    <create-partner-contract :client="client.id" :partner-contracts="client.partnercontract_set"></create-partner-contract>
+    <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Create Buyer Contract</h3>
-    <create-buyer-contract :client="client.id" :buyer-contracts="client.buyercontract_set"></create-buyer-contract>
+    <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ import updateClient from '@/components/clients/update'
 import partnerContractList from '@/components/contracts/partners/list'
 import buyerContractList from '@/components/contracts/buyers/list'
 import createPartner from '@/components/contracts/partners/create'
-import createBuyerContract from '@/components/contracts/buyers/create'
+import createBuyer from '@/components/contracts/buyers/create'
 
 export default {
   props: {
@@ -48,26 +49,32 @@ export default {
     'partner-contract-list': partnerContractList,
     'buyer-contract-list': buyerContractList,
     'create-partner-contract': createPartner,
-    'create-buyer-contract': createBuyerContract
+    'create-buyer-contract': createBuyer
   },
   computed: {
     ...mapGetters({
       client: 'getCurrentClient',
-      getPartnersByClient: 'getPartnersByClient'
+      getPartnersByClient: 'getPartnersByClient',
+      getBuyersByClient: 'getBuyersByClient'
     }),
     partners: function () {
       return this.getPartnersByClient(this.id)
+    },
+    buyers: function () {
+      return this.getBuyersByClient(this.id)
     }
   },
   methods: {
     ...mapActions({
       fetchPartners: 'fetchPartners',
+      fetchBuyers: 'fetchBuyers',
       fetchCurrentClient: 'fetchCurrentClient'
     })
   },
   created () {
     this.fetchCurrentClient(this.id)
     this.fetchPartners()
+    this.fetchBuyers()
   }
 }
 </script>
