@@ -2,8 +2,6 @@
   <div v-if="user">
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
     <h1 class="h1 text-white">{{user.first_name}}</h1>
-      <div>
-    </div>
   </div>
     <h3 class="h3 mt-5 mb-2">Delete User</h3>
     <delete-user :id="user.id"></delete-user>
@@ -30,22 +28,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'getCurrentUser',
-      getPartnersByUser: 'getPartnersByUser'
-    }),
-    partners: function () {
-      return this.getPartnersByUser(this.id)
-    }
+      user: 'getCurrentUser'
+    })
   },
   methods: {
     ...mapActions({
-      fetchPartners: 'fetchPartners',
       fetchCurrentUser: 'fetchCurrentUser'
     })
   },
   created () {
     this.fetchCurrentUser(this.id)
-    this.fetchPartners()
   }
 }
 </script>

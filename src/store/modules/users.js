@@ -8,7 +8,7 @@ const state = {
 const getters = {
   getAllUsers: state => state.users,
   getCurrentUser: state => state.current_user,
-  getAllUserCount: (state) => {
+  getAllUsersCount: (state) => {
     return state.users.length
   }
 }
@@ -49,6 +49,7 @@ const actions = {
 
 const mutations = {
   SET_USERS: (state, users) => (state.users = users),
+  SET_CURRENT_USER: (state, user) => (state.current_user = user),
   ADD_USER: (state, user) => state.users.unshift(user),
   UPDATE_USER: (state, updatedUser) => {
     const index = state.users.findIndex(user => user.id === updatedUser.id)

@@ -20,14 +20,12 @@ export default {
       first_name: '',
       last_name: '',
       email: '',
-      is_staff: '',
-      output: ''
+      is_staff: ''
     }
   },
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   methods: {

@@ -1,4 +1,5 @@
 <template>
+  <div>
   <table v-if="users" class="w-full">
     <tr class="th-row">
       <th class="th">Email</th>
@@ -17,6 +18,7 @@
   </table>
   <div v-else>
     ...Loading...
+  </div>
   </div>
 </template>
 
