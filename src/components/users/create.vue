@@ -16,7 +16,6 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
       first_name: '',
       last_name: '',
       email: '',
@@ -28,8 +27,10 @@ export default {
     ...mapActions({ create: 'createUser' }),
     submitForm () {
       this.create({
-        name: this.name,
-        slug: this.slug
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        is_staff: this.is_staff
       })
     }
   }
