@@ -9,7 +9,7 @@
     </div>
 
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
-    <buyer-list :contracts="client.buyercontract_set"></buyer-list>
+    <buyer-list :contracts="buyers"></buyer-list>
 
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
     <partner-list :contracts="partners"></partner-list>
