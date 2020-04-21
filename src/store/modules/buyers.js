@@ -49,9 +49,6 @@ const actions = {
         commit('UPDATE_BUYER', updatedBuyer)
         commit('SET_CURRENT_BUYER', updatedBuyer)
       })
-      .catch(error => {
-        console.log(error)
-      })
   },
   async deleteBuyer ({ commit }, id) {
     await axios.delete(`/buyers/${id}/`)

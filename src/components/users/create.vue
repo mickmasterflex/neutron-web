@@ -19,8 +19,7 @@ export default {
       first_name: '',
       last_name: '',
       email: '',
-      is_staff: '',
-      output: ''
+      is_staff: ''
     }
   },
   methods: {
