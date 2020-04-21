@@ -84,12 +84,7 @@ const routes = [
     name: 'BuyerContracts',
     component: () => import('@/views/relationships/buyers/index.vue'),
     meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      return props
-    }
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',
