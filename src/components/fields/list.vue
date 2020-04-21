@@ -8,7 +8,7 @@
         <th class="th">Type</th>
       </tr>
       <tr v-for="field in base_text_fields" :key="field.id">
-        <td class="td">{{field.name}}</td>
+        <td class="td"><span @click="editField(field.id)" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
@@ -21,13 +21,25 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
+  data () {
+    return {
+      field: null
+    }
+  },
   computed: {
     ...mapGetters({ base_text_fields: 'getBaseTextFields' })
   },
   methods: {
-    ...mapActions({ fetchBaseTextFields: 'fetchBaseTextFields' })
+    ...mapActions({ fetchBaseTextFields: 'fetchBaseTextFields' }),
+    ...mapGetters({ getBaseTextFieldById: 'getBaseTextFieldById' }),
+    ...mapMutations({ showModal: 'showModal' }),
+    editField (id) {
+      this.showModal('updateText')
+      this.getBaseTextFieldById(id)
+    }
   },
   created () {
     this.fetchBaseTextFields()

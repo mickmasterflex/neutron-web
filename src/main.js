@@ -46,6 +46,8 @@ Vue.component('app-layout', appLayout)
 -------------------------------------------------- */
 
 Vue.component('stat-card', statCard)
+
+// Form Fields
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
