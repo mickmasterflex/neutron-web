@@ -16,8 +16,8 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import deleteBuyer from '@/components/contracts/buyers/delete'
-import updateBuyer from '@/components/contracts/buyers/update'
+import deleteBuyer from '@/components/buyers/delete'
+import updateBuyer from '@/components/buyers/update'
 
 export default {
   props: {

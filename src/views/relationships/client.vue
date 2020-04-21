@@ -32,10 +32,10 @@
 import { mapActions, mapGetters } from 'vuex'
 import deleteClient from '@/components/clients/delete'
 import updateClient from '@/components/clients/update'
-import partnerList from '@/components/contracts/partners/list'
-import buyerList from '@/components/contracts/buyers/list'
-import createPartner from '@/components/contracts/partners/create'
-import createBuyer from '@/components/contracts/buyers/create'
+import partnerList from '@/components/partners/list'
+import buyerList from '@/components/buyers/list'
+import createPartner from '@/components/partners/create'
+import createBuyer from '@/components/buyers/create'
 
 export default {
   props: {
