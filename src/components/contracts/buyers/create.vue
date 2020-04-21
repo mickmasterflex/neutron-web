@@ -1,6 +1,6 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
-    <form @submit.prevent="handleSubmit(createBuyerContract)">
+    <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="buyerName" field_label="Name" class="field-group"></v-text-field>
       <select-field v-model="parent" :options="buyerContracts" field_id="parent" field_label="Parent" class="field-group"></select-field>
       <button class="btn btn-green mt-5">Create Buyer Contract</button>
@@ -9,31 +9,31 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
     return {
       name: '',
-      parent: '',
-      output: ''
+      parent: ''
     }
   },
-  props: ['client', 'buyerContracts'],
+  props: {
+    client: {
+      type: Number
+    },
+    buyerContracts: {
+      type: Array
+    }
+  },
   methods: {
-    createBuyerContract () {
-      axios.post('/buyers/', {
+    ...mapActions({ create: 'createBuyer' }),
+    submitForm () {
+      this.create({
         name: this.name,
         parent: this.parent,
         client: this.$props.client
       })
-        .then(response => {
-          this.output = response
-        })
-        .catch(error => {
-          this.errored = true
-          this.output = error
-        })
     }
   }
 }

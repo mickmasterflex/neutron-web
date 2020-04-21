@@ -1,6 +1,6 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
-    <form @submit.prevent="handleSubmit(updateBuyerContract)">
+    <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="buyerName" field_label="Name" class="field-group"></v-text-field>
       <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent" class="field-group"></select-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
@@ -9,48 +9,34 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
       name: '',
-      parent: '',
-      siblings: [],
-      output: null
+      parent: ''
     }
   },
-  props: ['client', 'id'],
-  methods: {
-    updateBuyerContract () {
-      axios
-        .put(`/buyers/${this.id}/`, {
-          name: this.name,
-          parent: this.parent,
-          client: this.client
-        })
-        .then(response => {
-          this.output = response
-          this.$router.push({ name: 'Client', params: { id: this.output.data.client } })
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
-        })
+  props: {
+    id: {
+      type: Number
     },
-    getSiblingContracts () {
-      axios.get(`/clients/${this.$props.client}/`)
-        .then(response => {
-          this.siblings = response.data.buyercontract_set
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
-        })
+    client: {
+      type: Number
     }
   },
-  mounted () {
-    this.getSiblingContracts()
-  }
+  methods: {
+    ...mapActions({ update: 'updateBuyer' }),
+    submitForm () {
+      this.update({
+        name: this.name,
+        parent: this.parent,
+        client: this.client,
+        id: this.id
+      })
+    }
+  },
+  computed: { ...mapGetters({ siblings: 'getBuyerSiblings' }) }
 }
 </script>
