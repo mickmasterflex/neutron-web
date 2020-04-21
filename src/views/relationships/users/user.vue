@@ -1,7 +1,11 @@
 <template>
   <div v-if="user">
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
-    <h1 class="h1 text-white">{{user.first_name}}</h1>
+    <p class="h1 text-white">{{user.first_name}} {{user.last_name}}</p>
+      <div>
+        <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>
+      </div>
+      <p class="text-white text-1xl font-hairline">{{user.email}}</p>
   </div>
     <h3 class="h3 mt-5 mb-2">Delete User</h3>
     <delete-user :id="user.id"></delete-user>
