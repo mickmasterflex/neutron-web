@@ -26,9 +26,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      fetchBuyers: 'fetchBuyers'
-    })
+    ...mapActions({ fetchBuyers: 'fetchBuyers' })
   },
   created () {
     this.fetchBuyers()

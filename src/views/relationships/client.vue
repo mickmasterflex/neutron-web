@@ -9,10 +9,10 @@
     </div>
 
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
-    <buyer-contract-list :contracts="buyers"></buyer-contract-list>
+    <buyer-list :contracts="client.buyercontract_set"></buyer-list>
 
     <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
-    <partner-contract-list :contracts="partners"></partner-contract-list>
+    <partner-list :contracts="partners"></partner-list>
 
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
     <update-client :id="client.id"></update-client>
@@ -32,8 +32,8 @@
 import { mapActions, mapGetters } from 'vuex'
 import deleteClient from '@/components/clients/delete'
 import updateClient from '@/components/clients/update'
-import partnerContractList from '@/components/contracts/partners/list'
-import buyerContractList from '@/components/contracts/buyers/list'
+import partnerList from '@/components/contracts/partners/list'
+import buyerList from '@/components/contracts/buyers/list'
 import createPartner from '@/components/contracts/partners/create'
 import createBuyer from '@/components/contracts/buyers/create'
 
@@ -46,8 +46,8 @@ export default {
   components: {
     'delete-client': deleteClient,
     'update-client': updateClient,
-    'partner-contract-list': partnerContractList,
-    'buyer-contract-list': buyerContractList,
+    'partner-list': partnerList,
+    'buyer-list': buyerList,
     'create-partner-contract': createPartner,
     'create-buyer-contract': createBuyer
   },

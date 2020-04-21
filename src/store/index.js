@@ -4,7 +4,6 @@ import auth from './modules/authentication'
 import clients from './modules/clients'
 import partners from './modules/partners'
 import buyers from './modules/buyers'
-import users from './modules/users'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,7 +11,6 @@ export default new Vuex.Store({
     auth,
     clients,
     partners,
-    buyers,
-    users
+    buyers
   }
 })
