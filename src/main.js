@@ -16,6 +16,7 @@ import simpleLayout from '@/layouts/simpleLayout'
 import appLayout from '@/layouts/appLayout'
 
 /* Components */
+import baseModal from '@/components/global/modals/base'
 import statCard from '@/components/global/cards/stat-card'
 import checkboxSingle from '@/components/global/forms/base_fields/checkbox-single'
 import selectField from '@/components/global/forms/base_fields/select-field'
@@ -46,6 +47,7 @@ Vue.component('app-layout', appLayout)
 -------------------------------------------------- */
 
 Vue.component('stat-card', statCard)
+Vue.component('modal', baseModal)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)
