@@ -1,51 +1,57 @@
 <template>
-  <div class="modal-container">
-    <div class="flex flex-row items-center justify-between">
-      <h3 class="h2 inline">Update Base Text Field</h3>
-      <span class="cursor-pointer text-gray-500 hover:text-red-500 text-xl" @click="hideModal">&times;</span>
-    </div>
-    <div class="modal-body">
+  <modal-template :show="show" @close="close">
+    <template v-slot:header>Update Base Text Field</template>
+    <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }">
         <form @submit.prevent="handleSubmit(submitForm)">
-          <v-text-field v-model="formFieldName" rules="required" field_id="formFieldName" field_label="Form Field Name" class="field-group"></v-text-field>
-          <v-text-field v-model="formFieldLabel" rules="required" field_id="formFieldLabel" field_label="Form Field Label" class="field-group"></v-text-field>
-          <v-text-field v-model="formFieldDesc" rules="required" field_id="formFieldDesc" field_label="Form Field Description" class="field-group"></v-text-field>
-          <v-select-field v-model="formFieldType" :options="options" rules="required" field_id="formFieldType" field_label="Form Field Label" class="field-group"></v-select-field>
+          <v-text-field v-model="field_name" rules="required" field_id="formFieldName" field_label="Form Field Name" class="field-group"></v-text-field>
+          <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Form Field Label" class="field-group"></v-text-field>
+          <v-text-field v-model="field_desc" rules="required" field_id="formFieldDesc" field_label="Form Field Description" class="field-group"></v-text-field>
+          <v-select-field v-model="field_type" :options="options" rules="required" field_id="formFieldType" field_label="Form Field Type" class="field-group"></v-select-field>
           <button type="submit" class="btn btn-green mt-5">Submit</button>
         </form>
       </validation-observer>
-    </div>
-  </div>
+    </template>
+  </modal-template>
 </template>
 
 <script>
 import { mapActions, mapMutations } from 'vuex'
 
 export default {
-  name: 'updateText',
   data () {
     return {
-      formFieldName: '',
-      formFieldLabel: '',
-      formFieldDesc: '',
-      formFieldType: '',
+      field_name: '',
+      field_label: '',
+      field_desc: '',
+      field_type: '',
       options: {
         text: { name: 'text', id: 'text' },
         textarea: { name: 'textarea', id: 'textarea' }
       }
     }
   },
+  props: { show: Boolean, id: Number },
   methods: {
-    ...mapMutations(['hideModal']),
-    ...mapActions({ create: 'updateBaseTextField' }),
+    ...mapActions({ update: 'updateBaseTextField' }),
+    ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_TEXT_FIELD' }),
+    close () {
+      this.field_name = ''
+      this.field_label = ''
+      this.field_desc = ''
+      this.field_type = ''
+      this.$emit('close')
+      this.reset_state()
+    },
     submitForm () {
-      // const field = {
-      //   name: this.formFieldName,
-      //   label: this.formFieldLabel,
-      //   description: this.formFieldDesc,
-      //   type: this.formFieldType
-      // }
-      // this.create({ field })
+      this.update({
+        name: this.field_name,
+        label: this.field_label,
+        description: this.field_desc,
+        type: this.field_type,
+        id: this.id
+      })
+      this.close()
     }
   }
 }

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <table v-if="base_text_fields" class="w-full">
+    <table v-if="baseTextFields" class="w-full">
       <tr class="th-row">
         <th class="th">Name</th>
         <th class="th">Label</th>
         <th class="th">Description</th>
         <th class="th">Type</th>
       </tr>
-      <tr v-for="field in base_text_fields" :key="field.id">
-        <td class="td"><span @click="showModalUpdateText=true" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
+      <tr v-for="field in baseTextFields" :key="field.id">
+        <td class="td"><span @click="editField(field.id)" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
@@ -17,13 +17,13 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-text-modal :show="showModalUpdateText" @close="showModalUpdateText=false"></update-text-modal>
+    <update-text-modal :id="currentField.id" :show="showModalUpdateText" @close="showModalUpdateText=false"></update-text-modal>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import updateText from '@/components/fields/update-text'
+import updateText from '@/components/fields/update'
 
 export default {
   data () {
@@ -36,17 +36,23 @@ export default {
     'update-text-modal': updateText
   },
   computed: {
-    ...mapGetters({ base_text_fields: 'getBaseTextFields' })
+    ...mapGetters({
+      baseTextFields: 'getBaseTextFields',
+      currentField: 'getCurrentBaseTextField'
+    })
   },
   methods: {
-    ...mapActions({ fetchBaseTextFields: 'fetchBaseTextFields' }),
-    ...mapGetters({ getBaseTextFieldById: 'getBaseTextFieldById' }),
+    ...mapActions({
+      fetchFields: 'fetchBaseTextFields',
+      fetchCurrent: 'fetchCurrentBaseTextField'
+    }),
     editField (id) {
-      this.getBaseTextFieldById(id)
+      this.showModalUpdateText = true
+      this.fetchCurrent(id)
     }
   },
   created () {
-    this.fetchBaseTextFields()
+    this.fetchFields()
   }
 }
 </script>
