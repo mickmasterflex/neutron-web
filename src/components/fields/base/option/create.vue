@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="show" @close="close">
-    <template v-slot:header>Create Base Text Field</template>
+    <template v-slot:header>Create Base Option Field</template>
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }">
         <form @submit.prevent="handleSubmit(submitForm)">
@@ -26,8 +26,8 @@ export default {
       field_desc: '',
       field_type: '',
       options: {
-        text: { name: 'text', id: 'text' },
-        textarea: { name: 'textarea', id: 'textarea' }
+        text: { name: 'select', id: 'select' },
+        textarea: { name: 'radio', id: 'radio' }
       }
     }
   },
@@ -35,7 +35,7 @@ export default {
     show: Boolean
   },
   methods: {
-    ...mapActions({ create: 'createBaseTextField' }),
+    ...mapActions({ create: 'createBaseOptionField' }),
     close () {
       this.field_name = ''
       this.field_label = ''
