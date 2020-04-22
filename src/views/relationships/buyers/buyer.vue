@@ -3,7 +3,7 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">{{buyer.name}}</h1>
       <div>
-        <stat-card v-if="buyer.parent" v-bind:data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
+        <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>

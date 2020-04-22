@@ -24,6 +24,10 @@
 
 <script>
 export default {
-  props: ['users']
+  props: {
+    users: {
+      type: Array
+    }
+  }
 }
 </script>

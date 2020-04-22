@@ -3,10 +3,10 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="text-white text-4xl font-hairline">All Users</h1>
     <div>
-      <stat-card v-bind:data="getAllUsersCount" v-bind:title="`Users`" v-bind:color="`teal`"></stat-card>
+      <stat-card :data="getAllUsersCount" :title="`Users`" :color="`teal`"></stat-card>
     </div>
   </div>
-    <user-list v-bind:users="users" class="mt-5"></user-list>
+    <user-list :users="users" class="mt-5"></user-list>
     <h3 class="h3 mt-5 mb-2">Create User</h3>
     <create-user></create-user>
   </div>
