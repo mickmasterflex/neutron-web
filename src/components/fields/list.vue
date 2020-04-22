@@ -8,7 +8,7 @@
         <th class="th">Type</th>
       </tr>
       <tr v-for="field in base_text_fields" :key="field.id">
-        <td class="td"><span @click="showModal = true" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
+        <td class="td"><span @click="showModalUpdateText=true" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
@@ -17,7 +17,7 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-text-modal :show="showModal" @close="showModal = false"></update-text-modal>
+    <update-text-modal :show="showModalUpdateText" @close="showModalUpdateText=false"></update-text-modal>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       field: null,
-      showModal: false
+      showModalUpdateText: false
     }
   },
   components: {

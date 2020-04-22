@@ -1,5 +1,5 @@
 <template>
-  <modal-template class="modal-container">
+  <div class="modal-container">
     <div class="flex flex-row items-center justify-between">
       <h3 class="h2 inline">Update Base Text Field</h3>
       <span class="cursor-pointer text-gray-500 hover:text-red-500 text-xl" @click="hideModal">&times;</span>
@@ -15,7 +15,7 @@
         </form>
       </validation-observer>
     </div>
-  </modal-template>
+  </div>
 </template>
 
 <script>

@@ -1,6 +1,13 @@
 <template>
   <div v-show="show" @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
     <div class="bg-white w-1/2 rounded-lg p-10" @click.stop>
+      <div class="flex flex-row items-center justify-between">
+        <h3 class="h2 inline">
+          <slot name="header">Modal Header</slot>
+        </h3>
+        <span class="cursor-pointer text-gray-500 hover:text-red-500 text-xl" @click="close">&times;</span>
+      </div>
+      <slot name="body">Modal Body</slot>
       <slot/>
     </div>
   </div>

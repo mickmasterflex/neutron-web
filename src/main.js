@@ -47,7 +47,7 @@ Vue.component('app-layout', appLayout)
 -------------------------------------------------- */
 
 Vue.component('stat-card', statCard)
-Vue.component('modal', baseModal)
+Vue.component('modal-template', baseModal)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)

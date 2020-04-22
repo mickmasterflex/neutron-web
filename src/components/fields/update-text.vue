@@ -1,10 +1,7 @@
 <template>
-  <modal :show="show" @close="close">
-    <div class="flex flex-row items-center justify-between">
-      <h3 class="h2 inline">Update Base Text Field</h3>
-      <span class="cursor-pointer text-gray-500 hover:text-red-500 text-xl" @click="close">&times;</span>
-    </div>
-    <div class="modal-body">
+  <modal-template :show="show" @close="close">
+    <template v-slot:header>Update Base Text Field</template>
+    <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }">
         <form @submit.prevent="handleSubmit(submitForm)">
           <v-text-field v-model="formFieldName" rules="required" field_id="formFieldName" field_label="Form Field Name" class="field-group"></v-text-field>
@@ -14,8 +11,8 @@
           <button type="submit" class="btn btn-green mt-5">Submit</button>
         </form>
       </validation-observer>
-    </div>
-  </modal>
+    </template>
+  </modal-template>
 </template>
 
 <script>
@@ -32,7 +29,7 @@ export default {
       }
     }
   },
-  props: ['show'],
+  props: { show: Boolean },
   methods: {
     close () {
       this.title = ''
