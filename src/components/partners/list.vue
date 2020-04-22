@@ -9,7 +9,7 @@
       </tr>
       <tr v-for="contract in contracts" :key="contract.id">
         <td class="td">
-          <router-link :to="{name: 'PartnerContract', params: {client:contract.client, id:contract.id}}" class="underline text-blue-500">{{contract.name}}</router-link>
+          <router-link :to="{name: 'PartnerContract', params: {client:contract.client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
         </td>
         <td>{{ contract.id }}</td>
         <td>{{ contract.parent }}</td>

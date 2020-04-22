@@ -9,7 +9,7 @@
         <th class="th"></th>
       </tr>
       <tr v-for="field in baseTextFields" :key="field.id">
-        <td class="td"><span @click="editField(field.id)" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
+        <td class="td"><span @click="editField(field.id)" class="text-link">{{field.name}}</span></td>
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
