@@ -13,7 +13,7 @@
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
-        <td class="td flex flex-row content-end"><delete-field :id="field.id"></delete-field></td>
+        <td class="td flex flex-row justify-end"><delete-field :id="field.id"></delete-field></td>
       </tr>
     </table>
     <div v-else>
