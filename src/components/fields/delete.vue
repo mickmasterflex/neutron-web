@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-circle btn-o-red" @click="runDelete">-</button>
+  <button class="btn btn-circle btn-o-red" @click="this.deleteField">-</button>
 </template>
 
 <script>
@@ -9,13 +9,7 @@ export default {
     id: Number
   },
   methods: {
-    ...mapActions({ delete: 'deleteBaseTextField' }),
-    runDelete () {
-      this.delete(this.id)
-        .then(() => {
-          this.$emit('close')
-        })
-    }
+    ...mapActions({ deleteField: 'deleteBaseTextField' })
   }
 }
 </script>
