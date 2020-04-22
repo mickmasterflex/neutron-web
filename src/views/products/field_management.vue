@@ -8,8 +8,9 @@
       <h1 class="h1 text-white">Fields</h1>
     </div>
 
-    <div class="flex flex-col mt-4">
-      <button class="btn btn-green self-end" @click="showModalCreateBaseTextField = true">Create Base Text Field</button>
+    <div class="flex flex-row justify-between mt-4">
+      <h2 class="h3">Base Text Fields</h2>
+      <button class="btn btn-green" @click="showModalCreateBaseTextField = true">Create Base Text Field</button>
     </div>
 
     <create-base-text-field-modal :show="showModalCreateBaseTextField" @close="showModalCreateBaseTextField=false"></create-base-text-field-modal>
