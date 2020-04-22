@@ -1,28 +1,22 @@
 <template>
-  <button class="btn btn-red" @click="deleteUser">Delete User</button>
+  <button class="btn btn-red" @click="runDelete">Delete User</button>
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      output: null
+  props: {
+    id: {
+      type: Number
     }
   },
-  props: ['id'],
   methods: {
-    deleteUser () {
-      axios.delete(`/users/${this.id}/`)
-        .then(response => {
-          this.output = response
-          console.log(response)
+    ...mapActions({ delete: 'deleteUser' }),
+    runDelete () {
+      this.delete(this.id)
+        .then(() => {
           this.$router.push({ name: 'Users' })
-        })
-        .catch(error => {
-          this.output = error
         })
     }
   }
