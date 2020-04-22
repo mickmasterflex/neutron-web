@@ -19,7 +19,7 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-text-modal :id="currentField.id" :show="showModalUpdateBaseTextField" @close="showModalUpdateBaseTextField=false"></update-text-modal>
+    <update-base-text-field-modal :id="currentField.id" :show="showModalUpdateBaseTextField" @close="showModalUpdateBaseTextField=false"></update-base-text-field-modal>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
     }
   },
   components: {
-    'update-text-modal': updateText,
+    'update-base-text-field-modal': updateText,
     'delete-field': deleteField
   },
   computed: {
