@@ -31,7 +31,10 @@ export default {
       }
     }
   },
-  props: { show: Boolean, id: Number },
+  props: {
+    show: Boolean,
+    id: Number
+  },
   methods: {
     ...mapActions({ update: 'updateBaseTextField' }),
     ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_TEXT_FIELD' }),

@@ -24,7 +24,7 @@ const actions = {
       })
   },
   async createBaseTextField ({ commit }, field) {
-    await axios.post('/base-text-fields/', field.field)
+    await axios.post('/base-text-fields/', field)
       .then(response => {
         commit('ADD_BASE_TEXT_FIELD', response.data)
       })
