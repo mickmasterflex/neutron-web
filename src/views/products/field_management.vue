@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import baseTextFieldList from '@/components/fields/list'
-import createBaseTextField from '@/components/fields/create'
+import baseTextFieldList from '@/components/fields/base/text/list'
+import createBaseTextField from '@/components/fields/base/text/create'
 
 export default {
   data () {
