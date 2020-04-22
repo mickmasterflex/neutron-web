@@ -6,12 +6,14 @@
         <th class="th">Label</th>
         <th class="th">Description</th>
         <th class="th">Type</th>
+        <th class="th"></th>
       </tr>
       <tr v-for="field in baseTextFields" :key="field.id">
         <td class="td"><span @click="editField(field.id)" class="text-blue-500 underline cursor-pointer">{{field.name}}</span></td>
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
+        <td class="td"><delete-field :id="field.id"></delete-field></td>
       </tr>
     </table>
     <div v-else>
@@ -24,6 +26,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import updateText from '@/components/fields/update'
+import deleteField from '@/components/fields/delete'
 
 export default {
   data () {
@@ -33,7 +36,8 @@ export default {
     }
   },
   components: {
-    'update-text-modal': updateText
+    'update-text-modal': updateText,
+    'delete-field': deleteField
   },
   computed: {
     ...mapGetters({

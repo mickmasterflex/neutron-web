@@ -39,6 +39,12 @@
 .btn        { @apply text-white rounded-md px-3 py-2 transition duration-300; }
 .btn:focus  { @apply outline-none shadow-outline; }
 
+.btn-circle {
+    @apply rounded-full p-1 flex flex-col items-center justify-center;
+    width: 30px;
+    height: 30px;
+}
+
 /* Colors */
 
 .btn-blue             { @apply bg-blue-500; }
@@ -64,6 +70,10 @@
 .btn-red              { @apply bg-red-500; }
 .btn-red:hover        { @apply bg-red-600; }
 .btn-red:active       { @apply bg-red-600; }
+
+.btn-o-red            { @apply text-red-600 border-red-500 border-2 border-solid; }
+.btn-o-red:hover      { @apply text-white bg-red-600; }
+.btn-o-red:active     { @apply bg-red-600; }
 
 .btn-turquoise        { @apply bg-turquoise-500; }
 .btn-turquoise:hover  { @apply bg-turquoise-600; }

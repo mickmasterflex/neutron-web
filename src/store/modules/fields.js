@@ -34,6 +34,12 @@ const actions = {
       .then(() => {
         commit('UPDATE_BASE_TEXT_FIELD', updatedField)
       })
+  },
+  async deleteBaseTextField ({ commit }, id) {
+    await axios.delete(`/base-text-fields/${id}/`)
+      .then(() => {
+        commit('REMOVE_BASE_TEXT_FIELD', id)
+      })
   }
 }
 
@@ -47,7 +53,8 @@ const mutations = {
     if (index !== -1) {
       state.base_text_fields.splice(index, 1, updatedField)
     }
-  }
+  },
+  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id))
 }
 
 export default {
