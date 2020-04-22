@@ -1,4 +1,5 @@
 <template>
+  <div>
   <table v-if="users" class="w-full">
     <tr class="th-row">
       <th class="th">Email</th>
@@ -18,35 +19,15 @@
   <div v-else>
     ...Loading...
   </div>
+  </div>
 </template>
 
 <script>
-import axios from '../../axios'
-
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      users: null,
-      error: null
+  props: {
+    users: {
+      type: Array
     }
-  },
-  methods: {
-    getUsers () {
-      axios
-        .get('/users/')
-        .then(response => {
-          this.users = response.data
-        })
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-          this.error = error
-        })
-    }
-  },
-  created () {
-    this.getUsers()
   }
 }
 </script>

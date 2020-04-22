@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-red" @click="runDelete">Delete Client</button>
+  <button class="btn btn-red" @click="runDelete">Delete Contract</button>
 </template>
 
 <script>
@@ -7,16 +7,19 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
+    client: {
+      type: Number
+    },
     id: {
       type: Number
     }
   },
   methods: {
-    ...mapActions({ delete: 'deleteClient' }),
+    ...mapActions({ delete: 'deleteBuyer' }),
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'Relationships' })
+          this.$router.push({ name: 'Client', params: { id: this.client } })
         })
     }
   }

@@ -8,7 +8,7 @@
 
 <script>
 import axios from './axios'
-import { AUTH_LOGOUT } from './store/actions/authentication'
+import { mapActions } from 'vuex'
 const appLayout = 'app'
 
 export default {
@@ -17,11 +17,14 @@ export default {
       return (this.$route.meta.layout || appLayout) + '-layout'
     }
   },
+  methods: {
+    ...mapActions({ logout: 'authLogout' })
+  },
   created: function () {
     axios.interceptors.response.use(undefined, function (err) {
       return new Promise(function (resolve, reject) {
         if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch(AUTH_LOGOUT)
+          this.logout()
         }
         throw err
       })
