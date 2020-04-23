@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -38,6 +38,7 @@ export default {
   methods: {
     ...mapActions({ update: 'updateBaseOptionField' }),
     ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
+    ...mapGetters({ current_base_option_field: 'getCurrentBaseOptionField' }),
     close () {
       this.field_name = ''
       this.field_label = ''

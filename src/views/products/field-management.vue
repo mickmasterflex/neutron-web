@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import listBaseTextFields from '@/components/fields/base/text/list'
-import createBaseTextField from '@/components/fields/base/text/create'
-import listBaseOptionFields from '@/components/fields/base/option/list'
-import createBaseOptionField from '@/components/fields/base/option/create'
+import listBaseTextFields from '@/components/fields/base/text-fields/list'
+import createBaseTextField from '@/components/fields/base/text-fields/create'
+import listBaseOptionFields from '@/components/fields/base/option-fields/list'
+import createBaseOptionField from '@/components/fields/base/option-fields/create'
 
 export default {
   data () {

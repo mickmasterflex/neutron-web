@@ -25,8 +25,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import updateText from '@/components/fields/base/text/update'
-import deleteField from '@/components/fields/base/text/delete'
+import updateText from '@/components/fields/base/text-fields/update'
+import deleteField from '@/components/fields/base/text-fields/delete'
 
 export default {
   data () {
