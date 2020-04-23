@@ -9,7 +9,7 @@
         <th class="th"></th>
       </tr>
       <tr v-for="field in baseOptionFields" :key="field.id">
-        <td class="td">{{field.name}}</td>
+        <td class="td"><span @click="editField(field.id)" class="text-link">{{field.name}}</span></td>
         <td class="td">{{field.label}}</td>
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
@@ -19,26 +19,40 @@
     <div v-else>
       ...Loading...
     </div>
+    <update-base-option-field-modal :id="currentField.id" :show="showModalUpdateBaseOptionField" @close="showModalUpdateBaseOptionField=false"></update-base-option-field-modal>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import deleteField from '@/components/fields/base/option/delete'
+import updateField from '@/components/fields/base/option/update'
 
 export default {
-  computed: {
-    ...mapGetters({
-      baseOptionFields: 'getBaseOptionFields'
-    })
+  data () {
+    return {
+      showModalUpdateBaseOptionField: false
+    }
   },
   components: {
+    'update-base-option-field-modal': updateField,
     'delete-field': deleteField
+  },
+  computed: {
+    ...mapGetters({
+      baseOptionFields: 'getBaseOptionFields',
+      currentField: 'getCurrentBaseOptionField'
+    })
   },
   methods: {
     ...mapActions({
-      fetchFields: 'fetchBaseOptionFields'
-    })
+      fetchFields: 'fetchBaseOptionFields',
+      fetchCurrent: 'fetchCurrentBaseOptionField'
+    }),
+    editField (id) {
+      this.showModalUpdateBaseOptionField = true
+      this.fetchCurrent(id)
+    }
   },
   created () {
     this.fetchFields()

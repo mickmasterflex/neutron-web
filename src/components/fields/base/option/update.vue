@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="show" @close="close">
-    <template v-slot:header>Update Base Text Field</template>
+    <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }">
         <form @submit.prevent="handleSubmit(submitForm)">
@@ -26,8 +26,8 @@ export default {
       field_desc: '',
       field_type: '',
       options: {
-        text: { name: 'text', id: 'text' },
-        textarea: { name: 'textarea', id: 'textarea' }
+        text: { name: 'select', id: 'select' },
+        textarea: { name: 'radio', id: 'radio' }
       }
     }
   },
@@ -36,8 +36,8 @@ export default {
     id: Number
   },
   methods: {
-    ...mapActions({ update: 'updateBaseTextField' }),
-    ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_TEXT_FIELD' }),
+    ...mapActions({ update: 'updateBaseOptionField' }),
+    ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
     close () {
       this.field_name = ''
       this.field_label = ''
