@@ -10,7 +10,7 @@ export default {
     id: Number
   },
   methods: {
-    ...mapActions({ deleteField: 'deleteBaseTextField' }),
+    ...mapActions({ deleteField: 'deleteBaseOptionField' }),
     runDelete () {
       this.deleteField(this.id)
     }

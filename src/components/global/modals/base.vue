@@ -1,7 +1,7 @@
 <template>
   <div v-show="show" @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
     <div class="bg-white w-1/2 rounded-lg p-10" @click.stop>
-      <div class="flex flex-row items-center justify-between">
+      <div class="flex flex-row items-center justify-between mb-8">
         <h3 class="h2 inline">
           <slot name="header">Modal Header</slot>
         </h3>

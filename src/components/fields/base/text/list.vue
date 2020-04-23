@@ -31,7 +31,6 @@ import deleteField from '@/components/fields/base/text/delete'
 export default {
   data () {
     return {
-      field: null,
       showModalUpdateBaseTextField: false
     }
   },
