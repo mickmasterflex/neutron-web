@@ -5,7 +5,8 @@
       @input="handleInput($event.target.value)"
       class="base-field"
       :type="$attrs.field_type ? $attrs.field_type : 'text'"
-      :id="$attrs.field_id">
+      :id="$attrs.field_id"
+      :value="value">
   </div>
 </template>
 
@@ -13,7 +14,8 @@
 export default {
   props: {
     value: {
-      type: null
+      type: String,
+      default: ''
     }
   },
   methods: {

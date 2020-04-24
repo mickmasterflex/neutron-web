@@ -20,7 +20,8 @@
 export default {
   props: {
     value: {
-      type: null
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -29,5 +30,4 @@ export default {
     }
   }
 }
-
 </script>
