@@ -19,7 +19,7 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-base-option-field-modal :id="currentBaseOptionField.id" :show="showModalUpdateBaseOptionField" @close="showModalUpdateBaseOptionField=false"></update-base-option-field-modal>
+    <update-base-option-field-modal :field="currentBaseOptionField" :show="showModalUpdateBaseOptionField" @close="showModalUpdateBaseOptionField=false"></update-base-option-field-modal>
   </div>
 </template>
 

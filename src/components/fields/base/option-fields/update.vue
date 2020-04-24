@@ -11,12 +11,14 @@
           <button type="submit" class="btn btn-green mt-5">Update Field</button>
         </form>
       </validation-observer>
+      <field-options :options="field.base_options"></field-options>
     </template>
   </modal-template>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapGetters } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
+import fieldOptions from '@/components/fields/base/options/index'
 
 export default {
   data () {
@@ -25,6 +27,7 @@ export default {
       field_label: '',
       field_desc: '',
       field_type: '',
+      field_id: null,
       options: {
         text: { name: 'select', id: 'select' },
         textarea: { name: 'radio', id: 'radio' }
@@ -33,17 +36,25 @@ export default {
   },
   props: {
     show: Boolean,
-    id: Number
+    field: Object
+  },
+  components: {
+    'field-options': fieldOptions
+  },
+  watch: {
+    field: function () {
+      this.field_name = this.field.name
+      this.field_label = this.field.label
+      this.field_desc = this.field.description
+      this.field_type = this.field.type
+      this.field_id = this.field.id
+      console.log(this.field.type)
+    }
   },
   methods: {
     ...mapActions({ update: 'updateBaseOptionField' }),
     ...mapMutations({ reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
-    ...mapGetters({ current_base_option_field: 'getCurrentBaseOptionField' }),
     close () {
-      this.field_name = ''
-      this.field_label = ''
-      this.field_desc = ''
-      this.field_type = ''
       this.$emit('close')
       this.reset_current_field()
     },
@@ -53,7 +64,7 @@ export default {
         label: this.field_label,
         description: this.field_desc,
         type: this.field_type,
-        id: this.id
+        id: this.field_id
       })
       this.close()
     }
