@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     ...mapActions({ update: 'updateBaseOptionField' }),
-    ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
+    ...mapMutations({ reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
     ...mapGetters({ current_base_option_field: 'getCurrentBaseOptionField' }),
     close () {
       this.field_name = ''
@@ -45,7 +45,7 @@ export default {
       this.field_desc = ''
       this.field_type = ''
       this.$emit('close')
-      this.reset_state()
+      this.reset_current_field()
     },
     submitForm () {
       this.update({
