@@ -1,29 +1,34 @@
 <template>
-  <ul>
-    <li class="flex flex-row items-center" v-for="option in options" :key="option.id">
-      <v-text-field
-        :value="`${option.label}`"
-        :field_id="`optionLabel_${option.id}`"
-        rules="required"
+  <ul class="bg-gray-100 p-3">
+    <li class="p-2 flex flex-row items-center">
+      <text-field
+        value="Order"
+        field_id="none"
+        class="field-group field-sm mr-2"/>
+      <text-field
+        value="Label"
+        field_id="none"
+        class="field-group mr-2"/>
+      <text-field
+        value="Value"
+        field_id="none"
         class="field-group"/>
-      <v-text-field
-        :value="`${option.order}`"
-        :field_id="`optionLabel_${option.id}`"
-        rules="required"
-        class="field-group"/>
-      <v-text-field
-        :value="`${option.value}`"
-        :field_id="`optionLabel_${option.id}`"
-        rules="required"
-        class="field-group mt-0"/>
+    </li>
+    <li v-for="option in options" :key="option.id" class="mb-1">
+      <update-option :option="option"></update-option>
     </li>
   </ul>
 </template>
 
 <script>
+import updateOption from '@/components/fields/base/options/update'
+
 export default {
   props: {
     options: Array
+  },
+  components: {
+    'update-option': updateOption
   }
 }
 </script>

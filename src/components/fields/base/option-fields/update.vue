@@ -48,18 +48,17 @@ export default {
       this.field_desc = this.field.description
       this.field_type = this.field.type
       this.field_id = this.field.id
-      console.log(this.field.type)
     }
   },
   methods: {
-    ...mapActions({ update: 'updateBaseOptionField' }),
+    ...mapActions({ updateBaseOptionField: 'updateBaseOptionField' }),
     ...mapMutations({ reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
     close () {
       this.$emit('close')
       this.reset_current_field()
     },
     submitForm () {
-      this.update({
+      this.updateBaseOptionField({
         name: this.field_name,
         label: this.field_label,
         description: this.field_desc,
