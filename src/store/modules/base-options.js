@@ -1,15 +1,12 @@
 import axios from '@/axios'
 
 const state = {
-  base_options: []
-  // current_base_options: []
+  base_options: [],
+  modified_base_options: []
 }
 
 const getters = {
-  // getOptionsByField: (state) => (fieldId) => {
-  //   return state.base_options.filter(option => option.field_id === fieldId)
-  // },
-  // getCurrentBaseOptions: state => state.current_base_options
+  getModifiedBaseOptions: state => state.modified_base_options
 }
 
 const actions = {
@@ -33,12 +30,15 @@ const actions = {
   // },
   async updateBaseOption ({ commit }, option) {
     await axios.put(`/base-options/${option.id}/`, option)
-      .then(response => {
+      .then(() => {
         commit('UPDATE_BASE_OPTION')
       })
-      .catch(error => {
-        console.log(error)
-      })
+  },
+  async updateModifiedBaseOptions ({ commit, dispatch }) {
+    state.modified_base_options.forEach(option => {
+      dispatch('updateBaseOption', option)
+    })
+    commit('RESET_MODIFIED_BASE_OPTIONS')
   }
 }
 const mutations = {
@@ -51,6 +51,17 @@ const mutations = {
     if (index !== -1) {
       state.base_options.splice(index, 1, updatedOption)
     }
+  },
+  ADD_BASE_OPTION_TO_MODIFIED: (state, modifiedOption) => {
+    const index = state.modified_base_options.findIndex(option => option.id === modifiedOption.id)
+    if (index !== -1) {
+      state.modified_base_options.splice(index, 1, modifiedOption)
+    } else {
+      state.modified_base_options.unshift(modifiedOption)
+    }
+  },
+  RESET_MODIFIED_BASE_OPTIONS: (state) => {
+    state.modified_base_options = []
   }
 }
 

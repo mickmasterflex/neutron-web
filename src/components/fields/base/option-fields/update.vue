@@ -8,17 +8,17 @@
           <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <v-text-field v-model="field_desc" rules="required" field_id="formFieldDesc" field_label="Description" class="field-group"></v-text-field>
           <v-select-field v-model="field_type" :options="options" rules="required" field_id="formFieldType" field_label="Type" class="field-group"></v-select-field>
+          <field-options :options="field.base_options" class="mt-3"></field-options>
           <button type="submit" class="btn btn-green mt-5">Update Field</button>
         </form>
       </validation-observer>
-      <field-options :options="field.base_options"></field-options>
     </template>
   </modal-template>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
-import fieldOptions from '@/components/fields/base/options/index'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
+import fieldOptions from '@/components/fields/base/options/list'
 
 export default {
   data () {
@@ -50,14 +50,25 @@ export default {
       this.field_id = this.field.id
     }
   },
+  computed: {
+    ...mapGetters({
+      modified_base_options: 'getModifiedBaseOptions'
+    })
+  },
   methods: {
-    ...mapActions({ updateBaseOptionField: 'updateBaseOptionField' }),
-    ...mapMutations({ reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD' }),
+    ...mapActions({
+      updateBaseOptionField: 'updateBaseOptionField',
+      updateModifiedBaseOptions: 'updateModifiedBaseOptions'
+    }),
+    ...mapMutations({
+      reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
+    }),
     close () {
       this.$emit('close')
       this.reset_current_field()
     },
     submitForm () {
+      this.updateModifiedBaseOptions()
       this.updateBaseOptionField({
         name: this.field_name,
         label: this.field_label,

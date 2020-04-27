@@ -15,12 +15,11 @@
       :field_id="`optionValue_${option.id}`"
       rules="required"
       class="field-group"/>
-    <button class="btn btn-green" @click="submit">Submit</button>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -33,14 +32,24 @@ export default {
   props: {
     option: Object
   },
+  computed: {
+    optionData () {
+      return [this.order, this.label, this.value]
+    }
+  },
+  watch: {
+    optionData () {
+      this.addToModified()
+    }
+  },
   methods: {
-    ...mapActions({ updateBaseOption: 'updateBaseOption' }),
-    submit () {
-      this.updateBaseOption({
+    ...mapMutations({ addOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED' }),
+    addToModified () {
+      this.addOptionToModified({
+        id: this.option.id,
         order: this.order,
         label: this.label,
         value: this.value,
-        id: this.option.id,
         field: this.option.field
       })
     }
