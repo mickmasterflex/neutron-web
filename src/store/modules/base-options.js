@@ -39,6 +39,12 @@ const actions = {
       dispatch('updateBaseOption', option)
     })
     commit('RESET_MODIFIED_BASE_OPTIONS')
+  },
+  async deleteBaseOption ({ commit }, id) {
+    await axios.delete(`/base-options/${id}/`, id)
+      .then(() => {
+        commit('REMOVE_BASE_OPTION', id)
+      })
   }
 }
 const mutations = {
@@ -62,7 +68,8 @@ const mutations = {
   },
   RESET_MODIFIED_BASE_OPTIONS: (state) => {
     state.modified_base_options = []
-  }
+  },
+  REMOVE_BASE_OPTION: (state, id) => (state.base_options = state.base_options.filter(option => option.id !== id))
 }
 
 export default {
