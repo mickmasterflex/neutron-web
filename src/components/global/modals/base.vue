@@ -8,7 +8,7 @@
         <span class="cursor-pointer text-gray-500 hover:text-red-500 text-xl" @click="close">&times;</span>
       </div>
       <slot name="body">Modal Body</slot>
-      <slot/>
+      <slot name="footer"></slot>
     </div>
   </div>
 </template>

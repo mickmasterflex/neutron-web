@@ -43,9 +43,9 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({ addOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED' }),
+    ...mapMutations({ addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED' }),
     addToModified () {
-      this.addOptionToModified({
+      this.addBaseOptionToModified({
         id: this.option.id,
         order: this.order,
         label: this.label,

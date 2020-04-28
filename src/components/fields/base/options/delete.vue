@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-circle btn-o-red" @click="runDelete">-</button>
+  <span class="btn btn-circle btn-o-red" @click="runDelete">-</span>
 </template>
 
 <script>
@@ -7,12 +7,18 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: Number
+    option: Object
   },
   methods: {
-    ...mapActions({ delete: 'deleteBaseOption' }),
+    ...mapActions({
+      delete: 'deleteBaseOption',
+      fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField'
+    }),
     runDelete () {
-      this.delete(this.id)
+      this.delete(this.option.id)
+        .then(() => {
+          this.fetchCurrentBaseOptionField(this.option.field)
+        })
     }
   }
 }

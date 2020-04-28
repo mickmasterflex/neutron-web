@@ -8,10 +8,12 @@
           <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <v-text-field v-model="field_desc" rules="required" field_id="formFieldDesc" field_label="Description" class="field-group"></v-text-field>
           <v-select-field v-model="field_type" :options="options" rules="required" field_id="formFieldType" field_label="Type" class="field-group"></v-select-field>
-          <field-options :options="field.base_options" class="mt-3"></field-options>
-          <button type="submit" class="btn btn-green mt-5">Update Field</button>
+          <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
+          <button type="submit" class="btn btn-green mt-5">Save All Changes</button>
         </form>
       </validation-observer>
+      Add an Option
+      <create-option :field="field"></create-option>
     </template>
   </modal-template>
 </template>
@@ -19,6 +21,7 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/fields/base/options/list'
+import createOption from '@/components/fields/base/options/create'
 
 export default {
   data () {
@@ -39,7 +42,8 @@ export default {
     field: Object
   },
   components: {
-    'field-options': fieldOptions
+    'field-options': fieldOptions,
+    'create-option': createOption
   },
   watch: {
     field: function () {
@@ -58,7 +62,7 @@ export default {
   methods: {
     ...mapActions({
       updateBaseOptionField: 'updateBaseOptionField',
-      updateModifiedBaseOptions: 'updateModifiedBaseOptions'
+      updateModifiedBaseOptions: 'updateModifiedBaseOptions',
     }),
     ...mapMutations({
       reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
