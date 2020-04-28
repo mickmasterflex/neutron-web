@@ -63,6 +63,10 @@
 .btn-green:hover      { @apply bg-green-600; }
 .btn-green:active     { @apply bg-green-600; }
 
+.btn-o-green          { @apply text-green-600 border-green-500 border border-solid; }
+.btn-o-green:hover    { @apply text-white bg-green-600; }
+.btn-o-green:active   { @apply bg-green-600; }
+
 .btn-indigo           { @apply bg-indigo-500 border-indigo-600 border; }
 .btn-indigo:hover     { @apply bg-indigo-600; }
 .btn-indigo:active    { @apply bg-indigo-600; }
