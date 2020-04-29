@@ -60,6 +60,25 @@ const routes = [
     }
   },
   {
+    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/',
+    name: 'Offers',
+    component: () => import('@/views/relationships/offers/index.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/',
+    name: 'Offer',
+    component: () => import('@/views/relationships/offers/offer.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
     path: '/relationships/contracts/partners/',
     name: 'PartnerContracts',
     component: () => import('@/views/relationships/partners/index.vue'),

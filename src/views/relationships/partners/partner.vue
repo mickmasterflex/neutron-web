@@ -17,8 +17,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import deletePartner from '@/components/contracts/partners/delete'
-import updatePartner from '@/components/contracts/partners/update'
+import deletePartner from '@/components/partners/delete'
+import updatePartner from '@/components/partners/update'
 
 export default {
   props: {

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import buyersList from '@/components/contracts/buyers/list'
+import buyersList from '@/components/buyers/list'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
