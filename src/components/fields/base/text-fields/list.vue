@@ -19,7 +19,7 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-base-text-field-modal :id="currentField.id" :show="showModalUpdateBaseTextField" @close="showModalUpdateBaseTextField=false"></update-base-text-field-modal>
+    <update-base-text-field-modal :field="currentBaseTextField" :show="showModalUpdateBaseTextField" @close="showModalUpdateBaseTextField=false"></update-base-text-field-modal>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
   computed: {
     ...mapGetters({
       baseTextFields: 'getBaseTextFields',
-      currentField: 'getCurrentBaseTextField'
+      currentBaseTextField: 'getCurrentBaseTextField'
     })
   },
   methods: {

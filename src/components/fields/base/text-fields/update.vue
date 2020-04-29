@@ -25,6 +25,7 @@ export default {
       field_label: '',
       field_desc: '',
       field_type: '',
+      field_id: null,
       options: {
         text: { name: 'text', id: 'text' },
         textarea: { name: 'textarea', id: 'textarea' }
@@ -33,7 +34,16 @@ export default {
   },
   props: {
     show: Boolean,
-    id: Number
+    field: Object
+  },
+  watch: {
+    field: function () {
+      this.field_name = this.field.name
+      this.field_label = this.field.label
+      this.field_desc = this.field.description
+      this.field_type = this.field.type
+      this.field_id = this.field.id
+    }
   },
   methods: {
     ...mapActions({ update: 'updateBaseTextField' }),
