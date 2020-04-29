@@ -40,7 +40,7 @@
 
 /* Default */
 
-.btn        { @apply text-white rounded px-3 py-2 transition duration-300; }
+.btn        { @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer; }
 .btn:focus  { @apply outline-none shadow-outline; }
 
 .btn-circle {
