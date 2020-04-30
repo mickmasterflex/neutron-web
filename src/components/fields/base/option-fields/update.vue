@@ -20,8 +20,8 @@
 
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
-import fieldOptions from '@/components/fields/base/options/list'
-import createOption from '@/components/fields/base/options/create'
+import fieldOptions from '@/components/fields/base/option-fields/options/list'
+import createOption from '@/components/fields/base/option-fields/options/create'
 
 export default {
   data () {

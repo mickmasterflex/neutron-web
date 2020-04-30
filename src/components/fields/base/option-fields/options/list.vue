@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import updateOption from '@/components/fields/base/options/update'
-import deleteOption from '@/components/fields/base/options/delete'
+import updateOption from '@/components/fields/base/option-fields/options/update'
+import deleteOption from '@/components/fields/base/option-fields/options/delete'
 
 export default {
   props: {
