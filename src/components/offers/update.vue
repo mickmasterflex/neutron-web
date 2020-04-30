@@ -15,8 +15,7 @@ export default {
   data () {
     return {
       name: '',
-      contract: '',
-      product: ''
+      product: 1
     }
   },
   props: {
@@ -29,10 +28,10 @@ export default {
     ...mapActions({ update: 'updateOffer' }),
     submitForm () {
       this.update({
-        id: this.pk,
+        pk: this.id,
         name: this.name,
-        contract: this.contract,
-        product: this.product
+        contract: this.$props.buyer,
+        product: 1
       })
     }
   }

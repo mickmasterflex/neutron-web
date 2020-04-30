@@ -38,10 +38,13 @@ const actions = {
       })
   },
   async updateOffer ({ commit }, updatedOffer) {
-    await axios.put(`/offers/${updatedOffer.id}/`, updatedOffer)
+    await axios.put(`/offers/${updatedOffer.pk}/`, updatedOffer)
       .then(() => {
         commit('UPDATE_OFFER', updatedOffer)
         commit('SET_CURRENT_OFFER', updatedOffer)
+      })
+      .catch(response => {
+        console.log(response)
       })
   },
   async deleteOffer ({ commit }, id) {
@@ -57,7 +60,7 @@ const mutations = {
   SET_CURRENT_OFFER: (state, offer) => (state.current_offer = offer),
   ADD_OFFER: (state, offer) => state.offers.unshift(offer),
   UPDATE_OFFER: (state, updatedOffer) => {
-    const index = state.offers.findIndex(offer => offer.id === updatedOffer.id)
+    const index = state.offers.findIndex(offer => offer.id === updatedOffer.pk)
     if (index !== -1) {
       state.offers.splice(index, 1, updatedOffer)
     }
