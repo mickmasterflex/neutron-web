@@ -55,13 +55,11 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentBuyer: 'fetchCurrentBuyer',
-      fetchOffers: 'fetchOffers',
-      fetchCurrentOffer: 'fetchCurrentOffer'
+      fetchOffers: 'fetchOffers'
     })
   },
   created () {
     this.fetchCurrentBuyer(this.id)
-    this.fetchCurrentOffer(this.id)
     this.fetchOffers()
   }
 }

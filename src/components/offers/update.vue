@@ -3,7 +3,7 @@
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="offerName" field_label="Offer Name" class="field-group"></v-text-field>
       <select-field v-model="product" :options="product" field_id="product" field_label="product" class="field-group"></select-field>
-      <button class="btn btn-green mt-5">Submit</button>
+      <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </validation-observer>
 </template>
@@ -29,7 +29,7 @@ export default {
     ...mapActions({ update: 'updateOffer' }),
     submitForm () {
       this.update({
-        id: this.id,
+        id: this.pk,
         name: this.name,
         contract: this.contract,
         product: this.product
