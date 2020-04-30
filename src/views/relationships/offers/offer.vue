@@ -7,10 +7,10 @@
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Delete Offer</h3>
-    <delete-offer :id="offer.pk"></delete-offer>
+    <delete-offer :id="offer.id" :client="offer.client" :buyer="offer.contract"></delete-offer>
 
     <h3 class="h3 mt-5 mb-2">Update Offer</h3>
-    <update-offer :id="offer.pk"></update-offer>
+    <update-offer :id="offer.id"></update-offer>
   </div>
 </template>
 <script>
@@ -21,8 +21,7 @@ import updateOffer from '@/components/offers/update'
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {
@@ -31,12 +30,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offer: 'getCurrentOffer',
-      getOfferByBuyer: 'getOfferByBuyer'
-    }),
-    offers: function () {
-      return this.getOffersByBuyer(this.id)
-    }
+      offer: 'getCurrentOffer'
+    })
   },
   methods: {
     ...mapActions({
@@ -47,7 +42,6 @@ export default {
   },
   created () {
     this.fetchCurrentOffer(this.id)
-    this.fetchOffers()
   }
 }
 </script>
