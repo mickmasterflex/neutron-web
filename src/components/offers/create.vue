@@ -27,7 +27,7 @@ export default {
         name: this.name,
         contract: this.buyer,
         product: 1,
-        offer: this.buyer
+        buyer: this.buyer
       })
     }
   }

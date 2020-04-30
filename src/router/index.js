@@ -67,7 +67,7 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/',
+    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/:id/',
     name: 'Offer',
     component: () => import('@/views/relationships/offers/offer.vue'),
     meta: { requiresAuth: true },

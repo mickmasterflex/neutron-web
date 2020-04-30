@@ -62,7 +62,7 @@ const mutations = {
       state.offers.splice(index, 1, updatedOffer)
     }
   },
-  REMOVE_OFFER: (state, id) => (state.offer = state.offers.filter(offer => offer.id !== id))
+  REMOVE_OFFER: (state, id) => (state.offers = state.offers.filter(offer => offer.id !== id))
 }
 
 export default {

@@ -7,10 +7,13 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
+    id: {
+      type: Number
+    },
     buyer: {
       type: Number
     },
-    id: {
+    client: {
       type: Number
     }
   },
@@ -19,7 +22,7 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'Client', params: { id: this.client } })
+          this.$router.push({ name: 'BuyerContract', props: { id: this.buyer, client: this.client } })
         })
     }
   }

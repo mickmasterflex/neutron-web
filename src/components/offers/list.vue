@@ -9,7 +9,7 @@
       </tr>
       <tr v-for="offer in offers" :key="offer.pk">
         <td class="td">
-          <router-link :to="{name: 'Offer', params: {id:offer.pk}}" class="underline text-blue-500">{{offer.name}}</router-link>
+          <router-link :to="{name: 'Offer', params: {buyer:offer.contract, id:offer.pk}}" class="underline text-blue-500">{{offer.name}}</router-link>
         </td>
         <td>{{ offer.pk }}</td>
         <td>{{ offer.contract }}</td>
@@ -24,6 +24,6 @@
 
 <script>
 export default {
-  props: ['offers']
+  props: { offers: Array }
 }
 </script>
