@@ -3,7 +3,7 @@
     <v-text-field
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      rules="required"
+      rules="required|integer"
       class="field-group field-sm mr-2"/>
     <v-text-field
       v-model="label"

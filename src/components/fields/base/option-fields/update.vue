@@ -76,7 +76,6 @@ export default {
     },
     submitForm () {
       this.$refs.form.validate().then(() => {
-        alert('Form has been submitted!')
         this.updateModifiedBaseOptions()
         this.updateBaseOptionField({
           name: this.field_name,
