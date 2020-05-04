@@ -11,10 +11,10 @@
     <offer-list :offers="offers" :pk="id"></offer-list>
 
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
-    <delete-buyer-contract :client="client" :id="id"></delete-buyer-contract>
+    <delete-buyer-contract :client="buyer.client" :id="id"></delete-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
-    <update-buyer-contract :client="client" :id="id" ></update-buyer-contract>
+    <update-buyer-contract :client="buyer.client" :id="id" ></update-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :buyer="buyer.id" :offers="offers"></create-offer>
@@ -29,9 +29,6 @@ import offerList from '@/components/offers/list'
 export default {
   props: {
     id: {
-      type: Number
-    },
-    client: {
       type: Number
     }
   },

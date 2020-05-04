@@ -7,7 +7,7 @@
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Delete Offer</h3>
-    <delete-offer :id="offer.pk" :client="client" :buyer="offer.contract"></delete-offer>
+    <delete-offer :id="offer.pk" :client="client.id" :buyer="offer.contract"></delete-offer>
 
     <h3 class="h3 mt-5 mb-2">Update Offer</h3>
     <update-offer :id="offer.pk" :buyer="offer.contract"></update-offer>
@@ -30,7 +30,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offer: 'getCurrentOffer'
+      offer: 'getCurrentOffer',
+      client: 'getCurrentClient'
     })
   },
   methods: {
