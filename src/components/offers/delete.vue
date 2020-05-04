@@ -14,7 +14,7 @@ export default {
       type: Number
     },
     client: {
-      type: Number
+      type: String
     }
   },
   methods: {
@@ -22,7 +22,7 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'BuyerContract', props: { id: this.buyer, client: this.client } })
+          this.$router.push({ name: 'BuyerContract', props: { client: this.client, id: this.buyer } })
         })
     }
   }
