@@ -3,17 +3,18 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">{{buyer.name}}</h1>
       <div>
+        <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Offers List</h3>
-    <offer-list :offers="offers"></offer-list>
+    <offer-list :offers="offers" :pk="id"></offer-list>
 
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
-    <delete-buyer-contract :id="client.id"></delete-buyer-contract>
+    <delete-buyer-contract :client="client" :id="id"></delete-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
-    <update-buyer-contract :id="offer.id"></update-buyer-contract>
+    <update-buyer-contract :client="client" :id="id" ></update-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :buyer="buyer.id" :offers="offers"></create-offer>
@@ -28,12 +29,10 @@ import offerList from '@/components/offers/list'
 export default {
   props: {
     id: {
-      type: Number,
-      default: null
+      type: Number
     },
     client: {
-      type: Number,
-      default: null
+      type: Number
     }
   },
   components: {

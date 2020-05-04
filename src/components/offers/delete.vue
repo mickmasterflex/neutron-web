@@ -22,7 +22,7 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'BuyerContract', props: { client: this.client, id: this.buyer } })
+          this.$router.push({ name: 'BuyerContract', props: { id: this.buyer } })
         })
     }
   }
