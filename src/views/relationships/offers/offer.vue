@@ -22,9 +22,6 @@ export default {
   props: {
     id: {
       type: Number
-    },
-    client: {
-      type: Number
     }
   },
   components: {

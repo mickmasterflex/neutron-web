@@ -26,8 +26,7 @@ export default {
       this.create({
         name: this.name,
         contract: this.buyer,
-        product: 1,
-        offer: this.buyer
+        product: 1
       })
     }
   }

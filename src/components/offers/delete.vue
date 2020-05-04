@@ -14,7 +14,7 @@ export default {
       type: Number
     },
     client: {
-      type: String
+      type: Number
     }
   },
   methods: {
