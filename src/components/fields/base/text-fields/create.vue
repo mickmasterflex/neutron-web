@@ -2,7 +2,7 @@
   <modal-template :show="show" @close="close">
     <template v-slot:header>Create Base Text Field</template>
     <template v-slot:body>
-      <validation-observer v-slot="{ handleSubmit }">
+      <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
           <v-text-field v-model="field_name" rules="required" field_id="formFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
@@ -41,6 +41,9 @@ export default {
       this.field_label = ''
       this.field_desc = ''
       this.field_type = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
       this.$emit('close')
     },
     submitForm () {
