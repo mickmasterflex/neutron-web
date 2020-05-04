@@ -29,7 +29,7 @@ const actions = {
       })
   },
   async createOffer ({ commit }, offer) {
-    await axios.post('/offer/', offer)
+    await axios.post('/offers/', offer)
       .then(response => {
         commit('ADD_OFFER', response.data)
       })
