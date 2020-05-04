@@ -14,6 +14,7 @@
     <update-buyer-contract :client="client" :id="id"></update-buyer-contract>
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
