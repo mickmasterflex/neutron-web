@@ -47,14 +47,13 @@ export default {
   },
   methods: {
     ...mapActions({ update: 'updateBaseTextField' }),
-    ...mapMutations({ reset_state: 'RESET_CURRENT_BASE_TEXT_FIELD' }),
+    ...mapMutations({ reset_current_field: 'RESET_CURRENT_BASE_TEXT_FIELD' }),
     close () {
-      this.field_name = ''
-      this.field_label = ''
-      this.field_desc = ''
-      this.field_type = ''
+      this.reset_current_field()
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
       this.$emit('close')
-      this.reset_state()
     },
     submitForm () {
       this.update({

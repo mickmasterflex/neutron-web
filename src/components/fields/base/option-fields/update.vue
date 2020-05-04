@@ -2,7 +2,7 @@
   <modal-template :show="show" @close="close">
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
-      <validation-observer v-slot="{ handleSubmit }">
+      <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
           <v-text-field v-model="field_name" rules="required" field_id="formFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
@@ -68,8 +68,11 @@ export default {
       reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
     }),
     close () {
-      this.$emit('close')
       this.reset_current_field()
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.$emit('close')
     },
     submitForm () {
       this.updateModifiedBaseOptions()
