@@ -29,7 +29,7 @@ const actions = {
       })
   },
   async createOffer ({ commit }, offer) {
-    await axios.post('/offers/', offer)
+    await axios.post('/offer/', offer)
       .then(response => {
         commit('ADD_OFFER', response.data)
       })
@@ -48,9 +48,12 @@ const actions = {
       })
   },
   async deleteOffer ({ commit }, id) {
-    await axios.delete(`/offers/${id}/`)
+    await axios.delete(`/buyers/${id}/`)
       .then(() => {
         commit('REMOVE_OFFER', id)
+      })
+      .catch(response => {
+        console.log(response)
       })
   }
 }

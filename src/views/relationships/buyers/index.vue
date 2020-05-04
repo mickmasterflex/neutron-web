@@ -3,11 +3,11 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">All Buyer Contracts</h1>
       <div>
-        <stat-card :data="buyer_count" :title="`Buyers Contracts`" :color="`teal`"></stat-card>
+        <stat-card :data="buyer_count" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">All Buyer</h3>
-    <buyers-list :contracts="buyers"></buyers-list>
+    <buyer-list :contracts="buyers"></buyer-list>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'buyers-list': buyersList
+    'buyer-list': buyersList
   },
   computed: {
     ...mapGetters({
