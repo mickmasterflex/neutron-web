@@ -2,18 +2,18 @@
   <modal-template :show="show" @close="close">
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
-      <validation-observer v-slot="{ handleSubmit }" ref="form">
-        <form @submit.prevent="handleSubmit(submitForm)">
+      <validation-observer ref="form">
+        <form>
           <v-text-field v-model="field_name" rules="required" field_id="formFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <text-field v-model="field_desc" field_id="formFieldDesc" field_label="Description" class="field-group"></text-field>
           <v-select-field v-model="field_type" :options="options" rules="required" field_id="formFieldType" field_label="Type" class="field-group"></v-select-field>
-          <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
-          <button type="submit" class="btn btn-green mt-5">Save All Changes</button>
         </form>
       </validation-observer>
+      <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
       Add an Option
       <create-option :field="field"></create-option>
+      <button type="submit" class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
     </template>
   </modal-template>
 </template>
@@ -75,15 +75,18 @@ export default {
       this.$emit('close')
     },
     submitForm () {
-      this.updateModifiedBaseOptions()
-      this.updateBaseOptionField({
-        name: this.field_name,
-        label: this.field_label,
-        description: this.field_desc,
-        type: this.field_type,
-        id: this.field_id
+      this.$refs.form.validate().then(() => {
+        alert('Form has been submitted!')
+        this.updateModifiedBaseOptions()
+        this.updateBaseOptionField({
+          name: this.field_name,
+          label: this.field_label,
+          description: this.field_desc,
+          type: this.field_type,
+          id: this.field_id
+        })
+        this.close()
       })
-      this.close()
     }
   }
 }
