@@ -48,7 +48,7 @@ const actions = {
       })
   },
   async deleteOffer ({ commit }, id) {
-    await axios.delete(`/buyers/${id}/`)
+    await axios.delete(`/offers/${id}/`)
       .then(() => {
         commit('REMOVE_OFFER', id)
       })
