@@ -26,6 +26,7 @@ import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import createOffer from '@/components/offers/create'
 import offerList from '@/components/offers/list'
+
 export default {
   props: {
     id: {

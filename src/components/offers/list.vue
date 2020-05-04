@@ -7,7 +7,7 @@
         <th class="th">Contract</th>
         <th class="th">Product</th>
       </tr>
-      <tr v-for="offer in offers" :key="offer.pk">
+      <tr v-for="offer in this.offers" :key="offer.pk">
         <td class="td">
           <router-link :to="{name: 'Offer', params: {buyer:offer.contract, id:offer.pk}}" class="underline text-blue-500">{{offer.name}}</router-link>
         </td>

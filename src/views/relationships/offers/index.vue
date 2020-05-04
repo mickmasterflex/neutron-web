@@ -6,7 +6,7 @@
         <stat-card :data="getAllOffersCount" :title="`Offers`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <offers-list :contracts="offers"></offers-list>
+    <offer-list :contracts="offers"></offer-list>
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer></create-offer>
   </div>
@@ -14,12 +14,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import offersList from '@/components/offers/list'
+import offerList from '@/components/offers/list'
 import createOffer from '@/components/offers/create'
 
 export default {
   components: {
-    'offers-list': offersList,
+    'offer-list': offerList,
     'create-offer': createOffer
   },
   computed: {

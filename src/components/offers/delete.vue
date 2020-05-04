@@ -3,26 +3,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
-    id: {
-      type: Number
-    },
-    buyer: {
-      type: Number
-    },
-    client: {
-      type: Number
+    offer: {
+      type: Object
     }
+  },
+  computed: {
+    ...mapGetters({
+      client: 'getCurrentClient'
+    })
   },
   methods: {
     ...mapActions({ delete: 'deleteOffer' }),
     runDelete () {
-      this.delete(this.id)
+      this.delete(this.offer.pk)
         .then(() => {
-          this.$router.push({ name: 'BuyerContract', props: { id: this.buyer } })
+          this.$router.push({ name: 'BuyerContract', params: { id: this.offer.contract, client: this.client.id } })
         })
     }
   }
