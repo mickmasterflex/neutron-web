@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="show" @close="close">
-    <template v-slot:header>Create Base Text Field</template>
+    <template v-slot:header>Create Field</template>
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
@@ -27,7 +27,9 @@ export default {
       field_type: '',
       options: {
         text: { name: 'text', id: 'text' },
-        textarea: { name: 'textarea', id: 'textarea' }
+        textarea: { name: 'textarea', id: 'textarea' },
+        select: { name: 'select', id: 'select' },
+        radio: { name: 'radio', id: 'radio' }
       }
     }
   },
@@ -35,7 +37,10 @@ export default {
     show: Boolean
   },
   methods: {
-    ...mapActions({ create: 'createBaseTextField' }),
+    ...mapActions([
+      'createBaseOptionField',
+      'createBaseTextField'
+    ]),
     close () {
       this.field_name = ''
       this.field_label = ''
@@ -47,12 +52,21 @@ export default {
       this.$emit('close')
     },
     submitForm () {
-      this.create({
-        name: this.field_name,
-        label: this.field_label,
-        description: this.field_desc,
-        type: this.field_type
-      })
+      if (this.field_type === 'select' || this.field_type === 'radio') {
+        this.createBaseOptionField({
+          name: this.field_name,
+          label: this.field_label,
+          description: this.field_desc,
+          type: this.field_type
+        })
+      } else if (this.field_type === 'text' || this.field_type === 'textarea') {
+        this.createBaseTextField({
+          name: this.field_name,
+          label: this.field_label,
+          description: this.field_desc,
+          type: this.field_type
+        })
+      }
       this.close()
     }
   }

@@ -11,32 +11,25 @@
 
     <div class="flex flex-row justify-between mt-4">
       <h2 class="h3">Base Fields</h2>
-      <span>
-        <button class="btn btn-green mr-3" @click="showModalCreateBaseTextField = true">New Text Field</button>
-        <button class="btn btn-green" @click="showModalCreateBaseOptionField = true">New Option Field</button>
-      </span>
+      <button class="btn btn-green" @click="showModalCreateBaseField=true">Create Base Field</button>
     </div>
     <list-base-fields class="mt-5"></list-base-fields>
-    <create-base-text-field-modal :show="showModalCreateBaseTextField" @close="showModalCreateBaseTextField=false"></create-base-text-field-modal>
-    <create-base-option-field-modal :show="showModalCreateBaseOptionField" @close="showModalCreateBaseOptionField=false"></create-base-option-field-modal>
+    <create-base-field-modal :show="showModalCreateBaseField" @close="showModalCreateBaseField=false"></create-base-field-modal>
   </div>
 </template>
 
 <script>
-import createBaseTextField from '@/components/fields/base/text-fields/create'
-import createBaseOptionField from '@/components/fields/base/option-fields/create'
+import createBaseField from '@/components/fields/base/create'
 import listBaseFields from '@/components/fields/base/list'
 
 export default {
   data () {
     return {
-      showModalCreateBaseTextField: false,
-      showModalCreateBaseOptionField: false
+      showModalCreateBaseField: false
     }
   },
   components: {
-    'create-base-text-field-modal': createBaseTextField,
-    'create-base-option-field-modal': createBaseOptionField,
+    'create-base-field-modal': createBaseField,
     'list-base-fields': listBaseFields
   }
 }
