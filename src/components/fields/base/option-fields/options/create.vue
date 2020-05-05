@@ -1,27 +1,25 @@
 <template>
-  <div class="flex flex-row items-center">
-    <validation-observer v-slot="{ handleSubmit }" ref="form">
-      <form @submit.prevent="handleSubmit(submitForm)">
-        <v-text-field
-          v-model="order"
-          :field_id="`newOptionOrder`"
-          rules="required|integer"
-          field_type="number"
-          class="field-group field-sm mr-2"/>
-        <v-text-field
-          v-model="label"
-          :field_id="`newOptionLabel`"
-          rules="required"
-          class="field-group mr-2"/>
-        <v-text-field
-          v-model="value"
-          :field_id="`newOptionValue`"
-          rules="required"
-          class="field-group"/>
-        <button class="btn btn-circle btn-o-green ml-2" type="submit">+</button>
-      </form>
-    </validation-observer>
-  </div>
+  <validation-observer v-slot="{ handleSubmit }" ref="form">
+    <form @submit.prevent="handleSubmit(submitForm)" class="flex flex-row items-center">
+      <v-text-field
+        v-model="order"
+        :field_id="`newOptionOrder`"
+        rules="required|integer"
+        field_type="number"
+        class="field-group field-sm mr-2"/>
+      <v-text-field
+        v-model="label"
+        :field_id="`newOptionLabel`"
+        rules="required"
+        class="field-group mr-2"/>
+      <v-text-field
+        v-model="value"
+        :field_id="`newOptionValue`"
+        rules="required"
+        class="field-group"/>
+      <button class="btn btn-circle btn-o-green ml-2" type="submit">+</button>
+    </form>
+  </validation-observer>
 </template>
 
 <script>
@@ -42,6 +40,9 @@ export default {
   watch: {
     show () {
       if (this.show === false) {
+        this.order = ''
+        this.label = ''
+        this.value = ''
         this.$nextTick(() => {
           this.$refs.form.reset()
         })
