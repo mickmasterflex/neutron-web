@@ -1,10 +1,14 @@
 <template>
-  <div>
+  <div v-if="user">
     <div class="hud">
-    <h1 class="h1 text-white">{{user.first_name}}</h1>
       <div>
+        <p class="h1 text-white">{{user.first_name}} {{user.last_name}}</p>
+        <p class="text-white text-1xl font-hairline">{{user.email}}</p>
+      </div>
+      <div>
+        <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>
+      </div>
     </div>
-  </div>
     <h3 class="h3 mt-5 mb-2">Delete User</h3>
     <delete-user :id="user.id"></delete-user>
 
@@ -14,49 +18,32 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import { mapActions, mapGetters } from 'vuex'
 import deleteUser from '@/components/users/delete'
 import updateUser from '@/components/users/update'
 
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
-      output: null,
-      user: {
-        email: '',
-        first_name: '',
-        last_name: '',
-        is_staff: null
-      }
-    }
-  },
-  props: ['id'],
-  computed: {
-    userCount: function () {
-      return this.user.length
+  props: {
+    id: {
+      type: Number
     }
   },
   components: {
     'delete-user': deleteUser,
     'update-user': updateUser
   },
+  computed: {
+    ...mapGetters({
+      user: 'getCurrentUser'
+    })
+  },
   methods: {
-    getUser () {
-      axios
-        .get(`/users/${this.id}/`)
-        .then(response => {
-          this.output = response
-          this.user = response.data
-        })
-        .catch(error => {
-          this.output = error
-          this.errored = true
-        })
-    }
+    ...mapActions({
+      fetchCurrentUser: 'fetchCurrentUser'
+    })
   },
   created () {
-    this.getUser()
+    this.fetchCurrentUser(this.id)
   }
 }
 </script>

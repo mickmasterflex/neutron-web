@@ -116,14 +116,14 @@ const routes = [
   {
     path: '/users/',
     name: 'Users',
-    component: () => import('@/views/relationships/users/index.vue'),
+    component: () => import('@/views/users/index.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true }
   },
   {
     path: '/users/:id/',
     name: 'User',
-    component: () => import('@/views/relationships/users/user.vue'),
+    component: () => import('@/views/users/user.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true },
     props (route) {
