@@ -10,26 +10,22 @@
     </div>
 
     <div class="flex flex-row justify-between mt-4">
-      <h2 class="h3">Base Text Fields</h2>
-      <button class="btn btn-green" @click="showModalCreateBaseTextField = true">Create Base Text Field</button>
+      <h2 class="h3">Base Fields</h2>
+      <span>
+        <button class="btn btn-green mr-3" @click="showModalCreateBaseTextField = true">New Text Field</button>
+        <button class="btn btn-green" @click="showModalCreateBaseOptionField = true">New Option Field</button>
+      </span>
     </div>
+    <list-base-fields class="mt-5"></list-base-fields>
     <create-base-text-field-modal :show="showModalCreateBaseTextField" @close="showModalCreateBaseTextField=false"></create-base-text-field-modal>
-    <list-base-text-fields class="mt-5 mb-2"></list-base-text-fields>
-
-    <div class="flex flex-row justify-between mt-4">
-      <h2 class="h3">Base Option Fields</h2>
-      <button class="btn btn-green" @click="showModalCreateBaseOptionField = true">Create Base Option Field</button>
-    </div>
     <create-base-option-field-modal :show="showModalCreateBaseOptionField" @close="showModalCreateBaseOptionField=false"></create-base-option-field-modal>
-    <list-base-option-fields class="mt-5 mb-2"></list-base-option-fields>
   </div>
 </template>
 
 <script>
-import listBaseTextFields from '@/components/fields/base/text-fields/list'
 import createBaseTextField from '@/components/fields/base/text-fields/create'
-import listBaseOptionFields from '@/components/fields/base/option-fields/list'
 import createBaseOptionField from '@/components/fields/base/option-fields/create'
+import listBaseFields from '@/components/fields/base/list'
 
 export default {
   data () {
@@ -39,10 +35,9 @@ export default {
     }
   },
   components: {
-    'list-base-text-fields': listBaseTextFields,
     'create-base-text-field-modal': createBaseTextField,
-    'list-base-option-fields': listBaseOptionFields,
-    'create-base-option-field-modal': createBaseOptionField
+    'create-base-option-field-modal': createBaseOptionField,
+    'list-base-fields': listBaseFields
   }
 }
 </script>
