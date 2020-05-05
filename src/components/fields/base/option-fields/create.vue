@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
-          <v-text-field v-model="field_name" rules="required" field_id="formFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="field_desc" field_id="formFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="field_type" :options="options" rules="required" field_id="formFieldType" field_label="Type" class="field-group"></v-select-field>
+          <v-text-field v-model="field_name" rules="required" field_id="createBaseOptionFieldName" field_label="Name" class="field-group"></v-text-field>
+          <v-text-field v-model="field_label" rules="required" field_id="createBaseOptionFieldLabel" field_label="Label" class="field-group"></v-text-field>
+          <text-field v-model="field_desc" field_id="createBaseOptionFieldDesc" field_label="Description" class="field-group"></text-field>
+          <v-select-field v-model="field_type" :options="options" rules="required" field_id="createBaseOptionFieldType" field_label="Type" class="field-group"></v-select-field>
           <button type="submit" class="btn btn-green mt-5">Create</button>
         </form>
       </validation-observer>

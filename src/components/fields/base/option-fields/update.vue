@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form>
-          <v-text-field v-model="field_name" rules="required" field_id="formFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="field_label" rules="required" field_id="formFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="field_desc" field_id="formFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="field_type" :options="options" rules="required" field_id="formFieldType" field_label="Type" class="field-group"></v-select-field>
+          <v-text-field v-model="field_name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name" class="field-group"></v-text-field>
+          <v-text-field v-model="field_label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label" class="field-group"></v-text-field>
+          <text-field v-model="field_desc" field_id="updateBaseOptionFieldDesc" field_label="Description" class="field-group"></text-field>
+          <v-select-field v-model="field_type" :options="options" rules="required" field_id="updateBaseOptionFieldType" field_label="Type" class="field-group"></v-select-field>
         </form>
       </validation-observer>
       <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
