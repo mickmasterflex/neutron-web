@@ -12,7 +12,7 @@
       </validation-observer>
       <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
       Add an Option
-      <create-option :field="field"></create-option>
+      <create-option :field="field" :show="show"></create-option>
       <button type="submit" class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
     </template>
   </modal-template>

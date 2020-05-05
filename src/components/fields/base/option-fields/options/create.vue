@@ -36,7 +36,17 @@ export default {
     }
   },
   props: {
-    field: Object
+    field: Object,
+    show: Boolean
+  },
+  watch: {
+    show () {
+      if (this.show === false) {
+        this.$nextTick(() => {
+          this.$refs.form.reset()
+        })
+      }
+    }
   },
   computed: {
     baseOption: function () {
