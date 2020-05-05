@@ -2,7 +2,7 @@
   <modal-template :show="show" @close="close">
     <template v-slot:header>Update Base Text Field</template>
     <template v-slot:body>
-      <validation-observer v-slot="{ handleSubmit }">
+      <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
           <v-text-field v-model="field_name" rules="required" field_id="updateBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="field_label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>

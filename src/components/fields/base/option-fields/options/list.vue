@@ -1,5 +1,5 @@
 <template>
-  <ul class="bg-gray-100 p-3">
+  <ul class="bg-gray-100 p-3" v-if="options.length">
     <li class="p-2 flex flex-row items-center">
       <span>Order - Label - Value - Delete</span>
     </li>
@@ -16,7 +16,10 @@ import deleteOption from '@/components/fields/base/option-fields/options/delete'
 
 export default {
   props: {
-    options: Array,
+    options: {
+      type: Array,
+      default: () => []
+    },
     field_id: Number
   },
   components: {
