@@ -15,7 +15,9 @@
 
 <script>
 export default {
-  props: ['show'],
+  props: {
+    show: Boolean
+  },
   methods: {
     close () {
       this.$emit('close')
@@ -35,7 +37,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .modal-backdrop {
     background: rgba(0,0,0,.75);
   }

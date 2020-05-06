@@ -60,10 +60,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      updateBaseOptionField: 'updateBaseOptionField',
-      updateModifiedBaseOptions: 'updateModifiedBaseOptions'
-    }),
+    ...mapActions([
+      'updateBaseOptionField',
+      'updateModifiedBaseOptions'
+    ]),
     ...mapMutations({
       reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
     }),
