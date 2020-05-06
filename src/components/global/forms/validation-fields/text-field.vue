@@ -1,6 +1,10 @@
 <template>
   <validation-provider :rules="rules" v-slot="{ errors, classes }">
-    <text-field v-model="innerValue" :class="classes" v-bind="$attrs"></text-field>
+    <text-field
+      v-model="inner_value"
+      :class="classes"
+      v-bind="$attrs"
+      :value="value"></text-field>
     <span class="field-error">{{ errors[0] }}</span>
   </validation-provider>
 </template>
@@ -9,7 +13,8 @@
 export default {
   props: {
     value: {
-      type: null
+      type: null,
+      default: ''
     },
     rules: {
       type: [Object, String],
@@ -17,21 +22,21 @@ export default {
     }
   },
   data: () => ({
-    innerValue: ''
+    inner_value: ''
   }),
   watch: {
     // Handles internal model changes.
-    innerValue (newVal) {
+    inner_value (newVal) {
       this.$emit('input', newVal)
     },
     // Handles external model changes.
     value (newVal) {
-      this.innerValue = newVal
+      this.inner_value = newVal
     }
   },
   created () {
     if (this.value) {
-      this.innerValue = this.value
+      this.inner_value = this.value
     }
   }
 }

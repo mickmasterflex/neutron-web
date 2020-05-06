@@ -36,7 +36,14 @@ const routes = [
   {
     path: '/products/',
     name: 'Products',
-    component: () => import('@/views/Products.vue'),
+    component: () => import('@/views/products/index.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/products/fields/',
+    name: 'FieldManagement',
+    component: () => import('@/views/products/field-management.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true }
   },
@@ -127,14 +134,14 @@ const routes = [
   {
     path: '/users/',
     name: 'Users',
-    component: () => import('@/views/relationships/users/index.vue'),
+    component: () => import('@/views/users/index.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true }
   },
   {
     path: '/users/:id/',
     name: 'User',
-    component: () => import('@/views/relationships/users/user.vue'),
+    component: () => import('@/views/users/user.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true },
     props (route) {

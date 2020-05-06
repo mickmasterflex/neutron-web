@@ -10,7 +10,7 @@
       </tr>
       <tr v-for="client in clients" :key="client.id">
         <td class="td">
-          <router-link :to="{name: 'Client', params: {id:client.id}}" class="underline text-blue-500">{{client.name}}</router-link>
+          <router-link :to="{name: 'Client', params: {id:client.id}}" class="text-link">{{client.name}}</router-link>
         </td>
         <td class="td">{{client.id}}</td>
         <td class="td">{{client.slug}}</td>
