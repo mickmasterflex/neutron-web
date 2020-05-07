@@ -7,6 +7,9 @@
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>
+
+    <list-form v-if="buyer.form" :form="buyer.form"></list-form>
+
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
     <delete-buyer-contract :client="client" :id="id"></delete-buyer-contract>
 
@@ -19,6 +22,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
+import listForm from '@/components/fields/list'
 
 export default {
   props: {
@@ -33,7 +37,8 @@ export default {
   },
   components: {
     'delete-buyer-contract': deleteBuyer,
-    'update-buyer-contract': updateBuyer
+    'update-buyer-contract': updateBuyer,
+    'list-form': listForm
   },
   computed: {
     ...mapGetters({ buyer: 'getCurrentBuyer' })
