@@ -28,7 +28,7 @@ export default {
     ...mapActions({ update: 'updateOffer' }),
     submitForm () {
       this.update({
-        pk: this.id,
+        id: this.id,
         name: this.name,
         contract: this.$props.buyer,
         product: 1

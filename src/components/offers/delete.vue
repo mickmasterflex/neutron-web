@@ -9,6 +9,9 @@ export default {
   props: {
     offer: {
       type: Object
+    },
+    id: {
+      type: Number
     }
   },
   computed: {
@@ -19,7 +22,7 @@ export default {
   methods: {
     ...mapActions({ delete: 'deleteOffer' }),
     runDelete () {
-      this.delete(this.offer.pk)
+      this.delete(this.offer.id)
         .then(() => {
           this.$router.push({ name: 'BuyerContract', params: { id: this.offer.contract, client: this.client.id } })
         })
