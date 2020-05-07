@@ -61,7 +61,7 @@ export default {
         label: this.field_label,
         description: this.field_desc,
         type: this.field_type,
-        id: this.id
+        id: this.field_id
       })
       this.close()
     }
