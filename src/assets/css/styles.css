@@ -121,8 +121,9 @@
 .select-field-wrap { @apply relative w-64 }
 
 .base-field { @apply block w-64 bg-white border border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight; }
-.base-field:hover { @apply border-gray-500 }
+.base-field:hover:not(:disabled) { @apply border-gray-500 }
 .base-field:focus { @apply outline-none shadow-outline }
+.base-field:disabled { @apply cursor-not-allowed bg-gray-100 }
 
 /* Groups */
 .field-group:not(:first-child) { @apply mt-2 }

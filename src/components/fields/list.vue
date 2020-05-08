@@ -1,22 +1,25 @@
 <template>
   <div>
     <h2>Contract Form</h2>
-    <table v-if="form.fields">
-      <tr>
-        <th class="th">ID</th>
-        <th class="th">Label</th>
-        <th class="th"></th>
-      </tr>
-      <tr v-for="field in form.fields" :key="field.id">
-        <td>{{field.id}}</td>
-        <td>{{field.label}}</td>
-        <td><button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button></td>
-      </tr>
-    </table>
+    <div v-if="form.fields">
+      <div class="bg-gray-900 text-white rounded flex flex-row items-center">
+        <span class="py-1 px-3">ID</span>
+        <span class="py-1 px-3">Label</span>
+        <span class="py-1 px-3">Mapping</span>
+        <span class="py-1 px-3">Deliver</span>
+      </div>
+      <div v-for="field in form.fields" :key="field.id" class="flex flex-row items-center">
+        <text-field :value="field.id" disabled="disabled"/>
+        <text-field :value="field.label" disabled="disabled"/>
+        <text-field :value="field.mapping" disabled="disabled"/>
+        <text-field :value="field.deliver" disabled="disabled"/>
+        <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
+      </div>
+    </div>
     <div v-else>
       No Fields
     </div>
-    <update-text-field :field="this.currentTextField"></update-text-field>
+    <update-text-field :field="this.currentTextField" ref="updateTextField" v-show="showUpdateText"></update-text-field>
   </div>
 </template>
 
@@ -26,7 +29,11 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
-    form: Object
+    form: Object,
+    showUpdateText: {
+      type: Boolean,
+      default: false
+    }
   },
   components: {
     'update-text-field': updateTextField
@@ -39,6 +46,11 @@ export default {
   },
   computed: {
     ...mapGetters({ currentTextField: 'getCurrentTextField' })
+  },
+  watch: {
+    currentTextField () {
+      this.showUpdateText = true
+    }
   }
 }
 </script>
