@@ -14,12 +14,15 @@
         <text-field :value="field.mapping" disabled="disabled"/>
         <text-field :value="field.deliver" disabled="disabled"/>
         <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
+        <portal-target :name="`updateTextField--${field.id}`"></portal-target>
       </div>
     </div>
     <div v-else>
       No Fields
     </div>
-    <update-text-field :field="this.currentTextField" ref="updateTextField" v-show="showUpdateText"></update-text-field>
+    <portal v-if="currentTextField" :to="`updateTextField--${currentTextField.id}`">
+      <update-text-field :field="this.currentTextField" v-show="showUpdateText"></update-text-field>
+    </portal>
   </div>
 </template>
 
@@ -28,12 +31,13 @@ import updateTextField from '@/components/fields/text-fields/update'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    form: Object,
-    showUpdateText: {
-      type: Boolean,
-      default: false
+  data () {
+    return {
+      showUpdateText: false
     }
+  },
+  props: {
+    form: Object
   },
   components: {
     'update-text-field': updateTextField
