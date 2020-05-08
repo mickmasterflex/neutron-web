@@ -33,9 +33,6 @@ export default {
       offer: 'getCurrentOffer'
     })
   },
-  products: function () {
-    return this.getAllProducts()
-  },
   methods: {
     ...mapActions({
       fetchCurrentOffer: 'fetchCurrentOffer',
