@@ -6,6 +6,7 @@ import partners from './modules/partners'
 import buyers from './modules/buyers'
 import users from './modules/users'
 import offers from './modules/offers'
+import products from './modules/products'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     partners,
     buyers,
     users,
-    offers
+    offers,
+    products
   }
 })
