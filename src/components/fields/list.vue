@@ -60,7 +60,11 @@ export default {
   watch: {
     currentTextField () {
       this.showUpdateText = true
-      this.currentTextFieldId = this.currentTextField.id
+      if (this.currentTextField) {
+        this.currentTextFieldId = this.currentTextField.id
+      } else {
+        this.currentTextFieldId = null
+      }
     }
   }
 }

@@ -21,7 +21,8 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_TEXT_FIELD: (state, field) => (state.current_text_field = field)
+  SET_CURRENT_TEXT_FIELD: (state, field) => (state.current_text_field = field),
+  RESET_CURRENT_TEXT_FIELD: (state) => (state.current_text_field = null)
 }
 
 export default {

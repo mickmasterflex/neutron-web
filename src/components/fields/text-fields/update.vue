@@ -5,12 +5,13 @@
       <v-text-field v-model="field_mapping" field_id="updateTextFieldMapping" field_label="Mapping" rules="required" class="field-group"></v-text-field>
       <checkbox-single v-model="field_deliver" field_id="updateTextFieldDeliver" field_label="Deliver"></checkbox-single>
       <button type="submit" class="btn btn-green mt-5">Update Field</button>
+      <span @click="resetCurrentTextField" class="text-link">Close</span>
     </form>
   </validation-observer>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -32,6 +33,7 @@ export default {
   },
   methods: {
     ...mapActions({ update: 'updateTextField' }),
+    ...mapMutations({ resetCurrentTextField: 'RESET_CURRENT_TEXT_FIELD' }),
     submitForm () {
       this.update({
         label: this.field_label,
@@ -41,6 +43,7 @@ export default {
         base_field: this.field.base_field,
         id: this.field.id
       })
+      this.resetCurrentTextField()
     }
   }
 }
