@@ -7,6 +7,8 @@
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>
+
+    <h3 class="h3 mt-5 mb-2">List</h3>
     <list-form v-if="buyer.form" :form="buyer.form"></list-form>
 
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>

@@ -8,19 +8,21 @@
         <span class="py-1 px-3">Mapping</span>
         <span class="py-1 px-3">Deliver</span>
       </div>
-      <div v-for="field in form.fields" :key="field.id" class="flex flex-row items-center">
-        <text-field :value="field.id" disabled="disabled"/>
-        <text-field :value="field.label" disabled="disabled"/>
-        <text-field :value="field.mapping" disabled="disabled"/>
-        <text-field :value="field.deliver" disabled="disabled"/>
-        <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
+      <div v-for="field in form.fields" :key="field.id">
+        <div :field="field" v-show="field.id!==currentTextFieldId" class="flex flex-row items-center">
+          <text-field :value="field.id" disabled="disabled"/>
+          <text-field :value="field.label" disabled="disabled"/>
+          <text-field :value="field.mapping" disabled="disabled"/>
+          <text-field :value="field.deliver" disabled="disabled"/>
+          <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
+        </div>
         <portal-target :name="`updateTextField--${field.id}`"></portal-target>
       </div>
     </div>
     <div v-else>
       No Fields
     </div>
-    <portal v-if="currentTextField" :to="`updateTextField--${currentTextField.id}`">
+    <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
       <update-text-field :field="this.currentTextField" v-show="showUpdateText"></update-text-field>
     </portal>
   </div>
@@ -33,7 +35,11 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      showUpdateText: false
+      showUpdateText: false,
+      currentTextFieldId: {
+        default: null,
+        type: Number
+      }
     }
   },
   props: {
@@ -54,6 +60,7 @@ export default {
   watch: {
     currentTextField () {
       this.showUpdateText = true
+      this.currentTextFieldId = this.currentTextField.id
     }
   }
 }
