@@ -33,9 +33,6 @@ const actions = {
       .then(response => {
         commit('ADD_OFFER', response.data)
       })
-      .catch(error => {
-        console.log(error)
-      })
   },
   async updateOffer ({ commit }, updatedOffer) {
     await axios.put(`/offers/${updatedOffer.id}/`, updatedOffer)
@@ -43,17 +40,11 @@ const actions = {
         commit('UPDATE_OFFER', updatedOffer)
         commit('SET_CURRENT_OFFER', updatedOffer)
       })
-      .catch(response => {
-        console.log(response)
-      })
   },
   async deleteOffer ({ commit }, id) {
     await axios.delete(`/offers/${id}/`)
       .then(() => {
         commit('REMOVE_OFFER', id)
-      })
-      .catch(response => {
-        console.log(response)
       })
   }
 }

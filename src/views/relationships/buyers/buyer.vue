@@ -8,7 +8,7 @@
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Offers List</h3>
-    <offer-list :offers="offers" :id="id"></offer-list>
+    <offer-list :offers="offers"></offer-list>
 
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
     <delete-buyer-contract :client="buyer.client" :id="id"></delete-buyer-contract>

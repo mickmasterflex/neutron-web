@@ -19,11 +19,10 @@ export default {
     }
   },
   props: {
-    id: {
-      type: Number
-    },
+    id: Number,
     buyer: Number
   },
+
   methods: {
     ...mapActions({ update: 'updateOffer' }),
     submitForm () {
