@@ -16,6 +16,7 @@
 
     <h3 class="h3 mt-5 mb-2">Form Fields</h3>
     <list-form v-if="buyer.form" :form="buyer.form"></list-form>
+    <create-field v-if="buyer.form" :form="buyer.form.id"></create-field>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import listForm from '@/components/fields/list'
+import createField from '@/components/fields/create'
 
 export default {
   props: {
@@ -39,6 +41,7 @@ export default {
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
+    'create-field': createField,
     'list-form': listForm
   },
   computed: {

@@ -15,6 +15,12 @@ const actions = {
         commit('SET_CURRENT_TEXT_FIELD', response.data)
       })
   },
+  async createTextField ({ commit }, field) {
+    await axios.post('/text-fields/', field)
+      .catch(error => {
+        console.log(error)
+      })
+  },
   async updateTextField ({ commit }, updatedField) {
     await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
   },
