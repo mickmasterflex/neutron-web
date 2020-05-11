@@ -17,7 +17,7 @@
     <update-buyer-contract :client="buyer.client" :id="id" ></update-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
-    <create-offer :buyer="buyer.id" :offers="offers"></create-offer>
+    <create-offer :buyer="buyer.id"></create-offer>
   </div>
 </template>
 <script>
@@ -29,9 +29,7 @@ import offerList from '@/components/offers/list'
 
 export default {
   props: {
-    id: {
-      type: Number
-    }
+    id: Number
   },
   components: {
     'delete-buyer-contract': deleteBuyer,

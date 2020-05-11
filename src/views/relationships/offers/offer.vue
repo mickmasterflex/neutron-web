@@ -10,7 +10,7 @@
     <delete-offer :offer="offer" ></delete-offer>
 
     <h3 class="h3 mt-5 mb-2">Update Offer</h3>
-    <update-offer :id="offer.id" :buyer="offer.contract"></update-offer>
+    <update-offer :offer="offer" :id="id"></update-offer>
   </div>
 </template>
 <script>

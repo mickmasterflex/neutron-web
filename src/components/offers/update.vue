@@ -19,8 +19,7 @@ export default {
     }
   },
   props: {
-    id: Number,
-    buyer: Number
+    offer: Object
   },
 
   methods: {
@@ -30,10 +29,11 @@ export default {
     }),
     submitForm () {
       this.update({
-        id: this.id,
+        id: this.offer.id,
         name: this.name,
-        contract: this.$props.buyer,
-        product: this.product
+        contract: this.offer.contract,
+        product: this.product,
+        client: this.client
       })
     }
   },
