@@ -9,14 +9,17 @@ const getters = {
 }
 
 const actions = {
-  async updateTextField ({ commit }, updatedField) {
-    await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
-  },
   async fetchCurrentTextField ({ commit }, id) {
     await axios.get(`/text-fields/${id}/`)
       .then(response => {
         commit('SET_CURRENT_TEXT_FIELD', response.data)
       })
+  },
+  async updateTextField ({ commit }, updatedField) {
+    await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
+  },
+  async deleteTextField ({ commit }, id) {
+    await axios.delete(`/text-fields/${id}/`)
   }
 }
 

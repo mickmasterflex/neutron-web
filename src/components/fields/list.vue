@@ -13,6 +13,7 @@
           <text-field :value="field.label" disabled="disabled"/>
           <text-field :value="field.mapping" disabled="disabled"/>
           <text-field :value="field.deliver" disabled="disabled"/>
+          <delete-text-field :id="field.id"></delete-text-field>
           <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
         </div>
         <portal-target :name="`updateTextField--${field.id}`"></portal-target>
@@ -29,6 +30,7 @@
 
 <script>
 import updateTextField from '@/components/fields/text-fields/update'
+import deleteTextField from '@/components/fields/text-fields/delete'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -45,6 +47,7 @@ export default {
     form: Object
   },
   components: {
+    'delete-text-field': deleteTextField,
     'update-text-field': updateTextField
   },
   methods: {
