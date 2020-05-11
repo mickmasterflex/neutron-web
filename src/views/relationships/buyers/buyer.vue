@@ -8,14 +8,14 @@
       </div>
     </div>
 
-    <h3 class="h3 mt-5 mb-2">List</h3>
-    <list-form v-if="buyer.form" :form="buyer.form"></list-form>
-
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
     <delete-buyer-contract :client="client" :id="id"></delete-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
     <update-buyer-contract :client="client" :id="id"></update-buyer-contract>
+
+    <h3 class="h3 mt-5 mb-2">Form Fields</h3>
+    <list-form v-if="buyer.form" :form="buyer.form"></list-form>
   </div>
 </template>
 

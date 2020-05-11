@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Contract Form</h2>
     <div v-if="form.fields">
       <div class="bg-gray-900 text-white rounded flex flex-row items-center">
         <span class="py-1 px-3">ID</span>
