@@ -8,6 +8,30 @@ const modules = {
   baseOptions
 }
 
+const state = {
+  base_fields: []
+}
+
+const getters = {
+  getBaseFields: state => state.base_fields
+}
+
+const actions = {
+  async fetchBaseFields ({ commit, dispatch }) {
+    await dispatch('fetchBaseTextFields')
+    await dispatch('fetchBaseOptionFields')
+    commit('SET_BASE_FIELDS')
+  }
+}
+
+const mutations = {
+  SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields))
+}
+
 export default {
-  modules
+  modules,
+  state,
+  getters,
+  actions,
+  mutations
 }
