@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
-import { required, email } from 'vee-validate/dist/rules'
+import { required, email, integer } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -12,16 +12,17 @@ import axios from '@/axios'
 import '@/assets/css/styles.css'
 
 /* Layouts */
-import simpleLayout from '@/layouts/simpleLayout'
-import appLayout from '@/layouts/appLayout'
+import simpleLayout from '@/layouts/simple-layout'
+import appLayout from '@/layouts/app-layout'
 
 /* Components */
+import baseModal from '@/components/global/modals/base'
 import statCard from '@/components/global/cards/stat-card'
-import checkboxSingle from '@/components/global/forms/base_fields/checkbox-single'
-import selectField from '@/components/global/forms/base_fields/select-field'
-import textField from '@/components/global/forms/base_fields/text-field'
-import vTextField from '@/components/global/forms/validation_fields/text-field'
-import vSelectField from '@/components/global/forms/validation_fields/select-field'
+import checkboxSingle from '@/components/global/forms/base-fields/checkbox-single'
+import selectField from '@/components/global/forms/base-fields/select-field'
+import textField from '@/components/global/forms/base-fields/text-field'
+import vTextField from '@/components/global/forms/validation-fields/text-field'
+import vSelectField from '@/components/global/forms/validation-fields/select-field'
 
 /* -----------------------------------------------
   Authentication
@@ -46,6 +47,9 @@ Vue.component('app-layout', appLayout)
 -------------------------------------------------- */
 
 Vue.component('stat-card', statCard)
+Vue.component('modal-template', baseModal)
+
+// Form Fields
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
@@ -58,6 +62,7 @@ Vue.component('v-select-field', vSelectField)
 
 extend('email', { ...email, message: 'Invalid email address' })
 extend('required', { ...required, message: 'Required field' })
+extend('integer', { ...integer, message: 'Must be an integer' })
 Vue.component('validation-provider', ValidationProvider)
 Vue.component('validation-observer', ValidationObserver)
 configure({

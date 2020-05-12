@@ -20,6 +20,7 @@
     <create-offer :buyer="buyer.id"></create-offer>
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
       <h1 class="text-white text-4xl font-hairline">All Clients</h1>
       <div>
         <stat-card :data="getAllClientsCount" :title="`Clients`" :color="`teal`"></stat-card>

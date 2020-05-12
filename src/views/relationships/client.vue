@@ -1,6 +1,6 @@
 <template>
   <div v-if="client">
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
       <h1 class="h1 text-white">{{client.name}}</h1>
       <div>
         <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>

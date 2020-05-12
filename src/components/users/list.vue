@@ -8,7 +8,7 @@
     </tr>
     <tr v-for="user in users" :key="user.id">
       <td class="td">
-        <router-link :to="{name: 'User', params: {id:user.id}}" class="underline text-blue-500">
+        <router-link :to="{name: 'User', params: {id:user.id}}" class="text-link">
           {{ user.email }}
         </router-link>
       </td>
