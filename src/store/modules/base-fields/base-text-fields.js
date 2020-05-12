@@ -27,18 +27,21 @@ const actions = {
     await axios.post('/base-text-fields/', field)
       .then(response => {
         commit('ADD_BASE_TEXT_FIELD', response.data)
+        commit('SET_BASE_FIELDS')
       })
   },
   async updateBaseTextField ({ commit }, updatedField) {
     await axios.put(`/base-text-fields/${updatedField.id}/`, updatedField)
       .then(() => {
         commit('UPDATE_BASE_TEXT_FIELD', updatedField)
+        commit('SET_BASE_FIELDS')
       })
   },
   async deleteBaseTextField ({ commit }, id) {
     await axios.delete(`/base-text-fields/${id}/`)
       .then(() => {
         commit('REMOVE_BASE_TEXT_FIELD', id)
+        commit('SET_BASE_FIELDS')
       })
   }
 }
