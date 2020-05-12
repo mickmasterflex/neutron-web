@@ -8,10 +8,10 @@
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Delete Partner Contract</h3>
-    <delete-partner-contract :client="client" :id="id"></delete-partner-contract>
+    <delete-partner-contract :client="partner.client" :id="id"></delete-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Partner Contract</h3>
-    <update-partner-contract :client="client" :id="id"></update-partner-contract>
+    <update-partner-contract :client="partner.client" :id="id"></update-partner-contract>
   </div>
 </template>
 
@@ -23,9 +23,6 @@ import updatePartner from '@/components/partners/update'
 export default {
   props: {
     id: {
-      type: Number
-    },
-    client: {
       type: Number
     }
   },
