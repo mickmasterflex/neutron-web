@@ -6,11 +6,7 @@ const state = {
 }
 
 const getters = {
-  getAllOffers: state => state.offers,
   getCurrentOffer: state => state.current_offer,
-  getAllOffersCount: (state) => {
-    return state.offers.length
-  },
   getOffersByBuyer: (state) => (buyerId) => {
     return state.offers.filter(offer => offer.contract === buyerId)
   }

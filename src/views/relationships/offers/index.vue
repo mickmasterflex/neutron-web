@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offers: 'getAllOffers',
       getOffersByBuyer: 'getOffersByBuyer'
     }),
     offers: function () {
