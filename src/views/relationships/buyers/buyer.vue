@@ -7,16 +7,23 @@
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>
-
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
-    <delete-buyer-contract :client="client" :id="id"></delete-buyer-contract>
+    <delete-buyer-contract :client="buyer.client" :id="id"></delete-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
-    <update-buyer-contract :client="client" :id="id"></update-buyer-contract>
+    <update-buyer-contract :client="buyer.client" :id="id" ></update-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Form Fields</h3>
     <list-form v-if="buyer.form" :form="buyer.form"></list-form>
+
+    <h3 class="h3 mt-5 mb-2">Create Form Field</h3>
     <create-field v-if="buyer.form" :form="buyer.form.id"></create-field>
+
+    <h3 class="h3 mt-5 mb-2">Offers List</h3>
+    <offer-list :offers="offers"></offer-list>
+
+    <h3 class="h3 mt-5 mb-2">Create Offer</h3>
+    <create-offer :buyer="buyer.id"></create-offer>
   </div>
 </template>
 
@@ -26,32 +33,40 @@ import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import listForm from '@/components/fields/list'
 import createField from '@/components/fields/create'
+import createOffer from '@/components/offers/create'
+import offerList from '@/components/offers/list'
 
 export default {
   props: {
-    id: {
-      type: Number,
-      default: null
-    },
-    client: {
-      type: Number,
-      default: null
-    }
+    id: Number
   },
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
     'create-field': createField,
-    'list-form': listForm
+    'list-form': listForm,
+    'create-offer': createOffer,
+    'offer-list': offerList
   },
   computed: {
-    ...mapGetters({ buyer: 'getCurrentBuyer' })
+    ...mapGetters({
+      offer: 'getCurrentOffer',
+      buyer: 'getCurrentBuyer',
+      getOffersByBuyer: 'getOffersByBuyer'
+    }),
+    offers: function () {
+      return this.getOffersByBuyer(this.id)
+    }
   },
   methods: {
-    ...mapActions({ fetchCurrentBuyer: 'fetchCurrentBuyer' })
+    ...mapActions({
+      fetchCurrentBuyer: 'fetchCurrentBuyer',
+      fetchOffers: 'fetchOffers'
+    })
   },
   created () {
     this.fetchCurrentBuyer(this.id)
+    this.fetchOffers()
   }
 }
 </script>
