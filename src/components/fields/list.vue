@@ -23,7 +23,7 @@
       No Fields
     </div>
     <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
-      <update-text-field :field="this.currentTextField" v-show="showUpdateText"></update-text-field>
+      <update-text-field :field="this.currentTextField" :form="form.id" v-show="showUpdateText"></update-text-field>
     </portal>
   </div>
 </template>
@@ -51,13 +51,19 @@ export default {
     'update-text-field': updateTextField
   },
   methods: {
-    ...mapActions(['fetchCurrentTextField']),
+    ...mapActions({
+      fetchCurrentTextField: 'fetchCurrentTextField',
+      fetchBaseFields: 'fetchBaseFields'
+    }),
     editTextField (id) {
       this.fetchCurrentTextField(id)
     }
   },
   computed: {
-    ...mapGetters({ currentTextField: 'getCurrentTextField' })
+    ...mapGetters({
+      currentTextField: 'getCurrentTextField',
+      baseFields: 'getBaseFields'
+    })
   },
   watch: {
     currentTextField () {

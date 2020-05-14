@@ -30,11 +30,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      createTextField: 'createTextField',
+      create: 'createTextField',
       fetchBaseFields: 'fetchBaseFields'
     }),
     submitForm () {
-      this.createTextField({
+      this.create({
         label: this.label,
         mapping: this.mapping,
         deliver: this.deliver,

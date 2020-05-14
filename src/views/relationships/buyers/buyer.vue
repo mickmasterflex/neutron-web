@@ -13,17 +13,13 @@
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
     <update-buyer-contract :client="buyer.client" :id="id" ></update-buyer-contract>
 
-    <h3 class="h3 mt-5 mb-2">Form Fields</h3>
-    <list-form v-if="buyer.form" :form="buyer.form"></list-form>
-
-    <h3 class="h3 mt-5 mb-2">Create Form Field</h3>
-    <create-field v-if="buyer.form" :form="buyer.form.id"></create-field>
-
     <h3 class="h3 mt-5 mb-2">Offers List</h3>
     <offer-list :offers="offers"></offer-list>
 
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :buyer="buyer.id"></create-offer>
+
+    <field-management :buyer="buyer"></field-management>
   </div>
 </template>
 
@@ -31,8 +27,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import listForm from '@/components/fields/list'
-import createField from '@/components/fields/create'
+import fieldManagement from '@/components/fields/field-management'
 import createOffer from '@/components/offers/create'
 import offerList from '@/components/offers/list'
 
@@ -43,8 +38,7 @@ export default {
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
-    'create-field': createField,
-    'list-form': listForm,
+    'field-management': fieldManagement,
     'create-offer': createOffer,
     'offer-list': offerList
   },
