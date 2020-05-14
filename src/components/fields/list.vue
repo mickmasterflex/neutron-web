@@ -25,12 +25,14 @@
     <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
       <update-text-field :field="this.currentTextField" :form="form.id" v-show="showUpdateText"></update-text-field>
     </portal>
+    <create-field :form="form.id" ></create-field>
   </div>
 </template>
 
 <script>
 import updateTextField from '@/components/fields/text-fields/update'
 import deleteTextField from '@/components/fields/text-fields/delete'
+import createField from '@/components/fields/create'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -48,7 +50,8 @@ export default {
   },
   components: {
     'delete-text-field': deleteTextField,
-    'update-text-field': updateTextField
+    'update-text-field': updateTextField,
+    'create-field': createField
   },
   methods: {
     ...mapActions({
