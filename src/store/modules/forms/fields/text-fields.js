@@ -1,7 +1,8 @@
 import axios from '@/axios'
 
 const state = {
-  current_text_field: null
+  current_text_field: null,
+  current_form: null
 }
 
 const getters = {
@@ -17,15 +18,21 @@ const actions = {
   },
   async createTextField ({ commit }, field) {
     await axios.post('/text-fields/', field)
-      .catch(error => {
-        console.log(error)
+      .then(response => {
+        commit('ADD_FIELD', response.data)
       })
   },
   async updateTextField ({ commit }, updatedField) {
     await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
+      .then(() => {
+        commit('UPDATE_FIELD', updatedField)
+      })
   },
   async deleteTextField ({ commit }, id) {
     await axios.delete(`/text-fields/${id}/`)
+      .then(() => {
+        commit('REMOVE_FIELD', id)
+      })
   }
 }
 

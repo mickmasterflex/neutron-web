@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="form.fields">
+    <div v-if="form">
       <div class="bg-gray-900 text-white rounded flex flex-row items-center">
         <span class="py-1 px-3">ID</span>
         <span class="py-1 px-3">Label</span>
@@ -25,7 +25,7 @@
     <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
       <update-text-field :field="this.currentTextField" :form="form.id" v-show="showUpdateText"></update-text-field>
     </portal>
-    <create-field :form="form.id" ></create-field>
+    <create-field :form="form.id" v-if="form"></create-field>
   </div>
 </template>
 
@@ -45,9 +45,6 @@ export default {
       }
     }
   },
-  props: {
-    form: Object
-  },
   components: {
     'delete-text-field': deleteTextField,
     'update-text-field': updateTextField,
@@ -65,7 +62,8 @@ export default {
   computed: {
     ...mapGetters({
       currentTextField: 'getCurrentTextField',
-      baseFields: 'getBaseFields'
+      baseFields: 'getBaseFields',
+      form: 'getCurrentForm'
     })
   },
   watch: {

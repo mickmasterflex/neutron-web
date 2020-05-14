@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="h3 mt-5 mb-2">Form Fields</h3>
-    <list-fields v-if="buyer.form" :form="buyer.form"></list-fields>
+    <list-fields></list-fields>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import listFields from '@/components/fields/list'
 
 export default {
   props: {
-    buyer: Object
+    form: Object
   },
   components: {
     'list-fields': listFields

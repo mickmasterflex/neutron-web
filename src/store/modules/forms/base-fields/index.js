@@ -1,6 +1,6 @@
-import baseTextFields from '@/store/modules/base-fields/base-text-fields'
-import baseOptionFields from '@/store/modules/base-fields/base-option-fields'
-import baseOptions from '@/store/modules/base-fields/base-options'
+import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
+import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
+import baseOptions from '@/store/modules/forms/base-fields/base-options'
 
 const modules = {
   baseTextFields,
