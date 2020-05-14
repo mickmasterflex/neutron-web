@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import createField from '@/components/fields/create'
 import listFields from '@/components/fields/list'
 
@@ -18,12 +17,6 @@ export default {
   components: {
     'create-field': createField,
     'list-fields': listFields
-  },
-  methods: {
-    ...mapActions({
-      createTextField: 'createTextField',
-      fetchBaseFields: 'fetchBaseFields'
-    })
   }
 }
 </script>
