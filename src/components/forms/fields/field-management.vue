@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import listFields from '@/components/fields/list'
+import listFields from '@/components/forms/fields/list'
 
 export default {
   props: {

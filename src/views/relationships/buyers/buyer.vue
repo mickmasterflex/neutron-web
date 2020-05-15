@@ -27,7 +27,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import fieldManagement from '@/components/fields/field-management'
+import fieldManagement from '@/components/forms/fields/field-management'
 import createOffer from '@/components/offers/create'
 import offerList from '@/components/offers/list'
 

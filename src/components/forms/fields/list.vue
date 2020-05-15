@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import updateTextField from '@/components/fields/text-fields/update'
-import deleteTextField from '@/components/fields/text-fields/delete'
-import createField from '@/components/fields/create'
+import updateTextField from '@/components/forms/fields/text-fields/update'
+import deleteTextField from '@/components/forms/fields/text-fields/delete'
+import createField from '@/components/forms/fields/create'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
