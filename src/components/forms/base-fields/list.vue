@@ -33,10 +33,10 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import updateBaseTextField from '@/components/fields/base/text-fields/update'
-import deleteBaseTextField from '@/components/fields/base/text-fields/delete'
-import updateBaseOptionField from '@/components/fields/base/option-fields/update'
-import deleteBaseOptionField from '@/components/fields/base/option-fields/delete'
+import updateBaseTextField from '@/components/forms/base-fields/text-fields/update'
+import deleteBaseTextField from '@/components/forms/base-fields/text-fields/delete'
+import updateBaseOptionField from '@/components/forms/base-fields/option-fields/update'
+import deleteBaseOptionField from '@/components/forms/base-fields/option-fields/delete'
 
 export default {
   data () {

@@ -35,6 +35,7 @@ const actions = {
     await axios.get(`/buyers/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BUYER', response.data)
+        commit('SET_CURRENT_FORM', response.data.form) // Not convinced that this is correct. Mutation could be called on field/list component
       })
   },
   async createBuyer ({ commit }, buyer) {

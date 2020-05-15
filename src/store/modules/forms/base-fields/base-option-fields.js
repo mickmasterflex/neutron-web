@@ -6,7 +6,6 @@ const state = {
 }
 
 const getters = {
-  getBaseOptionFields: state => state.base_option_fields,
   getCurrentBaseOptionField: state => state.current_base_option_field
 }
 

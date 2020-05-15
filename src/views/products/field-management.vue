@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import createBaseField from '@/components/fields/base/create'
-import listBaseFields from '@/components/fields/base/list'
+import createBaseField from '@/components/forms/base-fields/create'
+import listBaseFields from '@/components/forms/base-fields/list'
 
 export default {
   data () {

@@ -5,13 +5,13 @@
       type="checkbox"
       :id="field_id"
       class="mr-2">
-    <span>{{label}}</span>
+    <span>{{field_label}}</span>
   </label>
 </template>
 
 <script>
 export default {
-  props: ['label', 'field_id', 'model', 'value'],
+  props: ['field_label', 'field_id', 'model', 'value'],
   methods: {
     handleInput (value) {
       this.$emit('input', value)

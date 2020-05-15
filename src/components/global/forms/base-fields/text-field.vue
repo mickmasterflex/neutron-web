@@ -6,7 +6,8 @@
       class="base-field"
       :type="$attrs.field_type ? $attrs.field_type : 'text'"
       :id="$attrs.field_id"
-      :value="value">
+      :value="value"
+      :disabled="$attrs.disabled">
   </div>
 </template>
 

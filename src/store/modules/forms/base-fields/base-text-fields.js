@@ -6,7 +6,6 @@ const state = {
 }
 
 const getters = {
-  getBaseTextFields: state => state.base_text_fields,
   getCurrentBaseTextField: state => state.current_base_text_field
 }
 
