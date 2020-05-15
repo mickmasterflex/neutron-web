@@ -1,22 +1,21 @@
 <template>
   <div>
-    <button class="btn btn-green" @click="showForm=true" v-show="!showForm">Add Field</button>
-    <validation-observer v-slot="{ handleSubmit }" ref="form" v-show="showForm">
+    <button class="btn btn-green" @click="toggleShowCreateForm(true)" v-show="!showCreateForm">Add Field</button>
+    <validation-observer v-slot="{ handleSubmit }" ref="form" v-show="showCreateForm">
       <form @submit.prevent="handleSubmit(submitForm)">
         <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" :options="baseFields"></v-select-field>
-        <button type="submit" class="btn btn-green mt-5">Select Field</button><span class="text-link" @click="showForm=false">Close</span>
+        <button type="submit" class="btn btn-green mt-5">Select Field</button><span class="text-link" @click="toggleShowCreateForm(false)">Close</span>
       </form>
     </validation-observer>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
-      showForm: false,
       baseField: ''
     }
   },
@@ -24,12 +23,18 @@ export default {
     form: Number
   },
   computed: {
-    ...mapGetters({ baseFields: 'getBaseFields' })
+    ...mapGetters({
+      baseFields: 'getBaseFields',
+      showCreateForm: 'getShowCreateTextField'
+    })
   },
   methods: {
     ...mapActions({
       create: 'createTextField',
       fetchBaseFields: 'fetchBaseFields'
+    }),
+    ...mapMutations({
+      toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_TEXT_FIELD'
     }),
     submitForm () {
       this.create({
