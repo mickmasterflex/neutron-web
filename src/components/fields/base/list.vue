@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="baseTextFields" class="w-full">
+    <table v-if="baseFields" class="w-full">
       <tr class="th-row">
         <th class="th">Name</th>
         <th class="th">Label</th>
@@ -53,22 +53,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseTextFields: 'getBaseTextFields',
-      baseOptionFields: 'getBaseOptionFields',
+      baseFields: 'getBaseFields',
       currentBaseTextField: 'getCurrentBaseTextField',
       currentBaseOptionField: 'getCurrentBaseOptionField'
-    }),
-    baseFields () {
-      return this.baseTextFields.concat(this.baseOptionFields)
-    }
+    })
   },
   methods: {
-    ...mapActions([
-      'fetchBaseOptionFields',
-      'fetchBaseTextFields',
-      'fetchCurrentBaseOptionField',
-      'fetchCurrentBaseTextField'
-    ]),
+    ...mapActions({
+      fetchBaseFields: 'fetchBaseFields',
+      fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField',
+      fetchCurrentBaseTextField: 'fetchCurrentBaseTextField'
+    }),
     editBaseTextField (id) {
       this.showModalUpdateBaseTextField = true
       this.fetchCurrentBaseTextField(id)
@@ -79,8 +74,7 @@ export default {
     }
   },
   created () {
-    this.fetchBaseOptionFields()
-    this.fetchBaseTextFields()
+    this.fetchBaseFields()
   }
 }
 </script>
