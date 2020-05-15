@@ -25,7 +25,7 @@
     <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
       <update-text-field :field="this.currentTextField" :form="form.id" v-show="showUpdateText"></update-text-field>
     </portal>
-    <create-field :form="form.id" v-if="form"></create-field>
+    <create-field :form="form.id" v-if="form" class="mt-5"></create-field>
   </div>
 </template>
 
@@ -33,12 +33,11 @@
 import updateTextField from '@/components/fields/text-fields/update'
 import deleteTextField from '@/components/fields/text-fields/delete'
 import createField from '@/components/fields/create'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
-      showUpdateText: false,
       currentTextFieldId: {
         default: null,
         type: Number
@@ -55,6 +54,9 @@ export default {
       fetchCurrentTextField: 'fetchCurrentTextField',
       fetchBaseFields: 'fetchBaseFields'
     }),
+    ...mapMutations({
+      toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD'
+    }),
     editTextField (id) {
       this.fetchCurrentTextField(id)
     }
@@ -63,12 +65,13 @@ export default {
     ...mapGetters({
       currentTextField: 'getCurrentTextField',
       baseFields: 'getBaseFields',
-      form: 'getCurrentForm'
+      form: 'getCurrentForm',
+      showUpdateText: 'getShowUpdateTextField'
     })
   },
   watch: {
     currentTextField () {
-      this.showUpdateText = true
+      this.toggleShowUpdateTextField(true)
       if (this.currentTextField) {
         this.currentTextFieldId = this.currentTextField.id
       } else {

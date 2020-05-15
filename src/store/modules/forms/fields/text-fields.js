@@ -2,11 +2,13 @@ import axios from '@/axios'
 
 const state = {
   current_text_field: null,
-  current_form: null
+  current_form: null,
+  show_update_text_field: false
 }
 
 const getters = {
-  getCurrentTextField: state => state.current_text_field
+  getCurrentTextField: state => state.current_text_field,
+  getShowUpdateTextField: state => state.show_update_text_field
 }
 
 const actions = {
@@ -38,7 +40,8 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_TEXT_FIELD: (state, field) => (state.current_text_field = field),
-  RESET_CURRENT_TEXT_FIELD: (state) => (state.current_text_field = null)
+  RESET_CURRENT_TEXT_FIELD: (state) => (state.current_text_field = null),
+  TOGGLE_SHOW_UPDATE_TEXT_FIELD: (state, bool) => (state.show_update_text_field = bool)
 }
 
 export default {
