@@ -19,13 +19,11 @@ export default {
       baseField: ''
     }
   },
-  props: {
-    form: Number
-  },
   computed: {
     ...mapGetters({
       baseFields: 'getBaseFields',
-      showCreateForm: 'getShowCreateTextField'
+      showCreateForm: 'getShowCreateTextField',
+      form: 'getCurrentForm'
     })
   },
   methods: {
@@ -38,7 +36,7 @@ export default {
     }),
     submitForm () {
       this.create({
-        form: this.form,
+        form: this.form.id,
         base_field: this.baseField
       })
     }

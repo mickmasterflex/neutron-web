@@ -19,7 +19,7 @@
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :buyer="buyer.id"></create-offer>
 
-    <field-management :form="buyer.form"></field-management>
+    <field-management></field-management>
   </div>
 </template>
 
