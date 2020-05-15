@@ -18,44 +18,44 @@ const actions = {
         commit('SET_CAMPAIGNS', response.data)
       })
   },
-  async fetchCurrentOffer ({ commit }, id) {
-    await axios.get(`/offers/${id}/`)
+  async fetchCurrentCampaign ({ commit }, id) {
+    await axios.get(`/campaigns/${id}/`)
       .then(response => {
-        commit('SET_CURRENT_OFFER', response.data)
+        commit('SET_CURRENT_CAMPAIGN', response.data)
       })
   },
-  async createOffer ({ commit }, offer) {
-    await axios.post('/offers/', offer)
+  async createCampaign ({ commit }, campaign) {
+    await axios.post('/offers/', campaign)
       .then(response => {
-        commit('ADD_OFFER', response.data)
+        commit('ADD_CAMPAIGN', response.data)
       })
   },
-  async updateOffer ({ commit }, updatedOffer) {
-    await axios.put(`/offers/${updatedOffer.id}/`, updatedOffer)
+  async updateCampaign ({ commit }, updatedCampaign) {
+    await axios.put(`/campaigns/${updatedCampaign.id}/`, updatedCampaign)
       .then(() => {
-        commit('UPDATE_OFFER', updatedOffer)
-        commit('SET_CURRENT_OFFER', updatedOffer)
+        commit('UPDATE_CAMPAIGN', updatedCampaign)
+        commit('SET_CURRENT_CAMPAIGN', updatedCampaign)
       })
   },
-  async deleteOffer ({ commit }, id) {
-    await axios.delete(`/offers/${id}/`)
+  async deleteCampaign ({ commit }, id) {
+    await axios.delete(`/campaigns/${id}/`)
       .then(() => {
-        commit('REMOVE_OFFER', id)
+        commit('REMOVE_CAMPAIGN', id)
       })
   }
 }
 
 const mutations = {
-  SET_OFFERS: (state, offers) => (state.offers = offers),
-  SET_CURRENT_OFFER: (state, offer) => (state.current_offer = offer),
-  ADD_OFFER: (state, offer) => state.offers.unshift(offer),
-  UPDATE_OFFER: (state, updatedOffer) => {
-    const index = state.offers.findIndex(offer => offer.id === updatedOffer.id)
+  SET_CAMPAIGNS: (state, campaigns) => (state.campaigns = campaigns),
+  SET_CURRENT_CAMPAIGN: (state, campaign) => (state.current_campaign = campaign),
+  ADD_CAMPAIGN: (state, campaign) => state.campaigns.unshift(campaign),
+  UPDATE_CAMPAIGN: (state, updatedCampaign) => {
+    const index = state.campaigns.findIndex(campaign => campaign.id === updatedCampaign.id)
     if (index !== -1) {
-      state.offers.splice(index, 1, updatedOffer)
+      state.campaigns.splice(index, 1, updatedCampaign)
     }
   },
-  REMOVE_OFFER: (state, id) => (state.offers = state.offers.filter(offer => offer.id !== id))
+  REMOVE_CAMPAIGN: (state, id) => (state.campaigns = state.campaigns.filter(campaign => campaign.id !== id))
 }
 
 export default {

@@ -5,6 +5,7 @@ import baseTextFields from './modules/base-text-fields'
 import baseOptionFields from './modules/base-option-fields'
 import baseOptions from './modules/base-options'
 import buyers from './modules/buyers'
+import campaigns from '@/store/modules/campaigns'
 import clients from './modules/clients'
 import offers from './modules/offers'
 import partners from './modules/partners'
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     baseOptionFields,
     baseOptions,
     buyers,
+    campaigns,
     clients,
     offers,
     partners,
