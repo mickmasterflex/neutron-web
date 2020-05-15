@@ -13,10 +13,17 @@
           <text-field :value="field.label" disabled="disabled"/>
           <text-field :value="field.mapping" disabled="disabled"/>
           <text-field :value="field.deliver" disabled="disabled"/>
-          <delete-text-field :id="field.id"></delete-text-field>
-          <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
+          <span v-if="field.type === 'text' || field.type === 'textarea'" class="flex flex-row">
+            <delete-text-field :id="field.id"></delete-text-field>
+            <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
+          </span>
+          <span v-if="field.type === 'select' || field.type === 'radio'" class="flex flex-row">
+            <delete-option-field :id="field.id"></delete-option-field>
+            <button class="btn btn-circle btn-o-blue" @click="editOptionField(field.id)">e</button>
+          </span>
         </div>
-        <portal-target :name="`updateTextField--${field.id}`"></portal-target>
+        <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
+        <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
       </div>
     </div>
     <div v-else>
@@ -25,12 +32,17 @@
     <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
       <update-text-field :field="this.currentTextField" :form="form.id" v-show="showUpdateText"></update-text-field>
     </portal>
+    <portal v-if="currentOptionField" :to="`updateOptionField--${currentOptionFieldId}`">
+      <update-option-field :field="this.currentOptionField" :form="form.id" v-show="showUpdateOption"></update-option-field>
+    </portal>
   </div>
 </template>
 
 <script>
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import deleteTextField from '@/components/forms/fields/text-fields/delete'
+import updateOptionField from '@/components/forms/fields/option-fields/update'
+import deleteOptionField from '@/components/forms/fields/option-fields/delete'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -39,31 +51,44 @@ export default {
       currentTextFieldId: {
         default: null,
         type: Number
+      },
+      currentOptionFieldId: {
+        default: null,
+        type: Number
       }
     }
   },
   components: {
     'delete-text-field': deleteTextField,
-    'update-text-field': updateTextField
+    'delete-option-field': deleteOptionField,
+    'update-text-field': updateTextField,
+    'update-option-field': updateOptionField
   },
   methods: {
     ...mapActions({
       fetchCurrentTextField: 'fetchCurrentTextField',
+      fetchCurrentOptionField: 'fetchCurrentOptionField',
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD'
+      toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD',
+      toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
     }),
     editTextField (id) {
       this.fetchCurrentTextField(id)
+    },
+    editOptionField (id) {
+      this.fetchCurrentOptionField(id)
     }
   },
   computed: {
     ...mapGetters({
       currentTextField: 'getCurrentTextField',
+      currentOptionField: 'getCurrentOptionField',
       baseFields: 'getBaseFields',
       form: 'getCurrentForm',
-      showUpdateText: 'getShowUpdateTextField'
+      showUpdateText: 'getShowUpdateTextField',
+      showUpdateOption: 'getShowUpdateOptionField'
     })
   },
   watch: {
@@ -73,6 +98,14 @@ export default {
         this.currentTextFieldId = this.currentTextField.id
       } else {
         this.currentTextFieldId = null
+      }
+    },
+    currentOptionField () {
+      this.toggleShowUpdateOptionField(true)
+      if (this.currentOptionField) {
+        this.currentOptionFieldId = this.currentOptionField.id
+      } else {
+        this.currentOptionFieldId = null
       }
     }
   }
