@@ -14,7 +14,7 @@ const getters = {
 
 const mutations = {
   SET_CURRENT_FORM: (state, form) => (state.current_form = form),
-  ADD_FIELD: (state, field) => state.current_form.fields.unshift(field),
+  ADD_FIELD: (state, field) => state.current_form.fields.push(field),
   UPDATE_FIELD: (state, updatedField) => {
     const index = state.current_form.fields.findIndex(field => field.id === updatedField.id)
     if (index !== -1) {
