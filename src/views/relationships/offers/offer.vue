@@ -3,14 +3,14 @@
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">{{offer.name}}</h1>
       <div>
-        <stat-card :data="offer.pk" :title="`Offer`" :color="`teal`"></stat-card>
+        <stat-card :data="offer.id" :title="`Offer`" :color="`teal`"></stat-card>
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Delete Offer</h3>
     <delete-offer :offer="offer" ></delete-offer>
 
     <h3 class="h3 mt-5 mb-2">Update Offer</h3>
-    <update-offer :id="offer.pk" :buyer="offer.contract"></update-offer>
+    <update-offer :offer="offer" :id="id"></update-offer>
   </div>
 </template>
 <script>
@@ -30,8 +30,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offer: 'getCurrentOffer',
-      client: 'getCurrentClient'
+      offer: 'getCurrentOffer'
     })
   },
   methods: {

@@ -2,13 +2,13 @@
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="offerName" field_label="Offer Name" class="field-group"></v-text-field>
-      <select-field v-model="product" :options="products" field_id="products" field_label="products" class="field-group"></select-field>
-      <button class="btn btn-green mt-5">Submit</button>
+      <v-select-field v-model="product" rules="required" :options="products" field_id="product" field_label="Product" class="field-group"></v-select-field>
+      <button class="btn btn-green mt-5">Create Offer</button>
     </form>
   </validation-observer>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -21,7 +21,10 @@ export default {
     buyer: Number
   },
   methods: {
-    ...mapActions({ create: 'createOffer' }),
+    ...mapActions({
+      create: 'createOffer',
+      fetchProducts: 'fetchProducts'
+    }),
     submitForm () {
       this.create({
         name: this.name,
@@ -29,6 +32,14 @@ export default {
         product: this.product
       })
     }
+  },
+  computed: {
+    ...mapGetters({
+      products: 'getAllProducts'
+    })
+  },
+  created () {
+    this.fetchProducts()
   }
 }
 </script>
