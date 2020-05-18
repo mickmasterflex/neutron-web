@@ -26,10 +26,10 @@
       No Fields
     </div>
     <portal v-if="currentField" :to="`updateOptionField--${currentFieldId}`">
-      <update-option-field :field="this.currentField" :form="form.id" v-show="showUpdateOption"></update-option-field>
+      <update-option-field :field="this.currentField" :form="form.id" v-show="showUpdateOptionField"></update-option-field>
     </portal>
     <portal v-if="currentField" :to="`updateTextField--${currentFieldId}`">
-      <update-text-field :field="this.currentField" :form="form.id" v-show="showUpdateText"></update-text-field>
+      <update-text-field :field="this.currentField" :form="form.id" v-show="showUpdateTextField"></update-text-field>
     </portal>
   </div>
 </template>
@@ -47,10 +47,6 @@ export default {
       currentFieldId: {
         default: null,
         type: Number
-      },
-      currentFieldType: {
-        default: null,
-        type: String
       }
     }
   },
@@ -70,15 +66,14 @@ export default {
     ...mapGetters({
       currentField: 'getCurrentField',
       form: 'getCurrentForm',
-      showUpdateText: 'getShowUpdateTextField',
-      showUpdateOption: 'getShowUpdateOptionField'
+      showUpdateTextField: 'getShowUpdateTextField',
+      showUpdateOptionField: 'getShowUpdateOptionField'
     })
   },
   watch: {
     currentField () {
       if (this.currentField) {
         this.currentFieldId = this.currentField.id
-        this.currentFieldType = this.currentField.type
         if (this.currentField.type === 'select' || this.currentField.type === 'radio') {
           this.toggleShowUpdateOptionField(true)
           this.toggleShowUpdateTextField(false)
