@@ -1,4 +1,9 @@
 import axios from '@/axios'
+import options from '@/store/modules/forms/fields/options'
+
+const modules = {
+  options
+}
 
 const state = {
   show_update_option_field: false
@@ -42,6 +47,7 @@ const mutations = {
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
