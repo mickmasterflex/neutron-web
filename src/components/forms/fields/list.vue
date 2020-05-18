@@ -15,7 +15,7 @@
           <text-field :value="field.deliver" disabled="disabled"/>
           <span class="flex flex-row">
             <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
-            <button class="btn btn-circle btn-o-blue" @click="editOptionField(field.id)">e</button>
+            <button class="btn btn-circle btn-o-blue" @click="editField(field.id, field.type)" v-if="field.type">e</button>
           </span>
         </div>
         <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
@@ -68,11 +68,12 @@ export default {
       toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD',
       toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
     }),
-    editTextField (id) {
-      this.fetchCurrentTextField(id)
-    },
-    editOptionField (id) {
-      this.fetchCurrentOptionField(id)
+    editField (id, type) {
+      if (type === 'radio' || type === 'select') {
+        this.fetchCurrentOptionField(id)
+      } else if (type === 'text' || type === 'textarea') {
+        this.fetchCurrentTextField(id)
+      }
     }
   },
   computed: {
