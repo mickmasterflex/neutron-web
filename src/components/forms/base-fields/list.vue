@@ -18,8 +18,7 @@
         <td class="td">{{field.description}}</td>
         <td class="td">{{field.type}}</td>
         <td class="td flex flex-row justify-end">
-          <delete-base-text-field :id="field.id" v-if="field.type === `text` || field.type === `textarea`"></delete-base-text-field>
-          <delete-base-option-field :id="field.id" v-if="field.type === `select` || field.type === `radio`"></delete-base-option-field>
+          <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
         </td>
       </tr>
     </table>
@@ -34,9 +33,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import updateBaseTextField from '@/components/forms/base-fields/text-fields/update'
-import deleteBaseTextField from '@/components/forms/base-fields/text-fields/delete'
 import updateBaseOptionField from '@/components/forms/base-fields/option-fields/update'
-import deleteBaseOptionField from '@/components/forms/base-fields/option-fields/delete'
+import deleteBaseField from '@/components/forms/base-fields/delete'
 
 export default {
   data () {
@@ -48,8 +46,7 @@ export default {
   components: {
     'update-base-text-field-modal': updateBaseTextField,
     'update-base-option-field-modal': updateBaseOptionField,
-    'delete-base-option-field': deleteBaseOptionField,
-    'delete-base-text-field': deleteBaseTextField
+    'delete-base-field': deleteBaseField
   },
   computed: {
     ...mapGetters({
