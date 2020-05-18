@@ -15,7 +15,7 @@
           <text-field :value="field.deliver" disabled="disabled"/>
           <span class="flex flex-row">
             <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
-            <button class="btn btn-circle btn-o-blue" @click="editField(field.id, field.type)" v-if="field.type">e</button>
+            <fetch-current-field :id="field.id" :type="field.type" copy="e" v-if="field.type"></fetch-current-field>
           </span>
         </div>
         <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
@@ -37,6 +37,7 @@
 <script>
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
+import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
@@ -56,25 +57,17 @@ export default {
   components: {
     'delete-field': deleteField,
     'update-text-field': updateTextField,
-    'update-option-field': updateOptionField
+    'update-option-field': updateOptionField,
+    'fetch-current-field': fetchCurrentField
   },
   methods: {
     ...mapActions({
-      fetchCurrentTextField: 'fetchCurrentTextField',
-      fetchCurrentOptionField: 'fetchCurrentOptionField',
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
       toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD',
       toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
-    }),
-    editField (id, type) {
-      if (type === 'radio' || type === 'select') {
-        this.fetchCurrentOptionField(id)
-      } else if (type === 'text' || type === 'textarea') {
-        this.fetchCurrentTextField(id)
-      }
-    }
+    })
   },
   computed: {
     ...mapGetters({
