@@ -18,6 +18,7 @@ const actions = {
     await axios.get(`/option-fields/${id}/`)
       .then(response => {
         commit('SET_CURRENT_FIELD', response.data)
+        commit('SET_CURRENT_OPTIONS', response.data.options)
       })
   },
   async createOptionField ({ commit }, field) {
@@ -25,6 +26,7 @@ const actions = {
       .then(response => {
         commit('ADD_FIELD', response.data)
         commit('SET_CURRENT_FIELD', response.data)
+        commit('SET_CURRENT_OPTIONS', response.data.options)
         commit('TOGGLE_SHOW_CREATE_FIELD', false)
       })
   },
