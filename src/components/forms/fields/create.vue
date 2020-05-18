@@ -16,29 +16,38 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      baseField: ''
+      baseField: Object
     }
   },
   computed: {
     ...mapGetters({
       baseFields: 'getBaseFields',
-      showCreateForm: 'getShowCreateTextField',
+      showCreateForm: 'getShowCreateField',
       form: 'getCurrentForm'
     })
   },
   methods: {
     ...mapActions({
-      create: 'createTextField',
+      createTextField: 'createTextField',
+      createOptionField: 'createOptionField',
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_TEXT_FIELD'
+      toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_FIELD'
     }),
     submitForm () {
-      this.create({
-        form: this.form.id,
-        base_field: this.baseField
-      })
+      const selectedField = this.baseFields.find(({ id }) => id === parseInt(this.baseField))
+      if (selectedField.type === 'text' || selectedField.type === 'textarea') {
+        this.createTextField({
+          form: this.form.id,
+          base_field: this.baseField
+        })
+      } else if (selectedField.type === 'select' || selectedField.type === 'radio') {
+        this.createOptionField({
+          form: this.form.id,
+          base_field: this.baseField
+        })
+      }
     }
   },
   created () {

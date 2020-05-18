@@ -7,16 +7,19 @@ const modules = {
 }
 
 const state = {
-  current_field: null
+  current_field: null,
+  show_create_field: false
 }
 
 const getters = {
-  getCurrentField: state => state.current_field
+  getCurrentField: state => state.current_field,
+  getShowCreateField: state => state.show_create_field
 }
 
 const mutations = {
   SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
-  RESET_CURRENT_FIELD: (state) => (state.current_field = null)
+  RESET_CURRENT_FIELD: (state) => (state.current_field = null),
+  TOGGLE_SHOW_CREATE_FIELD: (state, bool) => (state.show_create_field = bool)
 }
 
 export default {

@@ -1,13 +1,11 @@
 import axios from '@/axios'
 
 const state = {
-  show_update_text_field: false,
-  show_create_text_field: false
+  show_update_text_field: false
 }
 
 const getters = {
-  getShowUpdateTextField: state => state.show_update_text_field,
-  getShowCreateTextField: state => state.show_create_text_field
+  getShowUpdateTextField: state => state.show_update_text_field
 }
 
 const actions = {
@@ -22,7 +20,7 @@ const actions = {
       .then(response => {
         commit('ADD_FIELD', response.data)
         commit('SET_CURRENT_FIELD', response.data)
-        commit('TOGGLE_SHOW_CREATE_TEXT_FIELD', false)
+        commit('TOGGLE_SHOW_CREATE_FIELD', false)
       })
   },
   async updateTextField ({ commit }, updatedField) {
@@ -40,8 +38,7 @@ const actions = {
 }
 
 const mutations = {
-  TOGGLE_SHOW_UPDATE_TEXT_FIELD: (state, bool) => (state.show_update_text_field = bool),
-  TOGGLE_SHOW_CREATE_TEXT_FIELD: (state, bool) => (state.show_create_text_field = bool)
+  TOGGLE_SHOW_UPDATE_TEXT_FIELD: (state, bool) => (state.show_update_text_field = bool)
 }
 
 export default {
