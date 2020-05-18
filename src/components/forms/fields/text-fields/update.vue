@@ -5,7 +5,7 @@
       <v-text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping" rules="required" class="field-group"></v-text-field>
       <checkbox-single v-model="deliver" field_id="updateTextFieldDeliver" field_label="Pass to Client"></checkbox-single>
       <button type="submit" class="btn btn-green mt-5">Update Field</button>
-      <span @click="resetCurrentTextField" class="text-link">Close</span>
+      <span @click="resetCurrentField" class="text-link">Close</span>
     </form>
   </validation-observer>
 </template>
@@ -37,7 +37,7 @@ export default {
       update: 'updateTextField'
     }),
     ...mapMutations({
-      resetCurrentTextField: 'RESET_CURRENT_TEXT_FIELD'
+      resetCurrentField: 'RESET_CURRENT_FIELD'
     }),
     submitForm () {
       this.update({
@@ -48,7 +48,7 @@ export default {
         base_field: this.field.base_field,
         id: this.field.id
       })
-      this.resetCurrentTextField()
+      this.resetCurrentField()
     }
   }
 }

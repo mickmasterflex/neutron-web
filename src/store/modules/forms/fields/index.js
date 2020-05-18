@@ -6,6 +6,22 @@ const modules = {
   optionFields
 }
 
+const state = {
+  current_field: null
+}
+
+const getters = {
+  getCurrentField: state => state.current_field
+}
+
+const mutations = {
+  SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
+  RESET_CURRENT_FIELD: (state) => (state.current_field = null)
+}
+
 export default {
-  modules
+  modules,
+  state,
+  getters,
+  mutations
 }

@@ -8,7 +8,7 @@
         <span class="py-1 px-3">Deliver</span>
       </div>
       <div v-for="field in form.fields" :key="field.id">
-        <div :field="field" v-show="field.id!==currentTextFieldId" class="flex flex-row items-center">
+        <div :field="field" v-show="field.id!==currentFieldId" class="flex flex-row items-center">
           <text-field :value="field.id" disabled="disabled"/>
           <text-field :value="field.label" disabled="disabled"/>
           <text-field :value="field.mapping" disabled="disabled"/>
@@ -18,18 +18,18 @@
             <fetch-current-field :id="field.id" :type="field.type" copy="e" v-if="field.type"></fetch-current-field>
           </span>
         </div>
-        <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
         <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
+        <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
       </div>
     </div>
     <div v-else>
       No Fields
     </div>
-    <portal v-if="currentTextField" :to="`updateTextField--${currentTextFieldId}`">
-      <update-text-field :field="this.currentTextField" :form="form.id" v-show="showUpdateText"></update-text-field>
+    <portal v-if="currentField" :to="`updateOptionField--${currentFieldId}`">
+      <update-option-field :field="this.currentField" :form="form.id" v-show="showUpdateOption"></update-option-field>
     </portal>
-    <portal v-if="currentOptionField" :to="`updateOptionField--${currentOptionFieldId}`">
-      <update-option-field :field="this.currentOptionField" :form="form.id" v-show="showUpdateOption"></update-option-field>
+    <portal v-if="currentField" :to="`updateTextField--${currentFieldId}`">
+      <update-text-field :field="this.currentField" :form="form.id" v-show="showUpdateText"></update-text-field>
     </portal>
   </div>
 </template>
@@ -39,18 +39,18 @@ import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
 import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
-      currentTextFieldId: {
+      currentFieldId: {
         default: null,
         type: Number
       },
-      currentOptionFieldId: {
+      currentFieldType: {
         default: null,
-        type: Number
+        type: String
       }
     }
   },
@@ -61,9 +61,6 @@ export default {
     'fetch-current-field': fetchCurrentField
   },
   methods: {
-    ...mapActions({
-      fetchBaseFields: 'fetchBaseFields'
-    }),
     ...mapMutations({
       toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD',
       toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
@@ -71,29 +68,26 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentTextField: 'getCurrentTextField',
-      currentOptionField: 'getCurrentOptionField',
-      baseFields: 'getBaseFields',
+      currentField: 'getCurrentField',
       form: 'getCurrentForm',
       showUpdateText: 'getShowUpdateTextField',
       showUpdateOption: 'getShowUpdateOptionField'
     })
   },
   watch: {
-    currentTextField () {
-      this.toggleShowUpdateTextField(true)
-      if (this.currentTextField) {
-        this.currentTextFieldId = this.currentTextField.id
+    currentField () {
+      if (this.currentField) {
+        this.currentFieldId = this.currentField.id
+        this.currentFieldType = this.currentField.type
+        if (this.currentField.type === 'select' || this.currentField.type === 'radio') {
+          this.toggleShowUpdateOptionField(true)
+          this.toggleShowUpdateTextField(false)
+        } else if (this.currentField.type === 'text' || this.currentField.type === 'textarea') {
+          this.toggleShowUpdateTextField(true)
+          this.toggleShowUpdateOptionField(false)
+        }
       } else {
-        this.currentTextFieldId = null
-      }
-    },
-    currentOptionField () {
-      this.toggleShowUpdateOptionField(true)
-      if (this.currentOptionField) {
-        this.currentOptionFieldId = this.currentOptionField.id
-      } else {
-        this.currentOptionFieldId = null
+        this.currentFieldId = null
       }
     }
   }
