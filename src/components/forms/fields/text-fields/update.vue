@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -25,9 +25,6 @@ export default {
     field: Object,
     form: Number
   },
-  computed: {
-    ...mapGetters({ baseFields: 'getBaseFields' })
-  },
   watch: {
     field: function () {
       this.label = this.field.label
@@ -37,8 +34,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      update: 'updateTextField',
-      fetchBaseFields: 'fetchBaseFields'
+      update: 'updateTextField'
     }),
     ...mapMutations({
       resetCurrentTextField: 'RESET_CURRENT_TEXT_FIELD'
@@ -54,9 +50,6 @@ export default {
       })
       this.resetCurrentTextField()
     }
-  },
-  created () {
-    this.fetchBaseFields()
   }
 }
 </script>
