@@ -13,12 +13,8 @@
           <text-field :value="field.label" disabled="disabled"/>
           <text-field :value="field.mapping" disabled="disabled"/>
           <text-field :value="field.deliver" disabled="disabled"/>
-          <span v-if="field.type === 'text' || field.type === 'textarea'" class="flex flex-row">
-            <delete-text-field :id="field.id"></delete-text-field>
-            <button class="btn btn-circle btn-o-blue" @click="editTextField(field.id)">e</button>
-          </span>
-          <span v-if="field.type === 'select' || field.type === 'radio'" class="flex flex-row">
-            <delete-option-field :id="field.id"></delete-option-field>
+          <span class="flex flex-row">
+            <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
             <button class="btn btn-circle btn-o-blue" @click="editOptionField(field.id)">e</button>
           </span>
         </div>
@@ -40,9 +36,8 @@
 
 <script>
 import updateTextField from '@/components/forms/fields/text-fields/update'
-import deleteTextField from '@/components/forms/fields/text-fields/delete'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
-import deleteOptionField from '@/components/forms/fields/option-fields/delete'
+import deleteField from '@/components/forms/fields/delete'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -59,8 +54,7 @@ export default {
     }
   },
   components: {
-    'delete-text-field': deleteTextField,
-    'delete-option-field': deleteOptionField,
+    'delete-field': deleteField,
     'update-text-field': updateTextField,
     'update-option-field': updateOptionField
   },
