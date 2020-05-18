@@ -1,5 +1,5 @@
 <template>
-  <div v-if="offer">
+  <div v-if="campaign">
     <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
       <h1 class="h1 text-white">{{campaign.name}}</h1>
       <div>

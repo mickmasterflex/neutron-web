@@ -12,7 +12,7 @@ const getters = {
   }
 }
 const actions = {
-  async fetchCampaign ({ commit }) {
+  async fetchCampaigns ({ commit }) {
     await axios.get('/campaigns/')
       .then(response => {
         commit('SET_CAMPAIGNS', response.data)
@@ -25,7 +25,7 @@ const actions = {
       })
   },
   async createCampaign ({ commit }, campaign) {
-    await axios.post('/offers/', campaign)
+    await axios.post('/campaigns/', campaign)
       .then(response => {
         commit('ADD_CAMPAIGN', response.data)
       })
