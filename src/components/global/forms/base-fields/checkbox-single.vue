@@ -4,7 +4,8 @@
       @input="handleInput($event.target.value)"
       type="checkbox"
       :id="field_id"
-      class="mr-2">
+      class="mr-2"
+      :checked="value">
     <span>{{field_label}}</span>
   </label>
 </template>
