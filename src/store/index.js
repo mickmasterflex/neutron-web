@@ -1,26 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import auth from './modules/authentication'
-import baseTextFields from './modules/base-text-fields'
-import baseOptionFields from './modules/base-option-fields'
-import baseOptions from './modules/base-options'
-import buyers from './modules/buyers'
-import clients from './modules/clients'
-import offers from './modules/offers'
-import partners from './modules/partners'
-import products from './modules/products'
-import users from './modules/users'
+import auth from '@/store/modules/authentication'
+import buyers from '@/store/modules/buyers'
+import clients from '@/store/modules/clients'
+import forms from '@/store/modules/forms'
+import offers from '@/store/modules/offers'
+import partners from '@/store/modules/partners'
+import products from '@/store/modules/products'
+import users from '@/store/modules/users'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     auth,
-    baseTextFields,
-    baseOptionFields,
-    baseOptions,
     buyers,
     clients,
+    forms,
     offers,
     partners,
     products,

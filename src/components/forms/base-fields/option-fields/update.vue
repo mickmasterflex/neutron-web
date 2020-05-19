@@ -20,8 +20,9 @@
 
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
-import fieldOptions from '@/components/fields/base/option-fields/options/list'
-import createOption from '@/components/fields/base/option-fields/options/create'
+import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
+import createOption from '@/components/forms/base-fields/option-fields/options/create'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -59,14 +60,18 @@ export default {
       modified_base_options: 'getModifiedBaseOptions'
     })
   },
+  mixins: [enterKeyListener],
   methods: {
-    ...mapActions([
-      'updateBaseOptionField',
-      'updateModifiedBaseOptions'
-    ]),
+    ...mapActions({
+      updateField: 'updateBaseOptionField',
+      updateOptions: 'updateModifiedBaseOptions'
+    }),
     ...mapMutations({
       reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
     }),
+    enterKeyAction () {
+      this.submitForm()
+    },
     close () {
       this.reset_current_field()
       this.$nextTick(() => {
@@ -76,8 +81,8 @@ export default {
     },
     submitForm () {
       this.$refs.form.validate().then(() => {
-        this.updateModifiedBaseOptions()
-        this.updateBaseOptionField({
+        this.updateOptions()
+        this.updateField({
           name: this.field_name,
           label: this.field_label,
           description: this.field_desc,

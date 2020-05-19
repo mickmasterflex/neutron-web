@@ -6,7 +6,6 @@ const state = {
 }
 
 const getters = {
-  getBaseOptionFields: state => state.base_option_fields,
   getCurrentBaseOptionField: state => state.current_base_option_field
 }
 
@@ -27,18 +26,21 @@ const actions = {
     await axios.post('/base-option-fields/', field)
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
+        commit('SET_BASE_FIELDS')
       })
   },
   async updateBaseOptionField ({ commit }, updatedField) {
     await axios.put(`/base-option-fields/${updatedField.id}/`, updatedField)
       .then(() => {
         commit('UPDATE_BASE_OPTION_FIELD', updatedField)
+        commit('SET_BASE_FIELDS')
       })
   },
   async deleteBaseOptionField ({ commit }, id) {
     await axios.delete(`/base-option-fields/${id}/`)
       .then(() => {
         commit('REMOVE_BASE_OPTION_FIELD', id)
+        commit('SET_BASE_FIELDS')
       })
   }
 }

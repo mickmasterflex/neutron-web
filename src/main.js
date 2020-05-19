@@ -10,6 +10,7 @@ import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
 import '@/assets/css/styles.css'
+import PortalVue from 'portal-vue'
 
 /* Layouts */
 import simpleLayout from '@/layouts/simple-layout'
@@ -86,3 +87,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(PortalVue)
