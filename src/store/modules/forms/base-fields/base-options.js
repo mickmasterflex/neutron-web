@@ -22,6 +22,7 @@ const actions = {
     await axios.delete(`/base-options/${id}/`, id)
   }
 }
+
 const mutations = {
   ADD_BASE_OPTION_TO_MODIFIED: (state, modifiedOption) => {
     const index = state.modified_base_options.findIndex(option => option.id === modifiedOption.id)

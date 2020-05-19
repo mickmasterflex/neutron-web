@@ -60,10 +60,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions([
-      'updateBaseOptionField',
-      'updateModifiedBaseOptions'
-    ]),
+    ...mapActions({
+      updateField: 'updateBaseOptionField',
+      updateOptions: 'updateModifiedBaseOptions'
+    }),
     ...mapMutations({
       reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
     }),
@@ -76,8 +76,8 @@ export default {
     },
     submitForm () {
       this.$refs.form.validate().then(() => {
-        this.updateModifiedBaseOptions()
-        this.updateBaseOptionField({
+        this.updateOptions()
+        this.updateField({
           name: this.field_name,
           label: this.field_label,
           description: this.field_desc,
