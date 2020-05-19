@@ -4,7 +4,6 @@
       <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name" class="field-group"></v-text-field>
       <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name" class="field-group"></v-text-field>
       <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email" class="field-group"></v-text-field>
-      <checkbox-single v-model="is_staff" field_id="is_staff" label="Staff"></checkbox-single>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </validation-observer>
@@ -19,8 +18,7 @@ export default {
       baseUrl: process.env.VUE_APP_BASE_URL,
       first_name: '',
       last_name: '',
-      email: '',
-      is_staff: ''
+      email: ''
     }
   },
   props: {
@@ -35,7 +33,6 @@ export default {
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
-        is_staff: this.is_staff,
         id: this.id
       })
     }
