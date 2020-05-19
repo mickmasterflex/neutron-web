@@ -7,14 +7,13 @@
       <button type="submit" class="btn btn-green mt-5">Update Field</button>
       <span @click="resetCurrentField" class="text-link">Close</span>
     </form>
-    <ul>
-      <li v-for="option in options" :key="option.id">• {{option.label}}</li>
-    </ul>
+    <field-options></field-options>
   </validation-observer>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import fieldOptions from '@/components/forms/fields/option-fields/options/list'
 
 export default {
   data () {
@@ -58,6 +57,9 @@ export default {
       })
       this.resetCurrentField()
     }
+  },
+  components: {
+    'field-options': fieldOptions
   }
 }
 </script>
