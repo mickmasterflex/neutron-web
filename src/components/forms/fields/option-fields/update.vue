@@ -3,7 +3,7 @@
     <validation-observer ref="form">
       <form>
         <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required" class="field-group"></v-text-field>
-        <v-text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping" rules="required" class="field-group"></v-text-field>
+        <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping" class="field-group"></text-field>
         <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
       </form>
     </validation-observer>
