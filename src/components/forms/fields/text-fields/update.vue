@@ -2,7 +2,7 @@
   <validation-observer v-slot="{ handleSubmit }" ref="form">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="label" field_id="updateTextFieldLabel" field_label="Label" rules="required" class="field-group"></v-text-field>
-      <v-text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping" rules="required" class="field-group"></v-text-field>
+      <text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping" class="field-group"></text-field>
       <checkbox-single v-model="deliver" field_id="updateTextFieldDeliver" field_label="Pass to Client"></checkbox-single>
       <button type="submit" class="btn btn-green mt-5">Update Field</button>
       <span @click="resetCurrentTextField" class="text-link">Close</span>
