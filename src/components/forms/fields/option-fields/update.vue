@@ -16,6 +16,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/fields/option-fields/options/list'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -41,6 +42,7 @@ export default {
       options: 'getCurrentOptions'
     })
   },
+  mixins: [enterKeyListener],
   methods: {
     ...mapActions({
       updateField: 'updateOptionField',
@@ -49,6 +51,9 @@ export default {
     ...mapMutations({
       resetCurrentField: 'RESET_CURRENT_FIELD'
     }),
+    enterKeyAction () {
+      this.submitForm()
+    },
     submitForm () {
       this.$refs.form.validate().then(() => {
         this.updateOptions()
