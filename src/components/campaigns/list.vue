@@ -13,7 +13,7 @@
         </td>
         <td>{{ campaign.id }}</td>
         <td>{{ campaign.contract }}</td>
-        <td>{{ campaign.campaign_code }}</td>
+        <td>{{ campaign.code }}</td>
       </tr>
     </table>
     <div v-else>

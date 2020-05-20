@@ -28,7 +28,7 @@ export default {
       this.create({
         name: this.name,
         contract: this.partner,
-        campaign_code: this.campaign_code
+        code: this.campaign_code
       })
     }
   }
