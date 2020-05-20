@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="show" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -12,7 +12,7 @@
       </validation-observer>
       <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
       Add an Option
-      <create-option :field="field" :show="show"></create-option>
+      <create-option :field="field" :show="showModal"></create-option>
       <button type="submit" class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
     </template>
   </modal-template>
@@ -39,7 +39,6 @@ export default {
     }
   },
   props: {
-    show: Boolean,
     field: Object
   },
   components: {
@@ -57,7 +56,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      modified_base_options: 'getModifiedBaseOptions'
+      showModal: 'getShowUpdateBaseFieldModal'
     })
   },
   mixins: [enterKeyListener],
@@ -67,7 +66,8 @@ export default {
       updateOptions: 'updateModifiedBaseOptions'
     }),
     ...mapMutations({
-      reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD'
+      reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD',
+      closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL'
     }),
     enterKeyAction () {
       this.submitForm()
@@ -77,7 +77,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.$emit('close')
+      this.closeModal()
     },
     submitForm () {
       this.$refs.form.validate().then(() => {

@@ -9,11 +9,13 @@ const modules = {
 }
 
 const state = {
-  base_fields: []
+  base_fields: [],
+  show_create_base_field_modal: false
 }
 
 const getters = {
-  getBaseFields: state => state.base_fields
+  getBaseFields: state => state.base_fields,
+  getShowCreateBaseFieldModal: state => state.show_create_base_field_modal
 }
 
 const actions = {
@@ -25,7 +27,9 @@ const actions = {
 }
 
 const mutations = {
-  SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields))
+  SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields)),
+  SHOW_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = true),
+  CLOSE_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = false)
 }
 
 export default {

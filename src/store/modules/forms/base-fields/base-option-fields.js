@@ -3,12 +3,12 @@ import axios from '@/axios'
 const state = {
   base_option_fields: [],
   current_base_option_field: {},
-  show_create_base_field_modal: false
+  show_update_base_field_modal: false
 }
 
 const getters = {
   getCurrentBaseOptionField: state => state.current_base_option_field,
-  getShowCreateBaseFieldModal: state => state.show_create_base_field_modal
+  getShowUpdateBaseFieldModal: state => state.show_update_base_field_modal
 }
 
 const actions = {
@@ -60,8 +60,8 @@ const mutations = {
     }
   },
   REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id)),
-  SHOW_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = true),
-  CLOSE_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = false)
+  SHOW_UPDATE_BASE_FIELD_MODAL: (state) => (state.show_update_base_field_modal = true),
+  CLOSE_UPDATE_BASE_FIELD_MODAL: (state) => (state.show_update_base_field_modal = false)
 }
 
 export default {

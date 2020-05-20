@@ -26,12 +26,12 @@
       ...Loading...
     </div>
     <update-base-text-field-modal :field="currentBaseTextField" :show="showModalUpdateBaseTextField" @close="showModalUpdateBaseTextField=false"></update-base-text-field-modal>
-    <update-base-option-field-modal :field="currentBaseOptionField" :show="showModalUpdateBaseOptionField" @close="showModalUpdateBaseOptionField=false"></update-base-option-field-modal>
+    <update-base-option-field-modal :field="currentBaseOptionField" @click="showUpdateBaseFieldModal()"></update-base-option-field-modal>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import updateBaseTextField from '@/components/forms/base-fields/text-fields/update'
 import updateBaseOptionField from '@/components/forms/base-fields/option-fields/update'
 import deleteBaseField from '@/components/forms/base-fields/delete'
@@ -39,8 +39,7 @@ import deleteBaseField from '@/components/forms/base-fields/delete'
 export default {
   data () {
     return {
-      showModalUpdateBaseTextField: false,
-      showModalUpdateBaseOptionField: false
+      showModalUpdateBaseTextField: false
     }
   },
   components: {
@@ -61,12 +60,15 @@ export default {
       fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField',
       fetchCurrentBaseTextField: 'fetchCurrentBaseTextField'
     }),
+    ...mapMutations({
+      showUpdateBaseFieldModal: 'SHOW_UPDATE_BASE_FIELD_MODAL'
+    }),
     editBaseTextField (id) {
       this.showModalUpdateBaseTextField = true
       this.fetchCurrentBaseTextField(id)
     },
     editBaseOptionField (id) {
-      this.showModalUpdateBaseOptionField = true
+      this.showUpdateBaseFieldModal()
       this.fetchCurrentBaseOptionField(id)
     }
   },
