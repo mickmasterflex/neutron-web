@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
-          <v-text-field v-model="field_name" rules="required" field_id="updateBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="field_label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="field_desc" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="field_type" :options="options" rules="required" field_id="updateBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="updateBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
+          <text-field v-model="desc" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
           <button type="submit" class="btn btn-green mt-5">Update Field</button>
         </form>
       </validation-observer>
@@ -21,12 +21,12 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      field_name: '',
-      field_label: '',
-      field_desc: '',
-      field_type: '',
-      field_id: null,
-      options: {
+      name: '',
+      label: '',
+      desc: '',
+      type: '',
+      id: null,
+      typeOptions: {
         text: { name: 'text', id: 'text' },
         textarea: { name: 'textarea', id: 'textarea' }
       }
@@ -38,11 +38,11 @@ export default {
   },
   watch: {
     field: function () {
-      this.field_name = this.field.name
-      this.field_label = this.field.label
-      this.field_desc = this.field.description
-      this.field_type = this.field.type
-      this.field_id = this.field.id
+      this.name = this.field.name
+      this.label = this.field.label
+      this.desc = this.field.description
+      this.type = this.field.type
+      this.id = this.field.id
     }
   },
   computed: {
@@ -67,11 +67,11 @@ export default {
     },
     submitForm () {
       this.update({
-        name: this.field_name,
-        label: this.field_label,
-        description: this.field_desc,
-        type: this.field_type,
-        id: this.field_id
+        name: this.name,
+        label: this.label,
+        description: this.desc,
+        type: this.type,
+        id: this.id
       })
       this.close()
     }
