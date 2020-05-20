@@ -29,6 +29,7 @@ const actions = {
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+        commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
       })
   },
   async updateBaseOptionField ({ commit }, updatedField) {
