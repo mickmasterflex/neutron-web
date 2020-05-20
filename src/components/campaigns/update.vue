@@ -30,7 +30,8 @@ export default {
       this.update({
         id: this.campaign.id,
         name: this.name,
-        contract: this.campaign.contract
+        contract: this.campaign.contract,
+        code: this.campaign_code
       })
     }
   }
