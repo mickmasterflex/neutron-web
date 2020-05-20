@@ -91,6 +91,30 @@ const routes = [
     }
   },
   {
+    path: '/relationships/clients/:client/contracts/partners/:partner/campaigns/',
+    name: 'Campaigns',
+    component: () => import('@/views/relationships/campaigns/index.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.partner = +props.partner
+      return props
+    }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/partners/:partner/campaigns/:id/',
+    name: 'Campaign',
+    component: () => import('@/views/relationships/campaigns/campaign.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
     path: '/relationships/contracts/partners/',
     name: 'PartnerContracts',
     component: () => import('@/views/relationships/partners/index.vue'),
