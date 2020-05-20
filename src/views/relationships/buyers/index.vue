@@ -6,7 +6,7 @@
         <stat-card :data="buyer_count" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <h3 class="h3 mt-5 mb-2">All Buyers</h3>
+    <h3 class="h3 mt-5 mb-2">All Buyer</h3>
     <buyer-list :contracts="buyers"></buyer-list>
   </div>
 </template>
