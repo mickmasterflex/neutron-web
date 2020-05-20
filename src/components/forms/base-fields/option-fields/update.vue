@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateBaseFieldModal'
+      showModal: 'getShowUpdateBaseOptionFieldModal'
     })
   },
   mixins: [enterKeyListener],
@@ -67,7 +67,7 @@ export default {
     }),
     ...mapMutations({
       reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD',
-      closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL'
+      closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),
     enterKeyAction () {
       this.submitForm()
