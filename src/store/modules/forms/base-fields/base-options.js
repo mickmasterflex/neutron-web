@@ -4,10 +4,6 @@ const state = {
   modified_base_options: []
 }
 
-const getters = {
-  getModifiedBaseOptions: state => state.modified_base_options
-}
-
 const actions = {
   async createBaseOption ({ commit }, option) {
     await axios.post('/base-options/', option)
@@ -39,7 +35,6 @@ const mutations = {
 
 export default {
   state,
-  getters,
   actions,
   mutations
 }
