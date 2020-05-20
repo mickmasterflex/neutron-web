@@ -10,7 +10,7 @@
           <v-select-field v-model="field_type" :options="options" rules="required" field_id="updateBaseOptionFieldType" field_label="Type" class="field-group"></v-select-field>
         </form>
       </validation-observer>
-      <field-options :options="field.base_options" :field_id="field_id" class="mt-3"></field-options>
+      <field-options :options="field.base_options" class="mt-3"></field-options>
       Add an Option
       <create-option :field="field" :show="showModal"></create-option>
       <button type="submit" class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>

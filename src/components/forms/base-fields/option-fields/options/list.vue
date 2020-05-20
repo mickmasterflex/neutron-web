@@ -19,8 +19,7 @@ export default {
     options: {
       type: Array,
       default: () => []
-    },
-    field_id: Number
+    }
   },
   components: {
     'update-option': updateOption,
