@@ -30,6 +30,7 @@ const actions = {
         commit('ADD_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
         commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
+        commit('SHOW_UPDATE_BASE_OPTION_FIELD_MODAL', response.data)
       })
   },
   async updateBaseOptionField ({ commit }, updatedField) {
