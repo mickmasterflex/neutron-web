@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="show" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Field</template>
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }" ref="form">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
@@ -37,10 +37,10 @@ export default {
       }
     }
   },
-  props: {
-    show: Boolean
-  },
   computed: {
+    ...mapGetters({
+      showModal: 'getShowCreateBaseFieldModal'
+    }),
     optionFieldSelected () {
       return this.type === 'select' || this.type === 'radio'
     },
@@ -54,6 +54,9 @@ export default {
       createBaseOptionField: 'createBaseOptionField',
       createBaseTextField: 'createBaseTextField'
     }),
+    ...mapMutations({
+      closeModal: 'CLOSE_CREATE_BASE_FIELD_MODAL'
+    }),
     close () {
       this.name = ''
       this.label = ''
@@ -62,7 +65,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.$emit('close')
+      this.closeModal()
     },
     enterKeyAction () {
       this.submitForm()

@@ -11,14 +11,15 @@
 
     <div class="flex flex-row justify-between mt-4">
       <h2 class="h3">Base Fields</h2>
-      <button class="btn btn-green" @click="showModalCreateBaseField=true">Create Base Field</button>
+      <button class="btn btn-green" @click="showCreateBaseFieldModal()">Create Base Field</button>
     </div>
     <list-base-fields class="mt-5"></list-base-fields>
-    <create-base-field-modal :show="showModalCreateBaseField" @close="showModalCreateBaseField=false"></create-base-field-modal>
+    <create-base-field-modal></create-base-field-modal>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import createBaseField from '@/components/forms/base-fields/create'
 import listBaseFields from '@/components/forms/base-fields/list'
 
@@ -27,6 +28,11 @@ export default {
     return {
       showModalCreateBaseField: false
     }
+  },
+  methods: {
+    ...mapMutations({
+      showCreateBaseFieldModal: 'SHOW_CREATE_BASE_FIELD_MODAL'
+    })
   },
   components: {
     'create-base-field-modal': createBaseField,
