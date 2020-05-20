@@ -25,8 +25,8 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-base-text-field-modal :field="currentBaseTextField" :show="showModalUpdateBaseTextField" @close="showModalUpdateBaseTextField=false"></update-base-text-field-modal>
-    <update-base-option-field-modal :field="currentBaseOptionField" @click="showUpdateBaseOptionFieldModal()"></update-base-option-field-modal>
+    <update-base-text-field-modal :field="currentBaseTextField"></update-base-text-field-modal>
+    <update-base-option-field-modal :field="currentBaseOptionField"></update-base-option-field-modal>
   </div>
 </template>
 
@@ -61,10 +61,11 @@ export default {
       fetchCurrentBaseTextField: 'fetchCurrentBaseTextField'
     }),
     ...mapMutations({
-      showUpdateBaseOptionFieldModal: 'SHOW_UPDATE_BASE_OPTION_FIELD_MODAL'
+      showUpdateBaseOptionFieldModal: 'SHOW_UPDATE_BASE_OPTION_FIELD_MODAL',
+      showUpdateBaseTextFieldModal: 'SHOW_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
     editBaseTextField (id) {
-      this.showModalUpdateBaseTextField = true
+      this.showUpdateBaseTextFieldModal()
       this.fetchCurrentBaseTextField(id)
     },
     editBaseOptionField (id) {

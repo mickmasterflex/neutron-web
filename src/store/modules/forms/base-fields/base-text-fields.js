@@ -2,11 +2,13 @@ import axios from '@/axios'
 
 const state = {
   base_text_fields: [],
-  current_base_text_field: {}
+  current_base_text_field: {},
+  show_update_base_text_field_modal: false
 }
 
 const getters = {
-  getCurrentBaseTextField: state => state.current_base_text_field
+  getCurrentBaseTextField: state => state.current_base_text_field,
+  getShowUpdateBaseTextFieldModal: state => state.show_update_base_text_field_modal
 }
 
 const actions = {
@@ -56,7 +58,9 @@ const mutations = {
       state.base_text_fields.splice(index, 1, updatedField)
     }
   },
-  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id))
+  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id)),
+  SHOW_UPDATE_BASE_TEXT_FIELD_MODAL: (state) => (state.show_update_base_text_field_modal = true),
+  CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL: (state) => (state.show_update_base_text_field_modal = false)
 }
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="show" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Base Text Field</template>
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }" ref="form">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -45,15 +45,25 @@ export default {
       this.field_id = this.field.id
     }
   },
+  computed: {
+    ...mapGetters({
+      showModal: 'getShowUpdateBaseTextFieldModal'
+    })
+  },
   methods: {
-    ...mapActions({ update: 'updateBaseTextField' }),
-    ...mapMutations({ reset_current_field: 'RESET_CURRENT_BASE_TEXT_FIELD' }),
+    ...mapActions({
+      update: 'updateBaseTextField'
+    }),
+    ...mapMutations({
+      reset_current_field: 'RESET_CURRENT_BASE_TEXT_FIELD',
+      closeModal: 'CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL'
+    }),
     close () {
       this.reset_current_field()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.$emit('close')
+      this.closeModal()
     },
     submitForm () {
       this.update({
