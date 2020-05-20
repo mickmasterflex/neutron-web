@@ -4,11 +4,14 @@
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }" ref="form">
         <form @submit.prevent="handleSubmit(submitForm)">
-          <v-text-field v-model="field_name" rules="required" field_id="createBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="field_label" rules="required" field_id="createBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="field_desc" field_id="createBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="field_type" :options="options" rules="required" field_id="createBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
-          <button type="submit" class="btn btn-green mt-5">Create</button>
+          <v-text-field v-model="name" rules="required" field_id="createBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="createBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
+          <text-field v-model="desc" field_id="createBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
+          <v-select-field v-model="type" :options="options" rules="required" field_id="createBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
+          <button type="submit" class="btn btn-green mt-5">
+            <span v-if="optionFieldSelected">Create then add Options</span>
+            <span v-else>Create Field</span>
+          </button>
         </form>
       </validation-observer>
     </template>
@@ -17,14 +20,15 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
     return {
-      field_name: '',
-      field_label: '',
-      field_desc: '',
-      field_type: '',
+      name: '',
+      label: '',
+      desc: '',
+      type: '',
       options: {
         text: { name: 'text', id: 'text' },
         textarea: { name: 'textarea', id: 'textarea' },
@@ -36,35 +40,47 @@ export default {
   props: {
     show: Boolean
   },
+  computed: {
+    optionFieldSelected () {
+      return this.type === 'select' || this.type === 'radio'
+    },
+    textFieldSelected () {
+      return this.type === 'text' || this.type === 'textarea'
+    }
+  },
+  mixins: [enterKeyListener],
   methods: {
-    ...mapActions([
-      'createBaseOptionField',
-      'createBaseTextField'
-    ]),
+    ...mapActions({
+      createBaseOptionField: 'createBaseOptionField',
+      createBaseTextField: 'createBaseTextField'
+    }),
     close () {
-      this.field_name = ''
-      this.field_label = ''
-      this.field_desc = ''
-      this.field_type = ''
+      this.name = ''
+      this.label = ''
+      this.desc = ''
+      this.type = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
       this.$emit('close')
     },
+    enterKeyAction () {
+      this.submitForm()
+    },
     submitForm () {
-      if (this.field_type === 'select' || this.field_type === 'radio') {
+      if (this.optionFieldSelected) {
         this.createBaseOptionField({
-          name: this.field_name,
-          label: this.field_label,
-          description: this.field_desc,
-          type: this.field_type
+          name: this.name,
+          label: this.label,
+          description: this.desc,
+          type: this.type
         })
-      } else if (this.field_type === 'text' || this.field_type === 'textarea') {
+      } else if (this.textFieldSelected) {
         this.createBaseTextField({
-          name: this.field_name,
-          label: this.field_label,
-          description: this.field_desc,
-          type: this.field_type
+          name: this.name,
+          label: this.label,
+          description: this.desc,
+          type: this.type
         })
       }
       this.close()
