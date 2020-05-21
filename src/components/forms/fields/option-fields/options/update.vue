@@ -24,11 +24,13 @@
       :field_id="`optionHide_${option.id}`"
       field_label="Hide"
       class="field-group"/>
+    <delete-option :id="option.id"></delete-option>
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import deleteOption from '@/components/forms/fields/option-fields/options/delete'
 
 export default {
   data () {
@@ -67,6 +69,9 @@ export default {
         base_option: this.option.base_option
       })
     }
+  },
+  components: {
+    'delete-option': deleteOption
   }
 }
 </script>
