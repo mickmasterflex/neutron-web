@@ -3,7 +3,7 @@
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="offerName" field_label="Offer Name" class="field-group"></v-text-field>
       <v-select-field v-model="product" rules="required" :options="products" field_id="product" field_label="Product" class="field-group"></v-select-field>
-      <button class="btn btn-green mt-5">Create Offer</button>
+      <button type="submit" class="btn btn-green mt-5">Create Offer</button>
     </form>
   </validation-observer>
 </template>
