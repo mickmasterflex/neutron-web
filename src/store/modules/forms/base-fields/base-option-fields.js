@@ -22,6 +22,7 @@ const actions = {
     await axios.get(`/base-option-fields/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
+        commit('SET_CURRENT_BASE_OPTIONS', response.data.base_options)
       })
   },
   async createBaseOptionField ({ commit }, field) {

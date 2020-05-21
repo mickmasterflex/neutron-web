@@ -10,7 +10,7 @@
           <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type" class="field-group"></v-select-field>
         </form>
       </validation-observer>
-      <field-options :options="field.base_options" class="mt-3"></field-options>
+      <field-options class="mt-3"></field-options>
       Add an Option
       <create-option :field="field" :show="showModal"></create-option>
       <button type="submit" class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
@@ -66,14 +66,16 @@ export default {
       updateOptions: 'updateModifiedBaseOptions'
     }),
     ...mapMutations({
-      reset_current_field: 'RESET_CURRENT_BASE_OPTION_FIELD',
+      resetCurrentBaseOptionField: 'RESET_CURRENT_BASE_OPTION_FIELD',
+      resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
       closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),
     enterKeyAction () {
       this.submitForm()
     },
     close () {
-      this.reset_current_field()
+      this.resetCurrentBaseOptionField()
+      this.resetCurrentBaseOptions()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

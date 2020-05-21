@@ -66,9 +66,6 @@ export default {
     }),
     submitForm () {
       this.createBaseOption(this.baseOption)
-        .then(() => {
-          this.fetchCurrentBaseOptionField(this.field.id)
-        })
     }
   }
 }

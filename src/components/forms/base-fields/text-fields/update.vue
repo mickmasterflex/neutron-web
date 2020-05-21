@@ -55,11 +55,11 @@ export default {
       update: 'updateBaseTextField'
     }),
     ...mapMutations({
-      reset_current_field: 'RESET_CURRENT_BASE_TEXT_FIELD',
+      resetCurrentBaseTextField: 'RESET_CURRENT_BASE_TEXT_FIELD',
       closeModal: 'CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
     close () {
-      this.reset_current_field()
+      this.resetCurrentBaseTextField()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

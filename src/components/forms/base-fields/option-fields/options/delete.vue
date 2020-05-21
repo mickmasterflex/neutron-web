@@ -16,9 +16,6 @@ export default {
     }),
     runDelete () {
       this.delete(this.option.id)
-        .then(() => {
-          this.fetchCurrentBaseOptionField(this.option.field)
-        })
     }
   }
 }
