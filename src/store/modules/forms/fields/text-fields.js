@@ -25,8 +25,8 @@ const actions = {
   },
   async updateTextField ({ commit }, updatedField) {
     await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
-      .then(() => {
-        commit('UPDATE_FIELD', updatedField)
+      .then(response => {
+        commit('UPDATE_FIELD', response.data)
       })
   },
   async deleteTextField ({ commit }, id) {
