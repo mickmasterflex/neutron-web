@@ -2,6 +2,7 @@ export const enterKeyListener = {
   created () {
     const submitHandler = (e) => {
       if (e.key === 'Enter') {
+        e.preventDefault()
         this.enterKeyAction()
       }
     }
