@@ -15,6 +15,12 @@ const actions = {
       axios.put(`/options/${option.id}/`, option)
     })
     commit('RESET_MODIFIED_OPTIONS')
+  },
+  async deleteOption ({ commit }, id) {
+    await axios.delete(`/options/${id}/`)
+      .then(() => {
+        commit('REMOVE_OPTION', id)
+      })
   }
 }
 
@@ -28,8 +34,10 @@ const mutations = {
       state.modified_options.unshift(modifiedOption)
     }
   },
-  RESET_MODIFIED_OPTIONS: (state) => {
-    state.modified_options = []
+  RESET_MODIFIED_OPTIONS: (state) => (state.modified_options = []),
+  REMOVE_OPTION: (state, id) => {
+    state.current_options = state.current_options.filter(option => option.id !== id)
+    state.modified_options = state.modified_options.filter(option => option.id !== id)
   }
 }
 
