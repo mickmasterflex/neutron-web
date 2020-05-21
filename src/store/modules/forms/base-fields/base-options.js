@@ -42,7 +42,10 @@ const mutations = {
   RESET_MODIFIED_BASE_OPTIONS: (state) => (state.modified_base_options = []),
   SET_CURRENT_BASE_OPTIONS: (state, options) => (state.current_base_options = options),
   ADD_BASE_OPTION: (state, option) => (state.current_base_options.push(option)),
-  REMOVE_BASE_OPTION: (state, id) => (state.current_base_options = state.current_base_options.filter(option => option.id !== id)),
+  REMOVE_BASE_OPTION: (state, id) => {
+    state.current_base_options = state.current_base_options.filter(option => option.id !== id)
+    state.modified_base_options = state.modified_base_options.filter(option => option.id !== id)
+  },
   RESET_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = [])
 }
 

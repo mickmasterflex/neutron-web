@@ -11,8 +11,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      delete: 'deleteBaseOption',
-      fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField'
+      delete: 'deleteBaseOption'
     }),
     runDelete () {
       this.delete(this.option.id)
