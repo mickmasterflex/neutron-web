@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
       <h1 class="h1 text-white">All Campaigns</h1>
       <div>
         <stat-card :data="campaignCount" :title="`Campaigns`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <campaign-list :offers="campaigns"></campaign-list>
+    <campaign-list :campaigns="campaigns" class="mt-5"></campaign-list>
     <h3 class="h3 mt-5 mb-2">Create Campaign</h3>
-    <create-campaign :campaigns="campaigns"></create-campaign>
+    <create-campaign :partner="partner"></create-campaign>
   </div>
 </template>
 

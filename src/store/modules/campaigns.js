@@ -29,9 +29,6 @@ const actions = {
       .then(response => {
         commit('ADD_CAMPAIGN', response.data)
       })
-      .catch(response => {
-        console.log('error')
-      })
   },
   async updateCampaign ({ commit }, updatedCampaign) {
     await axios.put(`/campaigns/${updatedCampaign.id}/`, updatedCampaign)
