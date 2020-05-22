@@ -2,12 +2,13 @@ import axios from '@/axios'
 
 const state = {
   base_option_fields: [],
-  current_base_option_field: {}
+  current_base_option_field: {},
+  show_update_base_option_field_modal: false
 }
 
 const getters = {
-  getBaseOptionFields: state => state.base_option_fields,
-  getCurrentBaseOptionField: state => state.current_base_option_field
+  getCurrentBaseOptionField: state => state.current_base_option_field,
+  getShowUpdateBaseOptionFieldModal: state => state.show_update_base_option_field_modal
 }
 
 const actions = {
@@ -21,24 +22,30 @@ const actions = {
     await axios.get(`/base-option-fields/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
+        commit('SET_CURRENT_BASE_OPTIONS', response.data.base_options)
       })
   },
   async createBaseOptionField ({ commit }, field) {
     await axios.post('/base-option-fields/', field)
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
+        commit('SET_BASE_FIELDS')
+        commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
+        commit('SHOW_UPDATE_BASE_OPTION_FIELD_MODAL', response.data)
       })
   },
   async updateBaseOptionField ({ commit }, updatedField) {
     await axios.put(`/base-option-fields/${updatedField.id}/`, updatedField)
       .then(() => {
         commit('UPDATE_BASE_OPTION_FIELD', updatedField)
+        commit('SET_BASE_FIELDS')
       })
   },
   async deleteBaseOptionField ({ commit }, id) {
     await axios.delete(`/base-option-fields/${id}/`)
       .then(() => {
         commit('REMOVE_BASE_OPTION_FIELD', id)
+        commit('SET_BASE_FIELDS')
       })
   }
 }
@@ -54,7 +61,9 @@ const mutations = {
       state.base_option_fields.splice(index, 1, updatedField)
     }
   },
-  REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id))
+  REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id)),
+  SHOW_UPDATE_BASE_OPTION_FIELD_MODAL: (state) => (state.show_update_base_option_field_modal = true),
+  CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL: (state) => (state.show_update_base_option_field_modal = false)
 }
 
 export default {

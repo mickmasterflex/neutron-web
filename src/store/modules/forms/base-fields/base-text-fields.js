@@ -2,12 +2,13 @@ import axios from '@/axios'
 
 const state = {
   base_text_fields: [],
-  current_base_text_field: {}
+  current_base_text_field: {},
+  show_update_base_text_field_modal: false
 }
 
 const getters = {
-  getBaseTextFields: state => state.base_text_fields,
-  getCurrentBaseTextField: state => state.current_base_text_field
+  getCurrentBaseTextField: state => state.current_base_text_field,
+  getShowUpdateBaseTextFieldModal: state => state.show_update_base_text_field_modal
 }
 
 const actions = {
@@ -27,18 +28,21 @@ const actions = {
     await axios.post('/base-text-fields/', field)
       .then(response => {
         commit('ADD_BASE_TEXT_FIELD', response.data)
+        commit('SET_BASE_FIELDS')
       })
   },
   async updateBaseTextField ({ commit }, updatedField) {
     await axios.put(`/base-text-fields/${updatedField.id}/`, updatedField)
       .then(() => {
         commit('UPDATE_BASE_TEXT_FIELD', updatedField)
+        commit('SET_BASE_FIELDS')
       })
   },
   async deleteBaseTextField ({ commit }, id) {
     await axios.delete(`/base-text-fields/${id}/`)
       .then(() => {
         commit('REMOVE_BASE_TEXT_FIELD', id)
+        commit('SET_BASE_FIELDS')
       })
   }
 }
@@ -54,7 +58,9 @@ const mutations = {
       state.base_text_fields.splice(index, 1, updatedField)
     }
   },
-  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id))
+  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id)),
+  SHOW_UPDATE_BASE_TEXT_FIELD_MODAL: (state) => (state.show_update_base_text_field_modal = true),
+  CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL: (state) => (state.show_update_base_text_field_modal = false)
 }
 
 export default {

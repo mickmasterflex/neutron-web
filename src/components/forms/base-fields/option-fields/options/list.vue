@@ -11,16 +11,15 @@
 </template>
 
 <script>
-import updateOption from '@/components/fields/base/option-fields/options/update'
-import deleteOption from '@/components/fields/base/option-fields/options/delete'
+import { mapGetters } from 'vuex'
+import updateOption from '@/components/forms/base-fields/option-fields/options/update'
+import deleteOption from '@/components/forms/base-fields/option-fields/options/delete'
 
 export default {
-  props: {
-    options: {
-      type: Array,
-      default: () => []
-    },
-    field_id: Number
+  computed: {
+    ...mapGetters({
+      options: 'getCurrentBaseOptions'
+    })
   },
   components: {
     'update-option': updateOption,
