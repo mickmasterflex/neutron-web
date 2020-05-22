@@ -34,7 +34,7 @@ const actions = {
     await axios.put(`/campaigns/${updatedCampaign.id}/`, updatedCampaign)
       .then(response => {
         commit('UPDATE_CAMPAIGN', response.data)
-        commit('SET_CURRENT_CAMPAIGN', updatedCampaign)
+        commit('SET_CURRENT_CAMPAIGN', response.data)
       })
   },
   async deleteCampaign ({ commit }, id) {
