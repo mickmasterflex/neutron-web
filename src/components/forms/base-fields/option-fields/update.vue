@@ -3,7 +3,7 @@
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
       <validation-observer ref="form">
-        <form>
+        <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <text-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description" class="field-group"></text-field>
@@ -13,7 +13,7 @@
       <field-options class="mt-3"></field-options>
       Add an Option
       <create-option :field="field" :show="showModal"></create-option>
-      <button type="submit" class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
+      <button class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
     </template>
   </modal-template>
 </template>
@@ -71,7 +71,9 @@ export default {
       closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),
     enterKeyAction () {
-      this.submitForm()
+      if (this.showModal) {
+        this.submitForm()
+      }
     },
     close () {
       this.resetCurrentBaseOptionField()
@@ -82,16 +84,17 @@ export default {
       this.closeModal()
     },
     submitForm () {
-      this.$refs.form.validate().then(() => {
-        this.updateOptions()
-        this.updateField({
-          name: this.name,
-          label: this.label,
-          description: this.description,
-          type: this.type,
-          id: this.id
-        })
-        this.close()
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.updateOptions()
+          this.updateField({
+            name: this.name,
+            label: this.label,
+            description: this.description,
+            type: this.type,
+            id: this.id
+          }).then(() => { this.close() })
+        }
       })
     }
   }
