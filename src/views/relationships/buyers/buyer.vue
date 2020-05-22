@@ -1,6 +1,6 @@
 <template>
   <div v-if="buyer">
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
       <h1 class="h1 text-white">{{buyer.name}}</h1>
       <div>
         <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
