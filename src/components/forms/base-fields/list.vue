@@ -11,7 +11,7 @@
       <tr v-for="field in baseFields" :key="field.id">
         <td class="td">
           <span class="text-link"
-            @click="field.type === `text` || field.type === `textarea` ? editBaseTextField(field.id) : editBaseOptionField(field.id)">
+            @click="editBaseField(field.id, field.type)">
             {{field.name}}</span>
         </td>
         <td class="td">{{field.label}}</td>
@@ -64,6 +64,13 @@ export default {
       showUpdateBaseOptionFieldModal: 'SHOW_UPDATE_BASE_OPTION_FIELD_MODAL',
       showUpdateBaseTextFieldModal: 'SHOW_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
+    editBaseField (id, type) {
+      if (type === 'text' || type === 'textarea') {
+        this.editBaseTextField(id)
+      } else {
+        this.editBaseOptionField(id)
+      }
+    },
     editBaseTextField (id) {
       this.showUpdateBaseTextFieldModal()
       this.fetchCurrentBaseTextField(id)
