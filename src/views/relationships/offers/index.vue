@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="hud">
       <h1 class="h1 text-white">All Offers</h1>
       <div>
         <stat-card :data="offerCount" :title="`Offers`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <offer-list :offers="offers"></offer-list>
+    <offer-list :offers="offers" class="mt-5"></offer-list>
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :offers="offers"></create-offer>
   </div>

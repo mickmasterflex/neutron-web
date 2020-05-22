@@ -2,7 +2,8 @@ import Vue from 'vue'
 
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
-import { required, email, integer } from 'vee-validate/dist/rules'
+// eslint-disable-next-line camelcase
+import { required, email, integer, alpha_dash } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -63,6 +64,8 @@ Vue.component('v-select-field', vSelectField)
 extend('email', { ...email, message: 'Invalid email address' })
 extend('required', { ...required, message: 'Required field' })
 extend('integer', { ...integer, message: 'Must be an integer' })
+// eslint-disable-next-line camelcase
+extend('alpha_dash', { ...alpha_dash, message: 'Can only contain alphabetic characters, numbers, dashes or underscores' })
 Vue.component('validation-provider', ValidationProvider)
 Vue.component('validation-observer', ValidationObserver)
 configure({
