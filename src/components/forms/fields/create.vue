@@ -24,7 +24,16 @@ export default {
       baseFields: 'getBaseFields',
       showCreateForm: 'getShowCreateField',
       form: 'getCurrentForm'
-    })
+    }),
+    selectedBaseField () {
+      return this.baseFields.find(({ id }) => id === parseInt(this.baseField))
+    },
+    optionFieldSelected () {
+      return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
+    },
+    textFieldSelected () {
+      return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
+    }
   },
   methods: {
     ...mapActions({
@@ -36,13 +45,12 @@ export default {
       toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_FIELD'
     }),
     submitForm () {
-      const selectedField = this.baseFields.find(({ id }) => id === parseInt(this.baseField))
-      if (selectedField.type === 'text' || selectedField.type === 'textarea') {
+      if (this.textFieldSelected) {
         this.createTextField({
           form: this.form.id,
           base_field: this.baseField
         })
-      } else if (selectedField.type === 'select' || selectedField.type === 'radio') {
+      } else if (this.optionFieldSelected) {
         this.createOptionField({
           form: this.form.id,
           base_field: this.baseField
