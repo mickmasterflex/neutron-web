@@ -3,7 +3,7 @@
     <div class="hud">
       <div>
         <h1 class="h1 text-white">{{user.first_name}} {{user.last_name}}</h1>
-        <h1 class="text-white">{{user.email}}</h1>
+        <p class="text-white">{{user.email}}</p>
       </div>
       <div>
         <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>

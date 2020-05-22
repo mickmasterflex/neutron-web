@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="hud">
-      <h1 class="text-white">All Users</h1>
+      <h1 class="text-white text-4xl font-hairline">All Users</h1>
       <div>
         <stat-card :data="getAllUsersCount" :title="`Users`" :color="`teal`"></stat-card>
       </div>
