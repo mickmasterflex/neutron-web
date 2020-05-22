@@ -2,8 +2,8 @@
   <div v-if="user">
     <div class="hud">
       <div>
-        <p class="h1 text-white">{{user.first_name}} {{user.last_name}}</p>
-        <p class="text-white text-1xl font-hairline">{{user.email}}</p>
+        <h1 class="h1 text-white">{{user.first_name}} {{user.last_name}}</h1>
+        <h1 class="text-white">{{user.email}}</h1>
       </div>
       <div>
         <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>
