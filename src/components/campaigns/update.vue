@@ -2,7 +2,7 @@
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="campaignName" field_label="Campaign Name" class="field-group"></v-text-field>
-      <v-text-field v-model="campaign_code" rules="required" field_id="campaignCode" field_label="Campaign Code" class="field-group"></v-text-field>
+      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="campaignCode" field_label="Campaign Code" class="field-group"></v-text-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </validation-observer>
