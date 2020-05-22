@@ -6,7 +6,7 @@
         <form @submit.prevent="handleSubmit(submitForm)">
           <v-text-field v-model="name" rules="required" field_id="createBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="label" rules="required" field_id="createBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="desc" field_id="createBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
+          <text-field v-model="description" field_id="createBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
           <v-select-field v-model="type" :options="options" rules="required" field_id="createBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
           <button type="submit" class="btn btn-green mt-5">
             <span v-if="optionFieldSelected">Create then add Options</span>
@@ -27,7 +27,7 @@ export default {
     return {
       name: '',
       label: '',
-      desc: '',
+      description: '',
       type: '',
       options: {
         text: { name: 'text', id: 'text' },
@@ -60,7 +60,7 @@ export default {
     close () {
       this.name = ''
       this.label = ''
-      this.desc = ''
+      this.description = ''
       this.type = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
@@ -75,14 +75,14 @@ export default {
         this.createBaseOptionField({
           name: this.name,
           label: this.label,
-          description: this.desc,
+          description: this.description,
           type: this.type
         })
       } else if (this.textFieldSelected) {
         this.createBaseTextField({
           name: this.name,
           label: this.label,
-          description: this.desc,
+          description: this.description,
           type: this.type
         })
       }

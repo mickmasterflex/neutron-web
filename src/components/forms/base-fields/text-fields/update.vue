@@ -6,7 +6,7 @@
         <form @submit.prevent="handleSubmit(submitForm)">
           <v-text-field v-model="name" rules="required" field_id="updateBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="desc" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
+          <text-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
           <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
           <button type="submit" class="btn btn-green mt-5">Update Field</button>
         </form>
@@ -23,7 +23,7 @@ export default {
     return {
       name: '',
       label: '',
-      desc: '',
+      description: '',
       type: '',
       id: null,
       typeOptions: {
@@ -40,7 +40,7 @@ export default {
     field: function () {
       this.name = this.field.name
       this.label = this.field.label
-      this.desc = this.field.description
+      this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
     }
@@ -69,7 +69,7 @@ export default {
       this.update({
         name: this.name,
         label: this.label,
-        description: this.desc,
+        description: this.description,
         type: this.type,
         id: this.id
       })
