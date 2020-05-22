@@ -32,8 +32,8 @@ const actions = {
   },
   async updateCampaign ({ commit }, updatedCampaign) {
     await axios.put(`/campaigns/${updatedCampaign.id}/`, updatedCampaign)
-      .then(() => {
-        commit('UPDATE_CAMPAIGN', updatedCampaign)
+      .then(response => {
+        commit('UPDATE_CAMPAIGN', response.data)
         commit('SET_CURRENT_CAMPAIGN', updatedCampaign)
       })
   },
