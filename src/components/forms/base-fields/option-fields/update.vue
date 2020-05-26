@@ -13,7 +13,9 @@
       <field-options class="mt-3"></field-options>
       Add an Option
       <create-option :field="field" :show="showModal"></create-option>
-      <button class="btn btn-green mt-5" @click="submitForm">Save All Changes</button>
+    </template>
+    <template v-slot:footer-additional>
+      <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
     </template>
   </modal-template>
 </template>
