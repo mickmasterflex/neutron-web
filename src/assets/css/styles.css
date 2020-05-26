@@ -1,5 +1,85 @@
+
+/* ------------------------------------------------
+    Tailwind Base
+--------------------------------------------------- */
+
 @tailwind base;
 @tailwind components;
+
+/* ------------------------------------------------
+    Fonts
+--------------------------------------------------- */
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-thin.eot');
+    src: url('../fonts/proxima-nova/proximanova-thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/proxima-nova/proximanova-thin.woff') format('woff'),
+    url('../fonts/proxima-nova/proximanova-thin.ttf') format('truetype'),
+    url('../fonts/proxima-nova/proximanova-thin.svg') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-light.eot');
+    src: url('../fonts/proxima-nova/proximanova-light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proxima-nova/proximanova-light.woff') format('woff'),
+         url('../fonts/proxima-nova/proximanova-light.ttf') format('truetype'),
+         url('../fonts/proxima-nova/proximanova-light.svg') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-regular.eot');
+    src: url('../fonts/proxima-nova/proximanova-regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/proxima-nova/proximanova-regular.woff') format('woff'),
+    url('../fonts/proxima-nova/proximanova-regular.ttf') format('truetype'),
+    url('../fonts/proxima-nova/proximanova-regular.svg') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-semibold.eot');
+    src: url('../fonts/proxima-nova/proximanova-semibold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/proxima-nova/proximanova-semibold.woff') format('woff'),
+    url('../fonts/proxima-nova/proximanova-semibold.ttf') format('truetype'),
+    url('../fonts/proxima-nova/proximanova-semibold.svg') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-bold.eot');
+    src: url('../fonts/proxima-nova/proximanova-bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proxima-nova/proximanova-bold.woff') format('woff'),
+         url('../fonts/proxima-nova/proximanova-bold.ttf') format('truetype'),
+         url('../fonts/proxima-nova/proximanova-bold.svg') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+/* ------------------------------------------------
+    Typography
+--------------------------------------------------- */
+
+/* Headings */
+
+.h1 { @apply text-4xl font-hairline; }
+.h2 { @apply text-3xl font-medium; }
+.h3 { @apply text-2xl font-hairline; }
+
+/* Misc */
+
+.text-link { @apply text-blue-500 underline cursor-pointer; }
+
 
 /* ------------------------------------------------
     Utilities
@@ -18,21 +98,6 @@
 @media screen and (min-width: 1024px) {
     .hud { @apply grid-cols-2; }
 }
-
-/* ------------------------------------------------
-    Typography
---------------------------------------------------- */
-
-/* Headings */
-
-.h1 { @apply text-4xl font-hairline; }
-.h2 { @apply text-3xl font-medium; }
-.h3 { @apply text-2xl font-hairline; }
-
-/* Misc */
-
-.text-link { @apply text-blue-500 underline cursor-pointer; }
-
 
 /* ------------------------------------------------
     Buttons
@@ -141,5 +206,9 @@
 
 .field-error { @apply text-red-500 }
 
+
+/* ------------------------------------------------
+    Tailwind Utilities
+--------------------------------------------------- */
 
 @tailwind utilities;
