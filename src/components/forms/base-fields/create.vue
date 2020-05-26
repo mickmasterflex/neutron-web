@@ -8,12 +8,14 @@
           <v-text-field v-model="label" rules="required" field_id="createBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <text-field v-model="description" field_id="createBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
           <v-select-field v-model="type" :options="options" rules="required" field_id="createBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
-          <button type="submit" class="btn btn-green mt-5">
-            <span v-if="optionFieldSelected">Create then add Options</span>
-            <span v-else>Create Field</span>
-          </button>
         </form>
       </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">
+        <span v-if="optionFieldSelected">Create then add Options</span>
+        <span v-else>Create Field</span>
+      </button>
     </template>
   </modal-template>
 </template>
