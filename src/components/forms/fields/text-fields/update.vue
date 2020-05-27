@@ -12,6 +12,7 @@
 
 <script>
 import { mapActions, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -32,6 +33,7 @@ export default {
       this.deliver = this.field.deliver
     }
   },
+  mixins: [enterKeyListener],
   methods: {
     ...mapActions({
       update: 'updateTextField'
@@ -39,16 +41,24 @@ export default {
     ...mapMutations({
       resetCurrentField: 'RESET_CURRENT_FIELD'
     }),
+    enterKeyAction () {
+      if (this.field) {
+        this.submitForm()
+      }
+    },
     submitForm () {
-      this.update({
-        label: this.label,
-        mapping: this.mapping,
-        deliver: this.deliver,
-        form: this.form,
-        base_field: this.field.base_field,
-        id: this.field.id
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.update({
+            label: this.label,
+            mapping: this.mapping,
+            deliver: this.deliver,
+            form: this.form,
+            base_field: this.field.base_field,
+            id: this.field.id
+          }).then(this.resetCurrentField())
+        }
       })
-      this.resetCurrentField()
     }
   }
 }

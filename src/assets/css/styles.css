@@ -1,5 +1,85 @@
+
+/* ------------------------------------------------
+    Tailwind Base
+--------------------------------------------------- */
+
 @tailwind base;
 @tailwind components;
+
+/* ------------------------------------------------
+    Fonts
+--------------------------------------------------- */
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-thin.eot');
+    src: url('../fonts/proxima-nova/proximanova-thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/proxima-nova/proximanova-thin.woff') format('woff'),
+    url('../fonts/proxima-nova/proximanova-thin.ttf') format('truetype'),
+    url('../fonts/proxima-nova/proximanova-thin.svg') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-light.eot');
+    src: url('../fonts/proxima-nova/proximanova-light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proxima-nova/proximanova-light.woff') format('woff'),
+         url('../fonts/proxima-nova/proximanova-light.ttf') format('truetype'),
+         url('../fonts/proxima-nova/proximanova-light.svg') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-regular.eot');
+    src: url('../fonts/proxima-nova/proximanova-regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/proxima-nova/proximanova-regular.woff') format('woff'),
+    url('../fonts/proxima-nova/proximanova-regular.ttf') format('truetype'),
+    url('../fonts/proxima-nova/proximanova-regular.svg') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-semibold.eot');
+    src: url('../fonts/proxima-nova/proximanova-semibold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/proxima-nova/proximanova-semibold.woff') format('woff'),
+    url('../fonts/proxima-nova/proximanova-semibold.ttf') format('truetype'),
+    url('../fonts/proxima-nova/proximanova-semibold.svg') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../fonts/proxima-nova/proximanova-bold.eot');
+    src: url('../fonts/proxima-nova/proximanova-bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proxima-nova/proximanova-bold.woff') format('woff'),
+         url('../fonts/proxima-nova/proximanova-bold.ttf') format('truetype'),
+         url('../fonts/proxima-nova/proximanova-bold.svg') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+/* ------------------------------------------------
+    Typography
+--------------------------------------------------- */
+
+/* Headings */
+
+.h1 { @apply text-4xl font-hairline; }
+.h2 { @apply text-3xl font-medium; }
+.h3 { @apply text-2xl font-hairline; }
+
+/* Misc */
+
+.text-link { @apply text-blue-500 underline cursor-pointer; }
+
 
 /* ------------------------------------------------
     Utilities
@@ -19,19 +99,12 @@
     .hud { @apply grid-cols-2; }
 }
 
+
 /* ------------------------------------------------
-    Typography
+    Box Shadow Stroke
 --------------------------------------------------- */
 
-/* Headings */
-
-.h1 { @apply text-4xl font-hairline; }
-.h2 { @apply text-3xl font-medium; }
-.h3 { @apply text-2xl font-hairline; }
-
-/* Misc */
-
-.text-link { @apply text-blue-500 underline cursor-pointer; }
+.shadow-stroke { box-shadow: 0 0 1px 4px rgba(0, 0, 0, 0.15);  }
 
 
 /* ------------------------------------------------
@@ -42,6 +115,7 @@
 
 .btn        { @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border; }
 .btn:focus  { @apply outline-none shadow-outline; }
+.btn-lg     { @apply text-lg font-light px-4 py-3 }
 
 .btn-circle {
     @apply rounded-full p-1 flex flex-col items-center justify-center;
@@ -50,6 +124,10 @@
 }
 
 /* Colors */
+
+.btn-o-default        { @apply text-gray-800; }
+.btn-o-default:hover  { @apply bg-gray-100; }
+.btn-o-default:active { @apply bg-gray-100; }
 
 .btn-blue             { @apply bg-blue-500 border-blue-600; }
 .btn-blue:hover       { @apply bg-blue-600; }
@@ -141,5 +219,9 @@
 
 .field-error { @apply text-red-500 }
 
+
+/* ------------------------------------------------
+    Tailwind Utilities
+--------------------------------------------------- */
 
 @tailwind utilities;

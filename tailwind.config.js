@@ -1,6 +1,14 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'Proxima Nova',
+          ...defaultTheme.fontFamily.sans
+        ]
+      },
       colors: {
         blue: {
           100: '#EBF5FB',
@@ -13,17 +21,6 @@ module.exports = {
           800: '#1B445F',
           900: '#122D3F'
         },
-        // gray: {
-        //   100: '#EEEEEE',
-        //   200: '#DDDDDD',
-        //   300: '#CCCCCC',
-        //   400: '#AAAAAA',
-        //   500: '#888888',
-        //   600: '#666666',
-        //   700: '#444444',
-        //   800: '#222222',
-        //   900: '#111111'
-        // },
         gray: {
           100: '#F3F3F3',
           200: '#E1E1E1',
@@ -33,7 +30,7 @@ module.exports = {
           600: '#7A7A7A',
           700: '#525252',
           800: '#3D3D3D',
-          900: '#292929',
+          900: '#292929'
         },
         green: {
           100: '#F3F9EE',

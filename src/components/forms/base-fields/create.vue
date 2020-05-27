@@ -2,18 +2,20 @@
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Field</template>
     <template v-slot:body>
-      <validation-observer v-slot="{ handleSubmit }" ref="form">
-        <form @submit.prevent="handleSubmit(submitForm)">
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="createBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="label" rules="required" field_id="createBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <text-field v-model="description" field_id="createBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
           <v-select-field v-model="type" :options="options" rules="required" field_id="createBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
-          <button type="submit" class="btn btn-green mt-5">
-            <span v-if="optionFieldSelected">Create then add Options</span>
-            <span v-else>Create Field</span>
-          </button>
         </form>
       </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">
+        <span v-if="optionFieldSelected">Create then add Options</span>
+        <span v-else>Create Field</span>
+      </button>
     </template>
   </modal-template>
 </template>
@@ -68,25 +70,30 @@ export default {
       this.closeModal()
     },
     enterKeyAction () {
-      this.submitForm()
+      if (this.showModal) {
+        this.submitForm()
+      }
     },
     submitForm () {
-      if (this.optionFieldSelected) {
-        this.createBaseOptionField({
-          name: this.name,
-          label: this.label,
-          description: this.description,
-          type: this.type
-        })
-      } else if (this.textFieldSelected) {
-        this.createBaseTextField({
-          name: this.name,
-          label: this.label,
-          description: this.description,
-          type: this.type
-        })
-      }
-      this.close()
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          if (this.optionFieldSelected) {
+            this.createBaseOptionField({
+              name: this.name,
+              label: this.label,
+              description: this.description,
+              type: this.type
+            }).then(() => { this.close() })
+          } else if (this.textFieldSelected) {
+            this.createBaseTextField({
+              name: this.name,
+              label: this.label,
+              description: this.description,
+              type: this.type
+            }).then(() => { this.close() })
+          }
+        }
+      })
     }
   }
 }

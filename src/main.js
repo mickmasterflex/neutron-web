@@ -13,6 +13,11 @@ import axios from '@/axios'
 import '@/assets/css/styles.css'
 import PortalVue from 'portal-vue'
 
+/* Font Awesome */
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 /* Layouts */
 import simpleLayout from '@/layouts/simple-layout'
 import appLayout from '@/layouts/app-layout'
@@ -80,6 +85,13 @@ configure({
     required: 'is-required'
   }
 })
+
+/* -----------------------------------------------
+  Font Awesome
+-------------------------------------------------- */
+
+library.add(faPlus)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------
   Root Vue Instance
