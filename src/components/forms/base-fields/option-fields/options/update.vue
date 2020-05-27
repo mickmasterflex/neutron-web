@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row items-center">
+  <div class="fields-inline">
     <v-text-field
       v-model="order"
       :field_id="`optionOrder_${option.id}`"

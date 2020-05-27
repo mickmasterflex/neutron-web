@@ -217,6 +217,9 @@
 .field-group:not(:first-child) { @apply mt-2 }
 .field-group { @apply block }
 
+.fields-inline { @apply flex flex-row items-center }
+.fields-inline .field-group { @apply m-1 }
+
 /* Errors */
 .is-invalid .base-field { @apply border-red-500 }
 .is-invalid .base-field:focus { @apply shadow-outline-red }
