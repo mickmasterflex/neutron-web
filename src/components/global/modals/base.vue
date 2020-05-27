@@ -1,6 +1,6 @@
 <template>
   <div v-show="show" @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
-    <div class="bg-white shadow-stroke w-1/2 rounded-lg" @click.stop>
+    <div class="bg-white modal-box rounded-lg mx-5" @click.stop>
       <div class="px-8 py-6 flex flex-row items-center justify-between">
         <h3 class="h2 inline">
           <slot name="header">Modal Header</slot>
@@ -12,7 +12,7 @@
       </div>
       <div class="px-8 py-6 flex flex-row items-center justify-end">
         <slot name="footer-default">
-          <button class="btn btn-lg btn-o-default mr-2" @click="close">Close</button>
+          <button class="btn btn-lg btn-hollow-default mr-2" @click="close">Close</button>
         </slot>
         <slot name="footer-additional"></slot>
       </div>
@@ -47,5 +47,9 @@ export default {
 <style scoped>
   .modal-backdrop {
     background: rgba(0,0,0,.75);
+  }
+  .modal-box {
+    width: 100%;
+    max-width: 900px;
   }
 </style>
