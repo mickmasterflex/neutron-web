@@ -44,9 +44,9 @@ const actions = {
   },
   async updatePartner ({ commit }, updatedPartner) {
     await axios.put(`/partners/${updatedPartner.id}/`, updatedPartner)
-      .then(() => {
-        commit('UPDATE_PARTNER', updatedPartner)
-        commit('SET_CURRENT_PARTNER', updatedPartner)
+      .then(response => {
+        commit('UPDATE_PARTNER', response.data)
+        commit('SET_CURRENT_PARTNER', response.data)
       })
   },
   async deletePartner ({ commit }, id) {

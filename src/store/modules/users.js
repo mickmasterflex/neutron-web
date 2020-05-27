@@ -34,9 +34,9 @@ const actions = {
   },
   async updateUser ({ commit }, updatedUser) {
     await axios.put(`/users/${updatedUser.id}/`, updatedUser)
-      .then(() => {
-        commit('UPDATE_USER', updatedUser)
-        commit('SET_CURRENT_USER', updatedUser)
+      .then(response => {
+        commit('UPDATE_USER', response.data)
+        commit('SET_CURRENT_USER', response.data)
       })
   },
   async deleteUser ({ commit }, id) {

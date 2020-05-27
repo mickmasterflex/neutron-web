@@ -32,9 +32,9 @@ const actions = {
   },
   async updateOffer ({ commit }, updatedOffer) {
     await axios.put(`/offers/${updatedOffer.id}/`, updatedOffer)
-      .then(() => {
-        commit('UPDATE_OFFER', updatedOffer)
-        commit('SET_CURRENT_OFFER', updatedOffer)
+      .then(response => {
+        commit('UPDATE_OFFER', response.data)
+        commit('SET_CURRENT_OFFER', response.data)
       })
   },
   async deleteOffer ({ commit }, id) {
