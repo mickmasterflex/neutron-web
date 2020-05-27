@@ -8,9 +8,11 @@
           <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
           <text-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
           <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
-          <button type="submit" class="btn btn-green mt-5">Update Field</button>
         </form>
       </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-green btn-lg">Update Field</button>
     </template>
   </modal-template>
 </template>
