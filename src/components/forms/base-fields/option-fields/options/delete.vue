@@ -1,5 +1,5 @@
 <template>
-  <span class="btn btn-circle btn-o-red" @click="runDelete">-</span>
+  <span class="btn btn-circle btn-hollow-red" @click="runDelete"><font-awesome-icon icon="minus"></font-awesome-icon></span>
 </template>
 
 <script>
