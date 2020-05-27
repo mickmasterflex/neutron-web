@@ -36,9 +36,9 @@ const actions = {
   },
   async updateBaseOptionField ({ commit }, updatedField) {
     await axios.put(`/base-option-fields/${updatedField.id}/`, updatedField)
-      .then(() => {
-        commit('UPDATE_BASE_OPTION_FIELD', updatedField)
-        commit('SET_BASE_FIELDS')
+      .then(response => {
+        commit('UPDATE_BASE_OPTION_FIELD', response.data)
+        commit('SET_BASE_FIELDS', response.data)
       })
   },
   async deleteBaseOptionField ({ commit }, id) {

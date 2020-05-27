@@ -46,9 +46,9 @@ const actions = {
   },
   async updateBuyer ({ commit }, updatedBuyer) {
     await axios.put(`/buyers/${updatedBuyer.id}/`, updatedBuyer)
-      .then(() => {
-        commit('UPDATE_BUYER', updatedBuyer)
-        commit('SET_CURRENT_BUYER', updatedBuyer)
+      .then(response => {
+        commit('UPDATE_BUYER', response.data)
+        commit('SET_CURRENT_BUYER', response.data)
       })
   },
   async deleteBuyer ({ commit }, id) {
