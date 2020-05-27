@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-circle btn-o-blue" @click="fetchFieldById(id, type)">{{copy}}</button>
+  <button class="btn btn-circle btn-hollow-blue" @click="fetchFieldById(id, type)">{{copy}}</button>
 </template>
 
 <script>
