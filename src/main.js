@@ -67,11 +67,11 @@ Vue.component('v-select-field', vSelectField)
   Validation
 -------------------------------------------------- */
 
-extend('email', { ...email, message: 'Invalid email address' })
-extend('required', { ...required, message: 'Required field' })
+extend('email', { ...email, message: 'Invalid email' })
+extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 // eslint-disable-next-line camelcase
-extend('alpha_dash', { ...alpha_dash, message: 'Can only contain alphabetic characters, numbers, dashes or underscores' })
+extend('alpha_dash', { ...alpha_dash, message: 'Only use alphabetic characters, numbers, dashes or underscores' })
 Vue.component('validation-provider', ValidationProvider)
 Vue.component('validation-observer', ValidationObserver)
 configure({

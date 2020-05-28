@@ -3,9 +3,9 @@
     <li class="p-2 flex flex-row items-center">
       <span>Order - Label - Value - Delete</span>
     </li>
-    <li v-for="option in options" :key="option.id" class="mb-1 shadow bg-white rounded-md p-2 flex flex-row items-center">
+    <li v-for="option in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
       <update-option :option="option"></update-option>
-      <delete-option :option="option" class="ml-2"></delete-option>
+      <delete-option :option="option" class="mx-1"></delete-option>
     </li>
   </ul>
 </template>
