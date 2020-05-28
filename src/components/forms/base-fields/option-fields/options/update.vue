@@ -2,6 +2,7 @@
   <div class="fields-inline">
     <text-field-prefixed
       color="blue"
+      icon="arrows-alt-v"
       field_disabled="true"
       field_class="field-sm"
       v-model="order"
