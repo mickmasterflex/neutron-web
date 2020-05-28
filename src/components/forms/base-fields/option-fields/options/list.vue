@@ -1,5 +1,5 @@
 <template>
-  <ul-draggable tag="ul" handle=".draggable-handle" class="well" v-if="options.length">
+  <ul-draggable tag="ul" handle=".field-draggable" class="well" v-if="options.length">
     <li class="p-2 flex flex-row items-center">
       <span>Order - Label - Value - Delete</span>
     </li>
