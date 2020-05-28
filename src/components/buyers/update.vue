@@ -19,24 +19,31 @@ export default {
     }
   },
   props: {
-    id: {
-      type: Number
-    },
-    client: {
-      type: Number
+    buyer: Object
+  },
+  watch: {
+    buyer: function () {
+      this.name = this.buyer.name
+      this.parent = this.buyer.parent
     }
   },
   methods: {
-    ...mapActions({ update: 'updateBuyer' }),
+    ...mapActions({
+      update: 'updateBuyer'
+    }),
     submitForm () {
       this.update({
         name: this.name,
         parent: this.parent,
-        client: this.client,
-        id: this.id
+        client: this.buyer.client,
+        id: this.buyer.id
       })
     }
   },
-  computed: { ...mapGetters({ siblings: 'getBuyerSiblings' }) }
+  computed: {
+    ...mapGetters({
+      siblings: 'getBuyerSiblings'
+    })
+  }
 }
 </script>
