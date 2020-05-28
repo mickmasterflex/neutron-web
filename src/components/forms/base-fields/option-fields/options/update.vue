@@ -1,15 +1,16 @@
 <template>
   <div class="fields-inline">
-    <v-text-field
+    <text-field-prefixed
+      disabled="disabled"
+      field_class="field-sm"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      rules="required|integer"
-      class="field-group field-sm mr-2"/>
+      class="field-group"/>
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
       rules="required"
-      class="field-group mr-2"/>
+      class="field-group"/>
     <v-text-field
       v-model="value"
       :field_id="`optionValue_${option.id}`"
@@ -20,6 +21,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
   data () {
@@ -53,6 +55,9 @@ export default {
         field: this.option.field
       })
     }
+  },
+  components: {
+    'text-field-prefixed': textFieldPrefixed
   }
 }
 </script>

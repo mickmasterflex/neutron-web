@@ -208,7 +208,9 @@
 .select-field { @apply appearance-none; }
 .select-field-wrap { @apply relative w-64 }
 
-.base-field { @apply block w-64 bg-white border border-gray-400 px-4 py-2 pr-8 rounded shadow leading-tight; }
+.base-field { @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight; }
+.field-sm { @apply w-20 }
+
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
 .base-field:focus { @apply outline-none shadow-outline }
 .base-field:disabled { @apply cursor-not-allowed bg-gray-100 }
@@ -217,8 +219,15 @@
 .field-group:not(:first-child) { @apply mt-2 }
 .field-group { @apply block }
 
+/* Inline Fields */
 .fields-inline { @apply flex flex-row items-center }
-.fields-inline .field-group { @apply m-1 }
+.fields-inline .field-group { @apply mx-1 my-0 }
+
+/* Draggable Fields */
+.field-draggable,
+.field-draggable input:disabled {
+    @apply cursor-move bg-white;
+}
 
 /* Errors */
 .is-invalid .base-field { @apply border-red-500 }
