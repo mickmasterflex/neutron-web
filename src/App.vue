@@ -12,6 +12,7 @@ import { mapActions } from 'vuex'
 const appLayout = 'app'
 
 export default {
+  name: 'Proton',
   computed: {
     layout () {
       return (this.$route.meta.layout || appLayout) + '-layout'
