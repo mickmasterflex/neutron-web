@@ -26,6 +26,7 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_OPTIONS: (state, options) => (state.current_options = options),
+  SORT_CURRENT_OPTIONS: (state) => (state.current_options = state.current_options.sort((a, b) => (a.order > b.order) ? 1 : -1)),
   ADD_OPTION_TO_MODIFIED: (state, modifiedOption) => {
     const index = state.modified_options.findIndex(option => option.id === modifiedOption.id)
     if (index !== -1) {

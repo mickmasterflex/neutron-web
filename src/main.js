@@ -15,7 +15,7 @@ import PortalVue from 'portal-vue'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -23,13 +23,13 @@ import simpleLayout from '@/layouts/simple-layout'
 import appLayout from '@/layouts/app-layout'
 
 /* Components */
-import baseModal from '@/components/global/modals/base'
-import statCard from '@/components/global/cards/stat-card'
-import checkboxSingle from '@/components/global/forms/base-fields/checkbox-single'
-import selectField from '@/components/global/forms/base-fields/select-field'
-import textField from '@/components/global/forms/base-fields/text-field'
-import vTextField from '@/components/global/forms/validation-fields/text-field'
-import vSelectField from '@/components/global/forms/validation-fields/select-field'
+import baseModal from '@/components/ui/modals/base'
+import statCard from '@/components/ui/cards/stat-card'
+import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
+import selectField from '@/components/ui/forms/base-fields/select-field'
+import textField from '@/components/ui/forms/base-fields/text-field'
+import vTextField from '@/components/ui/forms/validation-fields/text-field'
+import vSelectField from '@/components/ui/forms/validation-fields/select-field'
 
 /* -----------------------------------------------
   Authentication
@@ -90,7 +90,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faPlus, faMinus)
+library.add(faPlus, faMinus, faArrowsAltV)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

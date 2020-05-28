@@ -19,6 +19,7 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
+        commit('SORT_CURRENT_OPTIONS')
       })
   },
   async createOptionField ({ commit }, field) {
@@ -27,6 +28,7 @@ const actions = {
         commit('ADD_FIELD', response.data)
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
+        commit('SORT_CURRENT_OPTIONS')
         commit('TOGGLE_SHOW_CREATE_FIELD', false)
       })
   },

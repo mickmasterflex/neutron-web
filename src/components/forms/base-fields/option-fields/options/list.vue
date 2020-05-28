@@ -1,5 +1,5 @@
 <template>
-  <ul class="bg-gray-100 p-3" v-if="options.length">
+  <ul class="well" v-if="options.length">
     <li class="p-2 flex flex-row items-center">
       <span>Order - Label - Value - Delete</span>
     </li>

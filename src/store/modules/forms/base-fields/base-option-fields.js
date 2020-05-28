@@ -23,6 +23,7 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
         commit('SET_CURRENT_BASE_OPTIONS', response.data.base_options)
+        commit('SORT_CURRENT_BASE_OPTIONS')
       })
   },
   async createBaseOptionField ({ commit }, field) {
