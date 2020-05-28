@@ -1,6 +1,6 @@
 <template>
-  <div v-show="show" @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
-    <div class="bg-white modal-box rounded-lg mx-5" @click.stop>
+  <div v-show="show" class="fixed top-0 right-0 left-0 bottom-0 z-50 overflow-x-scroll">
+    <div class="bg-white modal-dialog rounded-lg relative mx-5 z-20">
       <div class="px-8 py-6 flex flex-row items-center justify-between">
         <h3 class="h2 inline">
           <slot name="header">Modal Header</slot>
@@ -17,6 +17,7 @@
         <slot name="footer-additional"></slot>
       </div>
     </div>
+    <div @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 z-10"></div>
   </div>
 </template>
 
@@ -28,6 +29,16 @@ export default {
   methods: {
     close () {
       this.$emit('close')
+    }
+  },
+  watch: {
+    show: function () {
+      const body = document.getElementsByTagName('BODY')[0]
+      if (this.show === true) {
+        body.classList.add('overflow-hidden')
+      } else {
+        body.classList.remove('overflow-hidden')
+      }
     }
   },
   created () {
@@ -48,8 +59,9 @@ export default {
   .modal-backdrop {
     background: rgba(0,0,0,.75);
   }
-  .modal-box {
+  .modal-dialog {
     width: 100%;
     max-width: 900px;
+    margin: 30px auto;
   }
 </style>
