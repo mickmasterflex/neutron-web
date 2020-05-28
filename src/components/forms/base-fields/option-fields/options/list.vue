@@ -5,7 +5,7 @@
     </li>
     <li v-for="option in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
       <update-option :option="option"></update-option>
-      <delete-option :option="option" class="ml-1"></delete-option>
+      <delete-option :option="option" class="mx-1"></delete-option>
     </li>
   </ul>
 </template>

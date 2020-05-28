@@ -112,7 +112,7 @@
 --------------------------------------------------- */
 
 .card { @apply shadow bg-white rounded-md; }
-.card-sm { @apply p-2; }
+.card-sm { @apply p-1; }
 
 
 /* ------------------------------------------------
@@ -225,14 +225,12 @@
 .base-field:disabled { @apply cursor-not-allowed bg-gray-100 }
 
 /* Groups */
-.field-group:not(:first-child) { @apply mt-2 }
+.field-group { @apply my-2 }
 .field-group { @apply block }
 
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-center flex-wrap }
-.fields-inline .field-group { @apply mx-1 my-0 }
-.fields-inline :first-child { @apply ml-0 }
-.fields-inline :last-child { @apply mr-0 }
+.fields-inline .field-group { @apply m-1 }
 
 /* Field Error Inside */
 .field-error-inside { @apply relative }
