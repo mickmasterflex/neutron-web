@@ -1,5 +1,5 @@
 <template>
-  <ul class="well" v-if="options.length">
+  <ul-draggable tag="ul" handle=".draggable-handle" class="well" v-if="options.length">
     <li class="p-2 flex flex-row items-center">
       <span>Order - Label - Value - Delete</span>
     </li>
@@ -7,10 +7,11 @@
       <update-option :option="option"></update-option>
       <delete-option :option="option" class="mx-1"></delete-option>
     </li>
-  </ul>
+  </ul-draggable>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import { mapGetters } from 'vuex'
 import updateOption from '@/components/forms/base-fields/option-fields/options/update'
 import deleteOption from '@/components/forms/base-fields/option-fields/options/delete'
@@ -23,7 +24,8 @@ export default {
   },
   components: {
     'update-option': updateOption,
-    'delete-option': deleteOption
+    'delete-option': deleteOption,
+    'ul-draggable': draggable
   }
 }
 </script>

@@ -8,7 +8,7 @@
       prefix_group_class="field-draggable"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      class="field-group"/>
+      class="field-group draggable-handle"/>
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
