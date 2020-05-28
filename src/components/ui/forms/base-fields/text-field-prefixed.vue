@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div class="flex flex-row field-draggable">
+    <div :class="`flex flex-row ${prefix_group_class}`">
       <span :class="`bg-${color}-500 text-white px-2 rounded-l flex flex-column items-center`">
         <font-awesome-icon :icon="icon" class="pb-1"/>
       </span>
@@ -31,7 +31,8 @@ export default {
       type: String,
       default: 'arrows-alt-v'
     },
-    field_class: String
+    field_class: String,
+    prefix_group_class: String
   },
   methods: {
     handleInput (value) {

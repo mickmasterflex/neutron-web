@@ -5,6 +5,7 @@
       icon="arrows-alt-v"
       field_disabled="true"
       field_class="field-sm"
+      prefix_group_class="field-draggable"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
       class="field-group"/>
