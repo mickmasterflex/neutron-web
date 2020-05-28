@@ -101,10 +101,18 @@
 
 
 /* ------------------------------------------------
-    HUD
+    Wells
 --------------------------------------------------- */
 
 .well { @apply bg-gray-200 border border-gray-300 p-3 rounded; }
+
+
+/* ------------------------------------------------
+    Cards
+--------------------------------------------------- */
+
+.card { @apply shadow bg-white rounded-md; }
+.card-sm { @apply p-2; }
 
 
 /* ------------------------------------------------
@@ -222,6 +230,12 @@
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-center }
 .fields-inline .field-group { @apply mx-1 my-0 }
+.fields-inline :first-child { @apply ml-0 }
+.fields-inline :last-child { @apply mr-0 }
+
+/* Field Error Inside */
+.field-error-inside { @apply relative }
+.field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 /* Draggable Fields */
 .field-draggable,

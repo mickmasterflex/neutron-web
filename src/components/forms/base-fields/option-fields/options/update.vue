@@ -13,12 +13,12 @@
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
       rules="required"
-      class="field-group"/>
+      class="field-group field-error-inside"/>
     <v-text-field
       v-model="value"
       :field_id="`optionValue_${option.id}`"
       rules="required"
-      class="field-group"/>
+      class="field-group field-error-inside"/>
   </div>
 </template>
 
