@@ -5,6 +5,7 @@
       type="checkbox"
       :id="field_id"
       class="mr-2"
+      :class="$attrs.field_class"
       :checked="value">
     <span>{{field_label}}</span>
   </label>

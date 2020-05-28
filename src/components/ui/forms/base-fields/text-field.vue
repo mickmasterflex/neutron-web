@@ -4,6 +4,7 @@
     <input
       @input="handleInput($event.target.value)"
       class="base-field"
+      :class="$attrs.field_class"
       :type="$attrs.field_type ? $attrs.field_type : 'text'"
       :id="$attrs.field_id"
       :value="value"
