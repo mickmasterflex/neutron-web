@@ -21,9 +21,7 @@ export default {
     }
   },
   props: {
-    user: {
-      type: Object
-    }
+    user: Object
   },
   watch: {
     user: function () {
