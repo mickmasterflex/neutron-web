@@ -8,7 +8,7 @@
       :type="$attrs.field_type ? $attrs.field_type : 'text'"
       :id="$attrs.field_id"
       :value="value"
-      :disabled="$attrs.disabled">
+      :disabled="$attrs.field_disabled">
   </div>
 </template>
 

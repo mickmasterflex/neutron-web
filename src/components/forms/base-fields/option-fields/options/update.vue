@@ -1,7 +1,7 @@
 <template>
   <div class="fields-inline">
     <text-field-prefixed
-      disabled="disabled"
+      field_disabled="true"
       field_class="field-sm"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"

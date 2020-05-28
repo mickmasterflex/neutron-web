@@ -9,10 +9,10 @@
       </div>
       <div v-for="field in form.fields" :key="field.id">
         <div :field="field" v-show="field.id!==currentFieldId" class="flex flex-row items-center">
-          <text-field :value="field.id" disabled="disabled"/>
-          <text-field :value="field.label" disabled="disabled"/>
-          <text-field :value="field.mapping" disabled="disabled"/>
-          <text-field :value="field.deliver" disabled="disabled"/>
+          <text-field :value="field.id" field_disabled="true"/>
+          <text-field :value="field.label" field_disabled="true"/>
+          <text-field :value="field.mapping" field_disabled="true"/>
+          <text-field :value="field.deliver" field_disabled="true"/>
           <span class="flex flex-row">
             <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
             <fetch-current-field :id="field.id" :type="field.type" copy="e" v-if="field.type"></fetch-current-field>
