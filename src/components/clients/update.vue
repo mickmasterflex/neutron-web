@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -35,14 +35,9 @@ export default {
       this.update({
         name: this.name,
         slug: this.slug,
-        id: this.$props.id
+        id: this.client.id
       })
     }
-  },
-  computed: {
-    ...mapGetters({
-      clients: 'getCurrentClients'
-    })
   }
 }
 </script>
