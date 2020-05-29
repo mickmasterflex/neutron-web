@@ -19,11 +19,12 @@ export default {
     }
   },
   props: {
-    id: {
-      type: Number
-    },
-    client: {
-      type: Number
+    partner: Object
+  },
+  watch: {
+    partner: function () {
+      this.name = this.partner.name
+      this.parent = this.partner.parent
     }
   },
   methods: {
@@ -32,11 +33,15 @@ export default {
       this.update({
         name: this.name,
         parent: this.parent,
-        client: this.client,
-        id: this.id
+        client: this.partner.client,
+        id: this.partner.id
       })
     }
   },
-  computed: { ...mapGetters({ siblings: 'getPartnerSiblings' }) }
+  computed: {
+    ...mapGetters({
+      siblings: 'getPartnerSiblings'
+    })
+  }
 }
 </script>

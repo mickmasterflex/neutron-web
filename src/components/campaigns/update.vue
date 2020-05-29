@@ -21,6 +21,12 @@ export default {
   props: {
     campaign: Object
   },
+  watch: {
+    campaign: function () {
+      this.name = this.campaign.name
+      this.campaign_code = this.campaign.code
+    }
+  },
 
   methods: {
     ...mapActions({

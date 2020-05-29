@@ -14,7 +14,7 @@
     <delete-partner-contract :client="partner.client" :id="id"></delete-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Partner Contract</h3>
-    <update-partner-contract :client="partner.client" :id="id"></update-partner-contract>
+    <update-partner-contract :partner="partner"></update-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Create Campaign</h3>
     <create-campaign :partner="partner.id"></create-campaign>

@@ -11,7 +11,7 @@
     <delete-buyer-contract :client="buyer.client" :id="id"></delete-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
-    <update-buyer-contract :client="buyer.client" :id="id" ></update-buyer-contract>
+    <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
 
     <h3 class="h3 mt-5 mb-2">Offers List</h3>
     <offer-list :offers="offers"></offer-list>

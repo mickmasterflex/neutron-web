@@ -21,6 +21,12 @@ export default {
   props: {
     offer: Object
   },
+  watch: {
+    offer: function () {
+      this.name = this.offer.name
+      this.product = this.offer.product
+    }
+  },
 
   methods: {
     ...mapActions({

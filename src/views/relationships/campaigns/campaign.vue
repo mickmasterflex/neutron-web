@@ -10,7 +10,7 @@
     <delete-campaign :campaign="campaign" ></delete-campaign>
 
     <h3 class="h3 mt-5 mb-2">Update Campaign</h3>
-    <update-campaign :campaign="campaign" :id="id"></update-campaign>
+    <update-campaign :campaign="campaign"></update-campaign>
   </div>
 </template>
 <script>
