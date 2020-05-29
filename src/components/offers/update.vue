@@ -45,8 +45,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: 'getAllProducts',
-      offers: 'getCurrentOffers'
+      products: 'getAllProducts'
     })
   },
   created () {
