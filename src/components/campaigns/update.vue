@@ -24,7 +24,7 @@ export default {
   watch: {
     campaign: function () {
       this.name = this.campaign.name
-      this.campaign_code = this.campaign.campaign_code
+      this.campaign_code = this.campaign.code
     }
   },
 
