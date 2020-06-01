@@ -35,7 +35,8 @@ export default {
     }
   },
   props: {
-    option: Object
+    option: Object,
+    newOrder: Number
   },
   computed: {
     optionData () {
@@ -45,6 +46,9 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
+    },
+    newOrder () {
+      this.order = this.newOrder
     }
   },
   methods: {
