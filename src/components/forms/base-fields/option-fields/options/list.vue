@@ -1,7 +1,7 @@
 <template>
   <div class="well">
     <p>Order - Label - Value</p>
-    <ul-draggable tag="ul" handle=".field-draggable" v-model="options" v-if="options">
+    <ul-draggable tag="ul" handle=".field-draggable" v-bind="dragOptions" v-model="options" v-if="options">
       <li v-for="(option, index) in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
         <update-option :option="option" :newOrder="index + 1"></update-option>
         <delete-option :option="option" class="mx-1"></delete-option>
@@ -17,6 +17,11 @@ import deleteOption from '@/components/forms/base-fields/option-fields/options/d
 
 export default {
   computed: {
+    dragOptions () {
+      return {
+        animation: 200
+      }
+    },
     options: {
       get () {
         return this.$store.getters.getCurrentBaseOptions
