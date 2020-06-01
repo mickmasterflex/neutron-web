@@ -24,11 +24,6 @@ import createBaseField from '@/components/forms/base-fields/create'
 import listBaseFields from '@/components/forms/base-fields/list'
 
 export default {
-  data () {
-    return {
-      showModalCreateBaseField: false
-    }
-  },
   methods: {
     ...mapMutations({
       showCreateBaseFieldModal: 'SHOW_CREATE_BASE_FIELD_MODAL'
