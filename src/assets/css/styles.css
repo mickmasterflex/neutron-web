@@ -217,6 +217,7 @@
 
 .sortable-drag {
     @apply shadow-xl;
+    cursor: grabbing;
 }
 
 .sortable-ghost {
