@@ -15,25 +15,31 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
       first_name: '',
       last_name: '',
       email: ''
     }
   },
   props: {
-    id: {
-      type: Number
+    user: Object
+  },
+  watch: {
+    user: function () {
+      this.first_name = this.user.first_name
+      this.last_name = this.user.last_name
+      this.email = this.user.email
     }
   },
   methods: {
-    ...mapActions({ update: 'updateUser' }),
+    ...mapActions({
+      update: 'updateUser'
+    }),
     submitForm () {
       this.update({
         first_name: this.first_name,
         last_name: this.last_name,
         email: this.email,
-        id: this.id
+        id: this.user.id
       })
     }
   }

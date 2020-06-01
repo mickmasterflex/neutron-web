@@ -13,7 +13,7 @@
     <delete-user :id="user.id"></delete-user>
 
     <h3 class="h3 mt-5 mb-2">Edit</h3>
-    <update-user :id="user.id"></update-user>
+    <update-user :user="user"></update-user>
   </div>
 </template>
 

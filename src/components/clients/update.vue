@@ -19,17 +19,23 @@ export default {
     }
   },
   props: {
-    id: {
-      type: Number
+    client: Object
+  },
+  watch: {
+    client: function () {
+      this.name = this.client.name
+      this.slug = this.client.slug
     }
   },
   methods: {
-    ...mapActions({ update: 'updateClient' }),
+    ...mapActions({
+      update: 'updateClient'
+    }),
     submitForm () {
       this.update({
         name: this.name,
         slug: this.slug,
-        id: this.$props.id
+        id: this.client.id
       })
     }
   }

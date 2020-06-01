@@ -15,7 +15,7 @@
     <partner-list :contracts="partners"></partner-list>
 
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
-    <update-client :id="client.id"></update-client>
+    <update-client :client="client"></update-client>
 
     <h3 class="h3 mt-5 mb-2">Delete Client</h3>
     <delete-client :id="client.id"></delete-client>
