@@ -246,6 +246,9 @@
 .fields-inline { @apply flex flex-row items-center flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
+.fields-inline-heading { @apply mb-1 flex flex-row; }
+.fields-inline-heading-item { @apply mx-1 font-bold; }
+
 /* Field Error Inside */
 .field-error-inside { @apply relative }
 .field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }

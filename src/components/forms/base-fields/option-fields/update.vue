@@ -11,7 +11,7 @@
         </form>
         <field-options class="mt-3"></field-options>
       </validation-observer>
-      <create-option :field="field" class="mt-5"></create-option>
+      <create-option :field="field" class="mt-4"></create-option>
     </template>
     <template v-slot:footer-additional>
       <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>

@@ -1,6 +1,10 @@
 <template>
   <div class="well">
-    <p>Order - Label - Value</p>
+    <ul class="fields-inline-heading px-1">
+      <li class="w-24 fields-inline-heading-item">Order</li>
+      <li class="w-64 fields-inline-heading-item">Label</li>
+      <li class="w-64 fields-inline-heading-item">Value</li>
+    </ul>
     <ul-draggable tag="ul" handle=".field-draggable" v-bind="dragOptions" v-model="options" v-if="options">
       <li v-for="(option, index) in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
         <update-option :option="option" :newOrder="index + 1"></update-option>
