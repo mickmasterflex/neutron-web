@@ -12,7 +12,6 @@
         <label class="field-label mt-3">Options</label>
         <field-options></field-options>
       </validation-observer>
-      <create-option :field="field" class="mt-4"></create-option>
     </template>
     <template v-slot:footer-additional>
       <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
@@ -23,7 +22,6 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
-import createOption from '@/components/forms/base-fields/option-fields/options/create'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
@@ -44,8 +42,7 @@ export default {
     field: Object
   },
   components: {
-    'field-options': fieldOptions,
-    'create-option': createOption
+    'field-options': fieldOptions
   },
   watch: {
     field: function () {
