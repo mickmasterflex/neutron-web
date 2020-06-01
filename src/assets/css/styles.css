@@ -212,6 +212,19 @@
 
 
 /* ------------------------------------------------
+    Vue Draggable Classes
+--------------------------------------------------- */
+
+.sortable-drag {
+    @apply shadow-xl;
+}
+
+.sortable-ghost {
+    @apply border-2 border-gray-500 border-dashed opacity-25
+}
+
+
+/* ------------------------------------------------
     Form Fields
 --------------------------------------------------- */
 
@@ -240,7 +253,8 @@
 /* Draggable Fields */
 .field-draggable input,
 .field-draggable input:disabled {
-    @apply cursor-move bg-white;
+    @apply bg-white;
+    cursor: grab;
 }
 
 /* Errors */
