@@ -5,7 +5,7 @@
       <li class="w-64 fields-inline-heading-item">Label</li>
       <li class="w-64 fields-inline-heading-item">Value</li>
     </ul>
-    <ul-draggable tag="ul" handle=".field-draggable" v-bind="dragOptions" v-model="options" v-if="options">
+    <ul-draggable v-bind="dragOptions" v-model="options" v-if="options">
       <li v-for="(option, index) in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
         <update-option :option="option" :newOrder="index + 1"></update-option>
         <delete-option :option="option" class="mx-1"></delete-option>
@@ -23,7 +23,9 @@ export default {
   computed: {
     dragOptions () {
       return {
-        animation: 200
+        animation: 200,
+        tag: 'ul',
+        handle: '.field-draggable'
       }
     },
     options: {
