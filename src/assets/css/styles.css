@@ -215,7 +215,8 @@
     Vue Draggable Classes
 --------------------------------------------------- */
 
-.sortable-drag {
+.sortable-drag,
+.sortable-chosen {
     @apply shadow-xl;
     cursor: grabbing;
 }
@@ -255,6 +256,12 @@
 .field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 /* Draggable Fields */
+.field-draggable { @apply relative }
+.field-draggable:after {
+    content: '';
+    @apply absolute top-0 right-0 bottom-0 left-0;
+}
+.field-draggable,
 .field-draggable input,
 .field-draggable input:disabled {
     @apply bg-white;
