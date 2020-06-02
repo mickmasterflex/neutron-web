@@ -2,7 +2,7 @@
   <div>
     <table v-if="baseFields" class="table">
       <thead>
-        <tr class="th-row">
+        <tr>
           <th class="th">Label</th>
           <th class="th">Name</th>
           <th class="th">Description</th>

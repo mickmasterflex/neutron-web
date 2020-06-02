@@ -2,7 +2,7 @@
   <div>
     <table v-if="clients" class="table">
       <thead>
-        <tr class="th-row">
+        <tr>
           <th class="th">Name</th>
           <th class="th">ID</th>
           <th class="th">Slug</th>

@@ -2,7 +2,7 @@
   <div>
   <table v-if="users" class="table">
     <thead>
-      <tr class="th-row">
+      <tr>
         <th class="th">Email</th>
         <th class="th">Name</th>
         <th class="th">ID</th>

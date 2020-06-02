@@ -2,7 +2,7 @@
   <div>
     <table v-if="contracts" class="table">
       <thead>
-        <tr class="th-row">
+        <tr>
           <th class="th">Name</th>
           <th class="th">Id</th>
           <th class="th">Parent</th>
