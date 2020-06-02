@@ -127,9 +127,10 @@
 
 .btn-circle {
     @apply rounded-full p-1 flex flex-col items-center justify-center;
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+    font-size: .75rem;
 }
 
 /* Standard Buttons */
@@ -211,6 +212,21 @@
 
 
 /* ------------------------------------------------
+    Vue Draggable Classes
+--------------------------------------------------- */
+
+.sortable-drag,
+.sortable-chosen {
+    @apply shadow-xl;
+    cursor: grabbing;
+}
+
+.sortable-ghost {
+    @apply border-2 border-gray-500 border-dashed opacity-25
+}
+
+
+/* ------------------------------------------------
     Form Fields
 --------------------------------------------------- */
 
@@ -232,14 +248,24 @@
 .fields-inline { @apply flex flex-row items-center flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
+.fields-inline-heading { @apply mb-1 flex flex-row; }
+.fields-inline-heading-item { @apply mx-1 font-bold; }
+
 /* Field Error Inside */
 .field-error-inside { @apply relative }
 .field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 /* Draggable Fields */
+.field-draggable { @apply relative }
+.field-draggable:after {
+    content: '';
+    @apply absolute top-0 right-0 bottom-0 left-0;
+}
 .field-draggable,
+.field-draggable input,
 .field-draggable input:disabled {
-    @apply cursor-move bg-white;
+    @apply bg-white;
+    cursor: grab;
 }
 
 /* Errors */

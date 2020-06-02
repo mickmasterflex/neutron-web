@@ -6,12 +6,10 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    field: Object
-  },
   computed: {
     ...mapGetters({
-      options: 'getCurrentBaseOptions'
+      options: 'getCurrentBaseOptions',
+      field: 'getCurrentBaseOptionField'
     }),
     baseOption: function () {
       return {
