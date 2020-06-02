@@ -1,21 +1,23 @@
 <template>
   <div>
     <div v-if="form">
-      <div class="bg-gray-900 text-white rounded flex flex-row items-center">
-        <span class="py-1 px-3">ID</span>
-        <span class="py-1 px-3">Label</span>
-        <span class="py-1 px-3">Mapping</span>
-        <span class="py-1 px-3">Deliver</span>
+      <div class="fields-inline-heading bg-gray-900 rounded flex flex-row items-center mb-2">
+        <span class="w-20 th fields-inline-heading-item">ID</span>
+        <span class="w-64 th fields-inline-heading-item">Label</span>
+        <span class="w-64 th fields-inline-heading-item">Mapping</span>
+        <span class="w-20 th fields-inline-heading-item">Deliver</span>
       </div>
       <div v-for="field in form.fields" :key="field.id">
-        <div :field="field" v-show="field.id!==currentFieldId" class="flex flex-row items-center">
-          <text-field :value="field.id" field_disabled="true"/>
-          <text-field :value="field.label" field_disabled="true"/>
-          <text-field :value="field.mapping" field_disabled="true"/>
-          <text-field :value="field.deliver" field_disabled="true"/>
+        <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
+          <div class="fields-inline">
+            <text-field class="field-group" field_class="field-sm" :value="field.id" field_disabled="true"/>
+            <text-field class="field-group" :value="field.label" field_disabled="true"/>
+            <text-field class="field-group" :value="field.mapping" field_disabled="true"/>
+            <text-field class="field-group" field_class="field-sm" :value="field.deliver" field_disabled="true"/>
+          </div>
           <span class="flex flex-row">
-            <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
-            <fetch-current-field :id="field.id" :type="field.type" copy="e" v-if="field.type"></fetch-current-field>
+            <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
+            <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
           </span>
         </div>
         <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>

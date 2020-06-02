@@ -1,5 +1,7 @@
 <template>
-  <button class="btn btn-circle btn-hollow-blue" @click="fetchFieldById(id, type)">{{copy}}</button>
+  <button class="btn btn-circle btn-hollow-blue" @click="fetchFieldById(id, type)">
+    <font-awesome-icon :icon="icon"></font-awesome-icon>
+  </button>
 </template>
 
 <script>
@@ -9,7 +11,7 @@ export default {
   props: {
     id: Number,
     type: String,
-    copy: String
+    icon: String
   },
   methods: {
     ...mapActions({
