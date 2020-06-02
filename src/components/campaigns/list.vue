@@ -2,7 +2,7 @@
   <div>
     <table v-if="campaigns" class="table">
       <thead>
-        <tr class="th-row">
+        <tr>
           <th class="th">Name</th>
           <th class="th">ID</th>
           <th class="th">Contract</th>

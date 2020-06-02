@@ -73,8 +73,15 @@
 /* Headings */
 
 .h1 { @apply text-4xl font-hairline; }
-.h2 { @apply text-3xl font-medium; }
 .h3 { @apply text-2xl font-hairline; }
+
+.h2,
+.h2-hairline {
+    @apply text-3xl
+}
+
+.h2 { @apply font-medium; }
+.h2-hairline { @apply font-hairline text-gray-700 }
 
 /* Misc */
 
