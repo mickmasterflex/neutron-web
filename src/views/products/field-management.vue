@@ -10,9 +10,9 @@
     </div>
 
     <div class="flex flex-row justify-between mt-4">
-      <h2 class="h3">Base Fields</h2>
-      <button class="btn btn-green" @click="showCreateBaseFieldModal()">Create Base Field</button>
-    </div>
+    <h2 class="h3">Base Fields</h2>
+    <button class="btn btn-green" @click="showCreateBaseFieldModal()">Create Base Field</button>
+  </div>
     <list-base-fields class="mt-5"></list-base-fields>
     <create-base-field-modal></create-base-field-modal>
   </div>
