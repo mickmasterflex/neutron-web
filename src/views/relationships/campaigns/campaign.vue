@@ -2,7 +2,7 @@
   <div v-if="campaign">
     <div class="hud">
       <h1 class="h1 text-white">{{campaign.name}}</h1>
-      <div>
+      <div class="hud--stat-cards">
         <stat-card :data="campaign.id" :title="`Campaign`" :color="`teal`"></stat-card>
       </div>
     </div>

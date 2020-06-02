@@ -1,7 +1,7 @@
 <template>
   <div v-if="user">
     <div class="hud">
-      <div>
+      <div class="hud--stat-cards">
         <h1 class="h1 text-white">{{user.first_name}} {{user.last_name}}</h1>
         <p class="text-white">{{user.email}}</p>
       </div>

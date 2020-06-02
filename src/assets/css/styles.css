@@ -99,6 +99,10 @@
     .hud { @apply grid-cols-2; }
 }
 
+.hud--stat-cards {
+    @apply flex flex-row items-center border-l border-gray-800 pl-4
+}
+
 
 /* ------------------------------------------------
     Wells
