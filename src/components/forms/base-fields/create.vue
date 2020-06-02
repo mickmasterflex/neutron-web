@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>Create Field</template>
+    <template v-slot:header>Create Base Field</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
