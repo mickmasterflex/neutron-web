@@ -1,5 +1,5 @@
 <template>
-  <ul class="bg-gray-100 p-3">
+  <ul class="well well-light">
     <li class="p-2 flex flex-row items-center">
       <span>Order - Label - Mapping - Scrub - Hide</span>
     </li>
