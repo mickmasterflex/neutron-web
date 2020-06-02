@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="baseFields" class="w-full">
+    <table v-if="baseFields" class="table w-full">
       <tr class="th-row">
         <th class="th">Name</th>
         <th class="th">Label</th>
@@ -8,19 +8,21 @@
         <th class="th">Type</th>
         <th class="th"></th>
       </tr>
-      <tr v-for="field in baseFields" :key="field.id">
-        <td class="td">
-          <span class="text-link"
-            @click="editBaseField(field.id, field.type)">
-            {{field.name}}</span>
-        </td>
-        <td class="td">{{field.label}}</td>
-        <td class="td">{{field.description}}</td>
-        <td class="td">{{field.type}}</td>
-        <td class="td flex flex-row justify-end">
-          <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
-        </td>
-      </tr>
+      <tbody class="tbody">
+        <tr class="tr" v-for="field in baseFields" :key="field.id">
+          <td class="td">
+            <span class="text-link"
+              @click="editBaseField(field.id, field.type)">
+              {{field.name}}</span>
+          </td>
+          <td class="td">{{field.label}}</td>
+          <td class="td">{{field.description}}</td>
+          <td class="td">{{field.type}}</td>
+          <td class="td flex flex-row justify-end">
+            <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
+          </td>
+        </tr>
+      </tbody>
     </table>
     <div v-else>
       ...Loading...
