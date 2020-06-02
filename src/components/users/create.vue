@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create User</template>
     <template v-slot:body>
       <validation-observer v-slot="{ handleSubmit }">
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -25,8 +25,27 @@ export default {
       email: ''
     }
   },
+  computed: {
+    ...mapGetters({
+      showModal: 'getShowCreateUserModal'
+    })
+  },
   methods: {
-    ...mapActions({ create: 'createUser' }),
+    ...mapActions({
+      create: 'createUser'
+    }),
+    ...mapMutations({
+      closeModal: 'CLOSE_CREATE_USER_MODAL'
+    }),
+    close () {
+      this.first_name = ''
+      this.last_name = ''
+      this.email = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
     submitForm () {
       this.create({
         first_name: this.first_name,
@@ -34,11 +53,6 @@ export default {
         email: this.email
       })
     }
-  },
-  computed: {
-    ...mapGetters({
-      showModal: 'getShowCreateUserModal'
-    })
   }
 }
 </script>
