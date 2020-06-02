@@ -93,10 +93,14 @@
     HUD
 --------------------------------------------------- */
 
-.hud { @apply bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 items-center; }
+.hud { @apply bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 items-center border-2 border-gray-200 }
 
 @media screen and (min-width: 1024px) {
     .hud { @apply grid-cols-2; }
+}
+
+.hud--stat-cards {
+    @apply flex flex-row items-center border-l border-gray-800 pl-4
 }
 
 
@@ -197,10 +201,30 @@
 /* ------------------------------------------------
     Tables
 --------------------------------------------------- */
-.td, .th { @apply font-normal px-2 py-1; }
+.table {
+    @apply border-separate w-full;
+    border-spacing: 0 2px;
+}
+
+.table > .tbody:before {
+    content: '';
+    display: block;
+    @apply h-1
+}
+
+.td, .th { @apply font-normal px-3 py-2 }
+
 .th { @apply text-left text-white bg-gray-900 }
-.th:first-child { @apply rounded-l-sm }
-.th:last-child { @apply rounded-r-sm }
+.th + .th { @apply border-l-2 border-gray-800 }
+.th:first-child { @apply rounded-l }
+.th:last-child { @apply rounded-r }
+
+.td + .td { @apply border-l-2 border-white }
+.td { @apply bg-gray-100 }
+.tr:first-child td:first-child { @apply rounded-tl }
+.tr:first-child td:last-child { @apply rounded-tr }
+.tr:last-child td:first-child { @apply rounded-bl }
+.tr:last-child td:last-child { @apply rounded-br }
 
 
 /* ------------------------------------------------

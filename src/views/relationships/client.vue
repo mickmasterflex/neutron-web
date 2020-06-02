@@ -2,7 +2,7 @@
   <div v-if="client">
     <div class="hud">
       <h1 class="h1 text-white">{{client.name}}</h1>
-      <div>
+      <div class="hud--stat-cards">
         <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
         <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
