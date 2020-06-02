@@ -1,13 +1,15 @@
 <template>
   <div>
-    <table v-if="baseFields" class="table w-full">
-      <tr class="th-row">
-        <th class="th">Name</th>
-        <th class="th">Label</th>
-        <th class="th">Description</th>
-        <th class="th">Type</th>
-        <th class="th"></th>
-      </tr>
+    <table v-if="baseFields" class="table">
+      <thead>
+        <tr class="th-row">
+          <th class="th">Name</th>
+          <th class="th">Label</th>
+          <th class="th">Description</th>
+          <th class="th">Type</th>
+          <th class="th"></th>
+        </tr>
+      </thead>
       <tbody class="tbody">
         <tr class="tr" v-for="field in baseFields" :key="field.id">
           <td class="td">

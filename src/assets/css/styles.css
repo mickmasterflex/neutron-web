@@ -202,7 +202,7 @@
     Tables
 --------------------------------------------------- */
 .table {
-    @apply border-separate;
+    @apply border-separate w-full;
     border-spacing: 0 2px;
 }
 
