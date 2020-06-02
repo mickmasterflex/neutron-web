@@ -15,6 +15,7 @@ const state = {
 
 const getters = {
   getBaseFields: state => state.base_fields,
+  getBaseFieldCount: state => state.base_fields.length,
   getShowCreateBaseFieldModal: state => state.show_create_base_field_modal
 }
 

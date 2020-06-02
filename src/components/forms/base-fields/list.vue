@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchBaseFields: 'fetchBaseFields',
       fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField',
       fetchCurrentBaseTextField: 'fetchCurrentBaseTextField'
     }),
@@ -79,9 +78,6 @@ export default {
       this.showUpdateBaseOptionFieldModal()
       this.fetchCurrentBaseOptionField(id)
     }
-  },
-  created () {
-    this.fetchBaseFields()
   }
 }
 </script>
