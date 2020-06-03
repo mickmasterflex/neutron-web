@@ -2,7 +2,7 @@
   <div>
     <div class="hud">
       <h1 class="h1 text-white">All Partner Contracts</h1>
-      <div>
+      <div class="hud--stat-cards">
         <stat-card :data="partner_count" :title="`Partner Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
