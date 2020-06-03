@@ -22,11 +22,9 @@ export default {
       type: String,
       required: true
     },
-    model: {
-      type: String,
-      required: true
-    },
-    value: Boolean
+    value: {
+      type: [Boolean, String]
+    }
   },
   methods: {
     handleInput (value) {
