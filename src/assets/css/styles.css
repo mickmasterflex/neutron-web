@@ -278,7 +278,10 @@
 .select-field { @apply appearance-none; }
 .select-field-wrap { @apply relative w-64 }
 
-.base-field { @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight; }
+.base-field {
+    @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight;
+    height: 38px;
+}
 .field-sm { @apply w-20 }
 
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
@@ -290,7 +293,7 @@
 .field-group { @apply block }
 
 /* Inline Fields */
-.fields-inline { @apply flex flex-row items-center flex-wrap }
+.fields-inline { @apply flex flex-row items-end flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
 .fields-inline-heading { @apply mb-1 flex flex-row; }

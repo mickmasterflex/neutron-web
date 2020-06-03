@@ -17,14 +17,12 @@
       class="field-group"/>
     <checkbox-single
       v-model="scrub"
-      :field_id="`optionScrub_${option.id}`"
-      field_label="Scrub"
-      class="field-group"/>
+      label_class="w-12"
+      :field_id="`optionScrub_${option.id}`"/>
     <checkbox-single
       v-model="hide"
-      :field_id="`optionHide_${option.id}`"
-      field_label="Hide"
-      class="field-group"/>
+      label_class="w-12"
+      :field_id="`optionHide_${option.id}`"/>
   </div>
 </template>
 
