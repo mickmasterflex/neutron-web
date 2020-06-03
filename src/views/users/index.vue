@@ -6,14 +6,17 @@
         <stat-card :data="getAllUsersCount" :title="`Users`" :color="`teal`"></stat-card>
       </div>
     </div>
+    <div class="flex flex-row justify-between mt-4">
+      <h2 class="h3">Users</h2>
+      <button class="btn btn-green" @click="showCreateUserModal()">Create User</button>
+    </div>
     <user-list :users="users" class="mt-5"></user-list>
-    <h3 class="h3 mt-5 mb-2">Create User</h3>
     <create-user></create-user>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import userList from '@/components/users/list'
 import createUser from '@/components/users/create'
 
@@ -29,7 +32,8 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ fetchUsers: 'fetchUsers' })
+    ...mapActions({ fetchUsers: 'fetchUsers' }),
+    ...mapMutations({ showCreateUserModal: 'SHOW_CREATE_USER_MODAL' })
   },
   created () {
     this.fetchUsers()
