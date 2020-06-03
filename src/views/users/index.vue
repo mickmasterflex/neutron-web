@@ -7,7 +7,6 @@
       </div>
     </div>
     <div class="flex flex-row justify-between mt-4">
-
       <h2 class="h3">Users</h2>
       <button class="btn btn-green" @click="showCreateUserModal()">Create User</button>
     </div>
