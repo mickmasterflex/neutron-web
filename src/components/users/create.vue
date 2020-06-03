@@ -2,14 +2,19 @@
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create User</template>
     <template v-slot:body>
-      <validation-observer v-slot="{ handleSubmit }">
-        <form @submit.prevent="handleSubmit(submitForm)">
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm">
           <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name" class="field-group"></v-text-field>
           <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name" class="field-group"></v-text-field>
           <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email" class="field-group"></v-text-field>
-          <button type="submit" class="btn btn-green mt-5">Submit</button>
         </form>
       </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">
+        <span v-if="userSelected">Create then add Options</span>
+        <span v-else>Create User</span>
+      </button>
     </template>
   </modal-template>
 </template>
@@ -28,7 +33,10 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateUserModal'
-    })
+    }),
+    userSelected () {
+      return this.type === 'text'
+    }
   },
   methods: {
     ...mapActions({
@@ -47,10 +55,14 @@ export default {
       this.closeModal()
     },
     submitForm () {
-      this.create({
-        first_name: this.first_name,
-        last_name: this.last_name,
-        email: this.email
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            first_name: this.first_name,
+            last_name: this.last_name,
+            email: this.email
+          }).then(() => { this.close() })
+        }
       })
     }
   }
