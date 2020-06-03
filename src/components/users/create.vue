@@ -11,10 +11,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">
-        <span v-if="userSelected">Create then add Options</span>
-        <span v-else>Create User</span>
-      </button>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create User</button>
     </template>
   </modal-template>
 </template>
@@ -34,10 +31,7 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateUserModal'
-    }),
-    userSelected () {
-      return this.type === 'text'
-    }
+    })
   },
   mixins: [enterKeyListener],
   methods: {
