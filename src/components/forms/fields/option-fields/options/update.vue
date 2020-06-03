@@ -20,21 +20,17 @@
       class="field-group"/>
     <checkbox-single
       v-model="scrub"
-      :field_id="`optionScrub_${option.id}`"
-      field_label="Scrub"
-      class="field-group"/>
+      label_class="w-12"
+      :field_id="`optionScrub_${option.id}`"/>
     <checkbox-single
       v-model="hide"
-      :field_id="`optionHide_${option.id}`"
-      field_label="Hide"
-      class="field-group"/>
-    <delete-option :id="option.id"></delete-option>
+      label_class="w-12"
+      :field_id="`optionHide_${option.id}`"/>
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
-import deleteOption from '@/components/forms/fields/option-fields/options/delete'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
@@ -80,7 +76,6 @@ export default {
     }
   },
   components: {
-    'delete-option': deleteOption,
     'text-field-prefixed': textFieldPrefixed
   }
 }

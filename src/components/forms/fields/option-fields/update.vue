@@ -1,15 +1,19 @@
 <template>
-  <div>
+  <div class="card card-base mb-1">
+    <h3 class="h3">Field Configuration</h3>
     <validation-observer ref="form">
-      <form @submit.prevent="submitForm">
+      <form @submit.prevent="submitForm" class="well well-light fields-inline">
         <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required" class="field-group"></v-text-field>
         <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping" class="field-group"></text-field>
         <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
       </form>
     </validation-observer>
+    <h3 class="h3 mt-4">Field Options</h3>
     <field-options></field-options>
-    <button @click="submitForm" class="btn btn-green mt-5">Update Field</button>
-    <span @click="resetCurrentField" class="text-link">Close</span>
+    <div class="card-actions">
+      <span class="btn btn-hollow-default" @click="resetCurrentField">Cancel</span>
+      <button @click="submitForm" class="btn btn-green">Update Field</button>
+    </div>
   </div>
 </template>
 

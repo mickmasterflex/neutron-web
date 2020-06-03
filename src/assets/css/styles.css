@@ -85,7 +85,12 @@
 
 /* Misc */
 
-.text-link { @apply text-blue-500 underline cursor-pointer; }
+.text-link {
+    @apply text-blue-500 underline cursor-pointer;
+    transition: color .125s;
+}
+
+.text-link:hover { @apply text-blue-700; }
 
 
 /* ------------------------------------------------
@@ -115,7 +120,8 @@
     Wells
 --------------------------------------------------- */
 
-.well { @apply bg-gray-200 border border-gray-300 p-3 rounded; }
+.well { @apply bg-gray-200 border border-gray-300 p-3 rounded }
+.well-light { @apply bg-gray-100 }
 
 
 /* ------------------------------------------------
@@ -124,6 +130,8 @@
 
 .card { @apply shadow bg-white rounded-md; }
 .card-sm { @apply p-1; }
+.card-base { @apply p-4; }
+.card-actions { @apply flex flex-row justify-end items-center mt-4 }
 
 
 /* ------------------------------------------------
@@ -132,7 +140,13 @@
 
 /* Default */
 
-.btn        { @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border; }
+.btn {
+    @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border;
+    -webkit-appearance: button;
+}
+
+.btn + .btn { @apply ml-2; }
+
 .btn:focus  { @apply outline-none shadow-outline; }
 .btn-lg     { @apply text-lg font-light px-4 py-3 }
 
@@ -264,7 +278,10 @@
 .select-field { @apply appearance-none; }
 .select-field-wrap { @apply relative w-64 }
 
-.base-field { @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight; }
+.base-field {
+    @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight;
+    height: 38px;
+}
 .field-sm { @apply w-20 }
 
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
@@ -276,7 +293,7 @@
 .field-group { @apply block }
 
 /* Inline Fields */
-.fields-inline { @apply flex flex-row items-center flex-wrap }
+.fields-inline { @apply flex flex-row items-end flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
 .fields-inline-heading { @apply mb-1 flex flex-row; }

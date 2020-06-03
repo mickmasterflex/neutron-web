@@ -19,6 +19,7 @@
 <script>
 import draggable from 'vuedraggable'
 import updateOption from '@/components/forms/fields/option-fields/options/update'
+import deleteOption from '@/components/forms/fields/option-fields/options/delete'
 
 export default {
   computed: {
@@ -39,13 +40,9 @@ export default {
     }
   },
   components: {
-<<<<<<< Updated upstream
-    'update-option': updateOption
-=======
     'update-option': updateOption,
     'delete-option': deleteOption,
     'ul-draggable': draggable
->>>>>>> Stashed changes
   }
 }
 </script>

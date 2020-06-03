@@ -1,5 +1,7 @@
 <template>
-  <button class="btn btn-circle btn-hollow-blue" @click="fetchFieldById(id, type)">{{copy}}</button>
+  <button class="btn btn-circle btn-hollow-blue" @click="fetchFieldById(id, type)">
+    <font-awesome-icon :icon="icon"></font-awesome-icon>
+  </button>
 </template>
 
 <script>
@@ -7,9 +9,18 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: Number,
-    type: String,
-    copy: String
+    id: {
+      type: Number,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    icon: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     ...mapActions({

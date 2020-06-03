@@ -1,10 +1,15 @@
 <template>
   <div>
-    <button class="btn btn-green" @click="toggleShowCreateForm(true)" v-show="!showCreateForm">Add Field</button>
+    <button class="btn btn-turquoise" @click="toggleShowCreateForm(true)" v-show="!showCreateForm">
+      <font-awesome-icon icon="plus"></font-awesome-icon> Add Field
+    </button>
     <validation-observer v-slot="{ handleSubmit }" ref="form" v-show="showCreateForm">
       <form @submit.prevent="handleSubmit(submitForm)">
         <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" :options="baseFields"></v-select-field>
-        <button type="submit" class="btn btn-green mt-5">Select Field</button><span class="text-link" @click="toggleShowCreateForm(false)">Close</span>
+        <div class="mt-3">
+          <button type="submit" class="btn btn-green">Select Field</button>
+          <span class="btn btn-hollow-default" @click="toggleShowCreateForm(false)">Cancel</span>
+        </div>
       </form>
     </validation-observer>
   </div>
