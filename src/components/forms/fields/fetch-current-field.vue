@@ -9,9 +9,18 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: Number,
-    type: String,
-    icon: String
+    id: {
+      type: Number,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    icon: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     ...mapActions({
