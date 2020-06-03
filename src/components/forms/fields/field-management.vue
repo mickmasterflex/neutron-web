@@ -34,10 +34,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL'
+      closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL',
+      resetCurrentField: 'RESET_CURRENT_FIELD'
     }),
     close () {
       this.closeModal()
+      this.resetCurrentField()
     }
   }
 }
