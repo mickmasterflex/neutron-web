@@ -1,10 +1,14 @@
 <template>
-  <div class="flex flex-row items-center" v-if="option">
-    <v-text-field
+  <div class="fields-inline" v-if="option">
+    <text-field-prefixed
+      color="blue"
+      icon="arrows-alt-v"
+      field_disabled="true"
+      field_class="field-sm"
+      prefix_group_class="field-draggable"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      rules="required|integer"
-      class="field-group field-sm mr-2"/>
+      class="field-group"/>
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
@@ -31,6 +35,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import deleteOption from '@/components/forms/fields/option-fields/options/delete'
+import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
   data () {
@@ -43,7 +48,8 @@ export default {
     }
   },
   props: {
-    option: Object
+    option: Object,
+    newOrder: Number
   },
   computed: {
     optionData () {
@@ -53,6 +59,9 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
+    },
+    newOrder () {
+      this.order = this.newOrder
     }
   },
   methods: {
@@ -71,7 +80,8 @@ export default {
     }
   },
   components: {
-    'delete-option': deleteOption
+    'delete-option': deleteOption,
+    'text-field-prefixed': textFieldPrefixed
   }
 }
 </script>
