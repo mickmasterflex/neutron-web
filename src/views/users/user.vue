@@ -5,7 +5,7 @@
         <h1 class="h1 text-white">{{user.first_name}} {{user.last_name}}</h1>
         <p class="text-white">{{user.email}}</p>
       </div>
-      <div>
+      <div class="hud--stat-cards">
         <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>
       </div>
     </div>

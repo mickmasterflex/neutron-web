@@ -73,8 +73,15 @@
 /* Headings */
 
 .h1 { @apply text-4xl font-hairline; }
-.h2 { @apply text-3xl font-medium; }
 .h3 { @apply text-2xl font-hairline; }
+
+.h2,
+.h2-hairline {
+    @apply text-3xl
+}
+
+.h2 { @apply font-medium; }
+.h2-hairline { @apply font-hairline text-gray-700 }
 
 /* Misc */
 
@@ -93,10 +100,14 @@
     HUD
 --------------------------------------------------- */
 
-.hud { @apply bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 items-center; }
+.hud { @apply bg-gray-900 rounded-lg w-full p-8 grid grid-cols-1 items-center border-2 border-gray-200 }
 
 @media screen and (min-width: 1024px) {
     .hud { @apply grid-cols-2; }
+}
+
+.hud--stat-cards {
+    @apply flex flex-row items-center border-l border-gray-800 pl-4
 }
 
 
@@ -127,9 +138,10 @@
 
 .btn-circle {
     @apply rounded-full p-1 flex flex-col items-center justify-center;
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+    font-size: .75rem;
 }
 
 /* Standard Buttons */
@@ -196,10 +208,30 @@
 /* ------------------------------------------------
     Tables
 --------------------------------------------------- */
-.td, .th { @apply font-normal px-2 py-1; }
+.table {
+    @apply border-separate w-full;
+    border-spacing: 0 2px;
+}
+
+.table > .tbody:before {
+    content: '';
+    display: block;
+    @apply h-1
+}
+
+.td, .th { @apply font-normal px-3 py-2 }
+
 .th { @apply text-left text-white bg-gray-900 }
-.th:first-child { @apply rounded-l-sm }
-.th:last-child { @apply rounded-r-sm }
+.th + .th { @apply border-l-2 border-gray-800 }
+.th:first-child { @apply rounded-l }
+.th:last-child { @apply rounded-r }
+
+.td + .td { @apply border-l-2 border-white }
+.td { @apply bg-gray-100 }
+.tr:first-child td:first-child { @apply rounded-tl }
+.tr:first-child td:last-child { @apply rounded-tr }
+.tr:last-child td:first-child { @apply rounded-bl }
+.tr:last-child td:last-child { @apply rounded-br }
 
 
 /* ------------------------------------------------
@@ -208,6 +240,21 @@
 
 .app-tab { @apply text-white bg-gray-800 rounded-l-md px-3 py-2 mb-2 w-full transition duration-300; }
 .app-tab:hover { @apply bg-gray-700; }
+
+
+/* ------------------------------------------------
+    Vue Draggable Classes
+--------------------------------------------------- */
+
+.sortable-drag,
+.sortable-chosen {
+    @apply shadow-xl;
+    cursor: grabbing;
+}
+
+.sortable-ghost {
+    @apply border-2 border-gray-500 border-dashed opacity-25
+}
 
 
 /* ------------------------------------------------
@@ -232,14 +279,24 @@
 .fields-inline { @apply flex flex-row items-center flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
+.fields-inline-heading { @apply mb-1 flex flex-row; }
+.fields-inline-heading-item { @apply mx-1 font-bold; }
+
 /* Field Error Inside */
 .field-error-inside { @apply relative }
 .field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 /* Draggable Fields */
+.field-draggable { @apply relative }
+.field-draggable:after {
+    content: '';
+    @apply absolute top-0 right-0 bottom-0 left-0;
+}
 .field-draggable,
+.field-draggable input,
 .field-draggable input:disabled {
-    @apply cursor-move bg-white;
+    @apply bg-white;
+    cursor: grab;
 }
 
 /* Errors */

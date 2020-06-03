@@ -2,7 +2,7 @@
   <div>
     <div class="hud">
       <h1 class="text-white text-4xl font-hairline">All Users</h1>
-      <div>
+      <div class="hud--stat-cards">
         <stat-card :data="getAllUsersCount" :title="`Users`" :color="`teal`"></stat-card>
       </div>
     </div>

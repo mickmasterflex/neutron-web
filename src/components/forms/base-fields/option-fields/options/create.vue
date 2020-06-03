@@ -1,17 +1,15 @@
 <template>
-  <button class="btn btn-turquoise" @click="submitForm()"><font-awesome-icon icon="plus"/> Add an Option</button>
+  <button class="btn btn-turquoise" @click="submitForm()"><font-awesome-icon icon="plus"></font-awesome-icon> Add an Option</button>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    field: Object
-  },
   computed: {
     ...mapGetters({
-      options: 'getCurrentBaseOptions'
+      options: 'getCurrentBaseOptions',
+      field: 'getCurrentBaseOptionField'
     }),
     baseOption: function () {
       return {
