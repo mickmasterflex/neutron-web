@@ -15,7 +15,7 @@ import PortalVue from 'portal-vue'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faMinus, faArrowsAltV } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -90,7 +90,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faPlus, faMinus, faArrowsAltV)
+library.add(faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

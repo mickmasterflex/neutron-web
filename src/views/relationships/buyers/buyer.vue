@@ -7,6 +7,12 @@
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </div>
+
+    <button class="btn btn-blue mt-5" @click="showFieldManagementModal">
+      <font-awesome-icon icon="wrench"></font-awesome-icon> Modify Contract Offer Form Template
+    </button>
+    <field-management :modal-heading="`${buyer.name}`"></field-management>
+
     <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
     <delete-buyer-contract :client="buyer.client" :id="id"></delete-buyer-contract>
 
@@ -18,13 +24,11 @@
 
     <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :buyer="buyer.id"></create-offer>
-
-    <field-management></field-management>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import fieldManagement from '@/components/forms/fields/field-management'
@@ -56,6 +60,9 @@ export default {
     ...mapActions({
       fetchCurrentBuyer: 'fetchCurrentBuyer',
       fetchOffers: 'fetchOffers'
+    }),
+    ...mapMutations({
+      showFieldManagementModal: 'SHOW_FIELD_MANAGEMENT_MODAL'
     })
   },
   created () {

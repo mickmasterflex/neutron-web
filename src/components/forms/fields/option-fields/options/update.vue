@@ -1,10 +1,11 @@
 <template>
-  <div class="flex flex-row items-center" v-if="option">
+  <div class="fields-inline" v-if="option">
     <v-text-field
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
       rules="required|integer"
-      class="field-group field-sm mr-2"/>
+      class="field-group mr-2"
+      field_class="field-sm"/>
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
@@ -16,21 +17,17 @@
       class="field-group"/>
     <checkbox-single
       v-model="scrub"
-      :field_id="`optionScrub_${option.id}`"
-      field_label="Scrub"
-      class="field-group"/>
+      label_class="w-12"
+      :field_id="`optionScrub_${option.id}`"/>
     <checkbox-single
       v-model="hide"
-      :field_id="`optionHide_${option.id}`"
-      field_label="Hide"
-      class="field-group"/>
-    <delete-option :id="option.id"></delete-option>
+      label_class="w-12"
+      :field_id="`optionHide_${option.id}`"/>
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
-import deleteOption from '@/components/forms/fields/option-fields/options/delete'
 
 export default {
   data () {
@@ -69,9 +66,6 @@ export default {
         base_option: this.option.base_option
       })
     }
-  },
-  components: {
-    'delete-option': deleteOption
   }
 }
 </script>
