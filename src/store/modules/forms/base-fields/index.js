@@ -32,13 +32,18 @@ const actions = {
 const mutations = {
   SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields)),
   SET_AVAILABLE_BASE_FIELDS: (state, fields) => {
-    state.available_base_fields = state.base_fields
-    fields.forEach(field => {
-      const index = state.available_base_fields.findIndex(baseField => baseField.id === field.base_field)
-      if (index !== -1) {
-        state.available_base_fields.splice(index, 1)
-      }
-    })
+    if (fields) {
+      state.available_base_fields = state.base_fields
+      fields.forEach(field => {
+        const index = state.available_base_fields.findIndex(baseField => baseField.id === field.base_field)
+        if (index !== -1) {
+          state.available_base_fields.splice(index, 1)
+        }
+      })
+    } else {
+      const error = new Error('fields Object was not provided in the payload')
+      window.console.log(error)
+    }
   },
   SHOW_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = true),
   CLOSE_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = false)
