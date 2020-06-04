@@ -1,11 +1,14 @@
 <template>
   <div class="fields-inline" v-if="option">
-    <v-text-field
+    <text-field-prefixed
+      color="blue"
+      icon="arrows-alt-v"
+      field_disabled="true"
+      field_class="field-sm"
+      prefix_group_class="field-draggable"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      rules="required|integer"
-      class="field-group mr-2"
-      field_class="field-sm"/>
+      class="field-group"/>
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
@@ -28,6 +31,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
   data () {
@@ -40,7 +44,8 @@ export default {
     }
   },
   props: {
-    option: Object
+    option: Object,
+    newOrder: Number
   },
   computed: {
     optionData () {
@@ -50,6 +55,9 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
+    },
+    newOrder () {
+      this.order = this.newOrder
     }
   },
   methods: {
@@ -66,6 +74,9 @@ export default {
         base_option: this.option.base_option
       })
     }
+  },
+  components: {
+    'text-field-prefixed': textFieldPrefixed
   }
 }
 </script>

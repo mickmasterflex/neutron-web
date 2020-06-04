@@ -1,35 +1,48 @@
 <template>
   <div class="well well-light">
     <ul class="fields-inline-heading px-1">
-      <li class="w-20 fields-inline-heading-item">Order</li>
+      <li class="w-24 fields-inline-heading-item">Order</li>
       <li class="w-64 fields-inline-heading-item">Label</li>
       <li class="w-64 fields-inline-heading-item">Mapping</li>
       <li class="w-12 fields-inline-heading-item">Scrub</li>
       <li class="w-12 fields-inline-heading-item">Hide</li>
     </ul>
-    <ul>
-      <li v-for="option in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
-        <update-option :option="option"/>
+    <ul-draggable v-if="options.length" v-bind="dragOptions" v-model="options">
+      <li v-for="(option, index) in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
+        <update-option :option="option" :newOrder="index + 1"/>
         <delete-option :id="option.id" class="mx-1"></delete-option>
       </li>
-    </ul>
+    </ul-draggable>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import draggable from 'vuedraggable'
 import updateOption from '@/components/forms/fields/option-fields/options/update'
 import deleteOption from '@/components/forms/fields/option-fields/options/delete'
 
 export default {
   computed: {
-    ...mapGetters({
-      options: 'getCurrentOptions'
-    })
+    dragOptions () {
+      return {
+        animation: 200,
+        tag: 'ul',
+        handle: '.field-draggable'
+      }
+    },
+    options: {
+      get () {
+        return this.$store.getters.getCurrentOptions
+      },
+      set (updatedOptions) {
+        this.$store.commit('SET_CURRENT_OPTIONS', updatedOptions)
+      }
+    }
   },
   components: {
     'update-option': updateOption,
-    'delete-option': deleteOption
+    'delete-option': deleteOption,
+    'ul-draggable': draggable
   }
 }
 </script>
