@@ -38,6 +38,13 @@ export default {
     },
     textFieldSelected () {
       return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
+    },
+    newFieldOrder () {
+      let val = 0
+      if (this.form.fields.length) {
+        val = this.form.fields.length + 1
+      }
+      return val
     }
   },
   methods: {
@@ -53,12 +60,14 @@ export default {
       if (this.textFieldSelected) {
         this.createTextField({
           form: this.form.id,
-          base_field: this.baseField
+          base_field: this.baseField,
+          order: this.newFieldOrder
         })
       } else if (this.optionFieldSelected) {
         this.createOptionField({
           form: this.form.id,
-          base_field: this.baseField
+          base_field: this.baseField,
+          order: this.newFieldOrder
         })
       }
     }

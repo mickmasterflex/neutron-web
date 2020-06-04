@@ -2,27 +2,39 @@
   <div>
     <div v-if="form">
       <div class="fields-inline-heading bg-gray-900 rounded flex flex-row items-center mb-2">
+        <span class="w-24 th fields-inline-heading-item">Order</span>
         <span class="w-20 th fields-inline-heading-item">ID</span>
         <span class="w-64 th fields-inline-heading-item">Label</span>
         <span class="w-64 th fields-inline-heading-item">Mapping</span>
         <span class="w-20 th fields-inline-heading-item">Deliver</span>
       </div>
-      <div v-for="field in form.fields" :key="field.id">
-        <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
-          <div class="fields-inline">
-            <text-field class="field-group" field_class="field-sm" :value="field.id" field_disabled="true"/>
-            <text-field class="field-group" :value="field.label" field_disabled="true"/>
-            <text-field class="field-group" :value="field.mapping" field_disabled="true"/>
-            <text-field class="field-group" field_class="field-sm" :value="field.deliver" field_disabled="true"/>
+      <ul-draggable v-bind="dragOptions" v-model="form.fields">
+        <li v-for="field in form.fields" :key="field.id">
+          <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
+            <div class="fields-inline">
+              <text-field-prefixed
+                color="blue"
+                icon="arrows-alt-v"
+                field_disabled="true"
+                field_class="field-sm"
+                prefix_group_class="field-draggable"
+                v-model="field.order"
+                :field_id="`fieldOrder_${field.id}`"
+                class="field-group"/>
+              <text-field class="field-group" field_class="field-sm" :value="field.id" field_disabled="true"/>
+              <text-field class="field-group" :value="field.label" field_disabled="true"/>
+              <text-field class="field-group" :value="field.mapping" field_disabled="true"/>
+              <text-field class="field-group" field_class="field-sm" :value="field.deliver" field_disabled="true"/>
+            </div>
+            <span class="flex flex-row">
+              <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
+              <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
+            </span>
           </div>
-          <span class="flex flex-row">
-            <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
-            <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
-          </span>
-        </div>
-        <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
-        <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
-      </div>
+          <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
+          <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
+        </li>
+      </ul-draggable>
     </div>
     <div v-else>
       No Fields
@@ -41,6 +53,8 @@ import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
 import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
+import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
+import draggable from 'vuedraggable'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -56,7 +70,9 @@ export default {
     'delete-field': deleteField,
     'update-text-field': updateTextField,
     'update-option-field': updateOptionField,
-    'fetch-current-field': fetchCurrentField
+    'fetch-current-field': fetchCurrentField,
+    'text-field-prefixed': textFieldPrefixed,
+    'ul-draggable': draggable
   },
   methods: {
     ...mapMutations({
@@ -70,7 +86,14 @@ export default {
       form: 'getCurrentForm',
       showUpdateTextField: 'getShowUpdateTextField',
       showUpdateOptionField: 'getShowUpdateOptionField'
-    })
+    }),
+    dragOptions () {
+      return {
+        animation: 200,
+        tag: 'ul',
+        handle: '.field-draggable'
+      }
+    }
   },
   watch: {
     currentField () {
