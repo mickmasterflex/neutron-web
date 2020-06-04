@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseFields: 'getBaseFields',
+      baseFields: 'getAvailableBaseFields',
       showCreateForm: 'getShowCreateField',
       form: 'getCurrentForm'
     }),
@@ -47,7 +47,8 @@ export default {
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_FIELD'
+      toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_FIELD',
+      setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
     submitForm () {
       if (this.textFieldSelected) {
@@ -63,8 +64,12 @@ export default {
       }
     }
   },
-  created () {
-    this.fetchBaseFields()
+  updated () {
+    this.fetchBaseFields().then(() => {
+      if (this.form) {
+        this.setAvailableBaseFields(this.form.fields)
+      }
+    })
   }
 }
 </script>
