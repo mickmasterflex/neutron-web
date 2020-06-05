@@ -76,14 +76,14 @@ export default {
       }
     }
   },
-  created () {
-    this.fetchBaseFields()
-  },
   watch: {
     fields: function () {
       this.setBaseFields()
       this.setAvailableBaseFields(this.fields)
     }
+  },
+  created () {
+    this.fetchBaseFields()
   },
   updated () {
     this.setAvailableBaseFields(this.fields)
