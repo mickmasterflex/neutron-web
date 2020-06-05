@@ -33,7 +33,7 @@ const mutations = {
   SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields)),
   SET_AVAILABLE_BASE_FIELDS: (state, fields) => {
     if (fields) {
-      state.available_base_fields = state.base_fields
+      state.available_base_fields = [...state.base_fields]
       fields.forEach(field => {
         const index = state.available_base_fields.findIndex(baseField => baseField.id === field.base_field)
         if (index !== -1) {

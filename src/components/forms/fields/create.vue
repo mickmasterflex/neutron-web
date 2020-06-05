@@ -78,7 +78,6 @@ export default {
   },
   watch: {
     fields: function () {
-      this.setBaseFields()
       this.setAvailableBaseFields(this.fields)
     }
   },
