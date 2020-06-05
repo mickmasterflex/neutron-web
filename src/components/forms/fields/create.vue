@@ -30,6 +30,9 @@ export default {
       showCreateField: 'getShowCreateField',
       form: 'getCurrentForm'
     }),
+    fields () {
+      return this.form.fields
+    },
     selectedBaseField () {
       return this.baseFields.find(({ id }) => id === parseInt(this.baseField))
     },
@@ -48,6 +51,7 @@ export default {
     }),
     ...mapMutations({
       toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD',
+      setBaseFields: 'SET_BASE_FIELDS',
       setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
     submitForm () {
@@ -64,12 +68,17 @@ export default {
       }
     }
   },
+  created () {
+    this.fetchBaseFields()
+  },
+  watch: {
+    fields: function () {
+      this.setBaseFields()
+      this.setAvailableBaseFields(this.fields)
+    }
+  },
   updated () {
-    this.fetchBaseFields().then(() => {
-      if (this.form) {
-        this.setAvailableBaseFields(this.form.fields)
-      }
-    })
+    this.setAvailableBaseFields(this.fields)
   }
 }
 </script>

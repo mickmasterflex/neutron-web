@@ -20,7 +20,6 @@ const actions = {
       .then(response => {
         commit('ADD_FIELD', response.data)
         commit('SET_CURRENT_FIELD', response.data)
-        commit('TOGGLE_SHOW_CREATE_FIELD', false)
       })
   },
   async updateTextField ({ commit }, updatedField) {
