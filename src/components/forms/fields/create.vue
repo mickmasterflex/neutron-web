@@ -37,10 +37,18 @@ export default {
       return this.baseFields.find(({ id }) => id === parseInt(this.baseField))
     },
     optionFieldSelected () {
-      return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
+      if (this.selectedBaseField) {
+        return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
+      } else {
+        return null
+      }
     },
     textFieldSelected () {
-      return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
+      if (this.selectedBaseField) {
+        return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
+      } else {
+        return null
+      }
     }
   },
   methods: {

@@ -41,7 +41,7 @@ const mutations = {
         }
       })
     } else {
-      const error = new Error('fields Object was not provided in the payload')
+      const error = new Error('fields Array was not provided in the payload')
       window.console.log(error)
     }
   },
