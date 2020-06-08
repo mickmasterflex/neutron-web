@@ -11,8 +11,13 @@
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
     <buyer-list :contracts="buyers"></buyer-list>
 
-    <h3 class="h3 mt-5 mb-2">Partner Contracts</h3>
+    <div class="flex flex-row justify-between mt-4">
+    <h3 class="h3">Partner Contracts</h3>
+      <button class="btn btn-green" @click="showCreatePartnerModal()">Create Partner Contract</button>
+    </div>
+
     <partner-list :contracts="partners"></partner-list>
+    <create-partner-contract></create-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
     <update-client :client="client"></update-client>
@@ -20,16 +25,13 @@
     <h3 class="h3 mt-5 mb-2">Delete Client</h3>
     <delete-client :id="client.id"></delete-client>
 
-    <h3 class="h3 mt-5 mb-2">Create Partner Contract</h3>
-    <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
-
-    <h3 class="h3 mt-5 mb-2">Create Buyer Contract</h3>
+   <h3 class="h3 mt-5 mb-2">Create Buyer Contract</h3>
     <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteClient from '@/components/clients/delete'
 import updateClient from '@/components/clients/update'
 import partnerList from '@/components/partners/list'
@@ -69,7 +71,8 @@ export default {
       fetchPartners: 'fetchPartners',
       fetchBuyers: 'fetchBuyers',
       fetchCurrentClient: 'fetchCurrentClient'
-    })
+    }),
+    ...mapMutations({ showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL' })
   },
   created () {
     this.fetchCurrentClient(this.id)
