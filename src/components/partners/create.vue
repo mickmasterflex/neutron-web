@@ -1,4 +1,5 @@
 <template>
+  <modal-template :show="showModal" @close="close">
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name" class="field-group"></v-text-field>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -17,6 +18,11 @@ export default {
       name: '',
       parent: ''
     }
+  },
+  computed: {
+    ...mapGetters({
+      showModal: 'getShowCreatePartnerModal'
+    })
   },
   props: {
     client: {
