@@ -6,18 +6,24 @@
         <stat-card :data="partner_count" :title="`Partner Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <h3 class="h3 mt-5 mb-2">All Partners</h3>
-    <partner-list :contracts="partners"></partner-list>
+    <div class="flex flex-row justify-between mt-4">
+    <h3 class="h3">Partners</h3>
+      <button class="btn btn-green" @click="showCreatePartnerModal()">Create Partner</button>
+    </div>
+    <partner-list :contracts="partners" class="mt-5"></partner-list>
+    <create-partner-contract></create-partner-contract>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import partnerList from '@/components/partners/list'
-import { mapActions, mapGetters } from 'vuex'
+import createPartner from '@/components/partners/create'
 
 export default {
   components: {
-    'partner-list': partnerList
+    'partner-list': partnerList,
+    'create-partner-contract': createPartner
   },
   computed: {
     ...mapGetters({
@@ -26,7 +32,8 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ fetchPartners: 'fetchPartners' })
+    ...mapActions({ fetchPartners: 'fetchPartners' }),
+    ...mapMutations({ showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL' })
   },
   created () {
     this.fetchPartners()
