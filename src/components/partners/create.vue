@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Partner Contract</template>
     <template v-slot:body>
   <validation-observer ref="form">
@@ -40,8 +40,22 @@ export default {
       create: 'createPartner'
     }),
     ...mapMutations({
-      showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL'
+      showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL',
+      closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
     }),
+    enterKeyAction () {
+      if (this.showModal) {
+        this.submitForm()
+      }
+    },
+    close () {
+      this.name = ''
+      this.parent = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
     ...mapActions({ create: 'createPartner' }),
     submitForm () {
       this.create({
