@@ -7,7 +7,6 @@
         <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
-
     <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
     <buyer-list :contracts="buyers"></buyer-list>
 
@@ -15,9 +14,8 @@
     <h3 class="h3">Partner Contracts</h3>
       <button class="btn btn-green" @click="showCreatePartnerModal()">Create Partner Contract</button>
     </div>
-
     <partner-list :contracts="partners"></partner-list>
-    <create-partner-contract></create-partner-contract>
+    <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
 
     <h3 class="h3 mt-5 mb-2">Edit Client</h3>
     <update-client :client="client"></update-client>
@@ -72,7 +70,9 @@ export default {
       fetchBuyers: 'fetchBuyers',
       fetchCurrentClient: 'fetchCurrentClient'
     }),
-    ...mapMutations({ showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL' })
+    ...mapMutations({
+      showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL'
+    })
   },
   created () {
     this.fetchCurrentClient(this.id)

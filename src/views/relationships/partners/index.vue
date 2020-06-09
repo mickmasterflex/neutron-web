@@ -7,21 +7,23 @@
       </div>
     </div>
     <div class="flex flex-row justify-between mt-4">
-    <h3 class="h3 mt-5 mb-2">All Partners</h3>
+    <h3 class="h3">Partners</h3>
       <button class="btn btn-green" @click="showCreatePartnerModal()">Create Partner</button>
     </div>
-    <partner-list :contracts="partners"></partner-list>
-    <create-user></create-user>
+    <partner-list :contracts="partners" class="mt-5"></partner-list>
+    <create-partner-contract></create-partner-contract>
   </div>
 </template>
 
 <script>
-import partnerList from '@/components/partners/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import partnerList from '@/components/partners/list'
+import createPartner from '@/components/partners/create'
 
 export default {
   components: {
-    'partner-list': partnerList
+    'partner-list': partnerList,
+    'create-partner-contract': createPartner
   },
   computed: {
     ...mapGetters({
@@ -31,7 +33,7 @@ export default {
   },
   methods: {
     ...mapActions({ fetchPartners: 'fetchPartners' }),
-    ...mapMutations({ showCreateUserModal: 'SHOW_CREATE_USER_MODAL' })
+    ...mapMutations({ showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL' })
   },
   created () {
     this.fetchPartners()

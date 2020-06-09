@@ -9,11 +9,15 @@
     </form>
   </validation-observer>
     </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Partner Contract</button>
+    </template>
   </modal-template>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -35,19 +39,14 @@ export default {
       type: Array
     }
   },
+  mixins: [enterKeyListener],
   methods: {
     ...mapActions({
       create: 'createPartner'
     }),
     ...mapMutations({
-      showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL',
       closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.name = ''
       this.parent = ''
@@ -56,12 +55,22 @@ export default {
       })
       this.closeModal()
     },
-    ...mapActions({ create: 'createPartner' }),
+    enterKeyAction () {
+      if (this.showModal) {
+        this.submitForm()
+      }
+    },
     submitForm () {
-      this.create({
-        name: this.name,
-        parent: this.parent,
-        client: this.$props.client
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            name: this.name,
+            parent: this.parent,
+            client: this.$props.client
+          }).then(() => {
+            this.close()
+          })
+        }
       })
     }
   }
