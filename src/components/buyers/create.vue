@@ -7,7 +7,7 @@
       <button class="btn btn-green mt-5">Create Buyer Contract</button>
     </form>
   </validation-observer>
-  </modal-template>
+    </modal-template>
 </template>
 
 <script>
