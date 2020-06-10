@@ -17,6 +17,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -38,9 +39,13 @@ export default {
       showModal: 'getShowCreateBuyerModal'
     })
   },
+  mixins: [enterKeyListener],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_BUYER_MODAL'
+    }),
+    ...mapActions({
+      create: 'createBuyer'
     }),
     close () {
       this.name = ''
@@ -50,7 +55,11 @@ export default {
       })
       this.closeModal()
     },
-    ...mapActions({ create: 'createBuyer' }),
+    enterKeyAction () {
+      if (this.showModal) {
+        this.submitForm()
+      }
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
