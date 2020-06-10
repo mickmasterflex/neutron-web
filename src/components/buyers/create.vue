@@ -9,6 +9,9 @@
     </form>
   </validation-observer>
     </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Buyer Contract</button>
+    </template>
   </modal-template>
 </template>
 
@@ -49,10 +52,16 @@ export default {
     },
     ...mapActions({ create: 'createBuyer' }),
     submitForm () {
-      this.create({
-        name: this.name,
-        parent: this.parent,
-        client: this.$props.client
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            name: this.name,
+            parent: this.parent,
+            client: this.$props.client
+          }).then(() => {
+            this.close()
+          })
+        }
       })
     }
   }
