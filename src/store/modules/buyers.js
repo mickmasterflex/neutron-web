@@ -2,7 +2,8 @@ import axios from '@/axios'
 
 const state = {
   buyers: [],
-  current_buyer: {}
+  current_buyer: {},
+  show_create_buyer_modal: false
 }
 
 const getters = {
@@ -21,7 +22,8 @@ const getters = {
       siblings.splice(index, 1)
     }
     return siblings
-  }
+  },
+  getShowCreateBuyerModal: state => state.show_create_buyer_modal
 }
 
 const actions = {
@@ -68,7 +70,9 @@ const mutations = {
       state.buyers.splice(index, 1, updatedBuyer)
     }
   },
-  REMOVE_BUYER: (state, id) => (state.buyers = state.buyers.filter(buyer => buyer.id !== id))
+  REMOVE_BUYER: (state, id) => (state.buyers = state.buyers.filter(buyer => buyer.id !== id)),
+  SHOW_CREATE_BUYER_MODAL: (state) => (state.show_create_buyer_modal = true),
+  CLOSE_CREATE_BUYER_MODAL: (state) => (state.show_create_buyer_modal = false)
 }
 
 export default {
