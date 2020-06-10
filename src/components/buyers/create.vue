@@ -1,15 +1,23 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }">
-    <form @submit.prevent="handleSubmit(submitForm)">
+  <modal-template :show="showModal" @close="close">
+    <template v-slot:header>Create Buyer Contract</template>
+    <template v-slot:body>
+  <validation-observer ref="form">
+    <form @submit.prevent="submitForm">
       <v-text-field v-model="name" rules="required" field_id="buyerName" field_label="Name" class="field-group"></v-text-field>
       <select-field v-model="parent" :options="buyerContracts" field_id="parent" field_label="Parent" class="field-group"></select-field>
-      <button class="btn btn-green mt-5">Create Buyer Contract</button>
     </form>
   </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Buyer Contract</button>
+    </template>
+  </modal-template>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -26,13 +34,43 @@ export default {
       type: Array
     }
   },
+  computed: {
+    ...mapGetters({
+      showModal: 'getShowCreateBuyerModal'
+    })
+  },
+  mixins: [enterKeyListener],
   methods: {
-    ...mapActions({ create: 'createBuyer' }),
+    ...mapMutations({
+      closeModal: 'CLOSE_CREATE_BUYER_MODAL'
+    }),
+    ...mapActions({
+      create: 'createBuyer'
+    }),
+    close () {
+      this.name = ''
+      this.parent = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
+    enterKeyAction () {
+      if (this.showModal) {
+        this.submitForm()
+      }
+    },
     submitForm () {
-      this.create({
-        name: this.name,
-        parent: this.parent,
-        client: this.$props.client
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            name: this.name,
+            parent: this.parent,
+            client: this.$props.client
+          }).then(() => {
+            this.close()
+          })
+        }
       })
     }
   }
