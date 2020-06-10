@@ -7,8 +7,12 @@
         <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </div>
-    <h3 class="h3 mt-5 mb-2">Buyer Contracts</h3>
+    <div class="flex flex-row justify-between mt-4">
+    <h3 class="h3">Buyer Contracts</h3>
+      <button class="btn btn-green" @click="showCreateBuyerModal()">Create Buyer Contract</button>
+    </div>
     <buyer-list :contracts="buyers"></buyer-list>
+    <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
 
     <div class="flex flex-row justify-between mt-4">
     <h3 class="h3">Partner Contracts</h3>
@@ -22,9 +26,6 @@
 
     <h3 class="h3 mt-5 mb-2">Delete Client</h3>
     <delete-client :id="client.id"></delete-client>
-
-   <h3 class="h3 mt-5 mb-2">Create Buyer Contract</h3>
-    <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
   </div>
 </template>
 
@@ -71,7 +72,8 @@ export default {
       fetchCurrentClient: 'fetchCurrentClient'
     }),
     ...mapMutations({
-      showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL'
+      showCreatePartnerModal: 'SHOW_CREATE_PARTNER_MODAL',
+      showCreateBuyerModal: 'SHOW_CREATE_BUYER_MODAL'
     })
   },
   created () {
