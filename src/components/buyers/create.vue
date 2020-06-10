@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Buyer Contract</template>
     <template v-slot:body>
   <validation-observer ref="form">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -36,6 +36,17 @@ export default {
     })
   },
   methods: {
+    ...mapMutations({
+      closeModal: 'CLOSE_CREATE_BUYER_MODAL'
+    }),
+    close () {
+      this.name = ''
+      this.parent = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
     ...mapActions({ create: 'createBuyer' }),
     submitForm () {
       this.create({
