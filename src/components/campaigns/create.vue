@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Campaign</template>
     <template v-slot:body>
   <validation-observer ref="form">
@@ -10,11 +10,14 @@
     </form>
   </validation-observer>
     </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Campaign</button>
+    </template>
   </modal-template>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -35,11 +38,28 @@ export default {
     ...mapActions({
       create: 'createCampaign'
     }),
+    ...mapMutations({
+      closeModal: 'CLOSE_CREATE_CAMPAIGN_MODAL'
+    }),
+    close() {
+      this.name = ''
+      this.campaign_code = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
     submitForm () {
-      this.create({
-        name: this.name,
-        contract: this.partner,
-        code: this.campaign_code
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            name: this.name,
+            contract: this.partner,
+            code: this.campaign_code
+          }).then(() => {
+            this.close()
+          })
+        }
       })
     }
   }
