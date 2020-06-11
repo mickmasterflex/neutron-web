@@ -1,4 +1,5 @@
 <template>
+  <modal-template :show="showModal">
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="campaignName" field_label="Campaign Name" class="field-group"></v-text-field>
@@ -6,9 +7,11 @@
       <button type="submit" class="btn btn-green mt-5">Create Campaign</button>
     </form>
   </validation-observer>
+  </modal-template>
 </template>
+
 <script>
-import { mapActions } from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
 
 export default {
   data () {
@@ -19,6 +22,11 @@ export default {
   },
   props: {
     partner: Number
+  },
+  computed: {
+    ...mapGetters({
+      showModal: 'getShowCreateCampaignModal'
+    })
   },
   methods: {
     ...mapActions({
