@@ -59,7 +59,7 @@ const mutations = {
   },
   REMOVE_CAMPAIGN: (state, id) => (state.campaigns = state.campaigns.filter(campaign => campaign.id !== id)),
   SHOW_CREATE_CAMPAIGN_MODAL: (state) => (state.show_create_campaign_modal = true),
-  CLOSE_CREATE_CAMPAIGN_MODAL: (state) => (state.show_create_camaign_modal = false)
+  CLOSE_CREATE_CAMPAIGN_MODAL: (state) => (state.show_create_campaign_modal = false)
 }
 
 export default {
