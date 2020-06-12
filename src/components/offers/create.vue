@@ -10,6 +10,9 @@
     </form>
   </validation-observer>
     </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Offer</button>
+    </template>
   </modal-template>
 </template>
 <script>
@@ -48,18 +51,22 @@ export default {
       })
       this.closeModal()
     },
-    submitForm () {
-      this.create({
-        name: this.name,
-        contract: this.buyer,
-        product: this.product
-      }).then(() => {
-        this.close()
-      })
+    created () {
+      this.fetchProducts()
     }
   },
-  created () {
-    this.fetchProducts()
+  submitForm () {
+    this.$refs.form.validate().then(success => {
+      if (success) {
+        this.create({
+          name: this.name,
+          contract: this.buyer,
+          product: this.product
+        }).then(() => {
+          this.close()
+        })
+      }
+    })
   }
 }
 </script>
