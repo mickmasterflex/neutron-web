@@ -2,14 +2,16 @@ import axios from '@/axios'
 
 const state = {
   offers: [],
-  current_offer: {}
+  current_offer: {},
+  show_create_offer_modal: false
 }
 
 const getters = {
   getCurrentOffer: state => state.current_offer,
   getOffersByBuyer: (state) => (buyerId) => {
     return state.offers.filter(offer => offer.contract === buyerId)
-  }
+  },
+  getShowCreateOfferModal: state => state.show_create_offer_modal
 }
 const actions = {
   async fetchOffers ({ commit }) {
@@ -55,7 +57,9 @@ const mutations = {
       state.offers.splice(index, 1, updatedOffer)
     }
   },
-  REMOVE_OFFER: (state, id) => (state.offers = state.offers.filter(offer => offer.id !== id))
+  REMOVE_OFFER: (state, id) => (state.offers = state.offers.filter(offer => offer.id !== id)),
+  SHOW_CREATE_OFFER_MODAL: (state) => (state.show_create_offer_modal = true),
+  CLOSE_CREATE_OFFER_MODAL: (state) => (state.show_create_offer_modal = false)
 }
 
 export default {
