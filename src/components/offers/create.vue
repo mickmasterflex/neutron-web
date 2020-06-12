@@ -40,9 +40,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: 'getAllProducts'
-    }),
-    showModal: 'getShowCreateOfferModal'
+      products: 'getAllProducts',
+      showModal: 'getShowCreateOfferModal'
+    })
   },
   created () {
     this.fetchProducts()
