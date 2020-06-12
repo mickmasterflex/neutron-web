@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Offer Contract</template>
     <template v-slot:body>
   <validation-observer ref="form">
@@ -13,7 +13,7 @@
   </modal-template>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -21,6 +21,12 @@ export default {
       name: '',
       product: ''
     }
+  },
+  computed: {
+    ...mapGetters({
+      products: 'getAllProducts',
+      showModal: 'getShowCreateOfferModal'
+    })
   },
   props: {
     buyer: Number
@@ -30,19 +36,27 @@ export default {
       create: 'createOffer',
       fetchProducts: 'fetchProducts'
     }),
+    ...mapMutations({
+      closeModal: 'CLOSE_CREATE_OFFER_MODAL'
+    }),
+    close () {
+      this.name = ''
+      this.contract = ''
+      this.product = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
     submitForm () {
       this.create({
         name: this.name,
         contract: this.buyer,
         product: this.product
+      }).then(() => {
+        this.close()
       })
     }
-  },
-  computed: {
-    ...mapGetters({
-      products: 'getAllProducts',
-      showModal: 'getShowCreateOfferModal'
-    })
   },
   created () {
     this.fetchProducts()
