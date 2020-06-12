@@ -17,6 +17,7 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -34,6 +35,7 @@ export default {
   props: {
     buyer: Number
   },
+  mixins: [enterKeyListener],
   methods: {
     ...mapActions({
       create: 'createOffer',
@@ -51,22 +53,27 @@ export default {
       })
       this.closeModal()
     },
-    created () {
-      this.fetchProducts()
+    enterKeyAction () {
+      if (this.showModal) {
+        this.submitForm()
+      }
+    },
+    submitForm () {
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            name: this.name,
+            contract: this.buyer,
+            product: this.product
+          }).then(() => {
+            this.close()
+          })
+        }
+      })
     }
   },
-  submitForm () {
-    this.$refs.form.validate().then(success => {
-      if (success) {
-        this.create({
-          name: this.name,
-          contract: this.buyer,
-          product: this.product
-        }).then(() => {
-          this.close()
-        })
-      }
-    })
+  created () {
+    this.fetchProducts()
   }
 }
 </script>
