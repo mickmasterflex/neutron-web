@@ -10,11 +10,15 @@
     </form>
   </validation-observer>
       </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Client</button>
+    </template>
   </modal-template>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
   data () {
@@ -28,6 +32,7 @@ export default {
       showModal: 'getShowCreateClientModal'
     })
   },
+  mixins: [enterKeyListener],
   methods: {
     ...mapActions({ create: 'createClient' }),
     ...mapMutations({
@@ -35,16 +40,27 @@ export default {
     }),
     close () {
       this.name = ''
-      this.parent = ''
+      this.slug = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
       this.closeModal()
     },
+    enterKeyAction () {
+      if (this.showModal) {
+        this.submitForm()
+      }
+    },
     submitForm () {
-      this.create({
-        name: this.name,
-        slug: this.slug
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            name: this.name,
+            slug: this.slug
+          }).then(() => {
+            this.close()
+          })
+        }
       })
     }
   }
