@@ -1,16 +1,16 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>Create Client</template>
+    <template v-slot:header>Create Product</template>
     <template v-slot:body>
-  <validation-observer ref="form">
-    <form @submit.prevent="submitForm">
-      <v-text-field v-model="name" rules="required" field_id="clientName" field_label="Client Name" class="field-group"></v-text-field>
-      <v-text-field v-model="slug" rules="required|alpha_dash" field_id="clientSlug" field_label="Slug" class="field-group"></v-text-field>
-    </form>
-  </validation-observer>
-      </template>
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm">
+          <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name" class="field-group"></v-text-field>
+          <v-text-feild v-model="slug" :options="slug" field_id="slug" field_label="Slug" class="slug"></v-text-feild>
+        </form>
+      </validation-observer>
+    </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Create Client</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Product</button>
     </template>
   </modal-template>
 </template>
@@ -23,23 +23,33 @@ export default {
   data () {
     return {
       name: '',
-      slug: ''
+      parent: ''
     }
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateClientModal'
+      showModal: 'getShowCreatePartnerModal'
     })
+  },
+  props: {
+    client: {
+      type: Number
+    },
+    partnerContracts: {
+      type: Array
+    }
   },
   mixins: [enterKeyListener],
   methods: {
-    ...mapActions({ create: 'createClient' }),
+    ...mapActions({
+      create: 'createPartner'
+    }),
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_CLIENT_MODAL'
+      closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
     }),
     close () {
       this.name = ''
-      this.slug = ''
+      this.parent = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -55,7 +65,8 @@ export default {
         if (success) {
           this.create({
             name: this.name,
-            slug: this.slug
+            parent: this.parent,
+            client: this.$props.client
           }).then(() => {
             this.close()
           })
