@@ -83,6 +83,7 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {

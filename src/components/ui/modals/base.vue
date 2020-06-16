@@ -24,7 +24,7 @@
 
 <script>
 import statusBar from '@/components/ui/modals/statusBar'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -35,10 +35,8 @@ export default {
     ...mapGetters({ unsavedChangesInModal: 'getChangesInModalUnsaved' })
   },
   methods: {
-    ...mapMutations({ toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED' }),
     close () {
       this.$emit('close')
-      this.toggleChangesInModalUnsaved(false)
     }
   },
   watch: {
