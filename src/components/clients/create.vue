@@ -3,12 +3,11 @@
     <template v-slot:header>Create Client</template>
     <template v-slot:body>
       <validation-observer ref="form">
-      <form @submit.prevent="submitForm">
-        <v-text-field v-model="name" rules="required" field_id="clientName" field_label="Client Name" class="field-group"></v-text-field>
-        <v-text-field v-model="slug" rules="required|alpha_dash" field_id="clientSlug" field_label="Slug" class="field-group"></v-text-field>
-        <button type="submit" class="btn btn-green mt-5">Submit</button>
-      </form>
-       </validation-observer>
+        <form @submit.prevent="submitForm">
+          <v-text-field v-model="name" rules="required" field_id="clientName" field_label="Client Name" class="field-group"></v-text-field>
+          <v-text-field v-model="slug" rules="required|alpha_dash" field_id="clientSlug" field_label="Slug" class="field-group"></v-text-field>
+        </form>
+      </validation-observer>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-lg btn-green">Create Client</button>
