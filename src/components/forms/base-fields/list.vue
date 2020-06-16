@@ -75,12 +75,14 @@ export default {
       }
     },
     editBaseTextField (id) {
-      this.showUpdateBaseTextFieldModal()
-      this.fetchCurrentBaseTextField(id)
+      this.fetchCurrentBaseTextField(id).then(() => {
+        this.showUpdateBaseTextFieldModal()
+      })
     },
     editBaseOptionField (id) {
-      this.showUpdateBaseOptionFieldModal()
-      this.fetchCurrentBaseOptionField(id)
+      this.fetchCurrentBaseOptionField(id).then(() => {
+        this.showUpdateBaseOptionFieldModal()
+      })
     }
   }
 }

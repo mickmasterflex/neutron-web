@@ -5,6 +5,7 @@ import buyers from './modules/buyers'
 import campaigns from '@/store/modules/campaigns'
 import clients from './modules/clients'
 import forms from '@/store/modules/forms'
+import modals from './modules/modals'
 import offers from './modules/offers'
 import partners from './modules/partners'
 import products from './modules/products'
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     campaigns,
     clients,
     forms,
+    modals,
     offers,
     partners,
     products,
