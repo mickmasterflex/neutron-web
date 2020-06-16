@@ -29,7 +29,6 @@ const actions = {
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
         commit('SORT_CURRENT_OPTIONS')
-        commit('TOGGLE_SHOW_CREATE_FIELD', false)
       })
   },
   async updateOptionField ({ commit }, updatedField) {
