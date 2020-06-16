@@ -60,12 +60,11 @@ export default {
   .modal-backdrop {
     background: rgba(0,0,0,.75);
   }
-  .modal-dialog {
-    width: 100%;
+  .modal-dialog, .modal-alert {
     max-width: 900px;
-    margin: 30px auto;
   }
-  .modal-dialog-lg {
+  .modal-lg .modal-dialog,
+  .modal-lg .modal-alert {
     max-width: 1500px;
   }
 </style>

@@ -10,12 +10,13 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
+import 'animate.css'
 import '@/assets/css/styles.css'
 import PortalVue from 'portal-vue'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -90,7 +91,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt)
+library.add(faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThumbsUp)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------
