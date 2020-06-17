@@ -21,6 +21,18 @@ const getters = {
   getShowFieldManagementModal: state => state.show_field_management_modal
 }
 
+const actions = {
+  async updateModifiedFields ({ dispatch }) {
+    await state.modified_fields.forEach(field => {
+      if (field.type === 'text' || field.type === 'textarea') {
+        dispatch('updateTextField', field)
+      } else if (field.type === 'select' || field.type === 'radio') {
+        dispatch('updateOptionField', field)
+      }
+    })
+  }
+}
+
 const mutations = {
   SET_CURRENT_FORM: (state, form) => (state.current_form = form),
   ADD_FIELD: (state, field) => state.current_form.fields.push(field),
@@ -50,5 +62,6 @@ export default {
   modules,
   state,
   getters,
+  actions,
   mutations
 }

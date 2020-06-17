@@ -49,7 +49,10 @@ export default {
         id: this.field.id,
         label: this.field.label,
         mapping: this.field.mapping,
-        deliver: this.field.deliver
+        deliver: this.field.deliver,
+        type: this.field.type,
+        form: this.field.form,
+        base_field: this.field.base_field
       })
     }
   },
