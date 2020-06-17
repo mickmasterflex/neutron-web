@@ -11,21 +11,7 @@
       <ul-draggable v-bind="dragOptions" v-model="form.fields">
         <li v-for="field in form.fields" :key="field.id">
           <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
-            <div class="fields-inline">
-              <text-field-prefixed
-                color="blue"
-                icon="arrows-alt-v"
-                field_disabled="true"
-                field_class="field-sm"
-                prefix_group_class="field-draggable"
-                v-model="field.order"
-                :field_id="`fieldOrder_${field.id}`"
-                class="field-group"/>
-              <text-field class="field-group" field_class="field-sm" :value="field.id" field_disabled="true"/>
-              <text-field class="field-group" :value="field.label" field_disabled="true"/>
-              <text-field class="field-group" :value="field.mapping" field_disabled="true"/>
-              <text-field class="field-group" field_class="field-sm" :value="field.deliver" field_disabled="true"/>
-            </div>
+            <field-list-item :field="field"></field-list-item>
             <span class="flex flex-row">
               <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
               <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
@@ -53,7 +39,7 @@ import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
 import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
-import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
+import fieldListItem from '@/components/forms/fields/list-item'
 import draggable from 'vuedraggable'
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -71,7 +57,7 @@ export default {
     'update-text-field': updateTextField,
     'update-option-field': updateOptionField,
     'fetch-current-field': fetchCurrentField,
-    'text-field-prefixed': textFieldPrefixed,
+    'field-list-item': fieldListItem,
     'ul-draggable': draggable
   },
   methods: {
