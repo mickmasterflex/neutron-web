@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal" @close="close" dialogClass="modal-dialog-lg">
+  <modal-template :show="showModal" @close="close" modalClass="modal-lg">
     <template v-slot:header>
       Modify Form Fields
       <span class="text-lg text-gray-700 block">{{modalHeading}}</span>
