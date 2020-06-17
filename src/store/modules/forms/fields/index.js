@@ -22,12 +22,16 @@ const getters = {
 }
 
 const actions = {
-  async updateModifiedFields ({ dispatch }) {
+  async updateModifiedFields ({ commit, dispatch }) {
     await state.modified_fields.forEach(field => {
       if (field.type === 'text' || field.type === 'textarea') {
-        dispatch('updateTextField', field)
+        dispatch('updateTextField', field).then(() => {
+          commit('REMOVE_FIELD_FROM_MODIFIED', field)
+        })
       } else if (field.type === 'select' || field.type === 'radio') {
-        dispatch('updateOptionField', field)
+        dispatch('updateOptionField', field).then(() => {
+          commit('REMOVE_FIELD_FROM_MODIFIED', field)
+        })
       }
     })
   }
@@ -55,6 +59,12 @@ const mutations = {
       state.modified_fields.splice(index, 1, modifiedField)
     } else {
       state.modified_fields.unshift(modifiedField)
+    }
+  },
+  REMOVE_FIELD_FROM_MODIFIED: (state, modifiedField) => {
+    const index = state.modified_fields.findIndex(field => field.id === modifiedField.id)
+    if (index !== -1) {
+      state.modified_fields.splice(index, 1)
     }
   }
 }
