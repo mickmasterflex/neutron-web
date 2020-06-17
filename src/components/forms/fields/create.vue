@@ -51,11 +51,7 @@ export default {
       }
     },
     newFieldOrder () {
-      let val = 0
-      if (this.form.fields.length) {
-        val = this.form.fields.length + 1
-      }
-      return val
+      return this.form.fields.length + 1
     }
   },
   methods: {
@@ -86,7 +82,7 @@ export default {
     }
   },
   watch: {
-    fields: function () {
+    fields () {
       this.setAvailableBaseFields(this.fields)
     }
   },
