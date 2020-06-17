@@ -4,8 +4,8 @@
       <font-awesome-icon icon="plus"></font-awesome-icon> Add Field
     </button>
     <validation-observer v-slot="{ handleSubmit }" v-show="showCreateField">
-      <form @submit.prevent="handleSubmit(submitForm)">
-        <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" field_id="baseFieldSelectToClone" :options="baseFields" class="field-group"></v-select-field>
+      <form @submit.prevent="handleSubmit(submitForm)" class="well">
+        <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" field_id="baseFieldSelectToClone" :options="baseFields" class="field-group mt-0"></v-select-field>
         <div class="mt-3">
           <button type="submit" class="btn btn-green">Select Field</button>
           <span class="btn btn-hollow-default" @click="toggleShowCreateField(false)">Cancel</span>
