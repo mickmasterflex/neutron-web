@@ -9,7 +9,7 @@
       <create-field class="mt-3"></create-field>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green btn-lg" @click="saveModifiedFields()">Save Field Order</button>
+      <button class="btn btn-green btn-lg" @click="saveModifiedFields()" :disabled="!unsavedChanges">Save Field Order</button>
     </template>
   </modal-template>
 </template>
@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowFieldManagementModal'
+      showModal: 'getShowFieldManagementModal',
+      unsavedChanges: 'getChangesInModalUnsaved'
     })
   },
   methods: {
