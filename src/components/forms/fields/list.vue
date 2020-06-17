@@ -9,9 +9,9 @@
         <span class="w-20 th fields-inline-heading-item">Deliver</span>
       </div>
       <ul-draggable v-bind="dragOptions" v-model="form.fields">
-        <li v-for="field in form.fields" :key="field.id">
+        <li v-for="(field, index) in form.fields" :key="field.id">
           <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
-            <field-list-item :field="field"></field-list-item>
+            <field-list-item :field="field" :newOrder="index + 1"></field-list-item>
             <span class="flex flex-row">
               <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
               <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>

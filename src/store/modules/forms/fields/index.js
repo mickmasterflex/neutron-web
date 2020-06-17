@@ -10,7 +10,8 @@ const state = {
   current_form: [],
   current_field: null,
   show_create_field: false,
-  show_field_management_modal: false
+  show_field_management_modal: false,
+  modified_fields: []
 }
 
 const getters = {
@@ -34,7 +35,15 @@ const mutations = {
   RESET_CURRENT_FIELD: (state) => (state.current_field = null),
   TOGGLE_SHOW_CREATE_FIELD: (state, bool) => (state.show_create_field = bool),
   SHOW_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = true),
-  CLOSE_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = false)
+  CLOSE_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = false),
+  ADD_FIELD_TO_MODIFIED: (state, modifiedField) => {
+    const index = state.modified_fields.findIndex(field => field.id === modifiedField.id)
+    if (index !== -1) {
+      state.modified_fields.splice(index, 1, modifiedField)
+    } else {
+      state.modified_fields.unshift(modifiedField)
+    }
+  }
 }
 
 export default {

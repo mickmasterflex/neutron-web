@@ -6,17 +6,18 @@
       field_disabled="true"
       field_class="field-sm"
       prefix_group_class="field-draggable"
-      v-model="order"
-      :field_id="`fieldOrder_${id}`"
+      v-model="this.order"
+      :field_id="`fieldOrder_${this.field.id}`"
       class="field-group"/>
-    <text-field class="field-group" field_class="field-sm" :value="id" field_disabled="true"/>
-    <text-field class="field-group" :value="label" field_disabled="true"/>
-    <text-field class="field-group" :value="mapping" field_disabled="true"/>
-    <text-field class="field-group" field_class="field-sm" :value="deliver" field_disabled="true"/>
+    <text-field class="field-group" field_class="field-sm" :value="this.field.id" field_disabled="true"/>
+    <text-field class="field-group" :value="this.field.label" field_disabled="true"/>
+    <text-field class="field-group" :value="this.field.mapping" field_disabled="true"/>
+    <text-field class="field-group" field_class="field-sm" :value="this.field.deliver" field_disabled="true"/>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
@@ -24,15 +25,32 @@ export default {
     field: {
       type: Object,
       required: true
-    }
+    },
+    newOrder: Number
   },
   data () {
     return {
-      order: this.field.order,
-      id: this.field.id,
-      label: this.field.label,
-      mapping: this.field.mapping,
-      deliver: this.field.deliver
+      order: this.field.order
+    }
+  },
+  watch: {
+    order () {
+      this.addToModified()
+    },
+    newOrder () {
+      this.order = this.newOrder
+    }
+  },
+  methods: {
+    ...mapMutations({ addFieldToModified: 'ADD_FIELD_TO_MODIFIED' }),
+    addToModified () {
+      this.addFieldToModified({
+        order: this.order,
+        id: this.field.id,
+        label: this.field.label,
+        mapping: this.field.mapping,
+        deliver: this.field.deliver
+      })
     }
   },
   components: {
