@@ -1,14 +1,14 @@
 <template>
   <div>
-    <button class="btn btn-turquoise" @click="toggleShowCreateForm(true)" v-show="!showCreateForm">
+    <button class="btn btn-turquoise" @click="toggleShowCreateField(true)" v-show="!showCreateField">
       <font-awesome-icon icon="plus"></font-awesome-icon> Add Field
     </button>
-    <validation-observer v-slot="{ handleSubmit }" ref="form" v-show="showCreateForm">
+    <validation-observer v-slot="{ handleSubmit }" v-show="showCreateField">
       <form @submit.prevent="handleSubmit(submitForm)">
-        <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" :options="baseFields"></v-select-field>
+        <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" field_id="baseFieldSelectToClone" :options="baseFields" class="field-group"></v-select-field>
         <div class="mt-3">
           <button type="submit" class="btn btn-green">Select Field</button>
-          <span class="btn btn-hollow-default" @click="toggleShowCreateForm(false)">Cancel</span>
+          <span class="btn btn-hollow-default" @click="toggleShowCreateField(false)">Cancel</span>
         </div>
       </form>
     </validation-observer>
@@ -21,23 +21,34 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      baseField: Object
+      baseField: ''
     }
   },
   computed: {
     ...mapGetters({
-      baseFields: 'getBaseFields',
-      showCreateForm: 'getShowCreateField',
+      baseFields: 'getAvailableBaseFields',
+      showCreateField: 'getShowCreateField',
       form: 'getCurrentForm'
     }),
+    fields () {
+      return this.form.fields
+    },
     selectedBaseField () {
       return this.baseFields.find(({ id }) => id === parseInt(this.baseField))
     },
     optionFieldSelected () {
-      return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
+      if (this.selectedBaseField) {
+        return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
+      } else {
+        return null
+      }
     },
     textFieldSelected () {
-      return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
+      if (this.selectedBaseField) {
+        return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
+      } else {
+        return null
+      }
     },
     newFieldOrder () {
       let val = 0
@@ -54,7 +65,9 @@ export default {
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      toggleShowCreateForm: 'TOGGLE_SHOW_CREATE_FIELD'
+      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD',
+      setBaseFields: 'SET_BASE_FIELDS',
+      setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
     submitForm () {
       if (this.textFieldSelected) {
@@ -72,8 +85,16 @@ export default {
       }
     }
   },
+  watch: {
+    fields: function () {
+      this.setAvailableBaseFields(this.fields)
+    }
+  },
   created () {
     this.fetchBaseFields()
+  },
+  updated () {
+    this.setAvailableBaseFields(this.fields)
   }
 }
 </script>

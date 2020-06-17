@@ -35,11 +35,11 @@ export default {
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL',
-      resetCurrentField: 'RESET_CURRENT_FIELD'
+      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD'
     }),
     close () {
       this.closeModal()
-      this.resetCurrentField()
+      this.toggleShowCreateField(false)
     }
   }
 }

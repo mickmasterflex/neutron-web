@@ -2,7 +2,8 @@ import axios from '@/axios'
 
 const state = {
   clients: [],
-  current_client: {}
+  current_client: {},
+  show_create_client_modal: false
 }
 
 const getters = {
@@ -10,7 +11,8 @@ const getters = {
   getCurrentClient: state => state.current_client,
   getAllClientsCount: (state) => {
     return state.clients.length
-  }
+  },
+  getShowCreateClientModal: state => state.show_create_client_modal
 }
 
 const actions = {
@@ -57,7 +59,9 @@ const mutations = {
       state.clients.splice(index, 1, updatedClient)
     }
   },
-  REMOVE_CLIENT: (state, id) => (state.clients = state.clients.filter(client => client.id !== id))
+  REMOVE_CLIENT: (state, id) => (state.clients = state.clients.filter(client => client.id !== id)),
+  SHOW_CREATE_CLIENT_MODAL: (state) => (state.show_create_client_modal = true),
+  CLOSE_CREATE_CLIENT_MODAL: (state) => (state.show_create_client_modal = false)
 }
 
 export default {

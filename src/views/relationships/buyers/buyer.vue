@@ -19,10 +19,11 @@
     <h3 class="h3 mt-5 mb-2">Update Buyer Contract</h3>
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
 
-    <h3 class="h3 mt-5 mb-2">Offers List</h3>
+    <div class="flex flex-row justify-between mt-4">
+    <h3 class="h3">Offers List</h3>
+      <button class="btn btn-green" @click="showCreateOfferModal()">Create Offer</button>
+    </div>
     <offer-list :offers="offers"></offer-list>
-
-    <h3 class="h3 mt-5 mb-2">Create Offer</h3>
     <create-offer :buyer="buyer.id"></create-offer>
   </div>
 </template>
@@ -62,7 +63,8 @@ export default {
       fetchOffers: 'fetchOffers'
     }),
     ...mapMutations({
-      showFieldManagementModal: 'SHOW_FIELD_MANAGEMENT_MODAL'
+      showFieldManagementModal: 'SHOW_FIELD_MANAGEMENT_MODAL',
+      showCreateOfferModal: 'SHOW_CREATE_OFFER_MODAL'
     })
   },
   created () {

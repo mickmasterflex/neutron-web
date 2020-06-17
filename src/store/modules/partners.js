@@ -2,7 +2,8 @@ import axios from '@/axios'
 
 const state = {
   partners: [],
-  current_partner: {}
+  current_partner: {},
+  show_create_partner_modal: false
 }
 const getters = {
   getAllPartners: state => state.partners,
@@ -20,7 +21,8 @@ const getters = {
       siblings.splice(index, 1)
     }
     return siblings
-  }
+  },
+  getShowCreatePartnerModal: state => state.show_create_partner_modal
 }
 
 const actions = {
@@ -66,7 +68,9 @@ const mutations = {
       state.partners.splice(index, 1, updatedPartner)
     }
   },
-  REMOVE_PARTNER: (state, id) => (state.partners = state.partners.filter(partner => partner.id !== id))
+  REMOVE_PARTNER: (state, id) => (state.partners = state.partners.filter(partner => partner.id !== id)),
+  SHOW_CREATE_PARTNER_MODAL: (state) => (state.show_create_partner_modal = true),
+  CLOSE_CREATE_PARTNER_MODAL: (state) => (state.show_create_partner_modal = false)
 }
 
 export default {
