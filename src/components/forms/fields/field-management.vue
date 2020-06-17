@@ -38,7 +38,8 @@ export default {
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL',
-      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD'
+      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
     }),
     ...mapActions({
       updateModifiedFields: 'updateModifiedFields'
@@ -49,6 +50,7 @@ export default {
     },
     saveModifiedFields () {
       this.updateModifiedFields()
+      this.toggleChangesInModalUnsaved(false)
     }
   }
 }

@@ -36,13 +36,17 @@ export default {
   watch: {
     order () {
       this.addToModified()
+      this.toggleChangesInModalUnsaved(true)
     },
     newOrder () {
       this.order = this.newOrder
     }
   },
   methods: {
-    ...mapMutations({ addFieldToModified: 'ADD_FIELD_TO_MODIFIED' }),
+    ...mapMutations({
+      addFieldToModified: 'ADD_FIELD_TO_MODIFIED',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
+    }),
     addToModified () {
       this.addFieldToModified({
         order: this.order,
