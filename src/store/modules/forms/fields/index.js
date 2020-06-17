@@ -35,6 +35,7 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_FORM: (state, form) => (state.current_form = form),
+  SORT_CURRENT_FORM_FIELDS: (state) => (state.current_form.fields = state.current_form.fields.sort((a, b) => (a.order > b.order) ? 1 : -1)),
   ADD_FIELD: (state, field) => state.current_form.fields.push(field),
   UPDATE_FIELD: (state, updatedField) => {
     const index = state.current_form.fields.findIndex(field => field.id === updatedField.id)
