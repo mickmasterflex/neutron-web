@@ -12,7 +12,7 @@
             <span class="cursor-pointer text-gray-500 hover:text-red-500 text-4xl font-hairline" @click="close">&times;</span>
           </div>
           <status-bar :show="unsavedChangesInModal" icon="exclamation-triangle" color="yellow" copy="Unsaved Changes"></status-bar>
-          <div class="px-8 py-6 bg-gray-100 border-t-2 border-b-2 border-gray-200">
+          <div class="px-8 py-6 bg-gray-100 border-t-2 border-b-2 border-gray-200 overflow-x-scroll">
             <slot name="body">Modal Body</slot>
           </div>
           <div class="px-8 py-6 flex flex-row items-center justify-end">
