@@ -5,7 +5,8 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-feild v-model="slug" :options="slug" field_id="slug" field_label="Slug" class="slug"></v-text-feild>
+          <text-feild v-model="short_description" field_id="shortDescription" field_label="Short Description" class="description"></text-feild>
+          <select-field v-model="product_group" :options="product_group" field_id="product" field_label="Product" class="product-group"></select-field>
         </form>
       </validation-observer>
     </template>
@@ -23,33 +24,31 @@ export default {
   data () {
     return {
       name: '',
-      parent: ''
+      short_description: '',
+      product_group: ''
     }
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreatePartnerModal'
+      showModal: 'getShowCreateProductModal'
     })
   },
   props: {
     client: {
       type: Number
     },
-    partnerContracts: {
-      type: Array
-    }
-  },
   mixins: [enterKeyListener],
   methods: {
     ...mapActions({
-      create: 'createPartner'
+      create: 'createProduct'
     }),
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
+      closeModal: 'CLOSE_CREATE_PRODUCT_MODAL'
     }),
     close () {
       this.name = ''
-      this.parent = ''
+      this.short_description = ''
+      this.product_group = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -65,8 +64,8 @@ export default {
         if (success) {
           this.create({
             name: this.name,
-            parent: this.parent,
-            client: this.$props.client
+            short_description: this.short_description,
+            product_group: this.product_group
           }).then(() => {
             this.close()
           })
