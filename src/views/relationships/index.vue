@@ -6,14 +6,17 @@
         <stat-card :data="getAllClientsCount" :title="`Clients`" :color="`teal`"></stat-card>
       </div>
     </div>
+    <div class="flex flex-row justify-between mt-4">
+      <h3 class="h3">Client List</h3>
+      <button class="btn btn-green" @click="showCreateClientModal()">Create Client</button>
+    </div>
     <client-list :clients="clients" class="mt-5"></client-list>
-    <h3 class="h3 mt-5 mb-2">Create Client</h3>
     <create-client></create-client>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import clientList from '@/components/clients/list'
 import createClient from '@/components/clients/create'
 
@@ -29,7 +32,12 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ fetchClients: 'fetchClients' })
+    ...mapActions({
+      fetchClients: 'fetchClients'
+    }),
+    ...mapMutations({
+      showCreateClientModal: 'SHOW_CREATE_CLIENT_MODAL'
+    })
   },
   created () {
     this.fetchClients()

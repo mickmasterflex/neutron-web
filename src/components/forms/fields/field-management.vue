@@ -34,10 +34,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL'
+      closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL',
+      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD'
     }),
     close () {
       this.closeModal()
+      this.toggleShowCreateField(false)
     }
   }
 }
