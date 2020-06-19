@@ -8,16 +8,15 @@
       prefix_group_class="field-draggable"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      class="field-group"/>
+     />
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
-      rules="required"
-      class="field-group mr-2"/>
+      rules="required"/>
     <text-field
       v-model="mapping"
       :field_id="`optionMapping_${option.id}`"
-      class="field-group"/>
+     />
     <checkbox-single
       v-model="scrub"
       label_class="w-12"

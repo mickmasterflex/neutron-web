@@ -302,16 +302,16 @@
 .field-group { @apply my-2 }
 .field-group { @apply block }
 
+/* Horizontal Forms */
+.form-horizontal .field-group { @apply my-3 flex flex-row }
+.form-horizontal .field-label { @apply mt-1 w-32 text-right pr-3 }
+
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
 .fields-inline-heading { @apply mb-1 flex flex-row; }
 .fields-inline-heading-item { @apply mx-1 font-bold; }
-
-/* Field Error Inside */
-.field-error-inside { @apply relative }
-.field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 /* Draggable Fields */
 .field-draggable { @apply relative }
@@ -328,6 +328,7 @@
 
 /* Errors */
 .is-invalid .base-field { @apply border-red-500 }
+.is-invalid .base-field:hover { @apply border-red-600 }
 .is-invalid .base-field:focus { @apply shadow-outline-red }
 .is-valid .base-field:focus { @apply shadow-outline-green border-green-500 }
 
@@ -336,7 +337,11 @@
     @apply text-red-500;
 }
 
-.field-error { @apply text-red-500 }
+.field-error { @apply text-red-500 mt-1 block }
+
+/* Field Error Inside Field */
+.field-error-inside { @apply relative }
+.field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 
 /* ------------------------------------------------
