@@ -3,8 +3,8 @@
     <h3 class="h3">Field Configuration</h3>
     <validation-observer ref="form">
       <form @submit.prevent="submitForm" class="well well-light fields-inline">
-        <v-text-field v-model="label" field_id="updateTextFieldLabel" field_label="Label" rules="required" class="field-group"></v-text-field>
-        <text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping" class="field-group"></text-field>
+        <v-text-field v-model="label" field_id="updateTextFieldLabel" field_label="Label" rules="required"></v-text-field>
+        <text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping"></text-field>
         <checkbox-single v-model="deliver" field_id="updateTextFieldDeliver" field_label="Pass to Client"></checkbox-single>
       </form>
     </validation-observer>

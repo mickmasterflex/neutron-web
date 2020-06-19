@@ -3,10 +3,10 @@
     <template v-slot:header>Create User</template>
     <template v-slot:body>
       <validation-observer ref="form">
-        <form @submit.prevent="submitForm">
-          <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name" class="field-group"></v-text-field>
-          <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name" class="field-group"></v-text-field>
-          <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email" class="field-group"></v-text-field>
+        <form @submit.prevent="submitForm" class="form-horizontal">
+          <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name"></v-text-field>
+          <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name"></v-text-field>
+          <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
         </form>
       </validation-observer>
     </template>

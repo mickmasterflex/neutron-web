@@ -9,7 +9,7 @@
             <h3 class="h2">
               <slot name="header">Modal Header</slot>
             </h3>
-            <span class="cursor-pointer text-gray-500 hover:text-red-500 text-4xl font-hairline" @click="close">&times;</span>
+            <span @click="close" class="cursor-pointer text-gray-500 transition-colors duration-200 hover:text-red-500 text-4xl font-hairline leading-none px-1">&times;</span>
           </div>
           <status-bar :show="unsavedChangesInModal" icon="exclamation-triangle" color="yellow" copy="Unsaved Changes"></status-bar>
           <div class="px-8 py-6 bg-gray-100 border-t-2 border-b-2 border-gray-200 overflow-x-scroll">
