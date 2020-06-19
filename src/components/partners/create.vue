@@ -3,9 +3,9 @@
     <template v-slot:header>Create Partner Contract</template>
     <template v-slot:body>
   <validation-observer ref="form">
-    <form @submit.prevent="submitForm">
-      <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name" class="field-group"></v-text-field>
-      <select-field v-model="parent" :options="partnerContracts" field_id="parent" field_label="Parent" class="field-group"></select-field>
+    <form @submit.prevent="submitForm" class="form-horizontal">
+      <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name"></v-text-field>
+      <select-field v-model="parent" :options="partnerContracts" field_id="parent" field_label="Parent"></select-field>
     </form>
   </validation-observer>
     </template>

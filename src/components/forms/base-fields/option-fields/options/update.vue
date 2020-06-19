@@ -8,17 +8,17 @@
       prefix_group_class="field-draggable"
       v-model="order"
       :field_id="`optionOrder_${option.id}`"
-      class="field-group"/>
+     />
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
       rules="required"
-      class="field-group field-error-inside"/>
+      class="field-error-inside"/>
     <v-text-field
       v-model="value"
       :field_id="`optionValue_${option.id}`"
       rules="required"
-      class="field-group field-error-inside"/>
+      class="field-error-inside"/>
   </div>
 </template>
 

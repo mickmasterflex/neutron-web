@@ -3,9 +3,9 @@
     <template v-slot:header>Create Campaign</template>
     <template v-slot:body>
   <validation-observer ref="form">
-    <form @submit.prevent="submitForm">
-      <v-text-field v-model="name" rules="required" field_id="campaignName" field_label="Campaign Name" class="field-group"></v-text-field>
-      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="campaignCode" field_label="Campaign Code" class="field-group"></v-text-field>
+    <form @submit.prevent="submitForm" class="form-horizontal">
+      <v-text-field v-model="name" rules="required" field_id="campaignName" field_label="Name"></v-text-field>
+      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="campaignCode" field_label="Code"></v-text-field>
     </form>
   </validation-observer>
     </template>
