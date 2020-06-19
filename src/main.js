@@ -29,7 +29,9 @@ import statCard from '@/components/ui/cards/stat-card'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
 import textField from '@/components/ui/forms/base-fields/text-field'
+import textareaField from '@/components/ui/forms/base-fields/textarea-field'
 import vTextField from '@/components/ui/forms/validation-fields/text-field'
+import vTextareaField from '@/components/ui/forms/validation-fields/textarea-field'
 import vSelectField from '@/components/ui/forms/validation-fields/select-field'
 
 /* -----------------------------------------------
@@ -61,6 +63,8 @@ Vue.component('modal-template', baseModal)
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
+Vue.component('textarea-field', textareaField)
+Vue.component('v-textarea-field', vTextareaField)
 Vue.component('select-field', selectField)
 Vue.component('v-select-field', vSelectField)
 
