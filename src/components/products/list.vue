@@ -1,11 +1,11 @@
 <template>
   <div>
-    <table v-if="campaigns" class="table">
+    <table v-if="products" class="table">
       <thead>
       <tr>
         <th class="th">Name</th>
         <th class="th">ID</th>
-        <th class="th">Product Description </th>
+        <th class="th">Product Description</th>
         <th class="th">Product Group</th>
       </tr>
       </thead>
