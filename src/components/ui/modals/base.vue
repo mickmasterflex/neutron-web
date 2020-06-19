@@ -1,31 +1,48 @@
 <template>
-  <div v-show="show" class="fixed top-0 right-0 left-0 bottom-0 z-50 p-5 overflow-x-scroll">
-    <div :class="`${dialogClass} bg-white modal-dialog rounded-lg relative mx-5 z-20`">
-      <div class="px-8 py-6 flex flex-row items-center justify-between">
-        <h3 class="h2">
-          <slot name="header">Modal Header</slot>
-        </h3>
-        <span class="cursor-pointer text-gray-500 hover:text-red-500 text-4xl font-hairline" @click="close">&times;</span>
-      </div>
-      <div class="px-8 py-6 bg-gray-100 border-t-2 border-b-2 border-gray-200">
-        <slot name="body">Modal Body</slot>
-      </div>
-      <div class="px-8 py-6 flex flex-row items-center justify-end">
-        <slot name="footer-default">
-          <button class="btn btn-lg btn-hollow-default mr-2" @click="close">Close</button>
-        </slot>
-        <slot name="footer-additional"></slot>
-      </div>
+  <transition leave-active-class="animate__animated animate__fadeOut animate__faster">
+    <div v-show="show" :class="`${modalClass} fixed top-0 right-0 left-0 bottom-0 z-50 p-5 pt-10 overflow-x-scroll`">
+      <transition
+        enter-active-class="animate__animated animate__slideInDown animate__faster"
+        leave-active-class="animate__animated animate__slideOutUp animate__faster">
+        <div v-show="show" class="modal-dialog bg-white rounded-lg relative mx-auto w-full z-20">
+          <div class="px-8 py-6 flex flex-row items-center justify-between">
+            <h3 class="h2">
+              <slot name="header">Modal Header</slot>
+            </h3>
+            <span class="cursor-pointer text-gray-500 hover:text-red-500 text-4xl font-hairline" @click="close">&times;</span>
+          </div>
+          <status-bar :show="unsavedChangesInModal" icon="exclamation-triangle" color="yellow" copy="Unsaved Changes"></status-bar>
+          <div class="px-8 py-6 bg-gray-100 border-t-2 border-b-2 border-gray-200 overflow-x-scroll">
+            <slot name="body">Modal Body</slot>
+          </div>
+          <div class="px-8 py-6 flex flex-row items-center justify-end">
+            <slot name="footer-default">
+              <button class="btn btn-lg btn-hollow-default" @click="close">Close</button>
+            </slot>
+            <slot name="footer-additional"></slot>
+          </div>
+        </div>
+      </transition>
+      <transition
+        enter-active-class="animate__animated animate__fadeIn animate__faster"
+        leave-active-class="animate__animated animate__fadeOut animate__faster">
+        <div v-show="show" @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 z-10"></div>
+      </transition>
     </div>
-    <div @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 z-10"></div>
-  </div>
+  </transition>
 </template>
 
 <script>
+import statusBar from '@/components/ui/modals/statusBar'
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     show: Boolean,
-    dialogClass: String
+    modalClass: String
+  },
+  computed: {
+    ...mapGetters({ unsavedChangesInModal: 'getChangesInModalUnsaved' })
   },
   methods: {
     close () {
@@ -52,6 +69,9 @@ export default {
     this.$once('hook:destroyed', () => {
       document.removeEventListener('keydown', escapeHandler)
     })
+  },
+  components: {
+    'status-bar': statusBar
   }
 }
 </script>
@@ -60,12 +80,11 @@ export default {
   .modal-backdrop {
     background: rgba(0,0,0,.75);
   }
-  .modal-dialog {
-    width: 100%;
+  .modal-dialog, .modal-alert {
     max-width: 900px;
-    margin: 30px auto;
   }
-  .modal-dialog-lg {
+  .modal-lg .modal-dialog,
+  .modal-lg .modal-alert {
     max-width: 1500px;
   }
 </style>

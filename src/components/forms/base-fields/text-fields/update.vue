@@ -20,6 +20,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -40,20 +41,29 @@ export default {
     field: Object
   },
   watch: {
-    field: function () {
+    field () {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    }
+    },
+    localField: 'checkUnsavedChanges'
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateBaseTextFieldModal'
-    })
+    }),
+    localField () {
+      return {
+        name: this.name,
+        label: this.label,
+        description: this.description,
+        type: this.type
+      }
+    }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       update: 'updateBaseTextField'
@@ -73,6 +83,7 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {

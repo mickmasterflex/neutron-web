@@ -46,13 +46,17 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
+      this.toggleChangesInModalUnsaved(true)
     },
     newOrder () {
       this.order = this.newOrder
     }
   },
   methods: {
-    ...mapMutations({ addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED' }),
+    ...mapMutations({
+      addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
+    }),
     addToModified () {
       this.addBaseOptionToModified({
         id: this.option.id,

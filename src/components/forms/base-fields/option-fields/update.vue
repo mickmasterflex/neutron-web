@@ -23,6 +23,7 @@
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -45,20 +46,29 @@ export default {
     'field-options': fieldOptions
   },
   watch: {
-    field: function () {
+    field () {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    }
+    },
+    localField: 'checkUnsavedChanges'
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateBaseOptionFieldModal'
-    })
+    }),
+    localField () {
+      return {
+        name: this.name,
+        label: this.label,
+        description: this.description,
+        type: this.type
+      }
+    }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       updateField: 'updateBaseOptionField',
@@ -81,6 +91,7 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
