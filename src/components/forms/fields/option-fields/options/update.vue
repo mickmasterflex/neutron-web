@@ -12,8 +12,7 @@
     <v-text-field
       v-model="label"
       :field_id="`optionLabel_${option.id}`"
-      rules="required"
-      class="mr-2"/>
+      rules="required"/>
     <text-field
       v-model="mapping"
       :field_id="`optionMapping_${option.id}`"
