@@ -304,7 +304,7 @@
 
 /* Horizontal Forms */
 .form-horizontal .field-group { @apply my-3 flex flex-row }
-.form-horizontal .field-label { @apply mt-1 w-32 text-right pr-3 }
+.form-horizontal .field-label { @apply mt-2 w-32 text-right pr-3 leading-tight }
 
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
