@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="updateBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
           <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
+          <textarea-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></textarea-field>
           <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
         </form>
       </validation-observer>
