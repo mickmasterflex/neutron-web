@@ -1,14 +1,17 @@
 <template>
-  <div>
+  <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <input
-      @input="handleInput($event.target.value)"
-      class="base-field"
-      :class="$attrs.field_class"
-      :type="$attrs.field_type ? $attrs.field_type : 'text'"
-      :id="$attrs.field_id"
-      :value="value"
-      :disabled="$attrs.field_disabled">
+    <div>
+      <input
+        @input="handleInput($event.target.value)"
+        class="field base-field"
+        :class="$attrs.field_class"
+        :type="$attrs.field_type ? $attrs.field_type : 'text'"
+        :id="$attrs.field_id"
+        :value="value"
+        :disabled="$attrs.field_disabled">
+      <slot></slot>
+    </div>
   </div>
 </template>
 

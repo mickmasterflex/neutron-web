@@ -2,15 +2,17 @@
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
-      <validation-observer ref="form">
+      <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type" class="field-group"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label"></v-text-field>
+          <text-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description"></text-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type"></v-select-field>
         </form>
-        <label class="field-label mt-3">Options</label>
-        <field-options></field-options>
+        <div class="field-group">
+          <label class="field-label">Options</label>
+          <field-options></field-options>
+        </div>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>

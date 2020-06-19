@@ -1,5 +1,5 @@
 <template>
-  <label :for="field_id" :class="`${label_class} field-group font-bold p-2 mt-5 base-field flex flex-row items-center cursor-pointer`">
+  <label :for="field_id" :class="`${label_class} font-bold p-2 mt-5 base-field flex flex-row items-center cursor-pointer`">
     <input
       @input="handleInput($event.target.checked)"
       type="checkbox"
