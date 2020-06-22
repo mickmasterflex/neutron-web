@@ -1,9 +1,8 @@
 <template>
   <transition leave-active-class="animate__animated animate__fadeOut animate__faster">
     <div v-show="show" :class="`${modalClass} fixed top-0 right-0 left-0 bottom-0 z-50 p-5 pt-10 overflow-x-scroll`">
-      <transition
-        enter-active-class="animate__animated animate__slideInDown animate__faster"
-        leave-active-class="animate__animated animate__slideOutUp animate__faster">
+      <transition enter-active-class="animate__animated animate__slideInDown animate__fast"
+                  leave-active-class="animate__animated animate__slideOutUp animate__fast">
         <div v-show="show" class="modal-dialog bg-white rounded-lg relative mx-auto w-full z-20">
           <div class="px-8 py-6 flex flex-row items-center justify-between">
             <h3 class="h2">
@@ -23,9 +22,7 @@
           </div>
         </div>
       </transition>
-      <transition
-        enter-active-class="animate__animated animate__fadeIn animate__faster"
-        leave-active-class="animate__animated animate__fadeOut animate__faster">
+      <transition enter-active-class="animate__animated animate__fadeIn animate__fast">
         <div v-show="show" @click="close" class="modal-backdrop fixed top-0 right-0 left-0 bottom-0 z-10"></div>
       </transition>
     </div>
