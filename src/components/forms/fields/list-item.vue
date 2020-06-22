@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
@@ -32,24 +32,9 @@ export default {
       order: this.field.order
     }
   },
-  watch: {
-    order () {
-      this.addToModified()
-      this.toggleChangesInModalUnsaved(true)
-      this.updateFieldOrder({ order: this.order, id: this.field.id })
-    },
-    newOrder () {
-      this.order = this.newOrder
-    }
-  },
-  methods: {
-    ...mapMutations({
-      addFieldToModified: 'ADD_FIELD_TO_MODIFIED',
-      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
-      updateFieldOrder: 'UPDATE_FIELD_ORDER'
-    }),
-    addToModified () {
-      this.addFieldToModified({
+  computed: {
+    localField () {
+      return {
         order: this.order,
         id: this.field.id,
         label: this.field.label,
@@ -58,7 +43,28 @@ export default {
         type: this.field.type,
         form: this.field.form,
         base_field: this.field.base_field
-      })
+      }
+    }
+  },
+  watch: {
+    order () {
+      this.update()
+    },
+    newOrder () {
+      this.order = this.newOrder
+    }
+  },
+  methods: {
+    ...mapActions({
+      updateTextField: 'updateTextField',
+      updateOptionField: 'updateOptionField'
+    }),
+    update () {
+      if (this.field.type === 'text' || this.field.type === 'textarea') {
+        this.updateTextField(this.localField)
+      } else if (this.field.type === 'select' || this.field.type === 'radio') {
+        this.updateOptionField(this.localField)
+      }
     }
   },
   components: {

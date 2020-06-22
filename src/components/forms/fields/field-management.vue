@@ -8,14 +8,11 @@
       <list-fields></list-fields>
       <create-field class="mt-3"></create-field>
     </template>
-    <template v-slot:footer-additional>
-      <button class="btn btn-green btn-lg" @click="saveModifiedFields()" :disabled="!unsavedChanges">Save Field Order</button>
-    </template>
   </modal-template>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
 
@@ -32,26 +29,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowFieldManagementModal',
-      unsavedChanges: 'getChangesInModalUnsaved'
+      showModal: 'getShowFieldManagementModal'
     })
   },
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL',
-      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD',
-      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
-    }),
-    ...mapActions({
-      updateModifiedFields: 'updateModifiedFields'
+      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD'
     }),
     close () {
       this.closeModal()
       this.toggleShowCreateField(false)
-    },
-    saveModifiedFields () {
-      this.updateModifiedFields()
-      this.toggleChangesInModalUnsaved(false)
     }
   }
 }

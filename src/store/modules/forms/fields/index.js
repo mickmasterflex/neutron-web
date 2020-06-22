@@ -21,22 +21,6 @@ const getters = {
   getShowFieldManagementModal: state => state.show_field_management_modal
 }
 
-const actions = {
-  async updateModifiedFields ({ commit, dispatch }) {
-    await state.modified_fields.forEach(field => {
-      if (field.type === 'text' || field.type === 'textarea') {
-        dispatch('updateTextField', field).then(() => {
-          commit('REMOVE_FIELD_FROM_MODIFIED', field)
-        })
-      } else if (field.type === 'select' || field.type === 'radio') {
-        dispatch('updateOptionField', field).then(() => {
-          commit('REMOVE_FIELD_FROM_MODIFIED', field)
-        })
-      }
-    })
-  }
-}
-
 const mutations = {
   SET_CURRENT_FORM: (state, form) => (state.current_form = form),
   SORT_CURRENT_FORM_FIELDS: (state) => (state.current_form.fields = state.current_form.fields.sort((a, b) => (a.order > b.order) ? 1 : -1)),
@@ -47,38 +31,17 @@ const mutations = {
       state.current_form.fields.splice(index, 1, updatedField)
     }
   },
-  UPDATE_FIELD_ORDER: (state, payload) => {
-    const index = state.current_form.fields.findIndex(field => field.id === payload.id)
-    if (index !== -1) {
-      state.current_form.fields[index].order = payload.order
-    }
-  },
   REMOVE_FIELD: (state, id) => (state.current_form.fields = state.current_form.fields.filter(field => field.id !== id)),
   SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
   RESET_CURRENT_FIELD: (state) => (state.current_field = null),
   TOGGLE_SHOW_CREATE_FIELD: (state, bool) => (state.show_create_field = bool),
   SHOW_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = true),
-  CLOSE_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = false),
-  ADD_FIELD_TO_MODIFIED: (state, modifiedField) => {
-    const index = state.modified_fields.findIndex(field => field.id === modifiedField.id)
-    if (index !== -1) {
-      state.modified_fields.splice(index, 1, modifiedField)
-    } else {
-      state.modified_fields.unshift(modifiedField)
-    }
-  },
-  REMOVE_FIELD_FROM_MODIFIED: (state, modifiedField) => {
-    const index = state.modified_fields.findIndex(field => field.id === modifiedField.id)
-    if (index !== -1) {
-      state.modified_fields.splice(index, 1)
-    }
-  }
+  CLOSE_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = false)
 }
 
 export default {
   modules,
   state,
   getters,
-  actions,
   mutations
 }
