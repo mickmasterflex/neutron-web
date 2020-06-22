@@ -41,6 +41,13 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    path: '/products/brands/',
+    name: 'Brand',
+    component: () => import('@/views/products/brand.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
     path: '/products/fields/',
     name: 'FieldManagement',
     component: () => import('@/views/products/field-management.vue'),

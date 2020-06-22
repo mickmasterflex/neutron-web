@@ -3,11 +3,11 @@
     <template v-slot:header>Create Brand</template>
     <template v-slot:body>
       <validation-observer ref="form">
-        <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="brandName" field_label="Brand Name" class="field-group"></v-text-field>
-          <v-text-field v-model="short_description" rules="required|alpha_dash" field_id="short_description" field_label="ShortDescription" class="field-group"></v-text-field>
-          <v-text-field v-model="alias" rules="required" field_id="alias" field_label="Alias" class="field-group"></v-text-field>
-          <v-text-field v-model="website" rules="required" field_id="website" field_label="Wesbite" class="field-group"></v-text-field>
+        <form @submit.prevent="submitForm" class="form-horizontal">
+          <text-field model="name" rules="required" field_id="brandName" field_label="Brand Name"></text-field>
+          <textarea-field model="short_description" rules="required|alpha_dash" field_id="short_description" field_label="ShortDescription"></textarea-field>
+          <text-field model="alias" rules="required" field_id="alias" field_label="Alias"></text-field>
+          <text-field model="website" rules="required" field_id="website" field_label="Wesbite"></text-field>
         </form>
       </validation-observer>
     </template>

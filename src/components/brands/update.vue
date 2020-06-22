@@ -1,10 +1,10 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
-      <v-text-field v-model="name" rules="required" field_id="brandName" field_label="Brand Name" class="field-group"></v-text-field>
-      <v-text-field v-model="short_description" rules="required|alpha_dash" field_id="short_description" field_label="ShortDescription" class="field-group"></v-text-field>
-      <v-text-field v-model="alias" rules="required" field_id="alias" field_label="Alias" class="field-group"></v-text-field>
-      <v-text-field v-model="website" rules="required" field_id="website" field_label="Wesbite" class="field-group"></v-text-field>
+      <v-text-field v-model="name" rules="required" field_id="brandName" field_label="Brand Name"></v-text-field>
+      <v-text-area v-model="short_description" rules="required|alpha_dash" field_id="short_description" field_label="ShortDescription"></v-text-area>
+      <text-field v-model="alias" rules="required" field_id="alias" field_label="Alias"></text-field>
+      <text-field v-model="website" rules="required" field_id="website" field_label="Wesbite"></text-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </validation-observer>
