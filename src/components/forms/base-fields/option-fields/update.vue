@@ -2,15 +2,17 @@
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
-      <validation-observer ref="form">
+      <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type" class="field-group"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label"></v-text-field>
+          <textarea-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description"></textarea-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type"></v-select-field>
         </form>
-        <label class="field-label mt-3">Options</label>
-        <field-options></field-options>
+        <div class="field-group">
+          <label class="field-label">Options</label>
+          <field-options></field-options>
+        </div>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
@@ -23,6 +25,7 @@
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -45,20 +48,29 @@ export default {
     'field-options': fieldOptions
   },
   watch: {
-    field: function () {
+    field () {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    }
+    },
+    localField: 'checkUnsavedChanges'
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateBaseOptionFieldModal'
-    })
+    }),
+    localField () {
+      return {
+        name: this.name,
+        label: this.label,
+        description: this.description,
+        type: this.type
+      }
+    }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       updateField: 'updateBaseOptionField',
@@ -81,6 +93,7 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {

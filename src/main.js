@@ -10,12 +10,13 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
+import 'animate.css'
 import '@/assets/css/styles.css'
 import PortalVue from 'portal-vue'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -28,7 +29,9 @@ import statCard from '@/components/ui/cards/stat-card'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
 import textField from '@/components/ui/forms/base-fields/text-field'
+import textareaField from '@/components/ui/forms/base-fields/textarea-field'
 import vTextField from '@/components/ui/forms/validation-fields/text-field'
+import vTextareaField from '@/components/ui/forms/validation-fields/textarea-field'
 import vSelectField from '@/components/ui/forms/validation-fields/select-field'
 
 /* -----------------------------------------------
@@ -60,6 +63,8 @@ Vue.component('modal-template', baseModal)
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
+Vue.component('textarea-field', textareaField)
+Vue.component('v-textarea-field', vTextareaField)
 Vue.component('select-field', selectField)
 Vue.component('v-select-field', vSelectField)
 
@@ -90,7 +95,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt)
+library.add(faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

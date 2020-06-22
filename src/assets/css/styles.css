@@ -74,6 +74,7 @@
 
 .h1 { @apply text-4xl font-hairline; }
 .h3 { @apply text-2xl font-hairline; }
+.h4 { @apply text-xl font-medium; }
 
 .h2,
 .h2-hairline {
@@ -145,6 +146,8 @@
     -webkit-appearance: button;
 }
 
+.btn:disabled { @apply cursor-not-allowed }
+
 .btn + .btn { @apply ml-2; }
 
 .btn:focus  { @apply outline-none shadow-outline; }
@@ -160,37 +163,45 @@
 
 /* Standard Buttons */
 
-.btn-blue             { @apply bg-blue-500 border-blue-600; }
-.btn-blue:hover       { @apply bg-blue-600; }
-.btn-blue:active      { @apply bg-blue-600; }
+.btn-blue                            { @apply bg-blue-500 border-blue-600; }
+.btn-blue:disabled                   { @apply bg-blue-400 border-blue-500; }
+.btn-blue:hover:not(:disabled)       { @apply bg-blue-600; }
+.btn-blue:active:not(:disabled)      { @apply bg-blue-600; }
 
-.btn-gray             { @apply bg-gray-500 border-gray-600; }
-.btn-gray:hover       { @apply bg-gray-600; }
-.btn-gray:active      { @apply bg-gray-600; }
+.btn-gray                            { @apply bg-gray-500 border-gray-600; }
+.btn-gray:disabled                   { @apply bg-gray-400 border-gray-500; }
+.btn-gray:hover:not(:disabled)       { @apply bg-gray-600; }
+.btn-gray:active:not(:disabled)      { @apply bg-gray-600; }
 
-.btn-green            { @apply bg-green-500 border-green-600; }
-.btn-green:hover      { @apply bg-green-600; }
-.btn-green:active     { @apply bg-green-600; }
+.btn-green                           { @apply bg-green-500 border-green-600; }
+.btn-green:disabled                  { @apply bg-green-400 border-green-500; }
+.btn-green:hover:not(:disabled)      { @apply bg-green-600; }
+.btn-green:active:not(:disabled)     { @apply bg-green-600; }
 
-.btn-indigo           { @apply bg-indigo-500 border-indigo-600; }
-.btn-indigo:hover     { @apply bg-indigo-600; }
-.btn-indigo:active    { @apply bg-indigo-600; }
+.btn-indigo                          { @apply bg-indigo-500 border-indigo-600; }
+.btn-indigo:disabled                 { @apply bg-indigo-400 border-indigo-500; }
+.btn-indigo:hover:not(:disabled)     { @apply bg-indigo-600; }
+.btn-indigo:active:not(:disabled)    { @apply bg-indigo-600; }
 
-.btn-orange           { @apply bg-orange-500 border-orange-600; }
-.btn-orange:hover     { @apply bg-orange-600; }
-.btn-orange:active    { @apply bg-orange-600; }
+.btn-orange                          { @apply bg-orange-500 border-orange-600; }
+.btn-orange:disabled                 { @apply bg-orange-400 border-orange-500; }
+.btn-orange:hover:not(:disabled)     { @apply bg-orange-600; }
+.btn-orange:active:not(:disabled)    { @apply bg-orange-600; }
 
-.btn-red              { @apply bg-red-500 border-red-600; }
-.btn-red:hover        { @apply bg-red-600; }
-.btn-red:active       { @apply bg-red-600; }
+.btn-red                             { @apply bg-red-500 border-red-600; }
+.btn-red:disabled                    { @apply bg-red-400 border-red-500; }
+.btn-red:hover:not(:disabled)        { @apply bg-red-600; }
+.btn-red:active:not(:disabled)       { @apply bg-red-600; }
 
-.btn-turquoise        { @apply bg-turquoise-500 border-turquoise-600; }
-.btn-turquoise:hover  { @apply bg-turquoise-600; }
-.btn-turquoise:active { @apply bg-turquoise-600; }
+.btn-turquoise                       { @apply bg-turquoise-500 border-turquoise-600; }
+.btn-turquoise:disabled              { @apply bg-turquoise-400 border-turquoise-500; }
+.btn-turquoise:hover:not(:disabled)  { @apply bg-turquoise-600; }
+.btn-turquoise:active:not(:disabled) { @apply bg-turquoise-600; }
 
-.btn-yellow           { @apply bg-yellow-500 border-yellow-600; }
-.btn-yellow:hover     { @apply bg-yellow-600; }
-.btn-yellow:active    { @apply bg-yellow-600; }
+.btn-yellow                          { @apply bg-yellow-500 border-yellow-600; }
+.btn-yellow:disabled                 { @apply bg-yellow-400 border-yellow-500; }
+.btn-yellow:hover:not(:disabled)     { @apply bg-yellow-600; }
+.btn-yellow:active:not(:disabled)    { @apply bg-yellow-600; }
 
 
 /* Hollow Buttons */
@@ -270,7 +281,6 @@
     @apply border-2 border-gray-500 border-dashed opacity-25
 }
 
-
 /* ------------------------------------------------
     Form Fields
 --------------------------------------------------- */
@@ -292,16 +302,16 @@
 .field-group { @apply my-2 }
 .field-group { @apply block }
 
+/* Horizontal Forms */
+.form-horizontal .field-group { @apply my-3 flex flex-row }
+.form-horizontal .field-label { @apply mt-2 w-32 text-right pr-3 leading-tight }
+
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
 .fields-inline .field-group { @apply m-1 }
 
 .fields-inline-heading { @apply mb-1 flex flex-row; }
 .fields-inline-heading-item { @apply mx-1 font-bold; }
-
-/* Field Error Inside */
-.field-error-inside { @apply relative }
-.field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-1 }
 
 /* Draggable Fields */
 .field-draggable { @apply relative }
@@ -318,6 +328,7 @@
 
 /* Errors */
 .is-invalid .base-field { @apply border-red-500 }
+.is-invalid .base-field:hover { @apply border-red-600 }
 .is-invalid .base-field:focus { @apply shadow-outline-red }
 .is-valid .base-field:focus { @apply shadow-outline-green border-green-500 }
 
@@ -326,7 +337,11 @@
     @apply text-red-500;
 }
 
-.field-error { @apply text-red-500 }
+.field-error { @apply text-red-500 mt-1 block }
+
+/* Field Error Inside Field */
+.field-error-inside { @apply relative }
+.field-error-inside .field-error { @apply absolute top-0 bottom-0 right-0 m-1 p-2 }
 
 
 /* ------------------------------------------------

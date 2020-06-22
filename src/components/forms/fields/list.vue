@@ -10,10 +10,10 @@
       <div v-for="field in form.fields" :key="field.id">
         <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
           <div class="fields-inline">
-            <text-field class="field-group" field_class="field-sm" :value="field.id" field_disabled="true"/>
-            <text-field class="field-group" :value="field.label" field_disabled="true"/>
-            <text-field class="field-group" :value="field.mapping" field_disabled="true"/>
-            <text-field class="field-group" field_class="field-sm" :value="field.deliver" field_disabled="true"/>
+            <text-field field_class="field-sm" :value="field.id" field_disabled="true"/>
+            <text-field :value="field.label" field_disabled="true"/>
+            <text-field :value="field.mapping" field_disabled="true"/>
+            <text-field field_class="field-sm" :value="field.deliver" field_disabled="true"/>
           </div>
           <span class="flex flex-row">
             <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
