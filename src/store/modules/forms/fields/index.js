@@ -47,6 +47,12 @@ const mutations = {
       state.current_form.fields.splice(index, 1, updatedField)
     }
   },
+  UPDATE_FIELD_ORDER: (state, payload) => {
+    const index = state.current_form.fields.findIndex(field => field.id === payload.id)
+    if (index !== -1) {
+      state.current_form.fields[index].order = payload.order
+    }
+  },
   REMOVE_FIELD: (state, id) => (state.current_form.fields = state.current_form.fields.filter(field => field.id !== id)),
   SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
   RESET_CURRENT_FIELD: (state) => (state.current_field = null),

@@ -57,7 +57,7 @@ export default {
     ...mapMutations({
       addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED',
       toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
-      updateCurrentBaseOptionOrder: 'UPDATE_CURRENT_BASE_OPTION_ORDER'
+      updateCurrentBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER'
     }),
     addToModified () {
       this.addBaseOptionToModified({

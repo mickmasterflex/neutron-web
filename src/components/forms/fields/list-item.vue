@@ -36,6 +36,7 @@ export default {
     order () {
       this.addToModified()
       this.toggleChangesInModalUnsaved(true)
+      this.updateFieldOrder({ order: this.order, id: this.field.id })
     },
     newOrder () {
       this.order = this.newOrder
@@ -44,7 +45,8 @@ export default {
   methods: {
     ...mapMutations({
       addFieldToModified: 'ADD_FIELD_TO_MODIFIED',
-      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
+      updateFieldOrder: 'UPDATE_FIELD_ORDER'
     }),
     addToModified () {
       this.addFieldToModified({
