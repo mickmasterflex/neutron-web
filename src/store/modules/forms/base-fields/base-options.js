@@ -39,6 +39,12 @@ const mutations = {
       state.modified_base_options.unshift(modifiedOption)
     }
   },
+  UPDATE_CURRENT_BASE_OPTION_ORDER: (state, payload) => {
+    const index = state.current_base_options.findIndex(option => option.id === payload.id)
+    if (index !== -1) {
+      state.current_base_options[index].order = payload.order
+    }
+  },
   RESET_MODIFIED_BASE_OPTIONS: (state) => (state.modified_base_options = []),
   SET_CURRENT_BASE_OPTIONS: (state, options) => (state.current_base_options = options),
   SORT_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = state.current_base_options.sort((a, b) => (a.order > b.order) ? 1 : -1)),

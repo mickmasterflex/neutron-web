@@ -47,6 +47,7 @@ export default {
     optionData () {
       this.addToModified()
       this.toggleChangesInModalUnsaved(true)
+      this.updateCurrentBaseOptionOrder({ id: this.option.id, order: this.order })
     },
     newOrder () {
       this.order = this.newOrder
@@ -55,7 +56,8 @@ export default {
   methods: {
     ...mapMutations({
       addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED',
-      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
+      updateCurrentBaseOptionOrder: 'UPDATE_CURRENT_BASE_OPTION_ORDER'
     }),
     addToModified () {
       this.addBaseOptionToModified({
