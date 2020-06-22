@@ -1,12 +1,12 @@
 <template>
   <validation-provider :rules="rules" v-slot="{ errors, classes }">
-    <text-field
+    <textarea-field
       v-model="inner_value"
       :class="classes"
       v-bind="$attrs"
       :value="value">
       <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
-    </text-field>
+    </textarea-field>
   </validation-provider>
 </template>
 

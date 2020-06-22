@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -19,9 +19,12 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({ toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED' }),
     ...mapActions({ createBaseOption: 'createBaseOption' }),
     submitForm () {
-      this.createBaseOption(this.baseOption)
+      this.createBaseOption(this.baseOption).then(() => {
+        this.toggleChangesInModalUnsaved(true)
+      })
     }
   }
 }

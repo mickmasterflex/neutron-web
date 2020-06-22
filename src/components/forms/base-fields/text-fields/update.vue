@@ -3,11 +3,11 @@
     <template v-slot:header>Update Base Text Field</template>
     <template v-slot:body>
       <validation-observer ref="form">
-        <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="updateBaseTextFieldName" field_label="Name" class="field-group"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label" class="field-group"></v-text-field>
-          <text-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description" class="field-group"></text-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type" class="field-group"></v-select-field>
+        <form @submit.prevent="submitForm" class="form-horizontal">
+          <v-text-field v-model="name" rules="required" field_id="updateBaseTextFieldName" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label"></v-text-field>
+          <textarea-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description"></textarea-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type"></v-select-field>
         </form>
       </validation-observer>
     </template>
@@ -20,6 +20,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -40,20 +41,29 @@ export default {
     field: Object
   },
   watch: {
-    field: function () {
+    field () {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    }
+    },
+    localField: 'checkUnsavedChanges'
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateBaseTextFieldModal'
-    })
+    }),
+    localField () {
+      return {
+        name: this.name,
+        label: this.label,
+        description: this.description,
+        type: this.type
+      }
+    }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       update: 'updateBaseTextField'
@@ -73,6 +83,7 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
