@@ -34,11 +34,23 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/products/',
-    name: 'Products',
+    path: '/products/brands/',
+    name: 'Brands',
     component: () => import('@/views/products/index.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/products/brands/:id/',
+    name: 'Brand',
+    component: () => import('@/views/products/brand.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
   },
   {
     path: '/products/fields/',
