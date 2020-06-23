@@ -32,7 +32,7 @@
 export default {
   props: {
     brands: {
-      type: Object,
+      type: Array,
       required: true
     }
   }
