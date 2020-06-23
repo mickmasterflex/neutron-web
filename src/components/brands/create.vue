@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <text-field model="name" rules="required" field_id="brandName" field_label="Brand Name"></text-field>
+          <text-field model="name" rules="required" field_id="brandName" field_label="BrandName"></text-field>
           <textarea-field model="short_description" rules="required|alpha_dash" field_id="short_description" field_label="ShortDescription"></textarea-field>
           <text-field model="alias" rules="required" field_id="alias" field_label="Alias"></text-field>
-          <text-field model="website" rules="required" field_id="website" field_label="Wesbite"></text-field>
+          <text-field model="website" rules="required" field_id="website" field_label="Website"></text-field>
         </form>
       </validation-observer>
     </template>

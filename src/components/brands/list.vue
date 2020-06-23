@@ -30,6 +30,11 @@
 
 <script>
 export default {
-  props: ['brands']
+  props: {
+    brands: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

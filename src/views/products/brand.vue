@@ -4,7 +4,7 @@
       <h1 class="h1 text-white">{{brand.name}}</h1>
     </div>
     <h3 class="h3 mt-5 mb-2">Edit Brand</h3>
-    <update-brand :client="client"></update-brand>
+    <update-brand :brand="brand"></update-brand>
 
     <h3 class="h3 mt-5 mb-2">Delete Brand</h3>
     <delete-brand :id="brand.id"></delete-brand>
