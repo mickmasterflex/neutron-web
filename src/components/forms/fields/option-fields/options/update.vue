@@ -54,13 +54,17 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
+      this.updateOptionOrder({ id: this.option.id, order: this.order })
     },
     newOrder () {
       this.order = this.newOrder
     }
   },
   methods: {
-    ...mapMutations({ addOptionToModified: 'ADD_OPTION_TO_MODIFIED' }),
+    ...mapMutations({
+      addOptionToModified: 'ADD_OPTION_TO_MODIFIED',
+      updateOptionOrder: 'UPDATE_OPTION_ORDER'
+    }),
     addToModified () {
       this.addOptionToModified({
         order: this.order,

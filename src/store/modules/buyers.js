@@ -38,6 +38,7 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_BUYER', response.data)
         commit('SET_CURRENT_FORM', response.data.form)
+        commit('SORT_CURRENT_FORM_FIELDS')
       })
   },
   async createBuyer ({ commit }, buyer) {

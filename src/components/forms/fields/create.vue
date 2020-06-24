@@ -4,7 +4,7 @@
       <font-awesome-icon icon="plus"></font-awesome-icon> Add Field
     </button>
     <validation-observer v-slot="{ handleSubmit }" v-show="showCreateField">
-      <form @submit.prevent="handleSubmit(submitForm)">
+      <form @submit.prevent="handleSubmit(submitForm)" class="well">
         <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
         <div class="mt-3">
           <button type="submit" class="btn btn-green">Select Field</button>
@@ -49,6 +49,9 @@ export default {
       } else {
         return null
       }
+    },
+    newFieldOrder () {
+      return this.form.fields.length + 1
     }
   },
   methods: {
@@ -66,18 +69,20 @@ export default {
       if (this.textFieldSelected) {
         this.createTextField({
           form: this.form.id,
-          base_field: this.baseField
+          base_field: this.baseField,
+          order: this.newFieldOrder
         })
       } else if (this.optionFieldSelected) {
         this.createOptionField({
           form: this.form.id,
-          base_field: this.baseField
+          base_field: this.baseField,
+          order: this.newFieldOrder
         })
       }
     }
   },
   watch: {
-    fields: function () {
+    fields () {
       this.setAvailableBaseFields(this.fields)
     }
   },
