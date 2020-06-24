@@ -41,6 +41,7 @@ import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
 import fieldListItem from '@/components/forms/fields/list-item'
 import draggable from 'vuedraggable'
+import { dragOptions } from '@/mixins/dragOptions'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -66,20 +67,14 @@ export default {
       toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
     })
   },
+  mixins: [dragOptions],
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',
       form: 'getCurrentForm',
       showUpdateTextField: 'getShowUpdateTextField',
       showUpdateOptionField: 'getShowUpdateOptionField'
-    }),
-    dragOptions () {
-      return {
-        animation: 200,
-        tag: 'ul',
-        handle: '.field-draggable'
-      }
-    }
+    })
   },
   watch: {
     currentField () {
