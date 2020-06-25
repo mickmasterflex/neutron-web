@@ -2,27 +2,25 @@
   <div>
     <div v-if="form">
       <div class="fields-inline-heading bg-gray-900 rounded flex flex-row items-center mb-2">
+        <span class="w-24 th fields-inline-heading-item">Order</span>
         <span class="w-20 th fields-inline-heading-item">ID</span>
         <span class="w-64 th fields-inline-heading-item">Label</span>
         <span class="w-64 th fields-inline-heading-item">Mapping</span>
         <span class="w-20 th fields-inline-heading-item">Deliver</span>
       </div>
-      <div v-for="field in form.fields" :key="field.id">
-        <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
-          <div class="fields-inline">
-            <text-field field_class="field-sm" :value="field.id" field_disabled="true"/>
-            <text-field :value="field.label" field_disabled="true"/>
-            <text-field :value="field.mapping" field_disabled="true"/>
-            <text-field field_class="field-sm" :value="field.deliver" field_disabled="true"/>
+      <ul-draggable v-bind="dragOptions" v-model="form.fields">
+        <li v-for="(field, index) in form.fields" :key="field.id">
+          <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
+            <field-list-item :field="field" :newOrder="index + 1"></field-list-item>
+            <span class="flex flex-row">
+              <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
+              <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
+            </span>
           </div>
-          <span class="flex flex-row">
-            <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
-            <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
-          </span>
-        </div>
-        <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
-        <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
-      </div>
+          <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
+          <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
+        </li>
+      </ul-draggable>
     </div>
     <div v-else>
       No Fields
@@ -41,6 +39,9 @@ import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
 import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
+import fieldListItem from '@/components/forms/fields/list-item'
+import draggable from 'vuedraggable'
+import { dragOptions } from '@/mixins/dragOptions'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -56,7 +57,9 @@ export default {
     'delete-field': deleteField,
     'update-text-field': updateTextField,
     'update-option-field': updateOptionField,
-    'fetch-current-field': fetchCurrentField
+    'fetch-current-field': fetchCurrentField,
+    'field-list-item': fieldListItem,
+    'ul-draggable': draggable
   },
   methods: {
     ...mapMutations({
@@ -64,6 +67,7 @@ export default {
       toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
     })
   },
+  mixins: [dragOptions],
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',

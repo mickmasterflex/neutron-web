@@ -17,19 +17,13 @@
 
 <script>
 import draggable from 'vuedraggable'
+import { dragOptions } from '@/mixins/dragOptions'
 import updateOption from '@/components/forms/base-fields/option-fields/options/update'
 import deleteOption from '@/components/forms/base-fields/option-fields/options/delete'
 import createOption from '@/components/forms/base-fields/option-fields/options/create'
 
 export default {
   computed: {
-    dragOptions () {
-      return {
-        animation: 200,
-        tag: 'ul',
-        handle: '.field-draggable'
-      }
-    },
     options: {
       get () {
         return this.$store.getters.getCurrentBaseOptions
@@ -39,6 +33,7 @@ export default {
       }
     }
   },
+  mixins: [dragOptions],
   components: {
     'update-option': updateOption,
     'delete-option': deleteOption,
