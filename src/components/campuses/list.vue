@@ -50,8 +50,7 @@
 export default {
   props: {
     campuses: {
-      type: Object,
-      required: true
+      type: Array
     }
   }
 }

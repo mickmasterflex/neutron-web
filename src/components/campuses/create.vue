@@ -21,10 +21,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">
-        <span v-if="optionFieldSelected">Create then add Options</span>
-        <span v-else>Create Campus</span>
-      </button>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Campus</button>
     </template>
   </modal-template>
 </template>
@@ -62,65 +59,66 @@ export default {
       showModal: 'getShowCreateCampusModal'
     }),
     optionFieldSelected () {
-      return this.type === 'home' || this.type === 'work' || this.type ==='mobile' || this.type === 'fax'
-    },
+      return this.type === 'home' || this.type === 'work' || this.type === 'mobile' || this.type === 'fax'
+    }
   },
   props: {
-    brands: {
+    campuses: {
       type: Array
     },
-  mixins: [enterKeyListener],
-  methods: {
-    ...mapActions({ create: 'createCampus' }),
-    ...mapMutations({
-      closeModal: 'CLOSE_CREATE_CAMPUS_MODAL'
-    }),
-    close () {
-      this.name = ''
-      this.short_description = ''
-      this.vertical = ''
-      this.address1 = ''
-      this.address2 = ''
-      this.city = ''
-      this.state = ''
-      this.postal_code = ''
-      this.phone_type = ''
-      this.phone_number = ''
-      this.phone_extension = ''
-      this.description = ''
-      this.brand = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
-    },
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
-    submitForm () {
-      this.$refs.form.validate().then(success => {
-        if (success) {
-          this.create({
-            name: this.name,
-            short_description: this.short_description,
-            vertical: this.vertical,
-            address1: this.address1,
-            address2: this.address2,
-            city: this.city,
-            state: this.state,
-            postal_code: this.postal_code,
-            phone_type: this.phone_type,
-            phone_number: this.phone_number,
-            phone_extension: this.phone_extension,
-            description: this.description,
-            brand: this.brand
-          }).then(() => {
-            this.close()
-          })
+    mixins: [enterKeyListener],
+    methods: {
+      ...mapActions({ create: 'createCampus' }),
+      ...mapMutations({
+        closeModal: 'CLOSE_CREATE_CAMPUS_MODAL'
+      }),
+      close () {
+        this.name = ''
+        this.short_description = ''
+        this.vertical = ''
+        this.address1 = ''
+        this.address2 = ''
+        this.city = ''
+        this.state = ''
+        this.postal_code = ''
+        this.phone_type = ''
+        this.phone_number = ''
+        this.phone_extension = ''
+        this.description = ''
+        this.brand = ''
+        this.$nextTick(() => {
+          this.$refs.form.reset()
+        })
+        this.closeModal()
+      },
+      enterKeyAction () {
+        if (this.showModal) {
+          this.submitForm()
         }
-      })
+      },
+      submitForm () {
+        this.$refs.form.validate().then(success => {
+          if (success) {
+            this.create({
+              name: this.name,
+              short_description: this.short_description,
+              vertical: this.vertical,
+              address1: this.address1,
+              address2: this.address2,
+              city: this.city,
+              state: this.state,
+              postal_code: this.postal_code,
+              phone_type: this.phone_type,
+              phone_number: this.phone_number,
+              phone_extension: this.phone_extension,
+              description: this.description,
+              brand: this.brand
+            }).then(() => {
+              this.close()
+            })
+          }
+        })
+      }
     }
   }
 }

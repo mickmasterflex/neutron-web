@@ -4,6 +4,7 @@ import auth from './modules/authentication'
 import buyers from './modules/buyers'
 import brands from './modules/brands'
 import campaigns from '@/store/modules/campaigns'
+import campuses from '@/store/modules/campuses'
 import clients from './modules/clients'
 import forms from '@/store/modules/forms'
 import modals from './modules/modals'
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     auth,
     buyers,
     brands,
+    campuses,
     campaigns,
     clients,
     forms,

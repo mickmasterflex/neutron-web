@@ -12,7 +12,7 @@ const getters = {
   getAllCampusesCount: (state) => {
     return state.campuses.length
   },
-  getShowCreateCampusesModal: state => state.show_create_campus_modal
+  getShowCreateCampusModal: state => state.show_create_campus_modal
 }
 
 const actions = {
