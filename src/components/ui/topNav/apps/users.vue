@@ -1,6 +1,6 @@
 <template>
   <ul class="flex flex-row">
-    <top-nav-item label="Home" route="Users" :active="activeTab === 'home'"></top-nav-item>
+    <top-nav-item label="Accounts" route="Users" :active="activeTab === 'accounts'"></top-nav-item>
   </ul>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   props: {
     activeTab: {
       type: String,
-      default: 'home'
+      default: 'accounts'
     }
   }
 }
