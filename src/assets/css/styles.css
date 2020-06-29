@@ -144,6 +144,7 @@
 .btn {
     @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border;
     -webkit-appearance: button;
+    height: 45px;
 }
 
 .btn:disabled { @apply cursor-not-allowed }
@@ -151,7 +152,11 @@
 .btn + .btn { @apply ml-2; }
 
 .btn:focus  { @apply outline-none shadow-outline; }
-.btn-lg     { @apply text-lg font-light px-4 py-3 }
+
+.btn-lg {
+    @apply text-lg font-light px-4 py-3;
+    height: 53px;
+}
 
 .btn-circle {
     @apply rounded-full p-1 flex flex-col items-center justify-center;
