@@ -146,11 +146,8 @@
     -webkit-appearance: button;
     height: 45px;
 }
-
 .btn:disabled { @apply cursor-not-allowed }
-
 .btn + .btn { @apply ml-2; }
-
 .btn:focus  { @apply outline-none shadow-outline; }
 
 .btn-lg {

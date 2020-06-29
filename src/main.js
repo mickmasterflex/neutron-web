@@ -25,7 +25,7 @@ import appLayout from '@/layouts/app-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
-import topNavItem from '@/components/ui/topNav/navItem'
+import topNavItem from '@/components/ui/nav/top/navItem'
 import statCard from '@/components/ui/cards/stat-card'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'

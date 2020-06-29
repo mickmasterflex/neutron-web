@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import analyticsNav from '@/components/ui/topNav/apps/analytics'
-import configNav from '@/components/ui/topNav/apps/config'
-import dashboardNav from '@/components/ui/topNav/apps/dashboard'
-import productsNav from '@/components/ui/topNav/apps/products'
-import relationshipsNav from '@/components/ui/topNav/apps/relationships'
-import usersNav from '@/components/ui/topNav/apps/users'
-import utilitiesNav from '@/components/ui/topNav/apps/utilities'
+import analyticsNav from '@/components/ui/nav/top/apps/analytics'
+import configNav from '@/components/ui/nav/top/apps/config'
+import dashboardNav from '@/components/ui/nav/top/apps/dashboard'
+import productsNav from '@/components/ui/nav/top/apps/products'
+import relationshipsNav from '@/components/ui/nav/top/apps/relationships'
+import usersNav from '@/components/ui/nav/top/apps/users'
+import utilitiesNav from '@/components/ui/nav/top/apps/utilities'
 import { mapGetters } from 'vuex'
 
 export default {
