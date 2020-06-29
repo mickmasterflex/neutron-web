@@ -33,7 +33,7 @@ export default {
     @apply text-gray-400 font-light text-lg rounded-l-full px-4 py-3 mb-1 w-full transition duration-200;
   }
   .app-tab:hover {
-    @apply bg-gray-800 text-gray-100;
+    @apply bg-gray-900 text-white;
   }
   .app-tab.active {
     @apply bg-gray-800 text-white;
