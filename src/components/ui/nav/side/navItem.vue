@@ -34,6 +34,7 @@ export default {
   }
   .app-tab:hover {
     @apply bg-gray-900 text-white;
+    box-shadow: 0 2px 0 0 #000000;
   }
   .app-tab.active {
     @apply bg-gray-800 text-white;
