@@ -16,7 +16,7 @@ import PortalVue from 'portal-vue'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -25,6 +25,7 @@ import appLayout from '@/layouts/app-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
+import topNavItem from '@/components/ui/topNav/navItem'
 import statCard from '@/components/ui/cards/stat-card'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
@@ -58,6 +59,7 @@ Vue.component('app-layout', appLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
+Vue.component('top-nav-item', topNavItem)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)
@@ -95,7 +97,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faPlus, faMinus, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle)
+library.add(faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

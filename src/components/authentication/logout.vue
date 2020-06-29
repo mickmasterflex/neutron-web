@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-red" @click="logout">Logout</button>
+  <span @click="logout" class="text-gray-400 hover:text-gray-200 transition-colors duration-200 cursor-pointer"><font-awesome-icon icon="sign-out-alt"></font-awesome-icon> Logout</span>
 </template>
 
 <script>
