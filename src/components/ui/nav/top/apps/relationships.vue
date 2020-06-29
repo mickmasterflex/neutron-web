@@ -1,6 +1,6 @@
 <template>
   <ul class="flex flex-row">
-    <top-nav-item label="Clients" route="Clients" :active="activeTab === 'clients'"></top-nav-item>
+    <top-nav-item label="Clients" route="Relationships" :active="activeTab === 'clients'"></top-nav-item>
   </ul>
 </template>
 
