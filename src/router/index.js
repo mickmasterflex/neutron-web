@@ -48,7 +48,8 @@ const routes = [
     component: () => import('@/views/products/index.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'products'
+      activeApp: 'products',
+      activeAppTab: 'product-mgmt'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -58,7 +59,8 @@ const routes = [
     component: () => import('@/views/products/brand.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'products'
+      activeApp: 'products',
+      activeAppTab: 'product-mgmt'
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
@@ -73,7 +75,8 @@ const routes = [
     component: () => import('@/views/products/field-management.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'products'
+      activeApp: 'products',
+      activeAppTab: 'field-mgmt'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -264,11 +267,21 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    // Set Active App
     if (to.matched.some(record => record.meta.activeApp)) {
       store.commit('SET_ACTIVE_APP', to.meta.activeApp)
     } else {
       store.commit('RESET_ACTIVE_APP')
     }
+
+    // Set Active App's Tab
+    if (to.matched.some(record => record.meta.activeApp)) {
+      store.commit('SET_ACTIVE_APP_TAB', to.meta.activeAppTab)
+    } else {
+      store.commit('RESET_ACTIVE_APP')
+    }
+
+    // Check Authentication
     if (store.getters.isAuthenticated) {
       next()
       return

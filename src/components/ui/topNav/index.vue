@@ -1,13 +1,13 @@
 <template>
   <div>
-    <analytics-nav v-show="tab==='analytics'"></analytics-nav>
-    <config-nav v-show="tab==='config'"></config-nav>
-    <dashboard-nav v-show="tab==='dashboard'"></dashboard-nav>
-    <products-nav v-show="tab==='products'"></products-nav>
-    <relationships-nav v-show="tab==='relationships'"></relationships-nav>
-    <users-nav v-show="tab==='users'"></users-nav>
-    <utilities-nav v-show="tab==='utilities'"></utilities-nav>
-    <div v-show="tab===''"></div>
+    <analytics-nav v-if="app==='analytics'" :activeTab="tab"></analytics-nav>
+    <config-nav v-if="app==='config'" :activeTab="tab"></config-nav>
+    <dashboard-nav v-if="app==='dashboard'" :activeTab="tab"></dashboard-nav>
+    <products-nav v-if="app==='products'" :activeTab="tab"></products-nav>
+    <relationships-nav v-if="app==='relationships'" :activeTab="tab"></relationships-nav>
+    <users-nav v-if="app==='users'" :activeTab="tab"></users-nav>
+    <utilities-nav v-if="app==='utilities'" :activeTab="tab"></utilities-nav>
+    <div v-if="app===''"></div>
   </div>
 </template>
 
@@ -33,7 +33,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      tab: 'getActiveApp'
+      app: 'getActiveApp',
+      tab: 'getActiveAppTab'
     })
   }
 }
