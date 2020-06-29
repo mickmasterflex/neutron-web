@@ -7,7 +7,6 @@
     <relationships-nav v-if="app==='relationships'" :activeTab="tab"></relationships-nav>
     <users-nav v-if="app==='users'" :activeTab="tab"></users-nav>
     <utilities-nav v-if="app==='utilities'" :activeTab="tab"></utilities-nav>
-    <div v-if="app===''"></div>
   </div>
 </template>
 
