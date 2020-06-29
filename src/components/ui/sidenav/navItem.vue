@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: route}" class="app-tab">
+  <router-link :to="{name: route}" :class="[active === true ? 'active ' : '' ] + 'app-tab'">
     <font-awesome-icon :icon="icon" class="mr-1"></font-awesome-icon>
     {{ label }}
   </router-link>
@@ -19,6 +19,10 @@ export default {
     label: {
       type: String,
       required: true
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -31,7 +35,7 @@ export default {
   .app-tab:hover {
     @apply bg-gray-800 text-gray-100;
   }
-  .app-tab-active {
+  .app-tab.active {
     @apply bg-gray-800 text-white;
     box-shadow: 0 3px 0 0 #000000;
   }

@@ -30,7 +30,7 @@ export default {
     @apply bg-white text-black-100;
   }
   .top-nav-item:hover:not(.active) {
-    @apply text-gray-200;
+    @apply text-gray-300;
   }
   .top-nav-item + .top-nav-item {
     margin-left: .125rem
