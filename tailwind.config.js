@@ -9,7 +9,17 @@ module.exports = {
           ...defaultTheme.fontFamily.sans
         ]
       },
+      borderRadius: {
+        xl: '1.125rem'
+      },
+      borderWidth: {
+        3: '3px'
+      },
       colors: {
+        black: {
+          100: '#151515',
+          500: '#000000'
+        },
         blue: {
           100: '#EBF5FB',
           200: '#CEE5F4',

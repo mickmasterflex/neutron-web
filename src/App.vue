@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <component :is="layout" class="min-h-screen flex flex-row p-5">
+    <component :is="layout">
       <router-view/>
     </component>
   </div>

@@ -1,29 +1,54 @@
 <template>
-  <div class="min-h-screen flex flex-row p-5">
-    <div id="nav" class="w-1/12 min-h-screen flex flex-col items-center justify-center">
-      <!--<div class="pr-5 mb-5"><img alt="Proton Logo" class="w-full h-auto" src="../public/images/logo.png"></div>-->
-      <router-link :to="{name: 'Dashboard'}" class="app-tab">Dashboard</router-link>
-      <router-link :to="{name: 'Analytics'}" class="app-tab">Analytics</router-link>
-      <router-link :to="{name: 'Relationships'}" class="app-tab">Relationships</router-link>
-      <router-link :to="{name: 'Brands'}" class="app-tab">Products</router-link>
-      <router-link :to="{name: 'Config'}" class="app-tab">Config</router-link>
-      <router-link :to="{name: 'Utilities'}" class="app-tab">Utilities</router-link>
-      <router-link :to="{name: 'Users'}" class="app-tab">Users</router-link>
-
-      <logout-button></logout-button>
+  <div class="min-h-screen flex flex-row pl-3">
+    <div id="nav" class="app-side-nav min-h-screen flex flex-col">
+      <proton-logo class="app-side-nav-logo mt-6 mb-10 pl-2"></proton-logo>
+      <side-nav-item :active="activeApp === 'dashboard'" icon="th-large" route="Dashboard" label="Dashboard"></side-nav-item>
+      <side-nav-item :active="activeApp === 'analytics'" icon="chart-area" route="Analytics" label="Analytics"></side-nav-item>
+      <side-nav-item :active="activeApp === 'relationships'" icon="dna" route="Relationships" label="Relationships"></side-nav-item>
+      <side-nav-item :active="activeApp === 'products'" icon="atom" route="Brands" label="Products"></side-nav-item>
+      <side-nav-item :active="activeApp === 'config'" icon="cog" route="Config" label="Config"></side-nav-item>
+      <side-nav-item :active="activeApp === 'utilities'" icon="wrench" route="Utilities" label="Utilities"></side-nav-item>
+      <side-nav-item :active="activeApp === 'users'" icon="key" route="Users" label="Users"></side-nav-item>
     </div>
-    <div class="w-11/12 rounded-lg bg-white p-5">
-      <slot/>
+    <div class="w-full min-h-screen pt-2">
+      <div class="flex flex-row justify-between items-center pr-4">
+        <top-nav></top-nav>
+        <logout-button class="pb-2"></logout-button>
+      </div>
+      <div class="bg-white p-8 h-full">
+        <slot/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import logoutButton from '@/components/authentication/logout'
+import logo from '@/components/ui/logo'
+import sideNavItem from '@/components/ui/nav/side/navItem'
+import topNav from '@/components/ui/nav/top/index'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    'logout-button': logoutButton
+    'logout-button': logoutButton,
+    'proton-logo': logo,
+    'side-nav-item': sideNavItem,
+    'top-nav': topNav
+  },
+  computed: {
+    ...mapGetters({
+      activeApp: 'getActiveApp'
+    })
   }
 }
 </script>
+
+<style>
+  .app-side-nav {
+    width: 200px;
+  }
+  .app-side-nav-logo {
+    width: 150px;
+  }
+</style>
