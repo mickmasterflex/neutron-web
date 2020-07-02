@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <div class="hud">
-      <h1 class="h1 text-white">Fields</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="baseFieldCount" :title="`Fields`" :color="`teal`"></stat-card>
+  <content-layout>
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="h1 text-white">Fields</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="baseFieldCount" :title="`Fields`" :color="`teal`"></stat-card>
+        </div>
       </div>
-    </div>
-
-    <div class="flex flex-row justify-between mt-4">
-      <h2 class="h2-hairline">Base Fields</h2>
-      <button class="btn btn-turquoise" @click="showCreateBaseFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
-    </div>
-    <list-base-fields class="mt-5"></list-base-fields>
-    <create-base-field-modal></create-base-field-modal>
-  </div>
+    </template>
+    <template v-slot:content>
+      <div class="flex flex-row justify-between">
+        <h2 class="h2-hairline">Base Fields</h2>
+        <button class="btn btn-turquoise" @click="showCreateBaseFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
+      </div>
+      <list-base-fields class="mt-5"></list-base-fields>
+      <create-base-field-modal></create-base-field-modal>
+    </template>
+  </content-layout>
 </template>
 
 <script>

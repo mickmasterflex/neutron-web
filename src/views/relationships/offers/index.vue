@@ -1,37 +1,34 @@
 <template>
-  <div>
-    <div class="hud">
-      <h1 class="h1 text-white">All Offers</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="offerCount" :title="`Offers`" :color="`teal`"></stat-card>
+  <content-layout>
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="h1 text-white">All Offers</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="offerCount" :title="`Offers`" :color="`teal`"></stat-card>
+        </div>
       </div>
-    </div>
-    <offer-list :offers="offers" class="mt-5"></offer-list>
-    <h3 class="h3 mt-5 mb-2">Create Offer</h3>
-    <create-offer :offers="offers"></create-offer>
-  </div>
+    </template>
+    <template v-slot:content>
+      <offer-list :offers="offers"></offer-list>
+    </template>
+  </content-layout>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import offerList from '@/components/offers/list'
-import createOffer from '@/components/offers/create'
 
 export default {
   props: {
     buyer: Number
   },
   components: {
-    'offer-list': offerList,
-    'create-offer': createOffer
+    'offer-list': offerList
   },
   computed: {
     ...mapGetters({
-      getOffersByBuyer: 'getOffersByBuyer'
+      offers: 'getOffers'
     }),
-    offers: function () {
-      return this.getOffersByBuyer(this.buyer)
-    },
     offerCount: function () {
       return this.offers.length
     }

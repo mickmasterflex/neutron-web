@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <div class="hud">
-      <h1 class="text-white text-4xl font-hairline">All Users</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="getAllUsersCount" :title="`Users`" :color="`teal`"></stat-card>
+  <content-layout>
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="text-white text-4xl font-hairline">All Users</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="getAllUsersCount" :title="`Users`" :color="`teal`"></stat-card>
+        </div>
       </div>
-    </div>
-    <div class="flex flex-row justify-between mt-4">
-      <h2 class="h3">Users</h2>
-      <button class="btn btn-green" @click="showCreateUserModal()">Create User</button>
-    </div>
-    <user-list :users="users" class="mt-5"></user-list>
-    <create-user></create-user>
-  </div>
+    </template>
+    <template v-slot:content>
+      <div class="flex flex-row justify-between">
+        <h2 class="h3">Users</h2>
+        <button class="btn btn-green" @click="showCreateUserModal()">Create User</button>
+      </div>
+      <user-list :users="users" class="mt-5"></user-list>
+      <create-user></create-user>
+    </template>
+  </content-layout>
 </template>
 
 <script>
