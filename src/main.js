@@ -26,7 +26,6 @@ import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
-import topNavItem from '@/components/ui/nav/top/nav-item'
 import statCard from '@/components/ui/cards/stat-card'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
@@ -61,7 +60,6 @@ Vue.component('content-layout', baseContentLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
-Vue.component('top-nav-item', topNavItem)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)
