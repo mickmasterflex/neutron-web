@@ -6,12 +6,17 @@
 </template>
 
 <script>
+import topNavItem from '@/components/ui/nav/top/nav-item'
+
 export default {
   props: {
     activeTab: {
       type: String,
       default: 'product-mgmt'
     }
+  },
+  components: {
+    'top-nav-item': topNavItem
   }
 }
 </script>

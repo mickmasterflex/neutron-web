@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <div class="hud">
-      <h1 class="text-white text-4xl font-hairline">All Brands</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="getAllBrandsCount" :title="`Brands`" :color="`teal`"></stat-card>
+  <content-layout>
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="text-white text-4xl font-hairline">All Brands</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="getAllBrandsCount" :title="`Brands`" :color="`teal`"></stat-card>
+        </div>
       </div>
-    </div>
-    <div class="flex flex-row justify-between mt-4">
-      <h3 class="h3">Brand List</h3>
-      <button class="btn btn-green" @click="showCreateBrandModal()">Create Brand</button>
-    </div>
-    <brand-list :brands="brands" class="mt-5"></brand-list>
-    <create-brand></create-brand>
-  </div>
+    </template>
+    <template v-slot:content>
+      <div class="flex flex-row justify-between">
+        <h3 class="h3">Brand List</h3>
+        <button class="btn btn-green" @click="showCreateBrandModal()">Create Brand</button>
+      </div>
+      <brand-list :brands="brands" class="mt-5"></brand-list>
+      <create-brand></create-brand>
+    </template>
+  </content-layout>
 </template>
 
 <script>

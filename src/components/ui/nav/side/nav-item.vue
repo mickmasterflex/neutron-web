@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
   .app-tab {
-    @apply text-gray-400 font-light text-lg rounded-l-full px-4 py-3 mb-1 w-full transition duration-200;
+    @apply text-gray-400 font-light text-lg rounded-l-full px-4 py-3 mb-1 w-full transition duration-200 cursor-pointer;
   }
   .app-tab:hover {
     @apply bg-gray-900 text-white;

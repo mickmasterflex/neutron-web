@@ -15,7 +15,7 @@
         <top-nav></top-nav>
         <logout-button class="pb-2"></logout-button>
       </div>
-      <div class="bg-white p-8 h-full">
+      <div class="bg-white h-full">
         <slot/>
       </div>
     </div>
@@ -25,7 +25,7 @@
 <script>
 import logoutButton from '@/components/authentication/logout'
 import logo from '@/components/ui/logo'
-import sideNavItem from '@/components/ui/nav/side/navItem'
+import sideNavItem from '@/components/ui/nav/side/nav-item'
 import topNav from '@/components/ui/nav/top/index'
 import { mapGetters } from 'vuex'
 
