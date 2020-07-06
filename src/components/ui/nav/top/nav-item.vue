@@ -1,5 +1,5 @@
 <template>
-  <li :class="[active === true ? 'active ' : ''] + `top-nav-item bg-gray-900 text-gray-400 transition-colors duration-200 font-bold uppercase tracking-wide`">
+  <li :class="[active === true ? 'active' : 'border-t border-gray-800'] + ` top-nav-item bg-gray-900 text-gray-400 transition-colors duration-200 font-bold uppercase tracking-wide`">
     <router-link :to="{name: route}" class="px-6 py-3 block">
       {{ label }}
     </router-link>
