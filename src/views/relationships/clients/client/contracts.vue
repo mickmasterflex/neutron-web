@@ -2,7 +2,7 @@
   <client-layout contentTab="contracts" :id="id" :buyers="buyers" :partners="partners">
     <template v-slot:content>
       <action-heading>
-        <template v-slot:heading>
+        <template v-slot:left>
           <h2 class="h3">Buyer Contracts</h2>
         </template>
         <template v-slot:right>
@@ -13,7 +13,7 @@
       <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
 
       <action-heading class="mt-5">
-        <template v-slot:heading>
+        <template v-slot:left>
           <h2 class="h3">Partner Contracts</h2>
         </template>
         <template v-slot:right>

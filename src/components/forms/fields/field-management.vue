@@ -1,7 +1,7 @@
 <template>
   <div>
     <action-heading>
-      <template v-slot:heading>
+      <template v-slot:left>
         <h2 class="h3">Contract Fields</h2>
       </template>
       <template v-slot:right>

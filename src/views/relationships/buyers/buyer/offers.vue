@@ -2,7 +2,7 @@
   <buyer-layout :id="id" contentTab="offers">
     <template v-slot:content>
       <action-heading>
-        <template v-slot:heading>
+        <template v-slot:left>
           <h2 class="h3">Offers List</h2>
         </template>
         <template v-slot:right>
