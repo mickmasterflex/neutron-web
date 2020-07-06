@@ -22,7 +22,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="campus in campuses" :key="campus.id">
         <td class="td">
-          <router-link :to="{name: 'Campus', params: {id:campus.id}}" class="text-link">{{campus.name}}</router-link>
+          <router-link :to="{name: 'Campus', params: {brand:campus.brand, id:campus.id}}" class="text-link">{{campus.name}}</router-link>
         </td>
         <td class="td">{{campus.id}}</td>
         <td class="td">{{campus.short_description}}</td>

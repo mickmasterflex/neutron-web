@@ -13,14 +13,14 @@
       <v-text-field v-model="phone_number" rules="phone_number" field_id="phone_number" field_label="PhoneNumber"></v-text-field>
       <v-text-field v-model="phone_extension" rules="phone_extension" field_id="phone_extension" field_label="PhoneExtension"></v-text-field>
       <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-      <select-field v-model="brand" :options="brand" field_id="brand" field_label="Brand"></select-field>
+      <select-field v-model="brand" :options="brands" field_id="brand" field_label="Brand"></select-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </validation-observer>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -78,9 +78,15 @@ export default {
         phone_number: this.phone_number,
         phone_extension: this.phone_extension,
         description: this.description,
-        brand: this.brand
+        brand: this.brand,
+        id: this.campus.id
       })
     }
+  },
+  computed: {
+    ...mapGetters({
+      brands: 'getAllBrands'
+    })
   }
 }
 </script>

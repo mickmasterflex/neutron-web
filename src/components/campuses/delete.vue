@@ -7,6 +7,9 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
+    brands: {
+      type: Number
+    },
     id: {
       type: Number
     }
@@ -16,7 +19,7 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'Campuses' })
+          this.$router.push({ name: 'Brands', params: { id: this.brand } })
         })
     }
   }

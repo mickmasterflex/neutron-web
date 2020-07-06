@@ -31,7 +31,9 @@ import campaignList from '@/components/campaigns/list'
 
 export default {
   props: {
-    id: Number
+    id: {
+      type: Number
+    }
   },
   components: {
     'delete-partner-contract': deletePartner,

@@ -53,6 +53,16 @@ const routes = [
     }
   },
   {
+    path: '/products/brands/:id/campuses/',
+    name: 'Campuses',
+    component: () => import('@/views/products/index.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/products/brands/:brand/campuses/:id'
+  },
+  {
     path: '/products/fields/',
     name: 'FieldManagement',
     component: () => import('@/views/products/field-management.vue'),

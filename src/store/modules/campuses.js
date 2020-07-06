@@ -9,6 +9,9 @@ const state = {
 const getters = {
   getAllCampuses: state => state.campuses,
   getCurrentCampus: state => state.current_campus,
+  getCampusesByBrand: (state) => (brandId) => {
+    return state.campuses.filter(campaign => campaign.brand === brandId)
+  },
   getAllCampusesCount: (state) => {
     return state.campuses.length
   },
@@ -32,6 +35,8 @@ const actions = {
     await axios.post('/campuses/', campus)
       .then(response => {
         commit('ADD_CAMPUS', response.data)
+      }).catch(error => {
+        window.console.log(error)
       })
   },
   async updateCampus ({ commit }, updatedCampus) {
