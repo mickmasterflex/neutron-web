@@ -27,6 +27,7 @@ import appLayout from '@/layouts/app-layout'
 import baseModal from '@/components/ui/modals/base'
 import topNavItem from '@/components/ui/nav/top/navItem'
 import statCard from '@/components/ui/cards/stat-card'
+import tableEmptyState from '@/components/ui/tables/empty-state'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
 import textField from '@/components/ui/forms/base-fields/text-field'
@@ -60,6 +61,9 @@ Vue.component('app-layout', appLayout)
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
 Vue.component('top-nav-item', topNavItem)
+
+// Tables
+Vue.component('table-empty-state', tableEmptyState)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)

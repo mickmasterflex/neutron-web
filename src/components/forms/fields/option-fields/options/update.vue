@@ -72,7 +72,6 @@ export default {
         mapping: this.mapping,
         scrub: this.scrub,
         hide: this.hide,
-        field: this.option.field,
         id: this.option.id,
         base_option: this.option.base_option
       })
