@@ -1,18 +1,20 @@
 <template>
-  <modal-template :show="showModal" @close="close" modalClass="modal-lg">
-    <template v-slot:header>
-      Modify Form Fields
-      <span class="text-lg text-gray-700 block">{{modalHeading}}</span>
-    </template>
-    <template v-slot:body>
-      <list-fields></list-fields>
-      <create-field class="mt-3"></create-field>
-    </template>
-  </modal-template>
+  <div>
+    <action-heading>
+      <template v-slot:heading>
+        <h2 class="h3">Contract Fields</h2>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateFieldModal(true)"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
+      </template>
+    </action-heading>
+    <create-field></create-field>
+    <list-fields></list-fields>
+  </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
 
@@ -27,20 +29,10 @@ export default {
     'list-fields': listFields,
     'create-field': createField
   },
-  computed: {
-    ...mapGetters({
-      showModal: 'getShowFieldManagementModal'
-    })
-  },
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_FIELD_MANAGEMENT_MODAL',
-      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD'
-    }),
-    close () {
-      this.closeModal()
-      this.toggleShowCreateField(false)
-    }
+      showCreateFieldModal: 'SHOW_CREATE_FIELD_MODAL'
+    })
   }
 }
 </script>

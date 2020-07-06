@@ -27,6 +27,7 @@ import baseContentLayout from '@/layouts/content-layout'
 /* Components */
 import baseModal from '@/components/ui/modals/base'
 import statCard from '@/components/ui/cards/stat-card'
+import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
@@ -61,6 +62,7 @@ Vue.component('content-layout', baseContentLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
+Vue.component('action-heading', actionHeading)
 
 // Tables
 Vue.component('table-empty-state', tableEmptyState)

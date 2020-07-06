@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="form">
+  <div class="well well-light">
+    <div v-if="form.fields">
       <div class="fields-inline-heading bg-gray-900 rounded flex flex-row items-center mb-2">
         <span class="w-24 th fields-inline-heading-item">Order</span>
         <span class="w-20 th fields-inline-heading-item">ID</span>

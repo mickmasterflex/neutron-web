@@ -1,18 +1,19 @@
 <template>
-  <div>
-    <button class="btn btn-turquoise" @click="toggleShowCreateField(true)" v-show="!showCreateField">
-      <font-awesome-icon icon="plus"></font-awesome-icon> Add Field
-    </button>
-    <validation-observer v-slot="{ handleSubmit }" v-show="showCreateField">
-      <form @submit.prevent="handleSubmit(submitForm)" class="well">
-        <v-select-field rules="required" v-model="baseField" field_label="Choose Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
-        <div class="mt-3">
-          <button type="submit" class="btn btn-green">Select Field</button>
-          <span class="btn btn-hollow-default" @click="toggleShowCreateField(false)">Cancel</span>
-        </div>
-      </form>
-    </validation-observer>
-  </div>
+  <modal-template :show="showCreateField" @close="close">
+    <template v-slot:header>
+      Clone a Base Field
+    </template>
+    <template v-slot:body>
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm" class="form-horizontal">
+          <v-select-field rules="required" v-model="baseField" field_label="Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
+        </form>
+      </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Clone Field</button>
+    </template>
+  </modal-template>
 </template>
 
 <script>
@@ -27,7 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       baseFields: 'getAvailableBaseFields',
-      showCreateField: 'getShowCreateField',
+      showCreateField: 'getShowCreateFieldModal',
       form: 'getCurrentForm'
     }),
     fields () {
@@ -61,24 +62,38 @@ export default {
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      toggleShowCreateField: 'TOGGLE_SHOW_CREATE_FIELD',
+      closeModal: 'CLOSE_CREATE_FIELD_MODAL',
       setBaseFields: 'SET_BASE_FIELDS',
       setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
+    close () {
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeModal()
+    },
     submitForm () {
-      if (this.textFieldSelected) {
-        this.createTextField({
-          form: this.form.id,
-          base_field: this.baseField,
-          order: this.newFieldOrder
-        })
-      } else if (this.optionFieldSelected) {
-        this.createOptionField({
-          form: this.form.id,
-          base_field: this.baseField,
-          order: this.newFieldOrder
-        })
-      }
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          if (this.textFieldSelected) {
+            this.createTextField({
+              form: this.form.id,
+              base_field: this.baseField,
+              order: this.newFieldOrder
+            }).then(() => {
+              this.close()
+            })
+          } else if (this.optionFieldSelected) {
+            this.createOptionField({
+              form: this.form.id,
+              base_field: this.baseField,
+              order: this.newFieldOrder
+            }).then(() => {
+              this.close()
+            })
+          }
+        }
+      })
     }
   },
   watch: {
