@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button class="btn btn-turquoise" @click="showForm = true" v-show="!showForm"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
-    <div class="flex flex-row items-start" v-show="showForm">
+    <button class="btn btn-turquoise" @click="showForm()" v-show="!formVisible"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
+    <div class="flex flex-row items-start" v-show="formVisible">
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
           <v-select-field rules="required" field_class="field-tall" v-model="baseField" field_label="Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       baseField: '',
-      showForm: false
+      formVisible: false
     }
   },
   computed: {
@@ -61,6 +61,10 @@ export default {
       setBaseFields: 'SET_BASE_FIELDS',
       setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
+    showForm () {
+      this.formVisible = true
+      this.setAvailableBaseFields(this.fields)
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
