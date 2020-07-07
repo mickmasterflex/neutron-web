@@ -61,6 +61,12 @@ export default {
       setBaseFields: 'SET_BASE_FIELDS',
       setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
+    resetForm () {
+      this.baseField = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+    },
     showForm () {
       this.formVisible = true
       this.setAvailableBaseFields(this.fields)
@@ -73,12 +79,16 @@ export default {
               form: this.form.id,
               base_field: this.baseField,
               order: this.newFieldOrder
+            }).then(() => {
+              this.resetForm()
             })
           } else if (this.optionFieldSelected) {
             this.createOptionField({
               form: this.form.id,
               base_field: this.baseField,
               order: this.newFieldOrder
+            }).then(() => {
+              this.resetForm()
             })
           }
         }

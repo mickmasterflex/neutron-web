@@ -287,6 +287,7 @@
     height: 38px;
 }
 .field-sm { @apply w-20 }
+.field-tall { height: 45px }
 
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
 .base-field:focus { @apply outline-none shadow-outline }
@@ -297,8 +298,9 @@
 .field-group { @apply block }
 
 /* Horizontal Forms */
-.form-horizontal .field-group { @apply my-3 flex flex-row }
-.form-horizontal .field-label { @apply mt-2 w-32 text-right pr-3 leading-tight }
+.form-horizontal .field-group { @apply my-3 flex flex-row items-center }
+.form-horizontal-slim .field-group { @apply my-0 }
+.form-horizontal .field-label { @apply w-32 text-right pr-3 leading-tight }
 
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
