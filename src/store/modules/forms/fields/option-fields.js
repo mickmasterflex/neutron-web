@@ -48,7 +48,8 @@ const actions = {
 }
 
 const mutations = {
-  TOGGLE_SHOW_UPDATE_OPTION_FIELD: (state, bool) => (state.show_update_option_field = bool)
+  SHOW_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field = true),
+  CLOSE_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field = false)
 }
 
 export default {

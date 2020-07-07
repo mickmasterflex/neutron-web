@@ -10,14 +10,13 @@
       </div>
       <ul-draggable v-bind="dragOptions" v-model="form.fields">
         <li v-for="(field, index) in form.fields" :key="field.id">
-          <div :field="field" v-show="field.id!==currentFieldId" class="card card-sm mb-1 flex flex-row items-center justify-between">
+          <div :field="field" class="card card-sm mb-1 flex flex-row items-center justify-between">
             <field-list-item :field="field" :newOrder="index + 1"></field-list-item>
             <span class="flex flex-row">
               <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
               <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
             </span>
           </div>
-          <portal-target :name="`updateOptionField--${field.id}`" v-if="field.type === 'select' || field.type === 'radio'"></portal-target>
           <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
         </li>
       </ul-draggable>
@@ -25,9 +24,7 @@
     <div v-else>
       No Fields
     </div>
-    <portal v-if="currentField" :to="`updateOptionField--${currentFieldId}`">
-      <update-option-field :field="this.currentField" :form="form.id" v-show="showUpdateOptionField"></update-option-field>
-    </portal>
+    <update-option-field></update-option-field>
     <portal v-if="currentField" :to="`updateTextField--${currentFieldId}`">
       <update-text-field :field="this.currentField" :form="form.id" v-show="showUpdateTextField"></update-text-field>
     </portal>
@@ -64,7 +61,7 @@ export default {
   methods: {
     ...mapMutations({
       toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD',
-      toggleShowUpdateOptionField: 'TOGGLE_SHOW_UPDATE_OPTION_FIELD'
+      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
     })
   },
   mixins: [dragOptions],
@@ -72,8 +69,7 @@ export default {
     ...mapGetters({
       currentField: 'getCurrentField',
       form: 'getCurrentForm',
-      showUpdateTextField: 'getShowUpdateTextField',
-      showUpdateOptionField: 'getShowUpdateOptionField'
+      showUpdateTextField: 'getShowUpdateTextField'
     })
   },
   watch: {
@@ -81,11 +77,9 @@ export default {
       if (this.currentField) {
         this.currentFieldId = this.currentField.id
         if (this.currentField.type === 'select' || this.currentField.type === 'radio') {
-          this.toggleShowUpdateOptionField(true)
-          this.toggleShowUpdateTextField(false)
+          this.showUpdateOptionFieldModal()
         } else if (this.currentField.type === 'text' || this.currentField.type === 'textarea') {
           this.toggleShowUpdateTextField(true)
-          this.toggleShowUpdateOptionField(false)
         }
       } else {
         this.currentFieldId = null
