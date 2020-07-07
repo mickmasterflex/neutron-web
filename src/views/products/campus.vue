@@ -10,7 +10,7 @@
     <update-campus :campus="campus"></update-campus>
 
     <h3 class="h3 mt-5 mb-2">Delete Campus</h3>
-    <delete-campus :campus="campus.brand" :id="id"></delete-campus>
+    <delete-campus :campus="campus"></delete-campus>
   </div>
 </template>
 

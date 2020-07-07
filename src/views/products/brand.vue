@@ -42,8 +42,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      brand: 'getCurrentBrand',
-      campuses: 'getCampusesByBrand'
+      brand: 'getCurrentBrand'
     }),
     campuses: function () {
       return this.getCampusesByBrand(this.id)
@@ -56,6 +55,9 @@ export default {
     }),
     ...mapMutations({
       showCreateCampusModal: 'SHOW_CREATE_CAMPUS_MODAL'
+    }),
+    ...mapGetters({
+      getCampusesByBrand: 'getCampusesByBrand'
     })
   },
   created () {

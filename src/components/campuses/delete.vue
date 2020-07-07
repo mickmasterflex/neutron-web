@@ -7,9 +7,6 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: {
-      type: Number
-    },
     campus: {
       type: Object
     }
