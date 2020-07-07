@@ -10,7 +10,7 @@
     <update-campus :campus="campus"></update-campus>
 
     <h3 class="h3 mt-5 mb-2">Delete Campus</h3>
-    <delete-campus :brand="campus.brand" :id="id"></delete-campus>
+    <delete-campus :campus="campus.brand" :id="id"></delete-campus>
   </div>
 </template>
 
@@ -31,23 +31,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      campus: 'getCurrentCampus',
-      brands: 'getCurrentBrand',
-      getCampusesByBrand: 'getCampusesByBrand'
-    }),
-    campuses: function () {
-      return this.getCampusesByBrand(this.id)
-    }
+      campus: 'getCurrentCampus'
+    })
   },
   methods: {
     ...mapActions({
-      fetchCurrentCampus: 'fetchCurrentCampus',
-      fetchBrands: 'fetchBrands'
+      fetchCurrentCampus: 'fetchCurrentCampus'
     })
   },
   created () {
     this.fetchCurrentCampus(this.id)
-    this.fetchBrands()
   }
 }
 </script>

@@ -53,14 +53,7 @@ const routes = [
     }
   },
   {
-    path: '/products/brands/:id/campuses/',
-    name: 'Campuses',
-    component: () => import('@/views/products/index.vue'),
-    meta: { requiresAuth: true },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
-    path: '/products/brands/:brand/campuses/:id',
+    path: '/products/brands/:brand/campuses/:id/',
     name: 'Campus',
     component: () => import('@/views/products/campus.vue'),
     meta: { requiresAuth: true },

@@ -5,17 +5,17 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required" field_id="campusName" field_label="CampusName"></v-text-field>
-          <textarea-field v-model="short_description" field_id="short_description" field_label="ShortDescription"></textarea-field>
-          <v-select-field v-model="vertical" :options="typeVertical" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
+          <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
+          <v-select-field v-model="vertical" :options="verticalOptions" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
           <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
           <text-field v-model="city" field_id="city" field_label="City"></text-field>
           <text-field v-model="state" field_id="state" field_label="State"></text-field>
-          <text-field v-model="postal_code" field_id="postal_code" field_label="PostalCode"></text-field>
+          <text-field v-model="postal_code" field_id="postal_code" field_label="Postal Code"></text-field>
           <select-field v-model="phone_type" :options="typeOptions" field_id="createPhoneType" field_label="Type"></select-field>
-          <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="PhoneNumber"></v-text-field>
-          <text-field v-model="phone_extension" field_id="phone_extension" field_label="PhoneExtension"></text-field>
+          <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="Phone Number"></v-text-field>
+          <text-field v-model="phone_extension" field_id="phone_extension" field_label="Phone Extension"></text-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
         </form>
       </validation-observer>
@@ -37,7 +37,7 @@ export default {
       short_description: '',
       vertical: '',
       is_online: '',
-      typeVertical: {
+      verticalOptions: {
         education: { name: 'education', id: 'education' }
       },
       address1: '',
