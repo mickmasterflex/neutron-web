@@ -73,16 +73,12 @@ export default {
               form: this.form.id,
               base_field: this.baseField,
               order: this.newFieldOrder
-            }).then(() => {
-              this.close()
             })
           } else if (this.optionFieldSelected) {
             this.createOptionField({
               form: this.form.id,
               base_field: this.baseField,
               order: this.newFieldOrder
-            }).then(() => {
-              this.close()
             })
           }
         }
