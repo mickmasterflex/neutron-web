@@ -7,7 +7,7 @@
           <v-text-field v-model="name" rules="required" field_id="campusName" field_label="CampusName"></v-text-field>
           <textarea-field v-model="short_description" field_id="short_description" field_label="ShortDescription"></textarea-field>
           <v-select-field v-model="vertical" :options="typeVertical" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
-          <input v-model="is_online" type="checkbox" field_id="checkbox">
+          <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
           <text-field v-model="city" field_id="city" field_label="City"></text-field>
@@ -17,7 +17,6 @@
           <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="PhoneNumber"></v-text-field>
           <text-field v-model="phone_extension" field_id="phone_extension" field_label="PhoneExtension"></text-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-          <select-field v-model="brand" :options="brands" field_id="brand" field_label="Brand"></select-field>
         </form>
       </validation-observer>
     </template>
@@ -55,8 +54,7 @@ export default {
       },
       phone_number: '',
       phone_extension: '',
-      description: '',
-      brand: 1
+      description: ''
     }
   },
   computed: {
@@ -65,11 +63,9 @@ export default {
     })
   },
   props: {
-    campus: {
-      type: Object
-    },
-    brands: {
-      type: Array
+    brandId: {
+      type: Number,
+      required: true
     }
   },
   mixins: [enterKeyListener],
@@ -94,7 +90,6 @@ export default {
       this.phone_number = ''
       this.phone_extension = ''
       this.description = ''
-      this.brand = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -122,7 +117,7 @@ export default {
             phone_number: this.phone_number,
             phone_extension: this.phone_extension,
             description: this.description,
-            brand: this.brand
+            brand: this.brandId
           }).then(() => {
             this.close()
           })
