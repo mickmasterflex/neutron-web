@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal" @close="close" modalClass="modal-lg">
+  <modal-template :show="showModal" @close="close" modalClass="modal-md">
     <template v-slot:header>
       Field Configuration
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
@@ -16,12 +16,12 @@
 
         <div class="field-group">
           <label class="field-label">Options</label>
-          <field-options></field-options>
+          <field-options class="flex-grow"></field-options>
         </div>
 
         <div class="field-group">
           <label class="field-label">Available Field Options</label>
-          <field-inactive-options></field-inactive-options>
+          <field-inactive-options class="flex-grow"></field-inactive-options>
         </div>
       </div>
     </template>

@@ -85,4 +85,8 @@ export default {
   .modal-lg .modal-alert {
     max-width: 1500px;
   }
+  .modal-md .modal-dialog,
+  .modal-md .modal-alert {
+    max-width: 1050px;
+  }
 </style>
