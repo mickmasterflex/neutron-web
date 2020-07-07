@@ -7,19 +7,16 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    brands: {
-      type: Number
-    },
-    id: {
-      type: Number
+    campus: {
+      type: Object
     }
   },
   methods: {
     ...mapActions({ delete: 'deleteCampus' }),
     runDelete () {
-      this.delete(this.id)
+      this.delete(this.campus.id)
         .then(() => {
-          this.$router.push({ name: 'Brands' })
+          this.$router.push({ name: 'Brand', params: { id: this.campus.brand } })
         })
     }
   }

@@ -3,7 +3,7 @@
     <div class="hud">
       <h1 class="h1 text-white">{{brand.name}}</h1>
       <div class="hud--stat-cards">
-        <stat-card :data="getAllCampusesCount" :title="`Campuses`" :color="`teal`"></stat-card>
+        <stat-card :data="campuses.length" :title="`Campuses`" :color="`teal`"></stat-card>
     </div>
     </div>
     <div class="flex flex-row justify-between mt-4">
@@ -42,10 +42,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      campuses: 'getAllCampuses',
-      brand: 'getCurrentBrand',
-      getCampusesByBrand: 'getCampusesByBrand',
-      getAllCampusesCount: 'getAllCampusesCount'
+      brand: 'getCurrentBrand'
     }),
     campuses: function () {
       return this.getCampusesByBrand(this.id)
@@ -58,6 +55,9 @@ export default {
     }),
     ...mapMutations({
       showCreateCampusModal: 'SHOW_CREATE_CAMPUS_MODAL'
+    }),
+    ...mapGetters({
+      getCampusesByBrand: 'getCampusesByBrand'
     })
   },
   created () {
