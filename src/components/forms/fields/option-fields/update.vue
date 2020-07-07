@@ -5,16 +5,15 @@
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
     </template>
     <template v-slot:body>
-      <h3 class="h3">Field Configuration</h3>
       <validation-observer ref="form">
-        <form @submit.prevent="submitForm" class="well fields-inline">
+        <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required"></v-text-field>
           <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping"></text-field>
           <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
         </form>
       </validation-observer>
 
-      <h3 class="h3 mt-4">Field Options</h3>
+      <h3 class="h3 mt-4">Options</h3>
       <field-options></field-options>
 
       <h3 class="h3 mt-4">Available Field Options</h3>
