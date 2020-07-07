@@ -17,7 +17,6 @@
         <th class="th">Phone Number</th>
         <th class="th">Phone Extension</th>
         <th class="th">Description</th>
-        <th class="th">Brand</th>
       </tr>
       </thead>
       <tbody class="tbody">
@@ -38,7 +37,6 @@
         <td class="td">{{campus.phone_number}}</td>
         <td class="td">{{campus.phone_extension}}</td>
         <td class="td">{{campus.description}}</td>
-        <td class="td">{{campus.brand}}</td>
       </tr>
       </tbody>
     </table>

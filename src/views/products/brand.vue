@@ -11,7 +11,7 @@
       <button class="btn btn-green" @click="showCreateCampusModal()">Create Campus</button>
     </div>
     <campus-list :campuses="campuses" class="mt-5"></campus-list>
-    <create-campus :brand="brand.id" :campuses="campuses"></create-campus>
+    <create-campus :brandId="brand.id"></create-campus>
 
     <h3 class="h3 mt-5 mb-2">Edit Brand</h3>
     <update-brand :brand="brand"></update-brand>

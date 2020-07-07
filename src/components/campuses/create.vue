@@ -17,7 +17,6 @@
           <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="PhoneNumber"></v-text-field>
           <text-field v-model="phone_extension" field_id="phone_extension" field_label="PhoneExtension"></text-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-          <select-field v-model="brand" :options="brands" field_id="brand" field_label="Brand"></select-field>
         </form>
       </validation-observer>
     </template>
@@ -55,8 +54,7 @@ export default {
       },
       phone_number: '',
       phone_extension: '',
-      description: '',
-      brand: 1
+      description: ''
     }
   },
   computed: {
@@ -65,11 +63,9 @@ export default {
     })
   },
   props: {
-    campus: {
-      type: Object
-    },
-    brands: {
-      type: Array
+    brandId: {
+      type: Number,
+      required: true
     }
   },
   mixins: [enterKeyListener],
@@ -94,7 +90,6 @@ export default {
       this.phone_number = ''
       this.phone_extension = ''
       this.description = ''
-      this.brand = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -122,7 +117,7 @@ export default {
             phone_number: this.phone_number,
             phone_extension: this.phone_extension,
             description: this.description,
-            brand: this.brand
+            brand: this.brandId
           }).then(() => {
             this.close()
           })
