@@ -4,10 +4,8 @@
       <thead>
       <tr>
         <th class="th">Name</th>
-        <th class="th">ID</th>
-        <th class="th">Vertical</th>
         <th class="th">Is Online</th>
-        <th class="th">Postal Code</th>
+        <th class="th">Campus Address</th>
         <th class="th">Phone Number</th>
       </tr>
       </thead>
@@ -16,10 +14,8 @@
         <td class="td">
           <router-link :to="{name: 'Campus', params: {brand:campus.brand, id:campus.id}}" class="text-link">{{campus.name}}</router-link>
         </td>
-        <td class="td">{{campus.id}}</td>
-        <td class="td">{{campus.vertical}}</td>
         <td class="td">{{campus.is_online}}</td>
-        <td class="td">{{campus.postal_code}}</td>
+        <td class="td">{{campus.address1}}</td>
         <td class="td">{{campus.phone_number}}</td>
       </tr>
       </tbody>
