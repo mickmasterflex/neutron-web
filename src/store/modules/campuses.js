@@ -9,7 +9,7 @@ const state = {
 const getters = {
   getCurrentCampus: state => state.current_campus,
   getCampusesByBrand: (state) => (brandId) => {
-    return state.campuses.filter(campaign => campaign.brand === brandId)
+    return state.campuses.filter(campus => campus.brand === brandId)
   },
   getShowCreateCampusModal: state => state.show_create_campus_modal
 }
