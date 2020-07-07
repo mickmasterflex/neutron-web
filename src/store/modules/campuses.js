@@ -15,7 +15,8 @@ const getters = {
   getAllCampusesCount: (state) => {
     return state.campuses.length
   },
-  getShowCreateCampusModal: state => state.show_create_campus_modal
+  getShowCreateCampusModal: state => state.show_create_campus_modal,
+  getShowUpdateCampusModal: state => state.show_update_campus_modal
 }
 
 const actions = {
@@ -66,6 +67,7 @@ const mutations = {
   },
   REMOVE_CAMPUS: (state, id) => (state.campuses = state.campuses.filter(campus => campus.id !== id)),
   SHOW_CREATE_CAMPUS_MODAL: (state) => (state.show_create_campus_modal = true),
+  SHOW_UPDATE_CAMPUS_MODAL: (state) => (state.show_update_campus_modal = true),
   CLOSE_CREATE_CAMPUS_MODAL: (state) => (state.show_create_campus_modal = false)
 }
 

@@ -60,7 +60,16 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/products/brands/:brand/campuses/:id'
+    path: '/products/brands/:brand/campuses/:id',
+    name: 'Campus',
+    component: () => import('@/views/products/campus.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
   },
   {
     path: '/products/fields/',
