@@ -121,7 +121,7 @@
     Wells
 --------------------------------------------------- */
 
-.well { @apply bg-gray-200 border border-gray-300 p-3 rounded }
+.well { @apply bg-gray-200 border border-gray-300 p-3 rounded-lg }
 .well-light { @apply bg-gray-100 }
 
 
