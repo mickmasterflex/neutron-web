@@ -1,23 +1,29 @@
 <template>
-  <modal-template :show="showModal" @close="close">
+  <modal-template :show="showModal" @close="close" modalClass="modal-lg">
     <template v-slot:header>
       Field Configuration
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
     </template>
     <template v-slot:body>
-      <validation-observer ref="form">
-        <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required"></v-text-field>
-          <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping"></text-field>
-          <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
-        </form>
-      </validation-observer>
+      <div class="form-horizontal">
+        <validation-observer ref="form">
+          <form @submit.prevent="submitForm">
+            <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required"></v-text-field>
+            <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping"></text-field>
+            <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
+          </form>
+        </validation-observer>
 
-      <h3 class="h3 mt-4">Options</h3>
-      <field-options></field-options>
+        <div class="field-group">
+          <label class="field-label">Options</label>
+          <field-options></field-options>
+        </div>
 
-      <h3 class="h3 mt-4">Available Field Options</h3>
-      <field-inactive-options></field-inactive-options>
+        <div class="field-group">
+          <label class="field-label">Available Field Options</label>
+          <field-inactive-options></field-inactive-options>
+        </div>
+      </div>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm" class="btn btn-green btn-lg">Update Field</button>
