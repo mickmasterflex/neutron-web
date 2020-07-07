@@ -15,8 +15,7 @@ const state = {
 
 const getters = {
   getCurrentForm: state => state.current_form,
-  getCurrentField: state => state.current_field,
-  getShowCreateFieldModal: state => state.show_create_field_modal
+  getCurrentField: state => state.current_field
 }
 
 const mutations = {
@@ -31,9 +30,7 @@ const mutations = {
   },
   REMOVE_FIELD: (state, id) => (state.current_form.fields = state.current_form.fields.filter(field => field.id !== id)),
   SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
-  RESET_CURRENT_FIELD: (state) => (state.current_field = null),
-  SHOW_CREATE_FIELD_MODAL: (state) => (state.show_create_field_modal = true),
-  CLOSE_CREATE_FIELD_MODAL: (state) => (state.show_create_field_modal = false)
+  RESET_CURRENT_FIELD: (state) => (state.current_field = null)
 }
 
 export default {

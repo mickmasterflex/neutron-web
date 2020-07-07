@@ -47,9 +47,11 @@ export default {
   },
   watch: {
     field: function () {
-      this.label = this.field.label
-      this.mapping = this.field.mapping
-      this.deliver = this.field.deliver
+      if (this.field) {
+        this.label = this.field.label
+        this.mapping = this.field.mapping
+        this.deliver = this.field.deliver
+      }
     }
   },
   mixins: [enterKeyListener],

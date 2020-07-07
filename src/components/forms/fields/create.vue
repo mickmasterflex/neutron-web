@@ -1,19 +1,15 @@
 <template>
-  <modal-template :show="showCreateField" @close="close">
-    <template v-slot:header>
-      Clone a Base Field
-    </template>
-    <template v-slot:body>
+  <div>
+    <button class="btn btn-turquoise" @click="showForm = true" v-show="!showForm"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
+    <div class="flex flex-row items-start" v-show="showForm">
       <validation-observer ref="form">
-        <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-select-field rules="required" v-model="baseField" field_label="Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
+        <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
+          <v-select-field rules="required" field_class="field-tall" v-model="baseField" field_label="Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
         </form>
       </validation-observer>
-    </template>
-    <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Clone Field</button>
-    </template>
-  </modal-template>
+      <button @click="submitForm()" class="btn btn-green ml-2"><font-awesome-icon icon="clone"></font-awesome-icon> Clone</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,13 +18,13 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      baseField: ''
+      baseField: '',
+      showForm: false
     }
   },
   computed: {
     ...mapGetters({
       baseFields: 'getAvailableBaseFields',
-      showCreateField: 'getShowCreateFieldModal',
       form: 'getCurrentForm'
     }),
     fields () {
@@ -62,16 +58,9 @@ export default {
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_FIELD_MODAL',
       setBaseFields: 'SET_BASE_FIELDS',
       setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
     }),
-    close () {
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
-    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -103,9 +92,6 @@ export default {
   },
   created () {
     this.fetchBaseFields()
-  },
-  updated () {
-    this.setAvailableBaseFields(this.fields)
   }
 }
 </script>
