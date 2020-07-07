@@ -4,6 +4,7 @@
       <v-text-field v-model="name" rules="required" field_id="campusName" field_label="CampusName"></v-text-field>
       <textarea-field v-model="short_description" field_id="short_description" field_label="ShortDescription"></textarea-field>
       <v-select-field v-model="vertical" :options="typeVertical" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
+      <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
       <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
       <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
       <text-field v-model="city" field_id="city" field_label="City"></text-field>
@@ -28,6 +29,7 @@ export default {
       name: '',
       short_description: '',
       vertical: '',
+      is_online: '',
       typeVertical: {
         education: { name: 'education', id: 'education' }
       },
@@ -56,6 +58,7 @@ export default {
       this.name = this.campus.name
       this.short_description = this.campus.short_description
       this.vertical = this.campus.vertical
+      this.is_online = this.campus.is_online
       this.address1 = this.campus.address1
       this.address2 = this.campus.address2
       this.city = this.campus.city
@@ -78,6 +81,7 @@ export default {
         name: this.name,
         short_description: this.short_description,
         vertical: this.vertical,
+        is_online: this.is_online,
         address1: this.address1,
         address2: this.address2,
         city: this.city,
