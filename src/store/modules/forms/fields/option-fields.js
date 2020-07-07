@@ -6,11 +6,11 @@ const modules = {
 }
 
 const state = {
-  show_update_option_field: false
+  show_update_option_field_modal: false
 }
 
 const getters = {
-  getShowUpdateOptionField: state => state.show_update_option_field
+  getShowUpdateOptionFieldModal: state => state.show_update_option_field_modal
 }
 
 const actions = {
@@ -48,8 +48,8 @@ const actions = {
 }
 
 const mutations = {
-  SHOW_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field = true),
-  CLOSE_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field = false)
+  SHOW_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field_modal = true),
+  CLOSE_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field_modal = false)
 }
 
 export default {

@@ -43,7 +43,7 @@ export default {
   computed: {
     ...mapGetters({
       field: 'getCurrentField',
-      showModal: 'getShowUpdateOptionField'
+      showModal: 'getShowUpdateOptionFieldModal'
     })
   },
   watch: {
@@ -92,8 +92,7 @@ export default {
           }).then(() => {
             this.closeModal()
             this.resetCurrentField()
-          }
-          )
+          })
         }
       })
     }

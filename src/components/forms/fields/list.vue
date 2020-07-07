@@ -17,7 +17,6 @@
               <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
             </span>
           </div>
-          <portal-target :name="`updateTextField--${field.id}`" v-if="field.type === 'text' || field.type === 'textarea'"></portal-target>
         </li>
       </ul-draggable>
     </div>
@@ -25,9 +24,7 @@
       No Fields
     </div>
     <update-option-field></update-option-field>
-    <portal v-if="currentField" :to="`updateTextField--${currentFieldId}`">
-      <update-text-field :field="this.currentField" :form="form.id" v-show="showUpdateTextField"></update-text-field>
-    </portal>
+    <update-text-field></update-text-field>
   </div>
 </template>
 
@@ -60,7 +57,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      toggleShowUpdateTextField: 'TOGGLE_SHOW_UPDATE_TEXT_FIELD',
+      showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
     })
   },
@@ -68,8 +65,7 @@ export default {
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',
-      form: 'getCurrentForm',
-      showUpdateTextField: 'getShowUpdateTextField'
+      form: 'getCurrentForm'
     })
   },
   watch: {
@@ -79,7 +75,7 @@ export default {
         if (this.currentField.type === 'select' || this.currentField.type === 'radio') {
           this.showUpdateOptionFieldModal()
         } else if (this.currentField.type === 'text' || this.currentField.type === 'textarea') {
-          this.toggleShowUpdateTextField(true)
+          this.showUpdateTextFieldModal()
         }
       } else {
         this.currentFieldId = null
