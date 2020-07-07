@@ -12,7 +12,6 @@ import store from '@/store'
 import axios from '@/axios'
 import 'animate.css'
 import '@/assets/css/styles.css'
-import PortalVue from 'portal-vue'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -115,5 +114,3 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
-Vue.use(PortalVue)
