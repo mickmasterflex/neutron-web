@@ -70,6 +70,18 @@ const routes = [
     }
   },
   {
+    path: '/products/brands/:brand/campuses/:id/',
+    name: 'Campus',
+    component: () => import('@/views/products/campus.vue'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
     path: '/products/fields/',
     name: 'FieldManagement',
     component: () => import('@/views/products/field-management.vue'),
