@@ -1,17 +1,20 @@
 <template>
-  <div v-if="campaign">
-    <div class="hud">
-      <h1 class="h1 text-white">{{campaign.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="campaign.id" :title="`Campaign`" :color="`teal`"></stat-card>
+  <content-layout v-if="campaign">
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="h1 text-white">{{campaign.name}}</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="campaign.id" :title="`Campaign`" :color="`teal`"></stat-card>
+        </div>
       </div>
-    </div>
-    <h3 class="h3 mt-5 mb-2">Delete Campaign</h3>
-    <delete-campaign :campaign="campaign" ></delete-campaign>
-
-    <h3 class="h3 mt-5 mb-2">Update Campaign</h3>
-    <update-campaign :campaign="campaign"></update-campaign>
-  </div>
+    </template>
+    <template v-slot:content>
+      <h3 class="h3 mb-2">Update Campaign</h3>
+      <update-campaign :campaign="campaign"></update-campaign>
+      <h3 class="h3 mt-5 mb-2">Delete Campaign</h3>
+      <delete-campaign :campaign="campaign" ></delete-campaign>
+    </template>
+  </content-layout>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
