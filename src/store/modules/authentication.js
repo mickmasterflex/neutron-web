@@ -16,18 +16,18 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit('SET_AUTH_LOADING')
       axios({ url: '/accounts/login/', data: user, method: 'POST' })
-        .then(resp => {
-          const token = 'Token ' + resp.data.key
+        .then(response => {
+          const token = 'Token ' + response.data.key
           localStorage.setItem('user-token', token)
           axios.defaults.headers.common.Authorization = token
           commit('SET_AUTH_TOKEN', token)
           commit('SET_AUTH_SUCCESS')
-          resolve(resp)
+          resolve(response)
         })
-        .catch(err => {
-          commit('SET_AUTH_ERROR', err)
+        .catch(error => {
+          commit('SET_AUTH_ERROR', error)
           localStorage.removeItem('user-token')
-          reject(err)
+          reject(error)
         })
     })
   },
