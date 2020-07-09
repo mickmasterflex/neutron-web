@@ -2,16 +2,16 @@
   <brand-layout :id="id" contentTab="details">
     <template v-slot:content>
       <h3 class="h3 mb-2">Update Brand</h3>
-      <update-brand-contract :brand="brand" ></update-brand-contract>
+      <update-brand :brand="brand" ></update-brand>
 
       <h3 class="h3 mt-5 mb-2">Delete Brand</h3>
-      <delete-brand-contract :client="brand.client" :id="id"></delete-brand-contract>
+      <delete-brand :id="brand.id"></delete-brand>
     </template>
   </brand-layout>
 </template>
 
 <script>
-import brandLayout from '@/views/relationships/brands/brand/layout'
+import brandLayout from '@/views/products/brand/layout'
 import deleteBrand from '@/components/brands/delete'
 import updateBrand from '@/components/brands/update'
 import { mapGetters } from 'vuex'
@@ -29,8 +29,8 @@ export default {
   },
   components: {
     'brand-layout': brandLayout,
-    'delete-brand-contract': deleteBrand,
-    'update-brand-contract': updateBrand
+    'delete-brand': deleteBrand,
+    'update-brand': updateBrand
   }
 }
 </script>

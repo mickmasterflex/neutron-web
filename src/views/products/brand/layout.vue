@@ -8,10 +8,10 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab" :class="contentTab === 'details' ? 'active' : ''">
-          <router-link :to="{name: 'BuyerContract', params: {id:id}}">Brand Details</router-link>
+          <router-link :to="{name: 'Brand', params: {id:id}}">Brand Details</router-link>
         </li>
         <li class="underscore-tab" :class="contentTab === 'offers' ? 'active' : ''">
-          <router-link :to="{name: 'BuyerContractOffers', params: {id:id}}">Campuses</router-link>
+          <router-link :to="{name: 'Brand', params: {id:id}}">Campuses</router-link>
         </li>
       </ul>
     </template>

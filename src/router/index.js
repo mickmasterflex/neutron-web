@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/products/brands/:id/',
     name: 'Brand',
-    component: () => import('@/views/products/brand/brand.vue'),
+    component: () => import('@/views/products/brand/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
