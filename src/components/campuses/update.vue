@@ -1,7 +1,7 @@
 <template>
   <validation-observer v-slot="{ handleSubmit }">
     <form @submit.prevent="handleSubmit(submitForm)">
-      <v-text-field v-model="name" rules="required" field_id="campusName" field_label="CampusName"></v-text-field>
+      <v-text-field v-model="name" rules="required" field_id="campusName" field_label="Campus Name"></v-text-field>
       <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
       <v-select-field v-model="vertical" :options="verticalOptions" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
       <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
