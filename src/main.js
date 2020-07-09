@@ -44,6 +44,13 @@ const token = localStorage.getItem('user-token')
 if (token) {
   axios.defaults.headers.common.Authorization = token
 }
+axios.interceptors.response.use(response => {
+  return response
+}, error => {
+  if (error.response.status === 404) {
+    router.push({ name: '404' })
+  }
+})
 
 /* -----------------------------------------------
   Layouts
