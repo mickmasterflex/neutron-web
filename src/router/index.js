@@ -199,6 +199,24 @@ const routes = [
     }
   },
   {
+    path: '/products/brands/:id/campuses/',
+    name: 'BrandCampuses',
+    component: () => import('@/views/products/brand/campuses.vue'),
+    meta: {
+      meta: {
+        requiresAuth: true,
+        activeApp: 'products',
+        activeAppTab: 'product-mgmt'
+      },
+      pathToRegexpOptions: { strict: true },
+      props (route) {
+        const props = { ...route.params }
+        props.id = +props.id
+        return props
+      }
+    }
+  },
+  {
     path: '/relationships/contracts/buyers/',
     name: 'AllBuyerContracts',
     component: () => import('@/views/relationships/buyers/index.vue'),

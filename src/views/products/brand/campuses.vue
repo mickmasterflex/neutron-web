@@ -6,7 +6,7 @@
         <button class="btn btn-green" @click="showCreateCampusModal()">Create Campus</button>
       </div>
       <campus-list :campuses="campuses"></campus-list>
-      <create-campus :brand="brand.id"></create-campus>
+      <create-campus :brandId="id"></create-campus>
     </template>
   </brand-layout>
 </template>
@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      fetchCurrentBrand: 'fetchCurrentBrand',
       fetchCampuses: 'fetchCampuses'
     }),
     ...mapMutations({

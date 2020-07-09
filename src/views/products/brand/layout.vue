@@ -10,8 +10,8 @@
         <li class="underscore-tab" :class="contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'Brand', params: {id:id}}">Brand Details</router-link>
         </li>
-        <li class="underscore-tab" :class="contentTab === 'offers' ? 'active' : ''">
-          <router-link :to="{name: 'Brand', params: {id:id}}">Campuses</router-link>
+        <li class="underscore-tab" :class="contentTab === 'campuses' ? 'active' : ''">
+          <router-link :to="{name: 'BrandCampuses', params: {id:id}}">Campuses</router-link>
         </li>
       </ul>
     </template>
