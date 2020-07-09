@@ -56,7 +56,7 @@ const routes = [
   {
     path: '/products/brands/:id/',
     name: 'Brand',
-    component: () => import('@/views/products/brand.vue'),
+    component: () => import('@/views/products/brand/brand.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
@@ -72,7 +72,7 @@ const routes = [
   {
     path: '/products/brands/:brand/campuses/:id/',
     name: 'Campus',
-    component: () => import('@/views/products/campus.vue'),
+    component: () => import('@/views/products/brand/campus.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true },
     props (route) {
@@ -84,7 +84,7 @@ const routes = [
   {
     path: '/products/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/field-management.vue'),
+    component: () => import('@/views/products/brand/field-management.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
