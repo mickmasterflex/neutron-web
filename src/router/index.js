@@ -314,7 +314,7 @@ const routes = [
     }
   },
   {
-    path: '/*/',
+    path: '/*',
     name: '404',
     component: () => import('@/views/error/404.vue'),
     meta: { layout: 'simple' },
