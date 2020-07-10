@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import statusBar from '@/components/ui/modals/status-bar'
+import statusBar from '@/components/ui/status-bar/default'
 import { mapGetters } from 'vuex'
 
 export default {
