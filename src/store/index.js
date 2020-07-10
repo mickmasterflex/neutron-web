@@ -13,6 +13,7 @@ import offers from './modules/offers'
 import partners from './modules/partners'
 import products from './modules/products'
 import users from './modules/users'
+import validation from '@/store/modules/validation'
 
 Vue.use(Vuex)
 
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     offers,
     partners,
     products,
-    users
+    users,
+    validation
   }
 })
