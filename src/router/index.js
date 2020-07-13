@@ -70,6 +70,22 @@ const routes = [
     }
   },
   {
+    path: '/products/brands/:id/campuses/',
+    name: 'BrandCampuses',
+    component: () => import('@/views/products/brand/campuses.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'products',
+      activeAppTab: 'product-mgmt'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
     path: '/products/brands/:brand/campuses/:id/',
     name: 'Campus',
     component: () => import('@/views/products/brand/campus.vue'),
@@ -196,24 +212,6 @@ const routes = [
       const props = { ...route.params }
       props.id = +props.id
       return props
-    }
-  },
-  {
-    path: '/products/brands/:id/campuses/',
-    name: 'BrandCampuses',
-    component: () => import('@/views/products/brand/campuses.vue'),
-    meta: {
-      meta: {
-        requiresAuth: true,
-        activeApp: 'products',
-        activeAppTab: 'product-mgmt'
-      },
-      pathToRegexpOptions: { strict: true },
-      props (route) {
-        const props = { ...route.params }
-        props.id = +props.id
-        return props
-      }
     }
   },
   {
