@@ -3,13 +3,21 @@
     <component :is="layout">
       <router-view/>
     </component>
+    <transition-group ref="toastList" name="toastList" tag="ul"
+                      enter-active-class="animate__animated animate__fadeInUp animate__faster"
+                      leave-active-class="animate__animated animate__fadeOut animate__faster absolute"
+                      class="fixed bottom-0 right-0 mr-1 z-50 w-full" style="max-width: 500px">
+      <toast v-for="toast in this.toasts" :toast="toast" :key="toast.id" class="z-40"></toast>
+    </transition-group>
   </div>
 </template>
 
 <script>
 import axios from './axios'
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 import router from '@/router'
+import toast from '@/components/ui/toast/index'
+
 const appLayout = 'app'
 
 export default {
@@ -17,7 +25,10 @@ export default {
   computed: {
     layout () {
       return (this.$route.meta.layout || appLayout) + '-layout'
-    }
+    },
+    ...mapGetters({
+      toasts: 'getToasts'
+    })
   },
   methods: {
     ...mapActions({
@@ -25,8 +36,12 @@ export default {
     }),
     ...mapMutations({
       setError: 'SET_ERROR',
-      setFormError: 'SET_FORM_ERROR'
+      setFormError: 'SET_FORM_ERROR',
+      addToast: 'ADD_TOAST'
     })
+  },
+  components: {
+    toast: toast
   },
   created () {
     axios.interceptors.response.use(response => {
@@ -39,7 +54,12 @@ export default {
       } else if (error.response.status === 404) {
         router.push({ name: '404' })
       } else if (error.response.status === 500) {
-        console.log(error.response.data)
+        this.addToast({
+          color: 'red',
+          icon: 'exclamation-triangle',
+          heading: error.message,
+          id: Date.now()
+        })
       } else {
         this.setFormError('Something went wrong. Try again, or contact your system administrator.')
       }
@@ -51,3 +71,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .toastList-move {
+    transition: transform .5s;
+  }
+</style>
