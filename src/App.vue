@@ -49,19 +49,23 @@ export default {
     }, error => {
       if (error.status === 401 && error.config && !error.config.__isRetryRequest) {
         this.logout()
-      } else if (error.response.status === 400) {
-        this.setError(error.response)
-      } else if (error.response.status === 404) {
+      } else if (error.response.status === 404 && error.response.config.method === 'get') {
         router.push({ name: '404' })
-      } else if (error.response.status === 500) {
+      } else if (error.response.status === 400) {
         this.addToast({
           color: 'red',
           icon: 'exclamation-triangle',
           heading: error.message,
-          id: Date.now()
+          id: Date.now() + Math.random(),
+          content: error.response.data
         })
       } else {
-        this.setFormError('Something went wrong. Try again, or contact your system administrator.')
+        this.addToast({
+          color: 'red',
+          icon: 'exclamation-triangle',
+          heading: error.message,
+          id: Date.now() + Math.random()
+        })
       }
       if (error.response.data.non_field_errors) {
         this.setFormError(error.response.data.non_field_errors[0])
