@@ -37,38 +37,57 @@ export default {
     ...mapMutations({
       setError: 'SET_ERROR',
       setFormError: 'SET_FORM_ERROR',
+      resetFormError: 'RESET_FORM_ERROR',
+      resetError: 'RESET_ERROR',
       addToast: 'ADD_TOAST'
-    })
+    }),
+    genericToastError (error) {
+      this.addToast({
+        color: 'red',
+        icon: 'exclamation-triangle',
+        heading: error.message,
+        id: Date.now() + Math.random()
+      })
+    }
   },
   components: {
     toast: toast
   },
   created () {
     axios.interceptors.response.use(response => {
+      this.resetError()
+      this.resetFormError()
       return response
     }, error => {
-      if (error.status === 401 && error.config && !error.config.__isRetryRequest) {
-        this.logout()
-      } else if (error.response.status === 404 && error.response.config.method === 'get') {
-        router.push({ name: '404' })
-      } else if (error.response.status === 400) {
-        this.addToast({
-          color: 'red',
-          icon: 'exclamation-triangle',
-          heading: error.message,
-          id: Date.now() + Math.random(),
-          content: error.response.data
-        })
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:
+            if (error.response.config && !error.response.config.__isRetryRequest) {
+              this.logout()
+              alert('hi')
+            }
+            break
+          case 404:
+            if (error.response.config.method === 'get') {
+              router.push({ name: '404' })
+            }
+            break
+          case 400:
+            return Promise.reject(error)
+          case 500:
+            this.addToast({
+              color: 'red',
+              icon: 'exclamation-triangle',
+              heading: error.message,
+              content: error.response.statusText,
+              id: Date.now() + Math.random()
+            })
+            break
+          default:
+            this.genericToastError(error)
+        }
       } else {
-        this.addToast({
-          color: 'red',
-          icon: 'exclamation-triangle',
-          heading: error.message,
-          id: Date.now() + Math.random()
-        })
-      }
-      if (error.response.data.non_field_errors) {
-        this.setFormError(error.response.data.non_field_errors[0])
+        this.genericToastError(error)
       }
       return Promise.reject(error)
     })

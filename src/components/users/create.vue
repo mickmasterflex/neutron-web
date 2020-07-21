@@ -19,6 +19,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import setResponseErrors from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -62,7 +63,11 @@ export default {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email
-          }).then(() => { this.close() })
+          }).then(() => {
+            this.close()
+          }).catch(error => {
+            setResponseErrors(error, this.$refs.form)
+          })
         }
       })
     }
