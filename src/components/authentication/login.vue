@@ -13,48 +13,40 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import statusBar from '@/components/ui/status-bar/default'
+import setResponseErrors from '@/mixins/setResponseErrors'
 
 export default {
   data () {
     return {
       username: '',
-      password: '',
-      submit_status: ''
+      password: ''
     }
   },
   computed: {
     ...mapGetters({
-      error: 'getError',
       formError: 'getFormError',
       errorStatus: 'getErrorStatus',
       errorData: 'getErrorData'
     })
   },
   methods: {
+    ...mapActions({ login: 'authLogin' }),
     ...mapMutations({
-      setAuthError: 'SET_AUTH_ERROR',
       setFormError: 'SET_FORM_ERROR',
-      resetError: 'RESET_ERROR',
       resetFormError: 'RESET_FORM_ERROR'
     }),
-    setErrors () {
-      this.$refs.form.setErrors(this.errorData)
-    },
-    async submitForm () {
-      this.resetError()
-      this.resetFormError()
-      const { username, password } = this
-      try {
-        await this.$store.dispatch('authLogin', { username, password })
-      } catch {
-        this.setAuthError()
-        localStorage.removeItem('user-token')
-        if (this.errorStatus === 400) {
-          this.setErrors()
+    submitForm () {
+      this.login({
+        username: this.username,
+        password: this.password
+      }).catch(error => {
+        setResponseErrors(error, this.$refs.form)
+        if (error.response.data.non_field_errors) {
+          this.setFormError(error.response.data.non_field_errors[0])
         }
-      }
+      })
     }
   },
   components: {

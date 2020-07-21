@@ -12,15 +12,20 @@ const getters = {
 }
 
 const actions = {
-  async authLogin ({ commit, dispatch }, { username, password }) {
-    commit('SET_AUTH_LOADING')
-    const response = await axios.post('/accounts/login/', { username, password })
-    const token = 'Token ' + response.data.key
-    localStorage.setItem('user-token', token)
-    axios.defaults.headers.common.Authorization = token
-    commit('SET_AUTH_TOKEN', token)
-    commit('SET_AUTH_SUCCESS')
-    router.push({ name: 'Dashboard' })
+  async authLogin ({ commit, dispatch }, user) {
+    await axios.post('/accounts/login/', user)
+      .then(response => {
+        const token = 'Token ' + response.data.key
+        localStorage.setItem('user-token', token)
+        axios.defaults.headers.common.Authorization = token
+        commit('SET_AUTH_TOKEN', token)
+        commit('SET_AUTH_SUCCESS')
+        router.push({ name: 'Dashboard' })
+      }).catch(error => {
+        commit('SET_AUTH_ERROR', error)
+        localStorage.removeItem('user-token')
+        return Promise.reject(error)
+      })
   },
   async authLogout ({ commit }) {
     return new Promise((resolve) => {
