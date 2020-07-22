@@ -4,8 +4,8 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="clientName" field_label="Client Name"></v-text-field>
-          <v-text-field v-model="slug" rules="required|alpha_dash" field_id="clientSlug" field_label="Slug"></v-text-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Client Name"></v-text-field>
+          <v-text-field v-model="slug" rules="required|alpha_dash" field_id="slug" field_label="Slug"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -18,6 +18,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import setResponseErrors from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -58,6 +59,8 @@ export default {
             slug: this.slug
           }).then(() => {
             this.close()
+          }).catch(error => {
+            setResponseErrors(error, this.$refs.form)
           })
         }
       })
