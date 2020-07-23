@@ -19,7 +19,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
-import setResponseErrors from '@/mixins/setResponseErrors'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -34,7 +34,7 @@ export default {
       showModal: 'getShowCreateUserModal'
     })
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createUser'
@@ -66,11 +66,14 @@ export default {
           }).then(() => {
             this.close()
           }).catch(error => {
-            setResponseErrors(error, this.$refs.form)
+            this.error = error
           })
         }
       })
     }
+  },
+  mounted () {
+    this.form_ref = this.$refs.form
   }
 }
 </script>

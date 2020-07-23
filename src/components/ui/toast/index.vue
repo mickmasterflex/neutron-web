@@ -44,7 +44,6 @@ export default {
   },
   mounted () {
     setTimeout(() => { this.close() }, this.timeout)
-    window.console.log(this.toast.id)
   }
 }
 </script>

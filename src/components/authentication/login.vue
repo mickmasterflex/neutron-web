@@ -15,7 +15,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import statusBar from '@/components/ui/status-bar/default'
-import setResponseErrors from '@/mixins/setResponseErrors'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -24,11 +24,10 @@ export default {
       password: ''
     }
   },
+  mixins: [setResponseErrors],
   computed: {
     ...mapGetters({
-      formError: 'getFormError',
-      errorStatus: 'getErrorStatus',
-      errorData: 'getErrorData'
+      formStatus: 'getAuthStatus'
     })
   },
   methods: {
@@ -42,15 +41,15 @@ export default {
         username: this.username,
         password: this.password
       }).catch(error => {
-        setResponseErrors(error, this.$refs.form)
-        if (error.response.data.non_field_errors) {
-          this.setFormError(error.response.data.non_field_errors[0])
-        }
+        this.error = error
       })
     }
   },
   components: {
     'status-bar': statusBar
+  },
+  mounted () {
+    this.form_ref = this.$refs.form
   }
 }
 </script>

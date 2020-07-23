@@ -35,8 +35,6 @@ export default {
       logout: 'authLogout'
     }),
     ...mapMutations({
-      setError: 'SET_ERROR',
-      setFormError: 'SET_FORM_ERROR',
       resetFormError: 'RESET_FORM_ERROR',
       resetError: 'RESET_ERROR',
       addToast: 'ADD_TOAST'
@@ -64,7 +62,6 @@ export default {
           case 401:
             if (error.response.config && !error.response.config.__isRetryRequest) {
               this.logout()
-              alert('hi')
             }
             break
           case 404:
@@ -73,6 +70,7 @@ export default {
             }
             break
           case 400:
+            this.genericToastError(error)
             return Promise.reject(error)
           case 500:
             this.addToast({
