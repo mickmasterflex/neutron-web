@@ -7,7 +7,7 @@
       <h3 class="text-lg text-white ml-4 flex-grow">{{toast.heading}}</h3>
       <span @click="close" :class="`text-${toast.color}-700 hover:text-${toast.color}-900 cursor-pointer transition-colors duration-200 text-3xl font-hairline leading-none`">&times;</span>
     </div>
-    <div class="ml-10" v-if="toast.content">
+    <div class="ml-10" v-if="toast.content !== ''">
       <p v-show="!showContent" @click="toggleContent( true )" :class="`underline cursor-pointer text-${toast.color}-900 hover:text-${toast.color}-800 block`">Show details</p>
       <p v-show="showContent" :class="`text-${toast.color}-900`">{{toast.content}}</p>
     </div>

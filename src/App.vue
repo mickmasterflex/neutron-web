@@ -37,11 +37,12 @@ export default {
     ...mapMutations({
       addToast: 'ADD_TOAST'
     }),
-    genericToastError (error) {
+    genericToast (color, icon, heading, content = '') {
       this.addToast({
-        color: 'red',
-        icon: 'exclamation-triangle',
-        heading: error.message,
+        color: color,
+        icon: icon,
+        heading: heading,
+        content: content,
         id: Date.now() + Math.random()
       })
     }
@@ -51,6 +52,15 @@ export default {
   },
   created () {
     axios.interceptors.response.use(response => {
+      if (response.config.method === 'post' && response.statusText === 'Created') {
+        this.genericToast('green', 'thumbs-up', response.statusText + ' successfully')
+      }
+      if (response.config.method === 'put') {
+        this.genericToast('green', 'thumbs-up', 'Updated successfully')
+      }
+      if (response.config.method === 'delete') {
+        this.genericToast('green', 'trash-alt', 'Deleted successfully')
+      }
       return response
     }, error => {
       if (error.response) {
@@ -66,22 +76,16 @@ export default {
             }
             break
           case 400:
-            this.genericToastError(error)
+            this.genericToast('red', 'exclamation-triangle', error.message)
             return Promise.reject(error)
           case 500:
-            this.addToast({
-              color: 'red',
-              icon: 'exclamation-triangle',
-              heading: error.message,
-              content: error.response.statusText,
-              id: Date.now() + Math.random()
-            })
+            this.genericToast('red', 'exclamation-triangle', error.message, error.response.statusText)
             break
           default:
-            this.genericToastError(error)
+            this.genericToast('red', 'exclamation-triangle', error.message)
         }
       } else {
-        this.genericToastError(error)
+        this.genericToast('red', 'exclamation-triangle', error.message)
       }
       return Promise.reject(error)
     })
