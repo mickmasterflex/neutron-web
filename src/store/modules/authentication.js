@@ -23,7 +23,7 @@ const actions = {
         commit('SET_AUTH_SUCCESS')
         router.push({ name: 'Dashboard' })
       }).catch(error => {
-        commit('SET_AUTH_ERROR', error)
+        commit('SET_AUTH_ERROR')
         localStorage.removeItem('user-token')
         return Promise.reject(error)
       })
