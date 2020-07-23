@@ -6,7 +6,7 @@
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(submitForm)">
         <v-text-field v-model="username" mode="passive" rules="required|email" field_id="username" field_label="Email" field_type="email"></v-text-field>
         <v-text-field v-model="password" rules="required" field_id="password" field_label="Password" field_type="password"></v-text-field>
-        <button type="submit" class="btn btn-green mt-3">Login</button>
+        <button type="submit" class="btn btn-green mt-3" :disabled="formStatus === 'loading'">Login</button>
       </form>
     </validation-observer>
   </div>
