@@ -23,8 +23,7 @@ export const enterKeyListener = {
   },
   methods: {
     enterKeyAction () {
-      const error = new Error('Must override enterKeyAction method in component.')
-      throw (error)
+      throw (new Error('Must override enterKeyAction method in component.'))
     }
   }
 }
