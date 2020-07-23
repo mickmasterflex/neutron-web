@@ -1,3 +1,13 @@
+/*
+ This mixin requires that you override enterKeyAction method in component.
+ ie:
+ enterKeyAction () {
+    if (this.showModal) {
+      this.submitForm()
+    }
+  },
+*/
+
 export const enterKeyListener = {
   created () {
     const submitHandler = (e) => {
@@ -14,7 +24,7 @@ export const enterKeyListener = {
   methods: {
     enterKeyAction () {
       const error = new Error('Must override enterKeyAction method in component.')
-      console.log(error)
+      throw (error)
     }
   }
 }
