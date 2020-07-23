@@ -35,8 +35,6 @@ export default {
       logout: 'authLogout'
     }),
     ...mapMutations({
-      resetFormError: 'RESET_FORM_ERROR',
-      resetError: 'RESET_ERROR',
       addToast: 'ADD_TOAST'
     }),
     genericToastError (error) {
@@ -53,8 +51,6 @@ export default {
   },
   created () {
     axios.interceptors.response.use(response => {
-      this.resetError()
-      this.resetFormError()
       return response
     }, error => {
       if (error.response) {

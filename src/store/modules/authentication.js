@@ -12,7 +12,8 @@ const getters = {
 }
 
 const actions = {
-  async authLogin ({ commit, dispatch }, user) {
+  async authLogin ({ commit }, user) {
+    commit('SET_AUTH_LOADING')
     await axios.post('/accounts/login/', user)
       .then(response => {
         const token = 'Token ' + response.data.key

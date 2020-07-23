@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import statusBar from '@/components/ui/status-bar/default'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
 
@@ -32,10 +32,6 @@ export default {
   },
   methods: {
     ...mapActions({ login: 'authLogin' }),
-    ...mapMutations({
-      setFormError: 'SET_FORM_ERROR',
-      resetFormError: 'RESET_FORM_ERROR'
-    }),
     submitForm () {
       this.login({
         username: this.username,
