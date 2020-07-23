@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name"></v-text-field>
           <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name"></v-text-field>
-          <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
+          <v-text-field v-model="email" mode="passive" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
         </form>
       </validation-observer>
     </template>
