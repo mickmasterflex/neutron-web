@@ -37,13 +37,13 @@ export default {
     ...mapMutations({
       addToast: 'ADD_TOAST'
     }),
-    genericToast (color, icon, heading, content = '') {
+    genericToast (color, icon, heading, content = '', id = Date.now() + Math.random()) {
       this.addToast({
         color: color,
         icon: icon,
         heading: heading,
         content: content,
-        id: Date.now() + Math.random()
+        id: id
       })
     }
   },
