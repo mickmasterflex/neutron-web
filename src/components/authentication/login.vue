@@ -43,9 +43,6 @@ export default {
   },
   components: {
     'status-bar': statusBar
-  },
-  mounted () {
-    this.form_ref = this.$refs.form
   }
 }
 </script>

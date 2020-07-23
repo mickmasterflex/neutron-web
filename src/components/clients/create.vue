@@ -65,9 +65,6 @@ export default {
         }
       })
     }
-  },
-  mounted () {
-    this.form_ref = this.$refs.form
   }
 }
 </script>

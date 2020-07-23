@@ -1,5 +1,5 @@
 /*
- This mixin requires that you set 'form_ref' in the mounted lifecycle hook of the component.
+ You can override 'form_ref' in the mounted lifecycle hook of the component.
  ie:
  mounted () {
    this.form_ref = this.$refs.form
@@ -27,17 +27,19 @@ export const setResponseErrors = {
   computed: {
     formError () {
       if (this.error.response.data) {
-        if (this.error.response.data.non_field_errors) {
-          return (this.error.response.data.non_field_errors[0])
+        const nonFieldErrors = this.error.response.data.non_field_errors
+        if (nonFieldErrors) {
+          return (nonFieldErrors[0])
         }
       }
       return ''
     }
   },
-  beforeUpdate () {
-    if (this.form_ref === undefined) {
-      const overrideError = new Error('You must set form_ref in the mounted lifecycle hook of the component. ie: mounted () { this.form_ref = this.$refs.form }')
+  mounted () {
+    if (!this.$refs.form) {
+      const overrideError = new Error('The validation-observer component requires the ref property. If you have defined ref as something other than "form" you will need to override the form_ref data property in the mounted lifecycle of your component. ie: mounted () { this.form_ref = this.$refs.someForm }')
       throw (overrideError)
     }
+    this.form_ref = this.$refs.form
   }
 }
