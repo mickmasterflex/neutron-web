@@ -29,7 +29,31 @@ export default {
       short_description: '',
       description: '',
       area_of_interest: '',
-      degree_level: ''
+      interestOptions: {
+        arts: { name: 'arts', id: 'arts' },
+        businessAndManagement: { name: 'businessAndManagement', id: 'businessAndManagement' },
+        computersAndTechnology: { name: 'computersAndTechnology', id: 'computersAndTechnology' },
+        criminalJusticeAndLegal: { name: 'criminalJusticeAndLegal', id: 'criminalJusticeAndLegal' },
+        culinary: { name: 'culinary', id: 'culinary' },
+        educationAndTeaching: { name: 'educationAndTeaching', id: 'educationAndTeaching' },
+        hospitalityAndTravel: { name: 'hospitalityAndTravel', id: 'hospitalityAndTravel' },
+        liberalArts: { name: 'liberalArts', id: 'liberalArts' },
+        nursingAndHealthCare: { name: 'nursingAndHealthCare', id: 'nursingAndHealthCare' },
+        psychologyAndHumanServices: { name: 'psychologyAndHumanServices', id: 'psychologyAndHumanServices' },
+        religion: { name: 'religion', id: 'religion' },
+        scienceAndMath: { name: 'scienceAndMath', id: 'scienceAndMath' },
+        tradesAndVocationalEducation: { name: 'tradesAndVocationalEducation', id: 'tradesAndVocationalEducation' }
+      },
+      degree_level: '',
+      degreeLevelOptions: {
+        unknown: { name: 'unknown', id: 'unknown' },
+        certificate: { name: 'certificate', id: 'certificate' },
+        associates: { name: 'associates', id: 'associates' },
+        diploma: { name: 'diploma', id: 'diploma' },
+        bachelors: { name: 'bachelors', id: 'bachelors' },
+        masters: { name: 'masters', id: 'masters' },
+        doctorate: { name: 'doctorate', id: 'doctorate' }
+      }
     }
   },
   computed: {

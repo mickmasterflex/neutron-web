@@ -82,6 +82,18 @@ const routes = [
     }
   },
   {
+    path: '/products/brands/:brand/campuses/educationProducts/:id/',
+    name: 'Education Products',
+    component: () => import('@/views/products/educationProducts'),
+    meta: { requiresAuth: true },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
     path: '/products/fields/',
     name: 'FieldManagement',
     component: () => import('@/views/products/field-management.vue'),
