@@ -52,14 +52,16 @@ export default {
   },
   created () {
     axios.interceptors.response.use(response => {
-      if (response.config.method === 'post' && response.statusText === 'Created') {
-        this.genericToast('green', 'thumbs-up', response.statusText + ' successfully')
-      }
-      if (response.config.method === 'put') {
-        this.genericToast('green', 'thumbs-up', 'Updated successfully')
-      }
-      if (response.config.method === 'delete') {
-        this.genericToast('green', 'trash-alt', 'Deleted successfully')
+      if (response.config.showSuccessToast !== false) {
+        if (response.config.method === 'post' && response.statusText === 'Created') {
+          this.genericToast('green', 'thumbs-up', response.statusText + ' successfully')
+        }
+        if (response.config.method === 'put') {
+          this.genericToast('green', 'thumbs-up', 'Updated successfully')
+        }
+        if (response.config.method === 'delete') {
+          this.genericToast('green', 'trash-alt', 'Deleted successfully')
+        }
       }
       return response
     }, error => {
