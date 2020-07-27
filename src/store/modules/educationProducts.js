@@ -11,7 +11,7 @@ const getters = {
   getEducationProductByCampus: (state) => (campusId) => {
     return state.educationProducts.filter(educationProduct => educationProduct.campus === campusId)
   },
-  getShowCreateEducationProductModal: state => state.show_create_educationProduct_modal
+  getShowCreateEducationProductModal: state => state.show_create_education_product_modal
 }
 
 const actions = {
@@ -61,8 +61,8 @@ const mutations = {
     }
   },
   REMOVE_EDUCATION_PRODUCT: (state, id) => (state.educationProducts = state.educationProducts.filter(educationProduct => educationProduct.id !== id)),
-  SHOW_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_educationProduct_modal = true),
-  CLOSE_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_educationproduct_modal = false)
+  SHOW_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_education_product_modal = true),
+  CLOSE_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_education_product_modal = false)
 }
 
 export default {

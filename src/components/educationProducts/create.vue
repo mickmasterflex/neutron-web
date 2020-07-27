@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateEducationProduct'
+      showModal: 'getShowCreateEducationProductModal'
     })
   },
   props: {

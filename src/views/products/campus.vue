@@ -6,6 +6,13 @@
         <stat-card :data="campus.id" :title="`Campus`" :color="`teal`"></stat-card>
       </div>
     </div>
+    <div class="flex flex-row justify-between mt-4">
+      <h3 class="h3">Education Products List</h3>
+      <button class="btn btn-green" @click="showCreateEducationProductModal()">Create Education Product</button>
+    </div>
+    <education-products-list :educationProducts="educationProducts" class="mt-5"></education-products-list>
+    <education-product-create :campusId="id"></education-product-create>
+
     <h3 class="h3 mt-5 mb-2">Edit Campus</h3>
     <update-campus :campus="campus"></update-campus>
 
@@ -15,9 +22,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampus from '@/components/campuses/delete'
 import updateCampus from '@/components/campuses/update'
+import educationProductCreate from '@/components/educationProducts/create'
+import educationProductsList from '@/components/educationProducts/list'
 
 export default {
   props: {
@@ -27,16 +36,26 @@ export default {
   },
   components: {
     'delete-campus': deleteCampus,
-    'update-campus': updateCampus
+    'update-campus': updateCampus,
+    'education-products-list': educationProductsList,
+    'education-product-create': educationProductCreate
   },
   computed: {
     ...mapGetters({
-      campus: 'getCurrentCampus'
-    })
+      campus: 'getCurrentCampus',
+      getEducationProductByCampus: 'getEducationProductByCampus'
+    }),
+    educationProducts: function () {
+      return this.getEducationProductByCampus(this.id)
+    }
   },
   methods: {
     ...mapActions({
-      fetchCurrentCampus: 'fetchCurrentCampus'
+      fetchCurrentCampus: 'fetchCurrentCampus',
+      fetchEducationProducts: 'fetchEducationProducts'
+    }),
+    ...mapMutations({
+      showCreateEducationProductModal: 'SHOW_CREATE_EDUCATION_PRODUCT_MODAL'
     })
   },
   created () {
