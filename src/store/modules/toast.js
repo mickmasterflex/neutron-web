@@ -1,14 +1,14 @@
 const state = {
-  toasts: []
+  toast_messages: []
 }
 
 const getters = {
-  getToasts: state => state.toasts
+  getToastMessages: state => state.toast_messages
 }
 
 const mutations = {
-  ADD_TOAST: (state, toast) => (state.toasts.push(toast)),
-  REMOVE_TOAST: (state, toastId) => (state.toasts = state.toasts.filter(toast => toast.id !== toastId))
+  ADD_TOAST: (state, toast) => (state.toast_messages.push(toast)),
+  REMOVE_TOAST: (state, toastId) => (state.toast_messages = state.toast_messages.filter(toast => toast.id !== toastId))
 }
 
 export default {

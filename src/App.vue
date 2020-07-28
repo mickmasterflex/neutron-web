@@ -7,7 +7,7 @@
                       enter-active-class="animate__animated animate__fadeInUp animate__faster"
                       leave-active-class="animate__animated animate__fadeOut animate__faster absolute"
                       class="fixed bottom-0 right-0 mr-1 z-50 w-full" style="max-width: 500px">
-      <toast v-for="toast in this.toasts" :toast="toast" :key="toast.id" class="z-40"></toast>
+      <toast v-for="toast in this.toast_messages" :toast="toast" :key="toast.id" class="z-40"></toast>
     </transition-group>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
       return (this.$route.meta.layout || appLayout) + '-layout'
     },
     ...mapGetters({
-      toasts: 'getToasts'
+      toast_messages: 'getToastMessages'
     })
   },
   methods: {
