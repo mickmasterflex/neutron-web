@@ -4,8 +4,8 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="brandName" field_label="BrandName"></v-text-field>
-          <textarea-field model="short_description" field_id="short_description" field_label="ShortDescription"></textarea-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Brand Name"></v-text-field>
+          <textarea-field model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
           <text-field model="alias" field_id="alias" field_label="Alias"></text-field>
           <text-field model="website" field_id="website" field_label="Website"></text-field>
         </form>
@@ -20,6 +20,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -35,7 +36,7 @@ export default {
       showModal: 'getShowCreateBrandModal'
     })
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({ create: 'createBrand' }),
     ...mapMutations({
@@ -66,6 +67,8 @@ export default {
             website: this.website
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

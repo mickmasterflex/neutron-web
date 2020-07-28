@@ -1,5 +1,5 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }">
+  <validation-observer v-slot="{ handleSubmit }" ref="form">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name"></v-text-field>
       <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name"></v-text-field>
@@ -11,6 +11,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -30,6 +31,7 @@ export default {
       this.email = this.user.email
     }
   },
+  mixins: [setResponseErrors],
   methods: {
     ...mapActions({
       update: 'updateUser'
@@ -40,6 +42,8 @@ export default {
         last_name: this.last_name,
         email: this.email,
         id: this.user.id
+      }).catch(error => {
+        this.error = error
       })
     }
   }
