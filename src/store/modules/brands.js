@@ -35,7 +35,7 @@ const actions = {
       })
   },
   async updateBrand ({ commit }, updatedBrand) {
-    await axios.put(`/brands/${updatedBrand.id}/`, updatedBrand, { showToast: false })
+    await axios.put(`/brands/${updatedBrand.id}/`, updatedBrand)
       .then(response => {
         commit('UPDATE_BRAND', response.data)
         commit('SET_CURRENT_BRAND', response.data)
