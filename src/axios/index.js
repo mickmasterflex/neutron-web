@@ -30,6 +30,8 @@ axios.interceptors.response.use(response => {
       case 404:
         if (error.response.config.method === 'get') {
           router.push({ name: '404' })
+        } else {
+          failedToast({ heading: error.message, content: error.response.config.url })
         }
         break
       case 400:
