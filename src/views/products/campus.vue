@@ -10,8 +10,8 @@
       <h3 class="h3">Education Products List</h3>
       <button class="btn btn-green" @click="showCreateEducationProductModal()">Create Education Product</button>
     </div>
-    <education-products-list :educationProducts="educationProducts" class="mt-5"></education-products-list>
-    <education-product-create :campusId="id"></education-product-create>
+    <education-product-list :educationProducts="educationProducts" class="mt-5"></education-product-list>
+    <create-education-product :campusId="id" :educationProducts="educationProducts"></create-education-product>
 
     <h3 class="h3 mt-5 mb-2">Edit Campus</h3>
     <update-campus :campus="campus"></update-campus>
@@ -25,8 +25,8 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampus from '@/components/campuses/delete'
 import updateCampus from '@/components/campuses/update'
-import educationProductCreate from '@/components/educationProducts/create'
-import educationProductsList from '@/components/educationProducts/list'
+import createEducationProduct from '@/components/educationProducts/create'
+import educationProductList from '@/components/educationProducts/list'
 
 export default {
   props: {
@@ -37,12 +37,13 @@ export default {
   components: {
     'delete-campus': deleteCampus,
     'update-campus': updateCampus,
-    'education-products-list': educationProductsList,
-    'education-product-create': educationProductCreate
+    'education-product-list': educationProductList,
+    'create-education-product': createEducationProduct
   },
   computed: {
     ...mapGetters({
       campus: 'getCurrentCampus',
+      educationProduct: 'getCurrentEducationProduct',
       getEducationProductByCampus: 'getEducationProductByCampus'
     }),
     educationProducts: function () {
@@ -60,6 +61,7 @@ export default {
   },
   created () {
     this.fetchCurrentCampus(this.id)
+    this.fetchEducationProducts()
   }
 }
 </script>

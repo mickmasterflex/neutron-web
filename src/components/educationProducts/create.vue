@@ -99,7 +99,7 @@ export default {
             short_description: this.short_description,
             description: this.description,
             area_of_interest: this.area_of_interest,
-            campus: this.campusId
+            product_group: this.campusId
           }).then(() => {
             this.close()
           })

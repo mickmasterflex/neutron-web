@@ -45,7 +45,8 @@ export default {
         bachelors: { name: 'bachelors', id: 'bachelors' },
         masters: { name: 'masters', id: 'masters' },
         doctorate: { name: 'doctorate', id: 'doctorate' }
-      }
+      },
+      product_group: ''
     }
   },
   props: {
@@ -58,6 +59,7 @@ export default {
       this.description = this.educationProduct.description
       this.area_of_interest = this.educationProduct.area_of_interest
       this.degree_level = this.educationProduct.degree_level
+      this.product_group = this.educationProduct.product_group
     }
   },
   methods: {
@@ -70,6 +72,7 @@ export default {
         short_description: this.short_description,
         description: this.description,
         area_of_interest: this.area_of_interest,
+        product_group: this.product_group,
         id: this.educationProduct.id
       })
     }

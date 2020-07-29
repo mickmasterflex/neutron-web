@@ -82,9 +82,9 @@ const routes = [
     }
   },
   {
-    path: '/products/brands/:brand/campuses/educationProducts/:id/',
-    name: 'Education Products',
-    component: () => import('@/views/products/educationProducts'),
+    path: '/products/brands/:brand/campuses/education-products/:id/',
+    name: 'EducationProduct',
+    component: () => import('@/views/products/educationProducts.vue'),
     meta: { requiresAuth: true },
     pathToRegexpOptions: { strict: true },
     props (route) {

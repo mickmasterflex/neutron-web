@@ -3,7 +3,7 @@
     <div class="hud">
       <h1 class="h1 text-white">{{educationProduct.name}}</h1>
       <div class="hud--stat-cards">
-        <stat-card :data="campus.id" :title="`Campus`" :color="`teal`"></stat-card>
+        <stat-card :data="educationProduct.id" :title="`EducationProducts`" :color="`teal`"></stat-card>
       </div>
     </div>
     <h3 class="h3 mt-5 mb-2">Edit Education Product</h3>

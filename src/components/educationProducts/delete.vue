@@ -9,6 +9,9 @@ export default {
   props: {
     educationProduct: {
       type: Object
+    },
+    id: {
+      type: Number
     }
   },
   methods: {
@@ -16,7 +19,7 @@ export default {
     runDelete () {
       this.delete(this.educationProduct.id)
         .then(() => {
-          this.$router.push({ name: 'Campus', params: { id: this.educationProduct.brand } })
+          this.$router.push({ name: 'Campus', params: { id: this.educationProduct.product_group } })
         })
     }
   }

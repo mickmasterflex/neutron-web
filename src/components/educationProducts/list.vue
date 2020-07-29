@@ -11,7 +11,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="educationProduct in educationProducts" :key="educationProduct.id">
         <td class="td">
-          <router-link :to="{name: 'Education Product', params: {campus:educationProduct.campus, id:educationProduct.id}}" class="text-link">{{educationProduct.name}}</router-link>
+          <router-link :to="{name: 'EducationProduct', params: {campus:educationProduct.campus, id:educationProduct.id}}" class="text-link">{{educationProduct.name}}</router-link>
         </td>
         <td class="td">{{educationProduct.description}}</td>
         <td class="td">{{educationProduct.campusId}}</td>

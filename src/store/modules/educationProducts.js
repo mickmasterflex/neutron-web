@@ -2,48 +2,48 @@ import axios from '@/axios'
 
 const state = {
   educationProducts: [],
-  current_educationProduct: {},
-  show_create_educationProduct_modal: false
+  current_education_product: {},
+  show_create_education_product_modal: false
 }
 
 const getters = {
-  getCurrentEducationProduct: state => state.current_educationProduct,
+  getCurrentEducationProduct: state => state.current_education_product,
   getEducationProductByCampus: (state) => (campusId) => {
-    return state.educationProducts.filter(educationProduct => educationProduct.campus === campusId)
+    return state.educationProducts.filter(educationProduct => educationProduct.product_group === campusId)
   },
   getShowCreateEducationProductModal: state => state.show_create_education_product_modal
 }
 
 const actions = {
   async fetchEducationProducts ({ commit }) {
-    await axios.get('/educationProducts/')
+    await axios.get('/education-products/')
       .then(response => {
         commit('SET_EDUCATION_PRODUCTS', response.data)
       })
   },
   async fetchCurrentEducationProduct ({ commit }, id) {
-    await axios.get(`/educationProducts/${id}/`)
+    await axios.get(`/education-products/${id}/`)
       .then(response => {
         commit('SET_CURRENT_EDUCATION_PRODUCT', response.data)
       })
   },
   async createEducationProduct ({ commit }, educationProduct) {
-    await axios.post('/educationProducts/', educationProduct)
+    await axios.post('/education-products/', educationProduct)
       .then(response => {
         commit('ADD_EDUCATION_PRODUCT', response.data)
+      })
+  },
+  async updateEducationProduct ({ commit }, updatedEducationProduct) {
+    await axios.put(`/education-products/${updatedEducationProduct.id}/`, updatedEducationProduct)
+      .then(response => {
+        commit('UPDATE_EDUCATION_PRODUCT', response.data)
+        commit('SET_CURRENT_EDUCATION_PRODUCT', response.data)
       }).catch(error => {
         window.console.log(error)
       })
   },
-  async updateEducationProduct ({ commit }, updatedEducationProduct) {
-    await axios.put(`/educationProduct/${updatedEducationProduct.id}/`, updatedEducationProduct)
-      .then(response => {
-        commit('UPDATE_EDUCATION_PRODUCT', response.data)
-        commit('SET_CURRENT_EDUCATION_PRODUCT', response.data)
-      })
-  },
   async deleteEducationProduct ({ commit }, id) {
-    await axios.delete(`/educationProducts/${id}/`)
+    await axios.delete(`/education-products/${id}/`)
       .then(() => {
         commit('REMOVE_EDUCATION_PRODUCT', id)
       })
@@ -52,8 +52,8 @@ const actions = {
 
 const mutations = {
   SET_EDUCATION_PRODUCTS: (state, educationProducts) => (state.educationProducts = educationProducts),
-  SET_CURRENT_EDUCATION_PRODUCT: (state, educationProduct) => (state.current_educationProduct = educationProduct),
-  ADD_EDUCATION_PRODUCT: (state, educationProduct) => state.educationProduct.unshift(educationProduct),
+  SET_CURRENT_EDUCATION_PRODUCT: (state, educationProduct) => (state.current_education_product = educationProduct),
+  ADD_EDUCATION_PRODUCT: (state, educationProduct) => state.educationProducts.unshift(educationProduct),
   UPDATE_EDUCATION_PRODUCT: (state, updatedEducationProduct) => {
     const index = state.educationProducts.findIndex(educationProduct => educationProduct.id === updatedEducationProduct.id)
     if (index !== -1) {
