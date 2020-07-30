@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import options from '@/store/modules/forms/fields/options'
+import options from '@/store/modules/forms/fields/options/'
 
 const modules = {
   options
@@ -19,6 +19,7 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
+        commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
         commit('SORT_CURRENT_OPTIONS')
       })
   },
@@ -28,6 +29,7 @@ const actions = {
         commit('ADD_FIELD', response.data)
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
+        commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
         commit('SORT_CURRENT_OPTIONS')
       })
   },

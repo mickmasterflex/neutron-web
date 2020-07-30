@@ -8,8 +8,13 @@
         <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
       </form>
     </validation-observer>
+
     <h3 class="h3 mt-4">Field Options</h3>
     <field-options></field-options>
+
+    <h3 class="h3 mt-4">Available Field Options</h3>
+    <field-inactive-options></field-inactive-options>
+
     <div class="card-actions">
       <span class="btn btn-hollow-default" @click="resetCurrentField">Cancel</span>
       <button @click="submitForm" class="btn btn-green">Update Field</button>
@@ -18,8 +23,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/fields/option-fields/options/list'
+import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 
 export default {
@@ -40,11 +46,6 @@ export default {
       this.mapping = this.field.mapping
       this.deliver = this.field.deliver
     }
-  },
-  computed: {
-    ...mapGetters({
-      options: 'getCurrentOptions'
-    })
   },
   mixins: [enterKeyListener],
   methods: {
@@ -77,7 +78,8 @@ export default {
     }
   },
   components: {
-    'field-options': fieldOptions
+    'field-options': fieldOptions,
+    'field-inactive-options': fieldInactiveOptions
   }
 }
 </script>
