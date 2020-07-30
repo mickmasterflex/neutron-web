@@ -1,9 +1,9 @@
 /*
- You can override 'form_ref' in the mounted lifecycle hook of the component.
+ You can customize what 'form_ref' is set to by overriding the setFormRef method in the component.
  ie:
- mounted () {
-   this.form_ref = this.$refs.form
- }
+  setFormRef () {
+    this.form_ref = this.$refs.someOtherRef
+  },
 */
 
 export const setResponseErrors = {
@@ -35,10 +35,15 @@ export const setResponseErrors = {
       return ''
     }
   },
-  mounted () {
-    if (!this.$refs.form) {
-      throw (new Error('The validation-observer component requires the ref property. If you have defined ref as something other than "form" you will need to override the form_ref data property in the mounted lifecycle of your component. ie: mounted () { this.form_ref = this.$refs.someForm }'))
+  methods: {
+    setFormRef () {
+      if (!this.$refs.form) {
+        throw (new Error('The validation-observer component requires the ref property. If you have defined ref as something other than "form" you will need to override the form_ref data property in the mounted lifecycle of your component. ie: mounted () { this.form_ref = this.$refs.someForm }'))
+      }
+      this.form_ref = this.$refs.form
     }
-    this.form_ref = this.$refs.form
+  },
+  mounted () {
+    this.setFormRef()
   }
 }
