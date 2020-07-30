@@ -12,11 +12,16 @@ const actions = {
   async addInactiveOption ({ commit }, option) {
     await axios.post('/options/', option)
       .then(response => {
-        commit('REMOVE_OPTION_FROM_INACTIVE', option.base_option.id)
-        commit('ADD_OPTION_TO_CURRENT_OPTIONS', response.data)
-      })
-      .catch(e => {
-        window.console.log(e.response.data)
+        commit('REMOVE_OPTION_FROM_INACTIVE', option.base_option)
+        const newOption = response.data
+        newOption.base_option = {
+          id: option.base_option,
+          label: option.label,
+          value: response.data.value,
+          order: option.order,
+          field: option.base_field
+        }
+        commit('ADD_OPTION_TO_CURRENT_OPTIONS', newOption)
       })
   }
 }
@@ -38,7 +43,7 @@ const mutations = {
     }
   },
   REMOVE_OPTION_FROM_INACTIVE: (state, baseOptionId) => {
-    state.inactive_options = state.inactive_options.filter(option => option.base_option.id !== baseOptionId)
+    state.inactive_options = state.inactive_options.filter(option => option.base_option !== baseOptionId)
   }
 }
 
