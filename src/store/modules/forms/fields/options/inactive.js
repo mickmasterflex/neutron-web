@@ -23,9 +23,6 @@ const actions = {
         }
         commit('ADD_OPTION_TO_CURRENT_OPTIONS', newOption)
       })
-      .catch(e => {
-        window.console.log(e.response.data)
-      })
   }
 }
 

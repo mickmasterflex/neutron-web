@@ -73,6 +73,7 @@ export default {
         scrub: this.scrub,
         hide: this.hide,
         id: this.option.id,
+        field: this.option.field,
         base_option: this.option.base_option
       })
     }

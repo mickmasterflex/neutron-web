@@ -31,8 +31,6 @@ const actions = {
     await axios.post('/campuses/', campus)
       .then(response => {
         commit('ADD_CAMPUS', response.data)
-      }).catch(error => {
-        window.console.log(error)
       })
   },
   async updateCampus ({ commit }, updatedCampus) {
