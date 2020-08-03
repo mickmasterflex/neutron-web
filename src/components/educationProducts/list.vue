@@ -14,7 +14,7 @@
           <router-link :to="{name: 'EducationProduct', params: {campus:educationProduct.campus, id:educationProduct.id}}" class="text-link">{{educationProduct.name}}</router-link>
         </td>
         <td class="td">{{educationProduct.description}}</td>
-        <td class="td">{{educationProduct.campusId}}</td>
+        <td class="td">{{educationProduct.id}}</td>
       </tr>
       </tbody>
     </table>
