@@ -4,7 +4,7 @@
     <template v-slot:body>
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
-      <v-text-field v-model="name" rules="required" field_id="partnerName" field_label="Name"></v-text-field>
+      <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
       <select-field v-model="parent" :options="partnerContracts" field_id="parent" field_label="Parent"></select-field>
     </form>
   </validation-observer>
@@ -18,6 +18,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -39,7 +40,7 @@ export default {
       type: Array
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createPartner'
@@ -69,6 +70,8 @@ export default {
             client: this.$props.client
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })
