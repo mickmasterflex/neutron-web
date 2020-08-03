@@ -7,9 +7,9 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="label" field_id="updateTextFieldLabel" field_label="Label" rules="required"></v-text-field>
-          <text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping"></text-field>
-          <checkbox-single v-model="deliver" field_id="updateTextFieldDeliver" field_label="Pass to Client"></checkbox-single>
+          <v-text-field v-model="label" field_id="label" field_label="Label" rules="required"></v-text-field>
+          <text-field v-model="mapping" field_id="mapping" field_label="Mapping"></text-field>
+          <checkbox-single v-model="deliver" field_id="deliver" field_label="Pass to Client"></checkbox-single>
         </form>
       </validation-observer>
     </template>
@@ -22,6 +22,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -46,7 +47,7 @@ export default {
       }
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       update: 'updateTextField'
@@ -83,6 +84,8 @@ export default {
           }).then(() => {
             this.closeModal()
             this.resetCurrentField()
+          }).catch(error => {
+            this.error = error
           })
         }
       })
