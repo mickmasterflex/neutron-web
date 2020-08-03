@@ -121,7 +121,7 @@
     Wells
 --------------------------------------------------- */
 
-.well { @apply bg-gray-200 border border-gray-300 p-3 rounded }
+.well { @apply bg-gray-200 border border-gray-300 p-3 rounded-lg }
 .well-light { @apply bg-gray-100 }
 
 
@@ -287,6 +287,7 @@
     height: 38px;
 }
 .field-sm { @apply w-20 }
+.field-tall { height: 45px }
 
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
 .base-field:focus { @apply outline-none shadow-outline }
@@ -297,8 +298,10 @@
 .field-group { @apply block }
 
 /* Horizontal Forms */
-.form-horizontal .field-group { @apply my-3 flex flex-row }
-.form-horizontal .field-label { @apply mt-2 w-32 text-right pr-3 leading-tight }
+.form-horizontal .field-group { @apply my-3 flex flex-row items-center }
+.form-horizontal .field-group--checkbox { @apply ml-32 }
+.form-horizontal-slim .field-group { @apply my-0 }
+.form-horizontal .field-label { @apply w-32 text-right pr-3 leading-tight }
 
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
@@ -343,14 +346,12 @@
 --------------------------------------------------- */
 
 .underscore-tabs { @apply flex flex-row -mx-3; }
-
 .underscore-tab {
     @apply
     text-lg font-normal text-gray-700
     border-b-4 border-white
     transition-colors duration-300;
 }
-
 .underscore-tab a { @apply block pt-6 pb-4 px-4 cursor-pointer; }
 .underscore-tab.active { @apply text-gray-900 font-bold border-red-500; }
 .underscore-tab:hover:not(.active) { @apply text-gray-800 border-gray-200; }

@@ -9,10 +9,14 @@
       </div>
     </template>
     <template v-slot:content>
-      <div class="flex flex-row justify-between">
-        <h3 class="h3">Client List</h3>
-        <button class="btn btn-green" @click="showCreateClientModal()">Create Client</button>
-      </div>
+      <action-heading>
+        <template v-slot:left>
+          <h2 class="h3">Client List</h2>
+        </template>
+        <template v-slot:right>
+          <button class="btn btn-turquoise" @click="showCreateClientModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Create Client</button>
+        </template>
+      </action-heading>
       <client-list :clients="clients" class="mt-5"></client-list>
       <create-client></create-client>
     </template>
