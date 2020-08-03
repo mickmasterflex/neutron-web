@@ -89,7 +89,7 @@ const routes = [
     path: '/products/brands/:brand/campuses/:id/',
     name: 'Campus',
     component: () => import('@/views/products/campus.vue'),
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, activeApp: 'products', activeAppTab: 'product-mgmt' },
     pathToRegexpOptions: { strict: true },
     props (route) {
       const props = { ...route.params }
@@ -101,7 +101,7 @@ const routes = [
     path: '/products/brands/:brand/campuses/education-products/:id/',
     name: 'EducationProduct',
     component: () => import('@/views/products/educationProducts.vue'),
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, activeApp: 'products', activeAppTab: 'product-mgmt' },
     pathToRegexpOptions: { strict: true },
     props (route) {
       const props = { ...route.params }
