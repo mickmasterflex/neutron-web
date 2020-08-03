@@ -1,11 +1,11 @@
 import axios from '@/axios'
 
 const state = {
-  show_update_text_field: false
+  show_update_text_field_modal: false
 }
 
 const getters = {
-  getShowUpdateTextField: state => state.show_update_text_field
+  getShowUpdateTextFieldModal: state => state.show_update_text_field_modal
 }
 
 const actions = {
@@ -37,7 +37,8 @@ const actions = {
 }
 
 const mutations = {
-  TOGGLE_SHOW_UPDATE_TEXT_FIELD: (state, bool) => (state.show_update_text_field = bool)
+  SHOW_UPDATE_TEXT_FIELD_MODAL: (state) => (state.show_update_text_field_modal = true),
+  CLOSE_UPDATE_TEXT_FIELD_MODAL: (state) => (state.show_update_text_field_modal = false)
 }
 
 export default {

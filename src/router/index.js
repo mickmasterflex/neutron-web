@@ -100,7 +100,7 @@ const routes = [
   {
     path: '/products/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/field-management.vue'),
+    component: () => import('@/views/products/base-field-management.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
