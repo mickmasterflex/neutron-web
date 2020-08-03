@@ -1,5 +1,5 @@
 <template>
-  <div class="well well-light">
+  <div class="well">
     <ul class="fields-inline-heading px-1" v-if="inactiveOptions.length">
       <li class="w-64 fields-inline-heading-item">Label</li>
       <li class="w-64 fields-inline-heading-item">Default Value</li>

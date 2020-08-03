@@ -1,5 +1,5 @@
 <template>
-  <div class="well well-light">
+  <div class="well">
     <ul class="fields-inline-heading px-1" v-if="options.length">
       <li class="w-24 fields-inline-heading-item">Order</li>
       <li class="w-64 fields-inline-heading-item">Label</li>

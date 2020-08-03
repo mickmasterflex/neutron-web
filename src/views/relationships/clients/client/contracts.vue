@@ -1,17 +1,25 @@
 <template>
   <client-layout contentTab="contracts" :id="id" :buyers="buyers" :partners="partners">
     <template v-slot:content>
-      <div class="flex flex-row justify-between">
-        <h3 class="h3">Buyer Contracts</h3>
-        <button class="btn btn-green" @click="showCreateBuyerModal()">Create Buyer Contract</button>
-      </div>
+      <action-heading>
+        <template v-slot:left>
+          <h2 class="h3">Buyer Contracts</h2>
+        </template>
+        <template v-slot:right>
+          <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Buyer</button>
+        </template>
+      </action-heading>
       <buyer-list :contracts="buyers"></buyer-list>
       <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
 
-      <div class="flex flex-row justify-between mt-5">
-        <h3 class="h3">Partner Contracts</h3>
-        <button class="btn btn-green" @click="showCreatePartnerModal()">Create Partner Contract</button>
-      </div>
+      <action-heading class="mt-5">
+        <template v-slot:left>
+          <h2 class="h3">Partner Contracts</h2>
+        </template>
+        <template v-slot:right>
+          <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Partner</button>
+        </template>
+      </action-heading>
       <partner-list :contracts="partners"></partner-list>
       <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
     </template>

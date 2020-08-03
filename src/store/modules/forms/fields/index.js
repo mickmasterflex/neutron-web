@@ -9,16 +9,13 @@ const modules = {
 const state = {
   current_form: [],
   current_field: null,
-  show_create_field: false,
-  show_field_management_modal: false,
+  show_create_field_modal: false,
   modified_fields: []
 }
 
 const getters = {
   getCurrentForm: state => state.current_form,
-  getCurrentField: state => state.current_field,
-  getShowCreateField: state => state.show_create_field,
-  getShowFieldManagementModal: state => state.show_field_management_modal
+  getCurrentField: state => state.current_field
 }
 
 const mutations = {
@@ -33,10 +30,7 @@ const mutations = {
   },
   REMOVE_FIELD: (state, id) => (state.current_form.fields = state.current_form.fields.filter(field => field.id !== id)),
   SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
-  RESET_CURRENT_FIELD: (state) => (state.current_field = null),
-  TOGGLE_SHOW_CREATE_FIELD: (state, bool) => (state.show_create_field = bool),
-  SHOW_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = true),
-  CLOSE_FIELD_MANAGEMENT_MODAL: (state) => (state.show_field_management_modal = false)
+  RESET_CURRENT_FIELD: (state) => (state.current_field = null)
 }
 
 export default {
