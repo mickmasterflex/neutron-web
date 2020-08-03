@@ -16,8 +16,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import deleteEducationProduct from '@/components/educationProducts/delete'
-import updateEducationProduct from '@/components/educationProducts/update'
+import deleteEducationProduct from '@/components/education-products/delete'
+import updateEducationProduct from '@/components/education-products/update'
 
 export default {
   props: {

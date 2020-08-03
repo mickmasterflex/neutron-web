@@ -1,15 +1,15 @@
 import axios from '@/axios'
 
 const state = {
-  educationProducts: [],
+  education_products: [],
   current_education_product: {},
   show_create_education_product_modal: false
 }
 
 const getters = {
   getCurrentEducationProduct: state => state.current_education_product,
-  getEducationProductByCampus: (state) => (campusId) => {
-    return state.educationProducts.filter(educationProduct => educationProduct.product_group === campusId)
+  getEducationProductsByCampus: (state) => (campusId) => {
+    return state.education_products.filter(educationProduct => educationProduct.product_group === campusId)
   },
   getShowCreateEducationProductModal: state => state.show_create_education_product_modal
 }
@@ -38,8 +38,6 @@ const actions = {
       .then(response => {
         commit('UPDATE_EDUCATION_PRODUCT', response.data)
         commit('SET_CURRENT_EDUCATION_PRODUCT', response.data)
-      }).catch(error => {
-        window.console.log(error)
       })
   },
   async deleteEducationProduct ({ commit }, id) {
@@ -51,16 +49,16 @@ const actions = {
 }
 
 const mutations = {
-  SET_EDUCATION_PRODUCTS: (state, educationProducts) => (state.educationProducts = educationProducts),
+  SET_EDUCATION_PRODUCTS: (state, educationProducts) => (state.education_products = educationProducts),
   SET_CURRENT_EDUCATION_PRODUCT: (state, educationProduct) => (state.current_education_product = educationProduct),
-  ADD_EDUCATION_PRODUCT: (state, educationProduct) => state.educationProducts.unshift(educationProduct),
+  ADD_EDUCATION_PRODUCT: (state, educationProduct) => state.education_products.unshift(educationProduct),
   UPDATE_EDUCATION_PRODUCT: (state, updatedEducationProduct) => {
-    const index = state.educationProducts.findIndex(educationProduct => educationProduct.id === updatedEducationProduct.id)
+    const index = state.education_products.findIndex(educationProduct => educationProduct.id === updatedEducationProduct.id)
     if (index !== -1) {
-      state.educationProducts.splice(index, 1, updatedEducationProduct)
+      state.education_products.splice(index, 1, updatedEducationProduct)
     }
   },
-  REMOVE_EDUCATION_PRODUCT: (state, id) => (state.educationProducts = state.educationProducts.filter(educationProduct => educationProduct.id !== id)),
+  REMOVE_EDUCATION_PRODUCT: (state, id) => (state.education_products = state.education_products.filter(educationProduct => educationProduct.id !== id)),
   SHOW_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_education_product_modal = true),
   CLOSE_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_education_product_modal = false)
 }

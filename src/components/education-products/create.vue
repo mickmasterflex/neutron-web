@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="educationProductName" field_label="Education Product Name"></v-text-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Education Product Name"></v-text-field>
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-          <select-field v-model="area_of_interest" :options="interestOptions" field_id="areaOfInterest" field_label="Area Of Interest"></select-field>
+          <select-field v-model="area_of_interest" :options="interestOptions" field_id="area_of_interest" field_label="Area Of Interest"></select-field>
           <select-field v-model="degree_level" :options="degreeLevelOptions" field_id="degreeLevel" field_label="Degree Level"></select-field>
         </form>
       </validation-observer>
