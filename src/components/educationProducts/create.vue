@@ -30,29 +30,29 @@ export default {
       description: '',
       area_of_interest: '',
       interestOptions: {
-        arts: { name: 'arts', id: 'arts' },
-        businessAndManagement: { name: 'businessAndManagement', id: 'businessAndManagement' },
-        computersAndTechnology: { name: 'computersAndTechnology', id: 'computersAndTechnology' },
-        criminalJusticeAndLegal: { name: 'criminalJusticeAndLegal', id: 'criminalJusticeAndLegal' },
-        culinary: { name: 'culinary', id: 'culinary' },
-        educationAndTeaching: { name: 'educationAndTeaching', id: 'educationAndTeaching' },
-        hospitalityAndTravel: { name: 'hospitalityAndTravel', id: 'hospitalityAndTravel' },
-        liberalArts: { name: 'liberalArts', id: 'liberalArts' },
-        nursingAndHealthCare: { name: 'nursingAndHealthCare', id: 'nursingAndHealthCare' },
-        psychologyAndHumanServices: { name: 'psychologyAndHumanServices', id: 'psychologyAndHumanServices' },
-        religion: { name: 'religion', id: 'religion' },
-        scienceAndMath: { name: 'scienceAndMath', id: 'scienceAndMath' },
-        tradesAndVocationalEducation: { name: 'tradesAndVocationalEducation', id: 'tradesAndVocationalEducation' }
+        arts: { name: 'Arts', id: '1' },
+        businessAndManagement: { name: 'Business & Management', id: '2' },
+        computersAndTechnology: { name: 'Computers & Technology', id: '3' },
+        criminalJusticeAndLegal: { name: 'Criminal Justice & Legal', id: '4' },
+        culinary: { name: 'Culinary', id: '5' },
+        educationAndTeaching: { name: 'Education & Teaching', id: '6' },
+        hospitalityAndTravel: { name: 'Hospitality & Travel', id: '7' },
+        liberalArts: { name: 'Liberal Arts', id: '8' },
+        nursingAndHealthCare: { name: 'Nursing & Health Care', id: '9' },
+        psychologyAndHumanServices: { name: 'Psychology & Human Services', id: '10' },
+        religion: { name: 'Religion', id: '11' },
+        scienceAndMath: { name: 'Science And Math', id: '12' },
+        tradesAndVocationalEducation: { name: 'Trades & Vocational Education', id: '13' }
       },
       degree_level: '',
       degreeLevelOptions: {
         unknown: { name: 'unknown', id: 'unknown' },
-        certificate: { name: 'certificate', id: 'certificate' },
-        associates: { name: 'associates', id: 'associates' },
-        diploma: { name: 'diploma', id: 'diploma' },
-        bachelors: { name: 'bachelors', id: 'bachelors' },
-        masters: { name: 'masters', id: 'masters' },
-        doctorate: { name: 'doctorate', id: 'doctorate' }
+        certificate: { name: 'Certificate', id: 'certificate' },
+        associates: { name: 'Associates', id: 'associates' },
+        diploma: { name: 'Diploma', id: 'diploma' },
+        bachelors: { name: 'Bachelors', id: 'bachelors' },
+        masters: { name: 'Masters', id: 'masters' },
+        doctorate: { name: 'Doctorate', id: 'doctorate' }
       }
     }
   },
