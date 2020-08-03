@@ -17,7 +17,7 @@ const getters = {
 const actions = {
   async updateModifiedOptions ({ commit }) {
     await state.modified_options.forEach(option => {
-      axios.put(`/options/${option.id}/`, option)
+      axios.put(`/options/${option.id}/`, option, { showSuccessToast: false })
     })
     commit('RESET_MODIFIED_OPTIONS')
   },
