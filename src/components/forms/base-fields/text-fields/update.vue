@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="updateBaseTextFieldName" field_label="Name"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="updateBaseTextFieldLabel" field_label="Label"></v-text-field>
-          <textarea-field v-model="description" field_id="updateBaseTextFieldDesc" field_label="Description"></textarea-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseTextFieldType" field_label="Type"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
+          <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
       </validation-observer>
     </template>
@@ -21,6 +21,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -63,7 +64,7 @@ export default {
       }
     }
   },
-  mixins: [enterKeyListener, checkUnsavedChangesInModal],
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       update: 'updateBaseTextField'
@@ -95,6 +96,9 @@ export default {
             type: this.type,
             id: this.id
           }).then(() => { this.close() })
+            .catch(error => {
+              this.error = error
+            })
         }
       })
     }

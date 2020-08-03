@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label"></v-text-field>
-          <textarea-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description"></textarea-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
+          <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
         <div class="field-group">
           <label class="field-label">Options</label>
@@ -26,6 +26,7 @@ import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -70,7 +71,7 @@ export default {
       }
     }
   },
-  mixins: [enterKeyListener, checkUnsavedChangesInModal],
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       updateField: 'updateBaseOptionField',
@@ -106,6 +107,9 @@ export default {
             type: this.type,
             id: this.id
           }).then(() => { this.close() })
+            .catch(error => {
+              this.error = error
+            })
         }
       })
     }
