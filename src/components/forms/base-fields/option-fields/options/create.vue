@@ -9,7 +9,7 @@ export default {
   computed: {
     ...mapGetters({
       options: 'getCurrentBaseOptions',
-      field: 'getCurrentBaseOptionField'
+      field: 'getCurrentBaseField'
     }),
     baseOption: function () {
       return {

@@ -29,43 +29,26 @@
     <div v-else>
       ...Loading...
     </div>
-    <update-base-text-field-modal :field="currentBaseTextField"></update-base-text-field-modal>
-    <update-base-option-field-modal :field="currentBaseOptionField"></update-base-option-field-modal>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
-import updateBaseTextField from '@/components/forms/base-fields/text-fields/update'
-import updateBaseOptionField from '@/components/forms/base-fields/option-fields/update'
+import { mapActions, mapGetters } from 'vuex'
 import deleteBaseField from '@/components/forms/base-fields/delete'
 
 export default {
-  data () {
-    return {
-      showModalUpdateBaseTextField: false
-    }
-  },
   components: {
-    'update-base-text-field-modal': updateBaseTextField,
-    'update-base-option-field-modal': updateBaseOptionField,
     'delete-base-field': deleteBaseField
   },
   computed: {
     ...mapGetters({
-      baseFields: 'getBaseFields',
-      currentBaseTextField: 'getCurrentBaseTextField',
-      currentBaseOptionField: 'getCurrentBaseOptionField'
+      baseFields: 'getBaseFields'
     })
   },
   methods: {
     ...mapActions({
       fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField',
       fetchCurrentBaseTextField: 'fetchCurrentBaseTextField'
-    }),
-    ...mapMutations({
-      showUpdateBaseOptionFieldModal: 'SHOW_UPDATE_BASE_OPTION_FIELD_MODAL',
-      showUpdateBaseTextFieldModal: 'SHOW_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
     editBaseField (id, type) {
       if (type === 'text' || type === 'textarea') {
@@ -75,14 +58,10 @@ export default {
       }
     },
     editBaseTextField (id) {
-      this.fetchCurrentBaseTextField(id).then(() => {
-        this.showUpdateBaseTextFieldModal()
-      })
+      this.fetchCurrentBaseTextField(id)
     },
     editBaseOptionField (id) {
-      this.fetchCurrentBaseOptionField(id).then(() => {
-        this.showUpdateBaseOptionFieldModal()
-      })
+      this.fetchCurrentBaseOptionField(id)
     }
   }
 }

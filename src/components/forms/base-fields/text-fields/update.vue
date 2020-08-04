@@ -42,14 +42,16 @@ export default {
     field: Object
   },
   watch: {
-    field () {
+    localField: 'checkUnsavedChanges'
+  },
+  updated () {
+    if (this.field) {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    },
-    localField: 'checkUnsavedChanges'
+    }
   },
   computed: {
     ...mapGetters({
@@ -70,7 +72,7 @@ export default {
       update: 'updateBaseTextField'
     }),
     ...mapMutations({
-      resetCurrentBaseTextField: 'RESET_CURRENT_BASE_TEXT_FIELD',
+      resetCurrentBaseTextField: 'RESET_CURRENT_BASE_FIELD',
       closeModal: 'CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
     enterKeyAction () {

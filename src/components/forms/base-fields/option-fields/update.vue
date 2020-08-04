@@ -49,14 +49,16 @@ export default {
     'field-options': fieldOptions
   },
   watch: {
-    field () {
+    localField: 'checkUnsavedChanges'
+  },
+  updated () {
+    if (this.field) {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    },
-    localField: 'checkUnsavedChanges'
+    }
   },
   computed: {
     ...mapGetters({
@@ -78,7 +80,7 @@ export default {
       updateOptions: 'updateModifiedBaseOptions'
     }),
     ...mapMutations({
-      resetCurrentBaseOptionField: 'RESET_CURRENT_BASE_OPTION_FIELD',
+      resetCurrentBaseOptionField: 'RESET_CURRENT_BASE_FIELD',
       resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
       closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),

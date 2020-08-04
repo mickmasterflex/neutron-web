@@ -2,12 +2,10 @@ import axios from '@/axios'
 
 const state = {
   base_text_fields: [],
-  current_base_text_field: {},
   show_update_base_text_field_modal: false
 }
 
 const getters = {
-  getCurrentBaseTextField: state => state.current_base_text_field,
   getShowUpdateBaseTextFieldModal: state => state.show_update_base_text_field_modal
 }
 
@@ -21,7 +19,7 @@ const actions = {
   async fetchCurrentBaseTextField ({ commit }, id) {
     await axios.get(`/base-text-fields/${id}/`)
       .then(response => {
-        commit('SET_CURRENT_BASE_TEXT_FIELD', response.data)
+        commit('SET_CURRENT_BASE_FIELD', response.data)
       })
   },
   async createBaseTextField ({ commit }, field) {
@@ -49,8 +47,6 @@ const actions = {
 
 const mutations = {
   SET_BASE_TEXT_FIELDS: (state, fields) => (state.base_text_fields = fields),
-  SET_CURRENT_BASE_TEXT_FIELD: (state, field) => (state.current_base_text_field = field),
-  RESET_CURRENT_BASE_TEXT_FIELD: (state) => { state.current_base_text_field = {} },
   ADD_BASE_TEXT_FIELD: (state, field) => state.base_text_fields.unshift(field),
   UPDATE_BASE_TEXT_FIELD: (state, updatedField) => {
     const index = state.base_text_fields.findIndex(field => field.id === updatedField.id)
