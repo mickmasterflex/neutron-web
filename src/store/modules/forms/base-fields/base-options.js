@@ -11,14 +11,14 @@ const getters = {
 
 const actions = {
   async createBaseOption ({ commit }, option) {
-    await axios.post('/base-options/', option)
+    await axios.post('/base-options/', option, { showSuccessToast: false })
       .then(response => {
         commit('ADD_BASE_OPTION', response.data)
       })
   },
   async updateModifiedBaseOptions ({ commit }) {
     await state.modified_base_options.forEach(option => {
-      axios.put(`/base-options/${option.id}/`, option)
+      axios.put(`/base-options/${option.id}/`, option, { showSuccessToast: false })
     })
     commit('RESET_MODIFIED_BASE_OPTIONS')
   },

@@ -56,7 +56,23 @@ const routes = [
   {
     path: '/products/brands/:id/',
     name: 'Brand',
-    component: () => import('@/views/products/brand.vue'),
+    component: () => import('@/views/products/brand/index.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'products',
+      activeAppTab: 'product-mgmt'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
+    path: '/products/brands/:id/campuses/',
+    name: 'BrandCampuses',
+    component: () => import('@/views/products/brand/campuses.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
@@ -104,7 +120,7 @@ const routes = [
   {
     path: '/products/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/field-management.vue'),
+    component: () => import('@/views/products/base-field-management.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
@@ -115,7 +131,7 @@ const routes = [
   {
     path: '/relationships/clients/',
     name: 'Relationships',
-    component: () => import('@/views/relationships/index.vue'),
+    component: () => import('@/views/relationships/clients/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -125,7 +141,7 @@ const routes = [
   {
     path: '/relationships/clients/:id/',
     name: 'Client',
-    component: () => import('@/views/relationships/client.vue'),
+    component: () => import('@/views/relationships/clients/client/index'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -138,24 +154,9 @@ const routes = [
     }
   },
   {
-    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/',
-    name: 'Offers',
-    component: () => import('@/views/relationships/offers/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      const props = { ...route.params }
-      props.buyer = +props.buyer
-      return props
-    }
-  },
-  {
-    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/:id/',
-    name: 'Offer',
-    component: () => import('@/views/relationships/offers/offer.vue'),
+    path: '/relationships/clients/:id/contracts/',
+    name: 'ClientContracts',
+    component: () => import('@/views/relationships/clients/client/contracts'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -168,19 +169,55 @@ const routes = [
     }
   },
   {
-    path: '/relationships/clients/:client/contracts/partners/:partner/campaigns/',
-    name: 'Campaigns',
+    path: '/relationships/contracts/partners/',
+    name: 'AllPartnerContracts',
+    component: () => import('@/views/relationships/partners/index.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/partners/:id/',
+    name: 'PartnerContract',
+    component: () => import('@/views/relationships/partners/partner/index.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      props.client = +props.client
+      return props
+    }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/partners/:id/campaigns/',
+    name: 'PartnerContractCampaigns',
+    component: () => import('@/views/relationships/partners/partner/campaigns.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
+    path: '/relationships/campaigns/',
+    name: 'All Campaigns',
     component: () => import('@/views/relationships/campaigns/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
     },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      const props = { ...route.params }
-      props.partner = +props.partner
-      return props
-    }
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/relationships/clients/:client/contracts/partners/:partner/campaigns/:id/',
@@ -198,34 +235,8 @@ const routes = [
     }
   },
   {
-    path: '/relationships/contracts/partners/',
-    name: 'PartnerContracts',
-    component: () => import('@/views/relationships/partners/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
-    path: '/relationships/clients/:client/contracts/partners/:id/',
-    name: 'PartnerContract',
-    component: () => import('@/views/relationships/partners/partner.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      props.client = +props.client
-      return props
-    }
-  },
-  {
-    path: '/relationships/contracts/buyers',
-    name: 'BuyerContracts',
+    path: '/relationships/contracts/buyers/',
+    name: 'AllBuyerContracts',
     component: () => import('@/views/relationships/buyers/index.vue'),
     meta: {
       requiresAuth: true,
@@ -236,7 +247,62 @@ const routes = [
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',
     name: 'BuyerContract',
-    component: () => import('@/views/relationships/buyers/buyer.vue'),
+    component: () => import('@/views/relationships/buyers/buyer/index.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/buyers/:id/field-management/',
+    name: 'BuyerContractFieldManagement',
+    component: () => import('@/views/relationships/buyers/buyer/field-management'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/buyers/:id/offers/',
+    name: 'BuyerContractOffers',
+    component: () => import('@/views/relationships/buyers/buyer/offers.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    }
+  },
+  {
+    path: '/relationships/offers/',
+    name: 'All Offers',
+    component: () => import('@/views/relationships/offers/index.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'relationships'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/:id/',
+    name: 'Offer',
+    component: () => import('@/views/relationships/offers/offer.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -284,7 +350,8 @@ const routes = [
     }
   },
   {
-    path: '/*/',
+    path: '/*',
+    name: '404',
     component: () => import('@/views/error/404.vue'),
     meta: { layout: 'simple' },
     pathToRegexpOptions: { strict: true }

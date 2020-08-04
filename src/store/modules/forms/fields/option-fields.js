@@ -1,16 +1,16 @@
 import axios from '@/axios'
-import options from '@/store/modules/forms/fields/options'
+import options from '@/store/modules/forms/fields/options/'
 
 const modules = {
   options
 }
 
 const state = {
-  show_update_option_field: false
+  show_update_option_field_modal: false
 }
 
 const getters = {
-  getShowUpdateOptionField: state => state.show_update_option_field
+  getShowUpdateOptionFieldModal: state => state.show_update_option_field_modal
 }
 
 const actions = {
@@ -19,6 +19,7 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
+        commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
         commit('SORT_CURRENT_OPTIONS')
       })
   },
@@ -28,6 +29,7 @@ const actions = {
         commit('ADD_FIELD', response.data)
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
+        commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
         commit('SORT_CURRENT_OPTIONS')
       })
   },
@@ -46,7 +48,8 @@ const actions = {
 }
 
 const mutations = {
-  TOGGLE_SHOW_UPDATE_OPTION_FIELD: (state, bool) => (state.show_update_option_field = bool)
+  SHOW_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field_modal = true),
+  CLOSE_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field_modal = false)
 }
 
 export default {

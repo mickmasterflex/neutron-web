@@ -1,8 +1,8 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }">
+  <validation-observer v-slot="{ handleSubmit }" ref="form">
     <form @submit.prevent="handleSubmit(submitForm)">
-      <v-text-field v-model="name" rules="required" field_id="brandName" field_label="BrandName"></v-text-field>
-      <textarea-field v-model="short_description" field_id="short_description" field_label="ShortDescription"></textarea-field>
+      <v-text-field v-model="name" rules="required" field_id="name" field_label="Brand Name"></v-text-field>
+      <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
       <text-field v-model="alias" field_id="alias" field_label="Alias"></text-field>
       <text-field v-model="website" field_id="website" field_label="Website"></text-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
@@ -12,6 +12,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -26,6 +27,7 @@ export default {
   props: {
     brand: Object
   },
+  mixins: [setResponseErrors],
   watch: {
     brand: function () {
       this.name = this.brand.name
@@ -46,6 +48,8 @@ export default {
         short_description: this.short_description,
         alias: this.alias,
         website: this.website
+      }).catch(error => {
+        this.error = error
       })
     }
   }

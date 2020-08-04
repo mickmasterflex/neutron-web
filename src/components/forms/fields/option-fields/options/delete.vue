@@ -7,14 +7,17 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: Number
+    option: {
+      type: Object,
+      required: true
+    }
   },
   methods: {
     ...mapActions({
       deleteOption: 'deleteOption'
     }),
     runDelete () {
-      this.deleteOption(this.id)
+      this.deleteOption(this.option)
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="well well-light">
-    <ul class="fields-inline-heading px-1">
+  <div class="well">
+    <ul class="fields-inline-heading px-1" v-if="options.length">
       <li class="w-24 fields-inline-heading-item">Order</li>
       <li class="w-64 fields-inline-heading-item">Label</li>
       <li class="w-64 fields-inline-heading-item">Mapping</li>
@@ -10,9 +10,10 @@
     <ul-draggable v-if="options.length" v-bind="dragOptions" v-model="options">
       <li v-for="(option, index) in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
         <update-option :option="option" :newOrder="index + 1"/>
-        <delete-option :id="option.id" class="mx-1"></delete-option>
+        <delete-option :option="option" class="mx-1"></delete-option>
       </li>
     </ul-draggable>
+    <table-empty-state v-else heading="No Options" copy="Add some from the available options below."></table-empty-state>
   </div>
 </template>
 
