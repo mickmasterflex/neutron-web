@@ -4,7 +4,7 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="campusName" field_label="Campus Name"></v-text-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Campus Name"></v-text-field>
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
           <v-select-field v-model="vertical" :options="verticalOptions" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
           <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
@@ -29,6 +29,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -68,7 +69,7 @@ export default {
       required: true
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createCampus'
@@ -120,6 +121,8 @@ export default {
             brand: this.brandId
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

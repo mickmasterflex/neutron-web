@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name"></v-text-field>
           <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name"></v-text-field>
-          <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
+          <v-text-field v-model="email" mode="passive" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -19,6 +19,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -33,7 +34,7 @@ export default {
       showModal: 'getShowCreateUserModal'
     })
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createUser'
@@ -62,7 +63,11 @@ export default {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email
-          }).then(() => { this.close() })
+          }).then(() => {
+            this.close()
+          }).catch(error => {
+            this.error = error
+          })
         }
       })
     }

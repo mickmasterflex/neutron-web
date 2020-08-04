@@ -120,7 +120,7 @@ const routes = [
   {
     path: '/products/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/field-management.vue'),
+    component: () => import('@/views/products/base-field-management.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
@@ -350,7 +350,8 @@ const routes = [
     }
   },
   {
-    path: '/*/',
+    path: '/*',
+    name: '404',
     component: () => import('@/views/error/404.vue'),
     meta: { layout: 'simple' },
     pathToRegexpOptions: { strict: true }

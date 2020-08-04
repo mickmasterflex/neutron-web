@@ -8,7 +8,7 @@
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
           <select-field v-model="area_of_interest" :options="interestOptions" field_id="area_of_interest" field_label="Area Of Interest"></select-field>
-          <select-field v-model="degree_level" :options="degreeLevelOptions" field_id="degreeLevel" field_label="Degree Level"></select-field>
+          <select-field v-model="degree_level" :options="degreeLevelOptions" field_id="degree_level" field_label="Degree Level"></select-field>
         </form>
       </validation-observer>
     </template>
@@ -21,6 +21,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -67,7 +68,7 @@ export default {
       required: true
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createEducationProduct'
@@ -99,9 +100,12 @@ export default {
             short_description: this.short_description,
             description: this.description,
             area_of_interest: this.area_of_interest,
+            degree_level: this.degree_level,
             product_group: this.campusId
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

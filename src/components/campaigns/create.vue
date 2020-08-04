@@ -4,8 +4,8 @@
     <template v-slot:body>
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
-      <v-text-field v-model="name" rules="required" field_id="campaignName" field_label="Name"></v-text-field>
-      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="campaignCode" field_label="Code"></v-text-field>
+      <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="code" field_label="Code"></v-text-field>
     </form>
   </validation-observer>
     </template>
@@ -18,6 +18,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -34,7 +35,7 @@ export default {
       showModal: 'getShowCreateCampaignModal'
     })
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createCampaign'
@@ -64,6 +65,8 @@ export default {
             code: this.campaign_code
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

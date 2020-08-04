@@ -1,10 +1,14 @@
 <template>
   <buyer-layout :id="id" contentTab="offers">
     <template v-slot:content>
-      <div class="flex flex-row justify-between">
-        <h3 class="h3">Offers List</h3>
-        <button class="btn btn-green" @click="showCreateOfferModal()">Create Offer</button>
-      </div>
+      <action-heading>
+        <template v-slot:left>
+          <h2 class="h3">Offers List</h2>
+        </template>
+        <template v-slot:right>
+          <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Create Offer</button>
+        </template>
+      </action-heading>
       <offer-list :offers="offers"></offer-list>
       <create-offer :buyer="buyer.id"></create-offer>
     </template>

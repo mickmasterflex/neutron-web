@@ -1,5 +1,5 @@
 <template>
-  <validation-provider :rules="rules" v-slot="{ errors, classes }">
+  <validation-provider :rules="rules" :vid="$attrs.field_id" :name="$attrs.field_id" :mode="mode" v-slot="{ errors, classes }">
     <textarea-field
       v-model="inner_value"
       :class="classes"
@@ -20,6 +20,10 @@ export default {
     rules: {
       type: [Object, String],
       default: ''
+    },
+    mode: {
+      type: String,
+      default: 'aggressive'
     }
   },
   data: () => ({

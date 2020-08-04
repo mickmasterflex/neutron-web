@@ -46,9 +46,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      client: 'getCurrentClient',
-      getPartnersByClient: 'getPartnersByClient',
-      getBuyersByClient: 'getBuyersByClient'
+      client: 'getCurrentClient'
     })
   },
   methods: {

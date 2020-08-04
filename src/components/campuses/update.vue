@@ -1,7 +1,7 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }">
+  <validation-observer v-slot="{ handleSubmit }" ref="form">
     <form @submit.prevent="handleSubmit(submitForm)">
-      <v-text-field v-model="name" rules="required" field_id="campusName" field_label="Campus Name"></v-text-field>
+      <v-text-field v-model="name" rules="required" field_id="name" field_label="Campus Name"></v-text-field>
       <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
       <v-select-field v-model="vertical" :options="verticalOptions" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
       <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
@@ -21,6 +21,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -52,6 +53,7 @@ export default {
   props: {
     campus: Object
   },
+  mixins: [setResponseErrors],
   watch: {
     campus: function () {
       this.name = this.campus.name
@@ -91,6 +93,8 @@ export default {
         description: this.description,
         brand: this.brand,
         id: this.campus.id
+      }).catch(error => {
+        this.error = error
       })
     }
   }

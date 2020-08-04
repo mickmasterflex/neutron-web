@@ -5,7 +5,7 @@
       <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
       <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
       <select-field v-model="area_of_interest" :options="interestOptions" field_id="area_of_interest" field_label="Area Of Interest"></select-field>
-      <select-field v-model="degree_level" :options="degreeLevelOptions" field_id="degreeLevel" field_label="Degree Level"></select-field>
+      <select-field v-model="degree_level" :options="degreeLevelOptions" field_id="degree_level" field_label="Degree Level"></select-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
     </form>
   </validation-observer>
@@ -13,6 +13,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -52,6 +53,7 @@ export default {
   props: {
     educationProduct: Object
   },
+  mixins: [setResponseErrors],
   watch: {
     educationProduct: function () {
       this.name = this.educationProduct.name
@@ -72,8 +74,11 @@ export default {
         short_description: this.short_description,
         description: this.description,
         area_of_interest: this.area_of_interest,
+        degree_level: this.degree_level,
         product_group: this.product_group,
         id: this.educationProduct.id
+      }).catch(error => {
+        this.error = error
       })
     }
   }

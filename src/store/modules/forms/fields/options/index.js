@@ -1,4 +1,9 @@
 import axios from '@/axios'
+import inactiveOptions from '@/store/modules/forms/fields/options/inactive.js'
+
+const modules = {
+  inactiveOptions
+}
 
 const state = {
   current_options: [],
@@ -12,14 +17,15 @@ const getters = {
 const actions = {
   async updateModifiedOptions ({ commit }) {
     await state.modified_options.forEach(option => {
-      axios.put(`/options/${option.id}/`, option)
+      axios.put(`/options/${option.id}/`, option, { showSuccessToast: false })
     })
     commit('RESET_MODIFIED_OPTIONS')
   },
-  async deleteOption ({ commit }, id) {
-    await axios.delete(`/options/${id}/`)
+  async deleteOption ({ commit }, option) {
+    await axios.delete(`/options/${option.id}/`)
       .then(() => {
-        commit('REMOVE_OPTION', id)
+        commit('REMOVE_OPTION', option.id)
+        commit('ADD_OPTION_TO_INACTIVE', option)
       })
   }
 }
@@ -31,6 +37,14 @@ const mutations = {
     const index = state.current_options.findIndex(option => option.id === payload.id)
     if (index !== -1) {
       state.current_options[index].order = payload.order
+    }
+  },
+  ADD_OPTION_TO_CURRENT_OPTIONS: (state, newOption) => {
+    const index = state.current_options.findIndex(option => option.id === newOption.id)
+    if (index !== -1) {
+      state.current_options.splice(index, 1, newOption)
+    } else {
+      state.current_options.push(newOption)
     }
   },
   ADD_OPTION_TO_MODIFIED: (state, modifiedOption) => {
@@ -49,6 +63,7 @@ const mutations = {
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
