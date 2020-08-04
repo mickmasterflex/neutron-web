@@ -21,6 +21,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -67,7 +68,7 @@ export default {
       required: true
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createEducationProduct'
@@ -103,6 +104,8 @@ export default {
             product_group: this.campusId
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

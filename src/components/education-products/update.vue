@@ -13,6 +13,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -52,6 +53,7 @@ export default {
   props: {
     educationProduct: Object
   },
+  mixins: [setResponseErrors],
   watch: {
     educationProduct: function () {
       this.name = this.educationProduct.name
@@ -75,6 +77,8 @@ export default {
         degree_level: this.degree_level,
         product_group: this.product_group,
         id: this.educationProduct.id
+      }).catch(error => {
+        this.error = error
       })
     }
   }
