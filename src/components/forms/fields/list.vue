@@ -1,6 +1,6 @@
 <template>
   <div class="well well-light">
-    <div v-if="form.fields.length">
+    <div v-if="form.fields">
       <div class="fields-inline-heading bg-gray-900 rounded flex flex-row items-center mb-2">
         <span class="w-24 th fields-inline-heading-item">Order</span>
         <span class="w-20 th fields-inline-heading-item">ID</span>
@@ -21,8 +21,7 @@
       </ul-draggable>
     </div>
     <table-empty-state v-else heading="No Fields" copy="Use the 'Add Field' button to start cloning base fields for this contract."></table-empty-state>
-    <update-option-field></update-option-field>
-    <update-text-field></update-text-field>
+    <component :is="update_component" :field="current_field"></component>
   </div>
 </template>
 
@@ -39,16 +38,17 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      currentFieldId: {
+      current_field_id: {
         default: null,
         type: Number
-      }
+      },
+      update_component: null
     }
   },
   components: {
+    updateTextField,
+    updateOptionField,
     'delete-field': deleteField,
-    'update-text-field': updateTextField,
-    'update-option-field': updateOptionField,
     'fetch-current-field': fetchCurrentField,
     'field-list-item': fieldListItem,
     'ul-draggable': draggable
@@ -57,26 +57,33 @@ export default {
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
-    })
+    }),
+    async setUpdateComponent (component) {
+      this.update_component = component
+    }
   },
   mixins: [dragOptions],
   computed: {
     ...mapGetters({
-      currentField: 'getCurrentField',
+      current_field: 'getCurrentField',
       form: 'getCurrentForm'
     })
   },
   watch: {
-    currentField () {
-      if (this.currentField) {
-        this.currentFieldId = this.currentField.id
-        if (this.currentField.type === 'select' || this.currentField.type === 'radio') {
-          this.showUpdateOptionFieldModal()
-        } else if (this.currentField.type === 'text' || this.currentField.type === 'textarea') {
-          this.showUpdateTextFieldModal()
+    current_field () {
+      if (this.current_field) {
+        this.current_field_id = this.current_field.id
+        if (this.current_field.type === 'select' || this.current_field.type === 'radio') {
+          this.setUpdateComponent(updateOptionField).then(() => {
+            this.showUpdateOptionFieldModal()
+          })
+        } else if (this.current_field.type === 'text' || this.current_field.type === 'textarea') {
+          this.setUpdateComponent(updateTextField).then(() => {
+            this.showUpdateTextFieldModal()
+          })
         }
       } else {
-        this.currentFieldId = null
+        this.current_field_id = null
       }
     }
   }

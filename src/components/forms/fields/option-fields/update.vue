@@ -46,19 +46,21 @@ export default {
       deliver: ''
     }
   },
+  props: {
+    field: {
+      type: Object
+    }
+  },
   computed: {
     ...mapGetters({
-      field: 'getCurrentField',
       showModal: 'getShowUpdateOptionFieldModal'
     })
   },
-  watch: {
-    field: function () {
-      if (this.field) {
-        this.label = this.field.label
-        this.mapping = this.field.mapping
-        this.deliver = this.field.deliver
-      }
+  updated () {
+    if (this.field) {
+      this.label = this.field.label
+      this.mapping = this.field.mapping
+      this.deliver = this.field.deliver
     }
   },
   mixins: [enterKeyListener, setResponseErrors],
@@ -77,13 +79,10 @@ export default {
       }
     },
     close () {
+      this.closeModal()
       this.label = ''
       this.mapping = ''
       this.deliver = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
       this.resetCurrentField()
     },
     submitForm () {

@@ -1,5 +1,5 @@
 <template>
-  <modal-template  :show="showModal" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>
       Field Configuration
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
@@ -32,19 +32,21 @@ export default {
       deliver: ''
     }
   },
+  props: {
+    field: {
+      type: Object
+    }
+  },
   computed: {
     ...mapGetters({
-      field: 'getCurrentField',
       showModal: 'getShowUpdateTextFieldModal'
     })
   },
-  watch: {
-    field: function () {
-      if (this.field) {
-        this.label = this.field.label
-        this.mapping = this.field.mapping
-        this.deliver = this.field.deliver
-      }
+  updated () {
+    if (this.field) {
+      this.label = this.field.label
+      this.mapping = this.field.mapping
+      this.deliver = this.field.deliver
     }
   },
   mixins: [enterKeyListener, setResponseErrors],
@@ -62,13 +64,10 @@ export default {
       }
     },
     close () {
+      this.closeModal()
       this.label = ''
       this.mapping = ''
       this.deliver = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
       this.resetCurrentField()
     },
     submitForm () {
