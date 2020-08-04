@@ -25,8 +25,8 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampus from '@/components/campuses/delete'
 import updateCampus from '@/components/campuses/update'
-import createEducationProduct from '@/components/educationProducts/create'
-import educationProductList from '@/components/educationProducts/list'
+import createEducationProduct from '@/components/education-products/create'
+import educationProductList from '@/components/education-products/list'
 
 export default {
   props: {
@@ -44,10 +44,10 @@ export default {
     ...mapGetters({
       campus: 'getCurrentCampus',
       educationProduct: 'getCurrentEducationProduct',
-      getEducationProductByCampus: 'getEducationProductByCampus'
+      getEducationProductsByCampus: 'getEducationProductsByCampus'
     }),
     educationProducts: function () {
-      return this.getEducationProductByCampus(this.id)
+      return this.getEducationProductsByCampus(this.id)
     }
   },
   methods: {
