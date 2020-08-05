@@ -1,5 +1,5 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }">
+  <validation-observer v-slot="{ handleSubmit }" ref="form">
     <form @submit.prevent="handleSubmit(submitForm)">
       <v-text-field v-model="name" rules="required" field_id="Name" field_label="Education Product Name"></v-text-field>
       <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
