@@ -48,9 +48,6 @@ export default {
   components: {
     'field-options': fieldOptions
   },
-  watch: {
-    localField: 'checkUnsavedChanges'
-  },
   updated () {
     if (this.field) {
       this.name = this.field.name
@@ -64,13 +61,13 @@ export default {
     ...mapGetters({
       showModal: 'getShowUpdateBaseOptionFieldModal'
     }),
-    localField () {
-      return {
-        name: this.name,
-        label: this.label,
-        description: this.description,
-        type: this.type
-      }
+    unsavedChanges () {
+      return this.name !== this.field.name || this.label !== this.field.label || this.description !== this.field.description || this.type !== this.field.type
+    }
+  },
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
   mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],

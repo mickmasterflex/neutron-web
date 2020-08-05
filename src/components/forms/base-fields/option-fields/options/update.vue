@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -38,16 +39,25 @@ export default {
     option: Object,
     newOrder: Number
   },
+  mixins: [checkUnsavedChangesInModal],
   computed: {
     optionData () {
       return [this.order, this.label, this.value]
-    }
+    },
+    unsavedChanges () {
+      return this.order !== this.option.order || this.label !== this.option.label || this.value !== this.option.value
+    },
+    ...mapGetters({
+      showUpdateOptionModal: 'getShowUpdateBaseOptionFieldModal'
+    })
   },
   watch: {
     optionData () {
       this.addToModified()
-      this.toggleChangesInModalUnsaved(true)
       this.updateBaseOptionOrder({ id: this.option.id, order: this.order })
+    },
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showUpdateOptionModal, this.unsavedChanges)
     },
     newOrder () {
       this.order = this.newOrder
