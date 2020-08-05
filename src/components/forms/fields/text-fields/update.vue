@@ -22,6 +22,8 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -35,9 +37,19 @@ export default {
     ...mapGetters({
       field: 'getCurrentField',
       showModal: 'getShowUpdateTextFieldModal'
-    })
+    }),
+    unsavedChanges () {
+      if (this.field) {
+        return this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+      } else {
+        return false
+      }
+    }
   },
   watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    },
     field: function () {
       if (this.field) {
         this.label = this.field.label
@@ -46,7 +58,7 @@ export default {
       }
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       update: 'updateTextField'

@@ -36,6 +36,8 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/fields/option-fields/options/list'
 import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -49,9 +51,19 @@ export default {
     ...mapGetters({
       field: 'getCurrentField',
       showModal: 'getShowUpdateOptionFieldModal'
-    })
+    }),
+    unsavedChanges () {
+      if (this.field) {
+        return this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+      } else {
+        return false
+      }
+    }
   },
   watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    },
     field: function () {
       if (this.field) {
         this.label = this.field.label
@@ -60,7 +72,7 @@ export default {
       }
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       updateField: 'updateOptionField',
