@@ -9,7 +9,6 @@ const modules = {
 const state = {
   current_form: [],
   current_field: null,
-  show_create_field_modal: false,
   modified_fields: []
 }
 

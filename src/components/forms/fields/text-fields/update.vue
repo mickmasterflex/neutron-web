@@ -1,5 +1,5 @@
 <template>
-  <modal-template  :show="showModal" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>
       Field Configuration
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
@@ -7,9 +7,9 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="label" field_id="updateTextFieldLabel" field_label="Label" rules="required"></v-text-field>
-          <text-field v-model="mapping" field_id="updateTextFieldMapping" field_label="Mapping"></text-field>
-          <checkbox-single v-model="deliver" field_id="updateTextFieldDeliver" field_label="Pass to Client"></checkbox-single>
+          <v-text-field v-model="label" field_id="label" field_label="Label" rules="required"></v-text-field>
+          <text-field v-model="mapping" field_id="mapping" field_label="Mapping"></text-field>
+          <checkbox-single v-model="deliver" field_id="deliver" field_label="Pass to Client"></checkbox-single>
         </form>
       </validation-observer>
     </template>
@@ -33,9 +33,13 @@ export default {
       deliver: ''
     }
   },
+  props: {
+    field: {
+      type: Object
+    }
+  },
   computed: {
     ...mapGetters({
-      field: 'getCurrentField',
       showModal: 'getShowUpdateTextFieldModal'
     }),
     unsavedChanges () {
@@ -49,16 +53,16 @@ export default {
   watch: {
     unsavedChanges () {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
-    },
-    field: function () {
-      if (this.field) {
-        this.label = this.field.label
-        this.mapping = this.field.mapping
-        this.deliver = this.field.deliver
-      }
     }
   },
   mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
+  updated () {
+    if (this.field) {
+      this.label = this.field.label
+      this.mapping = this.field.mapping
+      this.deliver = this.field.deliver
+    }
+  },
   methods: {
     ...mapActions({
       update: 'updateTextField'
@@ -73,13 +77,10 @@ export default {
       }
     },
     close () {
+      this.closeModal()
       this.label = ''
       this.mapping = ''
       this.deliver = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
       this.resetCurrentField()
     },
     submitForm () {
@@ -95,6 +96,8 @@ export default {
           }).then(() => {
             this.closeModal()
             this.resetCurrentField()
+          }).catch(error => {
+            this.error = error
           })
         }
       })
