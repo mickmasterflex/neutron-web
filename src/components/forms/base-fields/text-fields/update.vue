@@ -55,7 +55,11 @@ export default {
       showModal: 'getShowUpdateBaseTextFieldModal'
     }),
     unsavedChanges () {
-      return this.name !== this.field.name || this.label !== this.field.label || this.description !== this.field.description || this.type !== this.field.type
+      if (this.field) {
+        return this.name !== this.field.name || this.label !== this.field.label || this.description !== this.field.description || this.type !== this.field.type
+      } else {
+        return false
+      }
     }
   },
   watch: {

@@ -59,10 +59,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateBaseOptionFieldModal'
+      showModal: 'getShowUpdateBaseOptionFieldModal',
+      unsavedOptionChanges: 'getUnsavedBaseOptionChangesInModal'
     }),
     unsavedChanges () {
-      return this.name !== this.field.name || this.label !== this.field.label || this.description !== this.field.description || this.type !== this.field.type
+      if (this.field) {
+        return this.unsavedOptionChanges || this.name !== this.field.name || this.label !== this.field.label || this.description !== this.field.description || this.type !== this.field.type
+      } else {
+        return false
+      }
     }
   },
   watch: {
@@ -79,6 +84,7 @@ export default {
     ...mapMutations({
       resetCurrentBaseOptionField: 'RESET_CURRENT_BASE_FIELD',
       resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
+      resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
       closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),
     enterKeyAction () {
@@ -89,6 +95,7 @@ export default {
     close () {
       this.resetCurrentBaseOptionField()
       this.resetCurrentBaseOptions()
+      this.resetUnsavedBaseOptionChanges()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

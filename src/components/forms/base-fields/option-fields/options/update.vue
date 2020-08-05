@@ -25,7 +25,6 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
-import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -39,13 +38,9 @@ export default {
     option: Object,
     newOrder: Number
   },
-  mixins: [checkUnsavedChangesInModal],
   computed: {
     optionData () {
       return [this.order, this.label, this.value]
-    },
-    unsavedChanges () {
-      return this.order !== this.option.order || this.label !== this.option.label || this.value !== this.option.value
     },
     ...mapGetters({
       showUpdateOptionModal: 'getShowUpdateBaseOptionFieldModal'
@@ -54,20 +49,20 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
+      this.setUnsavedBaseOptionChanges()
       this.updateBaseOptionOrder({ id: this.option.id, order: this.order })
-    },
-    unsavedChanges () {
-      this.checkUnsavedChanges(this.showUpdateOptionModal, this.unsavedChanges)
     },
     newOrder () {
       this.order = this.newOrder
+      this.setUnsavedBaseOptionChanges()
     }
   },
   methods: {
     ...mapMutations({
       addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED',
       toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
-      updateBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER'
+      updateBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER',
+      setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
     }),
     addToModified () {
       this.addBaseOptionToModified({
