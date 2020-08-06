@@ -8,9 +8,9 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="submitForm">
-            <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required"></v-text-field>
-            <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping"></text-field>
-            <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
+            <v-text-field v-model="label" field_id="label" field_label="Label" rules="required"></v-text-field>
+            <text-field v-model="mapping" field_id="mapping" field_label="Mapping"></text-field>
+            <checkbox-single v-model="deliver" field_id="deliver" field_label="Pass to Client"></checkbox-single>
           </form>
         </validation-observer>
 
@@ -36,6 +36,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/fields/option-fields/options/list'
 import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -45,22 +46,24 @@ export default {
       deliver: ''
     }
   },
+  props: {
+    field: {
+      type: Object
+    }
+  },
   computed: {
     ...mapGetters({
-      field: 'getCurrentField',
       showModal: 'getShowUpdateOptionFieldModal'
     })
   },
-  watch: {
-    field: function () {
-      if (this.field) {
-        this.label = this.field.label
-        this.mapping = this.field.mapping
-        this.deliver = this.field.deliver
-      }
+  updated () {
+    if (this.field) {
+      this.label = this.field.label
+      this.mapping = this.field.mapping
+      this.deliver = this.field.deliver
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       updateField: 'updateOptionField',
@@ -76,13 +79,10 @@ export default {
       }
     },
     close () {
+      this.closeModal()
       this.label = ''
       this.mapping = ''
       this.deliver = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
       this.resetCurrentField()
     },
     submitForm () {
@@ -99,6 +99,8 @@ export default {
           }).then(() => {
             this.closeModal()
             this.resetCurrentField()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

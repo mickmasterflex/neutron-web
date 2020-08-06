@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="updateBaseOptionFieldName" field_label="Name"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="updateBaseOptionFieldLabel" field_label="Label"></v-text-field>
-          <textarea-field v-model="description" field_id="updateBaseOptionFieldDesc" field_label="Description"></textarea-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="updateBaseOptionFieldType" field_label="Type"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
+          <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
+          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
         <div class="field-group">
           <label class="field-label">Options</label>
@@ -26,6 +26,7 @@ import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -47,38 +48,43 @@ export default {
   components: {
     'field-options': fieldOptions
   },
-  watch: {
-    field () {
+  updated () {
+    if (this.field) {
       this.name = this.field.name
       this.label = this.field.label
       this.description = this.field.description
       this.type = this.field.type
       this.id = this.field.id
-    },
-    localField: 'checkUnsavedChanges'
+    }
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateBaseOptionFieldModal'
+      showModal: 'getShowUpdateBaseOptionFieldModal',
+      unsavedOptionChanges: 'getUnsavedBaseOptionChangesInModal'
     }),
-    localField () {
-      return {
-        name: this.name,
-        label: this.label,
-        description: this.description,
-        type: this.type
+    unsavedChanges () {
+      if (this.field) {
+        return this.unsavedOptionChanges || this.name !== this.field.name || this.label !== this.field.label || this.description !== this.field.description || this.type !== this.field.type
+      } else {
+        return false
       }
     }
   },
-  mixins: [enterKeyListener, checkUnsavedChangesInModal],
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    }
+  },
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       updateField: 'updateBaseOptionField',
       updateOptions: 'updateModifiedBaseOptions'
     }),
     ...mapMutations({
-      resetCurrentBaseOptionField: 'RESET_CURRENT_BASE_OPTION_FIELD',
+      resetCurrentBaseOptionField: 'RESET_CURRENT_BASE_FIELD',
       resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
+      resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
       closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),
     enterKeyAction () {
@@ -89,6 +95,7 @@ export default {
     close () {
       this.resetCurrentBaseOptionField()
       this.resetCurrentBaseOptions()
+      this.resetUnsavedBaseOptionChanges()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -106,6 +113,9 @@ export default {
             type: this.type,
             id: this.id
           }).then(() => { this.close() })
+            .catch(error => {
+              this.error = error
+            })
         }
       })
     }

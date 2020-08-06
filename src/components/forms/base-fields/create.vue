@@ -4,10 +4,10 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="createBaseTextFieldName" field_label="Name"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="createBaseTextFieldLabel" field_label="Label"></v-text-field>
-          <textarea-field v-model="description" field_id="createBaseTextFieldDesc" field_label="Description"></textarea-field>
-          <v-select-field v-model="type" :options="options" rules="required" field_id="createBaseTextFieldType" field_label="Type"></v-select-field>
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
+          <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
+          <v-select-field v-model="type" :options="options" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
       </validation-observer>
     </template>
@@ -23,6 +23,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 
 export default {
   data () {
@@ -50,7 +51,7 @@ export default {
       return this.type === 'text' || this.type === 'textarea'
     }
   },
-  mixins: [enterKeyListener],
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       createBaseOptionField: 'createBaseOptionField',
@@ -84,6 +85,9 @@ export default {
               description: this.description,
               type: this.type
             }).then(() => { this.close() })
+              .catch(error => {
+                this.error = error
+              })
           } else if (this.textFieldSelected) {
             this.createBaseTextField({
               name: this.name,
@@ -91,6 +95,9 @@ export default {
               description: this.description,
               type: this.type
             }).then(() => { this.close() })
+              .catch(error => {
+                this.error = error
+              })
           }
         }
       })

@@ -2,12 +2,10 @@ import axios from '@/axios'
 
 const state = {
   base_option_fields: [],
-  current_base_option_field: {},
   show_update_base_option_field_modal: false
 }
 
 const getters = {
-  getCurrentBaseOptionField: state => state.current_base_option_field,
   getShowUpdateBaseOptionFieldModal: state => state.show_update_base_option_field_modal
 }
 
@@ -21,7 +19,7 @@ const actions = {
   async fetchCurrentBaseOptionField ({ commit }, id) {
     await axios.get(`/base-option-fields/${id}/`)
       .then(response => {
-        commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
+        commit('SET_CURRENT_BASE_FIELD', response.data)
         commit('SET_CURRENT_BASE_OPTIONS', response.data.base_options)
         commit('SORT_CURRENT_BASE_OPTIONS')
       })
@@ -31,7 +29,7 @@ const actions = {
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
-        commit('SET_CURRENT_BASE_OPTION_FIELD', response.data)
+        commit('SET_CURRENT_BASE_FIELD', response.data)
         commit('SHOW_UPDATE_BASE_OPTION_FIELD_MODAL', response.data)
       })
   },
@@ -53,8 +51,6 @@ const actions = {
 
 const mutations = {
   SET_BASE_OPTION_FIELDS: (state, fields) => (state.base_option_fields = fields),
-  SET_CURRENT_BASE_OPTION_FIELD: (state, field) => (state.current_base_option_field = field),
-  RESET_CURRENT_BASE_OPTION_FIELD: (state) => { state.current_base_option_field = {} },
   ADD_BASE_OPTION_FIELD: (state, field) => state.base_option_fields.unshift(field),
   UPDATE_BASE_OPTION_FIELD: (state, updatedField) => {
     const index = state.base_option_fields.findIndex(field => field.id === updatedField.id)
