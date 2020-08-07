@@ -49,12 +49,10 @@ export default {
   watch: {
     optionData () {
       this.addToModified()
-      this.setUnsavedBaseOptionChanges()
       this.updateBaseOptionOrder({ id: this.option.id, order: this.order })
     },
     newOrder () {
       this.order = this.newOrder
-      this.setUnsavedBaseOptionChanges()
     }
   },
   methods: {
@@ -65,6 +63,7 @@ export default {
       setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
     }),
     addToModified () {
+      this.setUnsavedBaseOptionChanges()
       this.addBaseOptionToModified({
         id: this.option.id,
         order: this.order,
