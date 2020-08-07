@@ -58,6 +58,7 @@ const mutations = {
     }
   },
   RESET_MODIFIED_OPTIONS: (state) => (state.modified_options = []),
+  RESET_CURRENT_OPTIONS: (state) => (state.current_options = []),
   REMOVE_OPTION: (state, id) => {
     state.current_options = state.current_options.filter(option => option.id !== id)
     state.modified_options = state.modified_options.filter(option => option.id !== id)
