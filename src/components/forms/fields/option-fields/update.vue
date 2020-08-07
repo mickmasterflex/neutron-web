@@ -55,11 +55,11 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateOptionFieldModal',
-      getUnsavedOptionChangesInModal: 'getUnsavedOptionChangesInModal'
+      unsavedOptionChangesInModal: 'getUnsavedOptionChangesInModal'
     }),
     unsavedChanges () {
       if (this.field) {
-        return this.getUnsavedOptionChangesInModal || this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+        return this.unsavedOptionChangesInModal || this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
       } else {
         return false
       }
