@@ -19,7 +19,7 @@ export default {
     runDelete () {
       this.delete(this.educationProduct.id)
         .then(() => {
-          this.$router.push({ name: 'Campus', params: { id: this.educationProduct.product_group } })
+          this.$router.push({ name: 'CampusProducts', params: { id: this.educationProduct.product_group } })
         })
     }
   }
