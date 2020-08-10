@@ -16,7 +16,7 @@ export default {
     runDelete () {
       this.delete(this.campus.id)
         .then(() => {
-          this.$router.push({ name: 'Brand', params: { id: this.campus.brand } })
+          this.$router.push({ name: 'BrandCampuses', params: { id: this.campus.brand } })
         })
     }
   }

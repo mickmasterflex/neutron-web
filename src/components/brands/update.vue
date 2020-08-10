@@ -28,19 +28,17 @@ export default {
     brand: Object
   },
   mixins: [setResponseErrors],
-  watch: {
-    brand: function () {
+  methods: {
+    ...mapActions({
+      update: 'updateBrand'
+    }),
+    setBrand () {
       this.name = this.brand.name
       this.id = this.brand.id
       this.short_description = this.brand.short_description
       this.alias = this.brand.alias
       this.website = this.brand.website
-    }
-  },
-  methods: {
-    ...mapActions({
-      update: 'updateBrand'
-    }),
+    },
     submitForm () {
       this.update({
         name: this.name,
@@ -52,6 +50,14 @@ export default {
         this.error = error
       })
     }
+  },
+  watch: {
+    brand () {
+      this.setBrand()
+    }
+  },
+  created () {
+    this.setBrand()
   }
 }
 </script>

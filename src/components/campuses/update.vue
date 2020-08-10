@@ -97,7 +97,7 @@ export default {
     }
   },
   watch: {
-    campus: function () {
+    campus () {
       this.setCampus()
     }
   },

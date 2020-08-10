@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import deleteCampus from '@/components/campuses/delete'
 import updateCampus from '@/components/campuses/update'
 
@@ -21,11 +21,6 @@ export default {
   computed: {
     ...mapGetters({
       campus: 'getCurrentCampus'
-    })
-  },
-  methods: {
-    ...mapActions({
-      fetchEducationProducts: 'fetchEducationProducts'
     })
   }
 }
