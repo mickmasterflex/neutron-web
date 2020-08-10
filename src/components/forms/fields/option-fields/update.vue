@@ -37,6 +37,7 @@ import fieldOptions from '@/components/forms/fields/option-fields/options/list'
 import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -53,9 +54,23 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateOptionFieldModal'
-    })
+      showModal: 'getShowUpdateOptionFieldModal',
+      unsavedOptionChangesInModal: 'getUnsavedOptionChangesInModal'
+    }),
+    unsavedChanges () {
+      if (this.field) {
+        return this.unsavedOptionChangesInModal || this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+      } else {
+        return false
+      }
+    }
   },
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    }
+  },
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   updated () {
     if (this.field) {
       this.label = this.field.label
@@ -63,7 +78,6 @@ export default {
       this.deliver = this.field.deliver
     }
   },
-  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       updateField: 'updateOptionField',
@@ -71,7 +85,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrentField: 'RESET_CURRENT_FIELD',
-      closeModal: 'CLOSE_UPDATE_OPTION_FIELD_MODAL'
+      closeModal: 'CLOSE_UPDATE_OPTION_FIELD_MODAL',
+      resetUnsavedOptionChanges: 'RESET_UNSAVED_OPTION_CHANGES',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
+      resetCurrentOptions: 'RESET_CURRENT_OPTIONS',
+      resetModifiedOptions: 'RESET_MODIFIED_OPTIONS',
+      resetInactiveOptions: 'RESET_INACTIVE_OPTIONS'
     }),
     enterKeyAction () {
       if (this.field) {
@@ -80,10 +99,12 @@ export default {
     },
     close () {
       this.closeModal()
-      this.label = ''
-      this.mapping = ''
-      this.deliver = ''
       this.resetCurrentField()
+      this.resetCurrentOptions()
+      this.resetModifiedOptions()
+      this.resetInactiveOptions()
+      this.resetUnsavedOptionChanges()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
