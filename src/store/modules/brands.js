@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import brandLogos from '@/store/modules/brandLogos'
 
 const state = {
   brands: [],
@@ -22,10 +23,11 @@ const actions = {
         commit('SET_BRANDS', response.data)
       })
   },
-  async fetchCurrentBrand ({ commit }, id) {
+  async fetchCurrentBrand ({ commit, dispatch }, id) {
     await axios.get(`/brands/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BRAND', response.data)
+        dispatch('fetchCurrentBrandLogos', id)
       })
   },
   async createBrand ({ commit }, brand) {
@@ -64,9 +66,14 @@ const mutations = {
   CLOSE_CREATE_BRAND_MODAL: (state) => (state.show_create_brand_modal = false)
 }
 
+const modules = {
+  brandLogos
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
