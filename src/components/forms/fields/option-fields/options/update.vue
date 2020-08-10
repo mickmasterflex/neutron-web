@@ -63,9 +63,11 @@ export default {
   methods: {
     ...mapMutations({
       addOptionToModified: 'ADD_OPTION_TO_MODIFIED',
-      updateOptionOrder: 'UPDATE_OPTION_ORDER'
+      updateOptionOrder: 'UPDATE_OPTION_ORDER',
+      setUnsavedOptionChanges: 'SET_UNSAVED_OPTION_CHANGES'
     }),
     addToModified () {
+      this.setUnsavedOptionChanges()
       this.addOptionToModified({
         order: this.order,
         label: this.label,

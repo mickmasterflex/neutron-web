@@ -7,11 +7,13 @@ const modules = {
 
 const state = {
   current_options: [],
-  modified_options: []
+  modified_options: [],
+  unsaved_option_changes_in_modal: false
 }
 
 const getters = {
-  getCurrentOptions: state => state.current_options
+  getCurrentOptions: state => state.current_options,
+  getUnsavedOptionChangesInModal: state => state.unsaved_option_changes_in_modal
 }
 
 const actions = {
@@ -56,10 +58,13 @@ const mutations = {
     }
   },
   RESET_MODIFIED_OPTIONS: (state) => (state.modified_options = []),
+  RESET_CURRENT_OPTIONS: (state) => (state.current_options = []),
   REMOVE_OPTION: (state, id) => {
     state.current_options = state.current_options.filter(option => option.id !== id)
     state.modified_options = state.modified_options.filter(option => option.id !== id)
-  }
+  },
+  SET_UNSAVED_OPTION_CHANGES: (state) => (state.unsaved_option_changes_in_modal = true),
+  RESET_UNSAVED_OPTION_CHANGES: (state) => (state.unsaved_option_changes_in_modal = false)
 }
 
 export default {
