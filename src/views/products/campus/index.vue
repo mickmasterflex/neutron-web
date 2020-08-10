@@ -29,11 +29,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
-    id: Number,
-    contentTab: {
-      type: String,
-      default: 'details'
-    }
+    id: Number
   },
   methods: {
     ...mapActions({
