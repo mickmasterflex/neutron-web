@@ -64,8 +64,7 @@ export default {
   },
   props: {
     campusId: {
-      type: Number,
-      required: true
+      type: Number
     }
   },
   mixins: [enterKeyListener, setResponseErrors],
