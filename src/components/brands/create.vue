@@ -5,9 +5,9 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Brand Name"></v-text-field>
-          <textarea-field model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
-          <text-field model="alias" field_id="alias" field_label="Alias"></text-field>
-          <text-field model="website" field_id="website" field_label="Website"></text-field>
+          <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
+          <text-field v-model="alias" field_id="alias" field_label="Alias"></text-field>
+          <text-field v-model="website" field_id="website" field_label="Website"></text-field>
         </form>
       </validation-observer>
     </template>
