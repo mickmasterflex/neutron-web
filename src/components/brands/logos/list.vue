@@ -7,18 +7,27 @@
       <p>Height: {{logo.height}}</p>
       <p>Width: {{logo.width}}</p>
       <p>Size: {{logo.size}} bytes</p>
+      <button @click="runDelete(logo.id)">delete</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
       brandLogos: 'getCurrentBrandLogos'
     })
+  },
+  methods: {
+    ...mapActions({
+      deleteBrandLogo: 'deleteBrandLogo'
+    }),
+    runDelete (id) {
+      this.deleteBrandLogo(id)
+    }
   }
 }
 </script>

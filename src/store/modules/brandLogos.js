@@ -20,12 +20,19 @@ const actions = {
       .then(response => {
         commit('ADD_LOGOS', response.data)
       })
+  },
+  async deleteBrandLogo ({ commit }, id) {
+    await axios.delete(`/brand-logos/${id}/`)
+      .then(() => {
+        commit('REMOVE_LOGO', id)
+      })
   }
 }
 
 const mutations = {
   SET_CURRENT_BRAND_LOGOS: (state, logos) => (state.current_brand_logos = logos),
-  ADD_LOGOS: (state, logos) => (state.current_brand_logos.unshift(logos))
+  ADD_LOGOS: (state, logos) => (state.current_brand_logos.unshift(logos)),
+  REMOVE_LOGO: (state, id) => (state.current_brand_logos = state.current_brand_logos.filter(logo => logo.id !== id))
 }
 
 export default {
