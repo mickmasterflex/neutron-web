@@ -14,11 +14,18 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_BRAND_LOGOS', response.data)
       })
+  },
+  async uploadBrandLogo ({ commit }, logo) {
+    await axios.post('/brand-logos/', logo)
+      .then(response => {
+        commit('ADD_LOGOS', response.data)
+      })
   }
 }
 
 const mutations = {
-  SET_CURRENT_BRAND_LOGOS: (state, logos) => (state.current_brand_logos = logos)
+  SET_CURRENT_BRAND_LOGOS: (state, logos) => (state.current_brand_logos = logos),
+  ADD_LOGOS: (state, logos) => (state.current_brand_logos.unshift(logos))
 }
 
 export default {
