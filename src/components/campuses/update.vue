@@ -15,7 +15,6 @@
       <text-field v-model="phone_extension" field_id="phone_extension" field_label="Phone Extension"></text-field>
       <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
       <button type="submit" class="btn btn-green mt-5">Submit</button>
-      <file-upload title="Upload a Logo" endpoint="/campus-logos/" :formData="`${image_data}`"></file-upload>
     </form>
   </validation-observer>
 </template>
@@ -23,7 +22,6 @@
 <script>
 import { mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
-import fileUpload from '@/components/ui/forms/validation-fields/image'
 
 export default {
   data () {
@@ -96,16 +94,6 @@ export default {
       }).catch(error => {
         this.error = error
       })
-    }
-  },
-  components: {
-    'file-upload': fileUpload
-  },
-  computed: {
-    image_data () {
-      return {
-        campus: this.campus.id
-      }
     }
   },
   watch: {
