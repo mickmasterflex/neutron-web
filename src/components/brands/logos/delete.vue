@@ -12,7 +12,9 @@ export default {
     }),
     runDelete () {
       this.brandLogos.forEach(logo => {
-        this.deleteBrandLogo(logo.id)
+        if (logo.brand === this.brand.id) {
+          this.deleteBrandLogo(logo.id)
+        }
       })
     }
   },
