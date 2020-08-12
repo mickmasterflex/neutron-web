@@ -1,5 +1,7 @@
 <template>
   <div>
+    <upload-logo></upload-logo>
+    <delete-logo></delete-logo>
     <div :key="logo.id" v-for="logo in brandLogos">
       <img :src="logo.image" :alt="logo.alt"/>
       <p>Version: {{logo.scale_name}}</p>
@@ -7,27 +9,25 @@
       <p>Height: {{logo.height}}</p>
       <p>Width: {{logo.width}}</p>
       <p>Size: {{logo.size}} bytes</p>
-      <button @click="runDelete(logo.id)">delete</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import uploadLogo from '@/components/brands/logos/upload'
+import deleteLogo from '@/components/brands/logos/delete'
 
 export default {
   computed: {
     ...mapGetters({
-      brandLogos: 'getCurrentBrandLogos'
+      brandLogos: 'getCurrentBrandLogos',
+      brand: 'getCurrentBrand'
     })
   },
-  methods: {
-    ...mapActions({
-      deleteBrandLogo: 'deleteBrandLogo'
-    }),
-    runDelete (id) {
-      this.deleteBrandLogo(id)
-    }
+  components: {
+    'upload-logo': uploadLogo,
+    'delete-logo': deleteLogo
   }
 }
 </script>

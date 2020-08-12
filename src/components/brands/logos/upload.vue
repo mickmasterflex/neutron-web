@@ -18,19 +18,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    brandId: {
-      type: Number
-    }
-  },
   data () {
     return {
       selectedFile: null,
       alt: ''
     }
+  },
+  computed: {
+    ...mapGetters({
+      brand: 'getCurrentBrand'
+    })
   },
   methods: {
     ...mapActions({
@@ -44,10 +44,10 @@ export default {
         if (success) {
           const formData = new FormData()
           formData.append('image', this.selectedFile)
-          formData.append('brand', this.brandId)
+          formData.append('brand', this.brand.id)
           formData.append('alt', this.alt)
           this.uploadBrandLogo(formData).catch(e => {
-            window.console.log(e)
+            window.console.log(e.response)
           })
         }
       })
