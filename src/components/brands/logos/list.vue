@@ -1,6 +1,5 @@
 <template>
   <div>
-    <upload-logo></upload-logo>
     <delete-logo></delete-logo>
     <div :key="logo.id" v-for="logo in brandLogos">
       <img :src="logo.image" :alt="logo.alt"/>
@@ -15,7 +14,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import uploadLogo from '@/components/brands/logos/upload'
 import deleteLogo from '@/components/brands/logos/delete'
 
 export default {
@@ -26,7 +24,6 @@ export default {
     })
   },
   components: {
-    'upload-logo': uploadLogo,
     'delete-logo': deleteLogo
   }
 }
