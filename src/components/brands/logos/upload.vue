@@ -28,6 +28,11 @@ export default {
       brand: 'getCurrentBrand'
     })
   },
+  watch: {
+    brand () {
+      this.alt = this.brand.name + ' logo'
+    }
+  },
   methods: {
     ...mapActions({
       uploadBrandLogo: 'uploadBrandLogo'
