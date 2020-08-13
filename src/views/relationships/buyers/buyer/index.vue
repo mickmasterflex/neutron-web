@@ -11,14 +11,14 @@
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
-        <li class="underscore-tab" :class="contentTab === 'details' ? 'active' : ''">
-          <router-link :to="{name: 'BuyerContract', params: {id:id}}">Buyer Details</router-link>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+          <router-link :to="{name: 'BuyerContract', params: {id:id, client:buyer.client}}">Buyer Details</router-link>
         </li>
-        <li class="underscore-tab" :class="contentTab === 'offers' ? 'active' : ''">
-          <router-link :to="{name: 'BuyerContractOffers', params: {id:id}}">Offers</router-link>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
+          <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client:buyer.client}}">Offers</router-link>
         </li>
-        <li class="underscore-tab" :class="contentTab === 'field-management' ? 'active' : ''" >
-          <router-link :to="{name: 'BuyerContractFieldManagement', params: {id:id}}">Field Management</router-link>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'field-management' ? 'active' : ''" >
+          <router-link :to="{name: 'BuyerContractFieldManagement', params: {id:id, client:buyer.client}}">Field Management</router-link>
         </li>
       </ul>
     </template>
