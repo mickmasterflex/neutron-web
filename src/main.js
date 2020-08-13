@@ -15,7 +15,7 @@ import '@/assets/css/styles.css'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -103,7 +103,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faImage)
+library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------
