@@ -5,9 +5,9 @@ export const checkUnsavedChangesInModal = {
     ...mapMutations({
       toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
     }),
-    checkUnsavedChanges () {
-      if (this.showModal === true) {
-        this.toggleChangesInModalUnsaved(true)
+    checkUnsavedChanges (showModal, boolean) {
+      if (showModal === true) {
+        this.toggleChangesInModalUnsaved(boolean)
       }
     }
   }

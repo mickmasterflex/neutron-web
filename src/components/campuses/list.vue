@@ -12,7 +12,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="campus in campuses" :key="campus.id">
         <td class="td">
-          <router-link :to="{name: 'Campus', params: {brand:campus.brand, id:campus.id}}" class="text-link">{{campus.name}}</router-link>
+          <router-link :to="{name: 'CampusDetails', params: {brand:campus.brand, id:campus.id}}" class="text-link">{{campus.name}}</router-link>
         </td>
         <td class="td">{{campus.is_online}}</td>
         <td class="td">{{campus.address1}} {{campus.address2}}</td>

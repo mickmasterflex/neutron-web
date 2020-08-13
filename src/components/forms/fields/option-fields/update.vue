@@ -8,9 +8,9 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="submitForm">
-            <v-text-field v-model="label" field_id="updateOptionFieldLabel" field_label="Label" rules="required"></v-text-field>
-            <text-field v-model="mapping" field_id="updateOptionFieldMapping" field_label="Mapping"></text-field>
-            <checkbox-single v-model="deliver" field_id="updateOptionFieldDeliver" field_label="Pass to Client"></checkbox-single>
+            <v-text-field v-model="label" field_id="label" field_label="Label" rules="required"></v-text-field>
+            <text-field v-model="mapping" field_id="mapping" field_label="Mapping"></text-field>
+            <checkbox-single v-model="deliver" field_id="deliver" field_label="Pass to Client"></checkbox-single>
           </form>
         </validation-observer>
 
@@ -36,6 +36,8 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/fields/option-fields/options/list'
 import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 
 export default {
   data () {
@@ -45,22 +47,37 @@ export default {
       deliver: ''
     }
   },
+  props: {
+    field: {
+      type: Object
+    }
+  },
   computed: {
     ...mapGetters({
-      field: 'getCurrentField',
-      showModal: 'getShowUpdateOptionFieldModal'
-    })
-  },
-  watch: {
-    field: function () {
+      showModal: 'getShowUpdateOptionFieldModal',
+      unsavedOptionChangesInModal: 'getUnsavedOptionChangesInModal'
+    }),
+    unsavedChanges () {
       if (this.field) {
-        this.label = this.field.label
-        this.mapping = this.field.mapping
-        this.deliver = this.field.deliver
+        return this.unsavedOptionChangesInModal || this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+      } else {
+        return false
       }
     }
   },
-  mixins: [enterKeyListener],
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    }
+  },
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
+  updated () {
+    if (this.field) {
+      this.label = this.field.label
+      this.mapping = this.field.mapping
+      this.deliver = this.field.deliver
+    }
+  },
   methods: {
     ...mapActions({
       updateField: 'updateOptionField',
@@ -68,7 +85,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrentField: 'RESET_CURRENT_FIELD',
-      closeModal: 'CLOSE_UPDATE_OPTION_FIELD_MODAL'
+      closeModal: 'CLOSE_UPDATE_OPTION_FIELD_MODAL',
+      resetUnsavedOptionChanges: 'RESET_UNSAVED_OPTION_CHANGES',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
+      resetCurrentOptions: 'RESET_CURRENT_OPTIONS',
+      resetModifiedOptions: 'RESET_MODIFIED_OPTIONS',
+      resetInactiveOptions: 'RESET_INACTIVE_OPTIONS'
     }),
     enterKeyAction () {
       if (this.field) {
@@ -76,14 +98,13 @@ export default {
       }
     },
     close () {
-      this.label = ''
-      this.mapping = ''
-      this.deliver = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
       this.closeModal()
       this.resetCurrentField()
+      this.resetCurrentOptions()
+      this.resetModifiedOptions()
+      this.resetInactiveOptions()
+      this.resetUnsavedOptionChanges()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -99,6 +120,8 @@ export default {
           }).then(() => {
             this.closeModal()
             this.resetCurrentField()
+          }).catch(error => {
+            this.error = error
           })
         }
       })

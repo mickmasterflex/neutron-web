@@ -1,58 +1,35 @@
 <template>
-  <div v-if="campus">
-    <div class="hud">
-      <h1 class="h1 text-white">{{campus.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="campus.id" :title="`Campus`" :color="`teal`"></stat-card>
-      </div>
-    </div>
+  <div>
     <div class="flex flex-row justify-between mt-4">
       <h3 class="h3">Education Products List</h3>
       <button class="btn btn-green" @click="showCreateEducationProductModal()">Create Education Product</button>
     </div>
     <education-product-list :educationProducts="educationProducts" class="mt-5"></education-product-list>
-    <create-education-product :campusId="id" :educationProducts="educationProducts"></create-education-product>
-
-    <h3 class="h3 mt-5 mb-2">Edit Campus</h3>
-    <update-campus :campus="campus"></update-campus>
-
-    <h3 class="h3 mt-5 mb-2">Delete Campus</h3>
-    <delete-campus :campus="campus"></delete-campus>
+    <create-education-product v-if="campus" :campusId="campus.id" :educationProducts="educationProducts"></create-education-product>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
-import deleteCampus from '@/components/campuses/delete'
-import updateCampus from '@/components/campuses/update'
 import createEducationProduct from '@/components/education-products/create'
 import educationProductList from '@/components/education-products/list'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
-  props: {
-    id: {
-      type: Number
-    }
-  },
   components: {
-    'delete-campus': deleteCampus,
-    'update-campus': updateCampus,
     'education-product-list': educationProductList,
     'create-education-product': createEducationProduct
   },
   computed: {
     ...mapGetters({
       campus: 'getCurrentCampus',
-      educationProduct: 'getCurrentEducationProduct',
       getEducationProductsByCampus: 'getEducationProductsByCampus'
     }),
     educationProducts: function () {
-      return this.getEducationProductsByCampus(this.id)
+      return this.getEducationProductsByCampus(this.campus.id)
     }
   },
   methods: {
     ...mapActions({
-      fetchCurrentCampus: 'fetchCurrentCampus',
       fetchEducationProducts: 'fetchEducationProducts'
     }),
     ...mapMutations({
@@ -60,7 +37,6 @@ export default {
     })
   },
   created () {
-    this.fetchCurrentCampus(this.id)
     this.fetchEducationProducts()
   }
 }

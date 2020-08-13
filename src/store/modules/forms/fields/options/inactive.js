@@ -28,6 +28,7 @@ const actions = {
 
 const mutations = {
   SET_INACTIVE_OPTIONS: (state, options) => (state.inactive_options = options),
+  RESET_INACTIVE_OPTIONS: (state) => (state.inactive_options = []),
   ADD_OPTION_TO_INACTIVE: (state, activeOption) => {
     const index = state.inactive_options.findIndex(option => option.id === activeOption.id)
     const inactiveOption = {

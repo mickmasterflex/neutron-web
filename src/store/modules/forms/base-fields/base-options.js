@@ -2,11 +2,13 @@ import axios from '@/axios'
 
 const state = {
   modified_base_options: [],
-  current_base_options: []
+  current_base_options: [],
+  unsaved_base_option_changes_in_modal: false
 }
 
 const getters = {
-  getCurrentBaseOptions: state => state.current_base_options
+  getCurrentBaseOptions: state => state.current_base_options,
+  getUnsavedBaseOptionChangesInModal: state => state.unsaved_base_option_changes_in_modal
 }
 
 const actions = {
@@ -53,7 +55,9 @@ const mutations = {
     state.current_base_options = state.current_base_options.filter(option => option.id !== id)
     state.modified_base_options = state.modified_base_options.filter(option => option.id !== id)
   },
-  RESET_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = [])
+  RESET_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = []),
+  SET_UNSAVED_BASE_OPTION_CHANGES: (state) => (state.unsaved_base_option_changes_in_modal = true),
+  RESET_UNSAVED_BASE_OPTION_CHANGES: (state) => (state.unsaved_base_option_changes_in_modal = false)
 }
 
 export default {

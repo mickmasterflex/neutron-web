@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
@@ -41,12 +41,14 @@ export default {
   computed: {
     optionData () {
       return [this.order, this.label, this.value]
-    }
+    },
+    ...mapGetters({
+      showUpdateOptionModal: 'getShowUpdateBaseOptionFieldModal'
+    })
   },
   watch: {
     optionData () {
       this.addToModified()
-      this.toggleChangesInModalUnsaved(true)
       this.updateBaseOptionOrder({ id: this.option.id, order: this.order })
     },
     newOrder () {
@@ -56,10 +58,11 @@ export default {
   methods: {
     ...mapMutations({
       addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED',
-      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
-      updateBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER'
+      updateBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER',
+      setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
     }),
     addToModified () {
+      this.setUnsavedBaseOptionChanges()
       this.addBaseOptionToModified({
         id: this.option.id,
         order: this.order,

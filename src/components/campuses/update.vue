@@ -54,8 +54,11 @@ export default {
     campus: Object
   },
   mixins: [setResponseErrors],
-  watch: {
-    campus: function () {
+  methods: {
+    ...mapActions({
+      update: 'updateCampus'
+    }),
+    setCampus () {
       this.name = this.campus.name
       this.short_description = this.campus.short_description
       this.vertical = this.campus.vertical
@@ -70,12 +73,7 @@ export default {
       this.phone_extension = this.campus.phone_extension
       this.description = this.campus.description
       this.brand = this.campus.brand
-    }
-  },
-  methods: {
-    ...mapActions({
-      update: 'updateCampus'
-    }),
+    },
     submitForm () {
       this.update({
         name: this.name,
@@ -97,6 +95,14 @@ export default {
         this.error = error
       })
     }
+  },
+  watch: {
+    campus: function () {
+      this.setCampus()
+    }
+  },
+  created () {
+    this.setCampus()
   }
 }
 </script>
