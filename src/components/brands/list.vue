@@ -13,7 +13,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="brand in brands" :key="brand.id">
         <td class="td">
-          <router-link :to="{name: 'Brand', params: {id:brand.id}}" class="text-link">{{brand.name}}</router-link>
+          <router-link :to="{name: 'BrandDetails', params: {id:brand.id}}" class="text-link">{{brand.name}}</router-link>
         </td>
         <td class="td">{{brand.id}}</td>
         <td class="td">{{brand.short_description}}</td>

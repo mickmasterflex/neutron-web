@@ -1,17 +1,21 @@
 <template>
-  <div v-if="educationProduct">
-    <div class="hud">
-      <h1 class="h1 text-white">{{educationProduct.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="educationProduct.id" :title="`EducationProducts`" :color="`teal`"></stat-card>
+  <content-layout v-if="educationProduct">
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="h1 text-white">{{educationProduct.name}}</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="educationProduct.id" :title="`EducationProducts`" :color="`teal`"></stat-card>
+        </div>
       </div>
-    </div>
-    <h3 class="h3 mt-5 mb-2">Edit Education Product</h3>
-    <update-education-product :educationProduct="educationProduct"></update-education-product>
+    </template>
+    <template v-slot:content>
+      <h3 class="h3 mt-5 mb-2">Edit Education Product</h3>
+      <update-education-product :educationProduct="educationProduct"></update-education-product>
 
-    <h3 class="h3 mt-5 mb-2">Delete Education Product</h3>
-    <delete-education-product :educationProduct="educationProduct"></delete-education-product>
-  </div>
+      <h3 class="h3 mt-5 mb-2">Delete Education Product</h3>
+      <delete-education-product :educationProduct="educationProduct"></delete-education-product>
+    </template>
+  </content-layout>
 </template>
 
 <script>
