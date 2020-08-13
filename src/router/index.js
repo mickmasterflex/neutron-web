@@ -272,6 +272,7 @@ const routes = [
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
+      props.client = +props.client
       return props
     },
     children: [
@@ -288,7 +289,7 @@ const routes = [
       },
       {
         name: 'BuyerContractFieldManagement',
-        path: 'field-management',
+        path: 'field-management/',
         component: () => import('@/views/relationships/buyers/buyer/field-management'),
         meta: {
           requiresAuth: true,
@@ -298,8 +299,8 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        path: '/offers/',
         name: 'BuyerContractOffers',
+        path: 'offers/',
         component: () => import('@/views/relationships/buyers/buyer/offers.vue'),
         meta: {
           requiresAuth: true,
