@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import deleteLogo from '@/components/brands/logos/delete'
 
 export default {
@@ -25,6 +25,14 @@ export default {
   },
   components: {
     'delete-logo': deleteLogo
+  },
+  methods: {
+    ...mapActions({
+      fetchLogos: 'fetchCurrentBrandLogos'
+    })
+  },
+  created () {
+    this.fetchLogos(this.brand.id)
   }
 }
 </script>

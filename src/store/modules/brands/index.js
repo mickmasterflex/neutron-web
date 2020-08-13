@@ -23,11 +23,10 @@ const actions = {
         commit('SET_BRANDS', response.data)
       })
   },
-  async fetchCurrentBrand ({ commit, dispatch }, id) {
+  async fetchCurrentBrand ({ commit }, id) {
     await axios.get(`/brands/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BRAND', response.data)
-        dispatch('fetchCurrentBrandLogos', id)
       })
   },
   async createBrand ({ commit }, brand) {
