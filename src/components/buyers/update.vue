@@ -22,17 +22,16 @@ export default {
   props: {
     buyer: Object
   },
-  watch: {
-    buyer: function () {
-      this.name = this.buyer.name
-      this.parent = this.buyer.parent
-    }
-  },
   mixins: [setResponseErrors],
   methods: {
     ...mapActions({
       update: 'updateBuyer'
     }),
+    setBuyer () {
+      this.name = this.buyer.name
+      this.parent = this.buyer.parent
+      this.client = this.buyer.client
+    },
     submitForm () {
       this.update({
         name: this.name,
@@ -43,6 +42,14 @@ export default {
         this.error = error
       })
     }
+  },
+  watch: {
+    buyer: function () {
+      this.setBuyer()
+    }
+  },
+  created () {
+    this.setBuyer()
   },
   computed: {
     ...mapGetters({
