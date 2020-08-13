@@ -256,7 +256,7 @@ const routes = [
   {
     path: '/relationships/contracts/buyers/',
     name: 'AllBuyerContracts',
-    component: () => import('@/views/relationships/buyers/index.vue'),
+    component: () => import('@/views/relationships/buyers/layout.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -265,48 +265,36 @@ const routes = [
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',
-    name: 'BuyerContract',
-    component: () => import('@/views/relationships/buyers/buyer/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true },
+    component: () => import('@/views/relationships/buyers/buyer/details.vue'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
       return props
-    }
-  },
-  {
-    path: '/relationships/clients/:client/contracts/buyers/:id/field-management/',
-    name: 'BuyerContractFieldManagement',
-    component: () => import('@/views/relationships/buyers/buyer/field-management'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
     },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      return props
-    }
-  },
-  {
-    path: '/relationships/clients/:client/contracts/buyers/:id/offers/',
-    name: 'BuyerContractOffers',
-    component: () => import('@/views/relationships/buyers/buyer/offers.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      return props
-    }
+    children: [
+      {
+        name: 'BuyerContractFieldManagement',
+        path: '',
+        component: () => import('@/views/relationships/buyers/buyer/field-management'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'field-management'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        path: '/offers/',
+        name: 'BuyerContractOffers',
+        component: () => import('@/views/relationships/buyers/buyer/offers.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'offers'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/relationships/offers/',
