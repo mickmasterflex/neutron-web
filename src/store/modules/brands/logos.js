@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  current_brand_logos: ''
+  current_brand_logos: []
 }
 
 const getters = {
