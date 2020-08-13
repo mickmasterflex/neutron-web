@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import brandLogos from '@/store/modules/brandLogos'
+import brandLogos from '@/store/modules/brands/logos'
 
 const state = {
   brands: [],
