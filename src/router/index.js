@@ -206,10 +206,7 @@ const routes = [
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      props.client = +props.client
-      return props
+      return { ...route.params }
     }
   },
   {
@@ -222,9 +219,7 @@ const routes = [
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      return props
+      return { ...route.params }
     }
   },
   {
@@ -266,10 +261,7 @@ const routes = [
     path: '/relationships/clients/:client/contracts/buyers/:id/',
     component: () => import('@/views/relationships/buyers/buyer/index.vue'),
     props (route) {
-      const props = { ...route.params }
-      props.id = +props.id
-      props.client = +props.client
-      return props
+      return { ...route.params }
     },
     children: [
       {

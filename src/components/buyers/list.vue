@@ -12,7 +12,7 @@
       <tbody class="tbody">
         <tr class="tr" v-for="contract in this.contracts" :key="contract.id">
           <td class="td">
-            <router-link :to="{name: 'BuyerContract', params: {client:contract.client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
+            <router-link :to="{name: 'BuyerContract', params: {client:client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
           </td>
           <td class="td">{{ contract.id }}</td>
           <td class="td">{{ contract.parent }}</td>
@@ -28,6 +28,9 @@
 
 <script>
 export default {
-  props: ['contracts']
+  props: {
+    contracts: Object,
+    client: String
+  }
 }
 </script>
