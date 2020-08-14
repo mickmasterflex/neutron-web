@@ -206,7 +206,9 @@ const routes = [
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
-      return { ...route.params }
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
     }
   },
   {
@@ -219,7 +221,9 @@ const routes = [
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
-      return { ...route.params }
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
     }
   },
   {
@@ -243,6 +247,7 @@ const routes = [
     pathToRegexpOptions: { strict: true },
     props (route) {
       const props = { ...route.params }
+      props.partner = +props.partner
       props.id = +props.id
       return props
     }
