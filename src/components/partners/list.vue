@@ -29,7 +29,7 @@
 <script>
 export default {
   props: {
-    contracts: Object,
+    contracts: Array,
     client: String
   }
 }
