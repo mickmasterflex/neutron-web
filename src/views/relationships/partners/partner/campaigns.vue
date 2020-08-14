@@ -5,7 +5,7 @@
         <h3 class="h3">Campaigns List</h3>
         <button class="btn btn-green" @click="showCreateCampaignModal()">Create Campaign</button>
       </div>
-      <campaign-list :campaigns="campaigns"></campaign-list>
+      <campaign-list :campaigns="campaigns" :client="$route.params.client"></campaign-list>
       <create-campaign :partner="partner.id"></create-campaign>
     </template>
   </partner-layout>
