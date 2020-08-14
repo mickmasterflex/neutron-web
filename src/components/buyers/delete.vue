@@ -8,7 +8,7 @@ import { mapActions } from 'vuex'
 export default {
   props: {
     client: {
-      type: Number
+      type: String
     },
     id: {
       type: Number
@@ -19,7 +19,7 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'ClientContracts', params: { id: this.client } })
+          this.$router.push({ name: 'ClientContracts', params: { slug: this.client } })
         })
     }
   }
