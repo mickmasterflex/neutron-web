@@ -46,6 +46,8 @@ export default {
 
       if (valid) {
         this.selected_file = e.target.files[0]
+      } else {
+        this.selected_file = null
       }
     }
   },
