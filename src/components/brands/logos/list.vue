@@ -19,8 +19,7 @@ import deleteLogo from '@/components/brands/logos/delete'
 export default {
   computed: {
     ...mapGetters({
-      brandLogos: 'getCurrentBrandLogos',
-      brand: 'getCurrentBrand'
+      brandLogos: 'getCurrentBrandLogos'
     })
   },
   components: {
