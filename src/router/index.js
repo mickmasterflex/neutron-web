@@ -261,7 +261,9 @@ const routes = [
     path: '/relationships/clients/:client/contracts/buyers/:id/',
     component: () => import('@/views/relationships/buyers/buyer/index.vue'),
     props (route) {
-      return { ...route.params }
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
     },
     children: [
       {

@@ -4,7 +4,7 @@
       <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
 
       <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
-      <delete-buyer-contract :client="buyer.client" :id="buyer.id"></delete-buyer-contract>
+      <delete-buyer-contract :client="$route.params.client" :id="buyer.id"></delete-buyer-contract>
   </div>
 </template>
 
