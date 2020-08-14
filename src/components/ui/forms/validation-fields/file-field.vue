@@ -45,6 +45,8 @@ export default {
       const { valid } = await this.$refs.provider.validate(e)
       if (valid) {
         this.selected_file = e.target.files[0]
+      } else {
+        this.selected_file = null
       }
     }
   },
