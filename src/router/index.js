@@ -227,7 +227,8 @@ const routes = [
         component: () => import('@/views/relationships/partners/partner/campaigns.vue'),
         meta: {
           requiresAuth: true,
-          activeApp: 'relationships'
+          activeApp: 'relationships',
+          contentTab: 'campaigns'
         },
         pathToRegexpOptions: { strict: true }
       }

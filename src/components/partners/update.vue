@@ -24,8 +24,7 @@ export default {
   },
   watch: {
     partner: function () {
-      this.name = this.partner.name
-      this.parent = this.partner.parent
+      this.setPartner()
     }
   },
   mixins: [setResponseErrors],
@@ -34,7 +33,6 @@ export default {
     setPartner () {
       this.name = this.partner.name
       this.parent = this.partner.parent
-      this.client = this.partner.client
     },
     submitForm () {
       this.update({

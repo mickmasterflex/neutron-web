@@ -1,11 +1,11 @@
 <template>
   <div>
-      <div class="flex flex-row justify-between">
-        <h3 class="h3">Campaigns List</h3>
-        <button class="btn btn-green" @click="showCreateCampaignModal()">Create Campaign</button>
-      </div>
-      <campaign-list :campaigns="campaigns"></campaign-list>
-      <create-campaign :partner="partner.id"></create-campaign>
+    <div class="flex flex-row justify-between">
+      <h3 class="h3">Campaigns List</h3>
+      <button class="btn btn-green" @click="showCreateCampaignModal()">Create Campaign</button>
+    </div>
+    <campaign-list :campaigns="campaigns"></campaign-list>
+    <create-campaign :partner="partner.id"></create-campaign>
   </div>
 </template>
 
