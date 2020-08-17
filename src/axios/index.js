@@ -9,7 +9,6 @@ const axios = Axios.create({
 })
 
 axios.interceptors.response.use(response => {
-  window.console.log(process.env.NODE_ENV)
   if (response.config.showSuccessToast !== false) {
     if (response.config.method === 'post' && response.statusText === 'Created') {
       successfulToast({ heading: response.statusText + ' successfully' })
