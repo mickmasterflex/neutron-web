@@ -31,6 +31,11 @@ export default {
   mixins: [setResponseErrors],
   methods: {
     ...mapActions({ update: 'updatePartner' }),
+    setPartner () {
+      this.name = this.partner.name
+      this.parent = this.partner.parent
+      this.client = this.partner.client
+    },
     submitForm () {
       this.update({
         name: this.name,
@@ -41,6 +46,9 @@ export default {
         this.error = error
       })
     }
+  },
+  created () {
+    this.setPartner()
   },
   computed: {
     ...mapGetters({
