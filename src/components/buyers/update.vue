@@ -30,7 +30,6 @@ export default {
     setBuyer () {
       this.name = this.buyer.name
       this.parent = this.buyer.parent
-      this.client = this.buyer.client
     },
     submitForm () {
       this.update({
