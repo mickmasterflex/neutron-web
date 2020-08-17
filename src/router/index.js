@@ -162,29 +162,34 @@ const routes = [
   },
   {
     path: '/relationships/clients/:slug/',
-    name: 'Client',
-    component: () => import('@/views/relationships/clients/client/index'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true },
+    component: () => import('@/views/relationships/clients/client/index.vue'),
     props (route) {
       return { ...route.params }
-    }
-  },
-  {
-    path: '/relationships/clients/:slug/contracts/',
-    name: 'ClientContracts',
-    component: () => import('@/views/relationships/clients/client/contracts'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
     },
-    pathToRegexpOptions: { strict: true },
-    props (route) {
-      return { ...route.params }
-    }
+    children: [
+      {
+        name: 'Client',
+        path: '',
+        component: () => import('@/views/relationships/clients/client/details.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'details'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        path: '/relationships/clients/:slug/contracts/',
+        name: 'ClientContracts',
+        component: () => import('@/views/relationships/clients/client/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'contracts'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/relationships/contracts/partners/',

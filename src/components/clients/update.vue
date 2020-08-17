@@ -22,14 +22,17 @@ export default {
   },
   watch: {
     client: function () {
-      this.name = this.client.name
+      this.setClient()
     }
   },
   mixins: [setResponseErrors],
   methods: {
-    ...mapActions({
-      update: 'updateClient'
-    }),
+    ...mapActions({ update: 'updateClient' }),
+    setClient () {
+      this.name = this.client.name
+      this.name = this.client.slug
+      this.id = this.client.id
+    },
     submitForm () {
       this.update({
         name: this.name,
@@ -39,6 +42,9 @@ export default {
         this.error = error
       })
     }
+  },
+  create () {
+    this.setClient()
   }
 }
 </script>
