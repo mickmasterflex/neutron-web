@@ -12,10 +12,10 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab" :class="contentTab === 'details' ? 'active' : ''">
-          <router-link :to="{name: 'Client', params: {id:id}}">Client Details</router-link>
+          <router-link :to="{name: 'Client', params: {slug:slug}}">Client Details</router-link>
         </li>
         <li class="underscore-tab" :class="contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="{name: 'ClientContracts', params: {id:id}}">Contracts</router-link>
+          <router-link :to="{name: 'ClientContracts', params: {slug:slug}}">Contracts</router-link>
         </li>
       </ul>
     </template>
@@ -30,7 +30,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
-    id: Number,
+    slug: String,
     partners: {
       type: Array,
       default: function () { return [] }
@@ -57,7 +57,7 @@ export default {
     })
   },
   created () {
-    this.fetchCurrentClient(this.id)
+    this.fetchCurrentClient(this.slug)
     this.fetchPartners()
     this.fetchBuyers()
   }

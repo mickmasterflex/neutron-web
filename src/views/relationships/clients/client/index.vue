@@ -1,10 +1,10 @@
 <template>
-  <client-layout activeTab="details" :id="id" :partners="partners" :buyers="buyers">
+  <client-layout activeTab="details" :slug="slug" :partners="partners" :buyers="buyers">
     <template v-slot:content>
       <h3 class="h3 mb-2">Edit Client</h3>
       <update-client :client="client"></update-client>
       <h3 class="h3 mt-5 mb-2">Delete Client</h3>
-      <delete-client :id="client.id"></delete-client>
+      <delete-client :slug="client.slug"></delete-client>
     </template>
   </client-layout>
 </template>
@@ -17,8 +17,8 @@ import updateClient from '@/components/clients/update'
 
 export default {
   props: {
-    id: {
-      type: Number
+    slug: {
+      type: String
     }
   },
   components: {
@@ -33,10 +33,10 @@ export default {
       getBuyersByClient: 'getBuyersByClient'
     }),
     partners: function () {
-      return this.getPartnersByClient(this.id)
+      return this.getPartnersByClient(this.client.id)
     },
     buyers: function () {
-      return this.getBuyersByClient(this.id)
+      return this.getBuyersByClient(this.client.id)
     }
   }
 }

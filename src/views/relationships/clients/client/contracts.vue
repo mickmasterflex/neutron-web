@@ -1,5 +1,5 @@
 <template>
-  <client-layout contentTab="contracts" :id="id" :buyers="buyers" :partners="partners">
+  <client-layout contentTab="contracts" :slug="slug" :buyers="buyers" :partners="partners">
     <template v-slot:content>
       <action-heading>
         <template v-slot:left>
@@ -9,7 +9,7 @@
           <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Buyer</button>
         </template>
       </action-heading>
-      <buyer-list :contracts="buyers"></buyer-list>
+      <buyer-list :contracts="buyers" :client="slug"></buyer-list>
       <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
 
       <action-heading class="mt-5">
@@ -20,7 +20,7 @@
           <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Partner</button>
         </template>
       </action-heading>
-      <partner-list :contracts="partners"></partner-list>
+      <partner-list :contracts="partners" :client="slug"></partner-list>
       <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
     </template>
   </client-layout>
@@ -36,8 +36,8 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    id: {
-      type: Number
+    slug: {
+      type: String
     }
   },
   components: {
@@ -54,10 +54,10 @@ export default {
       getBuyersByClient: 'getBuyersByClient'
     }),
     partners: function () {
-      return this.getPartnersByClient(this.id)
+      return this.getPartnersByClient(this.client.id)
     },
     buyers: function () {
-      return this.getBuyersByClient(this.id)
+      return this.getBuyersByClient(this.client.id)
     }
   },
   methods: {

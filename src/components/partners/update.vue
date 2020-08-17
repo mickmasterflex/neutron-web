@@ -24,13 +24,16 @@ export default {
   },
   watch: {
     partner: function () {
-      this.name = this.partner.name
-      this.parent = this.partner.parent
+      this.setPartner()
     }
   },
   mixins: [setResponseErrors],
   methods: {
     ...mapActions({ update: 'updatePartner' }),
+    setPartner () {
+      this.name = this.partner.name
+      this.parent = this.partner.parent
+    },
     submitForm () {
       this.update({
         name: this.name,
@@ -41,6 +44,9 @@ export default {
         this.error = error
       })
     }
+  },
+  created () {
+    this.setPartner()
   },
   computed: {
     ...mapGetters({

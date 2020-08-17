@@ -12,7 +12,7 @@
       <h3 class="h3 mb-2">Update Offer</h3>
       <update-offer :offer="offer"></update-offer>
       <h3 class="h3 mt-5 mb-2">Delete Offer</h3>
-      <delete-offer :offer="offer" ></delete-offer>
+      <delete-offer :offer="offer" :client="$route.params.client"></delete-offer>
     </template>
   </content-layout>
 </template>
