@@ -12,7 +12,7 @@
       <tbody class="tbody">
         <tr class="tr" v-for="campaign in this.campaigns" :key="campaign.id">
           <td class="td">
-            <router-link :to="{name: 'Campaign', params: { client: campaign.client, partner:campaign.contract, id:campaign.id}}" class="underline text-blue-500">{{campaign.name}}</router-link>
+            <router-link :to="{name: 'Campaign', params: { client: client, partner:campaign.contract, id:campaign.id}}" class="underline text-blue-500">{{campaign.name}}</router-link>
           </td>
           <td class="td">{{ campaign.id }}</td>
           <td class="td">{{ campaign.contract }}</td>
@@ -28,6 +28,9 @@
 
 <script>
 export default {
-  props: { campaigns: Array }
+  props: {
+    campaigns: Array,
+    client: String
+  }
 }
 </script>

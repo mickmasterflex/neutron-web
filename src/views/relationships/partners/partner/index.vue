@@ -20,7 +20,7 @@
       </ul>
     </template>
     <template v-slot:content>
-    <router-view />
+      <router-view />
     </template>
   </content-layout>
 </template>

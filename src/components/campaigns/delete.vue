@@ -7,6 +7,7 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
+    client: String,
     campaign: {
       type: Object
     }
@@ -16,7 +17,7 @@ export default {
     runDelete () {
       this.delete(this.campaign.id)
         .then(() => {
-          this.$router.push({ name: 'PartnerContractCampaigns', params: { id: this.campaign.contract, client: this.campaign.client } })
+          this.$router.push({ name: 'PartnerContractCampaigns', params: { id: this.campaign.contract, client: this.client } })
         })
     }
   }
