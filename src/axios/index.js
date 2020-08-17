@@ -2,11 +2,14 @@ import Axios from 'axios'
 import router from '@/router'
 import { successfulToast, failedToast } from '@/mixins/toastMessages'
 
+const development = process.env.NODE_ENV !== 'production'
+
 const axios = Axios.create({
-  baseURL: 'http://127.0.0.1:8000/api'
+  baseURL: development ? 'http://127.0.0.1:8000/api' : 'https://neutron.neutroninteractive.com/api'
 })
 
 axios.interceptors.response.use(response => {
+  window.console.log(process.env.NODE_ENV)
   if (response.config.showSuccessToast !== false) {
     if (response.config.method === 'post' && response.statusText === 'Created') {
       successfulToast({ heading: response.statusText + ' successfully' })
