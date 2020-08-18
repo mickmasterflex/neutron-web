@@ -1,5 +1,5 @@
 <template>
-  <form-panel title="Edit Offer" :actionTransition="true">
+  <panel-template title="Edit Offer" :actionTransition="true">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -11,7 +11,7 @@
         </form>
       </validation-observer>
     </template>
-  </form-panel>
+  </panel-template>
 </template>
 
 <script>
