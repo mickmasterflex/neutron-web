@@ -7,7 +7,6 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Client Name"></v-text-field>
-          <v-text-field v-model="slug" rules="required|alpha_dash" field_id="slug" field_label="Slug"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -21,8 +20,7 @@ import { setResponseErrors } from '@/mixins/setResponseErrors'
 export default {
   data () {
     return {
-      name: '',
-      slug: ''
+      name: ''
     }
   },
   props: {
@@ -31,13 +29,12 @@ export default {
   watch: {
     client: function () {
       this.name = this.client.name
-      this.slug = this.client.slug
     }
   },
   computed: {
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.client.name || this.slug !== this.client.slug
+        return this.name !== this.client.name
       } else {
         return false
       }
@@ -53,7 +50,7 @@ export default {
         if (success) {
           this.update({
             name: this.name,
-            slug: this.slug,
+            slug: this.client.slug,
             id: this.client.id
           }).catch(error => {
             this.error = error

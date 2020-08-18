@@ -22,8 +22,8 @@ const actions = {
         commit('SET_CLIENTS', response.data)
       })
   },
-  async fetchCurrentClient ({ commit }, id) {
-    await axios.get(`/clients/${id}/`)
+  async fetchCurrentClient ({ commit }, slug) {
+    await axios.get(`/clients/${slug}/`)
       .then(response => {
         commit('SET_CURRENT_CLIENT', response.data)
       })
@@ -35,16 +35,16 @@ const actions = {
       })
   },
   async updateClient ({ commit }, updatedClient) {
-    await axios.put(`/clients/${updatedClient.id}/`, updatedClient)
+    await axios.put(`/clients/${updatedClient.slug}/`, updatedClient)
       .then(response => {
         commit('UPDATE_CLIENT', response.data)
         commit('SET_CURRENT_CLIENT', response.data)
       })
   },
-  async deleteClient ({ commit }, id) {
-    await axios.delete(`/clients/${id}/`)
+  async deleteClient ({ commit }, slug) {
+    await axios.delete(`/clients/${slug}/`)
       .then(() => {
-        commit('REMOVE_CLIENT', id)
+        commit('REMOVE_CLIENT', slug)
       })
   }
 }
@@ -54,12 +54,12 @@ const mutations = {
   SET_CURRENT_CLIENT: (state, client) => (state.current_client = client),
   ADD_CLIENT: (state, client) => state.clients.unshift(client),
   UPDATE_CLIENT: (state, updatedClient) => {
-    const index = state.clients.findIndex(client => client.id === updatedClient.id)
+    const index = state.clients.findIndex(client => client.slug === updatedClient.slug)
     if (index !== -1) {
       state.clients.splice(index, 1, updatedClient)
     }
   },
-  REMOVE_CLIENT: (state, id) => (state.clients = state.clients.filter(client => client.id !== id)),
+  REMOVE_CLIENT: (state, slug) => (state.clients = state.clients.filter(client => client.slug !== slug)),
   SHOW_CREATE_CLIENT_MODAL: (state) => (state.show_create_client_modal = true),
   CLOSE_CREATE_CLIENT_MODAL: (state) => (state.show_create_client_modal = false)
 }

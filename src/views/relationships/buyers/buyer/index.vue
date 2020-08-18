@@ -34,7 +34,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     id: Number,
-    client: Number
+    client: String
   },
   methods: {
     ...mapActions({
