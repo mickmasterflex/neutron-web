@@ -1,30 +1,40 @@
 <template>
-  <client-layout activeTab="details" :slug="slug" :partners="partners" :buyers="buyers">
-    <template v-slot:content>
-      <h3 class="h3 mb-2">Edit Client</h3>
-      <update-client :client="client"></update-client>
-      <h3 class="h3 mt-5 mb-2">Delete Client</h3>
-      <delete-client :slug="client.slug"></delete-client>
+  <content-layout>
+    <template v-slot:hud>
+      <div class="hud">
+        <h1 class="h1 text-white">{{client.name}}</h1>
+        <div class="hud--stat-cards">
+          <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
+          <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
+        </div>
+      </div>
     </template>
-  </client-layout>
+    <template v-slot:contentTabs>
+      <ul class="underscore-tabs">
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+          <router-link :to="{name: 'Client', params: {slug:slug}}">Client Details</router-link>
+        </li>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+          <router-link :to="{name: 'ClientContracts', params: {slug:slug}}">Contracts</router-link>
+        </li>
+      </ul>
+    </template>
+    <template v-slot:content>
+      <router-view/>
+    </template>
+  </content-layout>
 </template>
 
 <script>
-import clientLayout from '@/views/relationships/clients/client/layout'
-import { mapGetters } from 'vuex'
-import deleteClient from '@/components/clients/delete'
-import updateClient from '@/components/clients/update'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
-    slug: {
-      type: String
+    slug: String,
+    contentTab: {
+      type: String,
+      default: 'details'
     }
-  },
-  components: {
-    'client-layout': clientLayout,
-    'delete-client': deleteClient,
-    'update-client': updateClient
   },
   computed: {
     ...mapGetters({
@@ -38,6 +48,18 @@ export default {
     buyers: function () {
       return this.getBuyersByClient(this.client.id)
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchPartners: 'fetchPartners',
+      fetchBuyers: 'fetchBuyers',
+      fetchCurrentClient: 'fetchCurrentClient'
+    })
+  },
+  created () {
+    this.fetchCurrentClient(this.slug)
+    this.fetchPartners()
+    this.fetchBuyers()
   }
 }
 </script>
