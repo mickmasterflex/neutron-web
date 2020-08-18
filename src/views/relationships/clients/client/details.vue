@@ -1,9 +1,7 @@
 <template>
  <div>
-  <h3 class="h3 mb-2">Edit Client</h3>
-  <update-client :client="client"></update-client>
-  <h3 class="h3 mt-5 mb-2">Delete Client</h3>
-  <delete-client :slug="client.slug"></delete-client>
+   <update-client :client="client"></update-client>
+   <delete-client :slug="client.slug" class="mt-4"></delete-client>
  </div>
 </template>
 

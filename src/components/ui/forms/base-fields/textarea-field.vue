@@ -4,7 +4,7 @@
     <div>
       <textarea
         @input="handleInput($event.target.value)"
-        class="field base-field"
+        class="field base-field textarea"
         :class="$attrs.field_class"
         :id="$attrs.field_id"
         :value="value"
@@ -29,3 +29,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .textarea {
+    min-height: 80px;
+  }
+</style>

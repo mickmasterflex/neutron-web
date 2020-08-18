@@ -1,10 +1,7 @@
 <template>
   <div>
-    <h3 class="h3 mb-2">Update Brand</h3>
     <update-brand :brand="brand" ></update-brand>
-
-    <h3 class="h3 mt-5 mb-2">Delete Brand</h3>
-    <delete-brand :id="brand.id"></delete-brand>
+    <delete-brand :id="brand.id" class="mt-4"></delete-brand>
   </div>
 </template>
 

@@ -12,10 +12,8 @@
       </div>
     </template>
     <template v-slot:content>
-      <h3 class="h3 mb-2">Edit</h3>
       <update-user :user="user"></update-user>
-      <h3 class="h3 mt-5 mb-2">Delete User</h3>
-      <delete-user :id="user.id"></delete-user>
+      <delete-user :id="user.id" class="mt-4"></delete-user>
     </template>
   </content-layout>
 </template>
