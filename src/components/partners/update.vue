@@ -1,11 +1,17 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }" ref="form">
-    <form @submit.prevent="handleSubmit(submitForm)">
-      <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
-      <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
-      <button type="submit" class="btn btn-green mt-5">Submit</button>
-    </form>
-  </validation-observer>
+  <form-panel title="Edit Partner" :actionTransition="true">
+    <template v-slot:action>
+      <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
+    </template>
+    <template v-slot:content>
+      <validation-observer ref="form" class="form-horizontal">
+        <form @submit.prevent="submitForm">
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
+        </form>
+      </validation-observer>
+    </template>
+  </form-panel>
 </template>
 
 <script>
@@ -35,13 +41,17 @@ export default {
       this.parent = this.partner.parent
     },
     submitForm () {
-      this.update({
-        name: this.name,
-        parent: this.parent,
-        client: this.partner.client,
-        id: this.partner.id
-      }).catch(error => {
-        this.error = error
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.update({
+            name: this.name,
+            parent: this.parent,
+            client: this.partner.client,
+            id: this.partner.id
+          }).catch(error => {
+            this.error = error
+          })
+        }
       })
     }
   },
@@ -51,7 +61,14 @@ export default {
   computed: {
     ...mapGetters({
       siblings: 'getPartnerSiblings'
-    })
+    }),
+    unsavedChanges () {
+      if (this.name) {
+        return this.name !== this.partner.name || this.parent !== this.partner.parent
+      } else {
+        return false
+      }
+    }
   }
 }
 </script>
