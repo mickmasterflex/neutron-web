@@ -40,13 +40,17 @@ export default {
       update: 'updateCampaign'
     }),
     submitForm () {
-      this.update({
-        id: this.campaign.id,
-        name: this.name,
-        contract: this.campaign.contract,
-        code: this.campaign_code
-      }).catch(error => {
-        this.error = error
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.update({
+            id: this.campaign.id,
+            name: this.name,
+            contract: this.campaign.contract,
+            code: this.campaign_code
+          }).catch(error => {
+            this.error = error
+          })
+        }
       })
     }
   },
