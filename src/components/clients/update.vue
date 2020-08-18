@@ -28,7 +28,7 @@ export default {
   },
   watch: {
     client: function () {
-      this.name = this.client.name
+      this.setClient()
     }
   },
   computed: {
@@ -42,9 +42,10 @@ export default {
   },
   mixins: [setResponseErrors],
   methods: {
-    ...mapActions({
-      update: 'updateClient'
-    }),
+    ...mapActions({ update: 'updateClient' }),
+    setClient () {
+      this.name = this.client.name
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -58,6 +59,9 @@ export default {
         }
       })
     }
+  },
+  created () {
+    this.setClient()
   }
 }
 </script>
