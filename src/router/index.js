@@ -179,9 +179,9 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        path: '/relationships/clients/:slug/contracts/',
+        path: 'contracts/',
         name: 'ClientContracts',
-        component: () => import('@/views/relationships/clients/client/contracts'),
+        component: () => import('@/views/relationships/clients/client/contracts.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
