@@ -5,7 +5,7 @@ import { successfulToast, failedToast } from '@/mixins/toastMessages'
 const development = process.env.NODE_ENV !== 'production'
 
 const axios = Axios.create({
-  baseURL: development ? 'http://127.0.0.1:8000/api' : 'https://neutron.neutroninteractive.com/api'
+  baseURL: development ? 'http://127.0.0.1:8000/api/' : 'http://10.20.21.142:3010/api/'
 })
 
 axios.interceptors.response.use(response => {
