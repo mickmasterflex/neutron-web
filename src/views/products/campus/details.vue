@@ -1,10 +1,7 @@
 <template>
   <div>
-    <h3 class="h3 mt-5 mb-2">Edit Campus</h3>
     <update-campus :campus="campus"></update-campus>
-
-    <h3 class="h3 mt-5 mb-2">Delete Campus</h3>
-    <delete-campus :campus="campus"></delete-campus>
+    <delete-campus :campus="campus" class="mt-4"></delete-campus>
   </div>
 </template>
 
