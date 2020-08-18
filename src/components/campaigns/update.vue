@@ -1,11 +1,17 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }" ref="form">
-    <form @submit.prevent="handleSubmit(submitForm)">
-      <v-text-field v-model="name" rules="required" field_id="name" field_label="Campaign Name"></v-text-field>
-      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="code" field_label="Campaign Code"></v-text-field>
-      <button type="submit" class="btn btn-green mt-5">Submit</button>
-    </form>
-  </validation-observer>
+  <form-panel title="Edit Campaign" :actionTransition="true">
+    <template v-slot:action>
+      <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
+    </template>
+    <template v-slot:content>
+      <validation-observer ref="form" class="form-horizontal">
+        <form @submit.prevent="submitForm">
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="code" field_label="Code"></v-text-field>
+        </form>
+      </validation-observer>
+    </template>
+  </form-panel>
 </template>
 
 <script>
@@ -42,6 +48,15 @@ export default {
       }).catch(error => {
         this.error = error
       })
+    }
+  },
+  computed: {
+    unsavedChanges () {
+      if (this.name) {
+        return this.name !== this.campaign.name || this.campaign_code !== this.campaign.code
+      } else {
+        return false
+      }
     }
   }
 }
