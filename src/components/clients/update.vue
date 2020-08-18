@@ -43,7 +43,7 @@ export default {
       })
     }
   },
-  create () {
+  created () {
     this.setClient()
   }
 }
