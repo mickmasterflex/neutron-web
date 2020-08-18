@@ -31,14 +31,6 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     slug: String,
-    partners: {
-      type: Array,
-      default: function () { return [] }
-    },
-    buyers: {
-      type: Array,
-      default: function () { return [] }
-    },
     contentTab: {
       type: String,
       default: 'details'
@@ -46,8 +38,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      client: 'getCurrentClient'
-    })
+      client: 'getCurrentClient',
+      getPartnersByClient: 'getPartnersByClient',
+      getBuyersByClient: 'getBuyersByClient'
+    }),
+    partners: function () {
+      return this.getPartnersByClient(this.client.id)
+    },
+    buyers: function () {
+      return this.getBuyersByClient(this.client.id)
+    }
   },
   methods: {
     ...mapActions({
