@@ -1,33 +1,30 @@
 <template>
-  <client-layout contentTab="contracts" :id="id" :buyers="buyers" :partners="partners">
-    <template v-slot:content>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Buyer Contracts</h2>
-        </template>
-        <template v-slot:right>
-          <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Buyer</button>
-        </template>
-      </action-heading>
-      <buyer-list :contracts="buyers"></buyer-list>
-      <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
+  <div>
+    <action-heading>
+      <template v-slot:left>
+        <h2 class="h3">Buyer Contracts</h2>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Buyer</button>
+      </template>
+    </action-heading>
+    <buyer-list :contracts="buyers" :client="$route.params.slug"></buyer-list>
+    <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
 
-      <action-heading class="mt-5">
-        <template v-slot:left>
-          <h2 class="h3">Partner Contracts</h2>
-        </template>
-        <template v-slot:right>
-          <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Partner</button>
-        </template>
-      </action-heading>
-      <partner-list :contracts="partners"></partner-list>
-      <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
-    </template>
-  </client-layout>
-</template>
+    <action-heading class="mt-5">
+      <template v-slot:left>
+        <h2 class="h3">Partner Contracts</h2>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Partner</button>
+      </template>
+    </action-heading>
+    <partner-list :contracts="partners" :client="$route.params.slug"></partner-list>
+    <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
+  </div>
+  </template>
 
 <script>
-import clientLayout from '@/views/relationships/clients/client/layout'
 import partnerList from '@/components/partners/list'
 import buyerList from '@/components/buyers/list'
 import createPartner from '@/components/partners/create'
@@ -35,13 +32,7 @@ import createBuyer from '@/components/buyers/create'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  props: {
-    id: {
-      type: Number
-    }
-  },
   components: {
-    'client-layout': clientLayout,
     'partner-list': partnerList,
     'buyer-list': buyerList,
     'create-partner-contract': createPartner,
@@ -54,10 +45,10 @@ export default {
       getBuyersByClient: 'getBuyersByClient'
     }),
     partners: function () {
-      return this.getPartnersByClient(this.id)
+      return this.getPartnersByClient(this.client.id)
     },
     buyers: function () {
-      return this.getBuyersByClient(this.id)
+      return this.getBuyersByClient(this.client.id)
     }
   },
   methods: {
