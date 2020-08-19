@@ -80,7 +80,7 @@ export default {
           this.update({
             name: this.name,
             short_description: this.short_description,
-            vertical: 'education',
+            vertical: this.campus.vertical,
             is_online: this.is_online,
             address1: this.address1,
             address2: this.address2,
@@ -103,7 +103,7 @@ export default {
   computed: {
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.campus.name || this.short_description !== this.campus.short_description || this.vertical !== this.campus.vertical || this.is_online !== this.campus.is_online || this.address1 !== this.campus.address1 || this.address2 !== this.campus.address2 || this.city !== this.campus.city || this.state !== this.campus.state || this.postal_code !== this.campus.postal_code || this.phone_type !== this.campus.phone_type || this.phone_number !== this.campus.phone_number || this.phone_extension !== this.campus.phone_extension || this.description !== this.campus.description || this.brand !== this.campus.brand
+        return this.name !== this.campus.name || this.short_description !== this.campus.short_description || this.is_online !== this.campus.is_online || this.address1 !== this.campus.address1 || this.address2 !== this.campus.address2 || this.city !== this.campus.city || this.state !== this.campus.state || this.postal_code !== this.campus.postal_code || this.phone_type !== this.campus.phone_type || this.phone_number !== this.campus.phone_number || this.phone_extension !== this.campus.phone_extension || this.description !== this.campus.description || this.brand !== this.campus.brand
       } else {
         return false
       }
