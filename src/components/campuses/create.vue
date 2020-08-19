@@ -6,7 +6,6 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Campus Name"></v-text-field>
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
-          <v-select-field v-model="vertical" :options="verticalOptions" rules="required" field_id="vertical" field_label="Vertical"></v-select-field>
           <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
@@ -36,11 +35,7 @@ export default {
     return {
       name: '',
       short_description: '',
-      vertical: '',
       is_online: '',
-      verticalOptions: {
-        education: { name: 'education', id: 'education' }
-      },
       address1: '',
       address2: '',
       city: '',
@@ -80,7 +75,6 @@ export default {
     close () {
       this.name = ''
       this.short_description = ''
-      this.vertical = ''
       this.is_online = ''
       this.address1 = ''
       this.address2 = ''
@@ -107,7 +101,7 @@ export default {
           this.create({
             name: this.name,
             short_description: this.short_description,
-            vertical: this.vertical,
+            vertical: 'education',
             is_online: this.is_online,
             address1: this.address1,
             address2: this.address2,
