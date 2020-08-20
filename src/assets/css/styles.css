@@ -240,6 +240,9 @@
     border-spacing: 0 2px;
 }
 
+.table-white td { background: white; }
+.table-shadow td { @apply shadow; }
+
 .table > .tbody:before {
     content: '';
     display: block;
