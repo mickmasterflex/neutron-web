@@ -12,6 +12,7 @@ import forms from '@/store/modules/forms'
 import modals from './modules/modals'
 import offers from './modules/offers'
 import partners from './modules/partners'
+import pricingTiers from './modules/pricing-tiers'
 import products from './modules/products'
 import users from './modules/users'
 import toast from '@/store/modules/toast'
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     modals,
     offers,
     partners,
+    pricingTiers,
     products,
     users,
     toast
