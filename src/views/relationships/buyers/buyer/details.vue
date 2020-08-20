@@ -1,10 +1,7 @@
 <template>
   <div>
-      <h3 class="h3 mb-2">Update Buyer Contract</h3>
-      <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
-
-      <h3 class="h3 mt-5 mb-2">Delete Buyer Contract</h3>
-      <delete-buyer-contract :client="$route.params.client" :id="buyer.id"></delete-buyer-contract>
+    <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
+    <delete-buyer-contract :client="$route.params.client" :id="buyer.id" class="mt-4"></delete-buyer-contract>
   </div>
 </template>
 
