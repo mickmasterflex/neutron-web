@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-row justify-between">
-      <h3 class="h3">Campaigns List</h3>
-      <button class="btn btn-green" @click="showCreateCampaignModal()">Create Campaign</button>
-    </div>
+    <action-heading>
+      <template v-slot:left>
+        <h3 class="h3">Campaigns List</h3>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateCampaignModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campaign</button>
+      </template>
+    </action-heading>
     <campaign-list :campaigns="campaigns" :client="$route.params.client"></campaign-list>
     <create-campaign :partner="partner.id"></create-campaign>
   </div>

@@ -1,15 +1,15 @@
 <template>
   <div>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Contract Fields</h2>
-        </template>
-        <template v-slot:right>
-          <create-field></create-field>
-        </template>
-      </action-heading>
-      <list-fields></list-fields>
-      <component :is="updateComponent" :field="currentField"></component>
+    <action-heading>
+      <template v-slot:left>
+        <h2 class="h3">Contract Fields</h2>
+      </template>
+      <template v-slot:right>
+        <create-field></create-field>
+      </template>
+    </action-heading>
+    <list-fields></list-fields>
+    <component :is="updateComponent" :field="currentField"></component>
   </div>
 </template>
 
