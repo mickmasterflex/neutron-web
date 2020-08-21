@@ -1,12 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <div class="hud">
-        <h1 class="h1 text-white">{{buyer.name}}</h1>
-        <div class="hud--stat-cards">
-          <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
-          <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
-        </div>
+      <h1 class="h1 text-white">{{buyer.name}}</h1>
+      <div class="hud--stat-cards">
+        <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
+        <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </template>
     <template v-slot:contentTabs>

@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="px-8 pt-8">
-      <slot name="hud"></slot>
+      <div class="hud">
+        <slot name="hud"></slot>
+      </div>
       <slot name="contentTabs"></slot>
     </div>
     <div :class="`px-8 pt-5 ${contentTabsBorder}`">

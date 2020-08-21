@@ -1,11 +1,9 @@
 <template>
   <content-layout v-if="educationProduct">
     <template v-slot:hud>
-      <div class="hud">
-        <h1 class="h1 text-white">{{educationProduct.name}}</h1>
-        <div class="hud--stat-cards">
-          <stat-card :data="educationProduct.id" :title="`EducationProducts`" :color="`teal`"></stat-card>
-        </div>
+      <h1 class="h1 text-white">{{educationProduct.name}}</h1>
+      <div class="hud--stat-cards">
+        <stat-card :data="educationProduct.id" :title="`EducationProducts`" :color="`teal`"></stat-card>
       </div>
     </template>
     <template v-slot:content>
