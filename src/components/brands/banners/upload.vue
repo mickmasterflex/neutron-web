@@ -1,13 +1,17 @@
 <template>
-  <div class="well well-light">
-    <validation-observer v-slot="{ handleSubmit }" ref="form">
-      <form @submit.prevent="handleSubmit(uploadFile)" class="form-horizontal">
-        <file-field @input="fileSelected($event)" rules="image" field_id="image" field_label="Upload a Banner"></file-field>
-        <text-field v-model="alt" field_id="alt" field_label="Alt Text"></text-field>
-        <button class="btn btn-green" :disabled="!image">Upload</button>
-      </form>
-    </validation-observer>
-  </div>
+  <panel-template title="Upload a Banner" :actionTransition="true">
+    <template v-slot:action>
+      <button v-show="image" @click="uploadFile()" class="btn btn-green"><font-awesome-icon icon="upload"></font-awesome-icon> Upload</button>
+    </template>
+    <template v-slot:content>
+      <validation-observer v-slot="{ handleSubmit }" ref="form">
+        <form @submit.prevent="handleSubmit(uploadFile)" class="form-horizontal">
+          <file-field @input="fileSelected($event)" rules="image" field_id="image" field_label="Banner"></file-field>
+          <text-field v-model="alt" field_id="alt" field_label="Alt Text"></text-field>
+        </form>
+      </validation-observer>
+    </template>
+  </panel-template>
 </template>
 
 <script>
