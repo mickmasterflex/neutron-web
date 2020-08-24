@@ -1,9 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <div class="hud">
-        <h1 class="h1 text-white">{{brand.name}}</h1>
-      </div>
+      <h1 class="h1 text-white">{{brand.name}}</h1>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">

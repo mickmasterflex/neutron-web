@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-row justify-between mt-4">
-      <h3 class="h3">Education Products List</h3>
-      <button class="btn btn-green" @click="showCreateEducationProductModal()">Create Education Product</button>
-    </div>
+    <action-heading>
+      <template v-slot:left>
+        <h3 class="h3">Education Products List</h3>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateEducationProductModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Education Product</button>
+      </template>
+    </action-heading>
     <education-product-list :educationProducts="educationProducts" class="mt-5"></education-product-list>
     <create-education-product v-if="campus" :campusId="campus.id" :educationProducts="educationProducts"></create-education-product>
   </div>

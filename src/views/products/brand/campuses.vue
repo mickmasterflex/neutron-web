@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-row justify-between">
-      <h3 class="h3">Campuses List</h3>
-      <button class="btn btn-green" @click="showCreateCampusModal()">Create Campus</button>
-    </div>
+    <action-heading>
+      <template v-slot:left>
+        <h3 class="h3">Campuses List</h3>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateCampusModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campus</button>
+      </template>
+    </action-heading>
     <campus-list :campuses="campuses"></campus-list>
     <create-campus :brandId="brand.id"></create-campus>
   </div>
