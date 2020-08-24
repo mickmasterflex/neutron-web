@@ -1,5 +1,6 @@
 import axios from '@/axios'
 import brandLogos from '@/store/modules/brands/logos'
+import brandBanners from '@/store/modules/brands/banners'
 
 const state = {
   brands: [],
@@ -66,7 +67,8 @@ const mutations = {
 }
 
 const modules = {
-  brandLogos
+  brandLogos,
+  brandBanners
 }
 
 export default {
