@@ -4,13 +4,17 @@
       <delete-banner></delete-banner>
     </template>
     <template v-slot:content>
-      <div :key="banner.id" v-for="banner in brandBanners">
-        <img :src="banner.image" :alt="banner.alt"/>
-        <p>Version: {{banner.scale_name}}</p>
-        <p>Alt: {{banner.alt}}</p>
-        <p>Height: {{banner.height}}</p>
-        <p>Width: {{banner.width}}</p>
-        <p>Size: {{banner.size}} bytes</p>
+      <div :key="banner.id" v-for="banner in brandBanners" class="image-meta-li">
+        <div class="img-container">
+          <img :src="banner.image" :alt="banner.alt"/>
+        </div>
+        <ul class="img-meta">
+          <li class="h4 capitalize">{{banner.scale_name}}</li>
+          <li>Alt: {{banner.alt}}</li>
+          <li>Height: {{banner.height}}</li>
+          <li>Width: {{banner.width}}</li>
+          <li>Size: {{banner.size}} bytes</li>
+        </ul>
       </div>
     </template>
   </panel-template>
