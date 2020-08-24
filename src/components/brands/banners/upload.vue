@@ -4,8 +4,8 @@
       <button v-show="image" @click="uploadFile()" class="btn btn-green"><font-awesome-icon icon="upload"></font-awesome-icon> Upload</button>
     </template>
     <template v-slot:content>
-      <validation-observer v-slot="{ handleSubmit }" ref="form">
-        <form @submit.prevent="handleSubmit(uploadFile)" class="form-horizontal">
+      <validation-observer ref="form">
+        <form @submit.prevent="uploadFile()" class="form-horizontal">
           <file-field @input="fileSelected($event)" rules="image" field_id="image" field_label="Banner"></file-field>
           <text-field v-model="alt" field_id="alt" field_label="Alt Text"></text-field>
         </form>
