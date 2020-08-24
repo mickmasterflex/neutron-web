@@ -366,6 +366,20 @@
 
 
 /* ------------------------------------------------
+    Image List Item
+--------------------------------------------------- */
+
+.image-meta-li { @apply card mb-1 p-2 flex flex-col  }
+.image-meta-li .img-container { @apply p-2 border border-gray-200 rounded-sm flex flex-row items-center justify-center }
+.image-meta-li .img-meta { @apply ml-2 mt-2 }
+
+@media screen and (min-width: 768px) {
+    .image-meta-li { @apply flex-row items-center }
+    .image-meta-li .img-container { @apply w-1/2 }
+    .image-meta-li .img-meta { @apply ml-5 mt-0 w-1/2 }
+}
+
+/* ------------------------------------------------
     Tailwind Utilities
 --------------------------------------------------- */
 
