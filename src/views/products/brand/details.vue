@@ -37,9 +37,13 @@ export default {
     'delete-brand': deleteBrand,
     'update-brand': updateBrand
   },
-  created () {
-    this.fetchLogos(this.brand.id)
-    this.fetchBanners(this.brand.id)
+  watch: {
+    brand () {
+      if (this.brand) {
+        this.fetchLogos(this.brand.id)
+        this.fetchBanners(this.brand.id)
+      }
+    }
   },
   methods: {
     ...mapActions({
