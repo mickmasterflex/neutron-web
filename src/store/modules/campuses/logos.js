@@ -10,7 +10,7 @@ const getters = {
 
 const actions = {
   async fetchCurrentCampusLogos ({ commit }, campus) {
-    await axios.get(`/campus-logos/campus${campus}/`)
+    await axios.get(`/campus-logos/campus/${campus}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPUS_LOGOS', response.data)
       })

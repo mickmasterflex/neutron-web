@@ -17,20 +17,24 @@ import uploadLogo from '@/components/campuses/logos/upload'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  components: {
-    'delete-campus': deleteCampus,
-    'update-campus': updateCampus,
-    'campus-logos': campusLogos,
-    'upload-logo': uploadLogo
-  },
   computed: {
     ...mapGetters({
       campus: 'getCurrentCampus',
       campusLogos: 'getCurrentCampusLogos'
     })
   },
-  created () {
-    this.fetchLogos(this.campus.id)
+  components: {
+    'delete-campus': deleteCampus,
+    'update-campus': updateCampus,
+    'campus-logos': campusLogos,
+    'upload-logo': uploadLogo
+  },
+  watch: {
+    campus () {
+      if (this.campus) {
+        this.fetchLogos(this.campus.id)
+      }
+    }
   },
   methods: {
     ...mapActions({
