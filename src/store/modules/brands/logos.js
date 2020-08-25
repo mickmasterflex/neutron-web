@@ -10,7 +10,7 @@ const getters = {
 
 const actions = {
   async fetchCurrentBrandLogos ({ commit }, brand) {
-    await axios.get(`/brand-logos/?brand=${brand}/`)
+    await axios.get(`/brand-logos/brand=${brand}/`)
       .then(response => {
         commit('SET_CURRENT_BRAND_LOGOS', response.data)
       })
