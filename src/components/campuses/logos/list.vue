@@ -13,7 +13,7 @@
           <li>Alt: {{logo.alt}}</li>
           <li>Height: {{logo.height}}</li>
           <li>Width: {{logo.width}}</li>
-          <li>Size: {{logo.size}} bytes</li>
+          <li>Size: {{logo.total_size}} bytes</li>
         </ul>
       </div>
     </template>
