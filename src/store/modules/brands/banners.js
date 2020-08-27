@@ -18,21 +18,21 @@ const actions = {
   async uploadBrandBanner ({ commit }, banner) {
     await axios.post('/brand-banners/', banner)
       .then(response => {
-        commit('ADD_BANNERS', response.data)
+        commit('ADD_BRAND_BANNERS', response.data)
       })
   },
   async deleteBrandBanner ({ commit }, id) {
     await axios.delete(`/brand-banners/${id}/`)
       .then(() => {
-        commit('REMOVE_BANNER', id)
+        commit('REMOVE_BRAND_BANNER', id)
       })
   }
 }
 
 const mutations = {
   SET_CURRENT_BRAND_BANNERS: (state, banners) => (state.current_brand_banners = banners),
-  ADD_BANNERS: (state, banners) => (state.current_brand_banners.unshift(banners)),
-  REMOVE_BANNER: (state, id) => (state.current_brand_banners = state.current_brand_banners.filter(banner => banner.id !== id))
+  ADD_BRAND_BANNERS: (state, banners) => (state.current_brand_banners.unshift(banners)),
+  REMOVE_BRAND_BANNER: (state, id) => (state.current_brand_banners = state.current_brand_banners.filter(banner => banner.id !== id))
 }
 
 export default {

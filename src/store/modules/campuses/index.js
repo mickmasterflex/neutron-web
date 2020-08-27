@@ -1,5 +1,6 @@
 import axios from '@/axios'
 import campusLogos from '@/store/modules/campuses/logos'
+import campusBanners from '@/store/modules/campuses/banners'
 
 const state = {
   campuses: [],
@@ -65,7 +66,8 @@ const mutations = {
 }
 
 const modules = {
-  campusLogos
+  campusLogos,
+  campusBanners
 }
 export default {
   state,
