@@ -13,7 +13,7 @@
           <li>Alt: {{banner.alt}}</li>
           <li>Height: {{banner.height}}</li>
           <li>Width: {{banner.width}}</li>
-          <li>Size: {{banner.size}} bytes</li>
+          <li>Size: {{banner.total_size}} bytes</li>
         </ul>
       </div>
     </template>
