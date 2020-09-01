@@ -10,6 +10,7 @@ import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
+import VCalendar from 'v-calendar'
 import 'animate.css'
 import '@/assets/css/styles.css'
 
@@ -107,6 +108,11 @@ configure({
 
 library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+/* -----------------------------------------------
+  V-Calendar
+-------------------------------------------------- */
+Vue.use(VCalendar, {})
 
 /* -----------------------------------------------
   Root Vue Instance
