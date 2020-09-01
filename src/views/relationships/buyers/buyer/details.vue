@@ -1,7 +1,11 @@
 <template>
   <div>
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
-    <delete-buyer-contract :client="$route.params.client" :id="buyer.id" class="mt-4"></delete-buyer-contract>
+    <panel-template title="Danger Zone">
+      <template v-slot:content>
+        <delete-buyer-contract :client="$route.params.client" :id="buyer.id"></delete-buyer-contract>
+      </template>
+    </panel-template>
   </div>
 </template>
 
