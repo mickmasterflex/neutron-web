@@ -3,7 +3,7 @@
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
     <panel-template title="Daily Lead Caps">
       <template v-slot:content>
-        <daily-lead-caps></daily-lead-caps>
+        <day-caps v-if="buyer.caps" :caps="day_caps"></day-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -15,21 +15,40 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import dailyCaps from '@/components/caps/daily'
-import { mapGetters } from 'vuex'
+import dayCaps from '@/components/caps/day'
 
 export default {
   computed: {
     ...mapGetters({
       buyer: 'getCurrentBuyer'
-    })
+    }),
+    day_caps () {
+      if (this.buyer.caps) {
+        return this.buyer.caps.day_caps
+      } else {
+        return []
+      }
+    }
   },
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
-    'daily-lead-caps': dailyCaps
+    'day-caps': dayCaps
+  // },
+  // methods: {
+  //   ...mapActions({
+  //     fetchCaps: 'fetchCaps'
+  //   })
+  // },
+  // watch: {
+  //   buyer () {
+  //     if (this.buyer.caps) {
+  //       this.fetchCaps(this.buyer.cap)
+  //     }
+  //   }
   }
 }
 </script>
