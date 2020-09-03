@@ -1,4 +1,3 @@
-import axios from '@/axios'
 import dayCaps from '@/store/modules/caps/day'
 
 const modules = {
@@ -10,20 +9,13 @@ const state = {
 }
 
 const getters = {
-  getCurrentCaps: state => state.current_day_caps
+  getCurrentCaps: state => state.current_caps
 }
 
-const actions = {
-  async fetchCaps ({ commit }, id) {
-    await axios.get(`/caps/${id}`)
-      .then(response => {
-        commit('SET_CAPS', response.data)
-      })
-  }
-}
+const actions = {}
 
 const mutations = {
-  SET_CAPS: (state, caps) => (state.current_caps = caps)
+  SET_CURRENT_CAPS: (state, caps) => (state.current_caps = caps)
 }
 
 export default {

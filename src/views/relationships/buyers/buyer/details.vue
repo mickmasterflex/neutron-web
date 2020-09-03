@@ -1,9 +1,10 @@
 <template>
   <div>
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
-    <panel-template title="Daily Lead Caps">
+    <panel-template title="Daily Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <day-caps v-if="buyer.caps" :caps="day_caps"></day-caps>
+        <day-cap-create></day-cap-create>
+        <day-caps></day-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -15,40 +16,38 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import dayCaps from '@/components/caps/day'
+import dayCapCreate from '@/components/caps/day/create'
 
 export default {
   computed: {
     ...mapGetters({
       buyer: 'getCurrentBuyer'
-    }),
-    day_caps () {
-      if (this.buyer.caps) {
-        return this.buyer.caps.day_caps
-      } else {
-        return []
-      }
-    }
+    })
   },
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
-    'day-caps': dayCaps
-  // },
-  // methods: {
-  //   ...mapActions({
-  //     fetchCaps: 'fetchCaps'
-  //   })
-  // },
-  // watch: {
-  //   buyer () {
-  //     if (this.buyer.caps) {
-  //       this.fetchCaps(this.buyer.cap)
-  //     }
-  //   }
+    'day-caps': dayCaps,
+    'day-cap-create': dayCapCreate
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentDayCaps: 'SET_CURRENT_DAY_CAPS',
+      setCurrentCaps: 'SET_CURRENT_CAPS'
+    })
+  },
+  watch: {
+    buyer () {
+      if (this.buyer.caps) {
+        // Potentially only setCurrentCaps?
+        this.setCurrentCaps(this.buyer.caps)
+        this.setCurrentDayCaps(this.buyer.caps.day_caps)
+      }
+    }
   }
 }
 </script>
