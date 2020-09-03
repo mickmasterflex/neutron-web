@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_CAP_MODAL'
+      closeModal: 'CLOSE_CREATE_DAY_CAP_MODAL'
     }),
     ...mapActions({
       create: 'createDayCap'
@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateCapModal',
+      showModal: 'getShowCreateDayCapModal',
       day: 'getSelectedCapDay',
       caps: 'getCurrentCaps'
     })

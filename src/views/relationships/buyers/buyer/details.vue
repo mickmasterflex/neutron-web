@@ -4,6 +4,7 @@
     <panel-template title="Daily Lead Caps" contentClass="relative">
       <template v-slot:content>
         <day-cap-create></day-cap-create>
+        <day-cap-update></day-cap-update>
         <day-caps></day-caps>
       </template>
     </panel-template>
@@ -21,6 +22,7 @@ import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import dayCaps from '@/components/caps/day'
 import dayCapCreate from '@/components/caps/day/create'
+import dayCapUpdate from '@/components/caps/day/update'
 
 export default {
   computed: {
@@ -32,7 +34,8 @@ export default {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
     'day-caps': dayCaps,
-    'day-cap-create': dayCapCreate
+    'day-cap-create': dayCapCreate,
+    'day-cap-update': dayCapUpdate
   },
   methods: {
     ...mapMutations({
