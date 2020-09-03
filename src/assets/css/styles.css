@@ -163,6 +163,12 @@
     font-size: .75rem;
 }
 
+.btn-circle.btn-md {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+}
+
 /* Standard Buttons */
 
 .btn-blue                            { @apply bg-blue-500 border-blue-600; }
@@ -378,6 +384,27 @@
     .image-meta-li .img-container { @apply w-1/2 }
     .image-meta-li .img-meta { @apply ml-5 mt-0 w-1/2 }
 }
+
+/* ------------------------------------------------
+    Vendor
+--------------------------------------------------- */
+
+/* V-Calendar */
+.vc-container { @apply font-sans }
+
+.full-calendar {
+    max-width: 943px;
+}
+
+.full-calendar--day {
+    height: 135px;
+    width: 125px;
+}
+
+.full-calendar--day-title {
+    height: 40px;
+}
+
 
 /* ------------------------------------------------
     Tailwind Utilities

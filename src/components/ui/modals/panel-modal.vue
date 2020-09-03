@@ -3,7 +3,7 @@
     :allowScroll="true"
     modalClass="modal-xs"
     modalPosition="absolute"
-    modalBackdropColor="bg-gray-200"
+    modalBackdropColor="bg-gray-100"
     class="rounded-b-xl"
     :show="show" @close="close">
     <template v-slot:header>

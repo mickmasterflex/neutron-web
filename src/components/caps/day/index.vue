@@ -1,17 +1,23 @@
 <template>
-  <v-calendar ref="calendar" disabled="true" :attributes="attributes" is-expanded>
-    <template v-slot:day-content="slotProps">
-      <div class="border-2 border-gray-200">
-        {{ slotProps.day.day }}
-        <span v-if="hasCap(slotProps.day.attributes)" class="text-link cursor-pointer" @click="updateCap(slotProps.day)">
-            {{slotProps.day.attributes[0].customData.limit}}
-        </span>
-        <button v-else class="btn btn-green btn-circle" @click="addCap(slotProps.day)">
-          <font-awesome-icon icon="plus"></font-awesome-icon>
-        </button>
-      </div>
-    </template>
-  </v-calendar>
+  <div class="full-calendar mx-auto block">
+    <v-calendar class="border-0 bg-gray-100" ref="calendar" :attributes="attributes" is-expanded>
+      <template v-slot:day-content="slotProps">
+        <div class="card m-1 p-1 border-2 border-gray-300 full-calendar--day flex flex-col items-stretch">
+          <span class="full-calendar--day-title flex flex-row items-center border-b px-1">
+            <p class="font-bold">{{ slotProps.day.day }}</p>
+          </span>
+          <span class="flex flex-row items-center justify-center flex-grow pb-2">
+            <span v-if="hasCap(slotProps.day.attributes)"
+                  class="text-link h2 cursor-pointer"
+                  @click="updateCap(slotProps.day)">{{Number(slotProps.day.attributes[0].customData.limit).toLocaleString()}}</span>
+            <button v-else
+                    class="btn btn-green btn-md btn-circle"
+                    @click="addCap(slotProps.day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
+          </span>
+        </div>
+      </template>
+    </v-calendar>
+  </div>
 </template>
 
 <script>
