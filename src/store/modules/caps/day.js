@@ -19,8 +19,12 @@ const actions = {
     await axios.post('/day-cap/', cap)
       .then(response => {
         commit('ADD_DAY_CAP', response.data)
-      }).catch(e => {
-        window.console.log(e.data)
+      })
+  },
+  async updateDayCap ({ commit }, cap) {
+    await axios.put(`/day-cap/${cap.id}/`, cap)
+      .then(response => {
+        commit('UPDATE_DAY_CAP', response.data)
       })
   }
 }
@@ -29,6 +33,12 @@ const mutations = {
   SET_CURRENT_DAY_CAPS: (state, caps) => (state.current_day_caps = caps),
   RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = null),
   ADD_DAY_CAP: (state, cap) => state.current_day_caps.unshift(cap),
+  UPDATE_DAY_CAP: (state, updatedCap) => {
+    const index = state.current_day_caps.findIndex(cap => cap.id === updatedCap.id)
+    if (index !== -1) {
+      state.current_day_caps.splice(index, 1, updatedCap)
+    }
+  },
   SET_SELECTED_CAP_DAY: (state, day) => (state.selected_cap_day = day),
   RESET_CURRENT_DAY_CAP_DAY: (state) => (state.selected_cap_day = null),
   SHOW_CREATE_DAY_CAP_MODAL: (state) => (state.show_create_day_cap_modal = true),

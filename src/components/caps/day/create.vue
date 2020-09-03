@@ -11,7 +11,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green" @click="submitForm"><font-awesome-icon icon="plus"></font-awesome-icon> Add Cap</button>
+      <button class="btn btn-green" @click="submitForm"><font-awesome-icon icon="plus"></font-awesome-icon> Create Cap</button>
     </template>
   </panel-modal>
 </template>

@@ -1,14 +1,14 @@
 <template>
   <v-calendar ref="calendar" disabled="true" :attributes="attributes">
     <template v-slot:day-content="slotProps">
-      <div class="border-2 border-gray-200 cursor-pointer">
+      <div class="border-2 border-gray-200">
         {{ slotProps.day.day }}
-        <span v-if="slotProps.day.attributes" class="text-blue-500" @click="updateCap(slotProps.day)">
+        <span v-if="slotProps.day.attributes" class="text-link cursor-pointer" @click="updateCap(slotProps.day)">
           {{slotProps.day.attributes[0].customData.limit}}
         </span>
-        <span v-else class="text-blue-500" @click="addCap(slotProps.day)">
-          +
-        </span>
+        <button v-else class="btn btn-green btn-circle" @click="addCap(slotProps.day)">
+          <font-awesome-icon icon="plus"></font-awesome-icon>
+        </button>
       </div>
     </template>
   </v-calendar>
