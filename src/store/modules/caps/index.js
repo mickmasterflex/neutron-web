@@ -15,7 +15,8 @@ const getters = {
 const actions = {}
 
 const mutations = {
-  SET_CURRENT_CAPS: (state, caps) => (state.current_caps = caps)
+  SET_CURRENT_CAPS: (state, caps) => (state.current_caps = caps),
+  RESET_CURRENT_CAPS: (state) => (state.current_caps = [])
 }
 
 export default {

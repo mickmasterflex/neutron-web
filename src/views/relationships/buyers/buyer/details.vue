@@ -40,17 +40,29 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentDayCaps: 'SET_CURRENT_DAY_CAPS',
-      setCurrentCaps: 'SET_CURRENT_CAPS'
-    })
-  },
-  watch: {
-    buyer () {
+      setCurrentCaps: 'SET_CURRENT_CAPS',
+      resetCurrentDayCaps: 'RESET_CURRENT_DAY_CAPS',
+      resetCurrentCaps: 'RESET_CURRENT_CAPS'
+    }),
+    setCaps () {
       if (this.buyer.caps) {
         // Potentially only setCurrentCaps?
         this.setCurrentCaps(this.buyer.caps)
         this.setCurrentDayCaps(this.buyer.caps.day_caps)
       }
     }
+  },
+  watch: {
+    buyer () {
+      this.setCaps()
+    }
+  },
+  created () {
+    this.setCaps()
+  },
+  destroyed () {
+    this.resetCurrentCaps()
+    this.resetCurrentDayCaps()
   }
 }
 </script>

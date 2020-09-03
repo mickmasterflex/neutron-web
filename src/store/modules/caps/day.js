@@ -49,7 +49,6 @@ const mutations = {
   REMOVE_DAY_CAP: (state, id) => (state.current_day_caps = state.current_day_caps.filter(cap => cap.id !== id)),
   SET_SELECTED_CAP_DAY: (state, day) => (state.selected_cap_day = day),
   RESET_SELECTED_CAP_DAY: (state) => (state.selected_cap_day = null),
-  RESET_CURRENT_DAY_CAP_DAY: (state) => (state.selected_cap_day = null),
   SHOW_CREATE_DAY_CAP_MODAL: (state) => (state.show_create_day_cap_modal = true),
   CLOSE_CREATE_DAY_CAP_MODAL: (state) => (state.show_create_day_cap_modal = false),
   SHOW_UPDATE_DAY_CAP_MODAL: (state) => (state.show_update_day_cap_modal = true),
