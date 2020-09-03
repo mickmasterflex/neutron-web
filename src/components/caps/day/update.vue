@@ -11,7 +11,8 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save Changes</button>
+      <delete-cap :id="id"></delete-cap>
+      <button class="btn btn-green" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save</button>
     </template>
   </panel-modal>
 </template>
@@ -19,16 +20,19 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import panelModal from '@/components/ui/modals/panel-modal'
+import deleteCap from '@/components/caps/day/delete'
 
 export default {
   data () {
     return {
-      limit: ''
+      limit: '',
+      id: null
     }
   },
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_UPDATE_DAY_CAP_MODAL'
+      closeModal: 'CLOSE_UPDATE_DAY_CAP_MODAL',
+      resetSelected: 'RESET_SELECTED_CAP_DAY'
     }),
     ...mapActions({
       update: 'updateDayCap'
@@ -40,10 +44,15 @@ export default {
       }
     },
     close () {
+      this.closeModal()
+      this.resetSelected()
+      setTimeout(function () {
+        this.id = null
+        this.limit = ''
+      })
       this.$nextTick(() => {
         this.$refs.form.reset()
-      })
-      this.closeModal()
+      }, 100)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -63,8 +72,10 @@ export default {
     }
   },
   watch: {
-    day: function () {
-      this.setCap()
+    showModal: function () {
+      if (this.showModal === true && this.day) {
+        this.setCap()
+      }
     }
   },
   computed: {
@@ -75,7 +86,8 @@ export default {
     })
   },
   components: {
-    'panel-modal': panelModal
+    'panel-modal': panelModal,
+    'delete-cap': deleteCap
   }
 }
 </script>

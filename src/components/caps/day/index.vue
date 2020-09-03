@@ -1,10 +1,10 @@
 <template>
-  <v-calendar ref="calendar" disabled="true" :attributes="attributes">
+  <v-calendar ref="calendar" disabled="true" :attributes="attributes" is-expanded>
     <template v-slot:day-content="slotProps">
       <div class="border-2 border-gray-200">
         {{ slotProps.day.day }}
-        <span v-if="slotProps.day.attributes" class="text-link cursor-pointer" @click="updateCap(slotProps.day)">
-          {{slotProps.day.attributes[0].customData.limit}}
+        <span v-if="hasCap(slotProps.day.attributes)" class="text-link cursor-pointer" @click="updateCap(slotProps.day)">
+            {{slotProps.day.attributes[0].customData.limit}}
         </span>
         <button v-else class="btn btn-green btn-circle" @click="addCap(slotProps.day)">
           <font-awesome-icon icon="plus"></font-awesome-icon>
@@ -24,6 +24,11 @@ export default {
       showUpdate: 'SHOW_UPDATE_DAY_CAP_MODAL',
       setSelectedCapDay: 'SET_SELECTED_CAP_DAY'
     }),
+    hasCap (attributes) {
+      if (attributes) {
+        return !!attributes[0]
+      }
+    },
     addCap (day) {
       this.setSelectedCapDay(day)
       this.showCreate()
