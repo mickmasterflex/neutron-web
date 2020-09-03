@@ -45,14 +45,9 @@ export default {
     },
     close () {
       this.closeModal()
-      this.resetSelected()
-      setTimeout(function () {
-        this.id = null
-        this.limit = ''
-      })
       this.$nextTick(() => {
         this.$refs.form.reset()
-      }, 100)
+      })
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -72,7 +67,7 @@ export default {
     }
   },
   watch: {
-    showModal: function () {
+    showModal () {
       if (this.showModal === true && this.day) {
         this.setCap()
       }
@@ -88,6 +83,9 @@ export default {
   components: {
     'panel-modal': panelModal,
     'delete-cap': deleteCap
+  },
+  destroyed () {
+    this.resetSelected()
   }
 }
 </script>

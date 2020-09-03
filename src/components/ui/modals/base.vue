@@ -93,6 +93,7 @@ export default {
 <style scoped>
   .modal-dialog, .modal-alert {
     max-width: 900px;
+    @apply shadow-2xl;
   }
   .modal-padding {
     @apply px-8 py-6
