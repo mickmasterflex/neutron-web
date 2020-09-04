@@ -10,7 +10,7 @@
             <span class="full-calendar--day-title flex flex-row items-center border-b border-gray-200 px-1">
               <p class="font-bold">{{ slotProps.day.day }}</p>
             </span>
-          <span class="flex flex-row items-center justify-center flex-grow pb-2">
+          <span class="flex flex-row items-center justify-center flex-grow lg:pb-2">
               <slot name="day-inner" v-bind:day="slotProps.day"></slot>
           </span>
         </div>
@@ -28,18 +28,41 @@ export default {
 </script>
 
 <style>
-  .full-calendar { max-width: 943px; }
+  .full-calendar { max-width: 600px; }
   .full-calendar .vc-title { @apply text-xl text-gray-900 font-medium pb-2 }
   .full-calendar .in-prev-month,
   .full-calendar .in-next-month { display: none }
   .full-calendar .vc-header { @apply rounded-t-lg bg-white border-b-2 border-gray-200 }
 
   .full-calendar--day {
-    height: 135px;
-    width: 125px;
+    height: 85px;
+    width: 75px;
   }
 
   .full-calendar--day-title {
-    height: 30px;
+    height: 20px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .full-calendar {
+      max-width: 771px;
+    }
+    .full-calendar--day {
+      height: 115px;
+      width: 100px;
+    }
+    .full-calendar--day-title {
+      height: 30px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .full-calendar {
+      max-width: 943px;
+    }
+    .full-calendar--day {
+      height: 135px;
+      width: 125px;
+    }
   }
 </style>
