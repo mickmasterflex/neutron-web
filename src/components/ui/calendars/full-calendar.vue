@@ -42,6 +42,7 @@ export default {
   .full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
   .full-calendar .vc-arrows-container > :first-child { margin-left: 25% }
   .full-calendar .vc-arrows-container > :last-child { margin-right: 25% }
+  .full-calendar .vc-header { @apply mb-4 }
 
   /* Days out of scope of month */
   .full-calendar .in-prev-month > div,
