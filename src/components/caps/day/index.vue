@@ -1,6 +1,6 @@
 <template>
   <div class="full-calendar mx-auto block">
-    <v-calendar class="border-0 bg-gray-100" ref="calendar" :attributes="attributes" title-position="left" is-expanded>
+    <v-calendar class="border-0 bg-gray-100 border-2 rounded-xl border-gray-300" ref="calendar" :attributes="attributes" title-position="left" is-expanded>
       <template v-slot:day-content="slotProps">
         <div class="card m-1 p-2 border border-gray-300 full-calendar--day flex flex-col items-stretch">
           <span class="full-calendar--day-title flex flex-row items-center border-b border-gray-200 px-1">
