@@ -1,10 +1,11 @@
 <template>
   <div class="full-calendar mx-auto block">
     <v-calendar
-      class="bg-gray-200 border-2 rounded-lg border-gray-200"
       :attributes="attributes"
-      title-position="left"
-      is-expanded>
+      is-expanded
+      ref="calendar">
+      <template v-slot:header-left-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-left"></font-awesome-icon></span></template>
+      <template v-slot:header-right-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span></template>
       <template v-slot:day-content="slotProps">
         <div v-if="slotProps.day.inMonth" class="card m-1 p-2 border border-gray-300 full-calendar--day flex flex-col items-stretch">
             <span class="full-calendar--day-title flex flex-row items-center border-b border-gray-200 px-1">
@@ -29,15 +30,25 @@ export default {
 </script>
 
 <style>
-  .full-calendar { max-width: 600px; }
   .full-calendar .vc-container {
     background: none;
     border: none
   }
-  .full-calendar .vc-title { @apply text-xl text-gray-900 font-medium pb-2 }
+
+  /* Heading Typography */
+  .full-calendar .vc-title { @apply text-2xl text-gray-900 font-bold }
+
+  /* Arrow Positioning and Resets */
+  .full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
+  .full-calendar .vc-arrows-container > :first-child { margin-left: 25% }
+  .full-calendar .vc-arrows-container > :last-child { margin-right: 25% }
+
+  /* Days out of scope of month */
   .full-calendar .in-prev-month > div,
   .full-calendar .in-next-month > div { opacity: 1 }
-  .full-calendar .vc-header { @apply rounded-t-lg bg-white border-b-2 border-gray-200 }
+
+  /* Sizing Days and Calendat */
+  .full-calendar { max-width: 600px; }
 
   .full-calendar--day {
     height: 85px;
