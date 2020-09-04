@@ -18,6 +18,7 @@
 
 <script>
 import panelModal from '@/components/ui/modals/panel-modal'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -26,6 +27,7 @@ export default {
       limit: ''
     }
   },
+  mixins: [setResponseErrors],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_DAY_CAP_MODAL'

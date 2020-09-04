@@ -19,6 +19,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { setResponseErrors } from '@/mixins/setResponseErrors'
 import panelModal from '@/components/ui/modals/panel-modal'
 import deleteCap from '@/components/caps/day/delete'
 
@@ -29,6 +30,7 @@ export default {
       id: null
     }
   },
+  mixins: [setResponseErrors],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_UPDATE_DAY_CAP_MODAL',
