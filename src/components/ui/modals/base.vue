@@ -5,7 +5,7 @@
                   leave-active-class="animate__animated animate__slideOutUp animate__fast">
         <div v-show="show" class="modal-dialog bg-white rounded-lg relative mx-auto w-full z-20">
           <div class="modal-padding flex flex-row items-center justify-between">
-            <h3 class="h2">
+            <h3 class="modal-header h2">
               <slot name="header">Modal Header</slot>
             </h3>
             <span @click="close" class="cursor-pointer text-gray-500 transition-colors duration-200 hover:text-red-500 text-4xl font-hairline leading-none px-1">&times;</span>
@@ -112,5 +112,8 @@ export default {
   }
   .modal-xs .modal-padding {
     @apply px-4 py-3
+  }
+  .modal-xs .modal-header {
+    @apply text-2xl
   }
 </style>

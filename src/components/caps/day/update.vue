@@ -1,18 +1,18 @@
 <template>
   <panel-modal :show="showModal" @close="close">
     <template v-slot:header>
-      <span v-if="day !== null">{{day.day}}</span>
+      <span v-if="day !== null">{{day.month}}/{{day.day}}/{{day.year}}</span>
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="limit" rules="required|integer" field_id="limit" field_label="Cap"></v-text-field>
+          <v-text-field v-model="limit" rules="required|integer" field_id="limit" field_label="Day Cap"></v-text-field>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
       <delete-cap :id="id"></delete-cap>
-      <button class="btn btn-green" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save</button>
+      <button class="btn btn-green flex-grow" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save</button>
     </template>
   </panel-modal>
 </template>
