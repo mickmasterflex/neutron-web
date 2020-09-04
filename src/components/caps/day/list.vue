@@ -2,7 +2,7 @@
   <full-calendar :attributes="attributes">
     <template v-slot:day-inner="slotProps">
       <span v-if="hasCap(slotProps.day.attributes)"
-            class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer"
+            class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light"
             @click="updateCap(slotProps.day)">{{Number(slotProps.day.attributes[0].customData.limit).toLocaleString()}}</span>
       <button v-else
               class="btn btn-green btn-md btn-circle"
