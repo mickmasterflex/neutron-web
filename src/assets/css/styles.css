@@ -392,21 +392,6 @@
 /* V-Calendar */
 .vc-container { @apply font-sans }
 
-.full-calendar { max-width: 943px; }
-.full-calendar .vc-title { @apply text-xl text-gray-900 font-medium pb-2 }
-.full-calendar .in-prev-month,
-.full-calendar .in-next-month { display: none }
-.full-calendar .vc-header { @apply rounded-t-lg bg-white border-b-2 border-gray-200 }
-
-.full-calendar--day {
-    height: 135px;
-    width: 125px;
-}
-
-.full-calendar--day-title {
-    height: 30px;
-}
-
 
 /* ------------------------------------------------
     Tailwind Utilities

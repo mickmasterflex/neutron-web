@@ -20,7 +20,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import dayCaps from '@/components/caps/day'
+import dayCaps from '@/components/caps/day/list'
 import dayCapCreate from '@/components/caps/day/create'
 import dayCapUpdate from '@/components/caps/day/update'
 
