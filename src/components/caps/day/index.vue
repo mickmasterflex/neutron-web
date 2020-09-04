@@ -2,8 +2,8 @@
   <div class="full-calendar mx-auto block">
     <v-calendar class="border-0 bg-gray-100" ref="calendar" :attributes="attributes" is-expanded>
       <template v-slot:day-content="slotProps">
-        <div class="card m-1 p-1 border-2 border-gray-300 full-calendar--day flex flex-col items-stretch">
-          <span class="full-calendar--day-title flex flex-row items-center border-b px-1">
+        <div class="card m-1 p-2 border border-gray-300 full-calendar--day flex flex-col items-stretch">
+          <span class="full-calendar--day-title flex flex-row items-center border-b border-gray-200 px-1">
             <p class="font-bold">{{ slotProps.day.day }}</p>
           </span>
           <span class="flex flex-row items-center justify-center flex-grow pb-2">

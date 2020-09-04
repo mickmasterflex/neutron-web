@@ -5,7 +5,7 @@
       <template v-slot:content>
         <day-cap-create></day-cap-create>
         <day-cap-update></day-cap-update>
-        <day-caps></day-caps>
+        <day-caps class="mt-3"></day-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
