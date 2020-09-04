@@ -394,6 +394,9 @@
 
 .full-calendar { max-width: 943px; }
 .full-calendar .vc-title { @apply text-2xl font-bold pb-3 }
+.full-calendar .in-prev-month,
+.full-calendar .in-next-month { display: none }
+.full-calendar .vc-title-layout { @apply border-b-2 border-gray-300 mb-3 }
 
 .full-calendar--day {
     height: 135px;
