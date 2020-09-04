@@ -51,6 +51,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -86,7 +87,7 @@ export default {
       caps: 'getCurrentCaps'
     }),
     unsavedChanges () {
-      if (this.limit) {
+      if (this.limit && this.day.attributes) {
         return this.limit !== this.day.attributes[0].customData.limit
       } else {
         return false
