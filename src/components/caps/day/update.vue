@@ -20,6 +20,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 import panelModal from '@/components/ui/modals/panel-modal'
 import deleteCap from '@/components/caps/day/delete'
 
@@ -30,7 +31,7 @@ export default {
       id: null
     }
   },
-  mixins: [setResponseErrors],
+  mixins: [setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_UPDATE_DAY_CAP_MODAL',
@@ -73,6 +74,9 @@ export default {
       if (this.showModal === true && this.day) {
         this.setCap()
       }
+    },
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
   computed: {
@@ -80,7 +84,14 @@ export default {
       showModal: 'getShowUpdateDayCapModal',
       day: 'getSelectedCapDay',
       caps: 'getCurrentCaps'
-    })
+    }),
+    unsavedChanges () {
+      if (this.limit) {
+        return this.limit !== this.day.attributes[0].customData.limit
+      } else {
+        return false
+      }
+    }
   },
   components: {
     'panel-modal': panelModal,
