@@ -7,7 +7,7 @@
       <template v-slot:header-left-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-left"></font-awesome-icon></span></template>
       <template v-slot:header-right-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span></template>
       <template v-slot:day-content="slotProps">
-        <div v-if="slotProps.day.inMonth" class="card m-1 p-2 border border-gray-300 full-calendar--day flex flex-col items-stretch">
+        <div v-if="slotProps.day.inMonth" class="card m-1 pt-1 p-2 border border-gray-300 full-calendar--day flex flex-col items-stretch">
             <span class="full-calendar--day-title flex flex-row items-center border-b border-gray-200 px-1">
               <p class="font-bold">{{ slotProps.day.day }}</p>
             </span>
