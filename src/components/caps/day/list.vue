@@ -5,7 +5,7 @@
             class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light"
             @click="updateCap(slotProps.day)">{{Number(slotProps.day.attributes[0].customData.limit).toLocaleString()}}</span>
       <button v-else
-              class="btn btn-green btn-md btn-circle"
+              class="btn btn-hollow-green btn-md btn-circle"
               @click="addCap(slotProps.day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
     </template>
   </full-calendar>
