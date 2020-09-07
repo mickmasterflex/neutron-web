@@ -36,7 +36,8 @@ export default {
   }
 
   /* Heading Typography */
-  .full-calendar .vc-title { @apply text-2xl text-gray-900 font-bold }
+  .full-calendar .vc-title { @apply text-2xl text-gray-900 font-bold underline transition-colors duration-100 }
+  .full-calendar .vc-title:hover { @apply text-blue-500 opacity-100 }
 
   /* Arrow Positioning and Resets */
   .full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
@@ -48,7 +49,7 @@ export default {
   .full-calendar .in-prev-month > div,
   .full-calendar .in-next-month > div { opacity: 1 }
 
-  /* Sizing Days and Calendat */
+  /* Sizing Days and Calendar */
   .full-calendar { max-width: 600px; }
 
   .full-calendar--day {
