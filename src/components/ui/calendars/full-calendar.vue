@@ -7,14 +7,13 @@
       <template v-slot:header-left-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-left"></font-awesome-icon></span></template>
       <template v-slot:header-right-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span></template>
       <template v-slot:day-content="slotProps">
-        <div v-if="slotProps.day.inMonth" class="card m-1 pt-1 p-2 border border-gray-300 full-calendar--day flex flex-col items-stretch">
-            <span class="full-calendar--day-title flex flex-row items-center border-b border-gray-200 px-1">
-              <p class="font-bold">{{ slotProps.day.day }}</p>
+        <slot name="day" v-bind:day="slotProps.day">
+          <div v-if="slotProps.day.inMonth" class="card shadow-sm m-1 border-2 border-gray-300 full-calendar--day flex flex-col items-stretch">
+            <span class="full-calendar--day-title flex flex-row items-center px-3 py-4">
+              <p class="font-bold text-gray-700 text-lg">{{ slotProps.day.day }}</p>
             </span>
-          <span class="flex flex-row items-center justify-center flex-grow lg:pb-2">
-              <slot name="day-inner" v-bind:day="slotProps.day"></slot>
-          </span>
-        </div>
+          </div>
+        </slot>
         <div v-if="slotProps.day.inPrevMonth || slotProps.day.inNextMonth" class="full-calendar--day m-1 rounded-lg bg-gray-200"></div>
       </template>
     </v-calendar>
@@ -53,12 +52,8 @@ export default {
   .full-calendar { max-width: 600px; }
 
   .full-calendar--day {
-    height: 85px;
+    min-height: 120px;
     width: 75px;
-  }
-
-  .full-calendar--day-title {
-    height: 20px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -66,11 +61,8 @@ export default {
       max-width: 771px;
     }
     .full-calendar--day {
-      height: 115px;
+      min-height: 115px;
       width: 100px;
-    }
-    .full-calendar--day-title {
-      height: 30px;
     }
   }
 
@@ -79,8 +71,8 @@ export default {
       max-width: 943px;
     }
     .full-calendar--day {
-      height: 135px;
-      width: 125px;
+      min-height: 135px;
+      width: 135px;
     }
   }
 </style>
