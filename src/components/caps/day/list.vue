@@ -55,7 +55,7 @@ export default {
       } else if (limit > leads) {
         return 'red-card'
       } else {
-        return 'green-card'
+        return 'gray-card'
       }
     }
   },
