@@ -1,7 +1,11 @@
 <template>
   <div>
     <update-partner-contract :partner="partner"></update-partner-contract>
-    <day-caps :parent="partner"></day-caps>
+    <panel-template title="Lead Caps" contentClass="relative">
+      <template v-slot:content>
+        <day-caps :parent="partner"></day-caps>
+      </template>
+    </panel-template>
     <panel-template title="Danger Zone">
       <template v-slot:content>
         <delete-partner-contract :client="$route.params.client" :id="partner.id"></delete-partner-contract>
@@ -11,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
 import dayCaps from '@/components/caps/day/'
@@ -21,6 +25,24 @@ export default {
     ...mapGetters({
       partner: 'getCurrentPartner'
     })
+  },
+  methods: {
+    ...mapActions({
+      fetchCurrentCaps: 'fetchCurrentCaps'
+    }),
+    fetchCaps () {
+      if (this.partner.id) {
+        this.fetchCurrentCaps({ type: 'partners', id: this.partner.id })
+      }
+    }
+  },
+  watch: {
+    partner () {
+      this.fetchCaps()
+    }
+  },
+  mounted () {
+    this.fetchCaps()
   },
   components: {
     'delete-partner-contract': deletePartner,

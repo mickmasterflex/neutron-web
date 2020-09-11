@@ -39,7 +39,6 @@ const actions = {
 const mutations = {
   SET_CURRENT_DAY_CAPS: (state, caps) => (state.current_day_caps = caps),
   RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = null),
-  ADD_DAY_CAP: (state, cap) => state.current_day_caps.unshift(cap),
   UPDATE_DAY_CAP: (state, updatedCap) => {
     const index = state.current_day_caps.findIndex(cap => cap.date === updatedCap.date)
     if (index !== -1) {
