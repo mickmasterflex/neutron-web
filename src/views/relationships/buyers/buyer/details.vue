@@ -3,7 +3,7 @@
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
     <panel-template title="Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <day-caps v-if="buyer.id" :parent="{ type: 'buyers', id: buyer.id }"></day-caps>
+        <lead-caps v-if="buyer.id" :parent="{ type: 'buyers', id: buyer.id }"></lead-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -18,7 +18,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import dayCaps from '@/components/caps/day/'
+import leadCaps from '@/components/caps/'
 
 export default {
   computed: {
@@ -47,7 +47,7 @@ export default {
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
-    'day-caps': dayCaps
+    'lead-caps': leadCaps
   }
 }
 </script>

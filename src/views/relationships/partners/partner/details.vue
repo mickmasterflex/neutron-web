@@ -3,7 +3,7 @@
     <update-partner-contract :partner="partner"></update-partner-contract>
     <panel-template title="Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <day-caps :parent="partner"></day-caps>
+        <lead-caps :parent="partner"></lead-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -18,7 +18,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
-import dayCaps from '@/components/caps/day/'
+import leadCaps from '@/components/caps/'
 
 export default {
   computed: {
@@ -47,7 +47,7 @@ export default {
   components: {
     'delete-partner-contract': deletePartner,
     'update-partner-contract': updatePartner,
-    'day-caps': dayCaps
+    'lead-caps': leadCaps
   }
 }
 </script>
