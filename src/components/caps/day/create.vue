@@ -48,11 +48,9 @@ export default {
           this.create({
             date: this.day.id,
             limit: this.limit,
-            parent: this.caps.id
+            parent: this.parent
           }).then(() => {
             this.close()
-          }).catch(error => {
-            this.error = error
           })
         }
       })
@@ -62,7 +60,7 @@ export default {
     ...mapGetters({
       showModal: 'getShowCreateDayCapModal',
       day: 'getSelectedCapDay',
-      caps: 'getCurrentCaps'
+      parent: 'getCurrentCapParent'
     })
   },
   components: {

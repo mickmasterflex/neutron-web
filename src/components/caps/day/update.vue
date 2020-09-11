@@ -60,7 +60,7 @@ export default {
             limit: this.limit,
             id: this.id,
             date: this.day.id,
-            parent: this.caps.id
+            parent: this.parent
           }).then(() => {
             this.close()
           }).catch(error => {
@@ -84,7 +84,7 @@ export default {
     ...mapGetters({
       showModal: 'getShowUpdateDayCapModal',
       day: 'getSelectedCapDay',
-      caps: 'getCurrentCaps'
+      parent: 'getCurrentCapParent'
     }),
     unsavedChanges () {
       if (this.limit && this.day.attributes) {

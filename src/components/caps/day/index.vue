@@ -1,11 +1,9 @@
 <template>
-  <panel-template title="Daily Lead Caps" contentClass="relative">
-    <template v-slot:content>
-      <day-cap-create></day-cap-create>
-      <day-cap-update></day-cap-update>
-      <day-caps class="my-3"></day-caps>
-    </template>
-  </panel-template>
+  <div>
+    <day-cap-create></day-cap-create>
+    <day-cap-update></day-cap-update>
+    <day-caps class="my-3"></day-caps>
+  </div>
 </template>
 
 <script>
@@ -25,29 +23,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentDayCaps: 'SET_CURRENT_DAY_CAPS',
-      setCurrentCaps: 'SET_CURRENT_CAPS',
       resetCurrentDayCaps: 'RESET_CURRENT_DAY_CAPS',
-      resetCurrentCaps: 'RESET_CURRENT_CAPS'
-    }),
-    setCaps () {
-      if (this.parent.caps) {
-        // Potentially only setCurrentCaps?
-        this.setCurrentCaps(this.parent.caps)
-        this.setCurrentDayCaps(this.parent.caps.day_caps)
-      }
-    }
-  },
-  watch: {
-    parent () {
-      this.setCaps()
-    }
-  },
-  created () {
-    this.setCaps()
+      resetCurrentCapParent: 'RESET_CURRENT_CAP_PARENT'
+    })
   },
   destroyed () {
-    this.resetCurrentCaps()
+    this.resetCurrentCapParent()
     this.resetCurrentDayCaps()
   }
 }

@@ -1,19 +1,21 @@
 <template>
   <full-calendar :attributes="attributes">
     <template v-slot:day="slotProps">
-      <div v-if="slotProps.day.inMonth" :class="`${hasCap(slotProps.day.attributes) ? cardColor(slotProps.day.attributes) : 'gray-card'} full-calendar--day card shadow-sm m-1 border-2 flex flex-col`">
+      <div v-if="slotProps.day.inMonth && hasAttributes(slotProps.day.attributes)"
+           class="full-calendar--day card shadow-sm m-1 border-2 flex flex-col"
+           :class="`${hasCap(slotProps.day.attributes) ? cardColor(slotProps.day.attributes) : 'gray-card'}`">
         <span class="full-calendar--day-title leading-none px-3 py-2 font-bold text-gray-700 text-lg">
           {{ slotProps.day.day }}
         </span>
         <span class="full-calendar--day-subtitle w-full text-center font-bold">
-          0 sold
+          {{Number(slotProps.day.attributes[0].customData.sold)}} sold
         </span>
         <span class="flex-grow flex flex-col items-center justify-center p-1">
           <span v-if="hasCap(slotProps.day.attributes)"
                 class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light"
                 @click="updateCap(slotProps.day)">{{Number(slotProps.day.attributes[0].customData.limit).toLocaleString()}}</span>
           <button v-else
-                  class="btn btn-hollow-green btn-md btn-circle"
+                  class="btn btn-green btn-md btn-circle"
                   @click="addCap(slotProps.day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
         </span>
       </div>
@@ -32,10 +34,14 @@ export default {
       showUpdate: 'SHOW_UPDATE_DAY_CAP_MODAL',
       setSelectedCapDay: 'SET_SELECTED_CAP_DAY'
     }),
-    hasCap (attributes) {
+    hasAttributes (attributes) {
       if (attributes) {
         return !!attributes[0]
       }
+    },
+    hasCap (attributes) {
+      const id = attributes[0].customData.id
+      return id !== null
     },
     addCap (day) {
       this.setSelectedCapDay(day)
@@ -47,12 +53,12 @@ export default {
     },
     cardColor (attributes) {
       const limit = attributes[0].customData.limit
-      const leads = attributes[0].customData.leads
+      const leads = attributes[0].customData.sold
       if (limit === leads) {
         return 'green-card'
-      } else if (limit < leads) {
-        return 'yellow-card'
       } else if (limit > leads) {
+        return 'yellow-card'
+      } else if (limit < leads) {
         return 'red-card'
       } else {
         return 'gray-card'
@@ -81,9 +87,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   .gray-card { @apply border-gray-300 }
-  .gray-card .full-calendar--day-subtitle { @apply bg-gray-200 }
+  .gray-card .full-calendar--day-subtitle { @apply bg-gray-100 }
   .red-card { @apply border-red-500 }
   .red-card .full-calendar--day-subtitle { @apply bg-red-500 text-white }
   .yellow-card { @apply border-yellow-500 }
