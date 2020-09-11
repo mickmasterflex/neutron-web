@@ -48,7 +48,16 @@ const mutations = {
       state.current_day_caps.splice(index, 1, capUpdate)
     }
   },
-  REMOVE_DAY_CAP: (state, id) => (state.current_day_caps = state.current_day_caps.filter(cap => cap.id !== id)),
+  REMOVE_DAY_CAP: (state, id) => {
+    const index = state.current_day_caps.findIndex(cap => cap.id === id)
+    if (index !== -1) {
+      const deletedCap = state.current_day_caps[index]
+      deletedCap.id = null
+      deletedCap.is_capped = false
+      deletedCap.limit = null
+      state.current_day_caps.splice(index, 1, deletedCap)
+    }
+  },
   SET_SELECTED_CAP_DAY: (state, day) => (state.selected_cap_day = day),
   RESET_SELECTED_CAP_DAY: (state) => (state.selected_cap_day = null),
   SHOW_CREATE_DAY_CAP_MODAL: (state) => (state.show_create_day_cap_modal = true),
