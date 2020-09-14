@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import router from '@/router'
 import { successfulToast, failedToast } from '@/mixins/toastMessages'
 
 const development = process.env.NODE_ENV !== 'production'
@@ -30,11 +29,7 @@ axios.interceptors.response.use(response => {
         }
         break
       case 404:
-        if (error.response.config.method === 'get') {
-          router.push({ name: '404' })
-        } else {
-          failedToast({ heading: error.message, content: error.response.config.url })
-        }
+        failedToast({ heading: error.message, content: error.response.config.url })
         break
       case 400:
         failedToast({ heading: error.message })
