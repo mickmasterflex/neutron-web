@@ -1,8 +1,4 @@
 import Axios from 'axios'
-<<<<<<< Updated upstream
-=======
-// import router from '@/router'
->>>>>>> Stashed changes
 import { successfulToast, failedToast } from '@/mixins/toastMessages'
 
 const development = process.env.NODE_ENV !== 'production'
