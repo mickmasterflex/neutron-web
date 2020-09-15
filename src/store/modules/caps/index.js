@@ -1,8 +1,10 @@
 import axios from '@/axios'
 import dayCaps from '@/store/modules/caps/day'
+import monthCaps from '@/store/modules/caps/month'
 
 const modules = {
-  dayCaps
+  dayCaps,
+  monthCaps
 }
 
 const state = {
