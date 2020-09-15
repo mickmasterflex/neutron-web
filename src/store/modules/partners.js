@@ -12,7 +12,7 @@ const getters = {
     return state.partners.length
   },
   getPartnersByClient: (state) => (clientId) => {
-    return state.partners.filter(partner => partner.client === clientId)
+    return state.partners.filter(partner => partner.client === clientId).filter(partner => partner.parent === null)
   },
   getPartnerSiblings: (state, getters) => {
     const siblings = getters.getPartnersByClient(state.current_partner.client)
@@ -21,6 +21,9 @@ const getters = {
       siblings.splice(index, 1)
     }
     return siblings
+  },
+  getPartnersByParent: (state) => (partnerId) => {
+    return state.partners.filter(partner => partner.parent === partnerId)
   },
   getShowCreatePartnerModal: state => state.show_create_partner_modal
 }
