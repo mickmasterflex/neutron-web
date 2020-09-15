@@ -1,9 +1,6 @@
 <template>
   <div class="full-calendar mx-auto block">
-    <v-calendar
-      :attributes="attributes"
-      is-expanded
-      ref="calendar">
+    <v-calendar :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
       <template v-slot:header-left-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-left"></font-awesome-icon></span></template>
       <template v-slot:header-right-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span></template>
       <template v-slot:day-content="slotProps">
