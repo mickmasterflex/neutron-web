@@ -3,7 +3,7 @@
     <update-partner-contract :partner="partner"></update-partner-contract>
     <panel-template title="Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <lead-caps :parent="partner"></lead-caps>
+        <lead-caps :parent="$route.params.id" type="partners"></lead-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
 import leadCaps from '@/components/caps/'
@@ -25,24 +25,6 @@ export default {
     ...mapGetters({
       partner: 'getCurrentPartner'
     })
-  },
-  methods: {
-    ...mapActions({
-      fetchCurrentCaps: 'fetchCurrentCaps'
-    }),
-    fetchCaps () {
-      if (this.partner.id) {
-        this.fetchCurrentCaps({ type: 'partners', id: this.partner.id })
-      }
-    }
-  },
-  watch: {
-    partner () {
-      this.fetchCaps()
-    }
-  },
-  mounted () {
-    this.fetchCaps()
   },
   components: {
     'delete-partner-contract': deletePartner,

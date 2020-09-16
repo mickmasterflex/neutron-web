@@ -3,7 +3,7 @@
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
     <panel-template title="Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <lead-caps v-if="buyer.id" :parent="$route.params.id" type="buyers"></lead-caps>
+        <lead-caps :parent="$route.params.id" type="buyers"></lead-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
