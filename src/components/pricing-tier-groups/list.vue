@@ -1,30 +1,17 @@
 <template>
   <div>
-    <table v-if="pricingTierGroups" class="table">
-      <thead>
-      <tr>
-        <th class="th">Name</th>
-        <th class="th">ID</th>
-        <th class="th"></th>
-      </tr>
-      </thead>
-      <tbody class="tbody">
-      <tr class="tr" v-for="pricingTierGroup in pricingTierGroups" :key="pricingTierGroup.id">
-        <td class="td">{{pricingTierGroup.name}}</td>
-        <td class="td">{{pricingTierGroup.id}}</td>
-        <td class="td">
-          <span class="flex flex-row justify-end">
+  <panel-template v-for="pricingTierGroup in pricingTierGroups" :title="pricingTierGroup.name" :key="pricingTierGroup.id">
+   <template v-slot:action>
+     <span class="flex flex-row justify-end">
               <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
             <button @click="showModal(pricingTierGroup)" class="btn btn-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-          </span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <div v-else>
-      ...Loading...
-    </div>
     <update-pricing-tier-group></update-pricing-tier-group>
+     </span>
+  </template>
+  <template v-slot:content>
+    LIST TIERS HERE
+  </template>
+  </panel-template>
   </div>
 </template>
 
