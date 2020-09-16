@@ -9,7 +9,7 @@
       </template>
     </action-heading>
     <partner-list :contracts="children" :client="$route.params.client"></partner-list>
-    <create-partner-contract :client="client.id" :partner-contracts="partners" :parent="partner.id"></create-partner-contract>
+    <create-partner-contract :client="partner.client" :parent="partner.id"></create-partner-contract>
   </div>
 </template>
 
@@ -27,7 +27,6 @@ export default {
     ...mapGetters({
       partner: 'getCurrentPartner',
       partners: 'getAllPartners',
-      client: 'getCurrentClient',
       getPartnersByParent: 'getPartnersByParent'
     }),
     children: function () {

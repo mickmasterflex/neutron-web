@@ -13,6 +13,9 @@ const getters = {
     return state.buyers.length
   },
   getBuyersByClient: (state) => (clientId) => {
+    return state.buyers.filter(buyer => buyer.client === clientId)
+  },
+  getParentlessBuyersByClient: (state) => (clientId) => {
     return state.buyers.filter(buyer => buyer.client === clientId).filter(buyer => buyer.parent === null)
   },
   getBuyerSiblings: (state, getters) => {

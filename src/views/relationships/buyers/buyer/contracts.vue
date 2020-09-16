@@ -9,7 +9,7 @@
       </template>
     </action-heading>
     <buyer-list :contracts="children" :client="$route.params.client"></buyer-list>
-    <create-buyer-contract :client="client.id" :buyer-contracts="buyers" :parent="buyer.id"></create-buyer-contract>
+    <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
   </div>
 </template>
 
@@ -27,7 +27,6 @@ export default {
     ...mapGetters({
       buyer: 'getCurrentBuyer',
       buyers: 'getAllBuyers',
-      client: 'getCurrentClient',
       getBuyersByParent: 'getBuyersByParent'
     }),
     children: function () {

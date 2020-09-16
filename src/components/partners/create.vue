@@ -34,9 +34,6 @@ export default {
     client: {
       type: Number
     },
-    partnerContracts: {
-      type: Array
-    },
     parent: {
       type: Number
     }
@@ -51,7 +48,6 @@ export default {
     }),
     close () {
       this.name = ''
-      this.parent = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

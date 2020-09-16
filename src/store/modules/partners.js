@@ -12,6 +12,9 @@ const getters = {
     return state.partners.length
   },
   getPartnersByClient: (state) => (clientId) => {
+    return state.partners.filter(partner => partner.client === clientId)
+  },
+  getParentlessPartnersByClient: (state) => (clientId) => {
     return state.partners.filter(partner => partner.client === clientId).filter(partner => partner.parent === null)
   },
   getPartnerSiblings: (state, getters) => {
