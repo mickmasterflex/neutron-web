@@ -8,7 +8,7 @@
 <script>
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -19,6 +19,14 @@ export default {
   components: {
     'delete-partner-contract': deletePartner,
     'update-partner-contract': updatePartner
+  },
+  methods: {
+    ...mapActions({
+      fetchPartners: 'fetchPartners'
+    })
+  },
+  created () {
+    this.fetchPartners()
   }
 }
 </script>

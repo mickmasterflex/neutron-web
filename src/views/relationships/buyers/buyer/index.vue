@@ -12,6 +12,9 @@
         <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'BuyerContract', params: {id:id, client: client}}">Buyer Details</router-link>
         </li>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+          <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts</router-link>
+        </li>
         <li class="underscore-tab" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
           <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers</router-link>
         </li>
@@ -43,6 +46,11 @@ export default {
     ...mapGetters({
       buyer: 'getCurrentBuyer'
     })
+  },
+  watch: {
+    id: function () {
+      this.fetchCurrentBuyer(this.id)
+    }
   },
   created () {
     this.fetchCurrentBuyer(this.id)
