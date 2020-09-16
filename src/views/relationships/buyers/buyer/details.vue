@@ -3,7 +3,7 @@
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
     <panel-template title="Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <lead-caps :parent="$route.params.id" type="buyers"></lead-caps>
+        <lead-caps :parent="id" type="buyers"></lead-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -21,6 +21,9 @@ import updateBuyer from '@/components/buyers/update'
 import leadCaps from '@/components/caps/'
 
 export default {
+  props: {
+    id: Number
+  },
   computed: {
     ...mapGetters({
       buyer: 'getCurrentBuyer'

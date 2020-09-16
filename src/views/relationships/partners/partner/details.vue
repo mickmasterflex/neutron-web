@@ -3,7 +3,7 @@
     <update-partner-contract :partner="partner"></update-partner-contract>
     <panel-template title="Lead Caps" contentClass="relative">
       <template v-slot:content>
-        <lead-caps :parent="$route.params.id" type="partners"></lead-caps>
+        <lead-caps :parent="id" type="partners"></lead-caps>
       </template>
     </panel-template>
     <panel-template title="Danger Zone">
@@ -21,6 +21,9 @@ import updatePartner from '@/components/partners/update'
 import leadCaps from '@/components/caps/'
 
 export default {
+  props: {
+    id: Number
+  },
   computed: {
     ...mapGetters({
       partner: 'getCurrentPartner'

@@ -15,7 +15,7 @@ import { mapMutations } from 'vuex'
 export default {
   props: {
     parent: {
-      type: [String, Number],
+      type: Number,
       required: true
     },
     type: {
