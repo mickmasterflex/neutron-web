@@ -15,7 +15,7 @@
         <td class="td">
           <span class="flex flex-row justify-end">
               <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
-            <button @click="showModal()" class="btn btn-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+            <button @click="showModal(pricingTierGroup)" class="btn btn-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           </span>
         </td>
       </tr>
@@ -46,10 +46,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      show: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL'
+      show: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL',
+      setCurrent: 'SET_CURRENT_PRICING_TIER_GROUP'
     }),
-    showModal () {
+    showModal (group) {
       this.show()
+      this.setCurrent(group)
     }
   }
 }

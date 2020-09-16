@@ -26,21 +26,19 @@ export default {
       name: ''
     }
   },
-  props: {
-    pricing_tier_groups: Object
-  },
   updated () {
-    if (this.pricingTierGroups) {
-      this.name = this.pricingTierGroups.name
+    if (this.pricingTierGroup) {
+      this.name = this.pricingTierGroup.name
     }
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdatePricingTierGroupModal'
+      showModal: 'getShowUpdatePricingTierGroupModal',
+      pricingTierGroup: 'getCurrentPricingTierGroup'
     }),
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.pricingTierGroups.name
+        return this.name !== this.pricingTierGroup.name
       } else {
         return false
       }
@@ -54,7 +52,7 @@ export default {
   mixins: [setResponseErrors, enterKeyListener, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
-      updatePricingTierGroup: 'updatePricingTierGroup'
+      update: 'updatePricingTierGroup'
     }),
     ...mapMutations({
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
@@ -77,7 +75,8 @@ export default {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.update({
-            name: this.name
+            name: this.name,
+            id: this.pricingTierGroup.id
           }).then(() => { this.close() })
             .catch(error => {
               this.error = error
