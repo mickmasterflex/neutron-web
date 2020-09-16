@@ -65,7 +65,7 @@ export default {
 
   @media screen and (min-width: 1280px) {
     .full-calendar {
-      max-width: 943px;
+      max-width: 1013px;
     }
     .full-calendar--day {
       min-height: 135px;
