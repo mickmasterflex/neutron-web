@@ -11,7 +11,6 @@ const getters = {
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
   getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal
 }
-
 const actions = {
   async fetchPricingTierGroups ({ commit }) {
     await axios.get('/pricing-tier-groups/')
