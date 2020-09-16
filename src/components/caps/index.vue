@@ -31,6 +31,7 @@ export default {
   methods: {
     ...mapMutations({
       resetCurrentDayCaps: 'RESET_CURRENT_DAY_CAPS',
+      resetCurrentMonthCaps: 'RESET_CURRENT_MONTH_CAPS',
       resetCurrentCapParent: 'RESET_CURRENT_CAP_PARENT',
       setCapsCalendarEndpoint: 'SET_CAPS_CALENDAR_ENDPOINT'
     }),
@@ -44,6 +45,7 @@ export default {
   destroyed () {
     this.resetCurrentCapParent()
     this.resetCurrentDayCaps()
+    this.resetCurrentMonthCaps()
   }
 }
 </script>
