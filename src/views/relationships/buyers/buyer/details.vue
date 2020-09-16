@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import leadCaps from '@/components/caps/'
@@ -33,6 +33,14 @@ export default {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer,
     'lead-caps': leadCaps
+  },
+  methods: {
+    ...mapActions({
+      fetchBuyers: 'fetchBuyers'
+    })
+  },
+  created () {
+    this.fetchBuyers()
   }
 }
 </script>
