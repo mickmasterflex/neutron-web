@@ -14,7 +14,14 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    parent: Object
+    parent: {
+      type: [String, Number],
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    }
   },
   components: {
     'caps-calendar': capsCalendar,
@@ -24,8 +31,15 @@ export default {
   methods: {
     ...mapMutations({
       resetCurrentDayCaps: 'RESET_CURRENT_DAY_CAPS',
-      resetCurrentCapParent: 'RESET_CURRENT_CAP_PARENT'
-    })
+      resetCurrentCapParent: 'RESET_CURRENT_CAP_PARENT',
+      setCapsCalendarEndpoint: 'SET_CAPS_CALENDAR_ENDPOINT'
+    }),
+    setCapEndpoint () {
+      this.setCapsCalendarEndpoint({ type: this.type, id: this.parent })
+    }
+  },
+  created () {
+    this.setCapEndpoint()
   },
   destroyed () {
     this.resetCurrentCapParent()

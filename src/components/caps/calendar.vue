@@ -1,5 +1,5 @@
 <template>
-  <full-calendar :attributes="attributes">
+  <full-calendar :attributes="attributes" @update:to-page="currentMonth = $event">
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth && hasAttributes(slotProps.day.attributes)"
            class="full-calendar--day card shadow-sm m-1 border-2 flex flex-col"
@@ -24,15 +24,27 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 import fullCalendar from '@/components/ui/calendars/full-calendar'
 
 export default {
+  data () {
+    return {
+      currentMonth: {},
+      formattedMonth: ''
+    }
+  },
+  watch: {
+    currentMonth () {
+      this.fetchCaps()
+    }
+  },
   methods: {
     ...mapMutations({
       showCreate: 'SHOW_CREATE_DAY_CAP_MODAL',
       showUpdate: 'SHOW_UPDATE_DAY_CAP_MODAL',
-      setSelectedCapDay: 'SET_SELECTED_CAP_DAY'
+      setSelectedCapDay: 'SET_SELECTED_CAP_DAY',
+      setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS'
     }),
     hasAttributes (attributes) {
       if (attributes) {
@@ -63,12 +75,38 @@ export default {
       } else {
         return 'gray-card'
       }
+    },
+    ...mapActions({
+      fetchCurrentCaps: 'fetchCurrentCaps'
+    }),
+    fetchCaps () {
+      if (this.currentMonth) {
+        let month = this.currentMonth.month
+        if (month < 10) {
+          month = '0' + month
+        }
+        this.formattedMonth = this.currentMonth.year + '-' + month + '-' + '01'
+
+        if (!this.checkForMonthData) {
+          this.setCapsCalendarParams({ date: this.formattedMonth, months: 2 })
+          this.fetchCurrentCaps()
+        }
+      }
     }
   },
   computed: {
     ...mapGetters({
-      caps: 'getCurrentDayCaps'
+      caps: 'getCurrentDayCaps',
+      monthCaps: 'getCurrentMonthCaps'
     }),
+    checkForMonthData () {
+      if (this.monthCaps) {
+        if (this.monthCaps.some(e => e.date === this.formattedMonth)) {
+          return true
+        }
+      }
+      return false
+    },
     attributes () {
       if (this.caps) {
         return this.caps.map(cap => ({
