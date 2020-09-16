@@ -157,8 +157,8 @@
 
 .btn-circle {
     @apply rounded-full p-1 flex flex-col items-center justify-center;
-    width: 23px;
-    height: 23px;
+    width: 24px;
+    height: 24px;
     min-width: 23px;
     font-size: .75rem;
 }
