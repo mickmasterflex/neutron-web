@@ -243,15 +243,15 @@
 .btn-hollow-default:hover  { @apply bg-gray-100; }
 .btn-hollow-default:active { @apply bg-gray-100; }
 
-.btn-hollow-blue           { @apply text-blue-400 border-blue-300; }
+.btn-hollow-blue           { @apply text-blue-500 border-blue-400; }
 .btn-hollow-blue:hover     { @apply text-white bg-blue-500 border-blue-500; }
 .btn-hollow-blue:active    { @apply bg-blue-500 border-blue-500; }
 
-.btn-hollow-green          { @apply text-green-400 border-green-300; }
+.btn-hollow-green          { @apply text-green-500 border-green-400; }
 .btn-hollow-green:hover    { @apply text-white bg-green-500 border-green-500; }
 .btn-hollow-green:active   { @apply bg-green-500 border-green-500; }
 
-.btn-hollow-red            { @apply text-red-400 border-red-300; }
+.btn-hollow-red            { @apply text-red-500 border-red-400; }
 .btn-hollow-red:hover      { @apply text-white bg-red-500 border-red-500; }
 .btn-hollow-red:active     { @apply bg-red-500 border-red-500; }
 
