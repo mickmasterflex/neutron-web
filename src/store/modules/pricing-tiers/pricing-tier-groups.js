@@ -11,19 +11,30 @@ const getters = {
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
   getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal
 }
-
 const actions = {
-  async fetchPricingTierGroups () {
+  async fetchPricingTierGroups ({ commit }) {
     await axios.get('/pricing-tier-groups/')
+      .then(response => {
+        commit('SET_PRICING_TIER_GROUPS', response.data)
+      })
   },
-  async createPricingTierGroup (data) {
-    await axios.get('/pricing-tier-groups/', data)
+  async createPricingTierGroup ({ commit }, data) {
+    await axios.post('/pricing-tier-groups/', data)
+      .then(response => {
+        commit('ADD_PRICING_TIER_GROUP', response.data)
+      })
   },
-  async updatePricingTierGroup (data) {
-    await axios.get(`/pricing-tier-groups/${data.id}/`, data)
+  async updatePricingTierGroup ({ commit }, data) {
+    await axios.put(`/pricing-tier-groups/${data.id}/`, data)
+      .then(response => {
+        commit('UPDATE_PRICING_TIER_GROUP', response.data)
+      })
   },
-  async deletePricingTierGroup (id) {
-    await axios.get(`/pricing-tier-groups/${id}/`)
+  async deletePricingTierGroup ({ commit }, id) {
+    await axios.delete(`/pricing-tier-groups/${id}/`)
+      .then(() => {
+        commit('REMOVE_PRICING_TIER_GROUP', id)
+      })
   }
 }
 
