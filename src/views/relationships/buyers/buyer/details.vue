@@ -10,6 +10,7 @@
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import listDeliveries from '@/components/deliveries/list'
+
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -21,8 +22,11 @@ export default {
   computed: {
     ...mapGetters({
       buyer: 'getCurrentBuyer',
-      deliveries: 'getDeliveries'
-    })
+      getDeliveriesByBuyer: 'getDeliveriesByBuyer'
+    }),
+    deliveries () {
+      return this.getDeliveriesByBuyer(this.buyer.id)
+    }
   },
   methods: {
     ...mapActions({
