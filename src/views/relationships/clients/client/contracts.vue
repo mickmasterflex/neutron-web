@@ -1,28 +1,25 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h2 class="h3">Buyer Contracts</h2>
+    <panel-template title="Buyer Contracts">
+      <template v-slot:action>
+        <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
       </template>
-      <template v-slot:right>
-        <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Buyer</button>
+      <template v-slot:content>
+        <buyer-list :contracts="buyers" :client="$route.params.slug" class="table-white table-shadow"></buyer-list>
       </template>
-    </action-heading>
-    <buyer-list :contracts="buyers" :client="$route.params.slug"></buyer-list>
-    <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
-
-    <action-heading class="mt-5">
-      <template v-slot:left>
-        <h2 class="h3">Partner Contracts</h2>
+    </panel-template>
+    <create-buyer-contract :client="client.id" :parent="buyer.id"></create-buyer-contract>
+    <panel-template title="Partner Contracts">
+      <template v-slot:action>
+        <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
       </template>
-      <template v-slot:right>
-        <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Partner</button>
+      <template v-slot:content>
+        <partner-list :contracts="partners" :client="$route.params.slug" class="table-white table-shadow"></partner-list>
       </template>
-    </action-heading>
-    <partner-list :contracts="partners" :client="$route.params.slug"></partner-list>
-    <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
+    </panel-template>
+    <create-partner-contract :client="client.id" :parent="partner.id"></create-partner-contract>
   </div>
-  </template>
+</template>
 
 <script>
 import partnerList from '@/components/partners/list'
@@ -40,15 +37,17 @@ export default {
   },
   computed: {
     ...mapGetters({
+      buyer: 'getCurrentBuyer',
       client: 'getCurrentClient',
-      getPartnersByClient: 'getPartnersByClient',
-      getBuyersByClient: 'getBuyersByClient'
+      partner: 'getCurrentPartner',
+      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
+      getParentlessPartnersByClient: 'getParentlessPartnersByClient'
     }),
     partners: function () {
-      return this.getPartnersByClient(this.client.id)
+      return this.getParentlessPartnersByClient(this.client.id)
     },
     buyers: function () {
-      return this.getBuyersByClient(this.client.id)
+      return this.getParentlessBuyersByClient(this.client.id)
     }
   },
   methods: {

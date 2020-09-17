@@ -1,12 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <div class="hud">
-        <h1 class="h1 text-white">{{client.name}}</h1>
-        <div class="hud--stat-cards">
-          <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
-          <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
-        </div>
+      <h1 class="h1 text-white">{{client.name}}</h1>
+      <div class="hud--stat-cards">
+        <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
+        <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
       </div>
     </template>
     <template v-slot:contentTabs>
@@ -39,14 +37,14 @@ export default {
   computed: {
     ...mapGetters({
       client: 'getCurrentClient',
-      getPartnersByClient: 'getPartnersByClient',
-      getBuyersByClient: 'getBuyersByClient'
+      getParentlessPartnersByClient: 'getParentlessPartnersByClient',
+      getParentlessBuyersByClient: 'getParentlessBuyersByClient'
     }),
     partners: function () {
-      return this.getPartnersByClient(this.client.id)
+      return this.getParentlessPartnersByClient(this.client.id)
     },
     buyers: function () {
-      return this.getBuyersByClient(this.client.id)
+      return this.getParentlessBuyersByClient(this.client.id)
     }
   },
   methods: {

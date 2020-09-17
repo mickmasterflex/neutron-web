@@ -20,8 +20,10 @@
           <td class="td">{{field.name}}</td>
           <td class="td">{{field.description}}</td>
           <td class="td">{{field.type}}</td>
-          <td class="td flex flex-row justify-end">
-            <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
+          <td class="td">
+            <span class="flex flex-row justify-end">
+              <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
+            </span>
           </td>
         </tr>
       </tbody>

@@ -1,18 +1,19 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <div class="hud">
-        <h1 class="h1 text-white">{{buyer.name}}</h1>
-        <div class="hud--stat-cards">
-          <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
-          <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
-        </div>
+      <h1 class="h1 text-white">{{buyer.name}}</h1>
+      <div class="hud--stat-cards">
+        <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
+        <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
       </div>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'BuyerContract', params: {id:id, client: client}}">Buyer Details</router-link>
+        </li>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+          <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts</router-link>
         </li>
         <li class="underscore-tab" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
           <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers</router-link>
@@ -45,6 +46,11 @@ export default {
     ...mapGetters({
       buyer: 'getCurrentBuyer'
     })
+  },
+  watch: {
+    id: function () {
+      this.fetchCurrentBuyer(this.id)
+    }
   },
   created () {
     this.fetchCurrentBuyer(this.id)

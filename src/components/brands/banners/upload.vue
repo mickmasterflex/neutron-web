@@ -1,12 +1,12 @@
 <template>
-  <panel-template title="Upload a Logo" :actionTransition="true">
+  <panel-template title="Upload a Banner" :actionTransition="true">
     <template v-slot:action>
       <button v-show="image" @click="uploadFile()" class="btn btn-green"><font-awesome-icon icon="upload"></font-awesome-icon> Upload</button>
     </template>
     <template v-slot:content>
       <validation-observer ref="form">
         <form @submit.prevent="uploadFile()" class="form-horizontal">
-          <file-field @input="fileSelected($event)" rules="image" field_id="image" field_label="Logo"></file-field>
+          <file-field @input="fileSelected($event)" rules="image" field_id="image" field_label="Banner"></file-field>
           <text-field v-model="alt" field_id="alt" field_label="Alt Text"></text-field>
         </form>
       </validation-observer>
@@ -34,12 +34,12 @@ export default {
   },
   watch: {
     brand () {
-      this.alt = this.brand.name + ' logo'
+      this.alt = this.brand.name + ' banner'
     }
   },
   methods: {
     ...mapActions({
-      uploadBrandLogo: 'uploadBrandLogo'
+      uploadBrandBanner: 'uploadBrandBanner'
     }),
     fileSelected (file) {
       this.image = file
@@ -51,7 +51,7 @@ export default {
           formData.append('image', this.image)
           formData.append('brand', this.brand.id)
           formData.append('alt', this.alt)
-          this.uploadBrandLogo(formData).catch(error => {
+          this.uploadBrandBanner(formData).catch(error => {
             this.error = error
           })
         }

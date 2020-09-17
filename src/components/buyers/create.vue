@@ -5,7 +5,6 @@
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
       <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
-      <select-field v-model="parent" :options="buyerContracts" field_id="parent" field_label="Parent"></select-field>
     </form>
   </validation-observer>
     </template>
@@ -23,16 +22,15 @@ import { setResponseErrors } from '@/mixins/setResponseErrors'
 export default {
   data () {
     return {
-      name: '',
-      parent: ''
+      name: ''
     }
   },
   props: {
     client: {
       type: Number
     },
-    buyerContracts: {
-      type: Array
+    parent: {
+      type: Number
     }
   },
   computed: {
@@ -50,7 +48,6 @@ export default {
     }),
     close () {
       this.name = ''
-      this.parent = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

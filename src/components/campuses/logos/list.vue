@@ -4,7 +4,7 @@
       <delete-logo></delete-logo>
     </template>
     <template v-slot:content>
-      <div :key="logo.id" v-for="logo in brandLogos" class="image-meta-li">
+      <div :key="logo.id" v-for="logo in campusLogos" class="image-meta-li">
         <div class="img-container">
           <img :src="logo.image" :alt="logo.alt"/>
         </div>
@@ -22,12 +22,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import deleteLogo from '@/components/brands/logos/delete'
+import deleteLogo from '@/components/campuses/logos/delete'
 
 export default {
   computed: {
     ...mapGetters({
-      brandLogos: 'getCurrentBrandLogos'
+      campusLogos: 'getCurrentCampusLogos'
     })
   },
   components: {

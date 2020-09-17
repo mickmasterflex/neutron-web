@@ -1,15 +1,15 @@
 <template>
   <div>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Offers List</h2>
-        </template>
-        <template v-slot:right>
-          <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Create Offer</button>
-        </template>
-      </action-heading>
-      <offer-list :offers="offers" :client="$route.params.client"></offer-list>
-      <create-offer :buyer="buyer.id"></create-offer>
+    <action-heading>
+      <template v-slot:left>
+        <h2 class="h3">Offers List</h2>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
+      </template>
+    </action-heading>
+    <offer-list :offers="offers" :client="$route.params.client"></offer-list>
+    <create-offer :buyer="buyer.id"></create-offer>
   </div>
 </template>
 

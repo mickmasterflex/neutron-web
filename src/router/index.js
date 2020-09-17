@@ -231,6 +231,17 @@ const routes = [
           contentTab: 'campaigns'
         },
         pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'PartnerContractChildren',
+        path: 'contracts/',
+        component: () => import('@/views/relationships/partners/partner/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'contracts'
+        },
+        pathToRegexpOptions: { strict: true }
       }
     ]
   },
@@ -287,6 +298,17 @@ const routes = [
           requiresAuth: true,
           activeApp: 'relationships',
           contentTab: 'details'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'BuyerContractChildren',
+        path: 'contracts/',
+        component: () => import('@/views/relationships/buyers/buyer/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'contracts'
         },
         pathToRegexpOptions: { strict: true }
       },

@@ -240,6 +240,9 @@
     border-spacing: 0 2px;
 }
 
+.table-white .td { @apply bg-white }
+.table-shadow .td { @apply shadow }
+
 .table > .tbody:before {
     content: '';
     display: block;
@@ -361,6 +364,20 @@
 .underscore-tab.active { @apply text-gray-900 font-bold border-red-500; }
 .underscore-tab:hover:not(.active) { @apply text-gray-800 border-gray-200; }
 
+
+/* ------------------------------------------------
+    Image List Item
+--------------------------------------------------- */
+
+.image-meta-li { @apply card mb-1 p-2 flex flex-col  }
+.image-meta-li .img-container { @apply p-2 border border-gray-200 rounded-sm flex flex-row items-center justify-center }
+.image-meta-li .img-meta { @apply ml-2 mt-2 }
+
+@media screen and (min-width: 768px) {
+    .image-meta-li { @apply flex-row items-center }
+    .image-meta-li .img-container { @apply w-1/2 }
+    .image-meta-li .img-meta { @apply ml-5 mt-0 w-1/2 }
+}
 
 /* ------------------------------------------------
     Tailwind Utilities

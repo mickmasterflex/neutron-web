@@ -1,4 +1,6 @@
 import axios from '@/axios'
+import campusLogos from '@/store/modules/campuses/logos'
+import campusBanners from '@/store/modules/campuses/banners'
 
 const state = {
   campuses: [],
@@ -63,9 +65,14 @@ const mutations = {
   CLOSE_CREATE_CAMPUS_MODAL: (state) => (state.show_create_campus_modal = false)
 }
 
+const modules = {
+  campusLogos,
+  campusBanners
+}
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }

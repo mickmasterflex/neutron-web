@@ -29,17 +29,17 @@ export default {
   mixins: [setResponseErrors],
   computed: {
     ...mapGetters({
-      brand: 'getCurrentBrand'
+      campus: 'getCurrentCampus'
     })
   },
   watch: {
-    brand () {
-      this.alt = this.brand.name + ' logo'
+    campus () {
+      this.alt = this.campus.name + ' logo'
     }
   },
   methods: {
     ...mapActions({
-      uploadBrandLogo: 'uploadBrandLogo'
+      uploadCampusLogo: 'uploadCampusLogo'
     }),
     fileSelected (file) {
       this.image = file
@@ -49,9 +49,9 @@ export default {
         if (success) {
           const formData = new FormData()
           formData.append('image', this.image)
-          formData.append('brand', this.brand.id)
+          formData.append('campus', this.campus.id)
           formData.append('alt', this.alt)
-          this.uploadBrandLogo(formData).catch(error => {
+          this.uploadCampusLogo(formData).catch(error => {
             this.error = error
           })
         }
