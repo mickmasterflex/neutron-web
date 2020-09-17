@@ -31,7 +31,6 @@
 </template>
 
 <script>
-
 import deleteDelivery from '@/components/deliveries/delete'
 import updateDelivery from '@/components/deliveries/update'
 

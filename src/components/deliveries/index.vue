@@ -1,7 +1,7 @@
 <template>
   <panel-template title="Deliveries">
     <template v-slot:action>
-      <button class="btn btn-turquoise" @click="showCreateDeliveryModal()">Add Delivery</button>
+      <button class="btn btn-turquoise" @click="showCreateDeliveryModal()">Create Delivery</button>
     </template>
     <template v-slot:content>
       <delivery-list :deliveries="deliveries"></delivery-list>

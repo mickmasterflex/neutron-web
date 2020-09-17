@@ -1,7 +1,7 @@
 <template>
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>
-      Delivery Configuration
+      Update Delivery
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -14,14 +14,13 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm" class="btn btn-green btn-lg">Update Delivery</button>
+      <button @click="submitForm" class="btn btn-green btn-lg">Update</button>
     </template>
   </modal-template>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-// import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
 
