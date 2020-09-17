@@ -1,6 +1,6 @@
 <template>
   <transition leave-active-class="animate__animated animate__fadeOut animate__faster">
-    <div v-show="show" :class="`${modalClass} ${modalPosition} top-0 right-0 left-0 bottom-0 z-50 p-5 pt-10 overflow-x-scroll`">
+    <div v-show="show" :class="`${modalClass} ${modalPosition} inset-0 z-50 p-5 pt-10 overflow-x-scroll`">
       <transition enter-active-class="animate__animated animate__slideInDown animate__faster"
                   leave-active-class="animate__animated animate__slideOutUp animate__fast">
         <div v-show="show" :class="`${modalDialogClass} modal-dialog bg-white rounded-lg relative mx-auto w-full z-20`">
