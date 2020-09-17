@@ -6,6 +6,7 @@
     <template v-slot:content>
       <delivery-list :deliveries="deliveries"></delivery-list>
       <create-delivery :buyer="buyer"></create-delivery>
+      <update-delivery></update-delivery>
     </template>
   </panel-template>
 </template>
@@ -13,13 +14,15 @@
 <script>
 import createDelivery from '@/components/deliveries/create'
 import deliveryList from '@/components/deliveries/list'
+import updateDelivery from '@/components/deliveries/update'
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
     'create-delivery': createDelivery,
-    'delivery-list': deliveryList
+    'delivery-list': deliveryList,
+    'update-delivery': updateDelivery
   },
   computed: {
     ...mapGetters({

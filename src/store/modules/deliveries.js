@@ -3,10 +3,12 @@ import axios from '@/axios'
 const state = {
   deliveries: [],
   show_create_delivery_modal: false,
-  show_update_delivery_modal: false
+  show_update_delivery_modal: false,
+  current_delivery: {}
 }
 
 const getters = {
+  getCurrentDelivery: state => state.current_delivery,
   getDeliveriesByBuyer: (state) => (buyerId) => {
     return state.deliveries.filter(delivery => delivery.buyer_contract === buyerId)
   },
@@ -46,6 +48,8 @@ const mutations = {
   CLOSE_CREATE_DELIVERY_MODAL: (state) => (state.show_create_delivery_modal = false),
   CLOSE_UPDATE_DELIVERY_MODAL: (state) => (state.show_update_delivery_modal = false),
   DELETE_DELIVERY: (state, id) => (state.deliveries = state.deliveries.filter(delivery => delivery.id !== id)),
+  RESET_CURRENT_DELIVERY: (state) => (state.current_delivery = {}),
+  SET_CURRENT_DELIVERY: (state, delivery) => (state.current_delivery = delivery),
   SET_DELIVERIES: (state, deliveries) => (state.deliveries = deliveries),
   SHOW_CREATE_DELIVERY_MODAL: (state) => (state.show_create_delivery_modal = true),
   SHOW_UPDATE_DELIVERY_MODAL: (state) => (state.show_update_delivery_modal = true),

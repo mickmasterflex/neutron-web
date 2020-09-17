@@ -21,6 +21,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
 
@@ -33,15 +34,24 @@ export default {
       headers: ''
     }
   },
-  props: {
-    delivery: Object
-  },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateDeliveryModal'
-    })
+      showModal: 'getShowUpdateDeliveryModal',
+      delivery: 'getCurrentDelivery'
+    }),
+    unsavedChanges () {
+      if (this.delivery) {
+        return this.type !== this.delivery.type || this.response_parser !== this.delivery.response_parser || this.target !== this.delivery.target || this.headers !== this.delivery.headers
+      }
+      return false
+    }
   },
-  mixins: [enterKeyListener, setResponseErrors],
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    }
+  },
+  mixins: [checkUnsavedChangesInModal, enterKeyListener, setResponseErrors],
   updated () {
     if (this.delivery) {
       this.type = this.delivery.type
@@ -55,7 +65,8 @@ export default {
       update: 'updateDelivery'
     }),
     ...mapMutations({
-      closeModal: 'CLOSE_UPDATE_DELIVERY_MODAL'
+      closeModal: 'CLOSE_UPDATE_DELIVERY_MODAL',
+      resetDelivery: 'RESET_CURRENT_DELIVERY'
     }),
     enterKeyAction () {
       if (this.delivery) {
@@ -63,11 +74,12 @@ export default {
       }
     },
     close () {
+      this.closeModal()
+      this.resetDelivery()
       this.type = ''
       this.response_parser = ''
       this.target = ''
       this.headers = ''
-      this.closeModal()
     },
     submitForm () {
       this.$refs.form.validate().then(success => {

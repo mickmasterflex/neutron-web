@@ -17,10 +17,9 @@
         <td class="td">
           <span class="flex flex-row justify-end">
             <delete-delivery :id="delivery.id"></delete-delivery>
-            <button class="btn btn-circle btn-hollow-blue" @click="showUpdateDeliveryModal()"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+            <button class="btn btn-circle btn-hollow-blue" @click="showSetDelivery(delivery)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           </span>
         </td>
-        <update-delivery :delivery="delivery"></update-delivery>
       </tr>
       </tbody>
     </table>
@@ -32,19 +31,22 @@
 
 <script>
 import deleteDelivery from '@/components/deliveries/delete'
-import updateDelivery from '@/components/deliveries/update'
 
 import { mapMutations } from 'vuex'
 
 export default {
   components: {
-    'delete-delivery': deleteDelivery,
-    'update-delivery': updateDelivery
+    'delete-delivery': deleteDelivery
   },
   methods: {
     ...mapMutations({
+      setCurrentDelivery: 'SET_CURRENT_DELIVERY',
       showUpdateDeliveryModal: 'SHOW_UPDATE_DELIVERY_MODAL'
-    })
+    }),
+    showSetDelivery (delivery) {
+      this.setCurrentDelivery(delivery)
+      this.showUpdateDeliveryModal()
+    }
   },
   props: {
     deliveries: Array
