@@ -33,7 +33,9 @@ export default {
       resetCurrentDayCaps: 'RESET_CURRENT_DAY_CAPS',
       resetCurrentMonthCaps: 'RESET_CURRENT_MONTH_CAPS',
       resetCurrentCapParent: 'RESET_CURRENT_CAP_PARENT',
-      setCapsCalendarEndpoint: 'SET_CAPS_CALENDAR_ENDPOINT'
+      setCapsCalendarEndpoint: 'SET_CAPS_CALENDAR_ENDPOINT',
+      resetCapsCalendarEndpoint: 'RESET_CAPS_CALENDAR_ENDPOINT',
+      resetCapsCalendarParams: 'RESET_CAPS_CALENDAR_PARAMS'
     }),
     setCapEndpoint () {
       this.setCapsCalendarEndpoint({ type: this.type, id: this.parent })
@@ -46,6 +48,8 @@ export default {
     this.resetCurrentCapParent()
     this.resetCurrentDayCaps()
     this.resetCurrentMonthCaps()
+    this.resetCapsCalendarEndpoint()
+    this.resetCapsCalendarParams()
   }
 }
 </script>
