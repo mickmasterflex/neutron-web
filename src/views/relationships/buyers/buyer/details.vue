@@ -1,7 +1,7 @@
 <template>
   <div>
     <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
-    <list-deliveries :deliveries="deliveries"></list-deliveries>
+    <delivery-index :buyer="buyer.id"></delivery-index>
     <delete-buyer-contract :client="$route.params.client" :id="buyer.id" class="mt-4"></delete-buyer-contract>
   </div>
 </template>
@@ -9,34 +9,28 @@
 <script>
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import listDeliveries from '@/components/deliveries/list'
+import deliveryIndex from '@/components/deliveries/index'
 
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
     'delete-buyer-contract': deleteBuyer,
-    'list-deliveries': listDeliveries,
+    'delivery-index': deliveryIndex,
     'update-buyer-contract': updateBuyer
   },
   computed: {
     ...mapGetters({
-      buyer: 'getCurrentBuyer',
-      getDeliveriesByBuyer: 'getDeliveriesByBuyer'
-    }),
-    deliveries () {
-      return this.getDeliveriesByBuyer(this.buyer.id)
-    }
+      buyer: 'getCurrentBuyer'
+    })
   },
   methods: {
     ...mapActions({
-      fetchBuyers: 'fetchBuyers',
-      fetchDeliveries: 'fetchDeliveries'
+      fetchBuyers: 'fetchBuyers'
     })
   },
   created () {
     this.fetchBuyers()
-    this.fetchDeliveries()
   }
 }
 </script>
