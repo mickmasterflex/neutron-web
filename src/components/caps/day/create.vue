@@ -6,7 +6,7 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="limit" rules="required|integer" field_id="limit" field_label="Day Cap"></v-text-field>
+          <v-text-field v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Day Cap"></v-text-field>
         </form>
       </validation-observer>
     </template>
