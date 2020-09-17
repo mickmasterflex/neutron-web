@@ -25,8 +25,8 @@
 <script>
 import logoutButton from '@/components/authentication/logout'
 import logo from '@/components/ui/logo'
-import sideNavItem from '@/components/ui/nav/side/nav-item'
-import topNav from '@/components/ui/nav/top/index'
+import sideNavItem from '@/components/app/nav/side/nav-item'
+import topNav from '@/components/app/nav/top/index'
 import { mapGetters } from 'vuex'
 
 export default {

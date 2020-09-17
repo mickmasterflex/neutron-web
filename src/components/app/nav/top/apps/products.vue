@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import topNavItem from '@/components/ui/nav/top/nav-item'
+import topNavItem from '@/components/app/nav/top/nav-item'
 
 export default {
   props: {

@@ -1,17 +1,17 @@
 <template>
   <ul class="flex flex-row">
-    <top-nav-item label="Clients" route="Relationships" :active="activeTab === 'clients'"></top-nav-item>
+    <top-nav-item label="Lead Data" route="Analytics" :active="activeTab === 'lead-data'"></top-nav-item>
   </ul>
 </template>
 
 <script>
-import topNavItem from '@/components/ui/nav/top/nav-item'
+import topNavItem from '@/components/app/nav/top/nav-item'
 
 export default {
   props: {
     activeTab: {
       type: String,
-      default: 'clients'
+      default: 'lead-data'
     }
   },
   components: {
