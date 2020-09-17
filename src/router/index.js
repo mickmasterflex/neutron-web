@@ -192,16 +192,6 @@ const routes = [
     ]
   },
   {
-    path: '/relationships/contracts/partners/',
-    name: 'AllPartnerContracts',
-    component: () => import('@/views/relationships/partners/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
     path: '/relationships/clients/:client/contracts/partners/:id/',
     component: () => import('@/views/relationships/partners/partner/index.vue'),
     props (route) {
@@ -235,16 +225,6 @@ const routes = [
     ]
   },
   {
-    path: '/relationships/campaigns/',
-    name: 'All Campaigns',
-    component: () => import('@/views/relationships/campaigns/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
     path: '/relationships/clients/:client/contracts/partners/:partner/campaigns/:id/',
     name: 'Campaign',
     component: () => import('@/views/relationships/campaigns/campaign.vue'),
@@ -259,16 +239,6 @@ const routes = [
       props.id = +props.id
       return props
     }
-  },
-  {
-    path: '/relationships/contracts/buyers/',
-    name: 'AllBuyerContracts',
-    component: () => import('@/views/relationships/buyers/layout.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',
@@ -313,16 +283,6 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       }
     ]
-  },
-  {
-    path: '/relationships/offers/',
-    name: 'All Offers',
-    component: () => import('@/views/relationships/offers/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/:id/',
