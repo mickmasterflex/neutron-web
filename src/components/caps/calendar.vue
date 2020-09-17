@@ -86,16 +86,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .gray-card { @apply border-gray-300 }
-  .gray-card .full-calendar--day-subtitle { @apply bg-gray-100 }
-  .red-card { @apply border-red-500 }
-  .red-card .full-calendar--day-subtitle { @apply bg-red-500 text-white }
-  .yellow-card { @apply border-yellow-500 }
-  .yellow-card .full-calendar--day-subtitle { @apply bg-yellow-500 text-white }
-  .green-card { @apply border-green-500 }
-  .green-card .full-calendar--day-subtitle { @apply bg-green-500 text-white }
-  .blue-card { @apply border-blue-500 }
-  .blue-card .full-calendar--day-subtitle { @apply bg-blue-500 text-white }
-</style>

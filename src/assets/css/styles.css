@@ -134,6 +134,23 @@
 .card-base { @apply p-4; }
 .card-actions { @apply flex flex-row justify-end items-center mt-4 }
 
+/* Colors */
+
+.card-gray { @apply border-gray-300 }
+.card-gray .card-highlight { @apply bg-gray-100 }
+
+.card-red { @apply border-red-500 }
+.card-red .card-highlight { @apply bg-red-500 text-white }
+
+.card-yellow { @apply border-yellow-500 }
+.card-yellow .card-highlight { @apply bg-yellow-500 text-white }
+
+.card-green { @apply border-green-500 }
+.card-green .card-highlight { @apply bg-green-500 text-white }
+
+.card-blue { @apply border-blue-500 }
+.card-blue .card-highlight { @apply bg-blue-500 text-white }
+
 
 /* ------------------------------------------------
     Buttons

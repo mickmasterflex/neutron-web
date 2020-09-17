@@ -1,10 +1,10 @@
 <template>
   <div class="full-calendar--day card shadow-sm m-1 border-2 flex flex-col"
-       :class="`${hasCap(day.attributes) ? cardColor(day.attributes) : 'gray-card'}`">
+       :class="`${hasCap(day.attributes) ? cardColor(day.attributes) : 'card-gray'}`">
     <span class="full-calendar--day-title leading-none px-3 py-2 font-bold text-gray-700 text-lg">
       {{ day.day }}
     </span>
-    <span class="full-calendar--day-subtitle w-full text-center font-bold">
+    <span class="card-highlight w-full text-center font-bold">
       {{Number(day.attributes[0].customData.sold)}} sold
     </span>
     <span class="flex-grow flex flex-col items-center justify-center p-1">
@@ -49,13 +49,13 @@ export default {
       const limit = attributes[0].customData.limit
       const leads = attributes[0].customData.sold
       if (limit === leads) {
-        return 'green-card'
+        return 'card-green'
       } else if (limit > leads) {
-        return 'yellow-card'
+        return 'card-yellow'
       } else if (limit < leads) {
-        return 'red-card'
+        return 'card-red'
       } else {
-        return 'gray-card'
+        return 'card-gray'
       }
     }
   }
