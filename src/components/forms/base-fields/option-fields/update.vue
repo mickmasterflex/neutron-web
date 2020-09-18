@@ -2,18 +2,24 @@
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Base Option Field</template>
     <template v-slot:body>
-      <validation-observer ref="form" class="form-horizontal">
-        <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
-          <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
-          <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-          <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="type" field_label="Type"></v-select-field>
-        </form>
+      <div class="form-horizontal">
+        <validation-observer ref="form">
+          <form @submit.prevent="submitForm">
+            <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+            <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
+            <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
+            <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="type" field_label="Type"></v-select-field>
+          </form>
+          <div class="field-group" v-if="fieldOptions.length">
+            <label class="field-label">Options</label>
+            <field-options></field-options>
+          </div>
+        </validation-observer>
         <div class="field-group">
-          <label class="field-label">Options</label>
-          <field-options></field-options>
+          <label class="field-label">Create Option</label>
+          <create-option></create-option>
         </div>
-      </validation-observer>
+      </div>
     </template>
     <template v-slot:footer-additional>
       <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
@@ -24,6 +30,7 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/option-fields/options/list'
+import createOption from '@/components/forms/base-fields/option-fields/options/create'
 import { enterKeyListener } from '@/mixins/enterKeyListener'
 import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
 import { setResponseErrors } from '@/mixins/setResponseErrors'
@@ -46,7 +53,8 @@ export default {
     field: Object
   },
   components: {
-    'field-options': fieldOptions
+    'field-options': fieldOptions,
+    'create-option': createOption
   },
   updated () {
     if (this.field) {
@@ -60,7 +68,8 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateBaseOptionFieldModal',
-      unsavedOptionChanges: 'getUnsavedBaseOptionChangesInModal'
+      unsavedOptionChanges: 'getUnsavedBaseOptionChangesInModal',
+      fieldOptions: 'getCurrentBaseOptions'
     }),
     unsavedChanges () {
       if (this.field) {

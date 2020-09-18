@@ -1,31 +1,91 @@
 <template>
-  <button class="btn btn-turquoise" @click="submitForm()"><font-awesome-icon icon="plus"></font-awesome-icon> Add an Option</button>
+  <div class="well">
+    <ul class="fields-inline-heading px-1">
+      <li class="w-24 fields-inline-heading-item">Order</li>
+      <li class="w-64 fields-inline-heading-item">Label</li>
+      <li class="w-64 fields-inline-heading-item">Value</li>
+    </ul>
+    <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
+      <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
+        <span class="fields-inline">
+          <text-field-prefixed
+            icon="arrows-alt-v"
+            field_disabled="true"
+            field_class="field-sm"
+            prefix_group_class="field-disabled"
+            v-model="order"
+            field_id="newOption_order"
+          />
+          <v-text-field
+            v-model="label"
+            field_id="newOption_label"
+            class="field-error-inside"
+            rules="required"/>
+          <v-text-field
+            v-model="value"
+            field_id="newOption_mapping"
+            class="field-error-inside"
+            rules="required"/>
+        </span>
+        <button class="btn btn-green btn-circle mx-1" type="submit"><font-awesome-icon icon="plus"></font-awesome-icon></button>
+      </form>
+    </validation-observer>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
+  data () {
+    return {
+      label: '',
+      value: ''
+    }
+  },
   computed: {
     ...mapGetters({
-      options: 'getCurrentBaseOptions',
-      field: 'getCurrentBaseField'
+      field: 'getCurrentBaseField',
+      options: 'getCurrentBaseOptions'
     }),
-    baseOption: function () {
-      return {
-        field: this.field.id,
-        order: this.options.length + 1
-      }
+    order () {
+      return this.options.length + 1
     }
   },
   methods: {
-    ...mapMutations({ toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED' }),
-    ...mapActions({ createBaseOption: 'createBaseOption' }),
-    submitForm () {
-      this.createBaseOption(this.baseOption).then(() => {
-        this.toggleChangesInModalUnsaved(true)
+    ...mapActions({
+      create: 'createBaseOption'
+    }),
+    resetForm () {
+      this.label = ''
+      this.value = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+    },
+    submitCreateForm () {
+      this.$refs.form.validate().then(success => {
+        if (success) {
+          this.create({
+            order: this.order,
+            label: this.label,
+            value: this.value,
+            field: this.field.id
+          }).then(() => {
+            this.resetForm()
+          }).catch(error => {
+            this.error = error
+          })
+        }
       })
     }
+  },
+  destroyed () {
+    this.resetForm()
+  },
+  components: {
+    'text-field-prefixed': textFieldPrefixed
   }
 }
 </script>
