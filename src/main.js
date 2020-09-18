@@ -3,7 +3,7 @@ import Vue from 'vue'
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 // eslint-disable-next-line camelcase
-import { required, email, integer, alpha_dash, image } from 'vee-validate/dist/rules'
+import { required, email, integer, alpha_dash, image, regex } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -85,6 +85,7 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
+extend('regex', { ...regex, message: 'Invalid Format' })
 // eslint-disable-next-line camelcase
 extend('alpha_dash', { ...alpha_dash, message: 'Only use alphabetic characters, numbers, dashes or underscores' })
 Vue.component('validation-provider', ValidationProvider)
