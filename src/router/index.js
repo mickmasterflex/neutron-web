@@ -230,6 +230,11 @@ const routes = [
           activeApp: 'relationships',
           contentTab: 'details'
         },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          return props
+        },
         pathToRegexpOptions: { strict: true }
       },
       {
@@ -309,6 +314,11 @@ const routes = [
           requiresAuth: true,
           activeApp: 'relationships',
           contentTab: 'details'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          return props
         },
         pathToRegexpOptions: { strict: true }
       },

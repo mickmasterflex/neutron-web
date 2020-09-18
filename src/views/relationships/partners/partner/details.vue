@@ -1,16 +1,29 @@
 <template>
   <div>
     <update-partner-contract :partner="partner"></update-partner-contract>
-    <delete-partner-contract :client="$route.params.client" :id="partner.id" class="mt-4"></delete-partner-contract>
+    <panel-template title="Lead Caps" contentClass="relative">
+      <template v-slot:content>
+        <lead-caps :parent="id" type="partners"></lead-caps>
+      </template>
+    </panel-template>
+    <panel-template title="Danger Zone">
+      <template v-slot:content>
+        <delete-partner-contract :client="$route.params.client" :id="partner.id"></delete-partner-contract>
+      </template>
+    </panel-template>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
-import { mapActions, mapGetters } from 'vuex'
+import leadCaps from '@/components/caps/'
 
 export default {
+  props: {
+    id: Number
+  },
   computed: {
     ...mapGetters({
       partner: 'getCurrentPartner'
@@ -18,7 +31,8 @@ export default {
   },
   components: {
     'delete-partner-contract': deletePartner,
-    'update-partner-contract': updatePartner
+    'update-partner-contract': updatePartner,
+    'lead-caps': leadCaps
   },
   methods: {
     ...mapActions({

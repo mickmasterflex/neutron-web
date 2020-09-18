@@ -6,6 +6,7 @@ import buyers from './modules/buyers'
 import brands from './modules/brands'
 import campaigns from '@/store/modules/campaigns'
 import campuses from '@/store/modules/campuses'
+import caps from '@/store/modules/caps'
 import clients from './modules/clients'
 import educationProducts from './modules/education-products'
 import forms from '@/store/modules/forms'
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     brands,
     campuses,
     campaigns,
+    caps,
     clients,
     educationProducts,
     forms,
