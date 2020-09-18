@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -26,7 +26,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreatePricingTierGroupModal',
       form: 'getCurrentForm'
     })
   },
@@ -34,11 +33,7 @@ export default {
     ...mapActions({
       create: 'createPricingTierGroup'
     }),
-    ...mapMutations({
-      closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
-    }),
     resetForm () {
-      this.name = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -46,18 +41,13 @@ export default {
     showForm () {
       this.formVisible = true
     },
-    close () {
-      this.name = ''
-      this.resetForm()
-      this.closeModal()
-    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.create({
             name: this.name
           }).then(() => {
-            this.close()
+            this.resetForm()
           }).catch(error => {
             this.error = error
           })
