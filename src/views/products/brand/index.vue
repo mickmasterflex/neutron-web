@@ -1,36 +1,43 @@
 <template>
-  <brand-layout :id="id" contentTab="details">
-    <template v-slot:content>
-      <h3 class="h3 mb-2">Update Brand</h3>
-      <update-brand :brand="brand" ></update-brand>
-
-      <h3 class="h3 mt-5 mb-2">Delete Brand</h3>
-      <delete-brand :id="brand.id"></delete-brand>
+  <content-layout>
+    <template v-slot:hud>
+      <h1 class="h1 text-white">{{brand.name}}</h1>
     </template>
-  </brand-layout>
+    <template v-slot:contentTabs>
+      <ul class="underscore-tabs">
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+          <router-link :to="{name: 'BrandDetails', params: {id:id}}">Brand Details</router-link>
+        </li>
+        <li class="underscore-tab" :class="$route.meta.contentTab === 'campuses' ? 'active' : ''">
+          <router-link :to="{name: 'BrandCampuses', params: {id:id}}">Campuses</router-link>
+        </li>
+      </ul>
+    </template>
+    <template v-slot:content>
+      <router-view></router-view>
+    </template>
+  </content-layout>
 </template>
 
 <script>
-import brandLayout from '@/views/products/brand/layout'
-import deleteBrand from '@/components/brands/delete'
-import updateBrand from '@/components/brands/update'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
-    id: {
-      type: Number
-    }
+    id: Number
+  },
+  methods: {
+    ...mapActions({
+      fetchCurrentBrand: 'fetchCurrentBrand'
+    })
   },
   computed: {
     ...mapGetters({
       brand: 'getCurrentBrand'
     })
   },
-  components: {
-    'brand-layout': brandLayout,
-    'delete-brand': deleteBrand,
-    'update-brand': updateBrand
+  created () {
+    this.fetchCurrentBrand(this.id)
   }
 }
 </script>

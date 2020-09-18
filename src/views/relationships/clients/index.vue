@@ -1,11 +1,9 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <div class="hud">
-        <h1 class="text-white text-4xl font-hairline">All Clients</h1>
-        <div class="hud--stat-cards">
-          <stat-card :data="getAllClientsCount" :title="`Clients`" :color="`teal`"></stat-card>
-        </div>
+      <h1 class="text-white text-4xl font-hairline">All Clients</h1>
+      <div class="hud--stat-cards">
+        <stat-card :data="getAllClientsCount" :title="`Clients`" :color="`teal`"></stat-card>
       </div>
     </template>
     <template v-slot:content>
@@ -14,7 +12,7 @@
           <h2 class="h3">Client List</h2>
         </template>
         <template v-slot:right>
-          <button class="btn btn-turquoise" @click="showCreateClientModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Create Client</button>
+          <button class="btn btn-turquoise" @click="showCreateClientModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Client</button>
         </template>
       </action-heading>
       <client-list :clients="clients" class="mt-5"></client-list>

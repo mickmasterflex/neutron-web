@@ -1,23 +1,20 @@
 <template>
-  <buyer-layout :id="id" contentTab="field-management">
-    <template v-slot:content>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Contract Fields</h2>
-        </template>
-        <template v-slot:right>
-          <create-field></create-field>
-        </template>
-      </action-heading>
-      <list-fields></list-fields>
-      <component :is="updateComponent" :field="currentField"></component>
-    </template>
-  </buyer-layout>
+  <div>
+    <action-heading>
+      <template v-slot:left>
+        <h2 class="h3">Contract Fields</h2>
+      </template>
+      <template v-slot:right>
+        <create-field></create-field>
+      </template>
+    </action-heading>
+    <list-fields></list-fields>
+    <component :is="updateComponent" :field="currentField"></component>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import buyerLayout from '@/views/relationships/buyers/buyer/layout'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
@@ -31,11 +28,6 @@ export default {
         type: Number
       },
       updateComponent: null
-    }
-  },
-  props: {
-    id: {
-      type: Number
     }
   },
   computed: {
@@ -56,7 +48,6 @@ export default {
   components: {
     updateTextField,
     updateOptionField,
-    'buyer-layout': buyerLayout,
     'list-fields': listFields,
     'create-field': createField
   },

@@ -15,6 +15,9 @@ const getters = {
   getBuyersByClient: (state) => (clientId) => {
     return state.buyers.filter(buyer => buyer.client === clientId)
   },
+  getParentlessBuyersByClient: (state) => (clientId) => {
+    return state.buyers.filter(buyer => buyer.client === clientId).filter(buyer => buyer.parent === null)
+  },
   getBuyerSiblings: (state, getters) => {
     const siblings = getters.getBuyersByClient(state.current_buyer.client)
     const index = siblings.findIndex(buyer => buyer.id === state.current_buyer.id)
@@ -22,6 +25,9 @@ const getters = {
       siblings.splice(index, 1)
     }
     return siblings
+  },
+  getBuyersByParent: (state) => (buyerId) => {
+    return state.buyers.filter(buyer => buyer.parent === buyerId)
   },
   getShowCreateBuyerModal: state => state.show_create_buyer_modal
 }

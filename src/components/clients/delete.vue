@@ -7,14 +7,14 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: {
-      type: Number
+    slug: {
+      type: String
     }
   },
   methods: {
     ...mapActions({ delete: 'deleteClient' }),
     runDelete () {
-      this.delete(this.id)
+      this.delete(this.slug)
         .then(() => {
           this.$router.push({ name: 'Relationships' })
         })

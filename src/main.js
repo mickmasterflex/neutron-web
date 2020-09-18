@@ -3,7 +3,7 @@ import Vue from 'vue'
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 // eslint-disable-next-line camelcase
-import { required, email, integer, alpha_dash } from 'vee-validate/dist/rules'
+import { required, email, integer, alpha_dash, image } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -15,7 +15,7 @@ import '@/assets/css/styles.css'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -25,6 +25,7 @@ import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
+import basePanel from '@/components/ui/panels/base'
 import statCard from '@/components/ui/cards/stat-card'
 import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
@@ -61,6 +62,7 @@ Vue.component('content-layout', baseContentLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
+Vue.component('panel-template', basePanel)
 Vue.component('action-heading', actionHeading)
 
 // Tables
@@ -82,6 +84,7 @@ Vue.component('v-select-field', vSelectField)
 extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
+extend('image', { ...image, message: 'Must be an image file' })
 // eslint-disable-next-line camelcase
 extend('alpha_dash', { ...alpha_dash, message: 'Only use alphabetic characters, numbers, dashes or underscores' })
 Vue.component('validation-provider', ValidationProvider)
@@ -102,7 +105,7 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone)
+library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

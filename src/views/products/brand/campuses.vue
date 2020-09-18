@@ -1,30 +1,25 @@
 <template>
-  <brand-layout :id="id" contentTab="campuses">
-    <template v-slot:content>
-      <div class="flex flex-row justify-between">
+  <div>
+    <action-heading>
+      <template v-slot:left>
         <h3 class="h3">Campuses List</h3>
-        <button class="btn btn-green" @click="showCreateCampusModal()">Create Campus</button>
-      </div>
-      <campus-list :campuses="campuses"></campus-list>
-      <create-campus :brandId="id"></create-campus>
-    </template>
-  </brand-layout>
+      </template>
+      <template v-slot:right>
+        <button class="btn btn-turquoise" @click="showCreateCampusModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campus</button>
+      </template>
+    </action-heading>
+    <campus-list :campuses="campuses"></campus-list>
+    <create-campus :brandId="brand.id"></create-campus>
+  </div>
 </template>
 
 <script>
-import brandLayout from '@/views/products/brand/layout'
 import createCampus from '@/components/campuses/create'
 import campusList from '@/components/campuses/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
-  props: {
-    id: {
-      type: Number
-    }
-  },
   components: {
-    'brand-layout': brandLayout,
     'create-campus': createCampus,
     'campus-list': campusList
   },
@@ -34,12 +29,11 @@ export default {
       getCampusesByBrand: 'getCampusesByBrand'
     }),
     campuses: function () {
-      return this.getCampusesByBrand(this.id)
+      return this.getCampusesByBrand(this.brand.id)
     }
   },
   methods: {
     ...mapActions({
-      fetchCurrentBrand: 'fetchCurrentBrand',
       fetchCampuses: 'fetchCampuses'
     }),
     ...mapMutations({

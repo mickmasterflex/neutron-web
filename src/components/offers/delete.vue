@@ -9,14 +9,15 @@ export default {
   props: {
     offer: {
       type: Object
-    }
+    },
+    client: String
   },
   methods: {
     ...mapActions({ delete: 'deleteOffer' }),
     runDelete () {
       this.delete(this.offer.id)
         .then(() => {
-          this.$router.push({ name: 'BuyerContractOffers', params: { id: this.offer.contract, client: this.offer.client } })
+          this.$router.push({ name: 'BuyerContractOffers', params: { id: this.offer.contract, client: this.client } })
         })
     }
   }

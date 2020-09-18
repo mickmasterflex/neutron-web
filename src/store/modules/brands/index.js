@@ -1,4 +1,6 @@
 import axios from '@/axios'
+import brandLogos from '@/store/modules/brands/logos'
+import brandBanners from '@/store/modules/brands/banners'
 
 const state = {
   brands: [],
@@ -64,9 +66,15 @@ const mutations = {
   CLOSE_CREATE_BRAND_MODAL: (state) => (state.show_create_brand_modal = false)
 }
 
+const modules = {
+  brandLogos,
+  brandBanners
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
