@@ -8,7 +8,7 @@
         <buyer-list :contracts="buyers" :client="$route.params.slug" class="table-white table-shadow"></buyer-list>
       </template>
     </panel-template>
-    <create-buyer-contract :client="client.id" :buyer-contracts="buyers"></create-buyer-contract>
+    <create-buyer-contract :client="client.id" :parent="buyer.id"></create-buyer-contract>
     <panel-template title="Partner Contracts">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
@@ -17,7 +17,7 @@
         <partner-list :contracts="partners" :client="$route.params.slug" class="table-white table-shadow"></partner-list>
       </template>
     </panel-template>
-    <create-partner-contract :client="client.id" :partner-contracts="partners"></create-partner-contract>
+    <create-partner-contract :client="client.id" :parent="partner.id"></create-partner-contract>
   </div>
 </template>
 
@@ -37,15 +37,17 @@ export default {
   },
   computed: {
     ...mapGetters({
+      buyer: 'getCurrentBuyer',
       client: 'getCurrentClient',
-      getPartnersByClient: 'getPartnersByClient',
-      getBuyersByClient: 'getBuyersByClient'
+      partner: 'getCurrentPartner',
+      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
+      getParentlessPartnersByClient: 'getParentlessPartnersByClient'
     }),
     partners: function () {
-      return this.getPartnersByClient(this.client.id)
+      return this.getParentlessPartnersByClient(this.client.id)
     },
     buyers: function () {
-      return this.getBuyersByClient(this.client.id)
+      return this.getParentlessBuyersByClient(this.client.id)
     }
   },
   methods: {

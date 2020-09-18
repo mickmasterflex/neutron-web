@@ -8,7 +8,7 @@
 <script>
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -19,6 +19,14 @@ export default {
   components: {
     'delete-buyer-contract': deleteBuyer,
     'update-buyer-contract': updateBuyer
+  },
+  methods: {
+    ...mapActions({
+      fetchBuyers: 'fetchBuyers'
+    })
+  },
+  created () {
+    this.fetchBuyers()
   }
 }
 </script>
