@@ -151,6 +151,17 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    path: '/config/pricing-tiers/',
+    name: 'PricingTiers',
+    component: () => import('@/views/config/pricing-tier-groups/index.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'config',
+      activeAppTab: 'pricing-tiers'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
     path: '/relationships/clients/',
     name: 'Relationships',
     component: () => import('@/views/relationships/clients/index.vue'),
