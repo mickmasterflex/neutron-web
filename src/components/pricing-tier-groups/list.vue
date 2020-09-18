@@ -5,7 +5,6 @@
         <span class="flex flex-row justify-end">
           <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
           <button @click="showModal(pricingTierGroup)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-          <update-pricing-tier-group></update-pricing-tier-group>
         </span>
        </template>
       <template v-slot:content>
@@ -17,13 +16,11 @@
 
 <script>
 import deletePricingTierGroup from '@/components/pricing-tier-groups/delete'
-import updatePricingTierGroup from '@/components/pricing-tier-groups/update'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
-    'delete-pricing-tier-group': deletePricingTierGroup,
-    'update-pricing-tier-group': updatePricingTierGroup
+    'delete-pricing-tier-group': deletePricingTierGroup
   },
   computed: {
     ...mapGetters({

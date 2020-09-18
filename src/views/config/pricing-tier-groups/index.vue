@@ -13,6 +13,7 @@
         </template>
       </action-heading>
       <pricing-tier-groups :pricing_tier_groups="pricing_tier_groups" class="mt-5"></pricing-tier-groups>
+      <update-pricing-tier-group></update-pricing-tier-group>
     </template>
   </content-layout>
 </template>
@@ -21,11 +22,13 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import getPricingTierGroups from '@/components/pricing-tier-groups/list'
 import createPricingTierGroup from '@/components/pricing-tier-groups/create'
+import updatePricingTierGroup from '@/components/pricing-tier-groups/update'
 
 export default {
   components: {
     'pricing-tier-groups': getPricingTierGroups,
-    'create-pricing-tier-group': createPricingTierGroup
+    'create-pricing-tier-group': createPricingTierGroup,
+    'update-pricing-tier-group': updatePricingTierGroup
   },
   computed: {
     ...mapGetters({

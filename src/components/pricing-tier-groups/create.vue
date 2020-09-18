@@ -48,9 +48,7 @@ export default {
     },
     close () {
       this.name = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
+      this.resetForm()
       this.closeModal()
     },
     submitForm () {
