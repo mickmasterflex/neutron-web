@@ -4,7 +4,7 @@
       <template v-slot:action>
         <span class="flex flex-row mr-2">
           <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
-          <button @click="showModal(pricingTierGroup)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+          <button @click="showModalSetCurrent(pricingTierGroup)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
         </span>
        </template>
       <template v-slot:content>
@@ -30,11 +30,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      show: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL',
+      showModal: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL',
       setCurrent: 'SET_CURRENT_PRICING_TIER_GROUP'
     }),
-    showModal (group) {
-      this.show()
+    showModalSetCurrent (group) {
+      this.showModal()
       this.setCurrent(group)
     }
   }
