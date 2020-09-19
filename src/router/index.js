@@ -33,16 +33,6 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/config/',
-    name: 'Config',
-    component: () => import('@/views/Config.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'config'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
     path: '/products/brands/',
     name: 'Brands',
     component: () => import('@/views/products/index.vue'),
