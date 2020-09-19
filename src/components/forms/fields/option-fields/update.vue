@@ -35,9 +35,9 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/fields/option-fields/options/list'
 import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
-import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
   data () {

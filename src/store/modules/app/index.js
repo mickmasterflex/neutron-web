@@ -1,5 +1,5 @@
-import activeApp from '@/store/modules/app/activeApp'
-import activeAppTab from '@/store/modules/app/activeAppTab'
+import activeApp from '@/store/modules/app/active-app'
+import activeAppTab from '@/store/modules/app/active-app-tab'
 
 const modules = {
   activeApp,
