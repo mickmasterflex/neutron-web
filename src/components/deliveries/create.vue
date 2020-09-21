@@ -12,7 +12,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green"><font-awesome-icon icon="plus"></font-awesome-icon> New Delivery</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Delivery</button>
     </template>
   </modal-template>
 </template>
