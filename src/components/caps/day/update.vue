@@ -19,8 +19,8 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
-import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { setResponseErrors } from '@/mixins/set-response-errors'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import panelModal from '@/components/ui/modals/panel-modal'
 import deleteCap from '@/components/caps/day/delete'
 
