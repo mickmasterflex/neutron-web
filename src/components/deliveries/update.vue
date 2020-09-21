@@ -21,9 +21,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {

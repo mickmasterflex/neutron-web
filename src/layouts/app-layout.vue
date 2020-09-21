@@ -6,7 +6,7 @@
       <side-nav-item :active="activeApp === 'analytics'" icon="chart-area" route="Analytics" label="Analytics"></side-nav-item>
       <side-nav-item :active="activeApp === 'relationships'" icon="dna" route="Relationships" label="Relationships"></side-nav-item>
       <side-nav-item :active="activeApp === 'products'" icon="atom" route="Brands" label="Products"></side-nav-item>
-      <side-nav-item :active="activeApp === 'config'" icon="cog" route="Config" label="Config"></side-nav-item>
+      <side-nav-item :active="activeApp === 'config'" icon="cog" route="PricingTiers" label="Config"></side-nav-item>
       <side-nav-item :active="activeApp === 'utilities'" icon="wrench" route="Utilities" label="Utilities"></side-nav-item>
       <side-nav-item :active="activeApp === 'users'" icon="key" route="Users" label="Users"></side-nav-item>
     </div>
@@ -25,8 +25,8 @@
 <script>
 import logoutButton from '@/components/authentication/logout'
 import logo from '@/components/ui/logo'
-import sideNavItem from '@/components/ui/nav/side/nav-item'
-import topNav from '@/components/ui/nav/top/index'
+import sideNavItem from '@/components/app/nav/side/nav-item'
+import topNav from '@/components/app/nav/top/index'
 import { mapGetters } from 'vuex'
 
 export default {

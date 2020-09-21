@@ -15,7 +15,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import statusBar from '@/components/ui/status-bar/default'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {

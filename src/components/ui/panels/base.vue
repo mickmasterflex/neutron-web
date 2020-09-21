@@ -9,7 +9,7 @@
         <slot name="action"></slot>
       </div>
     </div>
-    <div class="p-4">
+    <div :class="`p-4 ${contentClass}`">
       <slot name="content"></slot>
     </div>
   </div>
@@ -25,7 +25,8 @@ export default {
     actionTransition: {
       type: Boolean,
       default: false
-    }
+    },
+    contentClass: String
   }
 }
 </script>

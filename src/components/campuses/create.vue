@@ -27,8 +27,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
