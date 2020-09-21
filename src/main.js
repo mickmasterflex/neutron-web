@@ -85,7 +85,6 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
-// extend('regex', { ...regex, message: 'Invalid Format' })
 extend('url', {
   message: 'Must be a valid URL',
   validate: (value) => {
