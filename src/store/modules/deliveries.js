@@ -32,7 +32,7 @@ const actions = {
   async deleteDelivery ({ commit }, id) {
     await axios.delete(`/deliveries/${id}/`)
       .then(() => {
-        commit('DELETE_DELIVERY', id)
+        commit('REMOVE_DELIVERY', id)
       })
   },
   async updateDelivery ({ commit }, updatedDelivery) {
@@ -47,7 +47,7 @@ const mutations = {
   ADD_DELIVERY: (state, delivery) => state.deliveries.unshift(delivery),
   CLOSE_CREATE_DELIVERY_MODAL: (state) => (state.show_create_delivery_modal = false),
   CLOSE_UPDATE_DELIVERY_MODAL: (state) => (state.show_update_delivery_modal = false),
-  DELETE_DELIVERY: (state, id) => (state.deliveries = state.deliveries.filter(delivery => delivery.id !== id)),
+  REMOVE_DELIVERY: (state, id) => (state.deliveries = state.deliveries.filter(delivery => delivery.id !== id)),
   RESET_CURRENT_DELIVERY: (state) => (state.current_delivery = {}),
   SET_CURRENT_DELIVERY: (state, delivery) => (state.current_delivery = delivery),
   SET_DELIVERIES: (state, deliveries) => (state.deliveries = deliveries),

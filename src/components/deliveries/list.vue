@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="deliveries" class="table table-white table-shadow">
+    <table v-if="deliveries.length" class="table table-white table-shadow">
       <thead>
         <tr>
           <th class="th">Type</th>
@@ -23,9 +23,7 @@
       </tr>
       </tbody>
     </table>
-    <div v-else>
-      <p>...Loading...</p>
-    </div>
+    <table-empty-state v-else heading="No Deliveries Added" copy="Use the 'Create Delivery' button to add deliveries to this contract."></table-empty-state>
   </div>
 </template>
 

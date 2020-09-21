@@ -8,7 +8,7 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-select-field v-model="type" rules="required" field_id="delivery_type" field_label="Delivery Type" :options="types"></v-select-field>
           <v-select-field v-model="response_parser" rules="required" field_id="response_parser" field_label="Response Parser" :options="parsers"></v-select-field>
-          <v-text-field v-model="target" field_id="target" field_label="Target (URL)" :rules="{ required: true, regex: /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ }"></v-text-field>
+          <v-text-field v-model="target" field_id="target" field_label="Target (URL)" rules="required|url"></v-text-field>
           <v-textarea-field v-model="headers" field_id="headers" field_label="Headers"></v-textarea-field>
         </form>
       </validation-observer>
@@ -82,6 +82,7 @@ export default {
       this.response_parser = ''
       this.target = ''
       this.headers = ''
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
