@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { successfulToast, failedToast } from '@/mixins/toastMessages'
+import { successfulToast, failedToast } from '@/mixins/toast-messages'
 
 const development = process.env.NODE_ENV !== 'production'
 
