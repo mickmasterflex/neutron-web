@@ -1,9 +1,12 @@
 <template>
   <full-calendar :attributes="attributes" @update:to-page="currentMonth = $event">
+    <template v-slot:heading-details>
+      123
+    </template>
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth">
         <day-content :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
-        <span v-else class="full-calendar--day rounded-lg m-1 border-2 flex flex-row items-center justify-center">
+        <span v-else class="full-calendar--day m-1 border-2 flex flex-row items-center justify-center">
           <font-awesome-icon class="text-gray-700 text-lg" icon="spinner" spin></font-awesome-icon>
         </span>
       </div>
@@ -57,7 +60,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      caps: 'getCurrentDayCaps',
+      dayCaps: 'getCurrentDayCaps',
       monthCaps: 'getCurrentMonthCaps'
     }),
     checkForMonthData () {
@@ -69,8 +72,8 @@ export default {
       return false
     },
     attributes () {
-      if (this.caps) {
-        return this.caps.map(cap => ({
+      if (this.dayCaps) {
+        return this.dayCaps.map(cap => ({
           key: `cap.${cap.id}`,
           dates: cap.date,
           customData: cap

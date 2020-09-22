@@ -129,12 +129,14 @@
     Cards
 --------------------------------------------------- */
 
-.card { @apply shadow bg-white rounded-md; }
+.card { @apply shadow bg-white rounded-lg; }
 .card-sm { @apply p-1; }
 .card-base { @apply p-4; }
 .card-actions { @apply flex flex-row justify-end items-center mt-4 }
 
 /* Colors */
+
+.card-border { @apply shadow-sm border }
 
 .card-gray { @apply border-gray-300 }
 .card-gray .card-highlight { @apply bg-gray-100 }
@@ -416,6 +418,81 @@
 
 /* V-Calendar */
 .vc-container { @apply font-sans }
+
+.full-calendar .vc-container {
+    background: none;
+    border: none
+}
+
+/* Heading Typography */
+.full-calendar .vc-title { @apply text-3xl text-link font-normal underline transition-colors duration-100 p-0 }
+.full-calendar .vc-title:hover { @apply text-blue-500 opacity-100 }
+
+/* Arrow Positioning and Resets */
+.full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
+.full-calendar .vc-weeks { @apply mt-4 }
+
+/* Days out of scope of month */
+.full-calendar .in-prev-month > div,
+.full-calendar .in-next-month > div { opacity: 1 }
+
+/* Sizing Days and Calendar */
+.full-calendar { max-width: 600px; }
+
+.full-calendar--day {
+    min-height: 120px;
+    width: 75px;
+}
+
+@media screen and (min-width: 1024px) {
+    .full-calendar {
+        max-width: 771px;
+    }
+    .full-calendar--day {
+        min-height: 115px;
+        width: 100px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .full-calendar {
+        max-width: 1013px;
+    }
+    .full-calendar--day {
+        min-height: 135px;
+        width: 135px;
+    }
+}
+
+/* Header */
+
+.vc-header,
+.vc-arrows-container,
+.full-calendar--heading {
+    height: 120px;
+    padding: 2rem 1.25rem !important; /* --header-padding variable override instead?? */
+}
+
+.full-calendar .vc-header,
+.full-calendar--heading {
+    @apply grid;
+    grid-template-areas: "title actions";
+    grid-template-columns: 50% 50%;
+}
+
+.vc-title-layout {
+    @apply pl-24;
+    grid-area: title;
+}
+
+.full-calendar--heading-details {
+    @apply flex flex-row items-center justify-end;
+    grid-area: actions;
+}
+
+.full-calendar .vc-title-layout.align-right {
+    @apply justify-start
+}
 
 
 /* ------------------------------------------------

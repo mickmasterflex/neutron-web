@@ -1,5 +1,5 @@
 <template>
-  <div class="full-calendar--day card shadow-sm m-1 border-2 flex flex-col"
+  <div class="full-calendar--day card card-border m-1 flex flex-col"
        :class="`${hasCap(day.attributes) ? cardColor(day.attributes) : 'card-gray'}`">
     <span class="full-calendar--day-title leading-none px-3 py-2 font-bold text-gray-700 text-lg">
       {{ day.day }}
