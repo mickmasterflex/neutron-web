@@ -1,10 +1,9 @@
 <template>
   <div class="full-calendar mx-auto block relative">
-    <div class="card card-border rounded-xl full-calendar--heading absolute w-full">
-      <div class="full-calendar--heading-details">
-        <slot name="heading-details"></slot>
-      </div>
+    <div class="full-calendar--heading absolute w-1/2 z-10 right-0 flex flex-row items-center justify-end">
+      <slot name="heading-details"></slot>
     </div>
+    <div class="card card-border rounded-xl full-calendar--heading absolute w-full"></div>
     <v-calendar :masks="{ title: 'MMM YYYY' }" title-position="right" :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
       <template v-slot:header-left-button><span class="btn btn-circle btn-md btn-glow btn-blue"><font-awesome-icon icon="angle-left"></font-awesome-icon></span></template>
       <template v-slot:header-right-button><span class="btn btn-circle btn-md btn-glow btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span></template>
