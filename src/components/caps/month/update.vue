@@ -9,6 +9,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
+      <delete-cap :id="id"></delete-cap>
       <button class="btn btn-green flex-grow" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save</button>
     </template>
   </panel-modal>
@@ -16,6 +17,7 @@
 
 <script>
 import panelModal from '@/components/ui/modals/panel-modal'
+import deleteCap from '@/components/caps/month/delete'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
@@ -41,11 +43,12 @@ export default {
       this.id = this.month.id
     },
     close () {
+      this.closeModal()
       this.limit = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.closeModal()
+      this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -89,7 +92,8 @@ export default {
     }
   },
   components: {
-    'panel-modal': panelModal
+    'panel-modal': panelModal,
+    'delete-cap': deleteCap
   },
   destroyed () {
     this.resetSelected()

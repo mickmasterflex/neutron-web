@@ -30,6 +30,13 @@ const actions = {
       .then(response => {
         commit('UPDATE_MONTH_CAP', response.data)
       })
+  },
+  async deleteMonthCap ({ commit }, id) {
+    await axios.delete(`/month-cap/${id}/`)
+      .then(() => {
+        commit('CLOSE_UPDATE_MONTH_CAP_MODAL')
+        commit('REMOVE_MONTH_CAP', id)
+      })
   }
 }
 
@@ -46,6 +53,16 @@ const mutations = {
       capUpdate.limit = updatedCap.limit
       capUpdate.id = updatedCap.id
       state.current_month_caps.splice(index, 1, capUpdate)
+    }
+  },
+  REMOVE_MONTH_CAP: (state, id) => {
+    const index = state.current_month_caps.findIndex(cap => cap.id === id)
+    if (index !== -1) {
+      const deletedCap = state.current_month_caps[index]
+      deletedCap.id = null
+      deletedCap.is_capped = false
+      deletedCap.limit = null
+      state.current_month_caps.splice(index, 1, deletedCap)
     }
   }
 }
