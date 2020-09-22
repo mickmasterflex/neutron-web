@@ -1,20 +1,21 @@
 import axios from '@/axios'
+import monthCapModals from '@/store/modules/caps/month/modals'
+
+const modules = {
+  monthCapModals
+}
 
 const state = {
   current_month_caps: null,
   current_month_date: '',
-  selected_cap_month: null,
-  show_create_month_cap_modal: false,
-  show_update_month_cap_modal: false
+  selected_cap_month: null
 }
 
 const getters = {
   getCurrentMonthCaps: state => state.current_month_caps,
   getSelectedCapMonth: state => state.selected_cap_month,
   getCurrentMonth: state => state.current_month_date,
-  getMonthCapByCurrentMonthDate: state => state.current_month_caps.find(cap => cap.date === state.current_month_date),
-  getShowCreateMonthCapModal: state => state.show_create_month_cap_modal,
-  getShowUpdateMonthCapModal: state => state.show_update_month_cap_modal
+  getMonthCapByCurrentMonthDate: state => state.current_month_caps.find(cap => cap.date === state.current_month_date)
 }
 
 const actions = {
@@ -46,14 +47,11 @@ const mutations = {
       capUpdate.id = updatedCap.id
       state.current_month_caps.splice(index, 1, capUpdate)
     }
-  },
-  SHOW_CREATE_MONTH_CAP_MODAL: (state) => (state.show_create_month_cap_modal = true),
-  CLOSE_CREATE_MONTH_CAP_MODAL: (state) => (state.show_create_month_cap_modal = false),
-  SHOW_UPDATE_MONTH_CAP_MODAL: (state) => (state.show_update_month_cap_modal = true),
-  CLOSE_UPDATE_MONTH_CAP_MODAL: (state) => (state.show_update_month_cap_modal = false)
+  }
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
