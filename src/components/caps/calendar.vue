@@ -1,7 +1,7 @@
 <template>
   <full-calendar :attributes="attributes" @update:to-page="emittedMonth = $event">
     <template v-slot:heading-details>
-      123
+      <month-content v-if="monthCaps"></month-content>
     </template>
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth">
@@ -18,6 +18,7 @@
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 import fullCalendar from '@/components/ui/calendars/full-calendar'
 import day from '@/components/caps/day'
+import month from '@/components/caps/month'
 
 export default {
   data () {
@@ -33,7 +34,7 @@ export default {
           month = '0' + month
         }
         const formattedMonth = this.emittedMonth.year + '-' + month + '-' + '01'
-        this.setCurrentMonth(formattedMonth)
+        this.setCurrentMonthDate(formattedMonth)
         this.fetchCaps()
       }
     }
@@ -41,7 +42,7 @@ export default {
   methods: {
     ...mapMutations({
       setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS',
-      setCurrentMonth: 'SET_CURRENT_MONTH'
+      setCurrentMonthDate: 'SET_CURRENT_MONTH_DATE'
     }),
     ...mapActions({
       fetchCurrentCaps: 'fetchCurrentCaps'
@@ -86,7 +87,8 @@ export default {
   },
   components: {
     'full-calendar': fullCalendar,
-    'day-content': day
+    'day-content': day,
+    'month-content': month
   }
 }
 </script>
