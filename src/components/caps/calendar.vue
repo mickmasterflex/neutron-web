@@ -1,5 +1,5 @@
 <template>
-  <full-calendar :attributes="attributes" @update:to-page="currentMonth = $event">
+  <full-calendar :attributes="attributes" @update:to-page="emittedMonth = $event">
     <template v-slot:heading-details>
       123
     </template>
@@ -22,18 +22,26 @@ import day from '@/components/caps/day'
 export default {
   data () {
     return {
-      currentMonth: {},
-      formattedMonth: ''
+      emittedMonth: {}
     }
   },
   watch: {
-    currentMonth () {
-      this.fetchCaps()
+    emittedMonth () {
+      if (this.emittedMonth) {
+        let month = this.emittedMonth.month
+        if (month < 10) {
+          month = '0' + month
+        }
+        const formattedMonth = this.emittedMonth.year + '-' + month + '-' + '01'
+        this.setCurrentMonth(formattedMonth)
+        this.fetchCaps()
+      }
     }
   },
   methods: {
     ...mapMutations({
-      setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS'
+      setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS',
+      setCurrentMonth: 'SET_CURRENT_MONTH'
     }),
     ...mapActions({
       fetchCurrentCaps: 'fetchCurrentCaps'
@@ -44,28 +52,21 @@ export default {
       }
     },
     fetchCaps () {
-      if (this.currentMonth) {
-        let month = this.currentMonth.month
-        if (month < 10) {
-          month = '0' + month
-        }
-        this.formattedMonth = this.currentMonth.year + '-' + month + '-' + '01'
-
-        if (!this.checkForMonthData) {
-          this.setCapsCalendarParams({ date: this.formattedMonth, months: 2 })
-          this.fetchCurrentCaps()
-        }
+      if (!this.checkForMonthData) {
+        this.setCapsCalendarParams({ date: this.currentMonth, months: 2 })
+        this.fetchCurrentCaps()
       }
     }
   },
   computed: {
     ...mapGetters({
       dayCaps: 'getCurrentDayCaps',
-      monthCaps: 'getCurrentMonthCaps'
+      monthCaps: 'getCurrentMonthCaps',
+      currentMonth: 'getCurrentMonth'
     }),
     checkForMonthData () {
       if (this.monthCaps) {
-        if (this.monthCaps.some(e => e.date === this.formattedMonth)) {
+        if (this.monthCaps.some(e => e.date === this.currentMonth)) {
           return true
         }
       }
