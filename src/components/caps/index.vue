@@ -3,6 +3,7 @@
     <day-cap-create></day-cap-create>
     <day-cap-update></day-cap-update>
     <month-cap-create></month-cap-create>
+    <month-cap-update></month-cap-update>
     <caps-calendar class="my-3"></caps-calendar>
   </div>
 </template>
@@ -12,6 +13,7 @@ import capsCalendar from '@/components/caps/calendar'
 import dayCapCreate from '@/components/caps/day/create'
 import dayCapUpdate from '@/components/caps/day/update'
 import monthCapCreate from '@/components/caps/month/create'
+import monthCapUpdate from '@/components/caps/month/update'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -29,7 +31,8 @@ export default {
     'caps-calendar': capsCalendar,
     'day-cap-create': dayCapCreate,
     'day-cap-update': dayCapUpdate,
-    'month-cap-create': monthCapCreate
+    'month-cap-create': monthCapCreate,
+    'month-cap-update': monthCapUpdate
   },
   methods: {
     ...mapMutations({

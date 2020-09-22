@@ -23,6 +23,12 @@ const actions = {
       .then(response => {
         commit('UPDATE_MONTH_CAP', response.data)
       })
+  },
+  async updateMonthCap ({ commit }, cap) {
+    await axios.put(`/month-cap/${cap.id}/`, cap)
+      .then(response => {
+        commit('UPDATE_MONTH_CAP', response.data)
+      })
   }
 }
 
@@ -31,6 +37,7 @@ const mutations = {
   RESET_CURRENT_MONTH_CAPS: (state) => (state.current_month_caps = null),
   SET_CURRENT_MONTH_DATE: (state, month) => (state.current_month_date = month),
   SET_SELECTED_CAP_MONTH: (state, month) => (state.selected_cap_month = state.current_month_caps.find(cap => cap.date === month.date)),
+  RESET_SELECTED_CAP_MONTH: (state) => (state.selected_cap_month = null),
   UPDATE_MONTH_CAP: (state, updatedCap) => {
     const index = state.current_month_caps.findIndex(cap => cap.date === updatedCap.date)
     if (index !== -1) {

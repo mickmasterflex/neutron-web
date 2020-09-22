@@ -2,7 +2,7 @@
   <div>
     Sold: {{ month.sold }}
     <span v-if="month.limit">
-      Cap: {{ month.limit }}
+      Cap: <span @click="updateCap()" class="text-link">{{ month.limit }}</span>
     </span>
     <button v-else class="btn btn-green" @click="addCap()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Month Cap</button>
   </div>
@@ -15,11 +15,16 @@ export default {
   methods: {
     ...mapMutations({
       setSelectedCapMonth: 'SET_SELECTED_CAP_MONTH',
-      showCreate: 'SHOW_CREATE_MONTH_CAP_MODAL'
+      showCreate: 'SHOW_CREATE_MONTH_CAP_MODAL',
+      showUpdate: 'SHOW_UPDATE_MONTH_CAP_MODAL'
     }),
     addCap () {
       this.setSelectedCapMonth(this.month)
       this.showCreate()
+    },
+    updateCap () {
+      this.setSelectedCapMonth(this.month)
+      this.showUpdate()
     }
   },
   computed: {
