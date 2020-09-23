@@ -6,7 +6,6 @@
         <th class="th">Lower Bound</th>
         <th class="th">Upper Bound</th>
         <th class="th">Payout</th>
-        <th class="th"></th>
       </tr>
       </thead>
       <tbody class="tbody">
