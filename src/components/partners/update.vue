@@ -8,8 +8,8 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
-            <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
-            <table></table>
+          <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
+          <list-tiers v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
         </form>
       </validation-observer>
     </template>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import listTiers from '@/components/pricing-tiers/list'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -28,11 +29,11 @@ export default {
       pricing_tier_group: ''
     }
   },
+  components: {
+    'list-tiers': listTiers
+  },
   props: {
     partner: Object
-  },
-  components: {
-    // 'pricing-tier-groups': getPricingTierGroups
   },
   watch: {
     partner: function () {
@@ -73,8 +74,16 @@ export default {
   computed: {
     ...mapGetters({
       siblings: 'getPartnerSiblings',
-      pricingTierGroups: 'getPricingTierGroups'
+      pricingTierGroups: 'getPricingTierGroups',
+      getPricingTierGroupById: 'getPricingTierGroupById'
     }),
+    currentGroup () {
+      if (this.pricing_tier_group) {
+        return this.getPricingTierGroupById(Number(this.pricing_tier_group))
+      } else {
+        return null
+      }
+    },
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.partner.name || this.parent !== this.partner.parent || this.pricing_tier_group !== this.partner.pricing_tier_group
