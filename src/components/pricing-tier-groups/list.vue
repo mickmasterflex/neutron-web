@@ -8,7 +8,7 @@
         </span>
        </template>
       <template v-slot:content>
-        LIST TIERS HERE
+        <list-tiers :pricingTiers='pricingTierGroup.pricingtier_set'></list-tiers>
       </template>
     </panel-template>
   </div>
@@ -16,11 +16,13 @@
 
 <script>
 import deletePricingTierGroup from '@/components/pricing-tier-groups/delete'
+import listTiers from '@/components/pricing-tiers/list'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
-    'delete-pricing-tier-group': deletePricingTierGroup
+    'delete-pricing-tier-group': deletePricingTierGroup,
+    'list-tiers': listTiers
   },
   computed: {
     ...mapGetters({

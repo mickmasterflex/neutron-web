@@ -9,7 +9,8 @@ const state = {
 const getters = {
   getPricingTierGroups: state => state.pricing_tier_groups,
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
-  getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal
+  getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal,
+  getPricingTierGroupById: (state, id) => { return state.pricing_tier_groups.find(group => group.id === id) }
 }
 const actions = {
   async fetchPricingTierGroups ({ commit }) {
