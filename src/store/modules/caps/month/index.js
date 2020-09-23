@@ -15,7 +15,11 @@ const getters = {
   getCurrentMonthCaps: state => state.current_month_caps,
   getSelectedCapMonth: state => state.selected_cap_month,
   getCurrentMonth: state => state.current_month_date,
-  getMonthCapByCurrentMonthDate: state => state.current_month_caps.find(cap => cap.date === state.current_month_date)
+  getMonthCapByCurrentMonthDate: state => {
+    if (state.current_month_caps) {
+      return state.current_month_caps.find(cap => cap.date === state.current_month_date)
+    }
+  }
 }
 
 const actions = {

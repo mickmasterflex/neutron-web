@@ -2,21 +2,9 @@
   <div class="full-calendar mx-auto block relative">
     <v-calendar title-position="right" :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
       <template v-slot:header="slotProps">
-        <div class="full-calendar--heading card card-border rounded-xl flex flex-row justify-between items-center">
-          <div class="flex flex-row items-center">
-            <pop-over-ref id="month-picker" visibility="click" placement="bottom-start" :isInteractive="true" class="ml-24">
-              <div class="text-link text-3xl">
-                <span>{{ slotProps.shortMonthLabel }}</span>
-                <span>{{ slotProps.monthLabel }}</span>
-                {{ slotProps.yearLabel }}
-              </div>
-            </pop-over-ref>
-          </div>
-          <slot name="heading-details"></slot>
-        </div>
-        <pop-over id="month-picker" content-class="vc-rounded vc-text-xs vc-text-white vc-font-medium vc-bg-gray-800 vc-border vc-border-gray-700 vc-px-2 vc-py-1 vc-shadow">
-          <calendar-nav @input="$refs.calendar.move($event)" :validator="() => true" :value="{month: slotProps.month, year: slotProps.year}"></calendar-nav>
-        </pop-over>
+        <slot name="header" :calendarData="slotProps" :calendarRefs="$refs">
+          <calendar-header :calendarData="slotProps" :calendarRefs="$refs"></calendar-header>
+        </slot>
       </template>
       <template v-slot:header-left-button>
         <span class="btn btn-circle btn-md btn-glow btn-blue m-1"><font-awesome-icon icon="angle-left"></font-awesome-icon></span>
@@ -39,26 +27,65 @@
 </template>
 
 <script>
-import popOver from 'v-calendar/src/components/Popover'
-import popOverRef from 'v-calendar/src/components/PopoverRef'
-import calendarNav from 'v-calendar/src/components/CalendarNav.vue'
+import fullCalendarHeader from '@/components/ui/calendars/full-calendar/header'
 
 export default {
   props: {
     attributes: Array
   },
   components: {
-    'pop-over': popOver,
-    'pop-over-ref': popOverRef,
-    'calendar-nav': calendarNav
-  },
-  data () {
-    return {
-      popOverProps: {
-        isInteractive: true,
-        placement: 'bottom-start'
-      }
-    }
+    'calendar-header': fullCalendarHeader
   }
 }
 </script>
+
+<style>
+  .full-calendar .vc-container {
+    background: none;
+    border: none;
+  }
+
+  /* Arrow Positioning and Resets */
+  .full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
+  .full-calendar .vc-weeks { @apply mt-4 }
+
+  /* Days out of scope of month */
+  .full-calendar .in-prev-month > div,
+  .full-calendar .in-next-month > div { opacity: 1 }
+
+  /* Sizing Days and Calendar */
+  .full-calendar { max-width: 600px; }
+
+  .full-calendar--day {
+    min-height: 120px;
+    width: 75px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .full-calendar {
+      max-width: 771px;
+    }
+    .full-calendar--day {
+      min-height: 115px;
+      width: 100px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .full-calendar {
+      max-width: 1013px;
+    }
+    .full-calendar--day {
+      min-height: 135px;
+      width: 135px;
+    }
+  }
+
+  /* Full Calendar Header */
+  .full-calendar .vc-arrows-container,
+  .full-calendar--header {
+    padding: 2rem 1.25rem;
+    height: 120px;
+  }
+  .full-calendar .vc-popover-caret { opacity: 0 }
+</style>

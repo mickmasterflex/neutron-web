@@ -1,7 +1,7 @@
 <template>
   <full-calendar :attributes="attributes" @update:to-page="emittedMonth = $event">
-    <template v-slot:heading-details>
-      <month-content v-if="monthCaps"></month-content>
+    <template v-slot:header="slotProps">
+      <month-content :calendarData="slotProps.calendarData" :calendarRefs="slotProps.calendarRefs"></month-content>
     </template>
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth">
@@ -16,7 +16,7 @@
 
 <script>
 import { mapMutations, mapGetters, mapActions } from 'vuex'
-import fullCalendar from '@/components/ui/calendars/full-calendar'
+import fullCalendar from '@/components/ui/calendars/full-calendar/index'
 import day from '@/components/caps/day'
 import month from '@/components/caps/month'
 

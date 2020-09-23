@@ -421,72 +421,9 @@
 --------------------------------------------------- */
 
 /* V-Calendar */
-:root {
-    --full-calendar-header-padding: 2rem 1.25rem;
-}
-
 .vc-container {
     @apply font-sans;
 }
-
-.full-calendar .vc-container {
-    background: none;
-    border: none;
-    --header-padding: var(--full-calendar-header-padding);
-    --title-padding: 0
-}
-
-/* Heading Typography */
-.full-calendar .vc-title { @apply text-3xl text-link font-normal }
-.full-calendar .vc-title:hover { @apply opacity-100 }
-
-/* Arrow Positioning and Resets */
-.full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
-.full-calendar .vc-weeks { @apply mt-4 }
-
-/* Days out of scope of month */
-.full-calendar .in-prev-month > div,
-.full-calendar .in-next-month > div { opacity: 1 }
-
-/* Sizing Days and Calendar */
-.full-calendar { max-width: 600px; }
-
-.full-calendar--day {
-    min-height: 120px;
-    width: 75px;
-}
-
-@media screen and (min-width: 1024px) {
-    .full-calendar {
-        max-width: 771px;
-    }
-    .full-calendar--day {
-        min-height: 115px;
-        width: 100px;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .full-calendar {
-        max-width: 1013px;
-    }
-    .full-calendar--day {
-        min-height: 135px;
-        width: 135px;
-    }
-}
-
-/* Full Calendar Month Heading */
-.full-calendar .vc-title-layout { @apply pl-24 }
-.full-calendar .vc-title-layout.align-right { @apply justify-start }
-
-.full-calendar .vc-arrows-container,
-.full-calendar--heading { padding: var(--full-calendar-header-padding) }
-
-.full-calendar .vc-header,
-.full-calendar .vc-arrows-container,
-.full-calendar--heading { height: 120px }
-
 
 /* ------------------------------------------------
     Tailwind Utilities
