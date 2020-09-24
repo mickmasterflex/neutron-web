@@ -1,13 +1,13 @@
 <template>
   <div class="full-calendar--day card card-border m-1 flex flex-col"
        :class="`${hasCap(day.attributes) ? cardColor(day.attributes) : 'card-gray'}`">
-    <span class="full-calendar--day-title leading-none px-3 py-2 font-bold text-gray-700 text-lg">
+    <span class="full-calendar--day-title card-colored-text leading-none px-3 py-2 font-bold text-gray-700 text-lg">
       {{ day.day }}
     </span>
-    <span class="card-highlight w-full text-center font-bold">
-      {{Number(day.attributes[0].customData.sold)}} sold
+    <span class="w-full text-center font-bold text-gray-700">
+      <span class="card-colored-text">Sold: </span>{{Number(day.attributes[0].customData.sold)}}
     </span>
-    <span class="flex-grow flex flex-col items-center justify-center p-1">
+    <span class="flex-grow flex flex-col pb-3 items-center justify-center p-1">
       <span v-if="hasCap(day.attributes)" class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light" @click="updateCap(day)">
         {{Number(day.attributes[0].customData.limit).toLocaleString()}}
       </span>
