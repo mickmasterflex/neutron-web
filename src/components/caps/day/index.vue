@@ -4,10 +4,10 @@
     <span class="full-calendar--day-title card-colored-text leading-none px-3 py-2 font-bold text-gray-700 text-lg">
       {{ day.day }}
     </span>
-    <span class="w-full text-center font-bold text-gray-700">
+    <span class="w-full text-center font-bold text-gray-700 text-sm md:text-base xl:text-lg">
       <span class="card-colored-text">Sold: </span>{{Number(day.attributes[0].customData.sold)}}
     </span>
-    <span class="flex-grow flex flex-col pb-3 items-center justify-center p-1">
+    <span class="flex-grow flex flex-col pb-4 items-center justify-center px-1">
       <span v-if="hasCap(day.attributes)" class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light" @click="updateCap(day)">
         {{Number(day.attributes[0].customData.limit).toLocaleString()}}
       </span>

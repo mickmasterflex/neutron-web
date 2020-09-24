@@ -4,8 +4,8 @@
       <div class="flex flex-row items-center">
         <pop-over-ref id="month-picker" visibility="click" placement="bottom-start" :isInteractive="true" class="ml-24">
           <div class="text-link text-3xl flex flex-row">
-            <span class="block md:hidden lg:hidden xl:hidden">{{ calendarData.shortMonthLabel }}</span>
-            <span class="hidden md:block lg:block xl:block">{{ calendarData.monthLabel }}</span>
+            <span class="block lg:hidden xl:hidden">{{ calendarData.shortMonthLabel }}</span>
+            <span class="hidden lg:block xl:block">{{ calendarData.monthLabel }}</span>
             <span class="ml-1">{{ calendarData.yearLabel }}</span>
           </div>
         </pop-over-ref>
