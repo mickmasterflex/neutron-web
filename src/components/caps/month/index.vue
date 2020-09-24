@@ -1,5 +1,5 @@
 <template>
-  <calendar-header :calendarRefs="calendarRefs" :calendarData="calendarData" :headerClass="`${hasCap() ? cardColor(month) :'card-gray'}`">
+  <calendar-header :calendarRefs="calendarRefs" :calendarData="calendarData" :headerClass="`${hasCap() ? monthCardColor(month) :'card-gray'}`">
     <template v-slot:header-right>
       <div class="flex flex-row" v-if="month">
         <span class="mr-3 text-gray-700">
@@ -16,6 +16,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import { cardColor } from '@/mixins/card-color'
 import fullCalendarHeader from '@/components/ui/calendars/full-calendar/header'
 
 export default {
@@ -23,6 +24,7 @@ export default {
     calendarData: Object,
     calendarRefs: Object
   },
+  mixins: [cardColor],
   methods: {
     ...mapMutations({
       setSelectedCapMonth: 'SET_SELECTED_CAP_MONTH',
@@ -42,18 +44,8 @@ export default {
         return this.month.id !== null
       }
     },
-    cardColor (attributes) {
-      const limit = attributes.limit
-      const leads = attributes.sold
-      if (limit === leads) {
-        return 'card-green'
-      } else if (limit > leads) {
-        return 'card-yellow'
-      } else if (limit < leads) {
-        return 'card-red'
-      } else {
-        return 'card-gray'
-      }
+    monthCardColor (attributes) {
+      return this.cardColor(attributes.limit, attributes.sold)
     }
   },
   computed: {

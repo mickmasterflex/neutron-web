@@ -1,6 +1,6 @@
 <template>
   <div class="full-calendar--day card card-border m-1 flex flex-col"
-       :class="`${hasCap(day.attributes) ? cardColor(day.attributes) : 'card-gray'}`">
+       :class="`${hasCap(day.attributes) ? dayCardColor(day.attributes[0].customData) : 'card-gray'}`">
     <span class="full-calendar--day-title card-colored-text leading-none px-3 py-2 font-bold text-gray-700 text-lg">
       {{ day.day }}
     </span>
@@ -18,14 +18,13 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import { cardColor } from '@/mixins/card-color'
 
 export default {
   props: {
     day: Object
   },
-  computed: {
-
-  },
+  mixins: [cardColor],
   methods: {
     ...mapMutations({
       showCreate: 'SHOW_CREATE_DAY_CAP_MODAL',
@@ -45,18 +44,8 @@ export default {
       this.setSelectedCapDay(day)
       this.showUpdate()
     },
-    cardColor (attributes) {
-      const limit = attributes[0].customData.limit
-      const leads = attributes[0].customData.sold
-      if (limit === leads) {
-        return 'card-green'
-      } else if (limit > leads) {
-        return 'card-yellow'
-      } else if (limit < leads) {
-        return 'card-red'
-      } else {
-        return 'card-gray'
-      }
+    dayCardColor (attributes) {
+      return this.cardColor(attributes.limit, attributes.sold)
     }
   }
 }
