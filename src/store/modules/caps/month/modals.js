@@ -1,8 +1,4 @@
-
 const state = {
-  current_month_caps: null,
-  current_month_date: '',
-  selected_cap_month: null,
   show_create_month_cap_modal: false,
   show_update_month_cap_modal: false
 }
