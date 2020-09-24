@@ -129,7 +129,10 @@
     Cards
 --------------------------------------------------- */
 
-.card { @apply shadow bg-white rounded-lg; }
+.card {
+    @apply shadow bg-white rounded-lg;
+    --card-hard-shadow: 2px 2px 0
+}
 .card-sm { @apply p-1; }
 .card-base { @apply p-4; }
 .card-actions { @apply flex flex-row justify-end items-center mt-4 }
@@ -143,25 +146,25 @@
 
 .card-red {
     @apply border-red-500;
-    box-shadow: 1px 1px 0 theme('colors.red.500');
+    box-shadow: var(--card-hard-shadow) theme('colors.red.500');
 }
 .card-red .card-colored-text { @apply text-red-600 }
 
 .card-yellow {
     @apply border-yellow-500;
-    box-shadow: 1px 1px 0 theme('colors.yellow.500');
+    box-shadow: var(--card-hard-shadow) theme('colors.yellow.500');
 }
 .card-yellow .card-colored-text { @apply text-yellow-600 }
 
 .card-green {
     @apply border-green-500;
-    box-shadow: 1px 1px 0 theme('colors.green.500');
+    box-shadow: var(--card-hard-shadow) theme('colors.green.500');
 }
 .card-green .card-colored-text { @apply text-green-600 }
 
 .card-blue {
     @apply border-blue-500;
-    box-shadow: 1px 1px 0 theme('colors.blue.500');
+    box-shadow: var(--card-hard-shadow) theme('colors.blue.500');
 }
 .card-blue .card-colored-text { @apply text-blue-600 }
 
