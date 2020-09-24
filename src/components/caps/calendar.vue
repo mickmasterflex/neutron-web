@@ -21,11 +21,6 @@ import day from '@/components/caps/day'
 import month from '@/components/caps/month'
 
 export default {
-  data () {
-    return {
-      emittedMonth: {}
-    }
-  },
   methods: {
     ...mapMutations({
       setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS',
