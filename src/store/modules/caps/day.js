@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  current_day_caps: null,
+  current_day_caps: [],
   selected_cap_day: null,
   show_create_day_cap_modal: false,
   show_update_day_cap_modal: false
@@ -38,7 +38,7 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_DAY_CAPS: (state, caps) => (state.current_day_caps = caps),
-  RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = null),
+  RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = []),
   UPDATE_DAY_CAP: (state, updatedCap) => {
     const index = state.current_day_caps.findIndex(cap => cap.date === updatedCap.date)
     if (index !== -1) {
