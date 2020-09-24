@@ -434,9 +434,7 @@
 --------------------------------------------------- */
 
 /* V-Calendar */
-.vc-container {
-    @apply font-sans;
-}
+.vc-container { @apply font-sans }
 
 /* ------------------------------------------------
     Tailwind Utilities
