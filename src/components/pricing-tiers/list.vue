@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="pricingTiers" class="table">
+    <table v-if="pricingTiers.length" class="table">
       <thead>
       <tr>
         <th class="th">Lower Bound</th>
@@ -16,9 +16,7 @@
       </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
+    <table-empty-state v-else heading="No Tiers Added" copy="Edit the pricing tier group to add tiers"></table-empty-state>
   </div>
 </template>
 

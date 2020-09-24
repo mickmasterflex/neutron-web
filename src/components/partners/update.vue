@@ -78,11 +78,7 @@ export default {
       getPricingTierGroupById: 'getPricingTierGroupById'
     }),
     currentGroup () {
-      if (this.pricing_tier_group) {
-        return this.getPricingTierGroupById(Number(this.pricing_tier_group))
-      } else {
-        return null
-      }
+      return this.getPricingTierGroupById(Number(this.pricing_tier_group))
     },
     unsavedChanges () {
       if (this.name) {
