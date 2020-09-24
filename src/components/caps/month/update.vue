@@ -1,6 +1,6 @@
 <template>
   <panel-modal :show="showModal" @close="close">
-    <template v-slot:header>Holo</template>
+    <template v-slot:header>{{currentCapMonthFormats.MM_YYYY}}</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
@@ -39,8 +39,8 @@ export default {
       update: 'updateMonthCap'
     }),
     setCap () {
-      this.limit = this.month.limit
-      this.id = this.month.id
+      this.limit = this.monthCap.limit
+      this.id = this.monthCap.id
     },
     close () {
       this.closeModal()
@@ -56,7 +56,7 @@ export default {
           this.update({
             limit: this.limit,
             id: this.id,
-            date: this.month.date,
+            date: this.monthCap.date,
             parent: this.parent
           }).then(() => {
             this.close()
@@ -80,12 +80,13 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateMonthCapModal',
-      month: 'getSelectedCapMonth',
-      parent: 'getCurrentCapParent'
+      monthCap: 'getSelectedCapMonth',
+      parent: 'getCurrentCapParent',
+      currentCapMonthFormats: 'getCurrentCapMonthFormats'
     }),
     unsavedChanges () {
       if (this.month) {
-        return this.limit !== this.month.limit
+        return this.limit !== this.monthCap.limit
       } else {
         return false
       }

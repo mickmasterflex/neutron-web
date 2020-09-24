@@ -6,18 +6,21 @@ const modules = {
 }
 
 const state = {
-  current_month_caps: null,
-  current_month_date: '',
+  current_month_caps: [],
+  current_cap_month_formats: {
+    YYYY_MM_DD: 'YYYY_MM_DD',
+    MM_YYYY: 'MM_YYYY'
+  },
   selected_cap_month: null
 }
 
 const getters = {
   getCurrentMonthCaps: state => state.current_month_caps,
   getSelectedCapMonth: state => state.selected_cap_month,
-  getCurrentMonth: state => state.current_month_date,
+  getCurrentCapMonthFormats: state => state.current_cap_month_formats,
   getMonthCapByCurrentMonthDate: state => {
     if (state.current_month_caps) {
-      return state.current_month_caps.find(cap => cap.date === state.current_month_date)
+      return state.current_month_caps.find(cap => cap.date === state.current_cap_month_formats.YYYY_MM_DD)
     }
   }
 }
@@ -46,8 +49,14 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_MONTH_CAPS: (state, caps) => (state.current_month_caps = caps),
-  RESET_CURRENT_MONTH_CAPS: (state) => (state.current_month_caps = null),
-  SET_CURRENT_MONTH_DATE: (state, month) => (state.current_month_date = month),
+  RESET_CURRENT_MONTH_CAPS: (state) => (state.current_month_caps = []),
+  SET_CURRENT_CAP_MONTH_FORMATS: (state, month) => (state.current_cap_month_formats = month),
+  RESET_CURRENT_CAP_MONTH_FORMATS: (state) => {
+    state.current_cap_month_formats = {
+      YYYY_MM_DD: 'YYYY_MM_DD',
+      MM_YYYY: 'MM_YYYY'
+    }
+  },
   SET_SELECTED_CAP_MONTH: (state, month) => (state.selected_cap_month = state.current_month_caps.find(cap => cap.date === month.date)),
   RESET_SELECTED_CAP_MONTH: (state) => (state.selected_cap_month = null),
   UPDATE_MONTH_CAP: (state, updatedCap) => {

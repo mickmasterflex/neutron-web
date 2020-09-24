@@ -1,5 +1,5 @@
 <template>
-  <full-calendar :attributes="attributes" @update:to-page="emittedMonth = $event">
+  <full-calendar :attributes="mappedDayCaps" @update:to-page="capInitialization($event.month, $event.year)">
     <template v-slot:header="slotProps">
       <month-content :calendarData="slotProps.calendarData" :calendarRefs="slotProps.calendarRefs"></month-content>
     </template>
@@ -26,36 +26,36 @@ export default {
       emittedMonth: {}
     }
   },
-  watch: {
-    emittedMonth () {
-      if (this.emittedMonth) {
-        let month = this.emittedMonth.month
-        if (month < 10) {
-          month = '0' + month
-        }
-        const formattedMonth = this.emittedMonth.year + '-' + month + '-' + '01'
-        this.setCurrentMonthDate(formattedMonth)
-        this.fetchCaps()
-      }
-    }
-  },
   methods: {
     ...mapMutations({
       setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS',
-      setCurrentMonthDate: 'SET_CURRENT_MONTH_DATE'
+      setCurrentMonthFormats: 'SET_CURRENT_CAP_MONTH_FORMATS'
     }),
     ...mapActions({
       fetchCurrentCaps: 'fetchCurrentCaps'
     }),
-    dayHasAttributes (attributes) {
-      if (attributes) {
-        return !!attributes[0]
+    capInitialization (M, YYYY) {
+      let MM = M
+      if (M < 10) {
+        MM = '0' + M
       }
+      const dateFormats = {
+        YYYY_MM_DD: YYYY + '-' + MM + '-' + '01',
+        MM_YYYY: MM + '/' + YYYY
+      }
+
+      this.setCurrentMonthFormats(dateFormats)
+      this.fetchCaps()
     },
     fetchCaps () {
       if (!this.checkForMonthData) {
-        this.setCapsCalendarParams({ date: this.currentMonth, months: 2 })
+        this.setCapsCalendarParams({ date: this.currentMonthFormats.YYYY_MM_DD, months: 2 })
         this.fetchCurrentCaps()
+      }
+    },
+    dayHasAttributes (attributes) {
+      if (attributes) {
+        return !!attributes[0]
       }
     }
   },
@@ -63,17 +63,12 @@ export default {
     ...mapGetters({
       dayCaps: 'getCurrentDayCaps',
       monthCaps: 'getCurrentMonthCaps',
-      currentMonth: 'getCurrentMonth'
+      currentMonthFormats: 'getCurrentCapMonthFormats'
     }),
     checkForMonthData () {
-      if (this.monthCaps) {
-        if (this.monthCaps.some(e => e.date === this.currentMonth)) {
-          return true
-        }
-      }
-      return false
+      return !!this.monthCaps.some(e => e.date === this.currentMonthFormats.YYYY_MM_DD)
     },
-    attributes () {
+    mappedDayCaps () {
       if (this.dayCaps) {
         return this.dayCaps.map(cap => ({
           key: `cap.${cap.id}`,

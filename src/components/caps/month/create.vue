@@ -1,7 +1,7 @@
 <template>
   <panel-modal :show="showModal" @close="close">
     <template v-slot:header>
-      <p v-if="month">{{month.date}}</p>
+      <p v-if="monthCap">{{currentCapMonthFormats.MM_YYYY}}</p>
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -31,7 +31,7 @@ export default {
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_MONTH_CAP_MODAL',
-      resetSelected: 'RESET_SELECTED_CAP_MONTH'
+      resetCapMonth: 'RESET_SELECTED_CAP_MONTH'
     }),
     ...mapActions({
       create: 'createMonthCap'
@@ -47,7 +47,7 @@ export default {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.create({
-            date: this.month.date,
+            date: this.monthCap.date,
             limit: this.limit,
             parent: this.parent
           }).then(() => {
@@ -60,15 +60,16 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateMonthCapModal',
-      month: 'getSelectedCapMonth',
-      parent: 'getCurrentCapParent'
+      monthCap: 'getSelectedCapMonth',
+      parent: 'getCurrentCapParent',
+      currentCapMonthFormats: 'getCurrentCapMonthFormats'
     })
   },
   components: {
     'panel-modal': panelModal
   },
   destroyed () {
-    this.resetSelected()
+    this.resetCapMonth()
   }
 }
 </script>

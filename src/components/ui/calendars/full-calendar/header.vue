@@ -10,7 +10,7 @@
           </div>
         </pop-over-ref>
       </div>
-      <slot name="header-right"></slot>
+      <slot name="header-right" :date="{month: calendarData.month, year: calendarData.year}"></slot>
     </div>
     <pop-over id="month-picker" content-class="vc-rounded vc-text-xs vc-text-white vc-font-medium vc-bg-gray-800 vc-border vc-border-gray-700 vc-px-2 vc-py-1 vc-shadow">
       <calendar-nav @input="calendarRefs.calendar.move($event)" :validator="() => true" :value="{month: calendarData.month, year: calendarData.year}"></calendar-nav>
