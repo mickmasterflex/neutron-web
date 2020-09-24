@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-1">
     <div :class="`${headerClass} full-calendar--header card card-border rounded-xl flex flex-row justify-between items-center`">
       <div class="flex flex-row items-center">
         <pop-over-ref id="month-picker" visibility="click" placement="bottom-start" :isInteractive="true" class="ml-24">

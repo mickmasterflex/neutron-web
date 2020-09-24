@@ -141,16 +141,28 @@
 .card-gray { @apply border-gray-300 }
 .card-gray .card-colored-text { @apply text-gray-600 }
 
-.card-red { @apply border-red-500 }
+.card-red {
+    @apply border-red-500;
+    box-shadow: 1px 1px 0 theme('colors.red.500');
+}
 .card-red .card-colored-text { @apply text-red-600 }
 
-.card-yellow { @apply border-yellow-500 }
+.card-yellow {
+    @apply border-yellow-500;
+    box-shadow: 1px 1px 0 theme('colors.yellow.500');
+}
 .card-yellow .card-colored-text { @apply text-yellow-600 }
 
-.card-green { @apply border-green-500 }
+.card-green {
+    @apply border-green-500;
+    box-shadow: 1px 1px 0 theme('colors.green.500');
+}
 .card-green .card-colored-text { @apply text-green-600 }
 
-.card-blue { @apply border-blue-500 }
+.card-blue {
+    @apply border-blue-500;
+    box-shadow: 1px 1px 0 theme('colors.blue.500');
+}
 .card-blue .card-colored-text { @apply text-blue-600 }
 
 
