@@ -18,8 +18,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
@@ -42,11 +42,6 @@ export default {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_USER_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.first_name = ''
       this.last_name = ''

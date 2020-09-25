@@ -22,8 +22,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
@@ -69,11 +69,6 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
-    },
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
     },
     submitForm () {
       this.$refs.form.validate().then(success => {

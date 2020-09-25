@@ -19,9 +19,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
@@ -76,11 +76,6 @@ export default {
       resetCurrentBaseTextField: 'RESET_CURRENT_BASE_FIELD',
       closeModal: 'CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.resetCurrentBaseTextField()
       this.$nextTick(() => {

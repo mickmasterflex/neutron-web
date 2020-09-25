@@ -15,6 +15,9 @@ module.exports = {
       borderWidth: {
         3: '3px'
       },
+      inset: {
+        '30%': '30%'
+      },
       colors: {
         black: {
           100: '#151515',

@@ -16,7 +16,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 import fileField from '@/components/ui/forms/validation-fields/file-field'
 
 export default {

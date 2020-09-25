@@ -29,7 +29,7 @@ import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
 import deleteField from '@/components/forms/fields/delete'
 import fieldListItem from '@/components/forms/fields/list-item'
 import draggable from 'vuedraggable'
-import { dragOptions } from '@/mixins/dragOptions'
+import { dragOptions } from '@/mixins/drag-options'
 import { mapGetters } from 'vuex'
 
 export default {

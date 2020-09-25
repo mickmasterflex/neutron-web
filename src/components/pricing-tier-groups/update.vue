@@ -16,9 +16,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
-import { enterKeyListener } from '@/mixins/enterKeyListener'
-import { checkUnsavedChangesInModal } from '@/mixins/checkUnsavedChangesInModal'
+import { setResponseErrors } from '@/mixins/set-response-errors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
   data () {
@@ -58,11 +58,6 @@ export default {
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
       closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.resetCurrentPricingTierGroup()
       this.$nextTick(() => {

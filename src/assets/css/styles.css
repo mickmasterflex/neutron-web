@@ -134,6 +134,23 @@
 .card-base { @apply p-4; }
 .card-actions { @apply flex flex-row justify-end items-center mt-4 }
 
+/* Colors */
+
+.card-gray { @apply border-gray-300 }
+.card-gray .card-highlight { @apply bg-gray-100 }
+
+.card-red { @apply border-red-500 }
+.card-red .card-highlight { @apply bg-red-500 text-white }
+
+.card-yellow { @apply border-yellow-500 }
+.card-yellow .card-highlight { @apply bg-yellow-500 text-white }
+
+.card-green { @apply border-green-500 }
+.card-green .card-highlight { @apply bg-green-500 text-white }
+
+.card-blue { @apply border-blue-500 }
+.card-blue .card-highlight { @apply bg-blue-500 text-white }
+
 
 /* ------------------------------------------------
     Buttons
@@ -146,21 +163,35 @@
     -webkit-appearance: button;
     height: 45px;
 }
+
 .btn:disabled { @apply cursor-not-allowed }
 .btn + .btn { @apply ml-2; }
 .btn:focus  { @apply outline-none shadow-outline; }
+
+.btn-circle {
+    @apply rounded-full p-1 flex flex-col items-center justify-center;
+    width: 24px;
+    height: 24px;
+    min-width: 23px;
+    font-size: .75rem;
+}
 
 .btn-lg {
     @apply text-lg font-light px-4 py-3;
     height: 53px;
 }
 
-.btn-circle {
-    @apply rounded-full p-1 flex flex-col items-center justify-center;
-    width: 23px;
-    height: 23px;
-    min-width: 23px;
-    font-size: .75rem;
+.btn-lg.btn-circle {
+    width: 53px;
+}
+
+.btn-md {
+    height: 36px;
+    @apply text-base;
+}
+
+.btn-md.btn-circle {
+    width: 36px;
 }
 
 /* Standard Buttons */
@@ -212,15 +243,15 @@
 .btn-hollow-default:hover  { @apply bg-gray-100; }
 .btn-hollow-default:active { @apply bg-gray-100; }
 
-.btn-hollow-blue           { @apply text-blue-400 border-blue-300; }
+.btn-hollow-blue           { @apply text-blue-500 border-blue-400; }
 .btn-hollow-blue:hover     { @apply text-white bg-blue-500 border-blue-500; }
 .btn-hollow-blue:active    { @apply bg-blue-500 border-blue-500; }
 
-.btn-hollow-green          { @apply text-green-400 border-green-300; }
+.btn-hollow-green          { @apply text-green-500 border-green-400; }
 .btn-hollow-green:hover    { @apply text-white bg-green-500 border-green-500; }
 .btn-hollow-green:active   { @apply bg-green-500 border-green-500; }
 
-.btn-hollow-red            { @apply text-red-400 border-red-300; }
+.btn-hollow-red            { @apply text-red-500 border-red-400; }
 .btn-hollow-red:hover      { @apply text-white bg-red-500 border-red-500; }
 .btn-hollow-red:active     { @apply bg-red-500 border-red-500; }
 
@@ -378,6 +409,14 @@
     .image-meta-li .img-container { @apply w-1/2 }
     .image-meta-li .img-meta { @apply ml-5 mt-0 w-1/2 }
 }
+
+/* ------------------------------------------------
+    Vendor
+--------------------------------------------------- */
+
+/* V-Calendar */
+.vc-container { @apply font-sans }
+
 
 /* ------------------------------------------------
     Tailwind Utilities

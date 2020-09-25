@@ -18,7 +18,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {

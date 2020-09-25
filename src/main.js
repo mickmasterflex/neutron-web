@@ -3,19 +3,20 @@ import Vue from 'vue'
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 // eslint-disable-next-line camelcase
-import { required, email, integer, alpha_dash, image } from 'vee-validate/dist/rules'
+import { required, email, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
+import VCalendar from 'v-calendar'
 import 'animate.css'
 import '@/assets/css/styles.css'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -85,6 +86,16 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
+extend('url', {
+  message: 'Must be a valid URL',
+  validate: (value) => {
+    const regex = RegExp('[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
+    return regex.test(value)
+  }
+})
+
+// eslint-disable-next-line camelcase
+extend('min_value', { ...min_value, message: 'Must be {min} or greater' })
 // eslint-disable-next-line camelcase
 extend('alpha_dash', { ...alpha_dash, message: 'Only use alphabetic characters, numbers, dashes or underscores' })
 Vue.component('validation-provider', ValidationProvider)
@@ -105,8 +116,13 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload)
+library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faDna, faCog, faKey, faAtom, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+/* -----------------------------------------------
+  V-Calendar
+-------------------------------------------------- */
+Vue.use(VCalendar, {})
 
 /* -----------------------------------------------
   Root Vue Instance
