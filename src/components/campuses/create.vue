@@ -90,11 +90,6 @@ export default {
       })
       this.closeModal()
     },
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {

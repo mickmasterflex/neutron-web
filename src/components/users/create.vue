@@ -42,11 +42,6 @@ export default {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_USER_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.first_name = ''
       this.last_name = ''
