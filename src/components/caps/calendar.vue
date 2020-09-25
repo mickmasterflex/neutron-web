@@ -1,9 +1,12 @@
 <template>
-  <full-calendar :attributes="attributes" @update:to-page="currentMonth = $event">
+  <full-calendar :attributes="mappedDayCaps" @update:to-page="capInitialization($event.month, $event.year)">
+    <template v-slot:header="slotProps">
+      <month-content :calendarData="slotProps.calendarData" :calendarRefs="slotProps.calendarRefs"></month-content>
+    </template>
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth">
         <day-content :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
-        <span v-else class="full-calendar--day rounded-lg m-1 border-2 flex flex-row items-center justify-center">
+        <span v-else class="full-calendar--day m-1 border-2 flex flex-row items-center justify-center">
           <font-awesome-icon class="text-gray-700 text-lg" icon="spinner" spin></font-awesome-icon>
         </span>
       </div>
@@ -13,64 +16,56 @@
 
 <script>
 import { mapMutations, mapGetters, mapActions } from 'vuex'
-import fullCalendar from '@/components/ui/calendars/full-calendar'
+import fullCalendar from '@/components/ui/calendars/full-calendar/index'
 import day from '@/components/caps/day'
+import month from '@/components/caps/month'
 
 export default {
-  data () {
-    return {
-      currentMonth: {},
-      formattedMonth: ''
-    }
-  },
-  watch: {
-    currentMonth () {
-      this.fetchCaps()
-    }
-  },
   methods: {
     ...mapMutations({
-      setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS'
+      setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS',
+      setCurrentMonthFormats: 'SET_CURRENT_CAP_MONTH_FORMATS'
     }),
     ...mapActions({
       fetchCurrentCaps: 'fetchCurrentCaps'
     }),
+    capInitialization (M, YYYY) {
+      let MM = M
+      if (M < 10) {
+        MM = '0' + M
+      }
+      const dateFormats = {
+        YYYY_MM_DD: YYYY + '-' + MM + '-' + '01',
+        MM_YYYY: MM + '/' + YYYY
+      }
+
+      this.setCurrentMonthFormats(dateFormats)
+      this.fetchCaps()
+    },
+    fetchCaps () {
+      if (!this.checkForMonthData) {
+        this.setCapsCalendarParams({ date: this.currentMonthFormats.YYYY_MM_DD, months: 2 })
+        this.fetchCurrentCaps()
+      }
+    },
     dayHasAttributes (attributes) {
       if (attributes) {
         return !!attributes[0]
-      }
-    },
-    fetchCaps () {
-      if (this.currentMonth) {
-        let month = this.currentMonth.month
-        if (month < 10) {
-          month = '0' + month
-        }
-        this.formattedMonth = this.currentMonth.year + '-' + month + '-' + '01'
-
-        if (!this.checkForMonthData) {
-          this.setCapsCalendarParams({ date: this.formattedMonth, months: 2 })
-          this.fetchCurrentCaps()
-        }
       }
     }
   },
   computed: {
     ...mapGetters({
-      caps: 'getCurrentDayCaps',
-      monthCaps: 'getCurrentMonthCaps'
+      dayCaps: 'getCurrentDayCaps',
+      monthCaps: 'getCurrentMonthCaps',
+      currentMonthFormats: 'getCurrentCapMonthFormats'
     }),
     checkForMonthData () {
-      if (this.monthCaps) {
-        if (this.monthCaps.some(e => e.date === this.formattedMonth)) {
-          return true
-        }
-      }
-      return false
+      return !!this.monthCaps.some(e => e.date === this.currentMonthFormats.YYYY_MM_DD)
     },
-    attributes () {
-      if (this.caps) {
-        return this.caps.map(cap => ({
+    mappedDayCaps () {
+      if (this.dayCaps) {
+        return this.dayCaps.map(cap => ({
           key: `cap.${cap.id}`,
           dates: cap.date,
           customData: cap
@@ -82,7 +77,8 @@ export default {
   },
   components: {
     'full-calendar': fullCalendar,
-    'day-content': day
+    'day-content': day,
+    'month-content': month
   }
 }
 </script>

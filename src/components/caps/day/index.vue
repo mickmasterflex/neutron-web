@@ -1,31 +1,30 @@
 <template>
-  <div class="full-calendar--day card shadow-sm m-1 border-2 flex flex-col"
-       :class="`${hasCap(day.attributes) ? cardColor(day.attributes) : 'card-gray'}`">
-    <span class="full-calendar--day-title leading-none px-3 py-2 font-bold text-gray-700 text-lg">
+  <div class="full-calendar--day card card-border m-1 flex flex-col"
+       :class="`${hasCap(day.attributes) ? dayCardColor(day.attributes[0].customData) : 'card-gray'}`">
+    <span class="full-calendar--day-title card-colored-text leading-none px-3 py-2 font-bold text-gray-700 text-lg">
       {{ day.day }}
     </span>
-    <span class="card-highlight w-full text-center font-bold">
-      {{Number(day.attributes[0].customData.sold)}} sold
+    <span class="w-full text-center font-bold text-gray-700 text-sm md:text-base xl:text-lg">
+      <span class="card-colored-text">Sold: </span>{{Number(day.attributes[0].customData.sold)}}
     </span>
-    <span class="flex-grow flex flex-col items-center justify-center p-1">
+    <span class="flex-grow flex flex-col pb-4 items-center justify-center px-1">
       <span v-if="hasCap(day.attributes)" class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light" @click="updateCap(day)">
         {{Number(day.attributes[0].customData.limit).toLocaleString()}}
       </span>
-      <button v-else class="btn btn-hollow-green btn-md btn-circle" @click="addCap(day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
+      <button v-else class="btn btn-green btn-glow btn-md btn-circle" @click="addCap(day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
     </span>
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import { cardColor } from '@/mixins/card-color'
 
 export default {
   props: {
     day: Object
   },
-  computed: {
-
-  },
+  mixins: [cardColor],
   methods: {
     ...mapMutations({
       showCreate: 'SHOW_CREATE_DAY_CAP_MODAL',
@@ -45,18 +44,8 @@ export default {
       this.setSelectedCapDay(day)
       this.showUpdate()
     },
-    cardColor (attributes) {
-      const limit = attributes[0].customData.limit
-      const leads = attributes[0].customData.sold
-      if (limit === leads) {
-        return 'card-green'
-      } else if (limit > leads) {
-        return 'card-yellow'
-      } else if (limit < leads) {
-        return 'card-red'
-      } else {
-        return 'card-gray'
-      }
+    dayCardColor (attributes) {
+      return this.cardColor(attributes.limit, attributes.sold)
     }
   }
 }
