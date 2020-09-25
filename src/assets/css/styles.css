@@ -287,6 +287,9 @@
 .th:first-child { @apply rounded-l }
 .th:last-child { @apply rounded-r }
 
+.thead-clear .th { @apply text-gray-900 bg-transparent font-bold }
+.thead-clear .th + .th { @apply border-none }
+
 .td + .td { @apply border-l-2 border-white }
 .td { @apply bg-gray-100 }
 .tr:first-child td:first-child { @apply rounded-tl }
