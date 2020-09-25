@@ -92,11 +92,6 @@ export default {
       resetModifiedOptions: 'RESET_MODIFIED_OPTIONS',
       resetInactiveOptions: 'RESET_INACTIVE_OPTIONS'
     }),
-    enterKeyAction () {
-      if (this.field) {
-        this.submitForm()
-      }
-    },
     close () {
       this.closeModal()
       this.resetCurrentField()

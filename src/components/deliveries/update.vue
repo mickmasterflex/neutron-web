@@ -70,11 +70,6 @@ export default {
       closeModal: 'CLOSE_UPDATE_DELIVERY_MODAL',
       resetDelivery: 'RESET_CURRENT_DELIVERY'
     }),
-    enterKeyAction () {
-      if (this.delivery) {
-        this.submitForm()
-      }
-    },
     close () {
       this.closeModal()
       this.resetDelivery()
