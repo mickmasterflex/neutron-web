@@ -13,7 +13,7 @@ const getters = {
 
 const actions = {
   async createBaseOption ({ commit }, option) {
-    await axios.post('/base-options/', option, { showSuccessToast: false })
+    await axios.post('/base-options/', option)
       .then(response => {
         commit('ADD_BASE_OPTION', response.data)
       })
