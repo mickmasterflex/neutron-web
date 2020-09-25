@@ -18,6 +18,7 @@
 
 <script>
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import panelModal from '@/components/ui/modals/panel-modal'
 
@@ -27,7 +28,7 @@ export default {
       limit: ''
     }
   },
-  mixins: [setResponseErrors],
+  mixins: [setResponseErrors, enterKeyListener],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_MONTH_CAP_MODAL',

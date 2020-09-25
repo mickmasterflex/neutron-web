@@ -20,6 +20,7 @@ import panelModal from '@/components/ui/modals/panel-modal'
 import deleteCap from '@/components/caps/month/delete'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
@@ -29,7 +30,7 @@ export default {
       id: null
     }
   },
-  mixins: [setResponseErrors, checkUnsavedChangesInModal],
+  mixins: [setResponseErrors, checkUnsavedChangesInModal, enterKeyListener],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_UPDATE_MONTH_CAP_MODAL',
