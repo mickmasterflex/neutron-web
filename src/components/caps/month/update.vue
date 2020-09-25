@@ -4,7 +4,7 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Month Cap"></v-text-field>
+          <v-text-field ref="focusField" v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Month Cap"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -72,6 +72,7 @@ export default {
     showModal () {
       if (this.showModal === true) {
         this.setCap()
+        this.$refs.focusField.focusOnField()
       }
     },
     unsavedChanges () {
