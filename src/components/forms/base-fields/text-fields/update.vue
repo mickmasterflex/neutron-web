@@ -76,11 +76,6 @@ export default {
       resetCurrentBaseTextField: 'RESET_CURRENT_BASE_FIELD',
       closeModal: 'CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.resetCurrentBaseTextField()
       this.$nextTick(() => {

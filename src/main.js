@@ -86,6 +86,14 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
+extend('url', {
+  message: 'Must be a valid URL',
+  validate: (value) => {
+    const regex = RegExp('[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
+    return regex.test(value)
+  }
+})
+
 // eslint-disable-next-line camelcase
 extend('min_value', { ...min_value, message: 'Must be {min} or greater' })
 // eslint-disable-next-line camelcase

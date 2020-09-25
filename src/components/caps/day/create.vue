@@ -18,7 +18,7 @@
 
 <script>
 import panelModal from '@/components/ui/modals/panel-modal'
-import { setResponseErrors } from '@/mixins/setResponseErrors'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
