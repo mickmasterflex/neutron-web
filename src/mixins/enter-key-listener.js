@@ -1,9 +1,9 @@
 /*
- This mixin requires that you override enterKeyAction method in component.
+ Override enterKeyAction method in component to change the default behaviour.
  ie:
  enterKeyAction () {
-    if (this.showModal) {
-      this.submitForm()
+    if (this.showModal && this.isReady) {
+      this.fireTheNuclearWeapons()
     }
   },
 */
@@ -23,7 +23,9 @@ export const enterKeyListener = {
   },
   methods: {
     enterKeyAction () {
-      throw (new Error('Must override enterKeyAction method in component.'))
+      if (this.showModal) {
+        this.submitForm()
+      }
     }
   }
 }

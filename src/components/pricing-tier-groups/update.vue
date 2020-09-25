@@ -58,11 +58,6 @@ export default {
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
       closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.resetCurrentPricingTierGroup()
       this.$nextTick(() => {

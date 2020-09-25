@@ -71,11 +71,6 @@ export default {
       resetCurrentField: 'RESET_CURRENT_FIELD',
       closeModal: 'CLOSE_UPDATE_TEXT_FIELD_MODAL'
     }),
-    enterKeyAction () {
-      if (this.field) {
-        this.submitForm()
-      }
-    },
     close () {
       this.closeModal()
       this.label = ''

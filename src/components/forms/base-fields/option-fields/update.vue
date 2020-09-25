@@ -87,11 +87,6 @@ export default {
       resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
       closeModal: 'CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL'
     }),
-    enterKeyAction () {
-      if (this.showModal) {
-        this.submitForm()
-      }
-    },
     close () {
       this.resetCurrentBaseOptionField()
       this.resetCurrentBaseOptions()
