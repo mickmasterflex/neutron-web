@@ -8,6 +8,8 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
+          <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
+          <list-tiers v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
         </form>
       </validation-observer>
     </template>
@@ -15,6 +17,7 @@
 </template>
 
 <script>
+import listTiers from '@/components/pricing-tiers/list'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -22,8 +25,12 @@ export default {
   data () {
     return {
       name: '',
-      parent: ''
+      parent: '',
+      pricing_tier_group: ''
     }
+  },
+  components: {
+    'list-tiers': listTiers
   },
   props: {
     partner: Object
@@ -35,10 +42,14 @@ export default {
   },
   mixins: [setResponseErrors],
   methods: {
-    ...mapActions({ update: 'updatePartner' }),
+    ...mapActions({
+      update: 'updatePartner',
+      fetchPricingTierGroups: 'fetchPricingTierGroups'
+    }),
     setPartner () {
       this.name = this.partner.name
       this.parent = this.partner.parent
+      this.pricing_tier_group = this.partner.pricing_tier_group
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -47,7 +58,8 @@ export default {
             name: this.name,
             parent: this.parent,
             client: this.partner.client,
-            id: this.partner.id
+            id: this.partner.id,
+            pricing_tier_group: this.pricing_tier_group
           }).catch(error => {
             this.error = error
           })
@@ -57,14 +69,20 @@ export default {
   },
   created () {
     this.setPartner()
+    this.fetchPricingTierGroups()
   },
   computed: {
     ...mapGetters({
-      siblings: 'getPartnerSiblings'
+      siblings: 'getPartnerSiblings',
+      pricingTierGroups: 'getPricingTierGroups',
+      getPricingTierGroupById: 'getPricingTierGroupById'
     }),
+    currentGroup () {
+      return this.getPricingTierGroupById(Number(this.pricing_tier_group))
+    },
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.partner.name || this.parent !== this.partner.parent
+        return this.name !== this.partner.name || this.parent !== this.partner.parent || this.pricing_tier_group !== this.partner.pricing_tier_group
       } else {
         return false
       }
