@@ -8,7 +8,7 @@
         <span v-if="month.id">
           <span class="card-colored-text font-bold">Cap: </span> <span @click="updateCap()" class="text-link text-3xl">{{ Number(month.limit).toLocaleString() }}</span>
         </span>
-        <button v-else class="btn btn-green" @click="addCap()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Month Cap</button>
+        <button v-else class="btn btn-turquoise rounded-full" @click="addCap()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Month Cap</button>
       </div>
     </template>
   </calendar-header>

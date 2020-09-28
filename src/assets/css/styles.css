@@ -266,6 +266,10 @@
 .btn-hollow-blue:hover     { @apply text-white bg-blue-500 border-blue-500; }
 .btn-hollow-blue:active    { @apply bg-blue-500 border-blue-500; }
 
+.btn-hollow-turquoise        { @apply text-turquoise-500 border-turquoise-400; }
+.btn-hollow-turquoise:hover  { @apply text-white bg-turquoise-500 border-turquoise-500; }
+.btn-hollow-turquoise:active { @apply bg-turquoise-500 border-turquoise-500; }
+
 .btn-hollow-green          { @apply text-green-500 border-green-400; }
 .btn-hollow-green:hover    { @apply text-white bg-green-500 border-green-500; }
 .btn-hollow-green:active   { @apply bg-green-500 border-green-500; }

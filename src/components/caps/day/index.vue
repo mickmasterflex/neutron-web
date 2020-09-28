@@ -11,7 +11,7 @@
       <span v-if="hasCap(day.attributes)" class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light" @click="updateCap(day)">
         {{Number(day.attributes[0].customData.limit).toLocaleString()}}
       </span>
-      <button v-else class="btn btn-green btn-glow btn-md btn-circle" @click="addCap(day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
+      <button v-else class="btn btn-hollow-turquoise border-2 border-gray-300 btn-md btn-circle" @click="addCap(day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
     </span>
   </div>
 </template>
