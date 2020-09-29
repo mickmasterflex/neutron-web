@@ -24,7 +24,10 @@ export default {
     },
     type: {
       type: String,
-      required: true
+      required: true,
+      validator: function (value) {
+        return ['buyers', 'partners', 'relations'].includes(value)
+      }
     }
   },
   components: {

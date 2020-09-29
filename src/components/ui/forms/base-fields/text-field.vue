@@ -9,7 +9,8 @@
         :type="$attrs.field_type ? $attrs.field_type : 'text'"
         :id="$attrs.field_id"
         :value="value"
-        :disabled="$attrs.field_disabled">
+        :disabled="$attrs.field_disabled"
+        ref="field">
       <slot></slot>
     </div>
   </div>
@@ -26,6 +27,9 @@ export default {
   methods: {
     handleInput (value) {
       this.$emit('input', value)
+    },
+    focusOnField () {
+      this.$nextTick(() => this.$refs.field.focus())
     }
   }
 }
