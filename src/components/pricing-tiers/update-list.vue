@@ -1,23 +1,17 @@
 <template>
-  <div>
-    <table v-if="pricingTiers" class="table">
-      <thead>
-      <tr>
-        <th class="th">Lower Bound</th>
-        <th class="th">Upper Bound</th>
-        <th class="th">Payout</th>
-      </tr>
-      </thead>
-      <tbody class="tbody">
-      <tr class="tr" v-for="pricingTier in pricingTiers" :key="pricingTier.id">
-        <td class="td">{{pricingTier.lower_bound}}</td>
-        <td class="td">{{pricingTier.upper_bound}}</td>
-        <td class="td">{{pricingTier.payout}}</td>
+    <div class="well">
+      <ul class="fields-inline-heading px-1">
+        <li class="w-64 fields-inline-heading-item">Lower Bound</li>
+        <li class="w-64 fields-inline-heading-item">Upper Bound</li>
+        <li class="w-64 fields-inline-heading-item">Payout</li>
+      </ul>
+      <ul class="card card-sm mb-1 flex flex-row items-center justify-between" v-for="pricingTier in pricingTiers" :key="pricingTier.id">
+        <li>{{pricingTier.lower_bound}}</li>
+        <li>{{pricingTier.upper_bound}}</li>
+        <li>{{pricingTier.payout}}</li>
         <delete-pricing-tier :id="pricingTier.id"></delete-pricing-tier>
-      </tr>
-      </tbody>
-    </table>
-    <table-empty-state v-else heading="No Tiers Added" copy="Edit the pricing tier group to add tiers"></table-empty-state>
+      </ul>
+    <table-empty-state  heading="No Tiers Added" copy="Edit the pricing tier group to add tiers"></table-empty-state>
   </div>
 </template>
 
