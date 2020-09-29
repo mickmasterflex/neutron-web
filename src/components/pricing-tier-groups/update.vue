@@ -7,6 +7,7 @@
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
         </form>
       </validation-observer>
+      <list-tiers></list-tiers>
     </template>
     <template v-slot:footer-additional>
       <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import listTiers from '@/components/pricing-tiers/update-list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
@@ -25,6 +27,9 @@ export default {
     return {
       name: ''
     }
+  },
+  components: {
+    'list-tiers': listTiers
   },
   updated () {
     if (this.pricingTierGroup) {
