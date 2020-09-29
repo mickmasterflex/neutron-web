@@ -13,6 +13,7 @@
         <td class="td">{{pricingTier.lower_bound}}</td>
         <td class="td">{{pricingTier.upper_bound}}</td>
         <td class="td">{{pricingTier.payout}}</td>
+        <delete-pricing-tier :id="pricingTier.id"></delete-pricing-tier>
       </tr>
       </tbody>
     </table>
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+import deletePricingTier from '@/components/pricing-tiers/delete'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -28,6 +30,9 @@ export default {
     ...mapGetters({
       pricingTiers: 'getCurrentPricingTiers'
     })
+  },
+  components: {
+    'delete-pricing-tier': deletePricingTier
   }
 }
 </script>

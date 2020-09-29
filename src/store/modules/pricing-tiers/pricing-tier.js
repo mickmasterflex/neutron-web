@@ -41,12 +41,12 @@ const mutations = {
   CLOSE_UPDATE_PRICING_TIER_MODAL: (state) => (state.show_update_pricing_tier_modal = false),
   SET_CURRENT_PRICING_TIERS: (state, tier) => (state.current_pricing_tiers = tier),
   RESET_CURRENT_PRICING_TIERS: (state) => (state.current_pricing_tiers = {}),
-  ADD_PRICING_TIER: (state, tier) => state.pricing_tiers.unshift(tier),
-  REMOVE_PRICING_TIER: (state, id) => (state.pricing_tiers = state.pricing_tiers.filter(tier => tier.id !== id)),
+  ADD_PRICING_TIER: (state, tier) => state.current_pricing_tiers.unshift(tier),
+  REMOVE_PRICING_TIER: (state, id) => (state.current_pricing_tiers = state.current_pricing_tiers.filter(tier => tier.id !== id)),
   UPDATE_PRICING_TIER: (state, updatedTier) => {
-    const index = state.pricing_tiers.findIndex(tier => tier.id === updatedTier.id)
+    const index = state.current_pricing_tiers.findIndex(tier => tier.id === updatedTier.id)
     if (index !== -1) {
-      state.pricing_tiers.splice(index, 1, updatedTier)
+      state.current_pricing_tiers.splice(index, 1, updatedTier)
     }
   }
 }
