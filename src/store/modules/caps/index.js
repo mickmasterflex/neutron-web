@@ -1,6 +1,6 @@
 import axios from '@/axios'
-import dayCaps from '@/store/modules/caps/day'
-import monthCaps from '@/store/modules/caps/month'
+import dayCaps from '@/store/modules/caps/day/index'
+import monthCaps from '@/store/modules/caps/month/index'
 
 const modules = {
   dayCaps,

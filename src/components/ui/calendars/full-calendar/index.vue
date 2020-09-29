@@ -1,11 +1,20 @@
 <template>
-  <div class="full-calendar mx-auto block">
-    <v-calendar :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
-      <template v-slot:header-left-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-left"></font-awesome-icon></span></template>
-      <template v-slot:header-right-button><span class="btn btn-circle btn-md btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span></template>
+  <div class="full-calendar mx-auto block relative">
+    <v-calendar title-position="right" :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
+      <template v-slot:header="slotProps">
+        <slot name="header" :calendarData="slotProps" :calendarRefs="$refs">
+          <calendar-header :calendarData="slotProps" :calendarRefs="$refs"></calendar-header>
+        </slot>
+      </template>
+      <template v-slot:header-left-button>
+        <span class="btn btn-circle btn-md btn-glow btn-blue m-1"><font-awesome-icon icon="angle-left"></font-awesome-icon></span>
+      </template>
+      <template v-slot:header-right-button>
+        <span class="btn btn-circle btn-md btn-glow btn-blue"><font-awesome-icon icon="angle-right"></font-awesome-icon></span>
+      </template>
       <template v-slot:day-content="slotProps">
         <slot name="day" v-bind:day="slotProps.day">
-          <div v-if="slotProps.day.inMonth" class="card shadow-sm m-1 border-2 border-gray-300 full-calendar--day flex flex-col items-stretch">
+          <div v-if="slotProps.day.inMonth" class="full-calendar--day card card-border m-1 flex flex-col">
             <span class="full-calendar--day-title flex flex-row items-center px-3 py-4">
               <p class="font-bold text-gray-700 text-lg">{{ slotProps.day.day }}</p>
             </span>
@@ -18,9 +27,14 @@
 </template>
 
 <script>
+import fullCalendarHeader from '@/components/ui/calendars/full-calendar/header'
+
 export default {
   props: {
     attributes: Array
+  },
+  components: {
+    'calendar-header': fullCalendarHeader
   }
 }
 </script>
@@ -28,18 +42,12 @@ export default {
 <style>
   .full-calendar .vc-container {
     background: none;
-    border: none
+    border: none;
   }
-
-  /* Heading Typography */
-  .full-calendar .vc-title { @apply text-2xl text-gray-900 font-bold underline transition-colors duration-100 }
-  .full-calendar .vc-title:hover { @apply text-blue-500 opacity-100 }
 
   /* Arrow Positioning and Resets */
   .full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
-  .full-calendar .vc-arrows-container > :first-child { margin-left: 25% }
-  .full-calendar .vc-arrows-container > :last-child { margin-right: 25% }
-  .full-calendar .vc-header { @apply mb-4 }
+  .full-calendar .vc-weeks { @apply mt-4 }
 
   /* Days out of scope of month */
   .full-calendar .in-prev-month > div,
@@ -72,4 +80,12 @@ export default {
       width: 135px;
     }
   }
+
+  /* Full Calendar Header */
+  .full-calendar .vc-arrows-container,
+  .full-calendar--header {
+    padding: 2rem 1.25rem;
+    height: 120px;
+  }
+  .full-calendar .vc-popover-caret { opacity: 0 }
 </style>

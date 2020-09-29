@@ -1,17 +1,18 @@
 import axios from '@/axios'
+import dayCapModals from '@/store/modules/caps/day/modals'
+
+const modules = {
+  dayCapModals
+}
 
 const state = {
-  current_day_caps: null,
-  selected_cap_day: null,
-  show_create_day_cap_modal: false,
-  show_update_day_cap_modal: false
+  current_day_caps: [],
+  selected_cap_day: null
 }
 
 const getters = {
   getCurrentDayCaps: state => state.current_day_caps,
-  getSelectedCapDay: state => state.selected_cap_day,
-  getShowCreateDayCapModal: state => state.show_create_day_cap_modal,
-  getShowUpdateDayCapModal: state => state.show_update_day_cap_modal
+  getSelectedCapDay: state => state.selected_cap_day
 }
 
 const actions = {
@@ -38,7 +39,7 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_DAY_CAPS: (state, caps) => (state.current_day_caps = caps),
-  RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = null),
+  RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = []),
   UPDATE_DAY_CAP: (state, updatedCap) => {
     const index = state.current_day_caps.findIndex(cap => cap.date === updatedCap.date)
     if (index !== -1) {
@@ -59,14 +60,11 @@ const mutations = {
     }
   },
   SET_SELECTED_CAP_DAY: (state, day) => (state.selected_cap_day = day),
-  RESET_SELECTED_CAP_DAY: (state) => (state.selected_cap_day = null),
-  SHOW_CREATE_DAY_CAP_MODAL: (state) => (state.show_create_day_cap_modal = true),
-  CLOSE_CREATE_DAY_CAP_MODAL: (state) => (state.show_create_day_cap_modal = false),
-  SHOW_UPDATE_DAY_CAP_MODAL: (state) => (state.show_update_day_cap_modal = true),
-  CLOSE_UPDATE_DAY_CAP_MODAL: (state) => (state.show_update_day_cap_modal = false)
+  RESET_SELECTED_CAP_DAY: (state) => (state.selected_cap_day = null)
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

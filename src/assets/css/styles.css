@@ -129,27 +129,44 @@
     Cards
 --------------------------------------------------- */
 
-.card { @apply shadow bg-white rounded-md; }
+.card {
+    @apply shadow bg-white rounded-lg;
+    --card-hard-shadow: 2px 2px 0
+}
 .card-sm { @apply p-1; }
 .card-base { @apply p-4; }
 .card-actions { @apply flex flex-row justify-end items-center mt-4 }
 
 /* Colors */
 
+.card-border { @apply shadow-sm border }
+
 .card-gray { @apply border-gray-300 }
-.card-gray .card-highlight { @apply bg-gray-100 }
+.card-gray .card-colored-text { @apply text-gray-600 }
 
-.card-red { @apply border-red-500 }
-.card-red .card-highlight { @apply bg-red-500 text-white }
+.card-red {
+    @apply border-red-500;
+    box-shadow: var(--card-hard-shadow) theme('colors.red.500');
+}
+.card-red .card-colored-text { @apply text-red-600 }
 
-.card-yellow { @apply border-yellow-500 }
-.card-yellow .card-highlight { @apply bg-yellow-500 text-white }
+.card-yellow {
+    @apply border-yellow-500;
+    box-shadow: var(--card-hard-shadow) theme('colors.yellow.500');
+}
+.card-yellow .card-colored-text { @apply text-yellow-600 }
 
-.card-green { @apply border-green-500 }
-.card-green .card-highlight { @apply bg-green-500 text-white }
+.card-green {
+    @apply border-green-500;
+    box-shadow: var(--card-hard-shadow) theme('colors.green.500');
+}
+.card-green .card-colored-text { @apply text-green-600 }
 
-.card-blue { @apply border-blue-500 }
-.card-blue .card-highlight { @apply bg-blue-500 text-white }
+.card-blue {
+    @apply border-blue-500;
+    box-shadow: var(--card-hard-shadow) theme('colors.blue.500');
+}
+.card-blue .card-colored-text { @apply text-blue-600 }
 
 
 /* ------------------------------------------------
@@ -187,7 +204,7 @@
 
 .btn-md {
     height: 36px;
-    @apply text-base;
+    @apply text-lg;
 }
 
 .btn-md.btn-circle {
@@ -200,6 +217,7 @@
 .btn-blue:disabled                   { @apply bg-blue-400 border-blue-500; }
 .btn-blue:hover:not(:disabled)       { @apply bg-blue-600; }
 .btn-blue:active:not(:disabled)      { @apply bg-blue-600; }
+.btn-blue.btn-glow                   { box-shadow: 0 3px 5px rgba(59, 151, 210, .55) }
 
 .btn-gray                            { @apply bg-gray-500 border-gray-600; }
 .btn-gray:disabled                   { @apply bg-gray-400 border-gray-500; }
@@ -210,6 +228,7 @@
 .btn-green:disabled                  { @apply bg-green-400 border-green-500; }
 .btn-green:hover:not(:disabled)      { @apply bg-green-600; }
 .btn-green:active:not(:disabled)     { @apply bg-green-600; }
+.btn-green.btn-glow                  { box-shadow: 0 3px 5px rgba(139, 198, 80, .55) }
 
 .btn-indigo                          { @apply bg-indigo-500 border-indigo-600; }
 .btn-indigo:disabled                 { @apply bg-indigo-400 border-indigo-500; }
@@ -419,7 +438,6 @@
 
 /* V-Calendar */
 .vc-container { @apply font-sans }
-
 
 /* ------------------------------------------------
     Tailwind Utilities
