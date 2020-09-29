@@ -26,7 +26,7 @@ export default {
       type: String,
       required: true,
       validator: function (value) {
-        return ['buyer', 'partner', 'relations'].includes(value)
+        return ['buyers', 'partners', 'relations'].includes(value)
       }
     }
   },
