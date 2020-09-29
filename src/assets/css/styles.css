@@ -341,9 +341,9 @@
 
 /* Horizontal Forms */
 .form-horizontal .field-group { @apply my-3 flex flex-row items-center }
-.form-horizontal .field-group--checkbox { @apply ml-40 }
 .form-horizontal-slim .field-group { @apply my-0 }
 .form-horizontal .field-label { @apply w-40 text-right pr-3 leading-tight }
+.form-horizontal .ml-label-width { @apply ml-40 }
 
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
