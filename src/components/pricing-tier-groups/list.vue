@@ -33,11 +33,13 @@ export default {
   methods: {
     ...mapMutations({
       showModal: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL',
-      setCurrent: 'SET_CURRENT_PRICING_TIER_GROUP'
+      setCurrent: 'SET_CURRENT_PRICING_TIER_GROUP',
+      setCurrentPricingTiers: 'SET_CURRENT_PRICING_TIERS'
     }),
     showModalSetCurrent (group) {
       this.showModal()
       this.setCurrent(group)
+      this.setCurrentPricingTiers(group.pricingtier_set)
     }
   }
 }

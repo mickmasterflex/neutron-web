@@ -9,7 +9,7 @@
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
           <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
-          <list-tiers v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
+          <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
         </form>
       </validation-observer>
     </template>
