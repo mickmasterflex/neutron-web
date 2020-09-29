@@ -287,6 +287,9 @@
 .th:first-child { @apply rounded-l }
 .th:last-child { @apply rounded-r }
 
+.thead-transparent .th { @apply text-gray-900 bg-transparent font-bold py-1 }
+.thead-transparent .th + .th { @apply border-none }
+
 .td + .td { @apply border-l-2 border-white }
 .td { @apply bg-gray-100 }
 .tr:first-child td:first-child { @apply rounded-tl }
@@ -338,9 +341,9 @@
 
 /* Horizontal Forms */
 .form-horizontal .field-group { @apply my-3 flex flex-row items-center }
-.form-horizontal .field-group--checkbox { @apply ml-32 }
 .form-horizontal-slim .field-group { @apply my-0 }
-.form-horizontal .field-label { @apply w-32 text-right pr-3 leading-tight }
+.form-horizontal .field-label { @apply w-40 text-right pr-3 leading-tight }
+.form-horizontal .ml-label-width { @apply ml-40 }
 
 /* Inline Fields */
 .fields-inline { @apply flex flex-row items-end flex-wrap }
