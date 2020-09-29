@@ -1,12 +1,12 @@
 <template>
   <div>
-    <table v-if="pricingTiers.length" class="table">
-      <thead>
-      <tr>
-        <th class="th">Lower Bound</th>
-        <th class="th">Upper Bound</th>
-        <th class="th">Payout</th>
-      </tr>
+    <table v-if="pricingTiers.length" :class="`w-${tableWidth} table table-white table-shadow`">
+      <thead class="thead-transparent">
+        <tr>
+          <th class="th pr-8">Lower Bound</th>
+          <th class="th pr-8">Upper Bound</th>
+          <th class="th pr-8">Payout</th>
+        </tr>
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="pricingTier in pricingTiers" :key="pricingTier.id">
@@ -16,7 +16,7 @@
       </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Tiers Added" copy="Edit the pricing tier group to add tiers"></table-empty-state>
+    <table-empty-state v-else heading="No Tiers Added" copy="Edit the pricing tier group to add tiers" :class="`w-${tableWidth} ${emptyTableClass}`"></table-empty-state>
   </div>
 </template>
 
@@ -24,7 +24,15 @@
 
 export default {
   props: {
-    pricingTiers: Array
+    pricingTiers: Array,
+    emptyTableClass: String,
+    tableWidth: {
+      type: String,
+      default: 'full',
+      validator: function (value) {
+        return ['full', 'auto'].includes(value)
+      }
+    }
   }
 }
 </script>
