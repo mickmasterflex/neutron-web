@@ -16,6 +16,7 @@
     <div :class="`p-4 ${contentClass}`">
       <slot name="content"></slot>
     </div>
+    <slot name="footer"></slot>
   </div>
 </template>
 

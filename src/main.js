@@ -26,7 +26,7 @@ import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
-import basePanel from '@/components/ui/panels/base'
+import basePanel from '@/components/ui/panels/base/index'
 import statCard from '@/components/ui/cards/stat-card'
 import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
