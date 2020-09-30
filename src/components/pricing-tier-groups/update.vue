@@ -7,7 +7,10 @@
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
         </form>
       </validation-observer>
-      <list-tiers></list-tiers>
+       <div class="field-group">
+         <label class="field-label">Tiers</label>
+         <list-tiers></list-tiers>
+       </div>
     </template>
     <template v-slot:footer-additional>
       <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
