@@ -5,6 +5,7 @@
       <li class="w-64 fields-inline-heading-item">Lower Bound</li>
       <li class="w-64 fields-inline-heading-item">Payout</li>
     </ul>
+    {{formError}}
     <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
       <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
         <span class="fields-inline">
@@ -20,6 +21,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
@@ -35,6 +37,7 @@ export default {
       pricingTierGroup: 'getCurrentPricingTierGroup'
     })
   },
+  mixins: [setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createPricingTier'
@@ -60,8 +63,6 @@ export default {
         }
       })
     }
-  },
-  components: {
   }
 }
 </script>
