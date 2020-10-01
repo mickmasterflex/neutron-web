@@ -13,6 +13,7 @@
         <slot name="action"></slot>
       </div>
     </div>
+    <slot name="tabs"></slot>
     <div :class="`p-4 ${contentClass}`">
       <slot name="content"></slot>
     </div>
