@@ -13,7 +13,7 @@
            <list-tiers></list-tiers>
          </div>
         <div class="field-group">
-          <label class="field-label">Create Option</label>
+          <label class="field-label">Create Tier</label>
           <create-pricing-tier></create-pricing-tier>
         </div>
       </div>
