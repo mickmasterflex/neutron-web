@@ -43,9 +43,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .panel:not(:first-of-type) {
-    @apply mt-4
-  }
-</style>
