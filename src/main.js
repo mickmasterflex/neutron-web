@@ -16,7 +16,33 @@ import '@/assets/css/styles.css'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faTag, faDna, faCog, faKey, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAngleLeft,
+  faAngleRight,
+  faArrowsAltV,
+  faChartArea,
+  faCheck,
+  faCheckCircle,
+  faClone,
+  faCog,
+  faDna,
+  faDownload,
+  faExclamationTriangle,
+  faImage,
+  faKey,
+  faMinus,
+  faPencilAlt,
+  faPlus,
+  faSignOutAlt,
+  faSpinner,
+  faTag,
+  faThLarge,
+  faThumbsUp,
+  faTimesCircle,
+  faTrashAlt,
+  faUpload,
+  faWrench
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -118,7 +144,33 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faTag, faDna, faCog, faKey, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner)
+library.add(
+  faAngleLeft,
+  faAngleRight,
+  faArrowsAltV,
+  faChartArea,
+  faCheck,
+  faCheckCircle,
+  faClone,
+  faCog,
+  faDna,
+  faDownload,
+  faExclamationTriangle,
+  faImage,
+  faKey,
+  faMinus,
+  faPencilAlt,
+  faPlus,
+  faSignOutAlt,
+  faSpinner,
+  faTag,
+  faThLarge,
+  faThumbsUp,
+  faTimesCircle,
+  faTrashAlt,
+  faUpload,
+  faWrench
+)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------
