@@ -11,6 +11,7 @@ import clients from './modules/clients'
 import deliveries from '@/store/modules/deliveries'
 import educationProducts from './modules/education-products'
 import forms from '@/store/modules/forms'
+import geos from '@/store/modules/geos'
 import modals from './modules/modals'
 import offers from './modules/offers'
 import partners from './modules/partners'
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     deliveries,
     educationProducts,
     forms,
+    geos,
     modals,
     offers,
     partners,
