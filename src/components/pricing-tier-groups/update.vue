@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal" @close="close">
+  <modal-template :show="showModal" @close="close" class="modal-lg">
     <template v-slot:header>Update Pricing Tier Group</template>
     <template v-slot:body>
       <validation-observer ref="form" class="form-horizontal">
@@ -11,6 +11,10 @@
          <label class="field-label">Tiers</label>
          <list-tiers></list-tiers>
        </div>
+      <div class="field-group">
+        <label class="field-label">Create Option</label>
+        <create-pricing-tier></create-pricing-tier>
+      </div>
     </template>
     <template v-slot:footer-additional>
       <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
@@ -20,6 +24,7 @@
 
 <script>
 import listTiers from '@/components/pricing-tiers/update-list'
+import createPricingTier from '@/components/pricing-tiers/create'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
@@ -28,11 +33,16 @@ import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-mo
 export default {
   data () {
     return {
-      name: ''
+      name: '',
+      id: null
     }
   },
+  props: {
+    pricingTier: Object
+  },
   components: {
-    'list-tiers': listTiers
+    'list-tiers': listTiers,
+    'create-pricing-tier': createPricingTier
   },
   updated () {
     if (this.pricingTierGroup) {
