@@ -4,7 +4,8 @@
       v-model="inner_value"
       :class="classes"
       v-bind="$attrs"
-      :value="value">
+      :value="value"
+      ref="field">
       <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
     </text-field>
   </validation-provider>
@@ -37,6 +38,11 @@ export default {
     // Handles external model changes.
     value (newVal) {
       this.inner_value = newVal
+    }
+  },
+  methods: {
+    focusOnField () {
+      this.$nextTick(this.$refs.field.focusOnField())
     }
   },
   created () {

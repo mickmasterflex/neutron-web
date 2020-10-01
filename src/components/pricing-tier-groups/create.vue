@@ -34,6 +34,7 @@ export default {
       create: 'createPricingTierGroup'
     }),
     resetForm () {
+      this.name = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -47,6 +48,7 @@ export default {
           this.create({
             name: this.name
           }).then(() => {
+            this.resetForm()
           }).catch(error => {
             this.error = error
           })

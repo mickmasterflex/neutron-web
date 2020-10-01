@@ -2,18 +2,20 @@
   <modal-template :show="showModal" @close="close" class="modal-lg">
     <template v-slot:header>Update Pricing Tier Group</template>
     <template v-slot:body>
-      <validation-observer ref="form" class="form-horizontal">
-        <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
-        </form>
-      </validation-observer>
-       <div class="field-group">
-         <label class="field-label">Tiers</label>
-         <list-tiers></list-tiers>
-       </div>
-      <div class="field-group">
-        <label class="field-label">Create Option</label>
-        <create-pricing-tier></create-pricing-tier>
+      <div class="form-horizontal">
+        <validation-observer ref="form">
+          <form @submit.prevent="submitForm">
+            <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          </form>
+        </validation-observer>
+         <div class="field-group" v-if="pricingTiers.length">
+           <label class="field-label">Tiers</label>
+           <list-tiers></list-tiers>
+         </div>
+        <div class="field-group">
+          <label class="field-label">Create Option</label>
+          <create-pricing-tier></create-pricing-tier>
+        </div>
       </div>
     </template>
     <template v-slot:footer-additional>
@@ -52,7 +54,8 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdatePricingTierGroupModal',
-      pricingTierGroup: 'getCurrentPricingTierGroup'
+      pricingTierGroup: 'getCurrentPricingTierGroup',
+      pricingTiers: 'getCurrentPricingTiers'
     }),
     unsavedChanges () {
       if (this.name) {

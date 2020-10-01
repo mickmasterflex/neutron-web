@@ -1,12 +1,12 @@
 <template>
   <panel-modal :show="showModal" @close="close">
     <template v-slot:header>
-      <span v-if="day !== null">{{day.month}}/{{day.day}}/{{day.year}}</span>
+      <p v-if="monthCap">{{currentCapMonthFormats.MM_YYYY}}</p>
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
-          <v-text-field ref="focusField" v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Day Cap"></v-text-field>
+          <v-text-field ref="focusField" v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Month Cap"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import panelModal from '@/components/ui/modals/panel-modal'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
-import { mapMutations, mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import panelModal from '@/components/ui/modals/panel-modal'
 
 export default {
   data () {
@@ -28,13 +28,14 @@ export default {
       limit: ''
     }
   },
-  mixins: [enterKeyListener, setResponseErrors],
+  mixins: [setResponseErrors, enterKeyListener],
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_DAY_CAP_MODAL'
+      closeModal: 'CLOSE_CREATE_MONTH_CAP_MODAL',
+      resetCapMonth: 'RESET_SELECTED_CAP_MONTH'
     }),
     ...mapActions({
-      create: 'createDayCap'
+      create: 'createMonthCap'
     }),
     close () {
       this.limit = ''
@@ -47,7 +48,7 @@ export default {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.create({
-            date: this.day.id,
+            date: this.monthCap.date,
             limit: this.limit,
             parent: this.parent
           }).then(() => {
@@ -66,13 +67,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateDayCapModal',
-      day: 'getSelectedCapDay',
-      parent: 'getCurrentCapParent'
+      showModal: 'getShowCreateMonthCapModal',
+      monthCap: 'getSelectedCapMonth',
+      parent: 'getCurrentCapParent',
+      currentCapMonthFormats: 'getCurrentCapMonthFormats'
     })
   },
   components: {
     'panel-modal': panelModal
+  },
+  destroyed () {
+    this.resetCapMonth()
   }
 }
 </script>
