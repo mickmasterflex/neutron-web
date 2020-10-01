@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <panel-template title="Buyer Contracts">
+  <base-panel-grid>
+    <panel-template title="Buyer Contracts" class="col-span-2">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
       </template>
@@ -9,7 +9,7 @@
       </template>
     </panel-template>
     <create-buyer-contract :client="client.id" :parent="buyer.id"></create-buyer-contract>
-    <panel-template title="Partner Contracts">
+    <panel-template title="Partner Contracts" class="col-span-2">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
       </template>
@@ -18,7 +18,7 @@
       </template>
     </panel-template>
     <create-partner-contract :client="client.id" :parent="partner.id"></create-partner-contract>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>
