@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal" @close="close" class="modal-lg">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Pricing Tier Group</template>
     <template v-slot:body>
       <div class="form-horizontal">

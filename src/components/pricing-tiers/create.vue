@@ -1,17 +1,19 @@
 <template>
   <div class="well">
     <ul class="fields-inline-heading px-1">
-      <li class="w-64 fields-inline-heading-item">Upper Bound</li>
-      <li class="w-64 fields-inline-heading-item">Lower Bound</li>
-      <li class="w-64 fields-inline-heading-item">Payout</li>
+      <li class="w-40 fields-inline-heading-item">Upper Bound</li>
+      <li class="w-40 fields-inline-heading-item">Lower Bound</li>
+      <li class="w-40 fields-inline-heading-item">Payout</li>
     </ul>
-    {{formError}}
+    <div class="text-red-500">
+      {{formError}}
+    </div>
     <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
       <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
         <span class="fields-inline">
-          <v-text-field v-model="lower_bound" rules="required"/>
-          <v-text-field v-model="upper_bound" rules="required"/>
-          <v-text-field v-model="payout" rules="required"/>
+          <v-text-field field_id="newTier_lowerBound" field_class="field-md" v-model="lower_bound" rules="required"/>
+          <v-text-field field_id="newTier_upperBound" field_class="field-md" v-model="upper_bound" rules="required"/>
+          <v-text-field field_id="newTier_payout" field_class="field-md" v-model="payout" rules="required"/>
         </span>
         <button class="btn btn-green btn-circle mx-1" type="submit"><font-awesome-icon icon="plus"></font-awesome-icon></button>
       </form>
