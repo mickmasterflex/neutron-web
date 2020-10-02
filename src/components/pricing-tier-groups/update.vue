@@ -35,8 +35,7 @@ import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-mo
 export default {
   data () {
     return {
-      name: '',
-      id: null
+      name: ''
     }
   },
   props: {
@@ -73,7 +72,8 @@ export default {
   mixins: [setResponseErrors, enterKeyListener, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
-      update: 'updatePricingTierGroup'
+      update: 'updatePricingTierGroup',
+      updateTiers: 'updatePricingTiers'
     }),
     ...mapMutations({
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
@@ -90,6 +90,7 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
+          this.updateTiers()
           this.update({
             name: this.name,
             id: this.pricingTierGroup.id
