@@ -2,7 +2,8 @@ import axios from '@/axios'
 
 const state = {
   current_pricing_tiers: {},
-  show_update_pricing_tier_modal: false
+  show_update_pricing_tier_modal: false,
+  modified_pricing_tiers: []
 }
 
 const getters = {
@@ -22,11 +23,10 @@ const actions = {
         commit('ADD_PRICING_TIER', response.data)
       })
   },
-  async updatePricingTier ({ commit }, data) {
-    await axios.put(`/pricing-tiers/${data.id}/`, data)
-      .then(response => {
-        commit('UPDATE_PRICING_TIER', response.data)
-      })
+  async updatePricingTiers () {
+    await state.modified_pricing_tiers.forEach(tier => {
+      axios.put(`/pricing-tiers/${tier.id}/`, tier, { showSuccessToast: false })
+    })
   },
   async deletePricingTier ({ commit }, id) {
     await axios.delete(`/pricing-tiers/${id}/`)
@@ -48,7 +48,16 @@ const mutations = {
     if (index !== -1) {
       state.current_pricing_tiers.splice(index, 1, updatedTier)
     }
-  }
+  },
+  ADD_PRICING_TIER_TO_MODIFIED: (state, modifiedTier) => {
+    const index = state.modified_pricing_tiers.findIndex(tier => tier.id === modifiedTier.id)
+    if (index !== -1) {
+      state.modified_pricing_tiers.splice(index, 1, modifiedTier)
+    } else {
+      state.modified_pricing_tiers.unshift(modifiedTier)
+    }
+  },
+  RESET_MODIFIED_PRICING_TIERS: (state) => (state.modified_pricing_tiers = [])
 }
 
 export default {
