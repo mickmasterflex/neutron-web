@@ -35,8 +35,7 @@ import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-mo
 export default {
   data () {
     return {
-      name: '',
-      id: null
+      name: ''
     }
   },
   props: {
