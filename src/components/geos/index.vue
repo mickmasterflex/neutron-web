@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentGeo: 'SET_CURRENT_GEO'
+      setCurrentGeo: 'SET_CURRENT_GEO',
+      resetCurrentGeo: 'RESET_CURRENT_GEO'
     })
   },
   watch: {
@@ -39,6 +40,9 @@ export default {
         this.setCurrentGeo(this.geo)
       }
     }
+  },
+  destroyed () {
+    this.resetCurrentGeo()
   }
 }
 </script>
