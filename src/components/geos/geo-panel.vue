@@ -22,7 +22,7 @@
     <template #footer>
       <panel-footer>
         <template #end>
-          <button class="btn btn-hollow-purple"><font-awesome-icon icon="download"></font-awesome-icon> Download Current Locations</button>
+          <download-locations></download-locations>
         </template>
       </panel-footer>
     </template>
@@ -32,12 +32,14 @@
 <script>
 import panelTabs from '@/components/ui/panels/base/tabs'
 import panelFooter from '@/components/ui/panels/base/footer'
+import downloadLocations from '@/components/geos/download-locations'
 import { mapActions } from 'vuex'
 
 export default {
   components: {
     'panel-tabs': panelTabs,
-    'panel-footer': panelFooter
+    'panel-footer': panelFooter,
+    'download-locations': downloadLocations
   },
   props: {
     contentTab: {

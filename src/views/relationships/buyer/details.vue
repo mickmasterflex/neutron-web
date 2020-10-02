@@ -1,7 +1,7 @@
 <template>
   <base-panel-grid>
     <update-buyer-contract :buyer="buyer" class="col-span-2 xl:col-span-1"></update-buyer-contract>
-    <recruitment-locations class="col-span-2 xl:col-span-1"></recruitment-locations>
+    <recruitment-locations :geo="buyer.geo" class="col-span-2 xl:col-span-1"></recruitment-locations>
     <delivery-index :buyer="buyer.id" class="col-span-2 xl:col-span-1"></delivery-index>
     <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
       <template v-slot:content>

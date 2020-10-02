@@ -10,9 +10,12 @@
 import addLocations from '@/components/geos/add-locations'
 import removeLocations from '@/components/geos/remove-locations'
 import searchLocations from '@/components/geos/search-locations'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    geo: Number
+  },
   components: {
     'add-locations': addLocations,
     'remove-locations': removeLocations,
@@ -24,6 +27,18 @@ export default {
       removeVisible: 'getRemoveAddLocationsPanelVisible',
       searchVisible: 'getSearchAddLocationsPanelVisible'
     })
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentGeo: 'SET_CURRENT_GEO'
+    })
+  },
+  watch: {
+    geo () {
+      if (this.geo) {
+        this.setCurrentGeo(this.geo)
+      }
+    }
   }
 }
 </script>
