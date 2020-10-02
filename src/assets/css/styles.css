@@ -352,6 +352,7 @@
 }
 
 .field-sm { @apply w-20 }
+.field-md { @apply w-40 }
 .field-tall { height: 45px }
 
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
