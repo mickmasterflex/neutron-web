@@ -1,5 +1,6 @@
-import geoPanels from '@/store/modules/geos/panels'
 import downloadLocations from '@/store/modules/geos/download-locations'
+import searchLocations from '@/store/modules/geos/search-locations'
+import geoPanels from '@/store/modules/geos/panels'
 
 const state = {
   current_geo: null
@@ -16,6 +17,7 @@ const mutations = {
 
 const modules = {
   downloadLocations,
+  searchLocations,
   geoPanels
 }
 

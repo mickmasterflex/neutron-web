@@ -9,7 +9,7 @@
 <script>
 import addLocations from '@/components/geos/add-locations'
 import removeLocations from '@/components/geos/remove-locations'
-import searchLocations from '@/components/geos/search-locations'
+import searchLocations from '@/components/geos/search-locations/index'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {

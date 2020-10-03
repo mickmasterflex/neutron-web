@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Recruitment Locations">
+  <panel-template title="Recruitment Locations" :actionTransition="true">
     <template #action>
       <slot name="action"></slot>
     </template>

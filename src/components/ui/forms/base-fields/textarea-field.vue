@@ -8,7 +8,8 @@
         :class="$attrs.field_class"
         :id="$attrs.field_id"
         :value="value"
-        :disabled="$attrs.field_disabled"/>
+        :disabled="$attrs.field_disabled"
+        ref="field"/>
       <slot></slot>
     </div>
   </div>
