@@ -2,13 +2,11 @@ import axios from '@/axios'
 
 const state = {
   current_pricing_tiers: {},
-  show_update_pricing_tier_modal: false,
   modified_pricing_tiers: []
 }
 
 const getters = {
-  getCurrentPricingTiers: state => state.current_pricing_tiers,
-  getShowUpdatePricingTierModal: state => state.show_update_pricing_tier_modal
+  getCurrentPricingTiers: state => state.current_pricing_tiers
 }
 const actions = {
   async fetchPricingTiers ({ commit }) {
@@ -37,8 +35,6 @@ const actions = {
 }
 
 const mutations = {
-  SHOW_UPDATE_PRICING_TIER_MODAL: (state) => (state.show_update_pricing_tier_modal = true),
-  CLOSE_UPDATE_PRICING_TIER_MODAL: (state) => (state.show_update_pricing_tier_modal = false),
   SET_CURRENT_PRICING_TIERS: (state, tier) => (state.current_pricing_tiers = tier),
   RESET_CURRENT_PRICING_TIERS: (state) => (state.current_pricing_tiers = {}),
   ADD_PRICING_TIER: (state, tier) => state.current_pricing_tiers.unshift(tier),
