@@ -23,27 +23,27 @@ export default {
   computed: {
     tierData () {
       return [this.lower_bound, this.upper_bound, this.payout]
-    },
-    watch: {
-      tierData () {
-        this.addToModified()
-      }
-    },
-    methods: {
-      ...mapMutations({
-        addPricingTierToModified: 'ADD_PRICING_TIER_TO_MODIFIED',
-        setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
-      }),
-      addToModified () {
-        this.setUnsavedBaseOptionChanges()
-        this.addPricingTierToModified({
-          id: this.pricingTier.id,
-          lower_bound: this.lower_bound,
-          upper_bound: this.upper_bound,
-          payout: this.payout,
-          pricing_tier_group: this.pricingTier.pricing_tier_group
-        })
-      }
+    }
+  },
+  watch: {
+    tierData () {
+      this.addToModified()
+    }
+  },
+  methods: {
+    ...mapMutations({
+      addPricingTierToModified: 'ADD_PRICING_TIER_TO_MODIFIED',
+      setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
+    }),
+    addToModified () {
+      this.setUnsavedBaseOptionChanges()
+      this.addPricingTierToModified({
+        id: this.pricingTier.id,
+        lower_bound: this.lower_bound,
+        upper_bound: this.upper_bound,
+        payout: this.payout,
+        pricing_tier_group: this.pricingTier.pricing_tier_group
+      })
     }
   }
 }
