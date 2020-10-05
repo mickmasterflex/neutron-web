@@ -1,4 +1,5 @@
 import downloadLocations from '@/store/modules/geos/download-locations'
+import removeLocations from '@/store/modules/geos/remove-locations'
 import searchLocations from '@/store/modules/geos/search-locations'
 import geoPanels from '@/store/modules/geos/panels'
 
@@ -17,6 +18,7 @@ const mutations = {
 
 const modules = {
   downloadLocations,
+  removeLocations,
   searchLocations,
   geoPanels
 }
