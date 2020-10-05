@@ -7,11 +7,11 @@
           <form @submit.prevent="submitForm">
             <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           </form>
-        </validation-observer>
          <div class="field-group" v-if="pricingTiers.length">
            <label class="field-label">Tiers</label>
            <list-tiers></list-tiers>
          </div>
+        </validation-observer>
         <div class="field-group">
           <label class="field-label">Create Tier</label>
           <create-pricing-tier></create-pricing-tier>
