@@ -1,14 +1,12 @@
 <template>
   <div class="fields-inline">
-    <v-text-field field_class="field-md" v-model="lower_bound" rules="required" class="field-error-inside"/>
-    <v-text-field field_class="field-md" v-model="upper_bound" rules="required" class="field-error-inside"/>
-    <v-text-field field_class="field-md" v-model="payout" rules="required" class="field-error-inside"/>
+    <text-field field_class="field-md" field_disabled="true" v-model="lower_bound"/>
+    <text-field field_class="field-md" field_disabled="true" v-model="upper_bound"/>
+    <text-field field_class="field-md" field_disabled="true" v-model="payout"/>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
   data () {
     return {
@@ -19,32 +17,6 @@ export default {
   },
   props: {
     pricingTier: Object
-  },
-  computed: {
-    tierData () {
-      return [this.lower_bound, this.upper_bound, this.payout]
-    }
-  },
-  watch: {
-    tierData () {
-      this.addToModified()
-    }
-  },
-  methods: {
-    ...mapMutations({
-      addPricingTierToModified: 'ADD_PRICING_TIER_TO_MODIFIED',
-      setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
-    }),
-    addToModified () {
-      this.setUnsavedBaseOptionChanges()
-      this.addPricingTierToModified({
-        id: this.pricingTier.id,
-        lower_bound: this.lower_bound,
-        upper_bound: this.upper_bound,
-        payout: this.payout,
-        pricing_tier_group: this.pricingTier.pricing_tier_group
-      })
-    }
   }
 }
 </script>

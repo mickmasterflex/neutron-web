@@ -1,8 +1,8 @@
 <template>
   <div class="well">
     <ul class="fields-inline-heading px-1">
-      <li class="w-40 fields-inline-heading-item">Upper Bound</li>
       <li class="w-40 fields-inline-heading-item">Lower Bound</li>
+      <li class="w-40 fields-inline-heading-item">Upper Bound</li>
       <li class="w-40 fields-inline-heading-item">Payout</li>
     </ul>
     <div class="text-red-500">
