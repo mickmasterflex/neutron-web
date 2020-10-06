@@ -8,6 +8,7 @@
         <validation-observer ref="form">
           <form @submit.prevent="addLocations()">
             <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" rules="required" v-model="locations"></v-textarea-field>
+            <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace" v-model="nuke_replace"></checkbox-single>
           </form>
         </validation-observer>
       </div>
@@ -24,7 +25,8 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      locations: ''
+      locations: '',
+      nuke_replace: false
     }
   },
   computed: {
@@ -39,6 +41,7 @@ export default {
     }),
     resetForm () {
       this.locations = ''
+      this.nuke_replace = false
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -48,7 +51,8 @@ export default {
         if (success) {
           this.add({
             geo: this.geo,
-            locations: this.locations
+            locations: this.locations,
+            nuke_replace: this.nuke_replace
           }).then(() => {
             this.resetForm()
           }).catch(error => {
