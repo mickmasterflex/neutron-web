@@ -7,10 +7,14 @@
           <form @submit.prevent="submitForm">
             <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           </form>
+         <div class="field-group" v-if="pricingTiers.length">
+           <label class="field-label">Tiers</label>
+           <list-tiers></list-tiers>
+         </div>
         </validation-observer>
-        <div class="field-group" v-if="pricingTiers.length">
-          <label class="field-label">Tiers</label>
-          <list-tiers></list-tiers>
+        <div class="field-group">
+          <label class="field-label">Create Tier</label>
+          <create-pricing-tier></create-pricing-tier>
         </div>
       </div>
     </template>
@@ -22,6 +26,7 @@
 
 <script>
 import listTiers from '@/components/pricing-tiers/update-list'
+import createPricingTier from '@/components/pricing-tiers/create'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
@@ -33,8 +38,12 @@ export default {
       name: ''
     }
   },
+  props: {
+    pricingTier: Object
+  },
   components: {
-    'list-tiers': listTiers
+    'list-tiers': listTiers,
+    'create-pricing-tier': createPricingTier
   },
   updated () {
     if (this.pricingTierGroup) {

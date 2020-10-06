@@ -28,8 +28,11 @@ export const setResponseErrors = {
     formError () {
       if (this.error.response.data) {
         const nonFieldErrors = this.error.response.data.non_field_errors
+        const errorDetail = this.error.response.data.detail
         if (nonFieldErrors) {
           return (nonFieldErrors[0])
+        } else if (errorDetail) {
+          return errorDetail
         }
       }
       return ''
