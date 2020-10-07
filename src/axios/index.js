@@ -39,6 +39,9 @@ axios.interceptors.response.use(response => {
       case 400:
         failedToast({ heading: error.message })
         return Promise.reject(error)
+      case 409:
+        failedToast({ heading: error.message, content: error.response.data.detail })
+        break
       case 500:
         failedToast({ heading: error.message, content: error.response.statusText })
         break

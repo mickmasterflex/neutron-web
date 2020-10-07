@@ -9,6 +9,11 @@ module.exports = {
           ...defaultTheme.fontFamily.sans
         ]
       },
+      maxHeight: {
+        '1/4': '25vh',
+        '1/2': '50vh',
+        '3/4': '75vh'
+      },
       borderRadius: {
         xl: '1.125rem'
       },
