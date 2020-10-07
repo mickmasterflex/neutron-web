@@ -21,7 +21,6 @@
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
-            <!-- TODO need to update button click to update pricing tier group -->
             <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentPricingTierGroup(getPricingTierGroupById(relation.pricing_tier_group), relation)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
             <span v-if="relation.pricing_tier_group">{{ getPricingTierGroupById(relation.pricing_tier_group).name }}</span>
             <span v-else>No Pricing Tier Set</span>

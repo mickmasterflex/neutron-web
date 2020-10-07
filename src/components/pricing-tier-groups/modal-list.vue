@@ -80,7 +80,6 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          console.log(this.pricing_tier_group)
           this.update({
             id: this.contractRelation.id,
             buyer_contract: this.contractRelation.buyer_contract,
