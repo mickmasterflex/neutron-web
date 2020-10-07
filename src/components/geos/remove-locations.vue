@@ -7,7 +7,7 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="removeLocations()">
-            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" rules="required" v-model="locations" placeholder="Enter multiple postal codes, or abbreviated states. Separate by return or comma. ie: 84104, UT, 90210, UT, TX"></v-textarea-field>
+            <location-field ref="locationField" v-model="locations"></location-field>
           </form>
         </validation-observer>
       </div>
@@ -17,9 +17,11 @@
 
 <script>
 import geoPanel from '@/components/geos/geo-panel'
+import locationField from '@/components/geos/locations-field'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import resultsList from '@/components/geos/search-locations/results-list'
 
 export default {
   data () {
@@ -58,13 +60,14 @@ export default {
       })
     },
     enterKeyAction () {
-      if (document.activeElement === this.$refs.locationField.$refs.field.$refs.field) {
+      if (document.activeElement === this.$refs.locationField.$refs.locationField.$refs.field.$refs.field) {
         this.removeLocations()
       }
     }
   },
   components: {
-    'geo-panel': geoPanel
+    'geo-panel': geoPanel,
+    'location-field': locationField
   }
 }
 </script>

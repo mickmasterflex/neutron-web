@@ -7,7 +7,7 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="addLocations()">
-            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" v-model="locations" :field_disabled="csv" placeholder="Enter multiple postal codes, or abbreviated states. Separate by return or comma. ie: 84104, UT, 90210, UT, TX"></v-textarea-field>
+            <location-field ref="locationField" v-model="locations"></location-field>
             <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
             <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace" v-model="nuke_replace"></checkbox-single>
           </form>
@@ -20,6 +20,7 @@
 <script>
 import geoPanel from '@/components/geos/geo-panel'
 import fileField from '@/components/ui/forms/validation-fields/file-field'
+import locationField from '@/components/geos/locations-field'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { mapActions, mapGetters } from 'vuex'
@@ -73,14 +74,15 @@ export default {
       })
     },
     enterKeyAction () {
-      if (document.activeElement === this.$refs.locationField.$refs.field.$refs.field) {
+      if (document.activeElement === this.$refs.locationField.$refs.locationField.$refs.field.$refs.field) {
         this.addLocations()
       }
     }
   },
   components: {
     'geo-panel': geoPanel,
-    'file-field': fileField
+    'file-field': fileField,
+    'location-field': locationField
   }
 }
 </script>
