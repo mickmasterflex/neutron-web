@@ -1,13 +1,14 @@
 <template>
   <geo-panel contentTab="add">
     <template #action>
-      <button v-show="locations.length" @click="addLocations()" class="btn btn-green"><font-awesome-icon icon="plus"></font-awesome-icon> Add Locations</button>
+      <button v-show="locations.length || csv" @click="addLocations()" class="btn btn-green"><font-awesome-icon icon="plus"></font-awesome-icon> Add Locations</button>
     </template>
     <template #content>
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="addLocations()">
-            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" rules="required" v-model="locations"></v-textarea-field>
+            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" v-model="locations" :field_disabled="csv"></v-textarea-field>
+            <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
             <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace" v-model="nuke_replace"></checkbox-single>
           </form>
         </validation-observer>
@@ -18,6 +19,7 @@
 
 <script>
 import geoPanel from '@/components/geos/geo-panel'
+import fileField from '@/components/ui/forms/validation-fields/file-field'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { mapActions, mapGetters } from 'vuex'
@@ -26,6 +28,7 @@ export default {
   data () {
     return {
       locations: '',
+      csv: null,
       nuke_replace: false
     }
   },
@@ -39,6 +42,9 @@ export default {
     ...mapActions({
       add: 'addLocations'
     }),
+    fileSelected (file) {
+      this.csv = file
+    },
     resetForm () {
       this.locations = ''
       this.nuke_replace = false
@@ -49,11 +55,15 @@ export default {
     addLocations () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.add({
-            geo: this.geo,
-            locations: this.locations,
-            nuke_replace: this.nuke_replace
-          }).then(() => {
+          const formData = new FormData()
+          if (this.csv) {
+            formData.append('csv_file', this.csv)
+          } else {
+            formData.append('locations', this.locations)
+          }
+          formData.append('geo', this.geo)
+          formData.append('nuke_replace', this.nuke_replace)
+          this.add(formData).then(() => {
             this.resetForm()
           }).catch(error => {
             this.error = error
@@ -68,7 +78,8 @@ export default {
     }
   },
   components: {
-    'geo-panel': geoPanel
+    'geo-panel': geoPanel,
+    'file-field': fileField
   }
 }
 </script>

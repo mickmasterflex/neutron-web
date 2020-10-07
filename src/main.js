@@ -3,7 +3,7 @@ import Vue from 'vue'
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 // eslint-disable-next-line camelcase
-import { required, email, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
+import { required, email, ext, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -28,6 +28,7 @@ import {
   faDna,
   faDownload,
   faExclamationTriangle,
+  faFileCsv,
   faImage,
   faKey,
   faMinus,
@@ -115,6 +116,7 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
+extend('ext', { ...ext, message: 'Incorrect file type' })
 extend('url', {
   message: 'Must be a valid URL',
   validate: (value) => {
@@ -157,6 +159,7 @@ library.add(
   faDna,
   faDownload,
   faExclamationTriangle,
+  faFileCsv,
   faImage,
   faKey,
   faMinus,
