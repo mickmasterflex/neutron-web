@@ -7,7 +7,7 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="addLocations()">
-            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" v-model="locations" :field_disabled="csv"></v-textarea-field>
+            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" v-model="locations" :field_disabled="csv" placeholder="Enter multiple postal codes, or abbreviated states. Separate by return or comma. ie: 84104, UT, 90210, UT, TX"></v-textarea-field>
             <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
             <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace" v-model="nuke_replace"></checkbox-single>
           </form>
@@ -48,6 +48,7 @@ export default {
     resetForm () {
       this.locations = ''
       this.nuke_replace = false
+      this.csv = null
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -59,7 +60,7 @@ export default {
           if (this.csv) {
             formData.append('csv_file', this.csv)
           } else {
-            formData.append('locations', this.locations)
+            formData.append('locations', this.locations.toLowerCase())
           }
           formData.append('geo', this.geo)
           formData.append('nuke_replace', this.nuke_replace)

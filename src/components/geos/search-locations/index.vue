@@ -7,7 +7,7 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="searchLocations()">
-            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" rules="required" v-model="locations"></v-textarea-field>
+            <v-textarea-field field_id="locations" ref="locationField" field_label="Locations" rules="required" v-model="locations" placeholder="Enter multiple postal codes, or abbreviated states. Separate by return or comma. ie: 84104, UT, 90210, UT, TX"></v-textarea-field>
           </form>
         </validation-observer>
         <div class="field-group" v-if="results.found">
@@ -47,7 +47,7 @@ export default {
         if (success) {
           this.search({
             geo: this.geo,
-            locations: this.locations
+            locations: this.locations.toLowerCase()
           })
         }
       })
