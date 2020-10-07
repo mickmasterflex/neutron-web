@@ -9,6 +9,7 @@
         :id="$attrs.field_id"
         :value="value"
         :disabled="$attrs.field_disabled"
+        :placeholder="$attrs.placeholder"
         ref="field"/>
       <slot></slot>
     </div>
@@ -33,6 +34,6 @@ export default {
 
 <style>
   .textarea {
-    min-height: 80px;
+    min-height: 105px;
   }
 </style>
