@@ -9,6 +9,7 @@
       </template>
     </action-heading>
     <buyer-list :contracts="children" :client="$route.params.client"></buyer-list>
+    <contract-relations-index :buyer="buyer.id"></contract-relations-index>
     <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
   </div>
 </template>
@@ -16,12 +17,14 @@
 <script>
 import buyerList from '@/components/buyers/list'
 import createBuyer from '@/components/buyers/create'
+import contractRelationsIndex from '@/components/contract-relations/index'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
     'buyer-list': buyerList,
-    'create-buyer-contract': createBuyer
+    'create-buyer-contract': createBuyer,
+    'contract-relations-index': contractRelationsIndex
   },
   computed: {
     ...mapGetters({

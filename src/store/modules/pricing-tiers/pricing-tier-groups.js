@@ -3,13 +3,15 @@ import axios from '@/axios'
 const state = {
   pricing_tier_groups: [],
   current_pricing_tier_group: {},
-  show_update_pricing_tier_group_modal: false
+  show_update_pricing_tier_group_modal: false,
+  show_list_pricing_tier_group_modal: false
 }
 
 const getters = {
   getPricingTierGroups: state => state.pricing_tier_groups,
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
   getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal,
+  getShowListPricingTierGroupModal: state => state.show_list_pricing_tier_group_modal,
   getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) }
 }
 const actions = {
@@ -41,7 +43,9 @@ const actions = {
 
 const mutations = {
   SHOW_UPDATE_PRICING_TIER_GROUP_MODAL: (state) => (state.show_update_pricing_tier_group_modal = true),
+  SHOW_LIST_PRICING_TIER_GROUP_MODAL: (state) => (state.show_list_pricing_tier_group_modal = true),
   CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL: (state) => (state.show_update_pricing_tier_group_modal = false),
+  CLOSE_LIST_PRICING_TIER_GROUP_MODAL: (state) => (state.show_list_pricing_tier_group_modal = false),
   SET_PRICING_TIER_GROUPS: (state, groups) => (state.pricing_tier_groups = groups),
   SET_CURRENT_PRICING_TIER_GROUP: (state, group) => (state.current_pricing_tier_group = group),
   RESET_CURRENT_PRICING_TIER_GROUP: (state) => (state.current_pricing_tier_group = {}),
