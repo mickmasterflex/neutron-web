@@ -11,13 +11,13 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="relation in contractRelations" :key="relation.id">
+      <tr class="tr" v-for="relation in contractRelations.sort((a, b) => (a.id > b.id) ? 1 : -1)" :key="relation.id">
         <td class="td">
           <span>{{ getPartner(relation[getContractType().contract]) }}</span>
         </td>
         <td class="td">
-          <!-- TODO add checkbox to change suppression status -->
-          <span>{{ relation.suppressed }}</span>
+          <!-- TODO halp me style these -->
+          <checkbox-single v-model="relation.suppressed" :field_id="`suppressed-${relation.id}`" :field_label="showSuppressed(relation.suppressed)" @input="updateSuppressionStatus(relation, relation.suppressed)"/>
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
@@ -73,7 +73,8 @@ export default {
   methods: {
     ...mapActions({
       fetchPartners: 'fetchPartners',
-      fetchPricingTierGroups: 'fetchPricingTierGroups'
+      fetchPricingTierGroups: 'fetchPricingTierGroups',
+      updateContractRelation: 'updateContractRelation'
     }),
     ...mapMutations({
       setCurrentPricingTierGroup: 'SET_CURRENT_PRICING_TIER_GROUP',
@@ -103,6 +104,19 @@ export default {
         this.setCurrentPricingTierGroup(group)
         this.setCurrentPricingTiers(group.pricingtier_set)
       }
+    },
+    updateSuppressionStatus (relation, status) {
+      if (relation) {
+        this.updateContractRelation({
+          id: relation.id,
+          buyer_contract: relation.buyer_contract,
+          partner_contract: relation.partner_contract,
+          suppressed: status
+        }).catch(error => { this.error = error })
+      }
+    },
+    showSuppressed (status) {
+      return status === true ? 'Suppressed' : 'Active'
     }
   },
   created () {
