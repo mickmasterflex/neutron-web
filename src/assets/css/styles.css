@@ -177,7 +177,7 @@
 
 .btn {
     @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border;
-    -webkit-appearance: button;
+    -webkit-appearance: none;
     height: 45px;
 }
 
