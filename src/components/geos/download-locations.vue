@@ -17,9 +17,9 @@ export default {
     }),
     buttonCopy () {
       if (this.loading) {
-        return 'Downloading Current Locations'
+        return ' Downloading Current Locations'
       } else {
-        return 'Download Current Locations'
+        return ' Download Current Locations'
       }
     }
   },

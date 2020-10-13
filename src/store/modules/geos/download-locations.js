@@ -16,7 +16,7 @@ const actions = {
       method: 'GET'
     }).then(response => {
       const url = window.URL.createObjectURL(response.data)
-      window.open(url)
+      window.open(url, '_blank')
       commit('UNSET_DOWNLOAD_LOCATIONS_LOADING')
     })
   }
