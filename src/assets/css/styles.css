@@ -377,6 +377,8 @@
 .field-group { @apply my-2 }
 .field-group { @apply block }
 
+.field-label-top { @apply self-start mt-3 }
+
 /* Horizontal Forms */
 .form-horizontal .field-group { @apply my-3 flex flex-row items-center }
 .form-horizontal-slim .field-group { @apply my-0 }

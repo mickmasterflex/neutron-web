@@ -11,8 +11,8 @@
           </form>
         </validation-observer>
         <div class="field-group" v-if="results.found">
-          <label class="field-label">Search Results</label>
-          <results-list></results-list>
+          <label class="field-label field-label-top">Search Results</label>
+          <results-list class="well"></results-list>
         </div>
       </div>
     </template>
