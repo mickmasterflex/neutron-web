@@ -4,7 +4,7 @@
     <day-cap-update></day-cap-update>
     <month-cap-create></month-cap-create>
     <month-cap-update></month-cap-update>
-    <caps-calendar class="my-3"></caps-calendar>
+    <caps-calendar class="my-3" ref="calendar"></caps-calendar>
   </div>
 </template>
 
@@ -49,10 +49,18 @@ export default {
     }),
     setCapEndpoint () {
       this.setCapsCalendarEndpoint({ type: this.type, id: this.parent })
+    },
+    setCapEndpointAndFetchCaps () {
+      if (this.type && this.parent) {
+        this.setCapEndpoint()
+        this.$refs.calendar.fetchCaps()
+      }
     }
   },
   created () {
-    this.setCapEndpoint()
+    if (this.type && this.parent) {
+      this.setCapEndpoint()
+    }
   },
   destroyed () {
     this.resetCurrentCapParent()
