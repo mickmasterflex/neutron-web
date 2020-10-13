@@ -2,6 +2,7 @@ import addLocations from '@/store/modules/geos/add-locations'
 import downloadLocations from '@/store/modules/geos/download-locations'
 import removeLocations from '@/store/modules/geos/remove-locations'
 import searchLocations from '@/store/modules/geos/search-locations'
+import geoLoading from '@/store/modules/geos/loading'
 import geoPanels from '@/store/modules/geos/panels'
 
 const state = {
@@ -22,6 +23,7 @@ const modules = {
   downloadLocations,
   removeLocations,
   searchLocations,
+  geoLoading,
   geoPanels
 }
 

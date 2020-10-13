@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Recruitment Locations" :actionTransition="true">
+  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="geoLoading">
     <template #action>
       <slot name="action"></slot>
     </template>
@@ -33,7 +33,7 @@
 import panelTabs from '@/components/ui/panels/base/tabs'
 import panelFooter from '@/components/ui/panels/base/footer'
 import downloadLocations from '@/components/geos/download-locations'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -49,7 +49,16 @@ export default {
       validator: function (value) {
         return ['add', 'remove', 'search'].includes(value)
       }
+    },
+    loadingText: {
+      default: 'Loading',
+      type: String
     }
+  },
+  computed: {
+    ...mapGetters({
+      geoLoading: 'getGeoPanelLoading'
+    })
   },
   methods: {
     ...mapActions({
