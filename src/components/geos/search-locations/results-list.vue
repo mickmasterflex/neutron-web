@@ -38,6 +38,6 @@ export default {
 <style scoped>
   .table {
     max-height: 500px;
-    overflow-y: scroll;
+    @apply overflow-y-scroll
   }
 </style>
