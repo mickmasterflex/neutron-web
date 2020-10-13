@@ -42,7 +42,7 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          let relationData = {}
+          let relationData
           if (this.buyerContract()) {
             relationData = {
               buyer_contract: this.currentContract,
@@ -67,7 +67,7 @@ export default {
       return this.contractType === 'buyer'
     },
     newRelationContracts () {
-      // TODO this can probably be optimized
+      // TODO this can probably be optimized - only allows contracts that can be created to be shown
       const buyerRelationContracts = []
       const partnerRelationContracts = []
       this.contractRelations.forEach(relation => {

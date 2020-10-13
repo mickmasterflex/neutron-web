@@ -41,7 +41,7 @@
         </td>
         <td class="td">
           <span class="flex flex-row justify-end">
-            <button class="btn btn-circle btn-hollow-red"><font-awesome-icon icon="minus"></font-awesome-icon></button>
+            <delete-contract-relation :id="relation.id"></delete-contract-relation>
           </span>
         </td>
       </tr>
@@ -58,6 +58,7 @@
 import updatePricingTierGroup from '@/components/pricing-tier-groups/update'
 import pricingTierModalList from '@/components/pricing-tier-groups/modal-list'
 import capsModal from '@/components/contract-relations/caps-modal'
+import deleteContractRelation from '@/components/contract-relations/delete'
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
@@ -136,7 +137,8 @@ export default {
   components: {
     'update-pricing-tier-group': updatePricingTierGroup,
     'pricing-tier-group-modal-list': pricingTierModalList,
-    'caps-modal': capsModal
+    'caps-modal': capsModal,
+    'delete-contract-relation': deleteContractRelation
   }
 }
 </script>

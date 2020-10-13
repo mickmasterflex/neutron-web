@@ -34,6 +34,12 @@ const actions = {
       .then(response => {
         commit('ADD_CONTRACT_RELATION', response.data)
       })
+  },
+  async deleteContractRelation ({ commit }, id) {
+    await axios.delete(`/contract-relations/${id}/`)
+      .then(() => {
+        commit('REMOVE_CONTRACT_RELATION', id)
+      })
   }
 }
 
@@ -46,7 +52,8 @@ const mutations = {
     }
   },
   SET_CURRENT_CONTRACT_RELATION: (state, relation) => (state.current_contract_relation = relation),
-  ADD_CONTRACT_RELATION: (state, relation) => state.contract_relations.unshift(relation)
+  ADD_CONTRACT_RELATION: (state, relation) => state.contract_relations.unshift(relation),
+  REMOVE_CONTRACT_RELATION: (state, id) => (state.contract_relations = state.contract_relations.filter(relation => relation.id !== id))
 }
 
 export default {
