@@ -7,8 +7,8 @@
       </tr>
     </thead>
     <tbody class="tbody">
-      <list-item v-for="location in found" :key="location" :location="location" :found="true"></list-item>
-      <list-item v-for="location in notFound" :key="location" :location="location" :found="false"></list-item>
+      <list-item v-for="(location, index) in found" :key="'found-' + index" :location="location" :found="true"></list-item>
+      <list-item v-for="(location, index) in notFound" :key="'not-found-' + index" :location="location" :found="false"></list-item>
     </tbody>
   </table>
 </template>
