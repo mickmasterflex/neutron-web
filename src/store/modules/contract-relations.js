@@ -29,7 +29,6 @@ const actions = {
       })
   },
   async createContractRelation ({ commit }, relation) {
-    console.log(relation)
     await axios.post('/contract-relations/', relation)
       .then(response => {
         commit('ADD_CONTRACT_RELATION', response.data)

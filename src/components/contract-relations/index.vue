@@ -1,10 +1,10 @@
 <template>
   <panel-template title="Contract Relations">
     <template v-slot:action>
-      <create-contract-relation v-if="contract" :currentContract="contract" :contractType="contractType" :contractRelations="contract_relations"></create-contract-relation>
+      <create-contract-relation :currentContract="contract" :contractType="contractType" :contractRelations="contract_relations"></create-contract-relation>
     </template>
     <template v-slot:content>
-      <contract-relations-list :contractRelations="contract_relations" contractType="buyer"></contract-relations-list>
+      <contract-relations-list :contractRelations="contract_relations" :contractType="contractType"></contract-relations-list>
     </template>
   </panel-template>
 </template>
@@ -22,9 +22,13 @@ export default {
   },
   props: {
     contract: {
-      type: Number
+      type: Number,
+      required: true
     },
-    contractType: String
+    contractType: {
+      type: String,
+      required: true
+    }
   },
   computed: {
     ...mapGetters({

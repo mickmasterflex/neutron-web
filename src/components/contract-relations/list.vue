@@ -13,7 +13,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="relation in contractRelations.sort((a, b) => (a.id > b.id) ? 1 : -1)" :key="relation.id">
         <td class="td">
-          <span>{{ getPartner(relation[getContractType().contract]) }}</span>
+          <span>{{ getContract(relation[getContractType().contract]) }}</span>
         </td>
         <td class="td">
           <!-- TODO halp me style these -->
@@ -65,12 +65,19 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   props: {
     contractRelations: Array,
-    contractType: String
+    contractType: {
+      type: String,
+      validator: function (value) {
+        return ['buyer', 'partner'].includes(value)
+      }
+    }
   },
   computed: {
     ...mapGetters({
       partners: 'getAllPartners',
       partnerById: 'getPartnerById',
+      buyers: 'getAllBuyers',
+      buyerById: 'getBuyerById',
       pricingTierGroups: 'getPricingTierGroups',
       pricingTierGroupById: 'getPricingTierGroupById',
       currentRelation: 'getCurrentContractRelation'
@@ -97,9 +104,16 @@ export default {
         contract: this.contractType === 'buyer' ? 'partner_contract' : 'buyer_contract'
       }
     },
-    getPartner (partnerId) {
-      const partner = this.partnerById(partnerId)
-      return partner.name
+    getContract (contractId) {
+      let contract = null
+      if (this.contractType === 'buyer') {
+        contract = this.partnerById(contractId)
+      } else {
+        contract = this.buyerById(contractId)
+      }
+      if (contract) {
+        return contract.name
+      }
     },
     getPricingTierGroupById (pricingTierGroupId) {
       return this.pricingTierGroupById(pricingTierGroupId)
