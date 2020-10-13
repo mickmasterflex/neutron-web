@@ -1,5 +1,5 @@
 <template>
-  <geo-panel contentTab="remove">
+  <geo-panel contentTab="remove" loadingText="Removing Locations">
     <template #action>
       <button v-show="locations.length" @click="removeLocations()" class="btn btn-red"><font-awesome-icon icon="trash-alt"></font-awesome-icon> Remove Locations</button>
     </template>

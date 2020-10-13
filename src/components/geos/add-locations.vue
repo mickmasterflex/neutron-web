@@ -1,5 +1,5 @@
 <template>
-  <geo-panel contentTab="add">
+  <geo-panel contentTab="add" loadingText="Adding Locations">
     <template #action>
       <button v-show="locations.length || csv" @click="addLocations()" class="btn btn-green"><font-awesome-icon icon="plus"></font-awesome-icon> Add Locations</button>
     </template>

@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="geoLoading">
+  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="geoLoading" :loadingText="loadingText">
     <template #action>
       <slot name="action"></slot>
     </template>

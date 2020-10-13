@@ -1,5 +1,5 @@
 <template>
-  <geo-panel contentTab="search">
+  <geo-panel contentTab="search" loadingText="Searching Locations">
     <template #action>
       <button v-show="locations.length" @click="searchLocations()" class="btn btn-green"><font-awesome-icon icon="search"></font-awesome-icon> Search Locations</button>
     </template>
