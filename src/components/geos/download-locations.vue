@@ -1,6 +1,8 @@
 <template>
   <button :class="`btn btn-hollow-purple ${loading ? 'cursor-wait disabled' : ''}`" @click="downloadLocations()">
-    <font-awesome-icon icon="download"></font-awesome-icon> Download Current Locations
+    <font-awesome-icon v-if="!loading" icon="download"></font-awesome-icon>
+    <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon>
+    {{ buttonCopy }}
   </button>
 </template>
 
@@ -12,7 +14,14 @@ export default {
     ...mapGetters({
       geo: 'getCurrentGeo',
       loading: 'getDownloadLocationsLoading'
-    })
+    }),
+    buttonCopy () {
+      if (this.loading) {
+        return 'Downloading Current Locations'
+      } else {
+        return 'Download Current Locations'
+      }
+    }
   },
   methods: {
     ...mapActions({
