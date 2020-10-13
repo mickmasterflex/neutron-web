@@ -1,14 +1,13 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h2 class="h3">Child Contracts</h2>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Child Contracts">
+      <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
       </template>
-    </action-heading>
-    <partner-list :contracts="children" :client="$route.params.client"></partner-list>
+      <template v-slot:content>
+        <partner-list :contracts="children" :client="$route.params.client"></partner-list>
+      </template>
+    </panel-template>
     <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner"></contract-relations-index>
     <create-partner-contract :client="partner.client" :parent="partner.id"></create-partner-contract>
   </div>
