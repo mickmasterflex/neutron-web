@@ -12,7 +12,7 @@
 <script>
 import contractRelationsList from '@/components/contract-relations/list'
 
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -34,8 +34,7 @@ export default {
   methods: {
     ...mapActions({
       fetchContractRelations: 'fetchContractRelations'
-    }),
-    ...mapMutations({})
+    })
   },
   created () {
     this.fetchContractRelations()

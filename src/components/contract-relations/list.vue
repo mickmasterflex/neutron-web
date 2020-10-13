@@ -27,14 +27,10 @@
           </span>
         </td>
         <td class="td">
-          <span v-if="relation.caps.month_caps.length || relation.caps.day_caps.length" class="flex flex-row justify-start">
-            <!-- TODO need to update button click to update caps -->
-            <button class="btn btn-circle btn-hollow-blue"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-            <span>{{ relation.caps.month_caps.length }} Month Caps, {{ relation.caps.day_caps.length }} Day Caps</span>
-          </span>
-          <span v-else class="flex flex-row justify-start">
-            <button class="btn btn-circle btn-hollow-blue"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-            <span>No Caps Set</span>
+          <span class="flex flex-row justify-start">
+            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentRelation(relation)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+            <span v-if="relation.caps.month_caps.length || relation.caps.day_caps.length">{{ relation.caps.month_caps.length }} Month Caps, {{ relation.caps.day_caps.length }} Day Caps</span>
+            <span v-else >No Caps Set</span>
           </span>
         </td>
         <td class="td">
@@ -48,12 +44,14 @@
     <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations"></table-empty-state>
     <update-pricing-tier-group></update-pricing-tier-group>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
+    <caps-modal v-if="currentRelation.id" :capParent="currentRelation.id" capType="relations"></caps-modal>
   </div>
 </template>
 
 <script>
 import updatePricingTierGroup from '@/components/pricing-tier-groups/update'
 import pricingTierModalList from '@/components/pricing-tier-groups/modal-list'
+import capsModal from '@/components/contract-relations/caps-modal'
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
@@ -67,7 +65,8 @@ export default {
       partners: 'getAllPartners',
       partnerById: 'getPartnerById',
       pricingTierGroups: 'getPricingTierGroups',
-      pricingTierGroupById: 'getPricingTierGroupById'
+      pricingTierGroupById: 'getPricingTierGroupById',
+      currentRelation: 'getCurrentContractRelation'
     })
   },
   methods: {
@@ -81,7 +80,8 @@ export default {
       showPricingTierGroupModal: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL',
       showPricingTierListModal: 'SHOW_LIST_PRICING_TIER_GROUP_MODAL',
       setCurrentPricingTiers: 'SET_CURRENT_PRICING_TIERS',
-      setCurrentContractRelation: 'SET_CURRENT_CONTRACT_RELATION'
+      setCurrentContractRelation: 'SET_CURRENT_CONTRACT_RELATION',
+      showCapsModal: 'SHOW_CAPS_PARENT_MODAL'
     }),
     getContractType () {
       // needs to return opposite of whatever contract type it is
@@ -105,6 +105,10 @@ export default {
         this.setCurrentPricingTiers(group.pricingtier_set)
       }
     },
+    showModalSetCurrentRelation (relation) {
+      this.showCapsModal()
+      this.setCurrentContractRelation(relation)
+    },
     updateSuppressionStatus (relation, status) {
       if (relation) {
         this.updateContractRelation({
@@ -125,7 +129,8 @@ export default {
   },
   components: {
     'update-pricing-tier-group': updatePricingTierGroup,
-    'pricing-tier-group-modal-list': pricingTierModalList
+    'pricing-tier-group-modal-list': pricingTierModalList,
+    'caps-modal': capsModal
   }
 }
 </script>
