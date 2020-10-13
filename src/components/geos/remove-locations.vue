@@ -21,7 +21,6 @@ import locationField from '@/components/geos/locations-field'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import resultsList from '@/components/geos/search-locations/results-list'
 
 export default {
   data () {
