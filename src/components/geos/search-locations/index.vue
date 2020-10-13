@@ -43,12 +43,20 @@ export default {
     ...mapActions({
       search: 'searchLocations'
     }),
+    resetForm () {
+      this.locations = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+    },
     searchLocations () {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.search({
             geo: this.geo,
             locations: this.locations.toLowerCase()
+          }).then(() => {
+            this.resetForm()
           })
         }
       })

@@ -10,6 +10,12 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: null,
+      default: ''
+    }
+  },
   data: () => ({
     inner_value: '',
     placeholder: 'Enter multiple postal codes or abbreviated states.\nSeparate with commas, ie:\n84104, UT, 90210, ny, TX'
