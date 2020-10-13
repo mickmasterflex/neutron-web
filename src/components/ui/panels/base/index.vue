@@ -1,7 +1,7 @@
 <template>
   <div class="panel rounded-xl bg-gray-100 border-gray-200 border-2 relative">
-    <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__faster animate__fadeOut">
-      <div v-show="showLoader" class="absolute inset-0 bg-white opacity-75 flex flex-row items-center justify-center">
+    <transition enter-active-class="animate__animated animate__faster animate__fadeIn" leave-active-class="animate__animated animate__faster animate__fadeOut">
+      <div v-show="showLoader" class="absolute inset-0 bg-white bg-opacity-75 flex flex-row items-center justify-center rounded-xl">
         <font-awesome-icon class="text-gray-900 text-lg" icon="spinner" pulse></font-awesome-icon>
         <p class="h4 ml-1 mb-0 pb-0 font-bold">{{ loadingText }}</p>
       </div>
