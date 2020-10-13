@@ -38,20 +38,12 @@ export default {
     ...mapActions({
       remove: 'removeLocations'
     }),
-    resetForm () {
-      this.locations = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-    },
     removeLocations () {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.remove({
             geo: this.geo,
-            locations: this.locations.toLowerCase()
-          }).then(() => {
-            this.resetForm()
+            locations: this.locations.toLowerCase().replace(/ /g, '')
           }).catch(error => {
             this.error = error
           })

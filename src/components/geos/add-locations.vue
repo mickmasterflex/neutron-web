@@ -47,7 +47,6 @@ export default {
       this.csv = file
     },
     resetForm () {
-      this.locations = ''
       this.nuke_replace = false
       this.csv = null
       this.$nextTick(() => {
@@ -61,7 +60,7 @@ export default {
           if (this.csv) {
             formData.append('csv_file', this.csv)
           } else {
-            formData.append('locations', this.locations.toLowerCase())
+            formData.append('locations', this.locations.toLowerCase().replace(/ /g, ''))
           }
           formData.append('geo', this.geo)
           formData.append('nuke_replace', this.nuke_replace)
