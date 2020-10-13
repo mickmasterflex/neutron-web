@@ -3,7 +3,8 @@
     field_id="locations"
     ref="locationField"
     field_label="Locations"
-    rules="required"
+    v-bind="$attrs"
+    :rules="rules"
     v-model="inner_value"
     :placeholder="placeholder"></v-textarea-field>
 </template>
@@ -13,6 +14,10 @@ export default {
   props: {
     value: {
       type: null,
+      default: ''
+    },
+    rules: {
+      type: [Object, String],
       default: ''
     }
   },

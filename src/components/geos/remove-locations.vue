@@ -7,7 +7,7 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="removeLocations()">
-            <location-field ref="locationField" v-model="locations"></location-field>
+            <location-field rules="required" ref="locationField" v-model="locations"></location-field>
           </form>
         </validation-observer>
       </div>

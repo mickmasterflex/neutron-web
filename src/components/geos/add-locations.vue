@@ -7,9 +7,9 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="addLocations()">
-            <location-field ref="locationField" v-model="locations"></location-field>
+            <location-field ref="locationField" :field_disabled="csv" v-model="locations"></location-field>
             <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
-            <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace" v-model="nuke_replace"></checkbox-single>
+            <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace Existing" v-model="nuke_replace"></checkbox-single>
           </form>
         </validation-observer>
       </div>
