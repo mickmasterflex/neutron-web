@@ -16,8 +16,8 @@
           <span>{{ getContract(relation[getContractType().contract]) }}</span>
         </td>
         <td class="td">
-          <!-- TODO halp me style these -->
-          <checkbox-single v-model="relation.suppressed" :field_id="`suppressed-${relation.id}`" :field_label="showSuppressed(relation.suppressed)" @input="updateSuppressionStatus(relation, relation.suppressed)"/>
+          <input v-model="relation.suppressed" type="checkbox" :id="`suppressed-${relation.id}`" @change="updateSuppressionStatus(relation, relation.suppressed)">
+          <label :for="`suppressed-${relation.id}`"> {{ showSuppressed(relation.suppressed) }}</label>
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
