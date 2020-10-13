@@ -9,7 +9,7 @@
       </template>
     </action-heading>
     <buyer-list :contracts="children" :client="$route.params.client"></buyer-list>
-    <contract-relations-index :buyer="buyer.id"></contract-relations-index>
+    <contract-relations-index :contract="buyer.id" contractType="buyer"></contract-relations-index>
     <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
   </div>
 </template>

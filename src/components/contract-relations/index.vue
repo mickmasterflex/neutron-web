@@ -1,7 +1,7 @@
 <template>
   <panel-template title="Contract Relations">
     <template v-slot:action>
-      <button>New Buyer Relation</button>
+      <create-contract-relation v-if="contract" :currentContract="contract" :contractType="contractType" :contractRelations="contract_relations"></create-contract-relation>
     </template>
     <template v-slot:content>
       <contract-relations-list :contractRelations="contract_relations" contractType="buyer"></contract-relations-list>
@@ -11,30 +11,41 @@
 
 <script>
 import contractRelationsList from '@/components/contract-relations/list'
+import createContractRelation from '@/components/contract-relations/create'
 
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'contract-relations-list': contractRelationsList
+    'contract-relations-list': contractRelationsList,
+    'create-contract-relation': createContractRelation
   },
   props: {
-    buyer: {
+    contract: {
       type: Number
-    }
+    },
+    contractType: String
   },
   computed: {
     ...mapGetters({
-      getContractRelationsByBuyer: 'getContractRelationsByBuyer'
+      getContractRelationsByBuyer: 'getContractRelationsByBuyer',
+      getContractRelationsByPartner: 'getContractRelationsByPartner'
     }),
     contract_relations: function () {
-      return this.getContractRelationsByBuyer(this.buyer)
+      if (this.buyerContract() && this.contract) {
+        return this.getContractRelationsByBuyer(this.contract)
+      } else {
+        return this.getContractRelationsByPartner(this.contract)
+      }
     }
   },
   methods: {
     ...mapActions({
       fetchContractRelations: 'fetchContractRelations'
-    })
+    }),
+    buyerContract () {
+      return this.contractType === 'buyer'
+    }
   },
   created () {
     this.fetchContractRelations()

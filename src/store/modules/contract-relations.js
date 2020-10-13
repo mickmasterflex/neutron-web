@@ -9,6 +9,9 @@ const getters = {
   getCurrentContractRelation: state => state.current_contract_relation,
   getContractRelationsByBuyer: (state) => (buyerId) => {
     return state.contract_relations.filter(relation => relation.buyer_contract === buyerId)
+  },
+  getContractRelationsByPartner: (state) => (partnerId) => {
+    return state.contract_relations.filter(relation => relation.partner_contract === partnerId)
   }
 }
 
@@ -24,6 +27,13 @@ const actions = {
       .then(response => {
         commit('UPDATE_CONTRACT_RELATION', response.data)
       })
+  },
+  async createContractRelation ({ commit }, relation) {
+    console.log(relation)
+    await axios.post('/contract-relations/', relation)
+      .then(response => {
+        commit('ADD_CONTRACT_RELATION', response.data)
+      })
   }
 }
 
@@ -35,7 +45,8 @@ const mutations = {
       state.contract_relations.splice(index, 1, updatedContractRelation)
     }
   },
-  SET_CURRENT_CONTRACT_RELATION: (state, relation) => (state.current_contract_relation = relation)
+  SET_CURRENT_CONTRACT_RELATION: (state, relation) => (state.current_contract_relation = relation),
+  ADD_CONTRACT_RELATION: (state, relation) => state.contract_relations.unshift(relation)
 }
 
 export default {

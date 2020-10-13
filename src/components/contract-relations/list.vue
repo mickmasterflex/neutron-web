@@ -21,15 +21,21 @@
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
-            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentPricingTierGroup(getPricingTierGroupById(relation.pricing_tier_group), relation)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentPricingTierGroup(getPricingTierGroupById(relation.pricing_tier_group), relation)">
+              <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+            </button>
             <span v-if="relation.pricing_tier_group">{{ getPricingTierGroupById(relation.pricing_tier_group).name }}</span>
             <span v-else>No Pricing Tier Set</span>
           </span>
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
-            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentRelation(relation)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-            <span v-if="relation.caps.month_caps.length || relation.caps.day_caps.length">{{ relation.caps.month_caps.length }} Month Caps, {{ relation.caps.day_caps.length }} Day Caps</span>
+            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentRelation(relation)">
+              <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+            </button>
+            <span v-if="relation.caps.month_caps.length || relation.caps.day_caps.length">
+              {{ relation.caps.month_caps.length }} Month Cap(s), {{ relation.caps.day_caps.length }} Day Cap(s)
+            </span>
             <span v-else >No Caps Set</span>
           </span>
         </td>
@@ -41,7 +47,7 @@
       </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations"></table-empty-state>
+    <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" />
     <update-pricing-tier-group></update-pricing-tier-group>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
     <caps-modal v-if="currentRelation.id" :capParent="currentRelation.id" capType="relations"></caps-modal>
