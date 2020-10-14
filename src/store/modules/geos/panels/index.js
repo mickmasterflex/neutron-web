@@ -1,3 +1,5 @@
+import loading from '@/store/modules/geos/panels/loading'
+
 const state = {
   add_locations_panel_visible: true,
   remove_locations_panel_visible: false,
@@ -37,9 +39,14 @@ const mutations = {
   UNSET_SEARCH_LOCATIONS_VISIBLE: state => (state.search_locations_panel_visible = false)
 }
 
+const modules = {
+  loading
+}
+
 export default {
   state,
   actions,
   getters,
-  mutations
+  mutations,
+  modules
 }

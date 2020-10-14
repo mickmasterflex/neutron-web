@@ -22,6 +22,7 @@ const actions = {
       link.download = 'recruitment-locations'
       link.click()
       URL.revokeObjectURL(link.href)
+    }).finally(() => {
       commit('UNSET_DOWNLOAD_LOCATIONS_LOADING')
     })
   }
