@@ -32,14 +32,20 @@ export default {
     ...mapMutations({
       setCurrentGeo: 'SET_CURRENT_GEO',
       resetCurrentGeo: 'RESET_CURRENT_GEO'
-    })
-  },
-  watch: {
-    geo () {
+    }),
+    setGeo () {
       if (this.geo) {
         this.setCurrentGeo(this.geo)
       }
     }
+  },
+  watch: {
+    geo () {
+      this.setGeo()
+    }
+  },
+  created () {
+    this.setGeo()
   },
   destroyed () {
     this.resetCurrentGeo()
