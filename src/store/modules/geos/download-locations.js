@@ -17,7 +17,11 @@ const actions = {
       method: 'GET'
     }).then(response => {
       const url = window.URL.createObjectURL(response.data)
-      window.open(url, '_blank')
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'recruitment-locations'
+      link.click()
+      URL.revokeObjectURL(link.href)
       commit('UNSET_DOWNLOAD_LOCATIONS_LOADING')
     })
   }
