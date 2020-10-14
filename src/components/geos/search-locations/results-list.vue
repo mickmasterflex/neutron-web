@@ -1,16 +1,18 @@
 <template>
-  <table class="table table-white table-shadow w-auto">
-    <thead>
-      <tr>
-        <th class="th">Location</th>
-        <th class="th">In Recruitment Area</th>
-      </tr>
-    </thead>
-    <tbody class="tbody">
-      <list-item v-for="(location, index) in found" :key="'found-' + index" :location="location" :found="true"></list-item>
-      <list-item v-for="(location, index) in notFound" :key="'not-found-' + index" :location="location" :found="false"></list-item>
-    </tbody>
-  </table>
+  <div class="well overflow-y-scroll block max-h-500">
+    <table class="table table-white table-shadow w-auto">
+      <thead>
+        <tr>
+          <th class="th">Location</th>
+          <th class="th">In Recruitment Area</th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <list-item v-for="(location, index) in found" :key="'found-' + index" :location="location" :found="true"></list-item>
+        <list-item v-for="(location, index) in notFound" :key="'not-found-' + index" :location="location" :found="false"></list-item>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -34,10 +36,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .table {
-    max-height: 500px;
-    @apply overflow-y-scroll
-  }
-</style>
