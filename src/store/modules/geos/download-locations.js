@@ -10,6 +10,7 @@ const getters = {
 
 const actions = {
   async downloadCurrentLocations ({ commit }, geo) {
+    commit('SET_DOWNLOAD_LOCATIONS_LOADING')
     await axios({
       url: `/geo-download-locations/?geo=${geo}`,
       responseType: 'blob',

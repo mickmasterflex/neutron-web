@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -27,12 +27,8 @@ export default {
     ...mapActions({
       download: 'downloadCurrentLocations'
     }),
-    ...mapMutations({
-      setLoading: 'SET_DOWNLOAD_LOCATIONS_LOADING'
-    }),
     downloadLocations () {
       if (!this.loading) {
-        this.setLoading()
         this.download(this.geo)
       }
     }
