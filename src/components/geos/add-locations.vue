@@ -8,6 +8,7 @@
         <validation-observer ref="form">
           <form @submit.prevent="addLocations()">
             <location-field ref="locationField" :field_disabled="csv" v-model="locations"></location-field>
+            <p class="italic text-gray-500 ml-label-width">Enter locations using the form above or by uploading a properly formatted CSV file.</p>
             <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
             <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace Existing" v-model="nuke_replace"></checkbox-single>
           </form>
