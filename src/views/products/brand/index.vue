@@ -5,10 +5,10 @@
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
-        <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'BrandDetails', params: {id:id}}">Brand Details</router-link>
         </li>
-        <li class="underscore-tab" :class="$route.meta.contentTab === 'campuses' ? 'active' : ''">
+        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'campuses' ? 'active' : ''">
           <router-link :to="{name: 'BrandCampuses', params: {id:id}}">Campuses</router-link>
         </li>
       </ul>

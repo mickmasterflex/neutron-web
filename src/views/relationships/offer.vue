@@ -7,8 +7,14 @@
       </div>
     </template>
     <template v-slot:content>
-      <update-offer :offer="offer"></update-offer>
-      <delete-offer :offer="offer" :client="$route.params.client" class="mt-4"></delete-offer>
+      <base-panel-grid>
+        <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
+        <panel-template title="Danger Zone" class="col-span-2">
+          <template #content>
+            <delete-offer :offer="offer" :client="$route.params.client"></delete-offer>
+          </template>
+        </panel-template>
+      </base-panel-grid>
     </template>
   </content-layout>
 </template>

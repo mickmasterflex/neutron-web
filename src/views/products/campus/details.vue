@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <update-campus :campus="campus"></update-campus>
+  <base-panel-grid>
+    <update-campus :campus="campus" class="col-span-2 xl:col-span-1"></update-campus>
+    <div class="hidden xl:block xl:col-span-1"></div>
 
-    <campus-logos v-show="campusLogos.length"></campus-logos>
-    <upload-logo v-show="!campusLogos.length"></upload-logo>
+    <campus-logos v-show="campusLogos.length" class="col-span-2"></campus-logos>
+    <upload-logo v-show="!campusLogos.length" class="col-span-2 xl:col-span-1"></upload-logo>
 
-    <campus-banners v-show="campusBanners.length"></campus-banners>
-    <upload-banner v-show="!campusBanners.length"></upload-banner>
+    <campus-banners v-show="campusBanners.length" class="col-span-2"></campus-banners>
+    <upload-banner v-show="!campusBanners.length" class="col-span-2 xl:col-span-1"></upload-banner>
 
-    <delete-campus :campus="campus" class="mt-4"></delete-campus>
-  </div>
+    <panel-template title="Danger Zone" class="col-span-2">
+      <template #content>
+        <delete-campus :campus="campus"></delete-campus>
+      </template>
+    </panel-template>
+  </base-panel-grid>
 </template>
 
 <script>

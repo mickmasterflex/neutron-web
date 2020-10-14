@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <update-brand :brand="brand" ></update-brand>
+  <base-panel-grid>
+    <update-brand :brand="brand" class="col-span-2 xl:col-span-1"></update-brand>
+    <div class="hidden xl:block xl:col-span-1"></div>
 
-    <brand-logos v-show="brandLogos.length"></brand-logos>
-    <upload-logo v-show="!brandLogos.length"></upload-logo>
+    <brand-logos v-show="brandLogos.length" class="col-span-2"></brand-logos>
+    <upload-logo v-show="!brandLogos.length" class="col-span-2 xl:col-span-1"></upload-logo>
 
-    <brand-banners v-show="brandBanners.length"></brand-banners>
-    <upload-banner v-show="!brandBanners.length"></upload-banner>
+    <brand-banners v-show="brandBanners.length" class="col-span-2"></brand-banners>
+    <upload-banner v-show="!brandBanners.length" class="col-span-2 xl:col-span-1"></upload-banner>
 
-    <delete-brand :id="brand.id" class="mt-4"></delete-brand>
-  </div>
+    <panel-template title="Danger Zone" class="col-span-2">
+      <template #content>
+        <delete-brand :id="brand.id"></delete-brand>
+      </template>
+    </panel-template>
+  </base-panel-grid>
 </template>
 
 <script>

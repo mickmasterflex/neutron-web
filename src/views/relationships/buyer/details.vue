@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <update-buyer-contract :buyer="buyer" ></update-buyer-contract>
-    <delivery-index :buyer="buyer.id"></delivery-index>
-    <panel-template title="Lead Caps" contentClass="relative">
+  <base-panel-grid>
+    <update-buyer-contract :buyer="buyer" class="col-span-2 xl:col-span-1"></update-buyer-contract>
+    <delivery-index :buyer="buyer.id" class="col-span-2 xl:col-span-1"></delivery-index>
+    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
       <template v-slot:content>
         <lead-caps :parent="id" type="buyers"></lead-caps>
       </template>
     </panel-template>
-    <panel-template title="Danger Zone">
+    <panel-template title="Danger Zone" class="col-span-2">
       <template v-slot:content>
         <delete-buyer-contract :client="$route.params.client" :id="buyer.id"></delete-buyer-contract>
       </template>
     </panel-template>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>

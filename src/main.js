@@ -26,7 +26,8 @@ import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
-import basePanel from '@/components/ui/panels/base'
+import basePanel from '@/components/ui/panels/base/index'
+import basePanelGrid from '@/components/ui/panels/grid/base'
 import statCard from '@/components/ui/cards/stat-card'
 import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
@@ -64,6 +65,7 @@ Vue.component('content-layout', baseContentLayout)
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
 Vue.component('panel-template', basePanel)
+Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)
 
 // Tables
