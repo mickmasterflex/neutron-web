@@ -4,8 +4,16 @@
     <template v-slot:body>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-select-field v-model="pricing_tier_group" :options="pricing_tier_groups" field_label="Pricing Tier Group"></v-select-field>
-          <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
+          <v-select-field v-model="pricing_tier_group"
+                          :options="pricing_tier_groups"
+                          field_label="Pricing Tier Group">
+          </v-select-field>
+          <list-tiers class="ml-label-width"
+                      tableWidth="auto"
+                      emptyTableClass="max-w-sm well"
+                      v-if="currentGroup"
+                      :pricingTiers='currentGroup.pricingtier_set'>
+          </list-tiers>
         </form>
       </validation-observer>
     </template>

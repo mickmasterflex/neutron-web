@@ -11,20 +11,28 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="relation in contractRelations.sort((a, b) => (a.id > b.id) ? 1 : -1)" :key="relation.id">
+      <tr class="tr" v-for="relation in sorted(contractRelations)" :key="relation.id">
         <td class="td">
           <span>{{ getContract(relation[getContractType().contract]) }}</span>
         </td>
         <td class="td">
-          <input v-model="relation.suppressed" type="checkbox" :id="`suppressed-${relation.id}`" @change="updateSuppressionStatus(relation, relation.suppressed)">
-          <label :for="`suppressed-${relation.id}`"> {{ showSuppressed(relation.suppressed) }}</label>
+          <input v-model="relation.suppressed"
+                 type="checkbox"
+                 :id="`suppressed-${relation.id}`"
+                 @change="updateSuppressionStatus(relation, relation.suppressed)"
+          >
+          <span> {{ showSuppressed(relation.suppressed) }}</span>
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
-            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentPricingTierGroup(getPricingTierGroupById(relation.pricing_tier_group), relation)">
+            <button class="btn btn-circle btn-hollow-blue"
+                    @click="showModalSetCurrentPricingTierGroup(getPricingTierGroupById(relation.pricing_tier_group), relation)"
+            >
               <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
             </button>
-            <span v-if="relation.pricing_tier_group">{{ getPricingTierGroupById(relation.pricing_tier_group).name }}</span>
+            <span v-if="relation.pricing_tier_group">
+              {{ getPricingTierGroupById(relation.pricing_tier_group).name }}
+            </span>
             <span v-else>No Pricing Tier Set</span>
           </span>
         </td>
@@ -48,14 +56,12 @@
       </tbody>
     </table>
     <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" />
-    <update-pricing-tier-group></update-pricing-tier-group>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
     <caps-modal v-if="currentRelation.id" :capParent="currentRelation.id" capType="relations"></caps-modal>
   </div>
 </template>
 
 <script>
-import updatePricingTierGroup from '@/components/pricing-tier-groups/update'
 import pricingTierModalList from '@/components/pricing-tier-groups/modal-list'
 import capsModal from '@/components/contract-relations/caps-modal'
 import deleteContractRelation from '@/components/contract-relations/delete'
@@ -74,9 +80,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      partners: 'getAllPartners',
       partnerById: 'getPartnerById',
-      buyers: 'getAllBuyers',
       buyerById: 'getBuyerById',
       pricingTierGroups: 'getPricingTierGroups',
       pricingTierGroupById: 'getPricingTierGroupById',
@@ -85,18 +89,19 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPartners: 'fetchPartners',
       fetchPricingTierGroups: 'fetchPricingTierGroups',
       updateContractRelation: 'updateContractRelation'
     }),
     ...mapMutations({
       setCurrentPricingTierGroup: 'SET_CURRENT_PRICING_TIER_GROUP',
-      showPricingTierGroupModal: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL',
       showPricingTierListModal: 'SHOW_LIST_PRICING_TIER_GROUP_MODAL',
       setCurrentPricingTiers: 'SET_CURRENT_PRICING_TIERS',
       setCurrentContractRelation: 'SET_CURRENT_CONTRACT_RELATION',
       showCapsModal: 'SHOW_CAPS_PARENT_MODAL'
     }),
+    sorted (values) {
+      return values.sort((a, b) => (a.id > b.id) ? 1 : -1)
+    },
     getContractType () {
       // needs to return opposite of whatever contract type it is
       return {
@@ -105,7 +110,7 @@ export default {
       }
     },
     getContract (contractId) {
-      let contract = null
+      let contract
       if (this.contractType === 'buyer') {
         contract = this.partnerById(contractId)
       } else {
@@ -145,11 +150,9 @@ export default {
     }
   },
   created () {
-    this.fetchPartners()
     this.fetchPricingTierGroups()
   },
   components: {
-    'update-pricing-tier-group': updatePricingTierGroup,
     'pricing-tier-group-modal-list': pricingTierModalList,
     'caps-modal': capsModal,
     'delete-contract-relation': deleteContractRelation

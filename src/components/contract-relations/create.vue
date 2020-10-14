@@ -8,7 +8,13 @@
       <div class="flex flex-row items-start" v-show="formVisible">
         <validation-observer ref="form">
           <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
-            <v-select-field :options="newRelationContracts()" v-model="selectedContract" rules="required" field_class="field-tall" field_label="Select Contract" field_id="contractNewRelation"></v-select-field>
+            <v-select-field :options="newRelationContracts()"
+                            v-model="selectedContract"
+                            rules="required"
+                            field_class="field-tall"
+                            field_label="Select Contract"
+                            field_id="contractNewRelation">
+            </v-select-field>
           </form>
         </validation-observer>
         <button @click="submitForm()" class="btn btn-green ml-2">
@@ -35,6 +41,7 @@ export default {
     },
     resetForm () {
       this.selectedContract = ''
+      this.formVisible = false
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -67,7 +74,7 @@ export default {
       return this.contractType === 'buyer'
     },
     newRelationContracts () {
-      // TODO this can probably be optimized - only allows contracts that can be created to be shown
+      // removes existing relationships from create options
       const buyerRelationContracts = []
       const partnerRelationContracts = []
       this.contractRelations.forEach(relation => {
