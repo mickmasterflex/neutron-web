@@ -2,7 +2,7 @@
   <div>
     <button class="btn btn-turquoise" @click="showForm()" v-show="!formVisible">
       <font-awesome-icon icon="plus"></font-awesome-icon>
-      New {{ capitalized(contractType) }} Relation
+      New {{ relationType() }} Relation
     </button>
     <transition enter-active-class="animate__animated animate__slideInRight animate__fast">
       <div class="flex flex-row items-start" v-show="formVisible">
@@ -18,7 +18,7 @@
           </form>
         </validation-observer>
         <button @click="submitForm()" class="btn btn-green ml-2">
-           Create {{ capitalized(contractType) }} Relation
+           Create {{ relationType() }} Relation
         </button>
       </div>
     </transition>
@@ -69,6 +69,9 @@ export default {
     },
     capitalized (value) {
       return value.charAt(0).toUpperCase() + value.slice(1)
+    },
+    relationType () {
+      return this.contractType === 'buyer' ? 'Partner' : 'Buyer'
     },
     buyerContract () {
       return this.contractType === 'buyer'
