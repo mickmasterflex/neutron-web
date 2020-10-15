@@ -15,7 +15,7 @@
         <td class="td">
           <span>{{ getContract(relation[getContractType().contract]) }}</span>
         </td>
-        <td class="td">
+        <td class="td suppressed-cell">
           <input v-model="relation.suppressed"
                  type="checkbox"
                  :id="`suppressed-${relation.id}`"
@@ -164,3 +164,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .suppressed-cell {
+    width: 200px;
+  }
+</style>
