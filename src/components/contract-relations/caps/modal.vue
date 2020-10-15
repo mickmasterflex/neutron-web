@@ -1,5 +1,5 @@
 <template>
-  <caps-modal :capParent="capParent" :capType="capType"></caps-modal>
+  <caps-modal @close="resetCurrentContractRelation" :capParent="capParent" :capType="capType"></caps-modal>
 </template>
 
 <script>
@@ -20,7 +20,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      updateContractRelation: 'UPDATE_CONTRACT_RELATION'
+      updateContractRelation: 'UPDATE_CONTRACT_RELATION',
+      resetCurrentContractRelation: 'RESET_CURRENT_RELATION'
     })
   },
   watch: {

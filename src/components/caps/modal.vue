@@ -28,6 +28,7 @@ export default {
     close () {
       this.resetCapsCalendarParams()
       this.resetCapsCalendarEndpoint()
+      this.$emit('close')
       this.closeModal()
     }
   },
