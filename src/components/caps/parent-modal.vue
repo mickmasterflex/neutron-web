@@ -2,7 +2,7 @@
   <modal-template :show="showModal" @close="close" modalClass="modal-lg">
     <template v-slot:header>Update Caps</template>
     <template v-slot:body>
-      <lead-caps :parent="capParent" :type="capType" ref="leadCaps"></lead-caps>
+      <lead-caps :parent="capParent" :type="capType" ref="leadCaps" class="relative"></lead-caps>
     </template>
   </modal-template>
 </template>

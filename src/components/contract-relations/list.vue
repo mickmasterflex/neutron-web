@@ -20,12 +20,13 @@
                  type="checkbox"
                  :id="`suppressed-${relation.id}`"
                  @change="updateSuppressionStatus(relation, relation.suppressed)"
+                 class="mr-1"
           >
-          <span> {{ showSuppressed(relation.suppressed) }}</span>
+          <span :class="relation.suppressed ? 'text-red-500' : 'text-green-600'" class="font-bold"> {{ showSuppressed(relation.suppressed) }}</span>
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
-            <button class="btn btn-circle btn-hollow-blue"
+            <button class="btn btn-circle btn-hollow-blue mr-1"
                     @click="showModalSetCurrentPricingTierGroup(getPricingTierGroupById(relation.pricing_tier_group), relation)"
             >
               <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
@@ -33,18 +34,19 @@
             <span v-if="relation.pricing_tier_group">
               {{ getPricingTierGroupById(relation.pricing_tier_group).name }}
             </span>
-            <span v-else>No Pricing Tier Set</span>
+            <span v-else class="italic text-gray-500">No Pricing Tier Set</span>
           </span>
         </td>
         <td class="td">
           <span class="flex flex-row justify-start">
-            <button class="btn btn-circle btn-hollow-blue" @click="showModalSetCurrentRelation(relation)">
+            <button class="btn btn-circle btn-hollow-blue mr-1" @click="showModalSetCurrentRelation(relation)">
               <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
             </button>
             <span v-if="relation.caps.month_caps.length || relation.caps.day_caps.length">
-              {{ relation.caps.month_caps.length }} Month Cap(s), {{ relation.caps.day_caps.length }} Day Cap(s)
+              {{ relation.caps.month_caps.length }} {{ plural('Month Cap', relation.caps.month_caps.length) }},
+              {{ relation.caps.day_caps.length }} {{ plural('Day Cap', relation.caps.day_caps.length) }}
             </span>
-            <span v-else >No Caps Set</span>
+            <span v-else class="italic text-gray-500">No Caps Set</span>
           </span>
         </td>
         <td class="td">
@@ -62,7 +64,7 @@
 </template>
 
 <script>
-import pricingTierModalList from '@/components/pricing-tier-groups/modal-list'
+import pricingTierModalList from '@/components/contract-relations/modal-list'
 import capsModal from '@/components/contract-relations/caps-modal'
 import deleteContractRelation from '@/components/contract-relations/delete'
 
@@ -94,11 +96,14 @@ export default {
     }),
     ...mapMutations({
       setCurrentPricingTierGroup: 'SET_CURRENT_PRICING_TIER_GROUP',
-      showPricingTierListModal: 'SHOW_LIST_PRICING_TIER_GROUP_MODAL',
+      showPricingTierListModal: 'SHOW_RELATION_PRICING_TIER_GROUP_MODAL',
       setCurrentPricingTiers: 'SET_CURRENT_PRICING_TIERS',
       setCurrentContractRelation: 'SET_CURRENT_CONTRACT_RELATION',
       showCapsModal: 'SHOW_CAPS_PARENT_MODAL'
     }),
+    plural (value, len) {
+      return len !== 1 ? value + 's' : value
+    },
     sorted (values) {
       return values.sort((a, b) => (a.id > b.id) ? 1 : -1)
     },

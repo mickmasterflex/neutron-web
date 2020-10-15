@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowListPricingTierGroupModal',
+      showModal: 'getShowRelationPricingTierGroupModal',
       getPricingTierGroupById: 'getPricingTierGroupById',
       contractRelation: 'getCurrentContractRelation'
     }),
@@ -46,10 +46,7 @@ export default {
       return this.getPricingTierGroupById(Number(this.pricing_tier_group))
     },
     unsavedChanges () {
-      if (this.pricing_tier_group) {
-        return this.pricing_tier_group !== this.contractRelation.pricing_tier_group
-      }
-      return false
+      return this.pricing_tier_group !== this.contractRelation.pricing_tier_group
     }
   },
   updated () {
@@ -75,7 +72,7 @@ export default {
     }),
     ...mapMutations({
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
-      closeModal: 'CLOSE_LIST_PRICING_TIER_GROUP_MODAL'
+      closeModal: 'CLOSE_RELATION_PRICING_TIER_GROUP_MODAL'
     }),
     close () {
       this.resetCurrentPricingTierGroup()
