@@ -44,6 +44,7 @@ const actions = {
 
 const mutations = {
   SET_CONTRACT_RELATIONS: (state, relations) => (state.contract_relations = relations),
+  RESET_CURRENT_RELATION: (state) => (state.current_contract_relation = {}),
   UPDATE_CONTRACT_RELATION: (state, updatedContractRelation) => {
     const index = state.contract_relations.findIndex(group => group.id === updatedContractRelation.id)
     if (index !== -1) {
