@@ -15,7 +15,7 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      showModal: 'getShowCapsParentModal'
+      showModal: 'getShowCapsModal'
     })
   },
   methods: {
@@ -36,7 +36,12 @@ export default {
   },
   props: {
     capParent: Number,
-    capType: String
+    capType: {
+      type: String,
+      validator: function (value) {
+        return ['buyers', 'partners', 'relations'].includes(value)
+      }
+    }
   }
 }
 </script>

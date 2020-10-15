@@ -11,13 +11,13 @@ const state = {
   current_cap_parent: null,
   caps_calendar_endpoint: '',
   caps_calendar_params: '',
-  show_caps_parent_modal: false
+  show_caps_modal: false
 }
 
 const getters = {
   getCurrentCapParent: state => state.current_cap_parent,
   getCapsCalendarEndpoint: state => (state.caps_calendar_endpoint + state.caps_calendar_params),
-  getShowCapsParentModal: state => (state.show_caps_parent_modal)
+  getShowCapsModal: state => (state.show_caps_modal)
 }
 
 const actions = {
@@ -38,8 +38,8 @@ const mutations = {
   SET_CAPS_CALENDAR_PARAMS: (state, query) => (state.caps_calendar_params = '?months=' + query.months + '&date=' + query.date),
   RESET_CAPS_CALENDAR_ENDPOINT: (state) => (state.caps_calendar_endpoint = ''),
   RESET_CAPS_CALENDAR_PARAMS: (state) => (state.caps_calendar_params = ''),
-  SHOW_CAPS_PARENT_MODAL: (state) => (state.show_caps_parent_modal = true),
-  CLOSE_CAPS_PARENT_MODAL: (state) => (state.show_caps_parent_modal = false)
+  SHOW_CAPS_MODAL: (state) => (state.show_caps_modal = true),
+  CLOSE_CAPS_PARENT_MODAL: (state) => (state.show_caps_modal = false)
 }
 
 export default {

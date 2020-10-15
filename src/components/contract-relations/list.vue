@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import pricingTierModalList from '@/components/contract-relations/modal-list'
+import pricingTierModalList from '@/components/contract-relations/pricing-tier-modal'
 import capsModal from '@/components/contract-relations/caps-modal'
 import deleteContractRelation from '@/components/contract-relations/delete'
 
@@ -99,7 +99,7 @@ export default {
       showPricingTierListModal: 'SHOW_RELATION_PRICING_TIER_GROUP_MODAL',
       setCurrentPricingTiers: 'SET_CURRENT_PRICING_TIERS',
       setCurrentContractRelation: 'SET_CURRENT_CONTRACT_RELATION',
-      showCapsModal: 'SHOW_CAPS_PARENT_MODAL'
+      showCapsModal: 'SHOW_CAPS_MODAL'
     }),
     plural (value, len) {
       return len !== 1 ? value + 's' : value

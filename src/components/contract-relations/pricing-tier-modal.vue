@@ -18,7 +18,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
+      <button @click="submitForm" class="btn btn-green btn-lg" v-show="unsavedChanges">Save Changes</button>
     </template>
   </modal-template>
 </template>

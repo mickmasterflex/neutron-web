@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="contracts.length" class="table">
+    <table v-if="contracts.length" class="table table-white table-shadow">
       <thead>
         <tr>
           <th class="th">Name</th>

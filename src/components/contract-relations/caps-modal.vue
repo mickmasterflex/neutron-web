@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import parentModal from '@/components/caps/parent-modal'
+import parentModal from '@/components/caps/modal'
 
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -37,7 +37,12 @@ export default {
   },
   props: {
     capParent: Number,
-    capType: String
+    capType: {
+      type: String,
+      validator: function (value) {
+        return ['buyers', 'partners', 'relations'].includes(value)
+      }
+    }
   }
 }
 </script>
