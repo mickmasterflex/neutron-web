@@ -1,15 +1,15 @@
 <template>
-  <parent-caps-modal :capParent="capParent" :capType="capType"></parent-caps-modal>
+  <caps-modal :capParent="capParent" :capType="capType"></caps-modal>
 </template>
 
 <script>
-import parentModal from '@/components/caps/modal'
+import capsModal from '@/components/caps/modal'
 
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
-    'parent-caps-modal': parentModal
+    'caps-modal': capsModal
   },
   computed: {
     ...mapGetters({
