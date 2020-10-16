@@ -52,7 +52,9 @@ export default {
     }
   },
   created () {
-    this.setCapEndpoint()
+    if (this.type && this.parent) {
+      this.setCapEndpoint()
+    }
   },
   destroyed () {
     this.resetCurrentCapParent()

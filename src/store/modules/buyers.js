@@ -29,7 +29,10 @@ const getters = {
   getBuyersByParent: (state) => (buyerId) => {
     return state.buyers.filter(buyer => buyer.parent === buyerId)
   },
-  getShowCreateBuyerModal: state => state.show_create_buyer_modal
+  getShowCreateBuyerModal: state => state.show_create_buyer_modal,
+  getBuyerById: (state) => (buyerId) => {
+    return state.buyers.filter(buyer => buyer.id === buyerId)[0]
+  }
 }
 
 const actions = {

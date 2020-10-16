@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="contracts" class="table">
+    <table v-if="contracts.length" class="table table-white table-shadow">
       <thead>
         <tr>
           <th class="th">Name</th>
@@ -18,9 +18,7 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
+    <table-empty-state v-else heading="No Child Contracts" copy="Use the 'New Buyer' button to add children to this contract."></table-empty-state>
   </div>
 </template>
 
