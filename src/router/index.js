@@ -143,7 +143,7 @@ const routes = [
   {
     path: '/config/pricing-tiers/',
     name: 'PricingTiers',
-    component: () => import('@/views/config/pricing-tier-groups/index.vue'),
+    component: () => import('@/views/config/pricing-tiers/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'config',

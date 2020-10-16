@@ -1,5 +1,5 @@
-import pricingTierGroups from '@/store/modules/pricing-tiers/pricing-tier-groups'
-import pricingTiers from '@/store/modules/pricing-tiers/pricing-tiers'
+import pricingTierGroups from '@/store/modules/pricing-tiers/groups'
+import pricingTiers from '@/store/modules/pricing-tiers/tiers'
 
 const modules = {
   pricingTierGroups,

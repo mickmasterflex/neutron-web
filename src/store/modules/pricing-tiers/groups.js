@@ -12,6 +12,7 @@ const getters = {
   getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal,
   getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) }
 }
+
 const actions = {
   async fetchPricingTierGroups ({ commit }) {
     await axios.get('/pricing-tier-groups/')
@@ -70,6 +71,7 @@ const mutations = {
     state.pricing_tier_groups.sort(compare)
   }
 }
+
 export default {
   state,
   getters,
