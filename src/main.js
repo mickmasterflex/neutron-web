@@ -3,7 +3,7 @@ import Vue from 'vue'
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 // eslint-disable-next-line camelcase
-import { required, email, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
+import { required, email, ext, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -16,7 +16,35 @@ import '@/assets/css/styles.css'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faTag, faDna, faCog, faKey, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAngleLeft,
+  faAngleRight,
+  faArrowsAltV,
+  faChartArea,
+  faCheck,
+  faCheckCircle,
+  faClone,
+  faCog,
+  faDna,
+  faDownload,
+  faExclamationTriangle,
+  faFileCsv,
+  faImage,
+  faKey,
+  faMinus,
+  faPencilAlt,
+  faPlus,
+  faSearch,
+  faSignOutAlt,
+  faSpinner,
+  faTag,
+  faThLarge,
+  faThumbsUp,
+  faTimesCircle,
+  faTrashAlt,
+  faUpload,
+  faWrench
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -88,6 +116,7 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
+extend('ext', { ...ext, message: 'Incorrect file type' })
 extend('url', {
   message: 'Must be a valid URL',
   validate: (value) => {
@@ -118,7 +147,35 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faTag, faDna, faCog, faKey, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner)
+library.add(
+  faAngleLeft,
+  faAngleRight,
+  faArrowsAltV,
+  faChartArea,
+  faCheck,
+  faCheckCircle,
+  faClone,
+  faCog,
+  faDna,
+  faDownload,
+  faExclamationTriangle,
+  faFileCsv,
+  faImage,
+  faKey,
+  faMinus,
+  faPencilAlt,
+  faPlus,
+  faSearch,
+  faSignOutAlt,
+  faSpinner,
+  faTag,
+  faThLarge,
+  faThumbsUp,
+  faTimesCircle,
+  faTrashAlt,
+  faUpload,
+  faWrench
+)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

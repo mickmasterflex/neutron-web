@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <add-locations v-show="addVisible"></add-locations>
+    <remove-locations v-show="removeVisible"></remove-locations>
+    <search-locations v-show="searchVisible"></search-locations>
+  </div>
+</template>
+
+<script>
+import addLocations from '@/components/geos/add-locations'
+import removeLocations from '@/components/geos/remove-locations'
+import searchLocations from '@/components/geos/search-locations/index'
+import { mapGetters, mapMutations } from 'vuex'
+
+export default {
+  props: {
+    geo: Number
+  },
+  components: {
+    'add-locations': addLocations,
+    'remove-locations': removeLocations,
+    'search-locations': searchLocations
+  },
+  computed: {
+    ...mapGetters({
+      addVisible: 'getAddLocationsPanelVisible',
+      removeVisible: 'getRemoveAddLocationsPanelVisible',
+      searchVisible: 'getSearchAddLocationsPanelVisible'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentGeo: 'SET_CURRENT_GEO',
+      resetCurrentGeo: 'RESET_CURRENT_GEO'
+    }),
+    setGeo () {
+      if (this.geo) {
+        this.setCurrentGeo(this.geo)
+      }
+    }
+  },
+  watch: {
+    geo () {
+      this.setGeo()
+    }
+  },
+  created () {
+    this.setGeo()
+  },
+  destroyed () {
+    this.resetCurrentGeo()
+  }
+}
+</script>
