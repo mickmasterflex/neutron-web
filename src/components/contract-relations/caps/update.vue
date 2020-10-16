@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { plural } from '@/mixins/plural'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -21,13 +22,13 @@ export default {
       showCapsModal: 'SHOW_CAPS_MODAL'
     }),
     showModalSetCurrent (relation) {
-      this.showCapsModal()
       this.setCurrentContractRelation(relation)
-    },
-    plural (value, len) {
-      return len !== 1 ? value + 's' : value
+      this.$nextTick(() => {
+        this.showCapsModal()
+      })
     }
   },
+  mixins: [plural],
   props: {
     contractRelation: {
       type: Object,

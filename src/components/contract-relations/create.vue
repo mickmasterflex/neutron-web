@@ -67,9 +67,6 @@ export default {
         }
       })
     },
-    capitalized (value) {
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    },
     relationType () {
       return this.contractType === 'buyer' ? 'Partner' : 'Buyer'
     },
