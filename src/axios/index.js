@@ -14,9 +14,6 @@ axios.interceptors.response.use(response => {
     } else if (response.config.method === 'post' && response.data) {
       successfulToast({ heading: 'Success', content: response.data })
     }
-    if (response.config.method === 'post' && response.statusText === 'Created') {
-      successfulToast({ heading: response.statusText + ' successfully' })
-    }
     if (response.config.method === 'put') {
       successfulToast({ heading: 'Updated successfully' })
     }
