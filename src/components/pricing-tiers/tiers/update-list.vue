@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import deletePricingTier from '@/components/pricing-tiers/delete'
-import updatePricingTier from '@/components/pricing-tiers/update'
+import deletePricingTier from '@/components/pricing-tiers/tiers/delete'
+import updatePricingTier from '@/components/pricing-tiers/tiers/update'
 import { mapGetters } from 'vuex'
 
 export default {

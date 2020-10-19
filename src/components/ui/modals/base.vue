@@ -62,6 +62,9 @@ export default {
   methods: {
     close () {
       this.$emit('close')
+    },
+    removeOverflowHidden (bodyClassList) {
+      bodyClassList.remove('overflow-hidden')
     }
   },
   watch: {
@@ -70,7 +73,7 @@ export default {
       if (this.show === true && this.allowScroll === false) {
         body.classList.add('overflow-hidden')
       } else {
-        body.classList.remove('overflow-hidden')
+        this.removeOverflowHidden(body.classList)
       }
     }
   },
@@ -84,6 +87,9 @@ export default {
     this.$once('hook:destroyed', () => {
       document.removeEventListener('keydown', escapeHandler)
     })
+  },
+  destroyed () {
+    this.removeOverflowHidden(document.getElementsByTagName('BODY')[0].classList)
   },
   components: {
     'status-bar': statusBar

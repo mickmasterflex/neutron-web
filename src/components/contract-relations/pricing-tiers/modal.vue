@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import listTiers from '@/components/pricing-tiers/list'
+import listTiers from '@/components/pricing-tiers/tiers/list'
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'

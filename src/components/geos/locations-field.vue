@@ -1,14 +1,12 @@
 <template>
-  <validation-provider :rules="rules" :vid="$attrs.field_id" :name="$attrs.field_id" :mode="mode" v-slot="{ errors, classes }">
-    <textarea-field
-      v-model="inner_value"
-      :class="classes"
-      v-bind="$attrs"
-      :value="value"
-      ref="field">
-      <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
-    </textarea-field>
-  </validation-provider>
+  <v-textarea-field
+    field_id="locations"
+    ref="locationField"
+    field_label="Locations"
+    v-bind="$attrs"
+    :rules="rules"
+    v-model="inner_value"
+    :placeholder="placeholder"></v-textarea-field>
 </template>
 
 <script>
@@ -21,14 +19,11 @@ export default {
     rules: {
       type: [Object, String],
       default: ''
-    },
-    mode: {
-      type: String,
-      default: 'aggressive'
     }
   },
   data: () => ({
-    inner_value: ''
+    inner_value: '',
+    placeholder: 'Enter multiple postal codes or abbreviated states.\nSeparate with commas, ie:\n84104, UT, 90210, ny, TX'
   }),
   watch: {
     // Handles internal model changes.
