@@ -5,7 +5,7 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required|client_name" field_id="name" field_label="Client Name"></v-text-field>
-          <v-text-field :value="slug" field_id="slug" field_label="Slug" field_disabled="true"></v-text-field>
+          <text-field :value="slug" field_id="slug" field_label="Slug" field_disabled="true"></text-field>
         </form>
       </validation-observer>
     </template>
