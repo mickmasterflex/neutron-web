@@ -42,13 +42,12 @@ export default {
     }),
     cleanName (name) {
       const nameLower = name.toLowerCase()
-      let slug = nameLower.replace(/\s*$/g, '')
-      slug = slug.replace(/\s+/g, '-')
-      return slug
+      let formattedSlug = nameLower.replace(/\s*$/g, '')
+      formattedSlug = formattedSlug.replace(/\s+/g, '-')
+      return formattedSlug
     },
     close () {
       this.name = ''
-      this.slug = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
