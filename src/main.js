@@ -95,6 +95,13 @@ extend('url', {
     return regex.test(value)
   }
 })
+extend('client_name', {
+  message: 'Must not contain special characters',
+  validate: (value) => {
+    const regex = RegExp('^[\\w\\-\\s]+$')
+    return regex.test(value)
+  }
+})
 
 // eslint-disable-next-line camelcase
 extend('min_value', { ...min_value, message: 'Must be {min} or greater' })
