@@ -18,7 +18,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import multiselectCheckboxes from '@/components/ui/forms/base-fields/multi-select-checkboxes'
+import multiselectCheckboxes from '@/components/ui/forms/validation-fields/multi-select-checkbox'
 
 export default {
   data () {
