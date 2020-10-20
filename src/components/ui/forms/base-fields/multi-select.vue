@@ -1,22 +1,26 @@
 <template>
   <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <select
-      class="appearance-none base-field"
-      :class="$attrs.field_class"
-      v-model="selected"
-      @change="updateValue"
-      multiple>
-      <option
-        disabled
-        value=""
-        v-text="disabledOption"/>
-      <option
-        v-for="option in options"
-        :key="option.id"
-        :value="option.id"
-        v-text="option.name"/>
-    </select>
+    <div>
+      <select
+        class="appearance-none base-field"
+        :class="$attrs.field_class"
+        :id="$attrs.field_id"
+        v-model="selected"
+        @change="updateValue"
+        multiple>
+        <option
+          disabled
+          value=""
+          v-text="disabledOption"/>
+        <option
+          v-for="option in options"
+          :key="option.id"
+          :value="option.id"
+          v-text="option.name"/>
+      </select>
+      <slot></slot>
+    </div>
   </div>
 </template>
 

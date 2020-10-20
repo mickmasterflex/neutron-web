@@ -8,7 +8,7 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
-          <multiselect-switches v-if="channels" :options="available_channels" v-model="channels" field_label="Available Chans"></multiselect-switches>
+          <multiselect-switches :options="available_channels" v-model="channels" field_id="channels" field_label="Available Chans"></multiselect-switches>
           <ul class="list-none well ml-label-width"><li v-for="channel in channels" :key="channel">{{ channel }}</li></ul>
         </form>
       </validation-observer>
@@ -19,7 +19,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import multiselectSwitches from '@/components/ui/forms/base-fields/multi-select'
+import multiselectSwitches from '@/components/ui/forms/validation-fields/multi-select'
 
 export default {
   data () {
