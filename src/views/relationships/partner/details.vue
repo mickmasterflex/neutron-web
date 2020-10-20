@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <update-partner-contract :partner="partner"></update-partner-contract>
-    <panel-template title="Lead Caps" contentClass="relative">
+  <base-panel-grid>
+    <update-partner-contract :partner="partner" class="col-span-2 xl:col-span-1"></update-partner-contract>
+    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
       <template v-slot:content>
         <lead-caps :parent="id" type="partners"></lead-caps>
       </template>
     </panel-template>
-    <panel-template title="Danger Zone">
+    <panel-template title="Danger Zone" class="col-span-2">
       <template v-slot:content>
         <delete-partner-contract :client="$route.params.client" :id="partner.id"></delete-partner-contract>
       </template>
     </panel-template>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>

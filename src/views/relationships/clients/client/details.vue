@@ -1,8 +1,12 @@
 <template>
- <div>
-   <update-client :client="client"></update-client>
-   <delete-client :slug="client.slug" class="mt-4"></delete-client>
- </div>
+ <base-panel-grid>
+   <update-client :client="client" class="col-span-2 xl:col-span-1"></update-client>
+   <panel-template title="Danger Zone" class="col-span-2">
+     <template #content>
+       <delete-client :slug="client.slug"></delete-client>
+     </template>
+   </panel-template>
+ </base-panel-grid>
 </template>
 
 <script>

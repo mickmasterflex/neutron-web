@@ -4,7 +4,8 @@
       v-model="inner_value"
       :class="classes"
       v-bind="$attrs"
-      :value="value">
+      :value="value"
+      ref="field">
       <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
     </textarea-field>
   </validation-provider>

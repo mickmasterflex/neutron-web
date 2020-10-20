@@ -3,7 +3,7 @@ import Vue from 'vue'
 /* Validation */
 import { ValidationProvider, ValidationObserver, extend, configure } from 'vee-validate'
 // eslint-disable-next-line camelcase
-import { required, email, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
+import { required, email, ext, integer, alpha_dash, image, min_value } from 'vee-validate/dist/rules'
 
 /* App */
 import App from '@/App.vue'
@@ -16,7 +16,35 @@ import '@/assets/css/styles.css'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faTag, faDna, faCog, faKey, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAngleLeft,
+  faAngleRight,
+  faArrowsAltV,
+  faChartArea,
+  faCheck,
+  faCheckCircle,
+  faClone,
+  faCog,
+  faDna,
+  faDownload,
+  faExclamationTriangle,
+  faFileCsv,
+  faImage,
+  faKey,
+  faMinus,
+  faPencilAlt,
+  faPlus,
+  faSearch,
+  faSignOutAlt,
+  faSpinner,
+  faTag,
+  faThLarge,
+  faThumbsUp,
+  faTimesCircle,
+  faTrashAlt,
+  faUpload,
+  faWrench
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -26,7 +54,8 @@ import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
 import baseModal from '@/components/ui/modals/base'
-import basePanel from '@/components/ui/panels/base'
+import basePanel from '@/components/ui/panels/base/index'
+import basePanelGrid from '@/components/ui/panels/grid/base'
 import statCard from '@/components/ui/cards/stat-card'
 import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
@@ -64,6 +93,7 @@ Vue.component('content-layout', baseContentLayout)
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
 Vue.component('panel-template', basePanel)
+Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)
 
 // Tables
@@ -86,10 +116,18 @@ extend('email', { ...email, message: 'Invalid email' })
 extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
+extend('ext', { ...ext, message: 'Incorrect file type' })
 extend('url', {
   message: 'Must be a valid URL',
   validate: (value) => {
     const regex = RegExp('[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
+    return regex.test(value)
+  }
+})
+extend('client_name', {
+  message: 'Must not contain special characters',
+  validate: (value) => {
+    const regex = RegExp('^[\\w\\-\\s]+$')
     return regex.test(value)
   }
 })
@@ -116,7 +154,35 @@ configure({
   Font Awesome
 -------------------------------------------------- */
 
-library.add(faThumbsUp, faTrashAlt, faPlus, faMinus, faSignOutAlt, faArrowsAltV, faWrench, faPencilAlt, faExclamationTriangle, faThLarge, faChartArea, faTag, faDna, faCog, faKey, faClone, faCheckCircle, faTimesCircle, faImage, faUpload, faCheck, faAngleLeft, faAngleRight, faSpinner)
+library.add(
+  faAngleLeft,
+  faAngleRight,
+  faArrowsAltV,
+  faChartArea,
+  faCheck,
+  faCheckCircle,
+  faClone,
+  faCog,
+  faDna,
+  faDownload,
+  faExclamationTriangle,
+  faFileCsv,
+  faImage,
+  faKey,
+  faMinus,
+  faPencilAlt,
+  faPlus,
+  faSearch,
+  faSignOutAlt,
+  faSpinner,
+  faTag,
+  faThLarge,
+  faThumbsUp,
+  faTimesCircle,
+  faTrashAlt,
+  faUpload,
+  faWrench
+)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* -----------------------------------------------

@@ -20,9 +20,9 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
-import getPricingTierGroups from '@/components/pricing-tier-groups/list'
-import createPricingTierGroup from '@/components/pricing-tier-groups/create'
-import updatePricingTierGroup from '@/components/pricing-tier-groups/update'
+import getPricingTierGroups from '@/components/pricing-tiers/groups/list'
+import createPricingTierGroup from '@/components/pricing-tiers/groups/create'
+import updatePricingTierGroup from '@/components/pricing-tiers/groups/update'
 
 export default {
   components: {

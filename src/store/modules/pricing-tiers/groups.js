@@ -12,17 +12,20 @@ const getters = {
   getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal,
   getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) }
 }
+
 const actions = {
   async fetchPricingTierGroups ({ commit }) {
     await axios.get('/pricing-tier-groups/')
       .then(response => {
         commit('SET_PRICING_TIER_GROUPS', response.data)
+        commit('SORT_PRICING_TIER_GROUPS', response.data)
       })
   },
   async createPricingTierGroup ({ commit }, data) {
     await axios.post('/pricing-tier-groups/', data)
       .then(response => {
         commit('ADD_PRICING_TIER_GROUP', response.data)
+        commit('SORT_PRICING_TIER_GROUPS', response.data)
       })
   },
   async updatePricingTierGroup ({ commit }, data) {
@@ -52,6 +55,20 @@ const mutations = {
     if (index !== -1) {
       state.pricing_tier_groups.splice(index, 1, updatedGroup)
     }
+  },
+  SORT_PRICING_TIER_GROUPS: (state) => {
+    function compare (a, b) {
+      const groupA = a.name.toUpperCase()
+      const groupB = b.name.toUpperCase()
+      let comparison = 0
+      if (groupA > groupB) {
+        comparison = 1
+      } else if (groupA < groupB) {
+        comparison = -1
+      }
+      return comparison
+    }
+    state.pricing_tier_groups.sort(compare)
   }
 }
 

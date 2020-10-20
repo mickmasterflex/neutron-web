@@ -6,14 +6,14 @@
       v-slot="{ errors, classes }"
       ref="provider">
       <div class="flex flex-row items-center">
-        <span class="btn btn-turquoise base-btn-field" :class="classes" @click="$refs.fileInput.click()">
+        <span :class="`btn btn-turquoise base-btn-field ${classes} ${field_disabled ? 'disabled' : ''}`" @click="$refs.fileInput.click()">
           <font-awesome-icon :icon="icon"></font-awesome-icon> {{button_text}}
         </span>
         <span v-if="selected_file" class="text-gray-800 italic ml-2">
           <font-awesome-icon :icon="errors.length ? 'times-circle' : 'check-circle'" :class="errors.length ? 'text-red-600' : 'text-green-600'"></font-awesome-icon> {{selected_file.name}}
         </span>
       </div>
-      <input type="file" @change="onSelectedFile" ref="fileInput" style="display: none"/>
+      <input type="file" :disabled="field_disabled" @change="onSelectedFile" ref="fileInput" style="display: none"/>
       <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
     </validation-provider>
   </div>
@@ -33,6 +33,10 @@ export default {
     rules: {
       type: [Object, String],
       default: ''
+    },
+    field_disabled: {
+      default: false,
+      type: Boolean
     }
   },
   data () {

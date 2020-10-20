@@ -8,9 +8,11 @@ import campaigns from '@/store/modules/campaigns'
 import campuses from '@/store/modules/campuses'
 import caps from '@/store/modules/caps'
 import clients from './modules/clients'
+import contractRelations from '@/store/modules/contract-relations'
 import deliveries from '@/store/modules/deliveries'
 import educationProducts from './modules/education-products'
 import forms from '@/store/modules/forms'
+import geos from '@/store/modules/geos'
 import modals from './modules/modals'
 import offers from './modules/offers'
 import partners from './modules/partners'
@@ -31,9 +33,11 @@ export default new Vuex.Store({
     campaigns,
     caps,
     clients,
+    contractRelations,
     deliveries,
     educationProducts,
     forms,
+    geos,
     modals,
     offers,
     partners,

@@ -11,6 +11,8 @@ axios.interceptors.response.use(response => {
   if (response.config.showSuccessToast !== false) {
     if (response.config.method === 'post' && response.statusText === 'Created') {
       successfulToast({ heading: response.statusText + ' successfully' })
+    } else if (response.config.method === 'post' && response.data) {
+      successfulToast({ heading: 'Success', content: response.data })
     }
     if (response.config.method === 'put') {
       successfulToast({ heading: 'Updated successfully' })
@@ -34,6 +36,9 @@ axios.interceptors.response.use(response => {
       case 400:
         failedToast({ heading: error.message })
         return Promise.reject(error)
+      case 409:
+        failedToast({ heading: error.message, content: error.response.data.detail })
+        break
       case 500:
         failedToast({ heading: error.message, content: error.response.statusText })
         break

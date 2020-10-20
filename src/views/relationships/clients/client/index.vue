@@ -9,10 +9,10 @@
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
-        <li class="underscore-tab" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'Client', params: {slug:slug}}">Client Details</router-link>
         </li>
-        <li class="underscore-tab" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
           <router-link :to="{name: 'ClientContracts', params: {slug:slug}}">Contracts</router-link>
         </li>
       </ul>
