@@ -7,7 +7,7 @@
       <validation-observer ref="form">
         <form @submit.prevent="uploadFile()" class="form-horizontal">
           <file-field @input="fileSelected($event)" rules="image" field_id="image" field_label="Logo"></file-field>
-          <text-field v-model="alt" :value="altBrand" field_id="alt" field_label="Alt Text"></text-field>
+          <text-field v-model="alt" :value="altLogo" field_id="alt" field_label="Alt Text"></text-field>
         </form>
       </validation-observer>
     </template>
@@ -31,7 +31,7 @@ export default {
     ...mapGetters({
       brand: 'getCurrentBrand'
     }),
-    altBrand: function () {
+    altLogo: function () {
       const defaultAlt = this.brand.name + ' logo'
       this.setAlt(defaultAlt)
       return defaultAlt
