@@ -8,7 +8,6 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
-          <multiselect-checkboxes v-if="buyer.channels" :options="available_channels" v-model="channels" field_id="channels" field_label="Active Channels"></multiselect-checkboxes>
         </form>
       </validation-observer>
     </template>
@@ -18,28 +17,12 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import multiselectCheckboxes from '@/components/ui/forms/validation-fields/multi-select-checkbox'
 
 export default {
   data () {
     return {
       name: '',
-      parent: '',
-      channels: '',
-      available_channels: [
-        {
-          id: 1,
-          name: 'Only The Best Powerlifters'
-        },
-        {
-          id: 2,
-          name: 'Swimmers'
-        },
-        {
-          id: 3,
-          name: 'Racers'
-        }
-      ]
+      parent: ''
     }
   },
   props: {
@@ -53,7 +36,6 @@ export default {
     setBuyer () {
       this.name = this.buyer.name
       this.parent = this.buyer.parent
-      this.channels = this.buyer.channels
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -61,7 +43,6 @@ export default {
           this.update({
             name: this.name,
             parent: this.parent,
-            channels: this.channels,
             client: this.buyer.client,
             id: this.buyer.id
           }).catch(error => {
@@ -85,14 +66,11 @@ export default {
     }),
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.buyer.name || this.parent !== this.buyer.parent || this.channels !== this.buyer.channels
+        return this.name !== this.buyer.name || this.parent !== this.buyer.parent
       } else {
         return false
       }
     }
-  },
-  components: {
-    'multiselect-checkboxes': multiselectCheckboxes
   }
 }
 </script>
