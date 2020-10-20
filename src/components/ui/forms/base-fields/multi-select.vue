@@ -1,6 +1,6 @@
 <template>
   <div class="field-group">
-    <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
+    <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div>
       <select
         class="appearance-none base-field"
@@ -15,9 +15,9 @@
           v-text="disabledOption"/>
         <option
           v-for="option in options"
+          :selected="selectedOption(option.id)"
           :key="option.id"
-          :value="option.id"
-          v-text="option.name"/>
+          :value="option.id">{{option.name}}</option>
       </select>
       <slot></slot>
     </div>
@@ -25,31 +25,10 @@
 </template>
 
 <script>
+import multiSelectMixin from '@/mixins/fields/multi-select'
+
 export default {
-  props: {
-    disabledOption: {
-      type: String,
-      default: 'Select something'
-    },
-    options: {
-      type: Array,
-      default: () => []
-    },
-    value: {
-      type: Array,
-      default: () => []
-    }
-  },
-  data () {
-    return {
-      selected: this.value
-    }
-  },
-  methods: {
-    updateValue () {
-      this.$emit('input', this.selected)
-    }
-  }
+  mixins: [multiSelectMixin]
 }
 </script>
 
