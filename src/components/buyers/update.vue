@@ -6,8 +6,10 @@
     <template v-slot:content>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
+          <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+          <v-text-field v-model="rpl" rules="dollar_amount" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -22,7 +24,14 @@ export default {
   data () {
     return {
       name: '',
-      parent: ''
+      parent: '',
+      rpl: undefined,
+      status: undefined,
+      statusOptions: {
+        active: { name: 'Active', id: 'active' },
+        paused: { name: 'Paused', id: 'paused' }
+      },
+      scheduledStart: null
     }
   },
   props: {
@@ -36,6 +45,9 @@ export default {
     setBuyer () {
       this.name = this.buyer.name
       this.parent = this.buyer.parent
+      this.status = this.buyer.status
+      this.rpl = this.buyer.rpl
+      this.scheduledStart = this.buyer.scheduled_start
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -44,7 +56,9 @@ export default {
             name: this.name,
             parent: this.parent,
             client: this.buyer.client,
-            id: this.buyer.id
+            id: this.buyer.id,
+            rpl: this.rpl,
+            status: this.status
           }).catch(error => {
             this.error = error
           })
@@ -66,7 +80,7 @@ export default {
     }),
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.buyer.name || this.parent !== this.buyer.parent
+        return this.name !== this.buyer.name || this.parent !== this.buyer.parent || this.rpl !== this.buyer.rpl || this.status !== this.buyer.status
       } else {
         return false
       }

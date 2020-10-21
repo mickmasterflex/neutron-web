@@ -124,10 +124,17 @@ extend('url', {
     return regex.test(value)
   }
 })
-extend('client_name', {
+extend('standard_chars', {
   message: 'Must not contain special characters',
   validate: (value) => {
     const regex = RegExp('^[\\w\\-\\s]+$')
+    return regex.test(value)
+  }
+})
+extend('dollar_amount', {
+  message: 'Must be a valid dollar amount without symbols',
+  validate: (value) => {
+    const regex = RegExp('^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$')
     return regex.test(value)
   }
 })
