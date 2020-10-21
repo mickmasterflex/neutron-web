@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="field_id" :class="`${label_class} ${checked === true ? 'border-green-500' : 'border-red-500'}`"
+    <label :for="field_id" :class="`${label_class} ${checked === true ? 'border-green-500' : 'border-gray-500'} ${checked === false ? 'border-red-500' : 'border-gray-500'}`"
            class="toggle-switch transition-colors duration-150 border-2 rounded-lg bg-white p-1 flex flex-row justify-between cursor-pointer">
       <span :class="`switch switch-off ${checked === false ? 'active' : ''}`">
         <slot name="switch-off">
@@ -48,6 +48,11 @@ export default {
   data () {
     return {
       checked: this.value
+    }
+  },
+  watch: {
+    value () {
+      this.checked = this.value
     }
   },
   methods: {
