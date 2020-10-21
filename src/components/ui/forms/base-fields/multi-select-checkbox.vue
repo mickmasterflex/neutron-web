@@ -2,7 +2,7 @@
   <div class="field-group">
     <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div>
-      <div class="well">
+      <div class="well w-64">
         <div
           v-for="option in options"
           :key="option.id">
