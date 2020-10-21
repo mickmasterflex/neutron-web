@@ -11,9 +11,9 @@
     <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
       <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
         <span class="fields-inline">
-          <v-text-field field_id="newTier_lowerBound" field_class="field-md" v-model="lower_bound" rules="required"/>
-          <v-text-field field_id="newTier_upperBound" field_class="field-md" v-model="upper_bound" rules="required"/>
-          <v-text-field field_id="newTier_payout" field_class="field-md" v-model="payout" rules="required"/>
+          <v-text-field field_id="lower_bound" field_class="field-md" v-model="lower_bound" rules="required"/>
+          <v-text-field field_id="upper_bound" field_class="field-md" v-model="upper_bound" rules="required"/>
+          <v-text-field field_id="payout" field_class="field-md" v-model="payout" rules="required"/>
         </span>
         <button class="btn btn-green btn-circle mx-1" type="submit"><font-awesome-icon icon="plus"></font-awesome-icon></button>
       </form>
@@ -45,6 +45,9 @@ export default {
       create: 'createPricingTier'
     }),
     resetForm () {
+      this.lower_bound = '0.00'
+      this.upper_bound = '0.00'
+      this.payout = '0.00'
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -59,6 +62,7 @@ export default {
             pricing_tier_group: this.pricingTierGroup.id
           }).then(() => {
             this.resetForm()
+            this.resetResponseErrors()
           }).catch(error => {
             this.error = error
           })

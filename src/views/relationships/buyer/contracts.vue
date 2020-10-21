@@ -1,27 +1,29 @@
 <template>
-  <div>
-    <action-heading>
-      <template v-slot:left>
-        <h2 class="h3">Child Contracts</h2>
-      </template>
-      <template v-slot:right>
+  <base-panel-grid>
+    <panel-template title="Child Contracts" class="col-span-2">
+      <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
       </template>
-    </action-heading>
-    <buyer-list :contracts="children" :client="$route.params.client"></buyer-list>
+      <template v-slot:content>
+        <buyer-list :contracts="children" :client="$route.params.client"></buyer-list>
+      </template>
+    </panel-template>
+    <contract-relations-index v-if="buyer.id" :contract="buyer.id" contractType="buyer" class="col-span-2"></contract-relations-index>
     <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>
 import buyerList from '@/components/buyers/list'
 import createBuyer from '@/components/buyers/create'
+import contractRelationsIndex from '@/components/contract-relations/index'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
     'buyer-list': buyerList,
-    'create-buyer-contract': createBuyer
+    'create-buyer-contract': createBuyer,
+    'contract-relations-index': contractRelationsIndex
   },
   computed: {
     ...mapGetters({
