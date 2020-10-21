@@ -4,7 +4,9 @@
     <template v-slot:body>
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
-      <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+      <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
+      <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+      <v-text-field v-model="pingbackUrl" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
     </form>
   </validation-observer>
     </template>
@@ -22,7 +24,14 @@ import { setResponseErrors } from '@/mixins/set-response-errors'
 export default {
   data () {
     return {
-      name: ''
+      name: '',
+      pingbackUrl: '',
+      status: undefined,
+      statusOptions: {
+        active: { name: 'Active', id: 'active' },
+        paused: { name: 'Paused', id: 'paused' }
+      }
+      // scheduledStart: null
     }
   },
   computed: {
@@ -48,6 +57,9 @@ export default {
     }),
     close () {
       this.name = ''
+      this.status = undefined
+      this.pingbackUrl = ''
+      this.scheduledStart = null
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -59,7 +71,10 @@ export default {
           this.create({
             name: this.name,
             parent: this.parent,
-            client: this.$props.client
+            client: this.$props.client,
+            status: this.status,
+            ping_back_url: this.pingbackUrl
+            // scheduled_start: this.scheduledStart
           }).then(() => {
             this.close()
           }).catch(error => {

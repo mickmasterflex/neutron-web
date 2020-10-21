@@ -68,6 +68,9 @@ export default {
     }),
     close () {
       this.name = ''
+      this.rpl = undefined
+      this.status = undefined
+      this.scheduledStart = null
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

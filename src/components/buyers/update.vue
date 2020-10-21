@@ -29,7 +29,9 @@ export default {
       status: undefined,
       statusOptions: {
         active: { name: 'Active', id: 'active' },
-        paused: { name: 'Paused', id: 'paused' }
+        paused: { name: 'Paused', id: 'paused' },
+        archived: { name: 'Archived', id: 'archived' },
+        terminated: { name: 'Terminated', id: 'terminated' }
       },
       scheduledStart: null
     }
@@ -80,7 +82,10 @@ export default {
     }),
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.buyer.name || this.parent !== this.buyer.parent || this.rpl !== this.buyer.rpl || this.status !== this.buyer.status
+        return this.name !== this.buyer.name ||
+          this.parent !== this.buyer.parent ||
+          this.rpl !== this.buyer.rpl ||
+          this.status !== this.buyer.status
       } else {
         return false
       }

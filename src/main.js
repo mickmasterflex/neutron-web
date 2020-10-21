@@ -118,9 +118,9 @@ extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
 extend('ext', { ...ext, message: 'Incorrect file type' })
 extend('url', {
-  message: 'Must be a valid URL',
+  message: 'Must be a valid URL including "http://"',
   validate: (value) => {
-    const regex = RegExp('[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
+    const regex = RegExp('(http(s)?:\\/\\/)[(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
     return regex.test(value)
   }
 })
