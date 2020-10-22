@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn btn-turquoise" @click="showForm()" v-show="!formVisible"><font-awesome-icon icon="plus"></font-awesome-icon> Add Pricing Tier Group</button>
+    <button class="btn btn-turquoise" @click="showForm()" v-show="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> Add Pricing Tier Group</button>
     <transition enter-active-class="animate__animated animate__slideInRight animate__fast" v-on:after-enter="$refs.focusField.focusOnField()">
       <div class="flex flex-row items-start" v-show="formVisible">
         <validation-observer ref="form">
@@ -15,32 +15,41 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
-      name: '',
-      formVisible: false
+      name: ''
     }
   },
   computed: {
     ...mapGetters({
-      form: 'getCurrentForm'
+      form: 'getCurrentForm',
+      formVisible: 'getShowCreatePricingTierGroupForm'
     })
   },
   methods: {
     ...mapActions({
       create: 'createPricingTierGroup'
     }),
+    ...mapMutations({
+      closeForm: 'CLOSE_CREATE_PRICING_TIER_GROUP',
+      showForm: 'SHOW_CREATE_PRICING_TIER_GROUP_FORM',
+      showUpdate: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL'
+    }),
+    close () {
+      this.name = ''
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
+      this.closeForm()
+    },
     resetForm () {
       this.name = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-    },
-    showForm () {
-      this.formVisible = true
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -49,6 +58,8 @@ export default {
             name: this.name
           }).then(() => {
             this.resetForm()
+            this.close()
+            this.showUpdate()
           }).catch(error => {
             this.error = error
           })
