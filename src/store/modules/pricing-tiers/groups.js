@@ -28,7 +28,7 @@ const actions = {
       .then(response => {
         commit('ADD_PRICING_TIER_GROUP', response.data)
         commit('SORT_PRICING_TIER_GROUPS', response.data)
-        commit('SET_CURRENT_PRICING_TIER_GROUP', response.data)
+        commit('SET_CURRENT_PRICING_TIER_GROUP_FORM', response.data)
       })
   },
   async updatePricingTierGroup ({ commit }, data) {
@@ -73,7 +73,7 @@ const mutations = {
     }
     state.pricing_tier_groups.sort(compare)
   },
-  CLOSE_CREATE_PRICING_TIER_GROUP: (state) => (state.show_create_pricing_tier_group_form = false),
+  CLOSE_CREATE_PRICING_TIER_GROUP_FORM: (state) => (state.show_create_pricing_tier_group_form = false),
   SHOW_CREATE_PRICING_TIER_GROUP_FORM: (state) => (state.show_create_pricing_tier_group_form = true)
 }
 

@@ -34,7 +34,7 @@ export default {
       create: 'createPricingTierGroup'
     }),
     ...mapMutations({
-      closeForm: 'CLOSE_CREATE_PRICING_TIER_GROUP',
+      closeForm: 'CLOSE_CREATE_PRICING_TIER_GROUP_FORM',
       showForm: 'SHOW_CREATE_PRICING_TIER_GROUP_FORM',
       showUpdate: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),
