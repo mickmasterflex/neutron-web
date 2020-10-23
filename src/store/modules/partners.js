@@ -28,7 +28,10 @@ const getters = {
   getPartnersByParent: (state) => (partnerId) => {
     return state.partners.filter(partner => partner.parent === partnerId)
   },
-  getShowCreatePartnerModal: state => state.show_create_partner_modal
+  getShowCreatePartnerModal: state => state.show_create_partner_modal,
+  getPartnerById: (state) => (partnerId) => {
+    return state.partners.filter(partner => partner.id === partnerId)[0]
+  }
 }
 
 const actions = {

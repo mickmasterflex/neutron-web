@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <panel-template v-for="pricingTierGroup in pricingTierGroups" :title="pricingTierGroup.name" :key="pricingTierGroup.id">
+  <base-panel-grid>
+    <panel-template v-for="pricingTierGroup in pricingTierGroups" :title="pricingTierGroup.name" :key="pricingTierGroup.id" class="col-span-2">
       <template v-slot:action>
         <span class="flex flex-row mr-2">
           <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
@@ -11,12 +11,12 @@
         <list-tiers :pricingTiers='pricingTierGroup.pricingtier_set'></list-tiers>
       </template>
     </panel-template>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>
-import deletePricingTierGroup from '@/components/pricing-tier-groups/delete'
-import listTiers from '@/components/pricing-tiers/list'
+import deletePricingTierGroup from '@/components/pricing-tiers/groups/delete'
+import listTiers from '@/components/pricing-tiers/tiers/list'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {

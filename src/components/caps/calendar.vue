@@ -7,7 +7,7 @@
       <div v-if="slotProps.day.inMonth">
         <day-content :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
         <span v-else class="full-calendar--day m-1 border-2 flex flex-row items-center justify-center">
-          <font-awesome-icon class="text-gray-700 text-lg" icon="spinner" spin></font-awesome-icon>
+          <font-awesome-icon class="text-gray-700 text-lg" icon="spinner" pulse></font-awesome-icon>
         </span>
       </div>
     </template>
@@ -43,7 +43,7 @@ export default {
       this.fetchCaps()
     },
     fetchCaps () {
-      if (!this.checkForMonthData) {
+      if (!this.checkForMonthData && this.calendarEndpoint) {
         this.setCapsCalendarParams({ date: this.currentMonthFormats.YYYY_MM_DD, months: 2 })
         this.fetchCurrentCaps()
       }
@@ -58,7 +58,8 @@ export default {
     ...mapGetters({
       dayCaps: 'getCurrentDayCaps',
       monthCaps: 'getCurrentMonthCaps',
-      currentMonthFormats: 'getCurrentCapMonthFormats'
+      currentMonthFormats: 'getCurrentCapMonthFormats',
+      calendarEndpoint: 'getCapsCalendarEndpoint'
     }),
     checkForMonthData () {
       return !!this.monthCaps.some(e => e.date === this.currentMonthFormats.YYYY_MM_DD)

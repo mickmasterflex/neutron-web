@@ -1,6 +1,6 @@
 <template>
   <div class="field-group">
-    <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
+    <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div>
       <textarea
         @input="handleInput($event.target.value)"
@@ -8,7 +8,9 @@
         :class="$attrs.field_class"
         :id="$attrs.field_id"
         :value="value"
-        :disabled="$attrs.field_disabled"/>
+        :disabled="$attrs.field_disabled"
+        :placeholder="$attrs.placeholder"
+        ref="field"/>
       <slot></slot>
     </div>
   </div>
@@ -32,6 +34,6 @@ export default {
 
 <style>
   .textarea {
-    min-height: 80px;
+    min-height: 105px;
   }
 </style>

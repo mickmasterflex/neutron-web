@@ -10,8 +10,14 @@
       </div>
     </template>
     <template v-slot:content>
-      <update-user :user="user"></update-user>
-      <delete-user :id="user.id" class="mt-4"></delete-user>
+      <base-panel-grid>
+        <update-user :user="user" class="col-span-2 xl:col-span-1"></update-user>
+        <panel-template title="Danger Zone" class="col-span-2">
+          <template #content>
+            <delete-user :id="user.id"></delete-user>
+          </template>
+        </panel-template>
+      </base-panel-grid>
     </template>
   </content-layout>
 </template>
