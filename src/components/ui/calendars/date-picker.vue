@@ -89,7 +89,7 @@ export default {
   },
   created () {
     if (this.value) {
-      this.date = this.value
+      this.date = this.formattedDate(new Date(this.value + 'T12:00:00Z'), 'mm-dd-yyyy')
     }
   }
 }
