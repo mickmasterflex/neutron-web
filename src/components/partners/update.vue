@@ -6,7 +6,7 @@
     <template v-slot:content>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+          <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="pingbackUrl" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
