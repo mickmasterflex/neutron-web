@@ -47,9 +47,6 @@ export default {
     ...mapActions({
       update: 'updateBuyer'
     }),
-    updateDate (date) {
-      this.scheduledStart = date
-    },
     setBuyer () {
       this.name = this.buyer.name
       this.parent = this.buyer.parent

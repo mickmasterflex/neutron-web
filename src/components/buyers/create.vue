@@ -58,9 +58,6 @@ export default {
     ...mapActions({
       create: 'createBuyer'
     }),
-    updateDate (date) {
-      this.scheduledStart = date
-    },
     close () {
       this.name = ''
       this.rpl = undefined
