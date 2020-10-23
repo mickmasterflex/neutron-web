@@ -10,6 +10,7 @@
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
+          <date-picker v-model="scheduledStart" rules="date" field_id="date" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
     </template>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import datePicker from '@/components/ui/calendars/date-picker'
+
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -44,6 +47,9 @@ export default {
     ...mapActions({
       update: 'updateBuyer'
     }),
+    updateDate (date) {
+      this.scheduledStart = date
+    },
     setBuyer () {
       this.name = this.buyer.name
       this.parent = this.buyer.parent
@@ -60,7 +66,8 @@ export default {
             client: this.buyer.client,
             id: this.buyer.id,
             rpl: this.rpl,
-            status: this.status
+            status: this.status,
+            scheduled_start: this.scheduledStart
           }).catch(error => {
             this.error = error
           })
@@ -85,11 +92,15 @@ export default {
         return this.name !== this.buyer.name ||
           this.parent !== this.buyer.parent ||
           this.rpl !== this.buyer.rpl ||
-          this.status !== this.buyer.status
+          this.status !== this.buyer.status ||
+          this.scheduledStart !== this.buyer.scheduled_start
       } else {
         return false
       }
     }
+  },
+  components: {
+    'date-picker': datePicker
   }
 }
 </script>

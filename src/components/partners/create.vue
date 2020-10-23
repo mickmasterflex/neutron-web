@@ -7,6 +7,7 @@
       <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
       <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
       <v-text-field v-model="pingbackUrl" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
+      <date-picker v-model="scheduledStart" rules="date" field_id="date" field_label="Scheduled Start"></date-picker>
     </form>
   </validation-observer>
     </template>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import datePicker from '@/components/ui/calendars/date-picker'
+
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
@@ -30,8 +33,8 @@ export default {
       statusOptions: {
         active: { name: 'Active', id: 'active' },
         paused: { name: 'Paused', id: 'paused' }
-      }
-      // scheduledStart: null
+      },
+      scheduledStart: null
     }
   },
   computed: {
@@ -73,8 +76,8 @@ export default {
             parent: this.parent,
             client: this.$props.client,
             status: this.status,
-            ping_back_url: this.pingbackUrl
-            // scheduled_start: this.scheduledStart
+            ping_back_url: this.pingbackUrl,
+            scheduled_start: this.scheduledStart
           }).then(() => {
             this.close()
           }).catch(error => {
@@ -83,6 +86,9 @@ export default {
         }
       })
     }
+  },
+  components: {
+    'date-picker': datePicker
   }
 }
 </script>
