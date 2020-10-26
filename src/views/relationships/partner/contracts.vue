@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <panel-template title="Child Contracts">
+  <base-panel-grid>
+    <panel-template title="Child Contracts" class="col-span-2">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
       </template>
@@ -8,9 +8,9 @@
         <partner-list :contracts="children" :client="$route.params.client"></partner-list>
       </template>
     </panel-template>
-    <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner"></contract-relations-index>
+    <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner" class="col-span-2"></contract-relations-index>
     <create-partner-contract :client="partner.client" :parent="partner.id"></create-partner-contract>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>

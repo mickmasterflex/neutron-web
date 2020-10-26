@@ -4,8 +4,8 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required" field_id="name" field_label="Client Name"></v-text-field>
-          <v-text-field v-model="slug" rules="required|alpha_dash" field_id="slug" field_label="Slug"></v-text-field>
+          <v-text-field v-model="name" rules="required|client_name" field_id="name" field_label="Client Name"></v-text-field>
+          <text-field :value="slug" field_id="slug" field_label="Slug" field_disabled="true"></text-field>
         </form>
       </validation-observer>
     </template>
@@ -23,14 +23,16 @@ import { setResponseErrors } from '@/mixins/set-response-errors'
 export default {
   data () {
     return {
-      name: '',
-      slug: ''
+      name: ''
     }
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateClientModal'
-    })
+    }),
+    slug: function () {
+      return this.cleanName(this.name)
+    }
   },
   mixins: [enterKeyListener, setResponseErrors],
   methods: {
@@ -38,9 +40,14 @@ export default {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_CLIENT_MODAL'
     }),
+    cleanName (name) {
+      const nameLower = name.toLowerCase()
+      let formattedSlug = nameLower.replace(/\s*$/g, '')
+      formattedSlug = formattedSlug.replace(/\s+/g, '-')
+      return formattedSlug
+    },
     close () {
       this.name = ''
-      this.slug = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <panel-template title="Child Contracts">
+  <base-panel-grid>
+    <panel-template title="Child Contracts" class="col-span-2">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
       </template>
@@ -8,9 +8,9 @@
         <buyer-list :contracts="children" :client="$route.params.client"></buyer-list>
       </template>
     </panel-template>
-    <contract-relations-index v-if="buyer.id" :contract="buyer.id" contractType="buyer"></contract-relations-index>
+    <contract-relations-index v-if="buyer.id" :contract="buyer.id" contractType="buyer" class="col-span-2"></contract-relations-index>
     <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>

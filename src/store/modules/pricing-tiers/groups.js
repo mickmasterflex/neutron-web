@@ -3,15 +3,18 @@ import axios from '@/axios'
 const state = {
   pricing_tier_groups: [],
   current_pricing_tier_group: {},
-  show_update_pricing_tier_group_modal: false
+  show_update_pricing_tier_group_modal: false,
+  show_create_pricing_tier_group_form: false
 }
 
 const getters = {
   getPricingTierGroups: state => state.pricing_tier_groups,
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
   getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal,
-  getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) }
+  getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) },
+  getShowCreatePricingTierGroupForm: state => state.show_create_pricing_tier_group_form
 }
+
 const actions = {
   async fetchPricingTierGroups ({ commit }) {
     await axios.get('/pricing-tier-groups/')
@@ -25,6 +28,7 @@ const actions = {
       .then(response => {
         commit('ADD_PRICING_TIER_GROUP', response.data)
         commit('SORT_PRICING_TIER_GROUPS', response.data)
+        commit('SET_CURRENT_PRICING_TIER_GROUP_FORM', response.data)
       })
   },
   async updatePricingTierGroup ({ commit }, data) {
@@ -68,8 +72,11 @@ const mutations = {
       return comparison
     }
     state.pricing_tier_groups.sort(compare)
-  }
+  },
+  CLOSE_CREATE_PRICING_TIER_GROUP_FORM: (state) => (state.show_create_pricing_tier_group_form = false),
+  SHOW_CREATE_PRICING_TIER_GROUP_FORM: (state) => (state.show_create_pricing_tier_group_form = true)
 }
+
 export default {
   state,
   getters,
