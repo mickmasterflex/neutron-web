@@ -21,8 +21,7 @@
 export default {
   props: {
     isChecked: {
-      type: Boolean,
-      required: true
+      type: Boolean
     },
     size: {
       type: String,
