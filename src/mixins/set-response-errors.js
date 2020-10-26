@@ -44,6 +44,13 @@ export const setResponseErrors = {
         throw (new Error('The validation-observer component requires the ref property. If you have defined ref as something other than "form" you will need to override the form_ref data property in the mounted lifecycle of your component. ie: mounted () { this.form_ref = this.$refs.someForm }'))
       }
       this.form_ref = this.$refs.form
+    },
+    resetResponseErrors () {
+      this.error = {
+        response: {
+          data: null
+        }
+      }
     }
   },
   mounted () {
