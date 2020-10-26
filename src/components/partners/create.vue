@@ -83,7 +83,7 @@ export default {
           this.create({
             name: this.name,
             parent: this.parent,
-            client: this.$props.client,
+            client: this.client,
             pricing_tier_group: this.pricing_tier_group,
             status: this.status,
             ping_back_url: this.pingbackUrl,

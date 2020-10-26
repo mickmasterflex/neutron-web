@@ -74,7 +74,7 @@ export default {
           this.create({
             name: this.name,
             parent: this.parent,
-            client: this.$props.client,
+            client: this.client,
             rpl: this.rpl,
             status: this.status,
             scheduled_start: this.scheduledStart
