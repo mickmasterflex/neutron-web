@@ -1,7 +1,7 @@
 <template>
   <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div :class="`flex flex-row ${prefix_group_class} relative`">
+    <div :class="`flex flex-row relative ${prefix_group_class}`">
       <span :class="`w-4 absolute top-0 left-0 bottom-0 bg-${color}-500 text-white rounded-l flex flex-column items-center justify-center`">
         <font-awesome-icon :icon="icon" class="pb-1"></font-awesome-icon>
       </span>
