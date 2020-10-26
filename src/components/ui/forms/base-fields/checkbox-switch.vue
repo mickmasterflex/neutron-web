@@ -28,7 +28,8 @@ export default {
       required: true
     },
     value: {
-      type: [Boolean, String]
+      type: [Boolean, String],
+      default: false
     },
     icons: {
       type: Boolean,
