@@ -7,24 +7,33 @@
     v-slot="{ errors, classes }">
     <div class="field-group">
       <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-      <v-date-picker v-model="date">
+      <v-date-picker v-model="date" :popover="{ visibility: 'click' }">
         <template v-slot="{ inputEvents }">
-          <input
-            v-on="inputEvents"
-            @input="handleInput($event.target.value)"
-            class="field base-field"
-            :class="classes"
-            :type="$attrs.field_type ? $attrs.field_type : 'text'"
-            :id="$attrs.field_id"
-            :value="finalDate"
-            :disabled="$attrs.field_disabled"
-            ref="field">
+          <div class="flex flex-row relative">
+            <span :class="`w-8 absolute top-0 left-0 bottom-0 bg-${fieldColor}-500 text-white rounded-l flex flex-column items-center justify-center cursor-pointer`">
+              <font-awesome-icon :icon="fieldIcon" class="pb-1 text-lg"></font-awesome-icon>
+            </span>
+            <input
+              v-on="inputEvents"
+              @input="handleInput($event.target.value)"
+              class="base-field pl-10"
+              :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500`"
+              :type="$attrs.field_type ? $attrs.field_type : 'text'"
+              :id="$attrs.field_id"
+              :value="finalDate"
+              disabled="disabled"
+              ref="field">
+          </div>
         </template>
       </v-date-picker>
     </div>
     <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
   </validation-provider>
 </template>
+
+<style scoped>
+  .base-field { @apply cursor-pointer bg-white }
+</style>
 
 <script>
 export default {
@@ -63,6 +72,14 @@ export default {
     mode: {
       type: String,
       default: 'aggressive'
+    },
+    fieldColor: {
+      type: String,
+      default: 'blue'
+    },
+    fieldIcon: {
+      type: String,
+      default: 'calendar-alt'
     }
   },
   methods: {
