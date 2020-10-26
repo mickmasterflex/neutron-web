@@ -8,24 +8,10 @@
 
 <script>
 import baseMultiSelectCheckbox from '@/components/ui/forms/base-fields/multi-select-checkbox'
-import validation from '@/mixins/fields/validation'
+import validation from '@/mixins/fields/multi-select-validation'
 
 export default {
   mixins: [validation],
-  props: {
-    value: {
-      type: Array,
-      default: () => []
-    },
-    options: {
-      type: Array,
-      default: () => []
-    },
-    mode: {
-      type: String,
-      default: 'aggressive'
-    }
-  },
   components: {
     'multi-select-checkbox-field': baseMultiSelectCheckbox
   }

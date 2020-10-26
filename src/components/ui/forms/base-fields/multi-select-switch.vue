@@ -19,6 +19,7 @@
           {{ option.name }}
         </label>
       </div>
+      <slot></slot>
     </div>
   </div>
 </template>
