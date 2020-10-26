@@ -11,7 +11,8 @@
         :type="$attrs.field_type ? $attrs.field_type : 'text'"
         :id="$attrs.field_id"
         :value="value"
-        :disabled="$attrs.field_disabled">
+        :disabled="$attrs.field_disabled"
+        :placeholder="$attrs.placeholder">
     </div>
   </div>
 </template>
