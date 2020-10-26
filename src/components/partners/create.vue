@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import listTiers from '@/components/pricing-tiers/list'
+import listTiers from '@/components/pricing-tiers/tiers/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
@@ -54,7 +54,7 @@ export default {
   methods: {
     ...mapActions({
       create: 'createPartner',
-      fetchPricingTierGroupsGroups: 'fetchPricingTierGroups'
+      fetchPricingTierGroups: 'fetchPricingTierGroups'
     }),
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
@@ -82,6 +82,9 @@ export default {
         }
       })
     }
+  },
+  created () {
+    this.fetchPricingTierGroups()
   }
 }
 </script>
