@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import datePicker from '@/components/ui/calendars/date-picker'
+import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
