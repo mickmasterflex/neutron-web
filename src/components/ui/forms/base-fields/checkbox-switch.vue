@@ -1,6 +1,6 @@
 <template>
   <div>
-    <switch-toggle :for="field_id" :isChecked="checked">
+    <switch-toggle :fieldId="field_id" :isChecked="checked" size="lg">
       <template v-slot:switch-off><slot name="switch-off"/></template>
       <template v-slot:switch-on><slot name="switch-on"/></template>
     </switch-toggle>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import switchToggle from '@/components/ui/forms/functional/switch'
+import switchToggle from '@/components/ui/forms/base-fields/switch'
 
 export default {
   props: {
