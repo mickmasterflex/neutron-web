@@ -20,6 +20,7 @@ import {
   faAngleLeft,
   faAngleRight,
   faArrowsAltV,
+  faBan,
   faCalendarAlt,
   faChartArea,
   faCheck,
@@ -67,6 +68,7 @@ import textareaField from '@/components/ui/forms/base-fields/textarea-field'
 import vTextField from '@/components/ui/forms/validation-fields/text-field'
 import vTextareaField from '@/components/ui/forms/validation-fields/textarea-field'
 import vSelectField from '@/components/ui/forms/validation-fields/select-field'
+import checkSwitch from '@/components/ui/forms/base-fields/checkbox-switch'
 
 /* -----------------------------------------------
   Authentication
@@ -102,6 +104,7 @@ Vue.component('table-empty-state', tableEmptyState)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)
+Vue.component('check-switch', checkSwitch)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
 Vue.component('textarea-field', textareaField)
@@ -173,6 +176,7 @@ library.add(
   faAngleLeft,
   faAngleRight,
   faArrowsAltV,
+  faBan,
   faCalendarAlt,
   faChartArea,
   faCheck,
