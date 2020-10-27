@@ -10,6 +10,7 @@
         :id="$attrs.field_id"
         :value="value"
         :disabled="$attrs.field_disabled"
+        :placeholder="$attrs.placeholder"
         ref="field">
       <slot></slot>
     </div>
