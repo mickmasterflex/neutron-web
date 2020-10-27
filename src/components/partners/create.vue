@@ -7,7 +7,7 @@
       <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
       <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
       <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
-      <date-picker v-model="scheduledStart" rules="date" field_id="date" field_label="Scheduled Start"></date-picker>
+      <date-picker @resetDate="scheduledStart = $event" v-model="scheduledStart" rules="date" field_id="date" field_label="Scheduled Start"></date-picker>
       <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
       <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
     </form>
