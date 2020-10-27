@@ -356,9 +356,10 @@
 .select-field { @apply appearance-none; }
 .select-field-wrap { @apply relative w-64 }
 
+.h-base-field { height: 38px }
+
 .base-field {
-    @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight;
-    height: 38px;
+    @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight h-base-field;
 }
 
 .base-btn-field {

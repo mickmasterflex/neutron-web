@@ -7,25 +7,30 @@
     v-slot="{ errors, classes }">
     <div class="field-group">
       <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-      <v-date-picker v-model="date" :popover="{ visibility: 'click' }">
-        <template v-slot="{ inputEvents }">
-          <div class="flex flex-row relative">
-            <span :class="`w-8 absolute top-0 left-0 bottom-0 bg-${fieldColor}-500 text-white rounded-l flex flex-column items-center justify-center cursor-pointer`">
-              <font-awesome-icon :icon="fieldIcon" class="pb-1 text-lg"></font-awesome-icon>
-            </span>
-            <input
-              v-on="inputEvents"
-              @input="handleInput($event.target.value)"
-              class="base-field pl-10"
-              :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500`"
-              :type="$attrs.field_type ? $attrs.field_type : 'text'"
-              :id="$attrs.field_id"
-              :value="finalDate"
-              disabled="disabled"
-              ref="field">
-          </div>
-        </template>
-      </v-date-picker>
+      <div class="flex flex-row">
+        <v-date-picker v-model="date" :popover="{ visibility: 'click' }">
+          <template v-slot="{ inputEvents }">
+            <div class="flex flex-row relative">
+              <span :class="`w-8 absolute top-0 left-0 bottom-0 bg-${fieldColor}-500 text-white rounded-l flex flex-column items-center justify-center cursor-pointer`">
+                <font-awesome-icon :icon="fieldIcon" class="pb-1 text-lg"></font-awesome-icon>
+              </span>
+              <input
+                v-on="inputEvents"
+                @input="handleInput($event.target.value)"
+                class="base-field pl-10"
+                :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500 ${finalDate ? ' w-56' : ''}`"
+                :type="$attrs.field_type ? $attrs.field_type : 'text'"
+                :id="$attrs.field_id"
+                :value="finalDate"
+                disabled="disabled"
+                ref="field">
+            </div>
+          </template>
+        </v-date-picker>
+        <span v-if="finalDate" @click="date=null" class="w-8 flex flex-row items-center justify-center h-base-field">
+          <icon-button color="red" icon="trash-alt"></icon-button>
+        </span>
+      </div>
     </div>
     <span class="field-error ml-label-width" v-show="errors.length">{{ errors[0] }}</span>
   </validation-provider>
@@ -36,6 +41,8 @@
 </style>
 
 <script>
+import iconButton from '@/components/ui/buttons/icon-button-subtle'
+
 export default {
   data () {
     return {
@@ -108,6 +115,9 @@ export default {
     if (this.value) {
       this.date = this.formattedDate(new Date(this.value + 'T12:00:00Z'), 'mm-dd-yyyy')
     }
+  },
+  components: {
+    'icon-button': iconButton
   }
 }
 </script>
