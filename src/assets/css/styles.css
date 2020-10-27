@@ -387,7 +387,7 @@
 .form-horizontal .ml-label-width { @apply ml-32 }
 
 /* Inline Fields */
-.fields-inline { @apply flex flex-row items-end flex-wrap }
+.fields-inline { @apply flex flex-row items-end flex-wrap items-start }
 .fields-inline .field-group { @apply m-1 }
 
 .fields-inline-heading { @apply mb-1 flex flex-row; }
