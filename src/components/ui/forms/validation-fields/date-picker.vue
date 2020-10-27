@@ -8,7 +8,7 @@
     <div class="field-group">
       <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
       <div class="flex flex-row">
-        <v-date-picker v-model="date" :popover="{ visibility: 'click' }">
+        <v-date-picker v-model="date" :popover="{ visibility: 'click' }" :minDate="new Date()">
           <template v-slot="{ inputEvents }">
             <div class="flex flex-row relative">
               <span :class="`w-8 absolute top-0 left-0 bottom-0 bg-${fieldColor}-500 text-white rounded-l flex flex-column items-center justify-center cursor-pointer`">
