@@ -4,7 +4,7 @@
     <div>
       <textarea
         @input="handleInput($event.target.value)"
-        class="field base-field textarea"
+        class="base-field textarea"
         :class="$attrs.field_class"
         :id="$attrs.field_id"
         :value="value"

@@ -20,6 +20,7 @@ import {
   faAngleLeft,
   faAngleRight,
   faArrowsAltV,
+  faCalendarAlt,
   faChartArea,
   faCheck,
   faCheckCircle,
@@ -118,16 +119,30 @@ extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
 extend('ext', { ...ext, message: 'Incorrect file type' })
 extend('url', {
-  message: 'Must be a valid URL',
+  message: 'Must be a valid URL including "http://"',
   validate: (value) => {
-    const regex = RegExp('[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
+    const regex = RegExp('(http(s)?:\\/\\/)[(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)')
     return regex.test(value)
   }
 })
-extend('client_name', {
+extend('standard_chars', {
   message: 'Must not contain special characters',
   validate: (value) => {
     const regex = RegExp('^[\\w\\-\\s]+$')
+    return regex.test(value)
+  }
+})
+extend('dollar_amount', {
+  message: 'Must be a valid dollar amount without symbols',
+  validate: (value) => {
+    const regex = RegExp('^([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$')
+    return regex.test(value)
+  }
+})
+extend('date', {
+  message: 'Must be a valid date in the following format: mm-dd-yyyy',
+  validate: (value) => {
+    const regex = RegExp('^(((0?[1-9]|1[012])-(0?[1-9]|1\\d|2[0-8])|(0?[13456789]|1[012])-(29|30)|(0?[13578]|1[02])-31)-(19|[2-9]\\d)\\d{2}|0?2-29-((19|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|(([2468][048]|[3579][26])00)))$')
     return regex.test(value)
   }
 })
@@ -158,6 +173,7 @@ library.add(
   faAngleLeft,
   faAngleRight,
   faArrowsAltV,
+  faCalendarAlt,
   faChartArea,
   faCheck,
   faCheckCircle,
