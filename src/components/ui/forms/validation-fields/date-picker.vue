@@ -27,7 +27,7 @@
         </template>
       </v-date-picker>
     </div>
-    <span class="field-error" v-show="errors.length">{{ errors[0] }}</span>
+    <span class="field-error ml-label-width" v-show="errors.length">{{ errors[0] }}</span>
   </validation-provider>
 </template>
 
