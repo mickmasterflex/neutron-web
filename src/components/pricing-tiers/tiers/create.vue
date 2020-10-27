@@ -9,7 +9,7 @@
       {{formError}}
     </div>
     <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
-      <form @submit.prevent="handleSubmit(submitForm)" class="flex flex-row items-center justify-between card card-sm">
+      <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
         <span class="fields-inline">
           <v-text-field field_id="lower_bound" field_class="field-md" v-model="lower_bound" rules="required" ref="lower_bound"/>
           <v-text-field field_id="upper_bound" field_class="field-md" v-model="upper_bound" rules="required" ref="upper_bound"/>
