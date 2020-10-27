@@ -27,7 +27,7 @@
             </div>
           </template>
         </v-date-picker>
-        <span v-if="finalDate" @click="date=null" class="w-8 flex flex-row items-center justify-center h-base-field">
+        <span v-if="finalDate" @click="$emit('resetDate', null)" class="w-8 flex flex-row items-center justify-center h-base-field">
           <icon-button color="red" icon="trash-alt"></icon-button>
         </span>
       </div>
@@ -51,8 +51,17 @@ export default {
   },
   watch: {
     date: function () {
-      this.date = this.formattedDate(new Date(this.date), 'mm-dd-yyyy')
-      this.$emit('input', this.formattedDate(new Date(this.date), 'yyyy-mm-dd'))
+      if (this.date) {
+        this.date = this.formattedDate(new Date(this.date), 'mm-dd-yyyy')
+        this.$emit('input', this.formattedDate(new Date(this.date), 'yyyy-mm-dd'))
+      }
+    },
+    value () {
+      if (this.value) {
+        this.date = this.formattedDate(new Date(this.value + 'T12:00:00Z'), 'mm-dd-yyyy')
+      } else {
+        this.date = null
+      }
     }
   },
   computed: {
@@ -109,11 +118,6 @@ export default {
     },
     handleInput (value) {
       this.$emit('input', value)
-    }
-  },
-  created () {
-    if (this.value) {
-      this.date = this.formattedDate(new Date(this.value + 'T12:00:00Z'), 'mm-dd-yyyy')
     }
   },
   components: {
