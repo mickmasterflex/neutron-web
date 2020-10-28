@@ -3,7 +3,6 @@
     :rules="rules"
     :vid="$attrs.field_id"
     :name="$attrs.field_id"
-    :mode="mode"
     v-slot="{ errors, classes }">
     <div class="field-group">
       <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
@@ -27,7 +26,7 @@
             </div>
           </template>
         </v-date-picker>
-        <span v-if="finalDate" @click="$emit('resetDate', null)" class="w-8 flex flex-row items-center justify-center h-base-field">
+        <span v-if="finalDate" @click="$emit('input', null)" class="w-8 flex flex-row items-center justify-center h-base-field">
           <icon-button color="red" icon="trash-alt"></icon-button>
         </span>
       </div>
@@ -83,11 +82,7 @@ export default {
     },
     rules: {
       type: [Object, String],
-      default: ''
-    },
-    mode: {
-      type: String,
-      default: 'aggressive'
+      default: 'date'
     },
     fieldColor: {
       type: String,

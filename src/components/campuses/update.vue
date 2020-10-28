@@ -9,7 +9,10 @@
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Campus Name"></v-text-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
-          <checkbox-single v-model="is_online" field_id="checkbox" field_label="Online"/>
+          <div class="field-group">
+            <label class="field-label">Online</label>
+            <check-switch field_id="is_online" v-model="is_online" :value="is_online"></check-switch>
+          </div>
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
           <text-field v-model="city" field_id="city" field_label="City"></text-field>
