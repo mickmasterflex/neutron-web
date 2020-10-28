@@ -42,7 +42,7 @@ export default {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.remove({
-            geo: this.geo,
+            geos: [this.geo],
             locations: this.locations.toLowerCase().replace(/ /g, '')
           }).catch(error => {
             this.error = error
