@@ -5,7 +5,7 @@
       <textarea
         @input="handleInput($event.target.value)"
         class="base-field textarea"
-        :class="$attrs.field_class"
+        :class="`${$attrs.field_class} ${$attrs.field_size}`"
         :id="$attrs.field_id"
         :value="value"
         :disabled="$attrs.field_disabled"

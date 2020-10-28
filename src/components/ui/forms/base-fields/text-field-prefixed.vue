@@ -7,7 +7,7 @@
       </span>
       <input
         @input="handleInput($event.target.value)"
-        :class="`${field_class} text-${color}-600 border-${color}-500 base-field pl-6`"
+        :class="`${$attrs.field_class} ${$attrs.field_size} text-${color}-600 border-${color}-500 base-field pl-6`"
         :type="$attrs.field_type ? $attrs.field_type : 'text'"
         :id="$attrs.field_id"
         :value="value"
@@ -32,7 +32,6 @@ export default {
       type: String,
       default: 'arrows-alt-v'
     },
-    field_class: String,
     prefix_group_class: String
   },
   methods: {
