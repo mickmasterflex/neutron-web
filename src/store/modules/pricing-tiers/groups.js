@@ -2,17 +2,13 @@ import axios from '@/axios'
 
 const state = {
   pricing_tier_groups: [],
-  current_pricing_tier_group: {},
-  show_update_pricing_tier_group_modal: false,
-  show_create_pricing_tier_group_form: false
+  current_pricing_tier_group: {}
 }
 
 const getters = {
   getPricingTierGroups: state => state.pricing_tier_groups,
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
-  getShowUpdatePricingTierGroupModal: state => state.show_update_pricing_tier_group_modal,
-  getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) },
-  getShowCreatePricingTierGroupForm: state => state.show_create_pricing_tier_group_form
+  getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) }
 }
 
 const actions = {
@@ -52,8 +48,6 @@ const actions = {
 }
 
 const mutations = {
-  SHOW_UPDATE_PRICING_TIER_GROUP_MODAL: (state) => (state.show_update_pricing_tier_group_modal = true),
-  CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL: (state) => (state.show_update_pricing_tier_group_modal = false),
   SET_PRICING_TIER_GROUPS: (state, groups) => (state.pricing_tier_groups = groups),
   SET_CURRENT_PRICING_TIER_GROUP: (state, group) => (state.current_pricing_tier_group = group),
   RESET_CURRENT_PRICING_TIER_GROUP: (state) => (state.current_pricing_tier_group = {}),
@@ -78,9 +72,7 @@ const mutations = {
       return comparison
     }
     state.pricing_tier_groups.sort(compare)
-  },
-  CLOSE_CREATE_PRICING_TIER_GROUP_FORM: (state) => (state.show_create_pricing_tier_group_form = false),
-  SHOW_CREATE_PRICING_TIER_GROUP_FORM: (state) => (state.show_create_pricing_tier_group_form = true)
+  }
 }
 
 export default {
