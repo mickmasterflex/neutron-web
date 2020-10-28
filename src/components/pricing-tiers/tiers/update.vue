@@ -1,12 +1,14 @@
 <template>
   <div class="fields-inline">
-    <text-field field_size="field-md" field_disabled="true" v-model="lower_bound"/>
-    <text-field field_size="field-md" field_disabled="true" v-model="upper_bound"/>
-    <text-field field_size="field-md" field_disabled="true" v-model="payout"/>
+    <text-field-prefixed color="none" icon="dollar-sign" field_size="field-md" field_disabled="true" v-model="lower_bound"/>
+    <text-field-prefixed color="none" icon="dollar-sign" field_size="field-md" field_disabled="true" v-model="upper_bound"/>
+    <text-field-prefixed color="none" icon="dollar-sign" field_size="field-md" field_disabled="true" v-model="payout"/>
   </div>
 </template>
 
 <script>
+import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
+
 export default {
   data () {
     return {
@@ -17,6 +19,9 @@ export default {
   },
   props: {
     pricingTier: Object
+  },
+  components: {
+    'text-field-prefixed': textFieldPrefixed
   }
 }
 </script>

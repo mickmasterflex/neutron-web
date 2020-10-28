@@ -11,9 +11,9 @@
     <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
       <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
         <span class="fields-inline">
-          <v-text-field placeholder="0.00" field_id="lower_bound" field_size="field-md" v-model="lower_bound" rules="required|dollar_amount" ref="lower_bound" mode="passive"/>
-          <v-text-field placeholder="0.00" field_id="upper_bound" field_size="field-md" v-model="upper_bound" rules="required|dollar_amount" ref="upper_bound" mode="passive"/>
-          <v-text-field placeholder="0.00" field_id="payout" field_size="field-md" v-model="payout" rules="required|dollar_amount" ref="payout" mode="passive"/>
+          <v-text-field-prefixed icon="dollar-sign" color="none" placeholder="0.00" field_id="lower_bound" field_size="field-md" v-model="lower_bound" rules="required|dollar_amount" ref="lower_bound" mode="passive"/>
+          <v-text-field-prefixed icon="dollar-sign" color="none" placeholder="0.00" field_id="upper_bound" field_size="field-md" v-model="upper_bound" rules="required|dollar_amount" ref="upper_bound" mode="passive"/>
+          <v-text-field-prefixed icon="dollar-sign" color="none" placeholder="0.00" field_id="payout" field_size="field-md" v-model="payout" rules="required|dollar_amount" ref="payout" mode="passive"/>
         </span>
         <button ref="submit" class="btn btn-green btn-circle mx-1" type="submit"><font-awesome-icon icon="plus"></font-awesome-icon></button>
       </form>
@@ -25,6 +25,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
+import textFieldPrefixed from '@/components/ui/forms/validation-fields/text-field-prefixed'
 
 export default {
   data () {
@@ -75,6 +76,9 @@ export default {
         this.submitCreateForm()
       }
     }
+  },
+  components: {
+    'v-text-field-prefixed': textFieldPrefixed
   }
 }
 </script>
