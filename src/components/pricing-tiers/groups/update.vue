@@ -19,7 +19,7 @@
       </div>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
+      <button v-show="unsavedChanges" class="btn btn-green btn-lg" @click="submitForm">Save Changes</button>
     </template>
   </modal-template>
 </template>
