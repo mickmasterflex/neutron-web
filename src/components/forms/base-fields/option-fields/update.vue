@@ -5,8 +5,8 @@
       <div class="form-horizontal">
         <validation-observer ref="form">
           <form @submit.prevent="submitForm">
-            <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
             <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
+            <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
             <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
             <v-select-field v-model="type" :options="typeOptions" rules="required" field_id="type" field_label="Type"></v-select-field>
           </form>
