@@ -1,8 +1,8 @@
 <template>
   <div class="fields-inline">
-    <text-field field_class="field-md" field_disabled="true" v-model="lower_bound"/>
-    <text-field field_class="field-md" field_disabled="true" v-model="upper_bound"/>
-    <text-field field_class="field-md" field_disabled="true" v-model="payout"/>
+    <text-field field_size="field-md" field_disabled="true" v-model="lower_bound"/>
+    <text-field field_size="field-md" field_disabled="true" v-model="upper_bound"/>
+    <text-field field_size="field-md" field_disabled="true" v-model="payout"/>
   </div>
 </template>
 
