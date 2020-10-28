@@ -64,6 +64,11 @@ export default {
     }
   },
   watch: {
+    showModal () {
+      if (this.showModal) {
+        this.closeCreateForm()
+      }
+    },
     unsavedChanges () {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
@@ -74,6 +79,7 @@ export default {
       update: 'updatePricingTierGroup'
     }),
     ...mapMutations({
+      closeCreateForm: 'CLOSE_CREATE_PRICING_TIER_GROUP_FORM',
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
       closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),
