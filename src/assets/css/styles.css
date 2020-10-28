@@ -308,7 +308,7 @@
     border-spacing: 0 2px;
 }
 
-.table-white .td { @apply bg-white }
+.table-white .td { @apply bg-white text-gray-800 }
 .table-shadow .td { @apply shadow }
 
 .table > .tbody:before {
