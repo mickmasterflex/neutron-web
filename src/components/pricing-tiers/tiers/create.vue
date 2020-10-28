@@ -11,9 +11,9 @@
     <validation-observer v-slot="{ handleSubmit }" ref="form" class="form-horizontal">
       <form @submit.prevent="handleSubmit(submitCreateForm)" class="flex flex-row items-center justify-between card card-sm">
         <span class="fields-inline">
-          <v-text-field field_id="lower_bound" field_class="field-md" v-model="lower_bound" rules="required" ref="lower_bound"/>
-          <v-text-field field_id="upper_bound" field_class="field-md" v-model="upper_bound" rules="required" ref="upper_bound"/>
-          <v-text-field field_id="payout" field_class="field-md" v-model="payout" rules="required" ref="payout"/>
+          <v-text-field placeholder="0.00" field_id="lower_bound" field_class="field-md" v-model="lower_bound" rules="required" ref="lower_bound"/>
+          <v-text-field placeholder="0.00" field_id="upper_bound" field_class="field-md" v-model="upper_bound" rules="required" ref="upper_bound"/>
+          <v-text-field placeholder="0.00" field_id="payout" field_class="field-md" v-model="payout" rules="required" ref="payout"/>
         </span>
         <button class="btn btn-green btn-circle mx-1" type="submit"><font-awesome-icon icon="plus"></font-awesome-icon></button>
       </form>
@@ -29,9 +29,9 @@ import { enterKeyListener } from '@/mixins/enter-key-listener'
 export default {
   data () {
     return {
-      lower_bound: '0.00',
-      upper_bound: '0.00',
-      payout: '0.00'
+      lower_bound: '',
+      upper_bound: '',
+      payout: ''
     }
   },
   computed: {
@@ -46,9 +46,9 @@ export default {
       create: 'createPricingTier'
     }),
     resetForm () {
-      this.lower_bound = '0.00'
-      this.upper_bound = '0.00'
-      this.payout = '0.00'
+      this.lower_bound = ''
+      this.upper_bound = ''
+      this.payout = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })

@@ -7,14 +7,14 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: Number
+    tier: Object
   },
   methods: {
     ...mapActions({
       delete: 'deletePricingTier'
     }),
     runDelete () {
-      this.delete(this.id)
+      this.delete(this.tier)
     }
   }
 }

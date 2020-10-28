@@ -3,15 +3,15 @@
     <table v-if="pricingTiers.length" :class="`w-${tableWidth} table table-white table-shadow`">
       <thead class="thead-transparent">
         <tr>
-          <th class="th pr-8">Lower Bound</th>
-          <th class="th pr-8">Upper Bound</th>
+          <th class="th pr-8 lg:w-56">Lower Bound</th>
+          <th class="th pr-8 lg:w-56">Upper Bound</th>
           <th class="th pr-8">Payout</th>
         </tr>
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="pricingTier in pricingTiers" :key="pricingTier.id">
-        <td class="td"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.lower_bound}}</td>
-        <td class="td"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.upper_bound}}</td>
+        <td class="td w-56"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.lower_bound}}</td>
+        <td class="td w-56"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.upper_bound}}</td>
         <td class="td"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.payout}}</td>
       </tr>
       </tbody>

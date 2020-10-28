@@ -42,6 +42,12 @@ const actions = {
       .then(() => {
         commit('REMOVE_PRICING_TIER_GROUP', id)
       })
+  },
+  async updateGroupTiers ({ commit, getters }, payload) {
+    const index = getters.getPricingTierGroups.findIndex(group => group.id === payload.groupId)
+    const updatedGroup = getters.getPricingTierGroups[index]
+    updatedGroup.pricingtier_set = payload.tiers
+    commit('UPDATE_PRICING_TIER_GROUP', updatedGroup)
   }
 }
 
