@@ -10,8 +10,8 @@
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="pricingTier in pricingTiers" :key="pricingTier.id">
-        <td class="td w-56"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.lower_bound}}</td>
-        <td class="td w-56"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.upper_bound}}</td>
+        <td class="td lg:w-56"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.lower_bound}}</td>
+        <td class="td lg:w-56"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.upper_bound}}</td>
         <td class="td"><font-awesome-icon icon="dollar-sign" class="text-gray-500"></font-awesome-icon> {{pricingTier.payout}}</td>
       </tr>
       </tbody>
