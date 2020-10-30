@@ -8,8 +8,9 @@
       <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
       <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
       <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
-      <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
-      <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
+      <v-select-field :field_wrap_class="pricing_tier_group ? 'well' : ''" v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group">
+        <list-tiers class="mt-3" tableWidth="auto" emptyTableClass="max-w-sm" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
+      </v-select-field>
     </form>
   </validation-observer>
     </template>
