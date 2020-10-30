@@ -65,7 +65,7 @@ export default {
           } else {
             formData.append('locations', this.locations.toLowerCase().replace(/ /g, ''))
           }
-          formData.append('geo', this.geo)
+          formData.append('geos', this.geo)
           formData.append('nuke_replace', this.nuke_replace)
           this.add(formData).then(() => {
             this.resetForm()
