@@ -1,7 +1,7 @@
 <template>
   <div class="well">
     <ul class="fields-inline-heading px-1">
-      <li class="w-24 fields-inline-heading-item">Order</li>
+      <li class="w-20 fields-inline-heading-item">Order</li>
       <li class="w-64 fields-inline-heading-item">Label</li>
       <li class="w-64 fields-inline-heading-item">Value</li>
     </ul>
@@ -11,7 +11,7 @@
           <text-field-prefixed
             icon="arrows-alt-v"
             field_disabled="true"
-            field_class="field-sm"
+            field_size="field-sm"
             prefix_group_class="field-disabled"
             v-model="order"
             field_id="newOption_order"

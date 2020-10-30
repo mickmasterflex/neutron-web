@@ -8,18 +8,20 @@ const getters = {
   getCurrentPricingTiers: state => state.current_pricing_tiers
 }
 const actions = {
-  async createPricingTier ({ commit }, data) {
+  async createPricingTier ({ commit, dispatch, getters }, data) {
     await axios.post('/pricing-tiers/', data)
       .then(response => {
         commit('ADD_PRICING_TIER', response.data)
-        commit('SORT_PRICING_TIERS', response.data)
+        commit('SORT_PRICING_TIERS')
       })
+    await dispatch('updateGroupTiers', { groupId: data.pricing_tier_group, tiers: getters.getCurrentPricingTiers })
   },
-  async deletePricingTier ({ commit }, id) {
-    await axios.delete(`/pricing-tiers/${id}/`)
+  async deletePricingTier ({ commit, dispatch, getters }, tier) {
+    await axios.delete(`/pricing-tiers/${tier.id}/`)
       .then(() => {
-        commit('REMOVE_PRICING_TIER', id)
+        commit('REMOVE_PRICING_TIER', tier.id)
       })
+    await dispatch('updateGroupTiers', { groupId: tier.pricing_tier_group, tiers: getters.getCurrentPricingTiers })
   }
 }
 

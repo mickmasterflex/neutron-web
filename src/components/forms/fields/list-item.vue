@@ -4,14 +4,14 @@
       color="blue"
       icon="arrows-alt-v"
       field_disabled="true"
-      field_class="field-sm"
+      field_size="field-sm"
       prefix_group_class="field-draggable"
       v-model="this.order"
       :field_id="`fieldOrder_${this.field.id}`"/>
-    <text-field field_class="field-sm" :value="this.field.id" field_disabled="true"/>
+    <text-field field_size="field-sm" :value="this.field.id" field_disabled="true"/>
     <text-field :value="this.field.label" field_disabled="true"/>
     <text-field :value="this.field.mapping" field_disabled="true"/>
-    <text-field field_class="field-sm" :value="this.field.deliver" field_disabled="true"/>
+    <text-field field_size="field-sm" :value="this.field.deliver" field_disabled="true"/>
   </div>
 </template>
 
