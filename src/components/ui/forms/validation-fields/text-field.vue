@@ -7,6 +7,7 @@
       :value="value"
       ref="field">
       <span class="field-error" :class="$attrs.field_size" v-show="errors.length">{{ errors[0] }}</span>
+      <slot></slot>
     </text-field>
   </validation-provider>
 </template>

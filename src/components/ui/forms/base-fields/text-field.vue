@@ -1,7 +1,7 @@
 <template>
   <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div>
+    <div :class="$attrs.field_wrap_class">
       <input
         @input="handleInput($event.target.value)"
         class="field base-field"

@@ -5,7 +5,7 @@
       icon="arrows-alt-v"
       field_disabled="true"
       field_size="field-sm"
-      prefix_group_class="field-draggable"
+      field_wrap_class="field-draggable"
       v-model="this.order"
       :field_id="`fieldOrder_${this.field.id}`"/>
     <text-field field_size="field-sm" :value="this.field.id" field_disabled="true"/>

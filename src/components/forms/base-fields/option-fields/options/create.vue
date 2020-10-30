@@ -12,7 +12,7 @@
             icon="arrows-alt-v"
             field_disabled="true"
             field_size="field-sm"
-            prefix_group_class="field-disabled"
+            field_wrap_class="field-disabled"
             v-model="order"
             field_id="newOption_order"
           />

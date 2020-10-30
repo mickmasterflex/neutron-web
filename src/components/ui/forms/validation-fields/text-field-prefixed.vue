@@ -7,9 +7,10 @@
       :value="value"
       :color="color"
       :icon="icon"
-      :prefix_group_class="prefix_group_class"
+      :field_wrap_class="field_wrap_class"
       ref="field">
       <span class="field-error" :class="$attrs.field_size" v-show="errors.length">{{ errors[0] }}</span>
+      <slot></slot>
     </text-field-prefixed>
   </validation-provider>
 </template>
@@ -29,7 +30,7 @@ export default {
       type: String,
       default: 'arrows-alt-v'
     },
-    prefix_group_class: String
+    field_wrap_class: String
   },
   components: {
     'text-field-prefixed': textFieldPrefixed

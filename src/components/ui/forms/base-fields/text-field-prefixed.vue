@@ -1,7 +1,7 @@
 <template>
   <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div :class="`flex flex-row relative ${prefix_group_class}`">
+    <div :class="`flex flex-row relative ${field_wrap_class}`">
       <span :class="`${color === 'none' ? 'w-6' : 'w-4'} ${prefixColorClasses} absolute top-0 left-0 h-base-field rounded-l flex flex-column items-center justify-center`">
         <font-awesome-icon :icon="icon" :class="color !== 'none' ? 'pb-1' : ''"></font-awesome-icon>
       </span>
@@ -36,7 +36,7 @@ export default {
       type: String,
       default: 'arrows-alt-v'
     },
-    prefix_group_class: String
+    field_wrap_class: String
   },
   methods: {
     handleInput (value) {
