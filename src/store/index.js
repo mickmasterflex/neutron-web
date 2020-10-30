@@ -7,6 +7,7 @@ import brands from './modules/brands'
 import campaigns from '@/store/modules/campaigns'
 import campuses from '@/store/modules/campuses'
 import caps from '@/store/modules/caps'
+import channels from './modules/channels'
 import clients from './modules/clients'
 import contractRelations from '@/store/modules/contract-relations'
 import deliveries from '@/store/modules/deliveries'
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     campuses,
     campaigns,
     caps,
+    channels,
     clients,
     contractRelations,
     deliveries,

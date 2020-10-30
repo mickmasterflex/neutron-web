@@ -8,6 +8,7 @@
       <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
       <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
       <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+      <v-select-field v-model="channel" :options="getAllChannels" field_label="Channels"></v-select-field>
       <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
       <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
     </form>
@@ -30,6 +31,7 @@ export default {
   data () {
     return {
       name: '',
+      channel: '',
       pricing_tier_group: '',
       pingbackUrl: '',
       status: undefined,
@@ -44,7 +46,8 @@ export default {
     ...mapGetters({
       showModal: 'getShowCreatePartnerModal',
       pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById'
+      getPricingTierGroupById: 'getPricingTierGroupById',
+      getAllChannels: 'getAllChannels'
     }),
     currentGroup () {
       return this.getPricingTierGroupById(Number(this.pricing_tier_group))
@@ -62,13 +65,15 @@ export default {
   methods: {
     ...mapActions({
       create: 'createPartner',
-      fetchPricingTierGroups: 'fetchPricingTierGroups'
+      fetchPricingTierGroups: 'fetchPricingTierGroups',
+      fetchChannels: 'fetchChannels'
     }),
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
     }),
     close () {
       this.name = ''
+      this.channel = ''
       this.status = undefined
       this.pingbackUrl = ''
       this.scheduledStart = null
@@ -84,6 +89,7 @@ export default {
             name: this.name,
             parent: this.parent,
             client: this.client,
+            channel: this.channel,
             pricing_tier_group: this.pricing_tier_group,
             status: this.status,
             ping_back_url: this.pingbackUrl,
@@ -99,6 +105,7 @@ export default {
   },
   created () {
     this.fetchPricingTierGroups()
+    this.fetchChannels()
   },
   components: {
     'date-picker': datePicker,
