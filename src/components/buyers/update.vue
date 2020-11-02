@@ -10,6 +10,7 @@
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
+          <select-buyer-group v-model="buyerGroup"></select-buyer-group>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
@@ -19,7 +20,7 @@
 
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
-
+import selectBuyerGroup from '@/components/buyer-groups/select'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -30,6 +31,7 @@ export default {
       parent: '',
       rpl: undefined,
       status: undefined,
+      buyerGroup: undefined,
       statusOptions: {
         active: { name: 'Active', id: 'active' },
         paused: { name: 'Paused', id: 'paused' },
@@ -52,6 +54,7 @@ export default {
       this.parent = this.buyer.parent
       this.status = this.buyer.status
       this.rpl = this.buyer.rpl
+      this.buyerGroup = this.buyer.buyer_group
       this.scheduledStart = this.buyer.scheduled_start
     },
     submitForm () {
@@ -63,6 +66,7 @@ export default {
             client: this.buyer.client,
             id: this.buyer.id,
             rpl: this.rpl,
+            buyer_group: this.buyerGroup,
             status: this.status,
             scheduled_start: this.scheduledStart
           }).catch(error => {
@@ -90,14 +94,16 @@ export default {
           this.parent !== this.buyer.parent ||
           this.rpl !== this.buyer.rpl ||
           this.status !== this.buyer.status ||
-          this.scheduledStart !== this.buyer.scheduled_start
+          this.scheduledStart !== this.buyer.scheduled_start ||
+          this.buyerGroup !== this.buyer.buyer_group
       } else {
         return false
       }
     }
   },
   components: {
-    'date-picker': datePicker
+    'date-picker': datePicker,
+    'select-buyer-group': selectBuyerGroup
   }
 }
 </script>
