@@ -1,7 +1,7 @@
 <template>
   <div>
     <table v-if="pricingTiers.length" :class="`w-${tableWidth} table table-white table-shadow`">
-      <thead class="thead-transparent">
+      <thead class="thead">
         <tr>
           <th class="th pr-8 lg:w-56">Lower Bound</th>
           <th class="th pr-8 lg:w-56">Upper Bound</th>
@@ -16,7 +16,7 @@
       </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Tiers Added" copy="Edit the pricing tier group to add tiers" :class="`w-${tableWidth} ${emptyTableClass}`"></table-empty-state>
+    <table-empty-state v-else heading="No Tiers Added" copy="Edit the pricing tier group to add tiers" :class="`w-${tableWidth} ${emptyTableClass} px-4`"></table-empty-state>
   </div>
 </template>
 
