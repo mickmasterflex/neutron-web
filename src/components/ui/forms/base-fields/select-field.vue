@@ -3,7 +3,9 @@
     <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div :class="$attrs.field_wrap_class">
       <div class="relative w-64">
+        <div v-if="$attrs.loading" class="cursor-not-allowed disabled base-field text-gray-800"><font-awesome-icon class="text-gray-500" icon="spinner" pulse></font-awesome-icon> Loading</div>
         <select
+          v-else
           @input="handleInput($event.target.value)"
           class="appearance-none base-field"
           :class="`${$attrs.field_class} ${$attrs.field_size}`"
