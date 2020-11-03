@@ -11,6 +11,7 @@
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+          <v-select-field v-model="channel" :options="getAllChannels" field_label="Channels"></v-select-field>
           <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
           <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
         </form>
@@ -38,6 +39,7 @@ export default {
         archived: { name: 'Archived', id: 'archived' },
         terminated: { name: 'Terminated', id: 'terminated' }
       },
+      channel: '',
       pricing_tier_group: '',
       scheduledStart: null
     }
@@ -58,13 +60,15 @@ export default {
   methods: {
     ...mapActions({
       update: 'updatePartner',
-      fetchPricingTierGroups: 'fetchPricingTierGroups'
+      fetchPricingTierGroups: 'fetchPricingTierGroups',
+      fetchChannels: 'fetchChannels'
     }),
     setPartner () {
       this.name = this.partner.name
       this.parent = this.partner.parent
       this.pingbackUrl = this.partner.ping_back_url
       this.status = this.partner.status
+      this.channel = this.partner.channel
       this.pricing_tier_group = this.partner.pricing_tier_group
       this.scheduledStart = this.partner.scheduled_start
     },
@@ -78,6 +82,7 @@ export default {
             id: this.partner.id,
             ping_back_url: this.pingbackUrl,
             status: this.status,
+            channel: this.channel,
             pricing_tier_group: this.pricing_tier_group,
             scheduled_start: this.scheduledStart
           }).catch(error => {
@@ -90,12 +95,14 @@ export default {
   created () {
     this.setPartner()
     this.fetchPricingTierGroups()
+    this.fetchChannels()
   },
   computed: {
     ...mapGetters({
       siblings: 'getPartnerSiblings',
       pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById'
+      getPricingTierGroupById: 'getPricingTierGroupById',
+      getAllChannels: 'getAllChannels'
     }),
     currentGroup () {
       return this.getPricingTierGroupById(Number(this.pricing_tier_group))
@@ -106,6 +113,7 @@ export default {
           this.parent !== this.partner.parent ||
           this.status !== this.partner.status ||
           this.pingbackUrl !== this.partner.ping_back_url ||
+          this.channel !== this.partner.channel ||
           this.pricing_tier_group !== this.partner.pricing_tier_group ||
           this.scheduledStart !== this.partner.scheduled_start
       } else {
