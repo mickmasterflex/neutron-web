@@ -1,12 +1,12 @@
 <template>
   <div class="field-group">
-    <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div>
+    <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
+    <div :class="$attrs.field_wrap_class">
       <div class="relative w-64">
         <select
           @input="handleInput($event.target.value)"
           class="appearance-none base-field"
-          :class="$attrs.field_class"
+          :class="`${$attrs.field_class} ${$attrs.field_size}`"
           :id="$attrs.field_id">
           <option value="">----------</option>
           <option :selected="option.id === value ? 'selected' : false" v-for="option in $attrs.options" :key="option.id" :value="`${option.id}`">{{option.name}}</option>

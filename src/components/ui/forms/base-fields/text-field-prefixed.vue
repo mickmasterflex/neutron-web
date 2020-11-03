@@ -1,18 +1,22 @@
 <template>
   <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div :class="`flex flex-row relative ${prefix_group_class}`">
-      <span :class="`w-4 absolute top-0 left-0 bottom-0 bg-${color}-500 text-white rounded-l flex flex-column items-center justify-center`">
-        <font-awesome-icon :icon="icon" class="pb-1"></font-awesome-icon>
+    <div :class="`flex flex-row relative ${field_wrap_class}`">
+      <span :class="`${color === 'none' ? 'w-6' : 'w-4'} ${prefixColorClasses} absolute top-0 left-0 h-base-field rounded-l flex flex-column items-center justify-center`">
+        <font-awesome-icon :icon="icon" :class="color !== 'none' ? 'pb-1' : ''"></font-awesome-icon>
       </span>
-      <input
-        @input="handleInput($event.target.value)"
-        :class="`${field_class} text-${color}-600 border-${color}-500 base-field pl-6`"
-        :type="$attrs.field_type ? $attrs.field_type : 'text'"
-        :id="$attrs.field_id"
-        :value="value"
-        :disabled="$attrs.field_disabled"
-        :placeholder="$attrs.placeholder">
+      <div>
+        <input
+          @input="handleInput($event.target.value)"
+          :class="`${$attrs.field_class} ${$attrs.field_size} ${inputColorClasses} base-field pl-6`"
+          :type="$attrs.field_type ? $attrs.field_type : 'text'"
+          :id="$attrs.field_id"
+          :value="value"
+          :disabled="$attrs.field_disabled"
+          :placeholder="$attrs.placeholder"
+          ref="field">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -32,12 +36,25 @@ export default {
       type: String,
       default: 'arrows-alt-v'
     },
-    field_class: String,
-    prefix_group_class: String
+    field_wrap_class: String
   },
   methods: {
     handleInput (value) {
       this.$emit('input', value)
+    }
+  },
+  computed: {
+    prefixColorClasses () {
+      if (this.color !== 'none') {
+        return `bg-${this.color}-500 text-white`
+      }
+      return 'text-gray-500'
+    },
+    inputColorClasses () {
+      if (this.color !== 'none') {
+        return `text-${this.color}-600 border-${this.color}-500`
+      }
+      return ''
     }
   }
 }

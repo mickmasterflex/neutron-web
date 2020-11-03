@@ -6,7 +6,7 @@
     <form @submit.prevent="submitForm" class="form-horizontal">
       <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
       <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
-      <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
+      <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
       <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
     </form>
   </validation-observer>

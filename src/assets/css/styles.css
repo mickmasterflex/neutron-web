@@ -176,7 +176,7 @@
 /* Default */
 
 .btn {
-    @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border;
+    @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border border-r-2 border-b-2;
     -webkit-appearance: none;
     height: 45px;
 }
@@ -188,7 +188,7 @@
 .btn:focus  { @apply outline-none shadow-outline; }
 
 .btn-circle {
-    @apply rounded-full p-1 flex flex-col items-center justify-center;
+    @apply rounded-full p-1 flex flex-col items-center justify-center border-r border-b;
     width: 24px;
     height: 24px;
     min-width: 23px;
@@ -308,7 +308,7 @@
     border-spacing: 0 2px;
 }
 
-.table-white .td { @apply bg-white }
+.table-white .td { @apply bg-white text-gray-800 }
 .table-shadow .td { @apply shadow }
 
 .table > .tbody:before {
@@ -328,7 +328,7 @@
 .thead-transparent .th + .th { @apply border-none }
 
 .td + .td { @apply border-l-2 border-white }
-.td { @apply bg-gray-100 }
+.td { @apply bg-gray-200 }
 .tr:first-child td:first-child { @apply rounded-tl }
 .tr:first-child td:last-child { @apply rounded-tr }
 .tr:last-child td:first-child { @apply rounded-bl }
@@ -387,7 +387,7 @@
 .form-horizontal .ml-label-width { @apply ml-32 }
 
 /* Inline Fields */
-.fields-inline { @apply flex flex-row items-end flex-wrap }
+.fields-inline { @apply flex flex-row items-end flex-wrap items-start }
 .fields-inline .field-group { @apply m-1 }
 
 .fields-inline-heading { @apply mb-1 flex flex-row; }

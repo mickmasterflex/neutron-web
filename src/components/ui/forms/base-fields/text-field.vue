@@ -1,11 +1,11 @@
 <template>
   <div class="field-group">
     <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
-    <div>
+    <div :class="$attrs.field_wrap_class">
       <input
         @input="handleInput($event.target.value)"
         class="field base-field"
-        :class="$attrs.field_class"
+        :class="`${$attrs.field_class} ${$attrs.field_size}`"
         :type="$attrs.field_type ? $attrs.field_type : 'text'"
         :id="$attrs.field_id"
         :value="value"
