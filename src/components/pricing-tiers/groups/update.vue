@@ -8,18 +8,18 @@
             <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           </form>
          <div class="field-group" v-if="pricingTiers.length">
-           <label class="field-label">Tiers</label>
+           <label class="field-label field-label-top">Tiers</label>
            <list-tiers></list-tiers>
          </div>
         </validation-observer>
         <div class="field-group">
-          <label class="field-label">Create Tier</label>
+          <label class="field-label field-label-top">Create Tier</label>
           <create-pricing-tier></create-pricing-tier>
         </div>
       </div>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
+      <button v-show="unsavedChanges" class="btn btn-green btn-lg" @click="submitForm">Save Changes</button>
     </template>
   </modal-template>
 </template>
@@ -64,6 +64,11 @@ export default {
     }
   },
   watch: {
+    showModal () {
+      if (this.showModal) {
+        this.closeCreateForm()
+      }
+    },
     unsavedChanges () {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
@@ -74,6 +79,7 @@ export default {
       update: 'updatePricingTierGroup'
     }),
     ...mapMutations({
+      closeCreateForm: 'CLOSE_CREATE_PRICING_TIER_GROUP_FORM',
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
       closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),

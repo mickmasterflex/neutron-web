@@ -8,7 +8,7 @@
     <ul>
       <li class="card card-sm mb-1 flex flex-row items-center justify-between" v-for="pricingTier in pricingTiers" :key="pricingTier.id">
         <update-pricing-tier :pricingTier="pricingTier"></update-pricing-tier>
-        <delete-pricing-tier class="mx-1" :id="pricingTier.id"></delete-pricing-tier>
+        <delete-pricing-tier class="mx-1" :tier="pricingTier"></delete-pricing-tier>
       </li>
     </ul>
   </div>
