@@ -28,12 +28,19 @@ const actions = {
       .then(response => {
         commit('ADD_BUYER_GROUP', response.data)
       })
+  },
+  async deleteBuyerGroup ({ commit }, id) {
+    await axios.delete(`/buyer-groups/${id}/`)
+      .then(() => {
+        commit('REMOVE_BUYER_GROUP', id)
+      })
   }
 }
 
 const mutations = {
   SET_BUYER_GROUPS: (state, groups) => (state.buyer_groups = groups),
   ADD_BUYER_GROUP: (state, group) => state.buyer_groups.unshift(group),
+  REMOVE_BUYER_GROUP: (state, id) => (state.buyer_groups = state.buyer_groups.filter(group => group.id !== id)),
   SET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = true),
   RESET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = false)
 }
