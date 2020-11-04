@@ -11,6 +11,7 @@
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+          <select-channels v-model="channel"></select-channels>
           <v-select-field :field_wrap_class="pricing_tier_group ? 'well' : ''" v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group">
             <list-tiers class="mt-3" tableWidth="auto" emptyTableClass="max-w-sm" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
           </v-select-field>
@@ -23,6 +24,7 @@
 <script>
 import listTiers from '@/components/pricing-tiers/tiers/list'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
+import selectChannels from '@/components/channels/select'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -39,13 +41,15 @@ export default {
         archived: { name: 'Archived', id: 'archived' },
         terminated: { name: 'Terminated', id: 'terminated' }
       },
+      channel: '',
       pricing_tier_group: '',
       scheduledStart: null
     }
   },
   components: {
     'list-tiers': listTiers,
-    'date-picker': datePicker
+    'date-picker': datePicker,
+    'select-channels': selectChannels
   },
   props: {
     partner: Object
@@ -66,6 +70,7 @@ export default {
       this.parent = this.partner.parent
       this.pingbackUrl = this.partner.ping_back_url
       this.status = this.partner.status
+      this.channel = this.partner.channel
       this.pricing_tier_group = this.partner.pricing_tier_group
       this.scheduledStart = this.partner.scheduled_start
     },
@@ -79,6 +84,7 @@ export default {
             id: this.partner.id,
             ping_back_url: this.pingbackUrl,
             status: this.status,
+            channel: this.channel,
             pricing_tier_group: this.pricing_tier_group,
             scheduled_start: this.scheduledStart
           }).catch(error => {
@@ -107,6 +113,7 @@ export default {
           this.parent !== this.partner.parent ||
           this.status !== this.partner.status ||
           this.pingbackUrl !== this.partner.ping_back_url ||
+          this.channel !== this.partner.channel ||
           this.pricing_tier_group !== this.partner.pricing_tier_group ||
           this.scheduledStart !== this.partner.scheduled_start
       } else {
