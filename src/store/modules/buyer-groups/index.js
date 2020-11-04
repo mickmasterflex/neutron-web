@@ -1,4 +1,9 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/buyer-groups/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   buyer_groups: [],
@@ -17,16 +22,24 @@ const actions = {
         commit('SET_BUYER_GROUPS', response.data)
         commit('RESET_BUYER_GROUPS_FETCH_LOADING')
       })
+  },
+  async createBuyerGroup ({ commit }, buyerGroup) {
+    await axios.post('/buyer-groups/', buyerGroup)
+      .then(response => {
+        commit('ADD_BUYER_GROUP', response.data)
+      })
   }
 }
 
 const mutations = {
   SET_BUYER_GROUPS: (state, groups) => (state.buyer_groups = groups),
+  ADD_BUYER_GROUP: (state, group) => state.buyer_groups.unshift(group),
   SET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = true),
   RESET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = false)
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

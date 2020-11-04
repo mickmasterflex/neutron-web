@@ -5,6 +5,11 @@
       <div class="hud--stat-cards"></div>
     </template>
     <template v-slot:content>
+      <action-heading>
+        <template v-slot:right>
+          <create-group></create-group>
+        </template>
+      </action-heading>
       <list-groups></list-groups>
     </template>
   </content-layout>
@@ -13,6 +18,7 @@
 <script>
 import { mapActions } from 'vuex'
 import listGroups from '@/components/buyer-groups/list'
+import createGroup from '@/components/buyer-groups/create'
 
 export default {
   methods: {
@@ -24,7 +30,8 @@ export default {
     this.fetchBuyerGroups()
   },
   components: {
-    'list-groups': listGroups
+    'list-groups': listGroups,
+    'create-group': createGroup
   }
 }
 </script>
