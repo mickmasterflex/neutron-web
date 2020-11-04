@@ -25,8 +25,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      showCreateBuyerGroup: 'SHOW_CREATE_BUYER_GROUP_FORM',
-      close: 'HIDE_CREATE_BUYER_GROUP_FORM'
+      showCreateBuyerGroup: 'SHOW_CREATE_BUYER_GROUP_FORM'
     }),
     ...mapActions({
       createBuyerGroup: 'createBuyerGroup'
@@ -44,7 +43,6 @@ export default {
             name: this.name
           }).then(() => {
             this.resetForm()
-            this.close()
           }).catch(error => {
             this.error = error
           })

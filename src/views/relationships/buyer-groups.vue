@@ -11,6 +11,7 @@
         </template>
       </action-heading>
       <list-groups></list-groups>
+      <update-group></update-group>
     </template>
   </content-layout>
 </template>
@@ -19,6 +20,7 @@
 import { mapActions } from 'vuex'
 import listGroups from '@/components/buyer-groups/list'
 import createGroup from '@/components/buyer-groups/create'
+import updateGroup from '@/components/buyer-groups/update'
 
 export default {
   methods: {
@@ -31,7 +33,8 @@ export default {
   },
   components: {
     'list-groups': listGroups,
-    'create-group': createGroup
+    'create-group': createGroup,
+    'update-group': updateGroup
   }
 }
 </script>
