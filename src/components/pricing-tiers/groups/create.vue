@@ -1,8 +1,10 @@
 <template>
   <div>
-    <button class="btn btn-turquoise" @click="showForm()" v-if="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> Add Group</button>
-    <transition enter-active-class="animate__animated animate__slideInRight animate__fast" v-on:after-enter="$refs.focusField.focusOnField()">
-      <div class="flex flex-row items-start" v-if="formVisible">
+    <transition enter-active-class="animate__animated animate__fadeIn animate__fast" leave-active-class="hidden">
+      <button class="btn btn-turquoise" @click="showForm()" v-show="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> New Group</button>
+    </transition>
+    <transition enter-active-class="animate__animated animate__fadeIn animate__fast" leave-active-class="hidden" v-on:after-enter="$refs.focusField.focusOnField()">
+      <div class="flex flex-row items-start" v-show="formVisible">
         <validation-observer ref="form">
           <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
             <v-text-field ref="focusField" field_class="field-tall" v-model="name" rules="required" field_id="name" field_label=" Name"></v-text-field>
