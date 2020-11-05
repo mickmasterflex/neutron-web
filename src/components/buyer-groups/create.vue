@@ -1,7 +1,9 @@
 <template>
   <div>
-    <button class="btn btn-turquoise" @click="showCreateBuyerGroup()" v-show="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer Group</button>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__fast" v-on:after-enter="$refs.focusField.focusOnField()">
+    <transition enter-active-class="animate__animated animate__fadeIn animate__fast" leave-active-class="hidden">
+      <button class="btn btn-turquoise" @click="showCreateBuyerGroup()" v-show="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer Group</button>
+    </transition>
+    <transition enter-active-class="animate__animated animate__fadeIn animate__fast" leave-active-class="hidden" v-on:after-enter="$refs.focusField.focusOnField()">
       <div class="flex flex-row items-start" v-show="formVisible">
         <validation-observer ref="form">
           <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
@@ -16,6 +18,8 @@
 
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
@@ -23,6 +27,12 @@ export default {
       name: ''
     }
   },
+  computed: {
+    ...mapGetters({
+      formVisible: 'getShowCreateBuyerGroupForm'
+    })
+  },
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapMutations({
       showCreateBuyerGroup: 'SHOW_CREATE_BUYER_GROUP_FORM'
@@ -30,6 +40,11 @@ export default {
     ...mapActions({
       createBuyerGroup: 'createBuyerGroup'
     }),
+    enterKeyAction () {
+      if (document.activeElement === this.$refs.focusField.$refs.field.$refs.field) {
+        this.submitForm()
+      }
+    },
     resetForm () {
       this.name = ''
       this.$nextTick(() => {
@@ -49,11 +64,6 @@ export default {
         }
       })
     }
-  },
-  computed: {
-    ...mapGetters({
-      formVisible: 'getShowCreateBuyerGroupForm'
-    })
   }
 }
 </script>

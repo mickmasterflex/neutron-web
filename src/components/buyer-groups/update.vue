@@ -19,6 +19,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
@@ -55,7 +56,7 @@ export default {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
-  mixins: [setResponseErrors, checkUnsavedChangesInModal],
+  mixins: [setResponseErrors, checkUnsavedChangesInModal, enterKeyListener],
   methods: {
     ...mapActions({
       updateBuyerGroup: 'updateBuyerGroup'
