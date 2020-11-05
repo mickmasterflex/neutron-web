@@ -8,18 +8,18 @@
             <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           </form>
          <div class="field-group" v-if="pricingTiers.length">
-           <label class="field-label">Tiers</label>
+           <label class="field-label field-label-top">Tiers</label>
            <list-tiers></list-tiers>
          </div>
         </validation-observer>
         <div class="field-group">
-          <label class="field-label">Create Tier</label>
+          <label class="field-label field-label-top">Create Tier</label>
           <create-pricing-tier></create-pricing-tier>
         </div>
       </div>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green btn-lg" @click="submitForm">Save All Changes</button>
+      <button v-show="unsavedChanges" class="btn btn-green btn-lg" @click="submitForm">Save Changes</button>
     </template>
   </modal-template>
 </template>
@@ -29,7 +29,6 @@ import listTiers from '@/components/pricing-tiers/tiers/update-list'
 import createPricingTier from '@/components/pricing-tiers/tiers/create'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
@@ -65,16 +64,22 @@ export default {
     }
   },
   watch: {
+    showModal () {
+      if (this.showModal) {
+        this.closeCreateForm()
+      }
+    },
     unsavedChanges () {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
-  mixins: [setResponseErrors, enterKeyListener, checkUnsavedChangesInModal],
+  mixins: [setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
       update: 'updatePricingTierGroup'
     }),
     ...mapMutations({
+      closeCreateForm: 'CLOSE_CREATE_PRICING_TIER_GROUP_FORM',
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
       closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),

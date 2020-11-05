@@ -4,9 +4,14 @@
     <template v-slot:body>
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
-      <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
-      <v-select-field v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group"></v-select-field>
-      <list-tiers class="ml-label-width" tableWidth="auto" emptyTableClass="max-w-sm well" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
+      <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
+      <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+      <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
+      <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+      <select-channels v-model="channel"></select-channels>
+      <v-select-field :field_wrap_class="pricing_tier_group ? 'well' : ''" v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group">
+        <list-tiers class="mt-3" tableWidth="auto" emptyTableClass="max-w-sm" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
+      </v-select-field>
     </form>
   </validation-observer>
     </template>
@@ -18,6 +23,8 @@
 
 <script>
 import listTiers from '@/components/pricing-tiers/tiers/list'
+import datePicker from '@/components/ui/forms/validation-fields/date-picker'
+import selectChannels from '@/components/channels/select'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
@@ -26,11 +33,16 @@ export default {
   data () {
     return {
       name: '',
-      pricing_tier_group: ''
+      channel: '',
+      pricing_tier_group: '',
+      pingbackUrl: '',
+      status: undefined,
+      statusOptions: {
+        active: { name: 'Active', id: 'active' },
+        paused: { name: 'Paused', id: 'paused' }
+      },
+      scheduledStart: null
     }
-  },
-  components: {
-    'list-tiers': listTiers
   },
   computed: {
     ...mapGetters({
@@ -61,6 +73,10 @@ export default {
     }),
     close () {
       this.name = ''
+      this.channel = ''
+      this.status = undefined
+      this.pingbackUrl = ''
+      this.scheduledStart = null
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -72,8 +88,12 @@ export default {
           this.create({
             name: this.name,
             parent: this.parent,
-            client: this.$props.client,
-            pricing_tier_group: this.pricing_tier_group
+            client: this.client,
+            channel: this.channel,
+            pricing_tier_group: this.pricing_tier_group,
+            status: this.status,
+            ping_back_url: this.pingbackUrl,
+            scheduled_start: this.scheduledStart
           }).then(() => {
             this.close()
           }).catch(error => {
@@ -85,6 +105,11 @@ export default {
   },
   created () {
     this.fetchPricingTierGroups()
+  },
+  components: {
+    'date-picker': datePicker,
+    'list-tiers': listTiers,
+    'select-channels': selectChannels
   }
 }
 </script>

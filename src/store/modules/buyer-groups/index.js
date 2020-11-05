@@ -1,0 +1,34 @@
+import axios from '@/axios'
+
+const state = {
+  buyer_groups: [],
+  buyer_groups_fetch_loading: false
+}
+
+const getters = {
+  getBuyerGroups: state => state.buyer_groups,
+  getBuyerGroupsFetchLoading: state => state.buyer_groups_fetch_loading
+}
+
+const actions = {
+  async fetchBuyerGroups ({ commit }) {
+    await axios.get('/buyer-groups/')
+      .then(response => {
+        commit('SET_BUYER_GROUPS', response.data)
+        commit('RESET_BUYER_GROUPS_FETCH_LOADING')
+      })
+  }
+}
+
+const mutations = {
+  SET_BUYER_GROUPS: (state, groups) => (state.buyer_groups = groups),
+  SET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = true),
+  RESET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = false)
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+}

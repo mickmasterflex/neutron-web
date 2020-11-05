@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app'
 import auth from './modules/authentication'
+import buyerGroups from './modules/buyer-groups'
 import buyers from './modules/buyers'
 import brands from './modules/brands'
 import campaigns from '@/store/modules/campaigns'
 import campuses from '@/store/modules/campuses'
 import caps from '@/store/modules/caps'
+import channels from './modules/channels'
 import clients from './modules/clients'
 import contractRelations from '@/store/modules/contract-relations'
 import deliveries from '@/store/modules/deliveries'
@@ -27,11 +29,13 @@ export default new Vuex.Store({
   modules: {
     app,
     auth,
+    buyerGroups,
     buyers,
     brands,
     campuses,
     campaigns,
     caps,
+    channels,
     clients,
     contractRelations,
     deliveries,
