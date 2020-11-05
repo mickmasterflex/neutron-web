@@ -359,16 +359,17 @@
 .h-base-field { height: 38px }
 
 .base-field {
-    @apply block w-64 bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight h-base-field;
-}
-
-.base-btn-field {
-    @apply w-64 text-center;
+    @apply block bg-white border border-gray-400 px-3 py-2 rounded shadow leading-tight h-base-field;
 }
 
 .field-sm { @apply w-20 }
 .field-md { @apply w-40 }
+.field-lg { @apply w-64 }
 .field-tall { height: 45px }
+
+.base-btn-field {
+    @apply field-lg text-center;
+}
 
 .base-field:hover:not(:disabled) { @apply border-gray-500 }
 .base-field:focus { @apply outline-none shadow-outline }

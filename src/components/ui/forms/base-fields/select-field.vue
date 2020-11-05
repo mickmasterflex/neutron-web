@@ -8,7 +8,7 @@
           v-else
           @input="handleInput($event.target.value)"
           class="appearance-none base-field"
-          :class="`${$attrs.field_class} ${$attrs.field_size}`"
+          :class="`${$attrs.field_class} ${$attrs.field_size ? $attrs.field_size : 'field-lg'}`"
           :id="$attrs.field_id">
           <option value="">----------</option>
           <option :selected="option.id === value ? 'selected' : false" v-for="option in $attrs.options" :key="option.id" :value="`${option.id}`">{{option.name}}</option>
