@@ -6,7 +6,7 @@ const modules = {
 }
 
 const state = {
-  buyer_groups: [],
+  buyer_groups: undefined,
   current_buyer_group: {},
   buyer_groups_fetch_loading: false
 }

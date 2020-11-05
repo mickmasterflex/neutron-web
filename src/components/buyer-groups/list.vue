@@ -1,5 +1,10 @@
 <template>
   <base-panel-grid>
+    <table-empty-state
+      class="well col-span-2"
+      v-if="buyerGroups === undefined"
+      heading="No Buyer Groups Added"
+      copy="Use the 'New Buyer Group' button to add buyer groups."></table-empty-state>
     <panel-template v-for="buyerGroup in buyerGroups" :title="buyerGroup.name" :key="buyerGroup.id" class="col-span-2">
       <template v-slot:action>
         <span class="flex flex-row mr-2">
