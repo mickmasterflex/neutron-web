@@ -18,6 +18,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
@@ -31,6 +33,7 @@ export default {
       formVisible: 'getShowCreatePricingTierGroupForm'
     })
   },
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createPricingTierGroup'
@@ -39,11 +42,10 @@ export default {
       showForm: 'SHOW_CREATE_PRICING_TIER_GROUP_FORM',
       showUpdate: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),
-    close () {
-      this.name = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
+    enterKeyAction () {
+      if (document.activeElement === this.$refs.focusField.$refs.field.$refs.field) {
+        this.submitForm()
+      }
     },
     resetForm () {
       this.name = ''
@@ -58,7 +60,6 @@ export default {
             name: this.name
           }).then(() => {
             this.resetForm()
-            this.close()
             this.showUpdate()
           }).catch(error => {
             this.error = error
