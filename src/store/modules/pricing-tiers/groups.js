@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  pricing_tier_groups: [],
+  pricing_tier_groups: undefined,
   current_pricing_tier_group: {}
 }
 
@@ -24,7 +24,7 @@ const actions = {
       .then(response => {
         commit('ADD_PRICING_TIER_GROUP', response.data)
         commit('SORT_PRICING_TIER_GROUPS', response.data)
-        commit('SET_CURRENT_PRICING_TIER_GROUP_FORM', response.data)
+        commit('SET_CURRENT_PRICING_TIER_GROUP', response.data)
       })
   },
   async updatePricingTierGroup ({ commit }, data) {

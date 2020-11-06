@@ -37,9 +37,6 @@ export default {
       name: ''
     }
   },
-  props: {
-    pricingTier: Object
-  },
   components: {
     'list-tiers': listTiers,
     'create-pricing-tier': createPricingTier
@@ -81,6 +78,7 @@ export default {
     ...mapMutations({
       closeCreateForm: 'CLOSE_CREATE_PRICING_TIER_GROUP_FORM',
       resetCurrentPricingTierGroup: 'RESET_CURRENT_PRICING_TIER_GROUP',
+      resetCurrentTiers: 'RESET_CURRENT_PRICING_TIERS',
       closeModal: 'CLOSE_UPDATE_PRICING_TIER_GROUP_MODAL'
     }),
     close () {
@@ -89,6 +87,7 @@ export default {
         this.$refs.form.reset()
       })
       this.closeModal()
+      this.resetCurrentTiers()
       this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {

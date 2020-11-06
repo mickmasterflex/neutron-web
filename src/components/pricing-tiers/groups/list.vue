@@ -1,5 +1,10 @@
 <template>
   <base-panel-grid>
+    <table-empty-state
+      class="well col-span-2"
+      v-if="pricingTierGroups === undefined"
+      heading="No Pricing Tier Groups Added"
+      copy="Use the 'New Group' button to add pricing tier groups."></table-empty-state>
     <panel-template v-for="pricingTierGroup in pricingTierGroups" :title="pricingTierGroup.name" :key="pricingTierGroup.id" class="col-span-2">
       <template v-slot:action>
         <span class="flex flex-row mr-2">
