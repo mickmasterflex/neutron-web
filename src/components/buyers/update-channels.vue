@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Active Channels" :actionTransition="true" :loading="loading">
+  <panel-template title="Active Channels" :actionTransition="true" :showLoader="loading">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -57,15 +57,14 @@ export default {
     }
   },
   created () {
+    this.setChannelsFetchLoading()
     this.setChannels()
     this.fetchChannels()
-    this.setChannelsFetchLoading()
   },
   computed: {
     ...mapGetters({
-      siblings: 'getBuyerSiblings',
       available_channels: 'getAllChannels',
-      loading: 'getChannelsFetchLoading'
+      showLoader: 'getChannelsFetchLoading'
     }),
     unsavedChanges () {
       if (this.channels) {
