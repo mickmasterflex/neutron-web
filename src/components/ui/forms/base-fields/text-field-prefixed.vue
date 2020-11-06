@@ -8,7 +8,7 @@
       <div>
         <input
           @input="handleInput($event.target.value)"
-          :class="`${$attrs.field_class} ${$attrs.field_size} ${inputColorClasses} base-field pl-6`"
+          :class="`${$attrs.field_class} ${$attrs.field_size ? $attrs.field_size : 'field-lg'} ${inputColorClasses} base-field pl-6`"
           :type="$attrs.field_type ? $attrs.field_type : 'text'"
           :id="$attrs.field_id"
           :value="value"
