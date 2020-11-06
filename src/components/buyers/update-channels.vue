@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Active Channels" :actionTransition="true">
+  <panel-template title="Active Channels" :actionTransition="true" :loading="loading">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import multiselectCheckboxes from '@/components/ui/forms/validation-fields/multi-select-switch.vue'
 
@@ -33,23 +33,18 @@ export default {
       update: 'updateBuyer',
       fetchChannels: 'fetchChannels'
     }),
-    setBuyer () {
+    ...mapMutations({
+      setChannelsFetchLoading: 'SET_CHANNELS_FETCH_LOADING'
+    }),
+    setChannels () {
       this.channels = this.buyer.channels
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.update({
-            name: this.buyer.name,
-            parent: this.buyer.parent,
-            client: this.buyer.client,
-            channels: this.channels,
-            id: this.buyer.id,
-            rpl: this.buyer.rpl,
-            buyer_group: this.buyerGroup,
-            status: this.buyer.status,
-            scheduled_start: this.buyer.scheduledStart
-          }).catch(error => {
+          const updatedBuyer = this.buyer
+          updatedBuyer.channels = this.channels
+          this.update(updatedBuyer).catch(error => {
             this.error = error
           })
         }
@@ -58,17 +53,19 @@ export default {
   },
   watch: {
     buyer: function () {
-      this.setBuyer()
+      this.setChannels()
     }
   },
   created () {
-    this.setBuyer()
+    this.setChannels()
     this.fetchChannels()
+    this.setChannelsFetchLoading()
   },
   computed: {
     ...mapGetters({
       siblings: 'getBuyerSiblings',
-      available_channels: 'getAllChannels'
+      available_channels: 'getAllChannels',
+      loading: 'getChannelsFetchLoading'
     }),
     unsavedChanges () {
       if (this.channels) {
