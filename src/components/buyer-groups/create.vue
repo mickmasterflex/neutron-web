@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition enter-active-class="animate__animated animate__fadeIn animate__fast" leave-active-class="hidden">
-      <button class="btn btn-turquoise" @click="showForm()" v-show="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> New Group</button>
+      <button class="btn btn-turquoise" @click="showCreateBuyerGroup()" v-show="formVisible === false"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer Group</button>
     </transition>
     <transition enter-active-class="animate__animated animate__fadeIn animate__fast" leave-active-class="hidden" v-on:after-enter="$refs.focusField.focusOnField()">
       <div class="flex flex-row items-start" v-show="formVisible">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -29,18 +29,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      form: 'getCurrentForm',
-      formVisible: 'getShowCreatePricingTierGroupForm'
+      formVisible: 'getShowCreateBuyerGroupForm'
     })
   },
   mixins: [enterKeyListener, setResponseErrors],
   methods: {
-    ...mapActions({
-      create: 'createPricingTierGroup'
-    }),
     ...mapMutations({
-      showForm: 'SHOW_CREATE_PRICING_TIER_GROUP_FORM',
-      showUpdate: 'SHOW_UPDATE_PRICING_TIER_GROUP_MODAL'
+      showCreateBuyerGroup: 'SHOW_CREATE_BUYER_GROUP_FORM'
+    }),
+    ...mapActions({
+      createBuyerGroup: 'createBuyerGroup'
     }),
     enterKeyAction () {
       if (document.activeElement === this.$refs.focusField.$refs.field.$refs.field) {
@@ -56,11 +54,10 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.create({
+          this.createBuyerGroup({
             name: this.name
           }).then(() => {
             this.resetForm()
-            this.showUpdate()
           }).catch(error => {
             this.error = error
           })

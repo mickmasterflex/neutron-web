@@ -5,7 +5,7 @@
       <input
         @input="handleInput($event.target.value)"
         class="field base-field"
-        :class="`${$attrs.field_class} ${$attrs.field_size}`"
+        :class="`${$attrs.field_class} ${$attrs.field_size ? $attrs.field_size : 'field-lg'}`"
         :type="$attrs.field_type ? $attrs.field_type : 'text'"
         :id="$attrs.field_id"
         :value="value"
