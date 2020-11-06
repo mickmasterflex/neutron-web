@@ -64,7 +64,7 @@ export default {
   computed: {
     ...mapGetters({
       available_channels: 'getAllChannels',
-      showLoader: 'getChannelsFetchLoading'
+      loading: 'getChannelsFetchLoading'
     }),
     unsavedChanges () {
       if (this.channels) {
