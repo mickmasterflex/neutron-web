@@ -7,6 +7,7 @@
         <lead-caps :parent="id" type="buyers"></lead-caps>
       </template>
     </panel-template>
+    <update-channels class="col-span-2" :buyer="buyer"></update-channels>
     <delivery-index :buyer="buyer.id" class="col-span-2"></delivery-index>
     <panel-template title="Danger Zone" class="col-span-2">
       <template v-slot:content>
@@ -23,6 +24,7 @@ import updateBuyer from '@/components/buyers/update'
 import recruitmentLocations from '@/components/geos/index'
 import deliveryIndex from '@/components/deliveries/index'
 import leadCaps from '@/components/caps/'
+import updateChannels from '@/components/buyers/update-channels'
 
 export default {
   props: {
@@ -34,6 +36,7 @@ export default {
     })
   },
   components: {
+    'update-channels': updateChannels,
     'delete-buyer-contract': deleteBuyer,
     'delivery-index': deliveryIndex,
     'update-buyer-contract': updateBuyer,
