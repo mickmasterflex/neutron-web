@@ -152,6 +152,17 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    path: '/config/channels/',
+    name: 'Channels',
+    component: () => import('@/views/config/channels.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'config',
+      activeAppTab: 'channels'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
     path: '/relationships/buyer-groups/',
     name: 'BuyerGroups',
     component: () => import('@/views/relationships/buyer-groups.vue'),
