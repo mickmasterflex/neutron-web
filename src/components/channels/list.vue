@@ -9,7 +9,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="channel in this.channels" :key="channel.id">
         <td class="td">
-          <router-link :to="{name: 'Channel', params: { id:channel.id }}" class="underline text-blue-500">{{channel.name}}</router-link>
+          <router-link :to="{name: 'Channels', params: { id:channel.id }}" class="underline text-blue-500">{{channel.name}}</router-link>
         </td>
       </tr>
       </tbody>
