@@ -8,6 +8,10 @@
             <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           </form>
         </validation-observer>
+        <div class="field-group">
+          <label class="field-label field-label-top">Contracts</label>
+          <contract-table></contract-table>
+        </div>
       </div>
     </template>
     <template v-slot:footer-additional>
@@ -21,6 +25,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
+import contractTable from '@/components/buyer-groups/table'
 
 export default {
   data () {
@@ -87,6 +92,9 @@ export default {
         }
       })
     }
+  },
+  components: {
+    'contract-table': contractTable
   }
 }
 </script>

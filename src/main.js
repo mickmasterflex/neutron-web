@@ -22,6 +22,8 @@ import {
   faArrowsAltV,
   faBan,
   faCalendarAlt,
+  faCaretDown,
+  faCaretRight,
   faChartArea,
   faCheck,
   faCheckCircle,
@@ -62,6 +64,7 @@ import basePanelGrid from '@/components/ui/panels/grid/base'
 import statCard from '@/components/ui/cards/stat-card'
 import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
+import checkboxField from '@/components/ui/forms/base-fields/checkbox'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
 import textField from '@/components/ui/forms/base-fields/text-field'
@@ -104,6 +107,7 @@ Vue.component('action-heading', actionHeading)
 Vue.component('table-empty-state', tableEmptyState)
 
 // Form Fields
+Vue.component('checkbox-field', checkboxField)
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('check-switch', checkSwitch)
 Vue.component('text-field', textField)
@@ -179,6 +183,8 @@ library.add(
   faArrowsAltV,
   faBan,
   faCalendarAlt,
+  faCaretDown,
+  faCaretRight,
   faChartArea,
   faCheck,
   faCheckCircle,
