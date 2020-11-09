@@ -9,6 +9,7 @@
           <h2 class="h3">Channels</h2>
         </template>
         <template v-slot:right>
+          <create-channel></create-channel>
         </template>
       </action-heading>
       <channels-list :channels="channelsList" class="mt-5"></channels-list>
@@ -19,10 +20,12 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import getAllChannels from '@/components/channels/list'
+import createChannel from '@/components/channels/create'
 
 export default {
   components: {
-    'channels-list': getAllChannels
+    'channels-list': getAllChannels,
+    'create-channel': createChannel
   },
   computed: {
     ...mapGetters({
@@ -34,7 +37,7 @@ export default {
       fetchChannels: 'fetchChannels'
     }),
     ...mapMutations({
-      showCreateChannelsModal: 'SHOW_CREATE_CHANNELS_MODAL'
+      showCreateChannelModal: 'SHOW_CREATE_CHANNEL_MODAL'
     })
   },
   created () {
