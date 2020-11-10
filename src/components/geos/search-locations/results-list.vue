@@ -1,6 +1,6 @@
 <template>
   <div class="well overflow-y-scroll block max-h-500">
-    <table class="table table-white table-shadow w-auto">
+    <table class="table table-white w-auto">
       <thead>
         <tr>
           <th class="th">Location</th>

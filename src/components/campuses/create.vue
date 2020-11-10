@@ -38,7 +38,7 @@ export default {
     return {
       name: '',
       short_description: '',
-      is_online: '',
+      is_online: false,
       address1: '',
       address2: '',
       city: '',
