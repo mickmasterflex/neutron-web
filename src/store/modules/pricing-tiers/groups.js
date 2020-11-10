@@ -8,7 +8,11 @@ const state = {
 const getters = {
   getPricingTierGroups: state => state.pricing_tier_groups,
   getCurrentPricingTierGroup: state => state.current_pricing_tier_group,
-  getPricingTierGroupById: (state) => (id) => { return state.pricing_tier_groups.find(group => group.id === id) }
+  getPricingTierGroupById: (state) => (id) => {
+    if (state.pricing_tier_groups) {
+      return state.pricing_tier_groups.find(group => group.id === id)
+    }
+  }
 }
 
 const actions = {

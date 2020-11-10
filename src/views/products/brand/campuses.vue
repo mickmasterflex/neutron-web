@@ -9,7 +9,7 @@
       </template>
     </action-heading>
     <campus-list :campuses="campuses"></campus-list>
-    <create-campus :brandId="brand.id"></create-campus>
+    <create-campus :brandId="brand.id" v-if="brand.id"></create-campus>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="pricingTiers.length" :class="`w-${tableWidth} table table-white table-shadow`">
+    <table v-if="pricingTiers.length" :class="`w-${tableWidth} table table-white`">
       <thead class="thead">
         <tr>
           <th class="th pr-8 lg:w-56">Lower Bound</th>
