@@ -11,7 +11,7 @@ const getters = {
   getCurrentChannel: state => state.current_channel,
   getAllChannels: state => state.channels,
   getChannelsFetchLoading: state => state.channels_fetch_loading,
-  getShowCreateChannelModal: state => state.show_create_channel_form
+  getShowCreateChannelForm: state => state.show_create_channel_form
 }
 
 const actions = {
