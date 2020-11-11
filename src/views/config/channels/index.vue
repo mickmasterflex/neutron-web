@@ -37,7 +37,7 @@ export default {
       fetchChannels: 'fetchChannels'
     }),
     ...mapMutations({
-      showCreateChannelModal: 'SHOW_CREATE_CHANNEL_MODAL'
+      showCreateChannelForm: 'SHOW_CREATE_CHANNEL_FORM'
     })
   },
   created () {

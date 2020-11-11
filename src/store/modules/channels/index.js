@@ -4,14 +4,14 @@ const state = {
   channels: [],
   current_channel: {},
   channels_fetch_loading: false,
-  show_create_channel_modal: false
+  show_create_channel_form: false
 }
 
 const getters = {
   getCurrentChannel: state => state.current_channel,
   getAllChannels: state => state.channels,
   getChannelsFetchLoading: state => state.channels_fetch_loading,
-  getShowCreateChannelModal: state => state.show_create_channel_modal
+  getShowCreateChannelModal: state => state.show_create_channel_form
 }
 
 const actions = {
@@ -62,8 +62,8 @@ const mutations = {
     }
   },
   REMOVE_CHANNEL: (state, id) => (state.channels = state.channels.filter(channel => channel.id !== id)),
-  SHOW_CREATE_CHANNEL_MODAL: (state) => (state.show_create_channel_modal = true),
-  CLOSE_CREATE_CHANNEL_MODAL: (state) => (state.show_create_channel_modal = false)
+  SHOW_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = true),
+  CLOSE_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = false)
 }
 
 export default {

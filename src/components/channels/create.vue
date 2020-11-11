@@ -30,7 +30,7 @@ export default {
   computed: {
     ...mapGetters({
       form: 'getCurrentChannel',
-      formVisible: 'getShowCreateChannelModal'
+      formVisible: 'getShowCreateChannelForm'
     })
   },
   mixins: [enterKeyListener, setResponseErrors],
@@ -39,7 +39,7 @@ export default {
       create: 'createChannel'
     }),
     ...mapMutations({
-      showForm: 'SHOW_CREATE_CHANNEL_MODAL'
+      showForm: 'SHOW_CREATE_CHANNEL_FORM'
     }),
     enterKeyAction () {
       if (document.activeElement === this.$refs.focusField.$refs.field.$refs.field) {
