@@ -11,7 +11,7 @@
           <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
           <button @click="showModalSetCurrent(pricingTierGroup)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
         </span>
-       </template>
+      </template>
       <template v-slot:content>
         <list-tiers :pricingTiers='pricingTierGroup.pricingtier_set'></list-tiers>
       </template>
