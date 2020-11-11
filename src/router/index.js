@@ -154,7 +154,7 @@ const routes = [
   {
     path: '/config/channels/',
     name: 'Channels',
-    component: () => import('@/views/config/channels.vue'),
+    component: () => import('@/views/config/channels/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'config',
