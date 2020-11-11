@@ -1,12 +1,12 @@
 <template>
-  <tr class="tr">
-    <td class="td">
+  <ul class="tr flex flex-row">
+    <li class="td w-32">
       <checkbox-field :field_id="buyer.id" @input="saveBuyer()" v-model="buyerGroup"></checkbox-field>
       Buyer
-    </td>
-    <td class="td">{{buyer.name}}</td>
-    <td class="td">{{buyer.status}}</td>
-  </tr>
+    </li>
+    <li class="td w-64">{{buyer.name}}</li>
+    <li class="td w-32">{{buyer.status}}</li>
+  </ul>
 </template>
 
 <script>
