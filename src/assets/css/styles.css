@@ -309,22 +309,18 @@
 }
 
 /* Hover */
-.table .tr:hover .td { @apply bg-blue-200 }
+.table .tr:hover .td { @apply bg-blue-100 }
 .table-white .tr:hover .td { @apply bg-blue-100 }
 
 /* General .th & .td */
 .td, .th { @apply font-normal p-3 }
-.td { @apply border-gray-400 border-opacity-25 bg-gray-100 transition-colors duration-200 }
+.td { @apply border-white bg-gray-100 transition-colors duration-200 }
 .th { @apply border-gray-800 bg-gray-900 text-left text-white }
 
 /* Borders */
-.table .th + .th,
-.table:not(.table-striped) .td + .td { @apply border-l }
-.table:not(.table-striped) .td { @apply border-b }
-
-.td:first-child { @apply border-l-2 }
-.td:last-child { @apply border-r-2 }
-.table .tr:last-child .td { @apply border-b-2 }
+.table:not(.table-border-none) .th + .th,
+.table:not(.table-border-none) .td + .td { @apply border-l-2 }
+.table:not(.table-border-none) .td { @apply border-b-2 }
 
 /* Rounded Table Styles */
 .tr:last-child td:first-child { @apply rounded-bl-lg }
@@ -337,7 +333,13 @@
 .thead-transparent .th + .th { @apply border-none }
 
 /* Table Variants */
-.table-white .td { @apply bg-white text-gray-800 }
+.table-white:not(.table-border-none) .td:first-child { @apply border-l }
+.table-white:not(.table-border-none) .td:last-child { @apply border-r }
+.table-white:not(.table-border-none) .tr:last-child .td { @apply border-b }
+.table-white:not(.table-border-none) .th + .th,
+.table-white:not(.table-border-none) .td + .td { @apply border-l }
+.table-white:not(.table-border-none) .td { @apply border-b }
+.table-white .td { @apply bg-white text-gray-800 border-gray-500 border-opacity-25 }
 .table-striped .tr:nth-child(even):not(:hover) .td {
     @apply bg-gray-200
 }
