@@ -339,7 +339,7 @@
 .table-white:not(.table-border-none) .th + .th,
 .table-white:not(.table-border-none) .td + .td { @apply border-l }
 .table-white:not(.table-border-none) .td { @apply border-b }
-.table-white .td { @apply bg-white text-gray-800 border-gray-500 border-opacity-25 }
+.table-white .td { @apply bg-white text-gray-800 border-gray-400 border-opacity-25 }
 .table-striped .tr:nth-child(even):not(:hover) .td {
     @apply bg-gray-200
 }
