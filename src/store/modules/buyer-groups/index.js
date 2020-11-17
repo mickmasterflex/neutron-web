@@ -1,7 +1,9 @@
 import axios from '@/axios'
 import visibility from '@/store/modules/buyer-groups/visibility'
+import tree from '@/store/modules/buyer-groups/tree'
 
 const modules = {
+  tree,
   visibility
 }
 

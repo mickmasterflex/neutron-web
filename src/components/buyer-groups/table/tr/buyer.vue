@@ -1,11 +1,11 @@
 <template>
   <ul class="tr flex flex-row">
-    <li class="td w-32">
+    <li class="td border-l border-b border-gray-200 w-32">
       <checkbox-field :field_id="buyer.id" @input="saveBuyer()" v-model="buyerGroup"></checkbox-field>
       Buyer
     </li>
-    <li class="td w-64">{{buyer.name}}</li>
-    <li class="td w-32">{{buyer.status}}</li>
+    <li class="td border-b border-gray-200 w-64">{{buyer.name}}</li>
+    <li class="td border-r border-b border-gray-200 w-32">{{buyer.status}}</li>
   </ul>
 </template>
 
@@ -35,6 +35,7 @@ export default {
         updatedBuyer.buyer_group = null
       }
       this.updateBuyer(updatedBuyer)
+      this.$emit('buyerSaved', this.buyerGroup)
     },
     setGroup () {
       if (this.buyer) {
@@ -48,6 +49,9 @@ export default {
         this.setGroup()
       }
     }
+  },
+  created () {
+    this.setGroup()
   },
   computed: {
     ...mapGetters({
