@@ -1,8 +1,7 @@
 <template>
   <label :for="field_id"
          :class="`transition-colors duration-150 border border-r-2 border-b-2 rounded-lg bg-white p-1 flex flex-row justify-between cursor-pointer
-                  ${is_on === true ? `border-${on_color}-500` : 'border-gray-500'}
-                  ${is_on === false ? `border-${off_color}-500` : 'border-gray-500'}
+                  ${is_on === true ? `border-${on_color}-500` : `border-${off_color}-500`}
                   switch-${size}`">
     <switch-side :active="!is_on" :color="off_color">
       <slot name="switch-off">
