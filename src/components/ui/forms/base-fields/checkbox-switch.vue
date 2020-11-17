@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <switch-toggle :fieldId="field_id" :isChecked="checked" size="lg">
+  <label :for="field_id">
+    <switch-toggle :field_id="field_id" :is_on="checked" size="lg" :on_color="on_color" :off_color="off_color">
       <template v-slot:switch-off><slot name="switch-off"/></template>
       <template v-slot:switch-on><slot name="switch-on"/></template>
     </switch-toggle>
@@ -12,11 +12,11 @@
       class="hidden"
       :checked="value"
       v-model="checked">
-  </div>
+  </label>
 </template>
 
 <script>
-import switchToggle from '@/components/ui/forms/base-fields/switch'
+import switchToggle from '@/components/ui/switch/'
 
 export default {
   props: {
@@ -29,6 +29,12 @@ export default {
     },
     value: {
       type: [Boolean, String]
+    },
+    on_color: {
+      default: 'green'
+    },
+    off_color: {
+      default: 'red'
     }
   },
   data () {
