@@ -4,14 +4,16 @@ const state = {
   channels: [],
   current_channel: {},
   channels_fetch_loading: false,
-  show_create_channel_form: false
+  show_create_channel_form: false,
+  show_update_channel_form: false
 }
 
 const getters = {
   getCurrentChannel: state => state.current_channel,
   getAllChannels: state => state.channels,
   getChannelsFetchLoading: state => state.channels_fetch_loading,
-  getShowCreateChannelForm: state => state.show_create_channel_form
+  getShowCreateChannelForm: state => state.show_create_channel_form,
+  getShowUpdateChannelForm: state => state.show_update_channel_form
 }
 
 const actions = {
@@ -20,12 +22,6 @@ const actions = {
       .then(response => {
         commit('SET_CHANNELS', response.data)
         commit('RESET_CHANNELS_FETCH_LOADING')
-      })
-  },
-  async fetchCurrentChannel ({ commit }, id) {
-    await axios.get(`/channels/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_CHANNEL', response.data)
       })
   },
   async createChannel ({ commit }, channel) {
@@ -63,7 +59,9 @@ const mutations = {
   },
   REMOVE_CHANNEL: (state, id) => (state.channels = state.channels.filter(channel => channel.id !== id)),
   SHOW_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = true),
-  CLOSE_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = false)
+  CLOSE_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = false),
+  SHOW_UPDATE_CHANNEL_FORM: (state) => (state.show_update_channel_form = true),
+  CLOSE_UPDATE_CHANNEL_FORM: (state) => (state.show_update_channel_form = false)
 }
 
 export default {
