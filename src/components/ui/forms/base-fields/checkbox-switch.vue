@@ -5,13 +5,13 @@
       <template v-slot:switch-on><slot name="switch-on"/></template>
     </switch-toggle>
     <input
-      @input="handleInput($event.target.checked)"
+      @input="$emit('input', $event.target.checked)"
       type="checkbox"
       :id="field_id"
       :class="$attrs.field_class"
       class="hidden"
       :checked="value"
-      v-model="checked">
+      :value="checked">
   </label>
 </template>
 
@@ -37,19 +37,9 @@ export default {
       default: 'red'
     }
   },
-  data () {
-    return {
-      checked: this.value
-    }
-  },
-  watch: {
-    value () {
-      this.checked = this.value
-    }
-  },
-  methods: {
-    handleInput (value) {
-      this.$emit('input', value)
+  computed: {
+    checked () {
+      return this.value
     }
   },
   components: {
