@@ -4,35 +4,62 @@
       <thead>
       <tr>
         <th class="th">Name</th>
-        <th class="th"></th>
+        <th class="th w-24"></th>
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="channel in this.channels" :key="channel.id">
+      <tr class="tr" v-for="channel in channels" :key="channel.id">
         <td class="td">
-          <router-link :to="{name: 'Channels', params: { id:channel.id }}" class="underline text-blue-500">{{channel.name}}</router-link>
+          {{channel.name}}
         </td>
-        <td class="td flex flex-row justify-end">
+        <td class=" w-24 td flex flex-row justify-end">
+          <button @click="setCurrentAndOpenForm(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           <delete-channel :id="channel.id"></delete-channel>
         </td>
       </tr>
+      <update-channel></update-channel>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
+    <table-empty-state v-else heading="No Channels" copy="Use the 'New Channel' button to add channels."></table-empty-state>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import deleteChannel from '@/components/channels/delete'
+import updateChannel from '@/components/channels/update'
 
 export default {
   props: {
-    channels: Array
+    id: {
+      type: Number
+    }
   },
   components: {
-    'delete-channel': deleteChannel
+    'delete-channel': deleteChannel,
+    'update-channel': updateChannel
+  },
+  computed: {
+    ...mapGetters({
+      channels: 'getAllChannels'
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchChannels: 'fetchChannels',
+      fetchCurrentChannel: 'fetchCurrentChannel'
+    }),
+    ...mapMutations({
+      showForm: 'SHOW_UPDATE_CHANNEL_FORM',
+      setChannel: 'SET_CURRENT_CHANNEL'
+    }),
+    setCurrentAndOpenForm (channel) {
+      this.showForm()
+      this.setChannel(channel)
+    }
+  },
+  created () {
+    this.fetchChannels()
   }
 }
 </script>
