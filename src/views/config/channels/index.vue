@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import getAllChannels from '@/components/channels/list'
 import createChannel from '@/components/channels/create'
 
@@ -35,9 +35,6 @@ export default {
   methods: {
     ...mapActions({
       fetchChannels: 'fetchChannels'
-    }),
-    ...mapMutations({
-      showCreateChannel: 'SHOW_CREATE_CHANNEL_FORM'
     })
   },
   created () {

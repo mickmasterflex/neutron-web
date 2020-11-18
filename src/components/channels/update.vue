@@ -47,12 +47,12 @@ export default {
   },
   watch: {
     showForm () {
-      if (this.showModal) {
-        this.closeForm()
+      if (this.showForm) {
+        this.closeCreateForm()
       }
     },
     unsavedChanges () {
-      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+      this.checkUnsavedChanges(this.showForm, this.unsavedChanges)
     }
   },
   mixins: [setResponseErrors, checkUnsavedChangesInModal],
@@ -62,12 +62,14 @@ export default {
     }),
     ...mapMutations({
       closeForm: 'CLOSE_UPDATE_CHANNEL_FORM',
+      closeCreateForm: 'CLOSE_CREATE_CHANNEL_FORM',
       setCurrentChannel: 'SET_CURRENT_CHANNEL'
     }),
     close () {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
+      this.closeCreateForm()
       this.closeForm()
       this.toggleChangesInModalUnsaved(false)
     },

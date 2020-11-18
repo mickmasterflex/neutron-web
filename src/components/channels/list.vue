@@ -4,25 +4,23 @@
       <thead>
       <tr>
         <th class="th">Name</th>
-        <th class="th"></th>
+        <th class="th w-24"></th>
       </tr>
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="channel in channels" :key="channel.id">
         <td class="td">
-          <router-link :to="{name: 'Channels', params: { id:channel.id }}" class="underline text-blue-500">{{channel.name}}</router-link>
+          {{channel.name}}
         </td>
-        <td class="td flex flex-row justify-end">
-          <button @click="setCurrentAndOpenModal(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+        <td class=" w-24 td flex flex-row justify-end">
+          <button @click="setCurrentAndOpenForm(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           <delete-channel :id="channel.id"></delete-channel>
         </td>
       </tr>
-      </tbody>
       <update-channel></update-channel>
+      </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
+    <table-empty-state v-else heading="No Channels" copy="Use the 'New Channel' button to add channels."></table-empty-state>
   </div>
 </template>
 
@@ -55,7 +53,7 @@ export default {
       showForm: 'SHOW_UPDATE_CHANNEL_FORM',
       setChannel: 'SET_CURRENT_CHANNEL'
     }),
-    setCurrentAndOpenModal (channel) {
+    setCurrentAndOpenForm (channel) {
       this.showForm()
       this.setChannel(channel)
     }
