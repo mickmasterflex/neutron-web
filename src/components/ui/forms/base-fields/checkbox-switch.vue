@@ -1,6 +1,6 @@
 <template>
   <label :for="field_id">
-    <switch-toggle :field_id="field_id" :is_on="checked" size="lg" :on_color="on_color" :off_color="off_color">
+    <switch-toggle :field_id="field_id" :is_on="value" size="lg" :on_color="on_color" :off_color="off_color">
       <template v-slot:switch-off><slot name="switch-off"/></template>
       <template v-slot:switch-on><slot name="switch-on"/></template>
     </switch-toggle>
@@ -10,8 +10,7 @@
       :id="field_id"
       :class="$attrs.field_class"
       class="hidden"
-      :checked="value"
-      :value="checked">
+      :checked="value">
   </label>
 </template>
 
@@ -35,11 +34,6 @@ export default {
     },
     off_color: {
       default: 'red'
-    }
-  },
-  computed: {
-    checked () {
-      return this.value
     }
   },
   components: {
