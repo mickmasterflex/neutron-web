@@ -22,7 +22,19 @@ export default {
       }
     },
     color: {
-      default: 'green'
+      default: 'green',
+      validator: (value) => {
+        return [
+          'blue',
+          'gray',
+          'green',
+          'indigo',
+          'orange',
+          'red',
+          'turquoise',
+          'yellow'
+        ].includes(value)
+      }
     }
   }
 }
