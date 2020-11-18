@@ -8,7 +8,7 @@
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
           <div class="field-group">
             <label class="field-label">Online</label>
-            <check-switch field_id="is_online" v-model="is_online" :value="is_online"></check-switch>
+            <check-switch field_id="is_online" v-model="is_online"></check-switch>
           </div>
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
