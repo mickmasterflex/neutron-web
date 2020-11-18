@@ -1,22 +1,21 @@
 <template>
-  <div>
-    <switch-toggle :fieldId="field_id" :isChecked="checked" size="lg">
+  <label :for="field_id">
+    <switch-toggle :field_id="field_id" :is_on="value" size="lg" :on_color="$attrs.on_color" :off_color="$attrs.off_color">
       <template v-slot:switch-off><slot name="switch-off"/></template>
       <template v-slot:switch-on><slot name="switch-on"/></template>
     </switch-toggle>
     <input
-      @input="handleInput($event.target.checked)"
+      @input="$emit('input', $event.target.checked)"
       type="checkbox"
       :id="field_id"
       :class="$attrs.field_class"
       class="hidden"
-      :checked="value"
-      v-model="checked">
-  </div>
+      :checked="value">
+  </label>
 </template>
 
 <script>
-import switchToggle from '@/components/ui/forms/base-fields/switch'
+import switchToggle from '@/components/ui/switch/'
 
 export default {
   props: {
@@ -29,21 +28,6 @@ export default {
     },
     value: {
       type: [Boolean, String]
-    }
-  },
-  data () {
-    return {
-      checked: this.value
-    }
-  },
-  watch: {
-    value () {
-      this.checked = this.value
-    }
-  },
-  methods: {
-    handleInput (value) {
-      this.$emit('input', value)
     }
   },
   components: {
