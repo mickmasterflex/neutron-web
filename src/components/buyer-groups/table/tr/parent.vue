@@ -2,120 +2,117 @@
   <div>
     <ul class="tr flex flex-row">
       <li class="td border-l border-b border-gray-200 w-32">
-        <span @click="toggleChildren(!childrenVisible)" class="p-1 mr-1 cursor-pointer">
-          <font-awesome-icon v-if="!childrenVisible" icon="caret-right" class="text-gray-500 hover:text-gray-700"></font-awesome-icon>
-          <font-awesome-icon v-if="childrenVisible" icon="caret-down" class="text-gray-800"></font-awesome-icon>
+        <span v-if="state.buyers.length" @click="toggleChildrenVisibilty()" class="p-1 mr-1 cursor-pointer">
+          <font-awesome-icon v-if="!childrenVisibility" icon="caret-right" class="text-gray-500 hover:text-gray-700"></font-awesome-icon>
+          <font-awesome-icon v-if="childrenVisibility" icon="caret-down" class="text-gray-800"></font-awesome-icon>
         </span>
-        <checkbox-field :field_id="obj.id" @input="check()" v-model="checked"></checkbox-field> {{obj.type}}
+        <slot name="checkbox">
+          <checkbox-field :field_id="'buyer' + obj.id" @input="check()" :value="state.checked" :indeterminate="state.indeterminate"></checkbox-field>
+        </slot>
+        {{type}}
       </li>
       <li class="td border-b border-gray-200 w-64">{{obj.name}}</li>
       <li class="td border-r border-b border-gray-200 w-32">{{obj.status}}</li>
     </ul>
-    <div v-if="childrenVisible">
-      <div v-for="buyer in buyers" :key="buyer.id" class="px-3">
-          <parent-node :buyer="buyer" v-if="buyerHasChildren(buyer.id)" :key="buyer.id"></parent-node>
-          <buyer-child :buyer="buyer" @buyerSaved="setCheck()" :key="buyer.id" v-else></buyer-child>
-      </div>
+    <div v-if="childrenVisibility">
+      <buyer-node v-for="buyer in state.buyers" :obj="buyer" :key="buyer.id" class="pl-3"></buyer-node>
     </div>
   </div>
 </template>
 
 <script>
-import BuyerChild from '@/components/buyer-groups/table/tr/buyer'
-import ParentNode from '@/components/buyer-groups/table/tr/parent'
-import { mapGetters } from 'vuex'
+import parent from '@/components/buyer-groups/table/tr/parent'
+import { ref, reactive, computed } from '@vue/composition-api'
+
+function buyerChildrenVisibility () {
+  const childrenVisibility = ref(false)
+
+  function toggleChildrenVisibilty () {
+    childrenVisibility.value = !childrenVisibility.value
+  }
+  return {
+    childrenVisibility,
+    toggleChildrenVisibilty
+  }
+}
+
+function client (root, client, currentBuyerGroup) {
+  const state = reactive({
+    buyers: computed(() => root.$store.getters.getParentlessBuyersByClient(client.id)),
+    buyersInGroup: computed(() => state.buyers.filter(b => b.buyer_group === currentBuyerGroup.id)),
+    buyersNotInGroup: computed(() => state.buyers.filter(b => b.buyer_group !== currentBuyerGroup.id)),
+    checked: computed(() => state.buyers.length === state.buyersInGroup.length),
+    indeterminate: computed(() => state.buyersInGroup.length > 0 && state.buyers.length !== state.buyersInGroup.length)
+  })
+  function check () {
+    if (state.checked === true) {
+      state.buyersInGroup.forEach(buyer => {
+        const updatedBuyer = buyer
+        updatedBuyer.buyer_group = null
+        root.$store.dispatch('updateBuyer', updatedBuyer)
+      })
+    } else {
+      state.buyersNotInGroup.forEach(buyer => {
+        const updatedBuyer = buyer
+        updatedBuyer.buyer_group = currentBuyerGroup.id
+        root.$store.dispatch('updateBuyer', updatedBuyer)
+      })
+    }
+  }
+  return {
+    state,
+    check
+  }
+}
+
+function buyer (root, buyer, currentBuyerGroup) {
+  const state = reactive({
+    buyers: computed(() => root.$store.getters.getBuyersByParent(buyer.id)),
+    buyersInGroup: computed(() => state.buyers.filter(b => b.buyer_group === currentBuyerGroup.id)),
+    checked: computed(() => buyer.buyer_group === currentBuyerGroup.id),
+    indeterminate: computed(() => state.buyersInGroup.length > 0 && state.buyers !== state.buyersInGroup.length)
+  })
+  function check () {
+    const updatedBuyer = buyer
+    updatedBuyer.buyer_group = state.checked ? null : currentBuyerGroup.id
+    root.$store.dispatch('updateBuyer', updatedBuyer)
+  }
+  return {
+    state,
+    check
+  }
+}
 
 export default {
-  name: 'parent-node',
+  name: 'buyer-node',
   props: {
-    client: {
-      type: Object
-    },
-    buyer: {
-      type: Object
+    obj: Object,
+    type: {
+      type: String,
+      default: 'buyer',
+      validator: (value) => {
+        return [
+          'buyer',
+          'client'
+        ].includes(value)
+      }
     }
   },
-  data () {
+  setup (props, { root }) {
+    const { childrenVisibility, toggleChildrenVisibilty } = buyerChildrenVisibility()
+
+    const currentBuyerGroup = computed(() => root.$store.getters.getCurrentBuyerGroup)
+    const { state, check } = props.type === 'client' ? client(root, props.obj, currentBuyerGroup.value) : buyer(root, props.obj, currentBuyerGroup.value)
+
     return {
-      childrenVisible: false,
-      checked: false,
-      indeterminate: false
+      state,
+      check,
+      childrenVisibility,
+      toggleChildrenVisibilty
     }
-  },
-  methods: {
-    check () {
-      window.console.log('hi')
-    },
-    toggleChildren (boolean) {
-      this.childrenVisible = boolean
-    },
-    buyerHasChildren (id) {
-      return !!this.getBuyersByParent(id).length
-    },
-    setCheck () {
-      let count = this.buyers.length
-      let checkedChildren = 0
-      this.buyers.forEach(buyer => {
-        if (this.buyerHasChildren(buyer.id)) {
-          count--
-        } else if (buyer.buyer_group === this.currentBuyerGroup.id) {
-          checkedChildren++
-        }
-      })
-      if (count > 0 && checkedChildren === count) {
-        this.checked = true
-        this.indeterminate = false
-      } else {
-        this.checked = false
-        this.indeterminate = true
-      }
-    }
-  },
-  computed: {
-    ...mapGetters({
-      getBuyersByParent: 'getBuyersByParent',
-      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
-      // getBuyersByClient: 'getBuyersByClient'
-      currentBuyerGroup: 'getCurrentBuyerGroup'
-    }),
-    buyers () {
-      if (this.client) {
-        return this.getParentlessBuyersByClient(this.client.id)
-      } else if (this.buyer) {
-        return this.getBuyersByParent(this.buyer.id)
-      } else {
-        return null
-      }
-    },
-    obj () {
-      if (this.client) {
-        const client = this.client
-        client.type = 'Client'
-        return client
-      } else if (this.buyer) {
-        const buyer = this.buyer
-        buyer.type = 'Buyer'
-        return buyer
-      } else {
-        return null
-      }
-    }
-  },
-  watch: {
-    currentBuyerGroup () {
-      // if (this.client) {
-      this.setCheck()
-      // }
-    }
-  },
-  created () {
-    // if (this.client) {
-    this.setCheck()
-    // }
   },
   components: {
-    'buyer-child': BuyerChild,
-    'parent-node': ParentNode
+    'buyer-node': parent
   }
 }
 </script>
