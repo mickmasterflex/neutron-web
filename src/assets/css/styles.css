@@ -305,34 +305,44 @@
 --------------------------------------------------- */
 .table {
     @apply border-separate w-full;
-    border-spacing: 0 2px;
+    border-spacing: 0;
 }
 
-.table-white .td { @apply bg-white text-gray-800 }
-.table-shadow .td { @apply shadow }
+/* Hover */
+.table .tr:hover .td { @apply bg-blue-100 }
+.table-white .tr:hover .td { @apply bg-blue-100 }
 
-.table > .tbody:before {
-    content: '';
-    display: block;
-    @apply h-1
-}
+/* General .th & .td */
+.td, .th { @apply font-normal p-3 }
+.td { @apply border-white bg-gray-100 transition-colors duration-200 }
+.th { @apply border-gray-800 bg-gray-900 text-left text-white }
 
-.td, .th { @apply font-normal px-3 py-2 }
+/* Borders */
+.table:not(.table-border-none) .th + .th,
+.table:not(.table-border-none) .td + .td { @apply border-l-2 }
+.table:not(.table-border-none) .td { @apply border-b-2 }
 
-.th { @apply text-left text-white bg-gray-900 }
-.th + .th { @apply border-l-2 border-gray-800 }
-.th:first-child { @apply rounded-l }
-.th:last-child { @apply rounded-r }
+/* Rounded Table Styles */
+.tr:last-child td:first-child { @apply rounded-bl-lg }
+.tr:last-child td:last-child { @apply rounded-br-lg }
+.th:first-child { @apply rounded-tl-lg }
+.th:last-child { @apply rounded-tr-lg }
 
+/* Transparent th */
 .thead-transparent .th { @apply text-gray-900 bg-transparent font-bold py-1 }
 .thead-transparent .th + .th { @apply border-none }
 
-.td + .td { @apply border-l-2 border-white }
-.td { @apply bg-gray-200 }
-.tr:first-child td:first-child { @apply rounded-tl }
-.tr:first-child td:last-child { @apply rounded-tr }
-.tr:last-child td:first-child { @apply rounded-bl }
-.tr:last-child td:last-child { @apply rounded-br }
+/* Table Variants */
+.table-white:not(.table-border-none) .td:first-child { @apply border-l-2 }
+.table-white:not(.table-border-none) .td:last-child { @apply border-r-2 }
+.table-white:not(.table-border-none) .tr:last-child .td { @apply border-b-2 }
+.table-white:not(.table-border-none) .th + .th,
+.table-white:not(.table-border-none) .td + .td { @apply border-l }
+.table-white:not(.table-border-none) .td { @apply border-b }
+.table-white .td { @apply bg-white text-gray-800 border-gray-500 border-opacity-25 }
+.table-striped .tr:nth-child(even):not(:hover) .td {
+    @apply bg-gray-200
+}
 
 
 /* ------------------------------------------------

@@ -5,7 +5,7 @@
         <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
       </template>
       <template v-slot:content>
-        <buyer-list :contracts="buyers" :client="$route.params.slug" class="table-white table-shadow"></buyer-list>
+        <buyer-list :contracts="buyers" :client="$route.params.slug"></buyer-list>
       </template>
     </panel-template>
     <create-buyer-contract :client="client.id"></create-buyer-contract>
@@ -14,7 +14,7 @@
         <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
       </template>
       <template v-slot:content>
-        <partner-list :contracts="partners" :client="$route.params.slug" class="table-white table-shadow"></partner-list>
+        <partner-list :contracts="partners" :client="$route.params.slug"></partner-list>
       </template>
     </panel-template>
     <create-partner-contract :client="client.id"></create-partner-contract>

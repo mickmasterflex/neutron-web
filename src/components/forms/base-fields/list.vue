@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="baseFields" class="table">
+    <table v-if="baseFields" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Label</th>

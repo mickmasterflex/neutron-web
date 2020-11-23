@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="campuses" class="table">
+    <table v-if="campuses" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
