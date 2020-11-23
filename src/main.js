@@ -28,6 +28,7 @@ import {
   faChartArea,
   faCheck,
   faCheckCircle,
+  faCheckSquare,
   faClone,
   faCog,
   faDna,
@@ -38,6 +39,7 @@ import {
   faImage,
   faKey,
   faMinus,
+  faMinusSquare,
   faPencilAlt,
   faPlus,
   faSearch,
@@ -51,6 +53,11 @@ import {
   faUpload,
   faWrench
 } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faSquare
+} from '@fortawesome/free-regular-svg-icons'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -189,6 +196,7 @@ library.add(
   faChartArea,
   faCheck,
   faCheckCircle,
+  faCheckSquare,
   faClone,
   faCog,
   faDna,
@@ -199,11 +207,13 @@ library.add(
   faImage,
   faKey,
   faMinus,
+  faMinusSquare,
   faPencilAlt,
   faPlus,
   faSearch,
   faSignOutAlt,
   faSpinner,
+  faSquare,
   faTag,
   faThLarge,
   faThumbsUp,
