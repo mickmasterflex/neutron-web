@@ -10,9 +10,9 @@
           <checkbox-field
             :field_id="type + obj.id"
             @input="check()"
-            :value="state.checked"
-            :indeterminate="state.indeterminate"
-            :disabled="state.disabled"
+            :value="checkboxState.checked"
+            :indeterminate="checkboxState.indeterminate"
+            :disabled="checkboxState.disabled"
           ></checkbox-field>
         </slot>
         {{type}}
@@ -56,11 +56,13 @@ function client (root, clientId) {
     areAllBuyersInGroup: computed(
       () => state.buyers.length === state.buyersInGroup.length
     ),
-    checked: computed(
-      () => state.buyers.length > 0 && state.areAllBuyersInGroup
-    ),
     currentBuyerGroup: computed(
       () => root.$store.getters.getCurrentBuyerGroup
+    )
+  })
+  const checkboxState = reactive({
+    checked: computed(
+      () => state.buyers.length > 0 && state.areAllBuyersInGroup
     ),
     disabled: computed(
       () => state.buyers.length === 0
@@ -85,8 +87,9 @@ function client (root, clientId) {
     }
   }
   return {
-    state,
-    check
+    check,
+    checkboxState,
+    state
   }
 }
 
@@ -107,14 +110,16 @@ function buyer (root, buyerId) {
     areAllBuyersInGroup: computed(
       () => state.buyers.length === state.buyersInGroup.length
     ),
+    currentBuyerGroup: computed(
+      () => root.$store.getters.getCurrentBuyerGroup
+    )
+  })
+  const checkboxState = reactive({
     checked: computed(() => {
       if (state.isBuyerInGroup) {
         return true
       } else return state.buyersInGroup.length > 0 && state.areAllBuyersInGroup
     }),
-    currentBuyerGroup: computed(
-      () => root.$store.getters.getCurrentBuyerGroup
-    ),
     // disabled: computed(() => buyer.buyer_group.inherited),
     indeterminate: computed(
       () => state.buyersInGroup.length > 0 && !state.areAllBuyersInGroup
@@ -126,8 +131,9 @@ function buyer (root, buyerId) {
     root.$store.dispatch('updateBuyer', updatedBuyer)
   }
   return {
-    state,
-    check
+    check,
+    checkboxState,
+    state
   }
 }
 
@@ -150,12 +156,16 @@ export default {
     const { childrenVisibility, toggleChildrenVisibilty } = buyerChildrenVisibility()
 
     const currentBuyerGroup = computed(() => root.$store.getters.getCurrentBuyerGroup)
-    const { state, check } = props.type === 'client' ? client(root, props.obj.id, currentBuyerGroup.value) : buyer(root, props.obj.id, currentBuyerGroup.value)
+    const { check, checkboxState, state } =
+      props.type === 'client'
+        ? client(root, props.obj.id, currentBuyerGroup.value)
+        : buyer(root, props.obj.id, currentBuyerGroup.value)
 
     return {
-      state,
       check,
+      checkboxState,
       childrenVisibility,
+      state,
       toggleChildrenVisibilty
     }
   },
