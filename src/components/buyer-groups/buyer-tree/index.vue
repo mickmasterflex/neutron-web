@@ -11,7 +11,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import parentRow from '@/components/buyer-groups/table/tr/parent'
+import parentRow from '@/components/buyer-groups/buyer-tree/tr/parent'
 
 export default {
   computed: {

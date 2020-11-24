@@ -21,13 +21,13 @@
       <li class="td border-r border-b border-gray-200 w-32">{{obj.buyer_group}}</li>
     </ul>
     <div v-if="childrenVisible">
-      <buyer-node v-for="buyer in state.buyers" :obj="buyer" :key="buyer.id" class="pl-3"></buyer-node>
+      <buyer-tree-node v-for="buyer in state.buyers" :obj="buyer" :key="buyer.id" class="pl-3"></buyer-tree-node>
     </div>
   </div>
 </template>
 
 <script>
-import parent from '@/components/buyer-groups/table/tr/parent'
+import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { ref, reactive, computed } from '@vue/composition-api'
 
 function useChildVisibility () {
@@ -138,7 +138,7 @@ function useBuyer (root, buyerId) {
 }
 
 export default {
-  name: 'buyer-node',
+  name: 'buyergroup-node',
   props: {
     obj: Object,
     type: {
@@ -170,7 +170,7 @@ export default {
     }
   },
   components: {
-    'buyer-node': parent
+    'buyer-tree-node': buyerTreeNode
   }
 }
 </script>
