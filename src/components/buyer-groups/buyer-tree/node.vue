@@ -42,22 +42,19 @@ function useChildVisibility () {
   }
 }
 
-function useClient (root, clientId) {
+function useClient (root, clientId, currentBuyerGroupId) {
   const state = reactive({
     buyers: computed(
       () => root.$store.getters.getParentlessBuyersByClient(clientId)
     ),
     buyersInGroup: computed(
-      () => state.buyers.filter(b => b.buyer_group === state.currentBuyerGroup.id)
+      () => state.buyers.filter(b => b.buyer_group === currentBuyerGroupId)
     ),
     buyersNotInGroup: computed(
-      () => state.buyers.filter(b => b.buyer_group !== state.currentBuyerGroup.id)
+      () => state.buyers.filter(b => b.buyer_group !== currentBuyerGroupId)
     ),
     areAllBuyersInGroup: computed(
       () => state.buyers.length === state.buyersInGroup.length
-    ),
-    currentBuyerGroup: computed(
-      () => root.$store.getters.getCurrentBuyerGroup
     )
   })
   const checkboxState = reactive({
@@ -72,7 +69,7 @@ function useClient (root, clientId) {
     )
   })
   function check () {
-    if (state.checked === true) {
+    if (state.areAllBuyersInGroup === true) {
       state.buyersInGroup.forEach(buyer => {
         const updatedBuyer = buyer
         updatedBuyer.buyer_group = null
@@ -81,7 +78,7 @@ function useClient (root, clientId) {
     } else {
       state.buyersNotInGroup.forEach(buyer => {
         const updatedBuyer = buyer
-        updatedBuyer.buyer_group = state.currentBuyerGroup.id
+        updatedBuyer.buyer_group = currentBuyerGroupId
         root.$store.dispatch('updateBuyer', updatedBuyer)
       })
     }
@@ -93,7 +90,7 @@ function useClient (root, clientId) {
   }
 }
 
-function useBuyer (root, buyerId) {
+function useBuyer (root, buyerId, currentBuyerGroupId) {
   const state = reactive({
     buyer: computed(
       () => root.$store.getters.getBuyerById(buyerId)
@@ -102,16 +99,13 @@ function useBuyer (root, buyerId) {
       () => root.$store.getters.getBuyersByParent(buyerId)
     ),
     isBuyerInGroup: computed(
-      () => state.buyer.buyer_group === state.currentBuyerGroup.id
+      () => state.buyer.buyer_group === currentBuyerGroupId
     ),
     buyersInGroup: computed(
-      () => state.buyers.filter(b => b.buyer_group === state.currentBuyerGroup.id)
+      () => state.buyers.filter(b => b.buyer_group === currentBuyerGroupId)
     ),
     areAllBuyersInGroup: computed(
       () => state.buyers.length === state.buyersInGroup.length
-    ),
-    currentBuyerGroup: computed(
-      () => root.$store.getters.getCurrentBuyerGroup
     )
   })
   const checkboxState = reactive({
@@ -127,7 +121,7 @@ function useBuyer (root, buyerId) {
   })
   function check () {
     const updatedBuyer = state.buyer
-    updatedBuyer.buyer_group = state.isBuyerInGroup ? null : state.currentBuyerGroup.id
+    updatedBuyer.buyer_group = state.isBuyerInGroup ? null : currentBuyerGroupId
     root.$store.dispatch('updateBuyer', updatedBuyer)
   }
   return {
@@ -155,11 +149,14 @@ export default {
   setup (props, { root }) {
     const { childrenVisible, toggleChildrenVisible } = useChildVisibility()
 
-    const currentBuyerGroup = computed(() => root.$store.getters.getCurrentBuyerGroup)
+    const currentBuyerGroup = reactive({
+      id: computed(() => root.$store.getters.getCurrentBuyerGroup.id)
+    })
+
     const { check, checkboxState, state } =
       props.type === 'client'
-        ? useClient(root, props.obj.id, currentBuyerGroup.value)
-        : useBuyer(root, props.obj.id, currentBuyerGroup.value)
+        ? useClient(root, props.obj.id, currentBuyerGroup.id)
+        : useBuyer(root, props.obj.id, currentBuyerGroup.id)
 
     return {
       check,
