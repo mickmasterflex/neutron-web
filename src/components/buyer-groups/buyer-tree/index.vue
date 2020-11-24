@@ -5,13 +5,13 @@
       <li class="w-64 th">Name</li>
       <li class="w-32 th">Status</li>
     </ul>
-    <tr-parent v-for="client in allClients" :key="client.id" :obj="client" type="client"></tr-parent>
+    <buyer-tree-node v-for="client in allClients" :key="client.id" :obj="client" type="client"></buyer-tree-node>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import parentRow from '@/components/buyer-groups/buyer-tree/tr/parent'
+import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 
 export default {
   computed: {
@@ -31,7 +31,7 @@ export default {
     this.fetchBuyers()
   },
   components: {
-    'tr-parent': parentRow
+    'buyer-tree-node': buyerTreeNode
   }
 }
 </script>

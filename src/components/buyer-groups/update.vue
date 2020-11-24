@@ -10,7 +10,7 @@
         </validation-observer>
         <div class="field-group">
           <label class="field-label field-label-top">Contracts</label>
-          <contract-table></contract-table>
+          <buyer-tree></buyer-tree>
         </div>
       </div>
     </template>
@@ -25,7 +25,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
-import contractTable from '@/components/buyer-groups/table'
+import buyerTree from '@/components/buyer-groups/buyer-tree'
 
 export default {
   data () {
@@ -94,7 +94,7 @@ export default {
     }
   },
   components: {
-    'contract-table': contractTable
+    'buyer-tree': buyerTree
   }
 }
 </script>

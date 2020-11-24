@@ -138,7 +138,7 @@ function useBuyer (root, buyerId) {
 }
 
 export default {
-  name: 'buyergroup-node',
+  name: 'buyer-tree-node',
   props: {
     obj: Object,
     type: {
