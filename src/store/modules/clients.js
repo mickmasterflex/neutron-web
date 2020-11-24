@@ -12,6 +12,9 @@ const getters = {
   getAllClientsCount: (state) => {
     return state.clients.length
   },
+  getClientById: (state) => (clientId) => {
+    return state.clients.filter(client => client.id === clientId)[0]
+  },
   getShowCreateClientModal: state => state.show_create_client_modal
 }
 
