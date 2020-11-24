@@ -43,10 +43,18 @@ function useChildVisibility () {
 }
 
 function useClient (root, clientId, currentBuyerGroupId) {
-  const state = reactive({
-    buyers: computed(
-      () => root.$store.getters.getParentlessBuyersByClient(clientId)
+  const checkboxState = reactive({
+    checked: computed(
+      () => state.buyers.length > 0 && computedState.areAllBuyersInGroup
     ),
+    disabled: computed(
+      () => state.buyers.length === 0
+    ),
+    indeterminate: computed(
+      () => computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
+    )
+  })
+  const computedState = reactive({
     buyersInGroup: computed(
       () => state.buyers.filter(b => b.buyer_group === currentBuyerGroupId)
     ),
@@ -54,29 +62,21 @@ function useClient (root, clientId, currentBuyerGroupId) {
       () => state.buyers.filter(b => b.buyer_group !== currentBuyerGroupId)
     ),
     areAllBuyersInGroup: computed(
-      () => state.buyers.length === state.buyersInGroup.length
+      () => state.buyers.length === computedState.buyersInGroup.length
     )
   })
-  const checkboxState = reactive({
-    checked: computed(
-      () => state.buyers.length > 0 && state.areAllBuyersInGroup
-    ),
-    disabled: computed(
-      () => state.buyers.length === 0
-    ),
-    indeterminate: computed(
-      () => state.buyersInGroup.length > 0 && !state.areAllBuyersInGroup
-    )
+  const state = reactive({
+    buyers: computed(() => root.$store.getters.getParentlessBuyersByClient(clientId))
   })
   function check () {
-    if (state.areAllBuyersInGroup === true) {
-      state.buyersInGroup.forEach(buyer => {
+    if (computedState.areAllBuyersInGroup === true) {
+      computedState.buyersInGroup.forEach(buyer => {
         const updatedBuyer = buyer
         updatedBuyer.buyer_group = null
         root.$store.dispatch('updateBuyer', updatedBuyer)
       })
     } else {
-      state.buyersNotInGroup.forEach(buyer => {
+      computedState.buyersNotInGroup.forEach(buyer => {
         const updatedBuyer = buyer
         updatedBuyer.buyer_group = currentBuyerGroupId
         root.$store.dispatch('updateBuyer', updatedBuyer)
@@ -91,13 +91,18 @@ function useClient (root, clientId, currentBuyerGroupId) {
 }
 
 function useBuyer (root, buyerId, currentBuyerGroupId) {
-  const state = reactive({
-    buyer: computed(
-      () => root.$store.getters.getBuyerById(buyerId)
-    ),
-    buyers: computed(
-      () => root.$store.getters.getBuyersByParent(buyerId)
-    ),
+  const checkboxState = reactive({
+    checked: computed(() => {
+      if (computedState.isBuyerInGroup) {
+        return true
+      } else return computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup
+    }),
+    // disabled: computed(() => buyer.buyer_group.inherited),
+    indeterminate: computed(
+      () => computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
+    )
+  })
+  const computedState = reactive({
     isBuyerInGroup: computed(
       () => state.buyer.buyer_group === currentBuyerGroupId
     ),
@@ -105,23 +110,20 @@ function useBuyer (root, buyerId, currentBuyerGroupId) {
       () => state.buyers.filter(b => b.buyer_group === currentBuyerGroupId)
     ),
     areAllBuyersInGroup: computed(
-      () => state.buyers.length === state.buyersInGroup.length
+      () => state.buyers.length === computedState.buyersInGroup.length
     )
   })
-  const checkboxState = reactive({
-    checked: computed(() => {
-      if (state.isBuyerInGroup) {
-        return true
-      } else return state.buyersInGroup.length > 0 && state.areAllBuyersInGroup
-    }),
-    // disabled: computed(() => buyer.buyer_group.inherited),
-    indeterminate: computed(
-      () => state.buyersInGroup.length > 0 && !state.areAllBuyersInGroup
+  const state = reactive({
+    buyer: computed(
+      () => root.$store.getters.getBuyerById(buyerId)
+    ),
+    buyers: computed(
+      () => root.$store.getters.getBuyersByParent(buyerId)
     )
   })
   function check () {
     const updatedBuyer = state.buyer
-    updatedBuyer.buyer_group = state.isBuyerInGroup ? null : currentBuyerGroupId
+    updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId
     root.$store.dispatch('updateBuyer', updatedBuyer)
   }
   return {
