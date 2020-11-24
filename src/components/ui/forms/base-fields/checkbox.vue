@@ -1,17 +1,18 @@
 <template>
-  <label :for="field_id">
-<!--    <font-awesome-icon icon="check-square" v-if="$refs.checkbox.prop.intermediate"></font-awesome-icon>-->
-<!--    <font-awesome-icon icon="check-square" v-else-if="checked"></font-awesome-icon>-->
-<!--    <font-awesome-icon icon="square" v-else></font-awesome-icon>-->
+  <label :for="field_id" :class="disabled ? 'cursor-not-allowed' : 'cursor-pointer'">
+    <font-awesome-icon v-if="indeterminate" icon="minus-square" class="text-yellow-500 hover:text-yellow-600"></font-awesome-icon>
+    <font-awesome-icon v-else-if="value" icon="check-square" :class="disabled ? 'text-blue-300' : 'text-blue-500 hover:text-blue-600'"></font-awesome-icon>
+    <font-awesome-icon v-else :icon="['far', 'square']" :class="disabled ? 'text-gray-300' : 'text-gray-600 hover:text-gray-900'"></font-awesome-icon>
     <input
       ref="checkbox"
-      @input="handleInput($event.target.checked)"
+      @input="$emit('input', $event.target.checked)"
       type="checkbox"
       :id="field_id"
+      class="hidden"
       :class="$attrs.field_class"
       :checked="value"
       :indeterminate.prop="indeterminate"
-      v-model="checked">
+      :disabled="disabled">
     {{field_label}}
   </label>
 </template>
@@ -29,23 +30,12 @@ export default {
     value: {
       type: [Boolean, String]
     },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     indeterminate: {
       type: Boolean
-    }
-  },
-  data () {
-    return {
-      checked: this.value
-    }
-  },
-  watch: {
-    value () {
-      this.checked = this.value
-    }
-  },
-  methods: {
-    handleInput (value) {
-      this.$emit('input', value)
     }
   }
 }
