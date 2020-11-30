@@ -28,7 +28,7 @@
 
 <script>
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
-import { ref, reactive, computed } from '@vue/composition-api'
+import { computed, inject, ref, reactive } from '@vue/composition-api'
 
 function useChildVisibility () {
   const childrenVisible = ref(false)
@@ -42,7 +42,8 @@ function useChildVisibility () {
   }
 }
 
-function useClient (root, clientId, currentBuyerGroupId) {
+function useClient (clientId, currentBuyerGroupId) {
+  const store = inject('vuex-store')
   const checkboxState = reactive({
     checked: computed(
       () => state.buyers.length > 0 && computedState.areAllBuyersInGroup
@@ -66,20 +67,20 @@ function useClient (root, clientId, currentBuyerGroupId) {
     )
   })
   const state = reactive({
-    buyers: computed(() => root.$store.getters.getParentlessBuyersByClient(clientId))
+    buyers: computed(() => store.getters.getParentlessBuyersByClient(clientId))
   })
   function check () {
     if (computedState.areAllBuyersInGroup === true) {
       computedState.buyersInGroup.forEach(buyer => {
         const updatedBuyer = buyer
         updatedBuyer.buyer_group = null
-        root.$store.dispatch('updateBuyer', updatedBuyer)
+        store.dispatch('updateBuyer', updatedBuyer)
       })
     } else {
       computedState.buyersNotInGroup.forEach(buyer => {
         const updatedBuyer = buyer
         updatedBuyer.buyer_group = currentBuyerGroupId.value
-        root.$store.dispatch('updateBuyer', updatedBuyer)
+        store.dispatch('updateBuyer', updatedBuyer)
       })
     }
   }
@@ -90,7 +91,8 @@ function useClient (root, clientId, currentBuyerGroupId) {
   }
 }
 
-function useBuyer (root, buyerId, currentBuyerGroupId) {
+function useBuyer (buyerId, currentBuyerGroupId) {
+  const store = inject('vuex-store')
   const checkboxState = reactive({
     checked: computed(() => {
       if (computedState.isBuyerInGroup) {
@@ -115,16 +117,16 @@ function useBuyer (root, buyerId, currentBuyerGroupId) {
   })
   const state = reactive({
     buyer: computed(
-      () => root.$store.getters.getBuyerById(buyerId)
+      () => store.getters.getBuyerById(buyerId)
     ),
     buyers: computed(
-      () => root.$store.getters.getBuyersByParent(buyerId)
+      () => store.getters.getBuyersByParent(buyerId)
     )
   })
   function check () {
     const updatedBuyer = state.buyer
     updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
-    root.$store.dispatch('updateBuyer', updatedBuyer)
+    store.dispatch('updateBuyer', updatedBuyer)
   }
   return {
     check,
@@ -148,14 +150,15 @@ export default {
       }
     }
   },
-  setup (props, { root }) {
+  setup (props) {
+    const store = inject('vuex-store')
     const { childrenVisible, toggleChildrenVisible } = useChildVisibility()
 
-    const currentBuyerGroupId = computed(() => root.$store.getters.getCurrentBuyerGroup.id)
+    const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
     const { check, checkboxState, state } =
       props.type === 'client'
-        ? useClient(root, props.obj.id, currentBuyerGroupId)
-        : useBuyer(root, props.obj.id, currentBuyerGroupId)
+        ? useClient(props.obj.id, currentBuyerGroupId)
+        : useBuyer(props.obj.id, currentBuyerGroupId)
 
     return {
       check,

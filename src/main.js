@@ -11,7 +11,7 @@ import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
 import VCalendar from 'v-calendar'
-import VueCompositionAPI from '@vue/composition-api'
+import VueCompositionAPI, { provide } from '@vue/composition-api'
 import 'animate.css'
 import '@/assets/css/styles.css'
 
@@ -235,6 +235,9 @@ Vue.use(VCalendar, {})
 
 Vue.use(VueCompositionAPI)
 new Vue({
+  setup () {
+    provide('vuex-store', store)
+  },
   router,
   store,
   render: h => h(App)
