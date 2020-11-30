@@ -124,7 +124,7 @@ function useBuyer (buyerId, currentBuyerGroupId) {
     )
   })
   function check () {
-    const updatedBuyer = state.buyer
+    const updatedBuyer = { ...state.buyer }
     updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
     store.dispatch('updateBuyer', updatedBuyer)
   }
