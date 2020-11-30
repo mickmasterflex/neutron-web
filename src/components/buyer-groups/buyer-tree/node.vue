@@ -45,7 +45,10 @@ function useChildVisibility () {
 function useClient (clientId, currentBuyerGroupId) {
   const store = inject('vuex-store')
   const checkboxState = reactive({
-    checked: computed(
+    checked: computed(() => {
+      return checkboxState.checkedImplied
+    }),
+    checkedImplied: computed(
       () => state.buyers.length > 0 && computedState.areAllBuyersInGroup
     ),
     disabled: computed(
@@ -72,13 +75,13 @@ function useClient (clientId, currentBuyerGroupId) {
   function check () {
     if (computedState.areAllBuyersInGroup === true) {
       computedState.buyersInGroup.forEach(buyer => {
-        const updatedBuyer = buyer
+        const updatedBuyer = { ...buyer }
         updatedBuyer.buyer_group = null
         store.dispatch('updateBuyer', updatedBuyer)
       })
     } else {
       computedState.buyersNotInGroup.forEach(buyer => {
-        const updatedBuyer = buyer
+        const updatedBuyer = { ...buyer }
         updatedBuyer.buyer_group = currentBuyerGroupId.value
         store.dispatch('updateBuyer', updatedBuyer)
       })
@@ -97,8 +100,11 @@ function useBuyer (buyerId, currentBuyerGroupId) {
     checked: computed(() => {
       if (computedState.isBuyerInGroup) {
         return true
-      } else return computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup
+      } else return checkboxState.checkedImplied
     }),
+    checkedImplied: computed(
+      () => computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup
+    ),
     // disabled: computed(() => buyer.buyer_group.inherited),
     indeterminate: computed(
       () => computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
