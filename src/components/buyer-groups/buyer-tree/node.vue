@@ -20,8 +20,13 @@
       <li class="td border-b border-gray-200 w-64">{{obj.name}}</li>
       <li class="td border-r border-b border-gray-200 w-32">{{obj.buyer_group}}</li>
     </ul>
-    <div v-if="childrenVisible">
-      <buyer-tree-node v-for="buyer in state.buyers" :obj="buyer" :key="buyer.id" class="pl-3"></buyer-tree-node>
+    <div v-show="childrenVisible">
+      <buyer-tree-node
+        v-for="buyer in state.buyers"
+        :ref="buyer.id"
+        :obj="buyer"
+        :key="buyer.id"
+        class="pl-3"></buyer-tree-node>
     </div>
   </div>
 </template>
@@ -42,8 +47,7 @@ function useChildVisibility () {
   }
 }
 
-function useClient (clientId, currentBuyerGroupId) {
-  const store = inject('vuex-store')
+function useClient (clientId, currentBuyerGroupId, refs, store) {
   const checkboxState = reactive({
     checked: computed(() => {
       return checkboxState.checkedImplied
@@ -94,8 +98,7 @@ function useClient (clientId, currentBuyerGroupId) {
   }
 }
 
-function useBuyer (buyerId, currentBuyerGroupId) {
-  const store = inject('vuex-store')
+function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
   const checkboxState = reactive({
     checked: computed(() => {
       if (computedState.isBuyerInGroup) {
@@ -156,15 +159,18 @@ export default {
       }
     }
   },
-  setup (props) {
+  setup (props, setupContext) {
     const store = inject('vuex-store')
+    // setupContext.refs will not be available in vue3 - will need to use refactor and use function refs
+    const refs = setupContext.refs
+
     const { childrenVisible, toggleChildrenVisible } = useChildVisibility()
 
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
     const { check, checkboxState, state } =
       props.type === 'client'
-        ? useClient(props.obj.id, currentBuyerGroupId)
-        : useBuyer(props.obj.id, currentBuyerGroupId)
+        ? useClient(props.obj.id, currentBuyerGroupId, refs, store)
+        : useBuyer(props.obj.id, currentBuyerGroupId, refs, store)
 
     return {
       check,
