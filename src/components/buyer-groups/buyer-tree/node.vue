@@ -55,7 +55,7 @@ function useClient (clientId, currentBuyerGroupId) {
       () => state.buyers.length === 0
     ),
     indeterminate: computed(
-      () => computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
+      () => !checkboxState.checked && computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
     )
   })
   const computedState = reactive({
@@ -107,7 +107,7 @@ function useBuyer (buyerId, currentBuyerGroupId) {
     ),
     // disabled: computed(() => buyer.buyer_group.inherited),
     indeterminate: computed(
-      () => computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
+      () => !checkboxState.checked && computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
     )
   })
   const computedState = reactive({
