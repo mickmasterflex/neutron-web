@@ -12,7 +12,7 @@
             @input="check()"
             :value="checkboxState.checked"
             :indeterminate="checkboxState.indeterminate"
-            :disabled="checkboxState.disabled"
+            :disabledVisually="checkboxState.disabled"
           ></checkbox-field>
         </slot>
         {{type}}
@@ -149,13 +149,27 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     )
   })
   function check () {
-    if (checkboxState.checkedImplied && !computedState.isBuyerInGroup) {
+    if (checkboxState.checkedImplied && !computedState.isBuyerInGroup && !checkboxState.disabled) {
       Object.keys(refs).forEach(key => {
         const buyer = refs[key][0]
         buyer.check()
       })
     } else if (checkboxState.disabled) {
-      failedToast({ heading: `The buyer '${state.buyer.name}' is assigned to '${store.getters.getCurrentBuyerGroup.name}'` })
+      if (computedState.buyerInOtherGroup) {
+        const conflictingGroup = store.getters.getBuyerGroupById(state.buyer.buyer_group)[0]
+        failedToast({
+          heading: 'Conflicting Buyer Group',
+          content: `Remove '${state.buyer.name}' from '${conflictingGroup.name}' in order to assign it to another group.`
+        })
+      } else if (state.buyer.inherited_buyer_group.contract) {
+        const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
+        failedToast({
+          heading: 'Buyer Group Inheritance Error',
+          content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.name}' in order assign '${state.buyer.name}' to another buyer group.`
+        })
+      } else {
+        failedToast({ heading: 'An Unknown Error Occurred' })
+      }
     } else {
       const updatedBuyer = { ...state.buyer }
       updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
