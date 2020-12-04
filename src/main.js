@@ -117,6 +117,7 @@ Vue.component('table-empty-state', tableEmptyState)
 // Form Fields
 Vue.component('checkbox-field', checkboxField)
 Vue.component('checkbox-single', checkboxSingle)
+Vue.component('checkbox-field', checkboxField)
 Vue.component('check-switch', checkSwitch)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
