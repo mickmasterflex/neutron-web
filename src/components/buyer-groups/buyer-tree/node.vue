@@ -34,6 +34,7 @@
 <script>
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
+import { failedToast } from '@/mixins/toast-messages'
 
 function useChildVisibility () {
   const childrenVisible = ref(false)
@@ -77,19 +78,16 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
     buyers: computed(() => store.getters.getParentlessBuyersByClient(clientId))
   })
   function check () {
-    if (computedState.areAllBuyersInGroup === true) {
-      computedState.buyersInGroup.forEach(buyer => {
-        const updatedBuyer = { ...buyer }
-        updatedBuyer.buyer_group = null
-        store.dispatch('updateBuyer', updatedBuyer)
-      })
-    } else {
-      computedState.buyersNotInGroup.forEach(buyer => {
-        const updatedBuyer = { ...buyer }
-        updatedBuyer.buyer_group = currentBuyerGroupId.value
-        store.dispatch('updateBuyer', updatedBuyer)
-      })
-    }
+    Object.keys(refs).forEach(key => {
+      const buyer = refs[key][0]
+      if (computedState.areAllBuyersInGroup) {
+        // Runs check() on all checked buyers if all are checked
+        buyer.check()
+      } else if (!buyer.checkboxState.checked) {
+        // Runs check() only on unchecked buyers
+        buyer.check()
+      }
+    })
   }
   return {
     check,
@@ -109,6 +107,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       () => computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup
     ),
     // disabled: computed(() => buyer.buyer_group.inherited),
+    disabled: computed(() => computedState.buyerInOtherGroup || state.buyer.inherited_buyer_group !== null),
     indeterminate: computed(
       () => !checkboxState.checked && computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
     )
@@ -122,6 +121,9 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     ),
     areAllBuyersInGroup: computed(
       () => state.buyers.length === computedState.buyersInGroup.length
+    ),
+    buyerInOtherGroup: computed(
+      () => state.buyer.buyer_group !== null && state.buyer.buyer_group !== currentBuyerGroupId.value
     )
   })
   const state = reactive({
@@ -133,9 +135,18 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     )
   })
   function check () {
-    const updatedBuyer = { ...state.buyer }
-    updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
-    store.dispatch('updateBuyer', updatedBuyer)
+    if (checkboxState.checkedImplied && !computedState.isBuyerInGroup) {
+      Object.keys(refs).forEach(key => {
+        const buyer = refs[key][0]
+        buyer.check()
+      })
+    } else if (checkboxState.disabled) {
+      failedToast({ heading: `The buyer '${state.buyer.name}' is assigned to '${store.getters.getCurrentBuyerGroup.name}'` })
+    } else {
+      const updatedBuyer = { ...state.buyer }
+      updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
+      store.dispatch('updateBuyer', updatedBuyer)
+    }
   }
   return {
     check,
