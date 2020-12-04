@@ -1,4 +1,9 @@
 import axios from '@/axios'
+import buyerGroups from '@/store/modules/buyers/buyer-groups'
+
+const modules = {
+  buyerGroups
+}
 
 const state = {
   buyers: [],
@@ -86,6 +91,7 @@ const mutations = {
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
