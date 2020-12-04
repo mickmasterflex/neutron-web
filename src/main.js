@@ -25,6 +25,7 @@ import {
   faChartArea,
   faCheck,
   faCheckCircle,
+  faCheckSquare,
   faClone,
   faCog,
   faDna,
@@ -35,6 +36,7 @@ import {
   faImage,
   faKey,
   faMinus,
+  faMinusSquare,
   faPencilAlt,
   faPlus,
   faSearch,
@@ -48,6 +50,11 @@ import {
   faUpload,
   faWrench
 } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faSquare
+} from '@fortawesome/free-regular-svg-icons'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* Layouts */
@@ -62,6 +69,7 @@ import basePanelGrid from '@/components/ui/panels/grid/base'
 import statCard from '@/components/ui/cards/stat-card'
 import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
+import checkboxField from '@/components/ui/forms/base-fields/checkbox'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
 import textField from '@/components/ui/forms/base-fields/text-field'
@@ -105,6 +113,7 @@ Vue.component('table-empty-state', tableEmptyState)
 
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)
+Vue.component('checkbox-field', checkboxField)
 Vue.component('check-switch', checkSwitch)
 Vue.component('text-field', textField)
 Vue.component('v-text-field', vTextField)
@@ -182,6 +191,7 @@ library.add(
   faChartArea,
   faCheck,
   faCheckCircle,
+  faCheckSquare,
   faClone,
   faCog,
   faDna,
@@ -192,11 +202,13 @@ library.add(
   faImage,
   faKey,
   faMinus,
+  faMinusSquare,
   faPencilAlt,
   faPlus,
   faSearch,
   faSignOutAlt,
   faSpinner,
+  faSquare,
   faTag,
   faThLarge,
   faThumbsUp,

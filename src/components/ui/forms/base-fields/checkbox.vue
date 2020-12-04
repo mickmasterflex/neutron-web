@@ -20,18 +20,19 @@
       type="checkbox"
       :id="field_id"
       class="hidden"
-      :class="$attrs.field_class"
       :checked="value"
       :indeterminate.prop="indeterminate"
       :disabled="disabled">
-    {{field_label}}
+    <span class="ml-2" :class="label_class">
+      <slot></slot>
+    </span>
   </label>
 </template>
 
 <script>
 export default {
   props: {
-    field_label: {
+    label_class: {
       type: String
     },
     field_id: {

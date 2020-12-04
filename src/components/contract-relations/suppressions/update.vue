@@ -1,15 +1,9 @@
 <template>
-  <div>
-    <input v-model="contractRelation.suppressed"
-           type="checkbox"
-           :id="`suppressed-${contractRelation.id}`"
-           @change="updateSuppressionStatus(contractRelation, contractRelation.suppressed)"
-           class="mr-1"
-    >
-    <span :class="contractRelation.suppressed ? 'text-red-500' : 'text-green-600'" class="font-bold">
-      {{ showSuppressed(contractRelation.suppressed) }}
-    </span>
-  </div>
+  <checkbox-field v-model="contractRelation.suppressed"
+                  :field_id="`suppressed-${contractRelation.id}`"
+                  class="font-bold"
+                  :label_class="contractRelation.suppressed ? 'text-red-500' : 'text-green-600'"
+                  @input="updateSuppressionStatus(contractRelation, contractRelation.suppressed)">{{ showSuppressed(contractRelation.suppressed) }}</checkbox-field>
 </template>
 
 <script>
