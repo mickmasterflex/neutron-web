@@ -159,7 +159,9 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     } else {
       const updatedBuyer = { ...state.buyer }
       updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
-      store.dispatch('updateBuyer', updatedBuyer)
+      store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
+        store.commit('SET_CURRENT_INHERITED_BUYER_GROUP', null)
+      })
     }
   }
   return {

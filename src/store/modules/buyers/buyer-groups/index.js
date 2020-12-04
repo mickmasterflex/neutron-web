@@ -16,6 +16,7 @@ const state = {
 const getters = {
   getBuyerGroups: state => state.buyer_groups,
   getCurrentBuyerGroup: state => state.current_buyer_group,
+  getBuyerGroupById: (state) => (id) => state.buyer_groups.filter(group => group.id === id),
   getBuyerGroupsFetchLoading: state => state.buyer_groups_fetch_loading
 }
 
