@@ -21,6 +21,7 @@
       <li class="td border-r border-b border-gray-200 w-32">{{obj.buyer_group}}</li>
     </ul>
     <div v-show="childrenVisible">
+      <!-- Vue3 Migration: Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for -->
       <buyer-tree-node
         v-for="buyer in state.buyers"
         :ref="buyer.id"
@@ -185,7 +186,7 @@ export default {
   },
   setup (props, setupContext) {
     const store = inject('vuex-store')
-    // setupContext.refs will not be available in vue3 - will need to use refactor and use function refs
+    // Vue3 Migration: setupContext.refs will not be available in vue3. Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for
     const refs = setupContext.refs
 
     const { childrenVisible, toggleChildrenVisible } = useChildVisibility()
