@@ -106,7 +106,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     }),
     checkedImplied: computed(
       () => (computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup) ||
-                    computedState.currentBuyerGroupInherited
+                    computedState.buyerInheritsCurrentBuyerGroup
     ),
     disabled: computed(
       () => computedState.buyerInOtherGroup ||
