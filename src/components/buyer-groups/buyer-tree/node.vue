@@ -104,12 +104,17 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       } else return checkboxState.checkedImplied
     }),
     checkedImplied: computed(
-      () => computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup
+      () => (computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup) ||
+                    computedState.currentBuyerGroupInherited
     ),
-    // disabled: computed(() => buyer.buyer_group.inherited),
-    disabled: computed(() => computedState.buyerInOtherGroup || state.buyer.inherited_buyer_group !== null),
+    disabled: computed(
+      () => computedState.buyerInOtherGroup ||
+                   state.buyer.inherited_buyer_group !== null
+    ),
     indeterminate: computed(
-      () => !checkboxState.checked && computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
+      () => !checkboxState.checked &&
+                   computedState.buyersInGroup.length > 0 &&
+                   !computedState.areAllBuyersInGroup
     )
   })
   const computedState = reactive({
@@ -123,7 +128,15 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       () => state.buyers.length === computedState.buyersInGroup.length
     ),
     buyerInOtherGroup: computed(
-      () => state.buyer.buyer_group !== null && state.buyer.buyer_group !== currentBuyerGroupId.value
+      () => state.buyer.buyer_group !== null &&
+                   state.buyer.buyer_group !== currentBuyerGroupId.value
+    ),
+    buyerInheritsCurrentBuyerGroup: computed(
+      () => {
+        if (state.buyer.inherited_buyer_group) {
+          return state.buyer.inherited_buyer_group.buyer_group === currentBuyerGroupId.value
+        }
+      }
     )
   })
   const state = reactive({
