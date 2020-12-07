@@ -19,7 +19,7 @@
       </li>
       <li class="td border-b border-gray-200 w-16">{{obj.id}}</li>
       <li class="td border-b border-gray-200 w-64">{{obj.name}}</li>
-      <li class="td border-r border-b border-gray-200 w-32">{{obj.status ? obj.status : 'active'}}</li>
+      <li class="td border-b border-gray-200 w-32">{{obj.status ? obj.status : 'active'}}</li>
       <li class="td border-r border-b border-gray-200 w-24">{{state.buyers.length}}</li>
     </ul>
     <div v-show="childrenVisible">
