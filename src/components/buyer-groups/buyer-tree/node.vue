@@ -17,8 +17,10 @@
         </slot>
         {{type}}
       </li>
+      <li class="td border-b border-gray-200 w-16">{{obj.id}}</li>
       <li class="td border-b border-gray-200 w-64">{{obj.name}}</li>
-      <li class="td border-r border-b border-gray-200 w-32">{{obj.buyer_group}}</li>
+      <li class="td border-r border-b border-gray-200 w-32">{{obj.status ? obj.status : 'active'}}</li>
+      <li class="td border-r border-b border-gray-200 w-24">{{state.buyers.length}}</li>
     </ul>
     <div v-show="childrenVisible">
       <!-- Vue3 Migration: Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for -->
