@@ -34,6 +34,7 @@ const actions = {
     children.forEach(childId => {
       const buyer = getters.getBuyerById(childId)
       buyer.inherited_buyer_group = getters.getCurrentInheritedBuyerGroup
+      buyer.buyer_group = null
       commit('UPDATE_BUYER', buyer)
       if (buyer.children) {
         dispatch('updateBuyerChildrenInheritedGroup', buyer.children)
