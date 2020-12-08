@@ -147,21 +147,12 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       () => store.getters.getBuyersByParent(buyerId)
     )
   })
-  function check () {
-    if (checkboxState.checkedImplied && !computedState.isBuyerInGroup && !checkboxState.disabled) {
-      Object.keys(refs).forEach(key => {
-        const buyer = refs[key][0]
-        buyer.check()
-      })
-    } else if (checkboxState.disabled) {
-      handleToastErrorMessages()
-    } else {
-      const updatedBuyer = { ...state.buyer }
-      updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
-      store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
-        store.commit('SET_CURRENT_INHERITED_BUYER_GROUP', null)
-      })
-    }
+  function saveBuyer () {
+    const updatedBuyer = { ...state.buyer }
+    updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
+    store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
+      store.commit('SET_CURRENT_INHERITED_BUYER_GROUP', null)
+    })
   }
   function handleToastErrorMessages () {
     if (computedState.buyerInOtherGroup) {
@@ -178,6 +169,13 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       })
     } else {
       failedToast({ heading: 'An Unknown Error Occurred' })
+    }
+  }
+  function check () {
+    if (checkboxState.disabled) {
+      handleToastErrorMessages()
+    } else {
+      saveBuyer()
     }
   }
   return {
