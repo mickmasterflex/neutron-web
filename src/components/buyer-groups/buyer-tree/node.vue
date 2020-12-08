@@ -2,7 +2,7 @@
   <div>
     <ul class="tr flex flex-row">
       <li class="td border-l border-b border-gray-200 w-32">
-        <span v-if="state.buyers.length" @click="toggleChildrenVisible()" class="p-1 mr-1 cursor-pointer">
+        <span v-if="state.children.length" @click="toggleChildrenVisible()" class="p-1 mr-1 cursor-pointer">
           <font-awesome-icon v-if="!childrenVisible" icon="caret-right" class="text-gray-500 hover:text-gray-700"></font-awesome-icon>
           <font-awesome-icon v-if="childrenVisible" icon="caret-down" class="text-gray-800"></font-awesome-icon>
         </span>
@@ -20,12 +20,12 @@
       <li class="td border-b border-gray-200 w-16">{{obj.id}}</li>
       <li class="td border-b border-gray-200 w-64">{{obj.name}}</li>
       <li class="td border-b border-gray-200 w-32">{{obj.status ? obj.status : 'active'}}</li>
-      <li class="td border-r border-b border-gray-200 w-24">{{state.buyers.length}}</li>
+      <li class="td border-r border-b border-gray-200 w-24">{{state.children.length}}</li>
     </ul>
     <div v-show="childrenVisible">
       <!-- Vue3 Migration: Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for -->
       <buyer-tree-node
-        v-for="buyer in state.buyers"
+        v-for="buyer in state.children"
         :ref="buyer.id"
         :obj="buyer"
         :key="buyer.id"
@@ -57,33 +57,33 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
       return checkboxState.checkedImplied
     }),
     checkedImplied: computed(
-      () => state.buyers.length > 0 && computedState.areAllBuyersInGroup
+      () => state.children.length > 0 && computedState.areAllChildrenInGroup
     ),
     disabled: computed(
-      () => state.buyers.length === 0
+      () => state.children.length === 0
     ),
     indeterminate: computed(
-      () => !checkboxState.checked && computedState.buyersInGroup.length > 0 && !computedState.areAllBuyersInGroup
+      () => !checkboxState.checked && computedState.childrenInGroup.length > 0 && !computedState.areAllChildrenInGroup
     )
   })
   const computedState = reactive({
-    buyersInGroup: computed(
-      () => state.buyers.filter(b => b.buyer_group === currentBuyerGroupId.value)
+    childrenInGroup: computed(
+      () => state.children.filter(b => b.buyer_group === currentBuyerGroupId.value)
     ),
-    buyersNotInGroup: computed(
-      () => state.buyers.filter(b => b.buyer_group !== currentBuyerGroupId.value)
-    ),
-    areAllBuyersInGroup: computed(
-      () => state.buyers.length === computedState.buyersInGroup.length
+    // buyersNotInGroup: computed(
+    //   () => state.children.filter(b => b.buyer_group !== currentBuyerGroupId.value)
+    // ),
+    areAllChildrenInGroup: computed(
+      () => state.children.length === computedState.childrenInGroup.length
     )
   })
   const state = reactive({
-    buyers: computed(() => store.getters.getParentlessBuyersByClient(clientId))
+    children: computed(() => store.getters.getParentlessBuyersByClient(clientId))
   })
   function check () {
     Object.keys(refs).forEach(key => {
       const buyer = refs[key][0]
-      if (computedState.areAllBuyersInGroup) {
+      if (computedState.areAllChildrenInGroup) {
         // Runs check() on all checked buyers if all are checked
         buyer.check()
       } else if (!buyer.checkboxState.checked) {
@@ -107,7 +107,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       } else return checkboxState.checkedImplied
     }),
     checkedImplied: computed(
-      () => (computedState.buyersInGroup.length > 0 && computedState.areAllBuyersInGroup) ||
+      () => (computedState.childrenInGroup.length > 0 && computedState.areAllChildrenInGroup) ||
                     computedState.buyerInheritsCurrentBuyerGroup
     ),
     disabled: computed(
@@ -116,19 +116,19 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     ),
     indeterminate: computed(
       () => !checkboxState.checked &&
-                   computedState.buyersInGroup.length > 0 &&
-                   !computedState.areAllBuyersInGroup
+                   computedState.childrenInGroup.length > 0 &&
+                   !computedState.areAllChildrenInGroup
     )
   })
   const computedState = reactive({
     isBuyerInGroup: computed(
       () => state.buyer.buyer_group === currentBuyerGroupId.value
     ),
-    buyersInGroup: computed(
-      () => state.buyers.filter(b => b.buyer_group === currentBuyerGroupId.value)
+    childrenInGroup: computed(
+      () => state.children.filter(b => b.buyer_group === currentBuyerGroupId.value)
     ),
-    areAllBuyersInGroup: computed(
-      () => state.buyers.length === computedState.buyersInGroup.length
+    areAllChildrenInGroup: computed(
+      () => state.children.length === computedState.childrenInGroup.length
     ),
     buyerInOtherGroup: computed(
       () => state.buyer.buyer_group !== null &&
@@ -146,7 +146,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     buyer: computed(
       () => store.getters.getBuyerById(buyerId)
     ),
-    buyers: computed(
+    children: computed(
       () => store.getters.getBuyersByParent(buyerId)
     )
   })
