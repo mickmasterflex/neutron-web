@@ -157,27 +157,30 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
         buyer.check()
       })
     } else if (checkboxState.disabled) {
-      if (computedState.buyerInOtherGroup) {
-        const conflictingGroup = store.getters.getBuyerGroupById(state.buyer.buyer_group)[0]
-        failedToast({
-          heading: 'Conflicting Buyer Group',
-          content: `Remove '${state.buyer.name}' from '${conflictingGroup.name}' in order to assign it to another group.`
-        })
-      } else if (state.buyer.inherited_buyer_group.contract) {
-        const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
-        failedToast({
-          heading: 'Buyer Group Inheritance Error',
-          content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.name}' in order assign '${state.buyer.name}' to another buyer group.`
-        })
-      } else {
-        failedToast({ heading: 'An Unknown Error Occurred' })
-      }
+      handleToastErrorMessages()
     } else {
       const updatedBuyer = { ...state.buyer }
       updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
       store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
         store.commit('SET_CURRENT_INHERITED_BUYER_GROUP', null)
       })
+    }
+  }
+  function handleToastErrorMessages () {
+    if (computedState.buyerInOtherGroup) {
+      const conflictingGroup = store.getters.getBuyerGroupById(state.buyer.buyer_group)[0]
+      failedToast({
+        heading: 'Conflicting Buyer Group',
+        content: `Remove '${state.buyer.name}' from '${conflictingGroup.name}' in order to assign it to another group.`
+      })
+    } else if (state.buyer.inherited_buyer_group.contract) {
+      const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
+      failedToast({
+        heading: 'Buyer Group Inheritance Error',
+        content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.name}' in order assign '${state.buyer.name}' to another buyer group.`
+      })
+    } else {
+      failedToast({ heading: 'An Unknown Error Occurred' })
     }
   }
   return {
