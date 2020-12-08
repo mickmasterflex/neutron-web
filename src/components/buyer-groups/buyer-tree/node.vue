@@ -60,9 +60,6 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
     checked: computed(() => {
       return false
     }),
-    checkedImplied: computed(
-      () => state.children.length > 0 && computedState.areAllChildrenInGroup
-    ),
     disabled: computed(
       () => state.children.length === 0
     ),
@@ -109,11 +106,8 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     checked: computed(() => {
       if (computedState.isBuyerInGroup) {
         return true
-      } else return checkboxState.checkedImplied
+      } else return computedState.buyerInheritsCurrentBuyerGroup
     }),
-    checkedImplied: computed(
-      () => computedState.buyerInheritsCurrentBuyerGroup
-    ),
     disabled: computed(
       () => computedState.buyerInOtherGroup ||
                    state.buyer.inherited_buyer_group !== null
