@@ -13,7 +13,11 @@
             :value="checkboxState.checked"
             :indeterminate="checkboxState.indeterminate"
             :disabledVisually="checkboxState.disabled"
-          ></checkbox-field>
+          >
+            <template v-if="computedState.buyerInOtherGroup" v-slot:checkbox>
+              <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-600 cursor-pointer"></font-awesome-icon>
+            </template>
+          </checkbox-field>
         </slot>
         {{type}}
       </li>
@@ -54,7 +58,7 @@ function useChildVisibility () {
 function useClient (clientId, currentBuyerGroupId, refs, store) {
   const checkboxState = reactive({
     checked: computed(() => {
-      return checkboxState.checkedImplied
+      return false
     }),
     checkedImplied: computed(
       () => state.children.length > 0 && computedState.areAllChildrenInGroup
@@ -63,7 +67,8 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
       () => state.children.length === 0
     ),
     indeterminate: computed(
-      () => !checkboxState.checked && computedState.childrenInGroup.length > 0 && !computedState.areAllChildrenInGroup
+      () => !checkboxState.checked &&
+        computedState.childrenInGroup.length > 0
     )
   })
   const computedState = reactive({
@@ -107,8 +112,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       } else return checkboxState.checkedImplied
     }),
     checkedImplied: computed(
-      () => (computedState.childrenInGroup.length > 0 && computedState.areAllChildrenInGroup) ||
-                    computedState.buyerInheritsCurrentBuyerGroup
+      () => computedState.buyerInheritsCurrentBuyerGroup
     ),
     disabled: computed(
       () => computedState.buyerInOtherGroup ||
@@ -116,8 +120,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     ),
     indeterminate: computed(
       () => !checkboxState.checked &&
-                   computedState.childrenInGroup.length > 0 &&
-                   !computedState.areAllChildrenInGroup
+                   computedState.childrenInGroup.length > 0
     )
   })
   const computedState = reactive({
