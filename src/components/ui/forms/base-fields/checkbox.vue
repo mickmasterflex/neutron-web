@@ -1,19 +1,21 @@
 <template>
   <label :for="field_id" :class="showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'">
-    <font-awesome-icon v-if="indeterminate"
-                       icon="minus-square"
-                       class="text-yellow-500 hover:text-yellow-600"
-    ></font-awesome-icon>
-    <font-awesome-icon v-else-if="value"
-                       icon="check-square"
-                       :class="{'text-blue-300': showDisabled,
+    <slot name="checkbox">
+      <font-awesome-icon v-if="indeterminate"
+                         icon="minus-square"
+                         class="text-yellow-500 hover:text-yellow-600"
+      ></font-awesome-icon>
+      <font-awesome-icon v-else-if="value"
+                         icon="check-square"
+                         :class="{'text-blue-300': showDisabled,
                                 'text-blue-500 hover:text-blue-600': !showDisabled}"
-    ></font-awesome-icon>
-    <font-awesome-icon v-else
-                       :icon="['far', 'square']"
-                       :class="{'text-gray-300': showDisabled,
+      ></font-awesome-icon>
+      <font-awesome-icon v-else
+                         :icon="['far', 'square']"
+                         :class="{'text-gray-300': showDisabled,
                                 'text-gray-600 hover:text-gray-900': !showDisabled}"
-    ></font-awesome-icon>
+      ></font-awesome-icon>
+    </slot>
     <input
       ref="checkbox"
       @input="$emit('input', $event.target.checked)"
