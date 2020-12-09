@@ -13,7 +13,7 @@
             :value="checkboxState.checked"
             :indeterminate="checkboxState.indeterminate"
             :disabledVisually="checkboxState.disabled"
-            :checkedColor="state.children.length > 0 && computedState.areAllChildrenInGroup ? 'yellow' : 'blue'"
+            :checkedColor="state.children.length > 0 && computedState.areAllChildrenInGroup && checkboxState.checkedImplied ? 'yellow' : 'blue'"
           >
             <template v-if="computedState.isBuyerInOtherGroup" v-slot:checkbox>
               <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-600 cursor-pointer"></font-awesome-icon>
@@ -59,7 +59,7 @@ function useChildVisibility () {
 function useClient (clientId, currentBuyerGroupId, refs, store) {
   const checkboxState = reactive({
     checked: computed(() => {
-      return false
+      return state.children.length > 0 && computedState.areAllChildrenInGroup
     }),
     disabled: computed(
       () => state.children.length === 0
