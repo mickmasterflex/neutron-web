@@ -13,6 +13,7 @@
             :value="checkboxState.checked"
             :indeterminate="checkboxState.indeterminate"
             :disabledVisually="checkboxState.disabled"
+            :checkedColor="state.children.length > 0 && computedState.areAllChildrenInGroup ? 'yellow' : 'blue'"
           >
             <template v-if="computedState.isBuyerInOtherGroup" v-slot:checkbox>
               <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-600 cursor-pointer"></font-awesome-icon>
@@ -106,15 +107,20 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     checked: computed(() => {
       if (computedState.isBuyerInGroup) {
         return true
-      } else return computedState.buyerInheritsCurrentBuyerGroup
+      } else return checkboxState.checkedImplied
     }),
+    checkedImplied: computed(
+      () => computedState.buyerInheritsCurrentBuyerGroup ||
+                   (state.children.length > 0 && computedState.areAllChildrenInGroup)
+    ),
     disabled: computed(
       () => computedState.isBuyerInOtherGroup ||
                    state.buyer.inherited_buyer_group !== null
     ),
     indeterminate: computed(
       () => !checkboxState.checked &&
-                   computedState.childrenInGroup.length > 0
+                   (computedState.childrenInGroup.length > 0 ||
+                     computedState.descendantsInCurrentGroup.length > 0)
     )
   })
   const computedState = reactive({
@@ -130,6 +136,9 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     ),
     areAllChildrenInGroup: computed(
       () => state.children.length === computedState.childrenInGroup.length
+    ),
+    descendantsInCurrentGroup: computed(
+      () => state.buyer.descendant_buyer_groups.filter(b => b.buyer_group === currentBuyerGroupId.value)
     ),
     buyerInheritsCurrentBuyerGroup: computed(
       () => {
