@@ -14,7 +14,7 @@
             :indeterminate="checkboxState.indeterminate"
             :disabledVisually="checkboxState.disabled"
           >
-            <template v-if="computedState.buyerInOtherGroup" v-slot:checkbox>
+            <template v-if="computedState.isBuyerInOtherGroup" v-slot:checkbox>
               <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-600 cursor-pointer"></font-awesome-icon>
             </template>
           </checkbox-field>
@@ -109,7 +109,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       } else return computedState.buyerInheritsCurrentBuyerGroup
     }),
     disabled: computed(
-      () => computedState.buyerInOtherGroup ||
+      () => computedState.isBuyerInOtherGroup ||
                    state.buyer.inherited_buyer_group !== null
     ),
     indeterminate: computed(
@@ -121,15 +121,15 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     isBuyerInGroup: computed(
       () => state.buyer.buyer_group === currentBuyerGroupId.value
     ),
+    isBuyerInOtherGroup: computed(
+      () => state.buyer.buyer_group !== null &&
+        state.buyer.buyer_group !== currentBuyerGroupId.value
+    ),
     childrenInGroup: computed(
       () => state.children.filter(b => b.buyer_group === currentBuyerGroupId.value)
     ),
     areAllChildrenInGroup: computed(
       () => state.children.length === computedState.childrenInGroup.length
-    ),
-    buyerInOtherGroup: computed(
-      () => state.buyer.buyer_group !== null &&
-                   state.buyer.buyer_group !== currentBuyerGroupId.value
     ),
     buyerInheritsCurrentBuyerGroup: computed(
       () => {
@@ -155,7 +155,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     })
   }
   function handleToastErrorMessages () {
-    if (computedState.buyerInOtherGroup) {
+    if (computedState.isBuyerInOtherGroup) {
       const conflictingGroup = store.getters.getBuyerGroupById(state.buyer.buyer_group)[0]
       failedToast({
         heading: 'Conflicting Buyer Group',
