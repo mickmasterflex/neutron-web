@@ -73,9 +73,6 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
     childrenInGroup: computed(
       () => state.children.filter(b => b.buyer_group === currentBuyerGroupId.value)
     ),
-    // buyersNotInGroup: computed(
-    //   () => state.children.filter(b => b.buyer_group !== currentBuyerGroupId.value)
-    // ),
     areAllChildrenInGroup: computed(
       () => state.children.length === computedState.childrenInGroup.length
     )
