@@ -112,6 +112,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     ),
     disabled: computed(
       () => computedState.isBuyerInOtherGroup ||
+                   computedState.descendantsInAnotherGroupCount > 0 ||
                    state.buyer.inherited_buyer_group !== null
     ),
     indeterminate: computed(
@@ -136,6 +137,9 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     ),
     descendantsInCurrentGroup: computed(
       () => state.buyer.descendant_buyer_groups.filter(b => b.buyer_group === currentBuyerGroupId.value)
+    ),
+    descendantsInAnotherGroupCount: computed(
+      () => state.buyer.descendant_buyer_groups.filter(b => b.buyer_group !== currentBuyerGroupId.value).length
     ),
     buyerInheritsCurrentBuyerGroup: computed(
       () => {
@@ -166,6 +170,11 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       failedToast({
         heading: 'Conflicting Buyer Group',
         content: `Remove '${state.buyer.name}' from '${conflictingGroup.name}' in order to assign it to another group.`
+      })
+    } else if (computedState.descendantsInAnotherGroupCount > 0) {
+      failedToast({
+        heading: 'Conflicting Descendant Buyer Group',
+        content: `${computedState.descendantsInAnotherGroupCount} descendant${computedState.descendantsInAnotherGroupCount > 1 ? 's' : ''} belong${computedState.descendantsInAnotherGroupCount > 1 ? '' : 's'} to another group, unable to set parent to another group.`
       })
     } else if (state.buyer.inherited_buyer_group.contract) {
       const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
