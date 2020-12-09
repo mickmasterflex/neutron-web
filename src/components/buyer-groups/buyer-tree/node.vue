@@ -158,7 +158,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
     const updatedBuyer = { ...state.buyer }
     updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
     store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
-      store.commit('SET_CURRENT_INHERITED_BUYER_GROUP', null)
+      store.commit('SET_CURRENT_BUYER_GROUP_ANCESTOR_DATA', null)
     })
   }
   function handleToastErrorMessages () {
