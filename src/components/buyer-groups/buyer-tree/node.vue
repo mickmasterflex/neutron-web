@@ -78,15 +78,16 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
     )
   })
   const state = reactive({
-    children: computed(() => store.getters.getParentlessBuyersByClient(clientId))
+    children: computed(() => store.getters.getParentlessBuyersByClient(clientId)),
+    childrenRefs: computed(() => Object.keys(refs))
   })
   function check () {
-    Object.keys(refs).forEach(key => {
+    state.childrenRefs.forEach(key => {
       const buyer = refs[key][0]
       if (computedState.areAllChildrenInGroup) {
         // Runs check() on all checked buyers if all are checked
         buyer.check()
-      } else if (!buyer.checkboxState.checked) {
+      } else if (!buyer.checkboxState.checked || buyer.checkboxState.checkedImplied) {
         // Runs check() only on unchecked buyers
         buyer.check()
       }
