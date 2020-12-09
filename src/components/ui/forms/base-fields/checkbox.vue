@@ -3,12 +3,15 @@
     <slot name="checkbox">
       <font-awesome-icon v-if="indeterminate"
                          icon="minus-square"
-                         class="text-yellow-500 hover:text-yellow-600"
+                         :class="showDisabled ?
+                                 `text-${indeterminateColor}-300` :
+                                 `text-${indeterminateColor}-500 hover:text-${indeterminateColor}-600`"
       ></font-awesome-icon>
       <font-awesome-icon v-else-if="value"
                          icon="check-square"
-                         :class="{'text-blue-300': showDisabled,
-                                'text-blue-500 hover:text-blue-600': !showDisabled}"
+                         :class="showDisabled ?
+                                `text-${checkedColor}-300` :
+                                `text-${checkedColor}-500 hover:text-${checkedColor}-600`"
       ></font-awesome-icon>
       <font-awesome-icon v-else
                          :icon="['far', 'square']"
@@ -54,6 +57,14 @@ export default {
     },
     indeterminate: {
       type: Boolean
+    },
+    checkedColor: {
+      default: 'green',
+      type: String
+    },
+    indeterminateColor: {
+      default: 'yellow',
+      type: String
     }
   },
   computed: {
