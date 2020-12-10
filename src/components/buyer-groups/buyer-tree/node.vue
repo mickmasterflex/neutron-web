@@ -4,7 +4,7 @@
     <ul @click="toggleTdExpanded(expandable)"
         class="flex flex-row transition-colors duration-200"
         :class="`${expandable ? 'cursor-pointer' : ''} ${tdExpanded ? `bg-${accentColor}-100` : `bg-white hover:bg-${checkboxState.disabled && !computedState.buyerInheritsCurrentBuyerGroup > 0 ? 'red' : 'blue'}-100 rounded-lg`}`">
-      <node-td class="w-32 flex flex-row">
+      <node-td class="w-32 flex flex-row capitalize">
         <div class="w-5">
           <div v-if="state.children.length || checkboxState.disabled" @click="toggleTdExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
             <font-awesome-icon v-if="!tdExpanded" icon="caret-right"></font-awesome-icon>
@@ -26,7 +26,7 @@
         {{type}}
       </node-td>
       <node-td class="w-16">{{obj.id}}</node-td>
-      <node-td class="w-64">{{obj.name}}</node-td>
+      <node-td class="w-64 capitalize">{{obj.name}}</node-td>
       <node-td class="w-32">{{obj.status ? obj.status : 'n/a'}}</node-td>
       <node-td class="w-24">{{state.children.length}}</node-td>
     </ul>

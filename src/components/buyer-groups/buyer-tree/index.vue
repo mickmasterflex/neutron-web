@@ -5,7 +5,7 @@
       <li class="w-16">Id</li>
       <li class="w-64">Name</li>
       <li class="w-32">Status</li>
-      <li class="w-32 pr-5">Contracts</li>
+      <li class="w-32 pr-5">Buyers</li>
     </ul>
     <div class="bg-white p-2 rounded-b-lg border-2 border-t-0 border-gray-200">
       <buyer-tree-node
