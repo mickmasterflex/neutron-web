@@ -15,8 +15,9 @@
       ></font-awesome-icon>
       <font-awesome-icon v-else
                          :icon="['far', 'square']"
-                         :class="{'text-gray-300': showDisabled,
-                                'text-gray-600 hover:text-gray-900': !showDisabled}"
+                         :class="showDisabled ?
+                                `text-${uncheckedColor}-300` :
+                                `text-${uncheckedColor}-600 hover:text-${uncheckedColor}-900`"
       ></font-awesome-icon>
     </slot>
     <input
@@ -58,8 +59,12 @@ export default {
     indeterminate: {
       type: Boolean
     },
+    uncheckedColor: {
+      default: 'gray',
+      type: String
+    },
     checkedColor: {
-      default: 'green',
+      default: 'blue',
       type: String
     },
     indeterminateColor: {
