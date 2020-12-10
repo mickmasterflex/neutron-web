@@ -176,7 +176,7 @@ const routes = [
   {
     path: '/relationships/clients/',
     name: 'Relationships',
-    component: () => import('@/views/relationships/client-mgmt/clients/index.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/clients/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -185,7 +185,7 @@ const routes = [
   },
   {
     path: '/relationships/clients/:slug/',
-    component: () => import('@/views/relationships/client-mgmt/clients/client/index.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/clients/client/index.vue'),
     props (route) {
       return { ...route.params }
     },
@@ -193,7 +193,7 @@ const routes = [
       {
         name: 'Client',
         path: '',
-        component: () => import('@/views/relationships/client-mgmt/clients/client/details.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/clients/client/details.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -204,7 +204,7 @@ const routes = [
       {
         path: 'contracts/',
         name: 'ClientContracts',
-        component: () => import('@/views/relationships/client-mgmt/clients/client/contracts.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/clients/client/contracts.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -216,7 +216,7 @@ const routes = [
   },
   {
     path: '/relationships/clients/:client/contracts/partners/:id/',
-    component: () => import('@/views/relationships/client-mgmt/partner/index.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/partner/index.vue'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
@@ -226,7 +226,7 @@ const routes = [
       {
         name: 'PartnerContract',
         path: '',
-        component: () => import('@/views/relationships/client-mgmt/partner/details.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/partner/details.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -242,7 +242,7 @@ const routes = [
       {
         path: 'campaigns/',
         name: 'PartnerContractCampaigns',
-        component: () => import('@/views/relationships/client-mgmt/partner/campaigns.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/partner/campaigns.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -253,7 +253,7 @@ const routes = [
       {
         name: 'PartnerContractChildren',
         path: 'contracts/',
-        component: () => import('@/views/relationships/client-mgmt/partner/contracts'),
+        component: () => import('@/views/relationships/contract-mgmt/partner/contracts'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -266,7 +266,7 @@ const routes = [
   {
     path: '/relationships/clients/:client/contracts/partners/:partner/campaigns/:id/',
     name: 'Campaign',
-    component: () => import('@/views/relationships/client-mgmt/campaign.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/campaign.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
@@ -281,7 +281,7 @@ const routes = [
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:id/',
-    component: () => import('@/views/relationships/client-mgmt/buyer/index.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/buyer/index.vue'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
@@ -291,7 +291,7 @@ const routes = [
       {
         name: 'BuyerContract',
         path: '',
-        component: () => import('@/views/relationships/client-mgmt/buyer/details.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/buyer/details.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -307,7 +307,7 @@ const routes = [
       {
         name: 'BuyerContractChildren',
         path: 'contracts/',
-        component: () => import('@/views/relationships/client-mgmt/buyer/contracts'),
+        component: () => import('@/views/relationships/contract-mgmt/buyer/contracts'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -318,7 +318,7 @@ const routes = [
       {
         name: 'BuyerContractFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/client-mgmt/buyer/field-management'),
+        component: () => import('@/views/relationships/contract-mgmt/buyer/field-management'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -329,7 +329,7 @@ const routes = [
       {
         name: 'BuyerContractOffers',
         path: 'offers/',
-        component: () => import('@/views/relationships/client-mgmt/buyer/offers.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/buyer/offers.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -342,7 +342,7 @@ const routes = [
   {
     path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/:id/',
     name: 'Offer',
-    component: () => import('@/views/relationships/client-mgmt/offer.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/offer.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'relationships'
