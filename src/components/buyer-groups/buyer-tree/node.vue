@@ -95,6 +95,7 @@ function useClient (clientId, currentBuyerGroupId, refs, store) {
   return {
     check,
     checkboxState,
+    computedState,
     state
   }
 }
@@ -196,6 +197,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
   return {
     check,
     checkboxState,
+    computedState,
     state
   }
 }
@@ -223,7 +225,7 @@ export default {
     const { childrenVisible, toggleChildrenVisible } = useChildVisibility()
 
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
-    const { check, checkboxState, state } =
+    const { check, checkboxState, computedState, state } =
       props.type === 'client'
         ? useClient(props.obj.id, currentBuyerGroupId, refs, store)
         : useBuyer(props.obj.id, currentBuyerGroupId, refs, store)
@@ -231,6 +233,7 @@ export default {
     return {
       check,
       checkboxState,
+      computedState,
       childrenVisible,
       state,
       toggleChildrenVisible
