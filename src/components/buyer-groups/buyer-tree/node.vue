@@ -200,7 +200,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
       failedToast({
         heading: 'Buyer Group Inheritance Error',
-        content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.name}' in order to modify '${state.buyer.name}'.`
+        content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.buyer_group_name}' in order to modify '${state.buyer.name}'.`
       })
     } else {
       failedToast({ heading: 'An Unknown Error Occurred' })
