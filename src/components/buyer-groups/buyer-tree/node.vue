@@ -26,19 +26,19 @@
       </node-td>
       <node-td class="w-16">{{obj.id}}</node-td>
       <node-td class="w-64">{{obj.name}}</node-td>
-      <node-td class="w-32">{{obj.status ? obj.status : 'active'}}</node-td>
+      <node-td class="w-32">{{obj.status ? obj.status : 'n/a'}}</node-td>
       <node-td class="w-24">{{state.children.length}}</node-td>
     </ul>
     <div v-show="childrenVisible">
       <p v-if="checkboxState.disabled || checkboxState.checkedImplied" :class="`bg-${accentColor}-100 text-${accentColor}-800 w-full pl-8 pr-2 pb-2`">
         <span v-if="computedState.isBuyerInOtherGroup">
-          Conflicting Buyer Group: Click checkbox for more details
+          Conflicting Buyer Group: Remove from <span class="font-bold">{{ assignedBuyerGroup[0].name }}</span> in order to modify
         </span>
         <span v-else-if="computedState.descendantsInAnotherGroupCount > 0">
-          Conflicting Descendant Buyer Group. Click checkbox for more details
+          Conflicting Descendant Buyer Group. Unassign children to modify <span class="font-bold">{{ obj.name }}</span>.
         </span>
         <span v-else-if="state.buyer.inherited_buyer_group !== null">
-          Inherits buyer group from a parent. Click checkbox for more details
+          Inherits buyer group from a parent. Unassign parent to modify <span class="font-bold">{{ obj.name }}</span>.
         </span>
         <span v-else-if="checkboxState.checkedImplied">
           Buyer is not in <span class="font-bold">{{ currentBuyerGroup.name }}</span>, but all direct children are.
@@ -260,8 +260,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentBuyerGroup: 'getCurrentBuyerGroup'
+      currentBuyerGroup: 'getCurrentBuyerGroup',
+      getBuyerGroupById: 'getBuyerGroupById'
     }),
+    assignedBuyerGroup () {
+      return this.getBuyerGroupById(this.obj.buyer_group)
+    },
     accentColor () {
       let color = 'gray'
       if (this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) {
