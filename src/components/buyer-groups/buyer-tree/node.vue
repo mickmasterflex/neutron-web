@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <ul class="tr flex flex-row">
-      <li class="td border-l border-b border-gray-200 w-32">
-        <span v-if="state.children.length" @click="toggleChildrenVisible()" class="p-1 mr-1 cursor-pointer">
-          <font-awesome-icon v-if="!childrenVisible" icon="caret-right" class="text-gray-500 hover:text-gray-700"></font-awesome-icon>
-          <font-awesome-icon v-if="childrenVisible" icon="caret-down" class="text-gray-800"></font-awesome-icon>
-        </span>
+  <div class="mb-1"
+       :class="`${childrenVisible ? `rounded-lg border-2 border-${accentColor}-200 overflow-hidden` : ''}`">
+    <ul class="flex flex-row transition-colors duration-200"
+        :class="`${childrenVisible ? `bg-${accentColor}-100` : `bg-white hover:bg-${checkboxState.disabled && !computedState.buyerInheritsCurrentBuyerGroup > 0 ? 'red' : 'blue'}-100 rounded-lg`}`">
+      <node-td class="w-32 flex flex-row">
+        <div class="w-5">
+          <div v-if="state.children.length || checkboxState.disabled" @click="toggleChildrenVisible()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
+            <font-awesome-icon v-if="!childrenVisible" icon="caret-right"></font-awesome-icon>
+            <font-awesome-icon v-if="childrenVisible" icon="caret-down"></font-awesome-icon>
+          </div>
+        </div>
         <slot name="checkbox">
           <checkbox-field
             :field_id="type + obj.id"
@@ -14,32 +18,47 @@
             :indeterminate="checkboxState.indeterminate"
             :disabledVisually="checkboxState.disabled"
             :checkedColor="state.children.length > 0 && computedState.areAllChildrenInGroup && checkboxState.checkedImplied ? 'yellow' : 'blue'"
+            :uncheckedColor="accentColor"
           >
-            <template v-if="computedState.isBuyerInOtherGroup" v-slot:checkbox>
-              <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-600 cursor-pointer"></font-awesome-icon>
-            </template>
           </checkbox-field>
         </slot>
         {{type}}
-      </li>
-      <li class="td border-b border-gray-200 w-16">{{obj.id}}</li>
-      <li class="td border-b border-gray-200 w-64">{{obj.name}}</li>
-      <li class="td border-b border-gray-200 w-32">{{obj.status ? obj.status : 'active'}}</li>
-      <li class="td border-r border-b border-gray-200 w-24">{{state.children.length}}</li>
+      </node-td>
+      <node-td class="w-16">{{obj.id}}</node-td>
+      <node-td class="w-64">{{obj.name}}</node-td>
+      <node-td class="w-32">{{obj.status ? obj.status : 'active'}}</node-td>
+      <node-td class="w-24">{{state.children.length}}</node-td>
     </ul>
     <div v-show="childrenVisible">
-      <!-- Vue3 Migration: Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for -->
-      <buyer-tree-node
-        v-for="buyer in state.children"
-        :ref="buyer.id"
-        :obj="buyer"
-        :key="buyer.id"
-        class="pl-3"></buyer-tree-node>
+      <p v-if="checkboxState.disabled || checkboxState.checkedImplied" :class="`bg-${accentColor}-100 text-${accentColor}-800 w-full pl-8 pr-2 pb-2`">
+        <span v-if="computedState.isBuyerInOtherGroup">
+          Conflicting Buyer Group: Click checkbox for more details
+        </span>
+        <span v-else-if="computedState.descendantsInAnotherGroupCount > 0">
+          Conflicting Descendant Buyer Group. Click checkbox for more details
+        </span>
+        <span v-else-if="state.buyer.inherited_buyer_group !== null">
+          Inherits buyer group from a parent. Click checkbox for more details
+        </span>
+        <span v-else-if="checkboxState.checkedImplied">
+          Buyer is not in <span class="font-bold">{{ currentBuyerGroup.name }}</span>, but all direct children are.
+        </span>
+      </p>
+      <div class="p-2" v-if="state.children.length">
+        <!-- Vue3 Migration: Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for -->
+        <buyer-tree-node
+          v-for="buyer in state.children"
+          :ref="buyer.id"
+          :obj="buyer"
+          :key="buyer.id"></buyer-tree-node>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import nodeTreeTd from '@/components/ui/tables/node-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
 import { failedToast } from '@/mixins/toast-messages'
@@ -181,7 +200,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
       const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
       failedToast({
         heading: 'Buyer Group Inheritance Error',
-        content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.name}' in order assign '${state.buyer.name}' to another buyer group.`
+        content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.name}' in order to modify '${state.buyer.name}'.`
       })
     } else {
       failedToast({ heading: 'An Unknown Error Occurred' })
@@ -239,8 +258,21 @@ export default {
       toggleChildrenVisible
     }
   },
+  computed: {
+    ...mapGetters({
+      currentBuyerGroup: 'getCurrentBuyerGroup'
+    }),
+    accentColor () {
+      let color = 'gray'
+      if (this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) {
+        color = 'red'
+      }
+      return color
+    }
+  },
   components: {
-    'buyer-tree-node': buyerTreeNode
+    'buyer-tree-node': buyerTreeNode,
+    'node-td': nodeTreeTd
   }
 }
 </script>

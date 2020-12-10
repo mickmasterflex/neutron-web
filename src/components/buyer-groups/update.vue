@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal" @close="close">
+  <modal-template class="modal-lg" :show="showModal" @close="close">
     <template v-slot:header>Update Buyer Group</template>
     <template v-slot:body>
       <div class="form-horizontal">
