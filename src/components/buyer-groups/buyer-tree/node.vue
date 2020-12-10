@@ -1,13 +1,14 @@
 <template>
   <div class="mb-1"
-       :class="`${childrenVisible ? `rounded-lg border-2 border-${accentColor}-200 overflow-hidden` : ''}`">
-    <ul class="flex flex-row transition-colors duration-200"
-        :class="`${childrenVisible ? `bg-${accentColor}-100` : `bg-white hover:bg-${checkboxState.disabled && !computedState.buyerInheritsCurrentBuyerGroup > 0 ? 'red' : 'blue'}-100 rounded-lg`}`">
+       :class="`${tdExpanded ? `rounded-lg border-2 border-${accentColor}-200 overflow-hidden` : ''}`">
+    <ul @click="toggleTdExpanded(expandable)"
+        class="flex flex-row transition-colors duration-200"
+        :class="`${expandable ? 'cursor-pointer' : ''} ${tdExpanded ? `bg-${accentColor}-100` : `bg-white hover:bg-${checkboxState.disabled && !computedState.buyerInheritsCurrentBuyerGroup > 0 ? 'red' : 'blue'}-100 rounded-lg`}`">
       <node-td class="w-32 flex flex-row">
         <div class="w-5">
-          <div v-if="state.children.length || checkboxState.disabled" @click="toggleChildrenVisible()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
-            <font-awesome-icon v-if="!childrenVisible" icon="caret-right"></font-awesome-icon>
-            <font-awesome-icon v-if="childrenVisible" icon="caret-down"></font-awesome-icon>
+          <div v-if="state.children.length || checkboxState.disabled" @click="toggleTdExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
+            <font-awesome-icon v-if="!tdExpanded" icon="caret-right"></font-awesome-icon>
+            <font-awesome-icon v-if="tdExpanded" icon="caret-down"></font-awesome-icon>
           </div>
         </div>
         <slot name="checkbox">
@@ -29,7 +30,7 @@
       <node-td class="w-32">{{obj.status ? obj.status : 'n/a'}}</node-td>
       <node-td class="w-24">{{state.children.length}}</node-td>
     </ul>
-    <div v-show="childrenVisible">
+    <div v-show="tdExpanded">
       <p v-if="checkboxState.disabled || checkboxState.checkedImplied" :class="`bg-${accentColor}-100 text-${accentColor}-800 w-full pl-8 pr-2 pb-2`">
         <span v-if="computedState.isBuyerInOtherGroup">
           Conflicting Buyer Group: Remove from <span class="font-bold">{{ assignedBuyerGroup[0].name }}</span> in order to modify
@@ -63,15 +64,17 @@ import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
 import { failedToast } from '@/mixins/toast-messages'
 
-function useChildVisibility () {
-  const childrenVisible = ref(false)
+function useExpandTd () {
+  const tdExpanded = ref(false)
 
-  function toggleChildrenVisible () {
-    childrenVisible.value = !childrenVisible.value
+  function toggleTdExpanded (childrenExist) {
+    if (childrenExist) {
+      tdExpanded.value = !tdExpanded.value
+    }
   }
   return {
-    childrenVisible,
-    toggleChildrenVisible
+    tdExpanded,
+    toggleTdExpanded
   }
 }
 
@@ -241,7 +244,7 @@ export default {
     // Vue3 Migration: setupContext.refs will not be available in vue3. Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for
     const refs = setupContext.refs
 
-    const { childrenVisible, toggleChildrenVisible } = useChildVisibility()
+    const { tdExpanded, toggleTdExpanded } = useExpandTd()
 
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
     const { check, checkboxState, computedState, state } =
@@ -253,9 +256,9 @@ export default {
       check,
       checkboxState,
       computedState,
-      childrenVisible,
       state,
-      toggleChildrenVisible
+      tdExpanded,
+      toggleTdExpanded
     }
   },
   computed: {
@@ -272,6 +275,9 @@ export default {
         color = 'red'
       }
       return color
+    },
+    expandable () {
+      return this.state.children.length > 0 || this.checkboxState.disabled
     }
   },
   components: {

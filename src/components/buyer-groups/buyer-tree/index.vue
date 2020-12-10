@@ -1,13 +1,13 @@
 <template>
   <div class="table table-border-none w-auto">
-    <ul class="flex flex-row font-normal p-3 rounded-t-lg border-gray-800 bg-gray-900 text-left text-white">
+    <ul class="flex flex-row font-normal p-3 rounded-t-lg border-2 border-gray-200 border-b-0 bg-gray-900 text-left text-white">
       <li class="w-32 pl-12">Type</li>
       <li class="w-16">Id</li>
       <li class="w-64">Name</li>
       <li class="w-32">Status</li>
       <li class="w-32 pr-5">Contracts</li>
     </ul>
-    <div class="bg-white p-2 rounded-b-lg border-2 border-gray-200">
+    <div class="bg-white p-2 rounded-b-lg border-2 border-t-0 border-gray-200">
       <buyer-tree-node
         v-for="client in allClients"
         :key="client.id"
