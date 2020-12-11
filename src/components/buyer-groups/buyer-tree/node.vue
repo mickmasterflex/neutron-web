@@ -164,13 +164,7 @@ function useBuyer (buyerId, currentBuyerGroupId, store) {
     })
   }
   function handleToastErrorMessages () {
-    if (computedState.isBuyerInOtherGroup) {
-      const conflictingGroup = store.getters.getBuyerGroupById(state.buyer.buyer_group)[0]
-      failedToast({
-        heading: 'Conflicting Buyer Group',
-        content: `Remove '${state.buyer.name}' from '${conflictingGroup.name}' in order to assign it to another group.`
-      })
-    } else if (computedState.descendantsInAnotherGroupCount > 0) {
+    if (computedState.descendantsInAnotherGroupCount > 0) {
       failedToast({
         heading: 'Conflicting Descendant Buyer Group',
         content: `${computedState.descendantsInAnotherGroupCount} descendant${computedState.descendantsInAnotherGroupCount > 1 ? 's' : ''} belong${computedState.descendantsInAnotherGroupCount > 1 ? '' : 's'} to another group, unable to set parent to another group.`
