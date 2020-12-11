@@ -6,8 +6,11 @@
         <p class="h4 ml-1 mb-0 pb-0 font-bold">{{ loadingText }}</p>
       </div>
     </transition>
-    <div class="flex flex-row justify-between items-center bg-white rounded-t-xl p-3 pl-4" style="height: 70px;">
-      <h3 class="h4 m-0">{{title}}</h3>
+    <div class="flex flex-row justify-between items-center bg-white rounded-t-xl p-3 pl-4" style="min-height: 70px;">
+      <div class="">
+        <h3 class="h4 m-0">{{title}}</h3>
+        <h4 class="h5 text-gray-600 m-0" v-if="subtitle">{{subtitle}}</h4>
+      </div>
       <transition v-if="actionTransition" enter-active-class="animate__animated animate__bounceIn" leave-active-class="animate__animated animate__fast animate__fadeOut">
         <slot name="action"></slot>
       </transition>
@@ -29,6 +32,9 @@ export default {
     title: {
       type: String,
       default: 'Panel Title'
+    },
+    subtitle: {
+      type: String
     },
     actionTransition: {
       type: Boolean,

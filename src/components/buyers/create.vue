@@ -7,7 +7,6 @@
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
-          <select-buyer-group v-model="buyerGroup"></select-buyer-group>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
@@ -20,7 +19,6 @@
 
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
-import selectBuyerGroup from '@/components/buyer-groups/select'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
@@ -92,8 +90,7 @@ export default {
     }
   },
   components: {
-    'date-picker': datePicker,
-    'select-buyer-group': selectBuyerGroup
+    'date-picker': datePicker
   }
 }
 </script>
