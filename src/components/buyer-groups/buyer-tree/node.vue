@@ -273,15 +273,20 @@ export default {
     assignedBuyerGroup () {
       return this.getBuyerGroupById(this.obj.buyer_group)
     },
-    accentColor () {
-      let color = 'gray'
-      if (this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) {
-        color = 'red'
-      }
-      return color
-    },
     expandable () {
-      return this.state.children.length > 0 || this.checkboxState.disabled
+      return this.state.children.length > 0 ||
+             this.computedState.isBuyerInOtherGroup ||
+             this.checkboxState.disabled
+    }
+  },
+  methods: {
+    accentColor (defaultColor = 'gray') {
+      if ((this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) ||
+        this.computedState.isBuyerInOtherGroup) {
+        return 'red'
+      } else {
+        return defaultColor
+      }
     }
   },
   components: {
