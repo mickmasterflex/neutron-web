@@ -12,6 +12,7 @@
           </div>
         </div>
         <checkbox-field
+          v-if="type === 'buyer'"
           :field_id="type + obj.id"
           @input="check()"
           :value="checkboxState.checked"
@@ -24,33 +25,32 @@
             <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-700 cursor-pointer"></font-awesome-icon>
           </template>
         </checkbox-field>
-        {{type}}
+        <span class="text-gray-700">{{type}}</span>
       </node-td>
-      <node-td class="w-16">{{obj.id}}</node-td>
-      <node-td class="w-64 capitalize">{{obj.name}}</node-td>
+      <node-td class="w-10 text-gray-900">{{obj.id}}</node-td>
+      <node-td class="w-64 text-gray-900 capitalize">{{obj.name}}</node-td>
       <node-td class="w-32">{{obj.status ? obj.status : 'n/a'}}</node-td>
-      <node-td class="w-24">{{state.children.length}}</node-td>
+      <node-td class="w-24 text-gray-900">{{state.children.length}}</node-td>
     </ul>
     <div v-show="tdExpanded">
-      <p v-if="checkboxState.disabled || checkboxState.checkedImplied || computedState.isBuyerInOtherGroup" :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
+      <p v-if="type === 'buyer' && (checkboxState.disabled || checkboxState.checkedImplied || computedState.isBuyerInOtherGroup)"
+         :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
         <span v-if="computedState.isBuyerInOtherGroup">
-          Conflicting Buyer Group: Click the x icon to remove from <span class="font-bold capitalize">{{ assignedBuyerGroup[0].name }}</span>.
+          Conflicting Buyer Group: Click the x icon to unassign from <span class="font-bold capitalize">{{ assignedBuyerGroup[0].name }}</span>.
         </span>
         <span v-else-if="computedState.descendantsInAnotherGroupCount > 0">
-          Conflicting Descendant Buyer Group. Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
+          Conflicting Descendant Buyer Group: Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
         </span>
         <span v-else-if="state.buyer.inherited_buyer_group !== null">
           Inherits buyer group from the parent with id <span class="font-bold capitalize">{{ obj.inherited_buyer_group.contract }}</span>. Unassign parent to modify.
         </span>
         <span v-else-if="checkboxState.checkedImplied">
-          All direct children are in <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>, but <span class="font-bold capitalize">{{ obj.name }}</span> is not assigned a group.
+          Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
         </span>
       </p>
       <div class="p-2" v-if="state.children.length">
-        <!-- Vue3 Migration: Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for -->
         <buyer-tree-node
           v-for="buyer in state.children"
-          :ref="buyer.id"
           :obj="buyer"
           :key="buyer.id"></buyer-tree-node>
       </div>
@@ -79,51 +79,16 @@ function useExpandTd () {
   }
 }
 
-function useClient (clientId, currentBuyerGroupId, refs, store) {
-  const checkboxState = reactive({
-    checked: computed(() => {
-      return state.children.length > 0 && computedState.areAllChildrenInGroup
-    }),
-    disabled: computed(
-      () => state.children.length === 0
-    ),
-    indeterminate: computed(
-      () => !checkboxState.checked &&
-        computedState.childrenInGroup.length > 0
-    )
-  })
-  const computedState = reactive({
-    childrenInGroup: computed(
-      () => state.children.filter(b => b.buyer_group === currentBuyerGroupId.value)
-    ),
-    areAllChildrenInGroup: computed(
-      () => state.children.length === computedState.childrenInGroup.length
-    )
-  })
+function useClient (clientId, store) {
   const state = reactive({
     children: computed(() => store.getters.getParentlessBuyersByClient(clientId))
   })
-  function check () {
-    Object.keys(refs).forEach(key => {
-      const buyer = refs[key][0]
-      if (computedState.areAllChildrenInGroup) {
-        // Runs check() on all checked buyers if all are checked
-        buyer.check()
-      } else if (!buyer.checkboxState.checked || buyer.checkboxState.checkedImplied) {
-        // Runs check() only on unchecked buyers
-        buyer.check()
-      }
-    })
-  }
   return {
-    check,
-    checkboxState,
-    computedState,
     state
   }
 }
 
-function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
+function useBuyer (buyerId, currentBuyerGroupId, store) {
   const checkboxState = reactive({
     checked: computed(() => {
       if (computedState.isBuyerInGroup) {
@@ -243,18 +208,15 @@ export default {
       }
     }
   },
-  setup (props, setupContext) {
+  setup (props) {
     const store = inject('vuex-store')
-    // Vue3 Migration: setupContext.refs will not be available in vue3. Refactor and use function refs. https://v3.vuejs.org/guide/composition-api-template-refs.html#usage-inside-v-for
-    const refs = setupContext.refs
-
     const { tdExpanded, toggleTdExpanded } = useExpandTd()
 
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
     const { check, checkboxState, computedState, state } =
       props.type === 'client'
-        ? useClient(props.obj.id, currentBuyerGroupId, refs, store)
-        : useBuyer(props.obj.id, currentBuyerGroupId, refs, store)
+        ? useClient(props.obj.id, store)
+        : useBuyer(props.obj.id, currentBuyerGroupId, store)
 
     return {
       check,
@@ -281,8 +243,7 @@ export default {
   },
   methods: {
     accentColor (defaultColor = 'gray') {
-      if ((this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) ||
-        this.computedState.isBuyerInOtherGroup) {
+      if (this.type === 'buyer' && ((this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) || this.computedState.isBuyerInOtherGroup)) {
         return 'red'
       } else {
         return defaultColor
