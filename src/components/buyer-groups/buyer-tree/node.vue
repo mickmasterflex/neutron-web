@@ -1,28 +1,29 @@
 <template>
   <div class="mb-1"
-       :class="`${tdExpanded ? `rounded-lg border-2 border-${accentColor}-200 overflow-hidden` : ''}`">
+       :class="`${tdExpanded ? `rounded-lg border-2 border-${accentColor('gray')}-200 overflow-hidden` : ''}`">
     <ul @click="toggleTdExpanded(expandable)"
         class="flex flex-row transition-colors duration-200"
-        :class="`${expandable ? 'cursor-pointer' : ''} ${tdExpanded ? `bg-${accentColor}-100` : `bg-white hover:bg-${checkboxState.disabled && !computedState.buyerInheritsCurrentBuyerGroup > 0 ? 'red' : 'blue'}-100 rounded-lg`}`">
+        :class="`${expandable ? 'cursor-pointer' : ''} ${tdExpanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
       <node-td class="w-32 flex flex-row capitalize">
         <div class="w-5">
-          <div v-if="state.children.length || checkboxState.disabled" @click="toggleTdExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
+          <div v-if="expandable" @click="toggleTdExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
             <font-awesome-icon v-if="!tdExpanded" icon="caret-right"></font-awesome-icon>
             <font-awesome-icon v-if="tdExpanded" icon="caret-down"></font-awesome-icon>
           </div>
         </div>
-        <slot name="checkbox">
-          <checkbox-field
-            :field_id="type + obj.id"
-            @input="check()"
-            :value="checkboxState.checked"
-            :indeterminate="checkboxState.indeterminate"
-            :disabledVisually="checkboxState.disabled"
-            :checkedColor="state.children.length > 0 && computedState.areAllChildrenInGroup && checkboxState.checkedImplied ? 'yellow' : 'blue'"
-            :uncheckedColor="accentColor"
-          >
-          </checkbox-field>
-        </slot>
+        <checkbox-field
+          :field_id="type + obj.id"
+          @input="check()"
+          :value="checkboxState.checked"
+          :indeterminate="checkboxState.indeterminate"
+          :disabledVisually="checkboxState.disabled"
+          :checkedColor="state.children.length > 0 && computedState.areAllChildrenInGroup && checkboxState.checkedImplied ? 'yellow' : 'blue'"
+          :uncheckedColor="accentColor('gray')"
+        >
+          <template v-if="computedState.isBuyerInOtherGroup" v-slot:checkbox>
+            <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-700 cursor-pointer"></font-awesome-icon>
+          </template>
+        </checkbox-field>
         {{type}}
       </node-td>
       <node-td class="w-16">{{obj.id}}</node-td>
@@ -134,8 +135,7 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
                    (state.children.length > 0 && computedState.areAllChildrenInGroup)
     ),
     disabled: computed(
-      () => computedState.isBuyerInOtherGroup ||
-                   computedState.descendantsInAnotherGroupCount > 0 ||
+      () => computedState.descendantsInAnotherGroupCount > 0 ||
                    state.buyer.inherited_buyer_group !== null
     ),
     indeterminate: computed(
@@ -182,7 +182,11 @@ function useBuyer (buyerId, currentBuyerGroupId, refs, store) {
   })
   function saveBuyer () {
     const updatedBuyer = { ...state.buyer }
-    updatedBuyer.buyer_group = computedState.isBuyerInGroup ? null : currentBuyerGroupId.value
+    if (computedState.isBuyerInOtherGroup || computedState.isBuyerInGroup) {
+      updatedBuyer.buyer_group = null
+    } else {
+      updatedBuyer.buyer_group = currentBuyerGroupId.value
+    }
     store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
       store.commit('SET_CURRENT_BUYER_GROUP_ANCESTOR_DATA', null)
     })
