@@ -1,14 +1,14 @@
 <template>
   <div class="mb-1"
-       :class="`${tdExpanded ? `rounded-lg border-2 border-${accentColor('gray')}-200 overflow-hidden` : ''}`">
-    <ul @click="toggleTdExpanded(expandable)"
+       :class="`${expandedState.expanded ? `rounded-lg border-2 border-${accentColor('gray')}-200 overflow-hidden` : ''}`">
+    <ul @click="toggleTrExpanded()"
         class="flex flex-row transition-colors duration-200"
-        :class="`${expandable ? 'cursor-pointer' : ''} ${tdExpanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
+        :class="`${expandedState.expandable ? 'cursor-pointer' : ''} ${expandedState.expanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
       <node-td class="w-32 flex flex-row capitalize">
         <div class="w-5">
-          <div v-if="expandable" @click="toggleTdExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
-            <font-awesome-icon v-if="!tdExpanded" icon="caret-right"></font-awesome-icon>
-            <font-awesome-icon v-if="tdExpanded" icon="caret-down"></font-awesome-icon>
+          <div v-if="expandedState.expandable" @click="toggleTrExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
+            <font-awesome-icon v-if="!expandedState.expanded" icon="caret-right"></font-awesome-icon>
+            <font-awesome-icon v-if="expandedState.expanded" icon="caret-down"></font-awesome-icon>
           </div>
         </div>
         <checkbox-field
@@ -32,7 +32,7 @@
       <node-td class="w-32">{{obj.status ? obj.status : 'n/a'}}</node-td>
       <node-td class="w-24 text-gray-900">{{state.children.length}}</node-td>
     </ul>
-    <div v-show="tdExpanded">
+    <div v-show="expandedState.expanded">
       <p v-if="type === 'buyer' && (checkboxState.disabled || checkboxState.checkedImplied || computedState.isBuyerInOtherGroup)"
          :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
         <span v-if="computedState.isBuyerInOtherGroup">
@@ -65,17 +65,24 @@ import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
 import { failedToast } from '@/mixins/toast-messages'
 
-function useExpandTd () {
-  const tdExpanded = ref(false)
+function useExpandTr (children, computedState, checkboxState) {
+  const expandedState = reactive({
+    expanded: ref(false),
+    expandable: computed(() => {
+      return children.length > 0 ||
+        computedState.isBuyerInOtherGroup ||
+        checkboxState.disabled
+    })
+  })
 
-  function toggleTdExpanded (childrenExist) {
-    if (childrenExist) {
-      tdExpanded.value = !tdExpanded.value
+  function toggleTrExpanded () {
+    if (expandedState.expandable) {
+      expandedState.expanded = !expandedState.expanded
     }
   }
   return {
-    tdExpanded,
-    toggleTdExpanded
+    expandedState,
+    toggleTrExpanded
   }
 }
 
@@ -210,21 +217,21 @@ export default {
   },
   setup (props) {
     const store = inject('vuex-store')
-    const { tdExpanded, toggleTdExpanded } = useExpandTd()
 
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
     const { check, checkboxState, computedState, state } =
       props.type === 'client'
         ? useClient(props.obj.id, store)
         : useBuyer(props.obj.id, currentBuyerGroupId, store)
+    const { expandedState, toggleTrExpanded } = useExpandTr(state.children, computedState, checkboxState)
 
     return {
       check,
       checkboxState,
       computedState,
       state,
-      tdExpanded,
-      toggleTdExpanded
+      expandedState,
+      toggleTrExpanded
     }
   },
   computed: {
@@ -234,11 +241,6 @@ export default {
     }),
     assignedBuyerGroup () {
       return this.getBuyerGroupById(this.obj.buyer_group)
-    },
-    expandable () {
-      return this.state.children.length > 0 ||
-             this.computedState.isBuyerInOtherGroup ||
-             this.checkboxState.disabled
     }
   },
   methods: {
