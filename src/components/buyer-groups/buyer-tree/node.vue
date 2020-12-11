@@ -32,18 +32,18 @@
       <node-td class="w-24">{{state.children.length}}</node-td>
     </ul>
     <div v-show="tdExpanded">
-      <p v-if="checkboxState.disabled || checkboxState.checkedImplied" :class="`bg-${accentColor}-100 text-${accentColor}-800 w-full pl-8 pr-2 pb-2`">
+      <p v-if="checkboxState.disabled || checkboxState.checkedImplied || computedState.isBuyerInOtherGroup" :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
         <span v-if="computedState.isBuyerInOtherGroup">
-          Conflicting Buyer Group: Remove from <span class="font-bold">{{ assignedBuyerGroup[0].name }}</span> in order to modify
+          Conflicting Buyer Group: Click the x icon to remove from <span class="font-bold capitalize">{{ assignedBuyerGroup[0].name }}</span>.
         </span>
         <span v-else-if="computedState.descendantsInAnotherGroupCount > 0">
-          Conflicting Descendant Buyer Group. Unassign children to modify <span class="font-bold">{{ obj.name }}</span>.
+          Conflicting Descendant Buyer Group. Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
         </span>
         <span v-else-if="state.buyer.inherited_buyer_group !== null">
-          Inherits buyer group from a parent. Unassign parent to modify <span class="font-bold">{{ obj.name }}</span>.
+          Inherits buyer group from the parent with id <span class="font-bold capitalize">{{ obj.inherited_buyer_group.contract }}</span>. Unassign parent to modify.
         </span>
         <span v-else-if="checkboxState.checkedImplied">
-          Buyer is not in <span class="font-bold">{{ currentBuyerGroup.name }}</span>, but all direct children are.
+          All direct children are in <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>, but <span class="font-bold capitalize">{{ obj.name }}</span> is not assigned a group.
         </span>
       </p>
       <div class="p-2" v-if="state.children.length">
