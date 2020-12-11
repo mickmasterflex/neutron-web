@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="clients" class="table table-striped">
+    <table v-if="clients.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Name</th>
@@ -22,9 +22,10 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
+    <table-empty-state v-else
+                       class="well"
+                       heading="No Clients Exist"
+                       copy="Use the 'New Client' button to get started."></table-empty-state>
   </div>
 </template>
 

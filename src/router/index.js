@@ -163,25 +163,34 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
-    path: '/relationships/buyer-groups/',
-    name: 'BuyerGroups',
-    component: () => import('@/views/relationships/buyer-groups.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships',
-      activeAppTab: 'buyer-groups'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
-    path: '/relationships/clients/',
+    path: '/relationships/',
     name: 'Relationships',
-    component: () => import('@/views/relationships/contract-mgmt/clients/index.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true }
+    component: () => import('@/views/relationships/index.vue'),
+    redirect: { name: 'Clients' },
+    children: [
+      {
+        name: 'Clients',
+        path: 'clients/',
+        component: () => import('@/views/relationships/contract-mgmt/clients/index.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'clients'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'BuyerGroups',
+        path: 'buyer-groups/',
+        component: () => import('@/views/relationships/buyer-groups.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'buyerGroups'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/relationships/clients/:slug/',
