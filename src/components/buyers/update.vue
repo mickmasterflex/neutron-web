@@ -10,7 +10,11 @@
           <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
-          <select-buyer-group v-model="buyerGroup"></select-buyer-group>
+          <text-field :field_disabled="true" v-model="buyerGroup" field_id="buyer_group" field_label="Buyer Group" class="relative">
+            <div class="absolute h-base-field field-lg flex flex-row justify-end top-0 left-0 pr-3 ml-label-width">
+              <router-link :to="{name: 'BuyerGroups'}" class="text-link mt-2"><font-awesome-icon icon="external-link-alt"></font-awesome-icon></router-link>
+            </div>
+          </text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
@@ -20,7 +24,6 @@
 
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
-import selectBuyerGroup from '@/components/buyer-groups/select'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -102,8 +105,7 @@ export default {
     }
   },
   components: {
-    'date-picker': datePicker,
-    'select-buyer-group': selectBuyerGroup
+    'date-picker': datePicker
   }
 }
 </script>
