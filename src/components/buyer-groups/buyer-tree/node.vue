@@ -65,7 +65,6 @@ import { mapGetters } from 'vuex'
 import nodeTreeTd from '@/components/ui/tables/node-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
-import { failedToast } from '@/mixins/toast-messages'
 
 function useExpandTr (children, computedState, checkboxState) {
   const expandedState = reactive({
@@ -165,26 +164,8 @@ function useBuyer (buyerId, currentBuyerGroupId, store) {
       store.commit('SET_CURRENT_BUYER_GROUP_ANCESTOR_DATA', null)
     })
   }
-  function handleToastErrorMessages () {
-    if (computedState.descendantsInAnotherGroupCount > 0) {
-      failedToast({
-        heading: 'Conflicting Descendant Buyer Group',
-        content: `${computedState.descendantsInAnotherGroupCount} descendant${computedState.descendantsInAnotherGroupCount > 1 ? 's' : ''} belong${computedState.descendantsInAnotherGroupCount > 1 ? '' : 's'} to another group, unable to set parent to another group.`
-      })
-    } else if (state.buyer.inherited_buyer_group.contract) {
-      const buyerParent = store.getters.getBuyerById(state.buyer.inherited_buyer_group.contract)
-      failedToast({
-        heading: 'Buyer Group Inheritance Error',
-        content: `Remove the parent '${buyerParent.name}' from the buyer group '${state.buyer.inherited_buyer_group.buyer_group_name}' in order to modify '${state.buyer.name}'.`
-      })
-    } else {
-      failedToast({ heading: 'An Unknown Error Occurred' })
-    }
-  }
   function check () {
-    if (checkboxState.disabled) {
-      handleToastErrorMessages()
-    } else {
+    if (!checkboxState.disabled) {
       saveBuyer()
     }
   }
