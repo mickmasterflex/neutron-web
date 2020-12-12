@@ -3,10 +3,12 @@
        :class="`${expandedState.expanded ? `rounded-lg border-2 border-${accentColor('gray')}-200 overflow-hidden` : ''}`">
     <ul @click="toggleTrExpanded()"
         class="flex flex-row transition-colors duration-200"
-        :class="`${expandedState.expandable ? 'cursor-pointer' : ''} ${expandedState.expanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
+        :class="`${expandedState.expandable ? 'cursor-pointer' : ''}
+                 ${expandedState.expanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
       <node-td class="w-32 flex flex-row capitalize">
         <div class="w-5">
-          <div v-if="expandedState.expandable" @click="toggleTrExpanded()" class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
+          <div v-if="expandedState.expandable"
+               class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
             <font-awesome-icon v-if="!expandedState.expanded" icon="caret-right"></font-awesome-icon>
             <font-awesome-icon v-if="expandedState.expanded" icon="caret-down"></font-awesome-icon>
           </div>
@@ -223,8 +225,8 @@ export default {
       check,
       checkboxState,
       computedState,
-      state,
       expandedState,
+      state,
       toggleTrExpanded
     }
   },
