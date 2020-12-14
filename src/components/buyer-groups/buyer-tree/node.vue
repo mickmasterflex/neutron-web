@@ -64,14 +64,14 @@
 </template>
 
 <script>
-import nodeTreeTd from '@/components/ui/tables/node-tree/td'
+import { computed, inject } from '@vue/composition-api'
+import nodeTreeTd from '@/components/buyer-groups/buyer-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import useBuyer from '@/use/buyer-groups/buyer'
 import useBuyerFeedback from '@/use/buyer-groups/buyer-feedback'
 import useClient from '@/use/buyer-groups/client'
 import useClientFeedback from '@/use/buyer-groups/client-feedback'
 import useExpandTr from '@/use/buyer-groups/expand-tr'
-import { computed, inject } from '@vue/composition-api'
 
 export default {
   name: 'buyer-tree-node',
