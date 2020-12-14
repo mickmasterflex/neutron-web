@@ -53,7 +53,7 @@
           Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
         </span>
       </p>
-      <div class="p-2" v-if="state.children.length > 0">
+      <div class="p-2" v-if="state.children.length">
         <buyer-tree-node
           v-for="buyer in state.children"
           :obj="buyer"
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import nodeTreeTd from '@/components/ui/tables/node-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
@@ -240,6 +239,7 @@ export default {
   setup (props) {
     const store = inject('vuex-store')
 
+    const currentBuyerGroup = computed(() => store.getters.getCurrentBuyerGroup)
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
     const { check, checkboxState, computedState, state } =
       props.type === 'client'
@@ -255,16 +255,12 @@ export default {
       check,
       checkboxState,
       computedState,
+      currentBuyerGroup,
       expandedState,
       state,
       toggleTrExpanded,
       userFeedbackState
     }
-  },
-  computed: {
-    ...mapGetters({
-      currentBuyerGroup: 'getCurrentBuyerGroup'
-    })
   },
   methods: {
     accentColor (defaultColor = 'gray') {
