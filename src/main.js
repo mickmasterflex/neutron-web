@@ -64,6 +64,7 @@ import actionHeading from '@/components/ui/action-heading'
 import tableEmptyState from '@/components/ui/tables/empty-state'
 import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import selectField from '@/components/ui/forms/base-fields/select-field'
+import tableLink from '@/components/ui/buttons/table-link'
 import textField from '@/components/ui/forms/base-fields/text-field'
 import textareaField from '@/components/ui/forms/base-fields/textarea-field'
 import vTextField from '@/components/ui/forms/validation-fields/text-field'
@@ -102,7 +103,7 @@ Vue.component('action-heading', actionHeading)
 
 // Tables
 Vue.component('table-empty-state', tableEmptyState)
-
+Vue.component('table-link', tableLink)
 // Form Fields
 Vue.component('checkbox-single', checkboxSingle)
 Vue.component('check-switch', checkSwitch)
