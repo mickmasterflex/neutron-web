@@ -1,5 +1,5 @@
 <template>
-  <modal-template class="modal-lg" :show="showModal" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>Update Buyer Group</template>
     <template v-slot:body>
       <div class="form-horizontal">
@@ -9,7 +9,7 @@
           </form>
         </validation-observer>
         <div class="field-group">
-          <label class="field-label field-label-top">Contracts</label>
+          <label class="field-label field-label-top">Buyers</label>
           <buyer-tree></buyer-tree>
         </div>
       </div>

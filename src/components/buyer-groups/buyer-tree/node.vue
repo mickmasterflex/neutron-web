@@ -5,7 +5,7 @@
         class="flex flex-row transition-colors duration-200"
         :class="`${expandedState.expandable ? 'cursor-pointer' : ''}
                  ${expandedState.expanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
-      <node-td class="w-32 flex flex-row capitalize">
+      <node-td class="w-64 flex flex-row capitalize">
         <div class="w-5">
           <div v-if="expandedState.expandable"
                class="mr-1 w-5 cursor-pointer text-gray-500 hover:text-gray-700">
@@ -27,15 +27,15 @@
             <font-awesome-icon icon="times-circle" class="text-red-500 hover:text-red-700 cursor-pointer"></font-awesome-icon>
           </template>
         </checkbox-field>
-        <span class="text-gray-700">{{type}}</span>
+        {{obj.name}}
+        <span class="text-gray-500 ml-3 font-light" v-if="this.type === 'client'">Client</span>
       </node-td>
-      <node-td class="w-10 text-gray-900">{{obj.id}}</node-td>
-      <node-td class="w-64 text-gray-900 capitalize">{{obj.name}}</node-td>
-      <node-td class="w-32">{{obj.status ? obj.status : 'n/a'}}</node-td>
-      <node-td class="w-24 text-gray-900">{{state.children.length}}</node-td>
+      <node-td class="w-10">{{obj.id}}</node-td>
+      <node-td class="w-24">{{obj.status ? obj.status : 'n/a'}}</node-td>
+      <node-td class="w-20">{{state.children.length}}</node-td>
     </ul>
     <div v-show="expandedState.expanded">
-      <p v-if="type === 'buyer' && (checkboxState.disabled || checkboxState.checkedImplied || computedState.isBuyerInOtherGroup)"
+      <p v-if="hasMessage"
          :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
         <span v-if="computedState.isBuyerInOtherGroup">
           Conflicting Buyer Group: Click the x icon to unassign from <span class="font-bold capitalize">{{ assignedBuyerGroup[0].name }}</span>.
@@ -216,6 +216,9 @@ export default {
       currentBuyerGroup: 'getCurrentBuyerGroup',
       getBuyerGroupById: 'getBuyerGroupById'
     }),
+    hasMessage () {
+      return this.type === 'buyer' && (this.checkboxState.disabled || this.checkboxState.checkedImplied || this.computedState.isBuyerInOtherGroup)
+    },
     assignedBuyerGroup () {
       return this.getBuyerGroupById(this.obj.buyer_group)
     }

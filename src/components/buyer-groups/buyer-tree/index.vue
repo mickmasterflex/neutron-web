@@ -1,11 +1,10 @@
 <template>
-  <div class="table table-border-none w-auto">
+  <div class="w-full">
     <ul class="flex flex-row font-normal p-3 rounded-t-lg border-2 border-gray-200 border-b-0 bg-gray-900 text-left text-white">
-      <li class="w-32 pr-3 pl-6">Type</li>
-      <li class="w-10 px-3">Id</li>
       <li class="w-64 px-3">Name</li>
-      <li class="w-32 px-3">Status</li>
-      <li class="w-32 px-3">Buyers</li>
+      <li class="w-10 px-3">Id</li>
+      <li class="w-24 px-3">Status</li>
+      <li class="w-20 px-3">Buyers</li>
     </ul>
     <div class="bg-white p-2 rounded-b-lg border-2 border-t-0 border-gray-200">
       <buyer-tree-node
