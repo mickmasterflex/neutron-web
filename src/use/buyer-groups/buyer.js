@@ -1,0 +1,82 @@
+import { computed, reactive } from '@vue/composition-api'
+
+export default function useBuyer (buyerId, currentBuyerGroupId, store) {
+  const checkboxState = reactive({
+    checked: computed(() => {
+      if (computedState.isBuyerInGroup) {
+        return true
+      } else return checkboxState.checkedImplied
+    }),
+    checkedImplied: computed(
+      () => computedState.buyerInheritsCurrentBuyerGroup ||
+        (state.children.length > 0 && computedState.areAllChildrenInGroup)
+    ),
+    disabled: computed(
+      () => computedState.descendantsInAnotherGroupCount > 0 ||
+        state.buyer.inherited_buyer_group !== null
+    ),
+    indeterminate: computed(
+      () => !checkboxState.checked &&
+        (computedState.childrenInGroup.length > 0 ||
+          computedState.descendantsInCurrentGroup.length > 0)
+    )
+  })
+  const computedState = reactive({
+    isBuyerInGroup: computed(
+      () => state.buyer.buyer_group === currentBuyerGroupId.value
+    ),
+    isBuyerInOtherGroup: computed(
+      () => state.buyer.buyer_group !== null &&
+        state.buyer.buyer_group !== currentBuyerGroupId.value
+    ),
+    childrenInGroup: computed(
+      () => state.children.filter(b => b.buyer_group === currentBuyerGroupId.value)
+    ),
+    areAllChildrenInGroup: computed(
+      () => state.children.length === computedState.childrenInGroup.length
+    ),
+    descendantsInCurrentGroup: computed(
+      () => state.buyer.descendant_buyer_groups.filter(b => b.buyer_group === currentBuyerGroupId.value)
+    ),
+    descendantsInAnotherGroupCount: computed(
+      () => state.buyer.descendant_buyer_groups.filter(b => b.buyer_group !== currentBuyerGroupId.value).length
+    ),
+    buyerInheritsCurrentBuyerGroup: computed(
+      () => {
+        if (state.buyer.inherited_buyer_group) {
+          return state.buyer.inherited_buyer_group.buyer_group === currentBuyerGroupId.value
+        }
+      }
+    )
+  })
+  const state = reactive({
+    buyer: computed(
+      () => store.getters.getBuyerById(buyerId)
+    ),
+    children: computed(
+      () => store.getters.getBuyersByParent(buyerId)
+    )
+  })
+  function saveBuyer () {
+    const updatedBuyer = { ...state.buyer }
+    if (computedState.isBuyerInOtherGroup || computedState.isBuyerInGroup) {
+      updatedBuyer.buyer_group = null
+    } else {
+      updatedBuyer.buyer_group = currentBuyerGroupId.value
+    }
+    store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
+      store.commit('SET_CURRENT_BUYER_GROUP_ANCESTOR_DATA', null)
+    })
+  }
+  function check () {
+    if (!checkboxState.disabled) {
+      saveBuyer()
+    }
+  }
+  return {
+    check,
+    checkboxState,
+    computedState,
+    state
+  }
+}
