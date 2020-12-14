@@ -35,22 +35,25 @@
       <node-td class="w-20">{{state.children.length}}</node-td>
     </ul>
     <div v-show="expandedState.expanded">
-      <p v-if="hasMessage"
+      <p v-if="userFeedbackState.hasUserFeedback"
          :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
-        <span v-if="computedState.isBuyerInOtherGroup">
-          Conflicting Buyer Group: Click the x icon to unassign from <span class="font-bold capitalize">{{ assignedBuyerGroup[0].name }}</span>.
+        <span v-if="userFeedbackState.clientHasNoChildren">
+          No buyers have been created for this client, add buyers <router-link :to="{name: 'ClientContracts', params: {slug:obj.slug}}" class="text-link">here</router-link>
         </span>
-        <span v-else-if="computedState.descendantsInAnotherGroupCount > 0">
+        <span v-if="userFeedbackState.conflictingBuyerGroup">
+          Conflicting Buyer Group: Click the x icon to unassign from <span class="font-bold capitalize">{{ userFeedbackState.conflictingBuyerGroup.name }}</span>.
+        </span>
+        <span v-else-if="userFeedbackState.descendantsInAnotherGroup">
           Conflicting Descendant Buyer Group: Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
         </span>
-        <span v-else-if="state.buyer.inherited_buyer_group !== null">
+        <span v-else-if="userFeedbackState.inheritsBuyerGroup">
           Inherits buyer group from the parent with id <span class="font-bold capitalize">{{ obj.inherited_buyer_group.contract }}</span>. Unassign parent to modify.
         </span>
-        <span v-else-if="checkboxState.checkedImplied">
+        <span v-else-if="userFeedbackState.descendantsAssignedSelfUnassigned">
           Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
         </span>
       </p>
-      <div class="p-2" v-if="state.children.length">
+      <div class="p-2" v-if="state.children.length > 0">
         <buyer-tree-node
           v-for="buyer in state.children"
           :obj="buyer"
@@ -66,13 +69,55 @@ import nodeTreeTd from '@/components/ui/tables/node-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import { computed, inject, ref, reactive } from '@vue/composition-api'
 
-function useExpandTr (children, computedState, checkboxState) {
+function useBuyerFeedback (obj, computedState, checkboxState, store) {
+  const userFeedbackState = reactive({
+    conflictingBuyerGroup: computed(
+      () => store.getters.getBuyerGroupById(obj.buyer_group)[0]
+    ),
+    descendantsInAnotherGroup: computed(
+      () => computedState.descendantsInAnotherGroupCount > 0
+    ),
+    inheritsBuyerGroup: computed(
+      () => obj.inherited_buyer_group !== null
+    ),
+    descendantsAssignedSelfUnassigned: computed(
+      () => checkboxState.checkedImplied
+    ),
+    hasUserFeedback: computed(
+      () => {
+        return userFeedbackState.conflictingBuyerGroup ||
+               userFeedbackState.descendantsInAnotherGroup ||
+               userFeedbackState.inheritsBuyerGroup ||
+               userFeedbackState.descendantsAssignedSelfUnassigned
+      }
+    )
+  })
+  return {
+    userFeedbackState
+  }
+}
+
+function useClientFeedback (state) {
+  const userFeedbackState = reactive({
+    clientHasNoChildren: computed(
+      () => state.children.length === 0
+    ),
+    hasUserFeedback: computed(
+      () => {
+        return userFeedbackState.clientHasNoChildren
+      }
+    )
+  })
+  return {
+    userFeedbackState
+  }
+}
+
+function useExpandTr (hasChildren, hasUserFeedback) {
   const expandedState = reactive({
     expanded: ref(false),
     expandable: computed(() => {
-      return children.length > 0 ||
-        computedState.isBuyerInOtherGroup ||
-        checkboxState.disabled
+      return hasChildren || hasUserFeedback
     })
   })
 
@@ -200,7 +245,11 @@ export default {
       props.type === 'client'
         ? useClient(props.obj.id, store)
         : useBuyer(props.obj.id, currentBuyerGroupId, store)
-    const { expandedState, toggleTrExpanded } = useExpandTr(state.children, computedState, checkboxState)
+    const { userFeedbackState } =
+      props.type === 'client'
+        ? useClientFeedback(state)
+        : useBuyerFeedback(props.obj, computedState, checkboxState, store)
+    const { expandedState, toggleTrExpanded } = useExpandTr(state.children.length > 0, userFeedbackState.hasUserFeedback)
 
     return {
       check,
@@ -208,20 +257,14 @@ export default {
       computedState,
       expandedState,
       state,
-      toggleTrExpanded
+      toggleTrExpanded,
+      userFeedbackState
     }
   },
   computed: {
     ...mapGetters({
-      currentBuyerGroup: 'getCurrentBuyerGroup',
-      getBuyerGroupById: 'getBuyerGroupById'
-    }),
-    hasMessage () {
-      return this.type === 'buyer' && (this.checkboxState.disabled || this.checkboxState.checkedImplied || this.computedState.isBuyerInOtherGroup)
-    },
-    assignedBuyerGroup () {
-      return this.getBuyerGroupById(this.obj.buyer_group)
-    }
+      currentBuyerGroup: 'getCurrentBuyerGroup'
+    })
   },
   methods: {
     accentColor (defaultColor = 'gray') {
