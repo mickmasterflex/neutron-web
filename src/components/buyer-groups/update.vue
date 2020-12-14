@@ -72,11 +72,11 @@ export default {
       closeModal: 'CLOSE_UPDATE_BUYER_GROUP_MODAL'
     }),
     close () {
+      this.closeModal()
       this.resetCurrentBuyerGroup()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.closeModal()
       this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {

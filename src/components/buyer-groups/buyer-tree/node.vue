@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { computed, inject } from '@vue/composition-api'
+import { computed, inject, watch } from '@vue/composition-api'
 import nodeTreeTd from '@/components/buyer-groups/buyer-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 import useBuyer from '@/use/buyer-groups/buyer'
@@ -102,6 +102,14 @@ export default {
         ? useClientFeedback(state)
         : useBuyerFeedback(props.obj, computedState, checkboxState, store)
     const { expandedState, toggleTrExpanded } = useExpandTr(state.children.length > 0, userFeedbackState.hasUserFeedback)
+
+    const showUpdateModal = computed(() => store.getters.getShowUpdateBuyerGroupModal)
+    watch(showUpdateModal, () => {
+      if (!showUpdateModal.value && expandedState.expanded) {
+        console.log(expandedState.expanded)
+        toggleTrExpanded()
+      }
+    })
 
     return {
       check,
