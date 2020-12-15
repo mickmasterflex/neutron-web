@@ -18,7 +18,7 @@
           <td class="td">{{client.id}}</td>
           <td class="td">{{client.slug}}</td>
           <td class="td">
-            <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{buyers(client.buyercontract_set.length)}}</table-link>
+            <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{buyers(client.buyercontract_set).length}}</table-link>
           </td>
           <td class="td">
             <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{partners(client.partnercontract_set).length}}</table-link>
