@@ -9,7 +9,7 @@ export default function useBuyerFeedback (obj, computedState, checkboxState, sto
       () => computedState.descendantsInAnotherGroupCount > 0
     ),
     inheritsBuyerGroup: computed(
-      () => obj.inherited_buyer_group !== null
+      () => obj.inherited_buyer_group
     ),
     descendantsAssignedSelfUnassigned: computed(
       () => checkboxState.checkedImplied
