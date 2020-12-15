@@ -17,8 +17,12 @@
           </td>
           <td class="td">{{client.id}}</td>
           <td class="td">{{client.slug}}</td>
-          <td class="td">{{client.buyercontract_set.length}}</td>
-          <td class="td">{{client.partnercontract_set.length}}</td>
+          <td class="td">
+            <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{client.buyercontract_set.length}}</table-link>
+          </td>
+          <td class="td">
+            <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{client.partnercontract_set.length}}</table-link>
+          </td>
         </tr>
       </tbody>
     </table>
