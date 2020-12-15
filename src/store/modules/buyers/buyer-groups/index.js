@@ -1,23 +1,23 @@
 import axios from '@/axios'
 import buyer from '@/store/modules/buyers/buyer-groups/buyer'
+import loading from '@/store/modules/buyers/buyer-groups/loading'
 import visibility from '@/store/modules/buyers/buyer-groups/visibility'
 
 const modules = {
   buyer,
+  loading,
   visibility
 }
 
 const state = {
   buyer_groups: undefined,
-  current_buyer_group: {},
-  buyer_groups_fetch_loading: false
+  current_buyer_group: {}
 }
 
 const getters = {
   getBuyerGroups: state => state.buyer_groups,
   getCurrentBuyerGroup: state => state.current_buyer_group,
-  getBuyerGroupById: (state) => (id) => state.buyer_groups.filter(group => group.id === id),
-  getBuyerGroupsFetchLoading: state => state.buyer_groups_fetch_loading
+  getBuyerGroupById: (state) => (id) => state.buyer_groups.filter(group => group.id === id)
 }
 
 const actions = {
@@ -59,9 +59,7 @@ const mutations = {
   },
   SET_CURRENT_BUYER_GROUP: (state, group) => (state.current_buyer_group = group),
   RESET_CURRENT_BUYER_GROUP: (state) => (state.current_buyer_group = {}),
-  REMOVE_BUYER_GROUP: (state, id) => (state.buyer_groups = state.buyer_groups.filter(group => group.id !== id)),
-  SET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = true),
-  RESET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = false)
+  REMOVE_BUYER_GROUP: (state, id) => (state.buyer_groups = state.buyer_groups.filter(group => group.id !== id))
 }
 
 export default {
