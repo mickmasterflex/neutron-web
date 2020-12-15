@@ -17,8 +17,12 @@
           </td>
           <td class="td">{{client.id}}</td>
           <td class="td">{{client.slug}}</td>
-          <td class="td">{{client.buyercontract_set.length}}</td>
-          <td class="td">{{client.partnercontract_set.length}}</td>
+          <td class="td">
+            <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{buyers(client.buyercontract_set).length}}</table-link>
+          </td>
+          <td class="td">
+            <table-link :route="{name: 'ClientContracts', params: {slug:client.slug}}">{{partners(client.partnercontract_set).length}}</table-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -30,7 +34,16 @@
 </template>
 
 <script>
+
 export default {
-  props: ['clients']
+  props: ['clients'],
+  methods: {
+    partners: function (partners) {
+      return partners.filter(partner => partner.parent === null)
+    },
+    buyers: function (buyers) {
+      return buyers.filter(buyer => buyer.parent === null)
+    }
+  }
 }
 </script>
