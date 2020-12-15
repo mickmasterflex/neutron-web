@@ -13,6 +13,7 @@ export default function useExpandTr (hasChildren, hasUserFeedback) {
       expandedState.expanded = !expandedState.expanded
     }
   }
+
   return {
     expandedState,
     toggleTrExpanded

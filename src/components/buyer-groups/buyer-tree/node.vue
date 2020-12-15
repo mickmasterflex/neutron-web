@@ -41,7 +41,9 @@
           No buyers have been created for this client, add buyers <router-link :to="{name: 'ClientContracts', params: {slug:obj.slug}}" class="text-link">here</router-link>
         </span>
         <span v-if="userFeedbackState.conflictingBuyerGroup">
-          Conflicting Buyer Group: Click the x icon to unassign from <span class="font-bold capitalize">{{ userFeedbackState.conflictingBuyerGroup.name }}</span>.
+          Conflicting Buyer Group: Click the x icon to unassign from
+          <span v-if="state.assignedBuyerGroup" class="font-bold capitalize">{{ state.assignedBuyerGroup.name }}</span>
+          <span v-else>other group</span>.
         </span>
         <span v-else-if="userFeedbackState.descendantsInAnotherGroup">
           Conflicting Descendant Buyer Group: Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
@@ -106,7 +108,6 @@ export default {
     const showUpdateModal = computed(() => store.getters.getShowUpdateBuyerGroupModal)
     watch(showUpdateModal, () => {
       if (!showUpdateModal.value && expandedState.expanded) {
-        console.log(expandedState.expanded)
         toggleTrExpanded()
       }
     })
