@@ -1,6 +1,6 @@
 import { computed, reactive } from '@vue/composition-api'
 
-export default function useBuyerFeedback (obj, computedState, checkboxState, store) {
+export default function useBuyerFeedback (obj, computedState, checkboxState) {
   const userFeedbackState = reactive({
     conflictingBuyerGroup: computed(
       () => computedState.isBuyerInOtherGroup
@@ -9,10 +9,10 @@ export default function useBuyerFeedback (obj, computedState, checkboxState, sto
       () => computedState.descendantsInAnotherGroupCount > 0
     ),
     inheritsBuyerGroup: computed(
-      () => obj.inherited_buyer_group
+      () => obj.inherited_buyer_group !== null
     ),
     descendantsAssignedSelfUnassigned: computed(
-      () => checkboxState.checkedImplied
+      () => checkboxState.checkedImplied && obj.inherited_buyer_group === null
     ),
     hasUserFeedback: computed(
       () => {

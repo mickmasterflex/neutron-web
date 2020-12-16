@@ -49,7 +49,7 @@
           Conflicting Descendant Buyer Group: Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
         </span>
         <span v-else-if="userFeedbackState.inheritsBuyerGroup">
-          Inherits buyer group from the parent with id <span class="font-bold capitalize">{{ userFeedbackState.inheritsBuyerGroup.contract }}</span>. Unassign parent to modify.
+          Inherits buyer group from the parent with id <span class="font-bold capitalize">{{ obj.inherited_buyer_group.contract }}</span>. Unassign parent to modify.
         </span>
         <span v-else-if="userFeedbackState.descendantsAssignedSelfUnassigned">
           Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
@@ -103,7 +103,7 @@ export default {
       props.type === 'client'
         ? useClientFeedback(state)
         : useBuyerFeedback(props.obj, computedState, checkboxState, store)
-    const { expandedState, toggleTrExpanded } = useExpandTr(state.children.length > 0, userFeedbackState.hasUserFeedback)
+    const { expandedState, toggleTrExpanded } = useExpandTr(state.children.length > 0, userFeedbackState)
 
     const showUpdateModal = computed(() => store.getters.getShowUpdateBuyerGroupModal)
     watch(showUpdateModal, () => {

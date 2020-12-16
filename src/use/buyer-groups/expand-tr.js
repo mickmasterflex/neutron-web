@@ -1,10 +1,10 @@
 import { computed, ref, reactive } from '@vue/composition-api'
 
-export default function useExpandTr (hasChildren, hasUserFeedback) {
+export default function useExpandTr (hasChildren, userFeedbackState) {
   const expandedState = reactive({
     expanded: ref(false),
     expandable: computed(() => {
-      return hasChildren || hasUserFeedback
+      return hasChildren || userFeedbackState.hasUserFeedback
     })
   })
 
