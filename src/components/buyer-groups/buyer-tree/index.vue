@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div>
     <div v-if="allClients.length > 0 && allBuyers.length > 0">
       <ul class="flex flex-row font-normal p-3 rounded-t-lg border-2 border-gray-200 border-b-0 bg-gray-900 text-left text-white">
         <li class="w-64 px-3">Name</li>

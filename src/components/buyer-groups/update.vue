@@ -10,7 +10,7 @@
         </validation-observer>
         <div class="field-group">
           <label class="field-label field-label-top">Buyers</label>
-          <buyer-tree></buyer-tree>
+          <buyer-tree class="flex-grow"></buyer-tree>
         </div>
       </div>
     </template>
