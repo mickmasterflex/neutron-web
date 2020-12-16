@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
 
 export default {
@@ -32,16 +32,6 @@ export default {
       allClients: 'getAllClients',
       allBuyers: 'getAllBuyers',
       loading: 'getBuyerGroupsLoading'
-    })
-  },
-  mounted () {
-    this.fetchClients()
-    this.fetchBuyers()
-  },
-  methods: {
-    ...mapActions({
-      fetchClients: 'fetchClients',
-      fetchBuyers: 'fetchBuyers'
     })
   },
   components: {
