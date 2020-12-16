@@ -18,7 +18,7 @@
           type="client"></buyer-tree-node>
       </div>
     </div>
-    <table-empty-state v-else heading="Loading all clients and buyers" copy="This might take a moment..." class="well"></table-empty-state>
+    <table-empty-state v-else heading="No clients or buyers have been created" copy="Close the modal and hit the Clients tab to get started." class="well"></table-empty-state>
   </div>
 </template>
 
