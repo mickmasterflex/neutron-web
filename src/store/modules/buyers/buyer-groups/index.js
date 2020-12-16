@@ -32,6 +32,7 @@ const actions = {
     await axios.post('/buyer-groups/', buyerGroup)
       .then(response => {
         commit('ADD_BUYER_GROUP', response.data)
+        commit('SET_CURRENT_BUYER_GROUP', response.data)
       })
   },
   async updateBuyerGroup ({ commit }, buyerGroup) {

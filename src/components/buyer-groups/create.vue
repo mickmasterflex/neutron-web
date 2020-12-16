@@ -35,7 +35,8 @@ export default {
   mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapMutations({
-      showCreateBuyerGroup: 'SHOW_CREATE_BUYER_GROUP_FORM'
+      showCreateBuyerGroup: 'SHOW_CREATE_BUYER_GROUP_FORM',
+      showUpdate: 'SHOW_UPDATE_BUYER_GROUP_MODAL'
     }),
     ...mapActions({
       createBuyerGroup: 'createBuyerGroup'
@@ -58,6 +59,7 @@ export default {
             name: this.name
           }).then(() => {
             this.resetForm()
+            this.showUpdate()
           }).catch(error => {
             this.error = error
           })
