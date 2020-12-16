@@ -35,10 +35,8 @@ const actions = {
           if (buyerGroupAncestorData) {
             dispatch('addBuyerParentDescendant', response.data.parent)
 
-            // Update to if (response.descendants) {
-            if (children) {
-              dispatch('removeBuyerParentDescendants', { buyer: response.data.parent, descendants: children })
-              // dispatch('removeBuyerParentDescendants', { buyer: response.data.parent, descendants: response.descendants })
+            if (response.data.descendants.length > 0) {
+              dispatch('removeBuyerParentDescendants', { buyer: response.data.parent, descendants: response.data.descendants })
             }
           } else {
             dispatch('removeBuyerGroupDescendant', { buyer: response.data.parent, descendant: updatedBuyer.id })
