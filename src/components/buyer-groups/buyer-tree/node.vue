@@ -4,7 +4,7 @@
     <ul @click="toggleTrExpanded()"
         class="flex flex-row transition-colors duration-200"
         :class="`${expandedState.expandable ? 'cursor-pointer' : ''}
-                 ${expandedState.expanded ? `bg-${accentColor('gray')}-100` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
+                 ${expandedState.expanded ? `bg-${accentColor('gray')}-100 hover:bg-${accentColor('gray')}-200` : `bg-white hover:bg-${accentColor('blue')}-100 rounded-lg`}`">
       <node-td class="w-64 flex flex-row capitalize">
         <div class="w-5">
           <div v-if="expandedState.expandable"
@@ -36,7 +36,8 @@
     </ul>
     <div v-show="expandedState.expanded">
       <p v-if="userFeedbackState.hasUserFeedback"
-         :class="`bg-${accentColor('gray')}-100 text-${accentColor('gray')}-800 w-full pl-8 pr-2 pb-2`">
+         class="w-full pl-8 pr-2 pb-2 pt-2 border-t"
+         :class="`bg-${accentColor('gray')}-100 border-${accentColor('gray')}-200 text-${accentColor('gray')}-800`">
         <span v-if="userFeedbackState.clientHasNoChildren">
           No buyers have been created for this client, add buyers <router-link :to="{name: 'ClientContracts', params: {slug:obj.slug}}" class="text-link">here</router-link>
         </span>
