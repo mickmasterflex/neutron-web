@@ -1,4 +1,4 @@
-import { computed, ref, reactive } from '@vue/composition-api'
+import { computed, ref, reactive, watch } from '@vue/composition-api'
 
 export default function useExpandTr (hasChildren, userFeedbackState) {
   const expandedState = reactive({
@@ -13,6 +13,12 @@ export default function useExpandTr (hasChildren, userFeedbackState) {
       expandedState.expanded = !expandedState.expanded
     }
   }
+
+  watch(expandedState, () => {
+    if (!expandedState.expandable) {
+      expandedState.expanded = false
+    }
+  })
 
   return {
     expandedState,
