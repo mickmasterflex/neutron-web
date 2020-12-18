@@ -114,7 +114,7 @@ export default {
     })
 
     function accentColor (defaultColor = 'gray') {
-      if (this.type === 'buyer' && ((this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) || this.computedState.isBuyerInOtherGroup)) {
+      if (this.type === 'buyer' && ((checkboxState.disabled && !computedState.buyerInheritsCurrentBuyerGroup) || computedState.isBuyerInOtherGroup)) {
         return 'red'
       } else {
         return defaultColor
