@@ -113,7 +113,16 @@ export default {
       }
     })
 
+    function accentColor (defaultColor = 'gray') {
+      if (this.type === 'buyer' && ((this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) || this.computedState.isBuyerInOtherGroup)) {
+        return 'red'
+      } else {
+        return defaultColor
+      }
+    }
+
     return {
+      accentColor,
       check,
       checkboxState,
       computedState,
@@ -122,15 +131,6 @@ export default {
       state,
       toggleTrExpanded,
       userFeedbackState
-    }
-  },
-  methods: {
-    accentColor (defaultColor = 'gray') {
-      if (this.type === 'buyer' && ((this.checkboxState.disabled && !this.computedState.buyerInheritsCurrentBuyerGroup) || this.computedState.isBuyerInOtherGroup)) {
-        return 'red'
-      } else {
-        return defaultColor
-      }
     }
   },
   components: {
