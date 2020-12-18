@@ -1,11 +1,11 @@
 import axios from '@/axios'
 
 const state = {
-  current_buyer_group_ancestor_data: null
+  current_buyer_group_relationship_data: null
 }
 
 const getters = {
-  getCurrentBuyerGroupAncestorData: state => state.current_buyer_group_ancestor_data
+  getCurrentBuyerGroupRelationshipData: state => state.current_buyer_group_relationship_data
 }
 
 const actions = {
@@ -25,7 +25,7 @@ const actions = {
         }
 
         const children = response.data.children
-        commit('SET_CURRENT_BUYER_GROUP_ANCESTOR_DATA', buyerGroupAncestorData)
+        commit('SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA', buyerGroupAncestorData)
 
         if (children) {
           dispatch('updateBuyerChildrenInheritedGroup', children)
@@ -47,7 +47,7 @@ const actions = {
   async updateBuyerChildrenInheritedGroup ({ commit, dispatch, getters }, children) {
     children.forEach(childId => {
       const buyer = getters.getBuyerById(childId)
-      buyer.inherited_buyer_group = getters.getCurrentBuyerGroupAncestorData
+      buyer.inherited_buyer_group = getters.getCurrentBuyerGroupRelationshipData
       buyer.buyer_group = null
       dispatch('removeAllBuyerGroupDescendants', buyer.id)
       commit('UPDATE_BUYER', buyer)
@@ -71,7 +71,7 @@ const actions = {
   },
   async addBuyerParentDescendant ({ commit, dispatch, getters }, buyerId) {
     const buyer = getters.getBuyerById(buyerId)
-    buyer.descendant_buyer_groups.push(getters.getCurrentBuyerGroupAncestorData)
+    buyer.descendant_buyer_groups.push(getters.getCurrentBuyerGroupRelationshipData)
     commit('UPDATE_BUYER', buyer)
     if (buyer.parent) {
       dispatch('addBuyerParentDescendant', buyer.parent)
@@ -88,8 +88,8 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_BUYER_GROUP_ANCESTOR_DATA: (state, inheritedBuyerGroup) => {
-    state.current_buyer_group_ancestor_data = inheritedBuyerGroup
+  SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA: (state, inheritedBuyerGroup) => {
+    state.current_buyer_group_relationship_data = inheritedBuyerGroup
   }
 }
 
