@@ -14,16 +14,16 @@ const actions = {
       .then(response => {
         commit('UPDATE_BUYER', response.data)
 
-        let buyerGroupAncestorData = null
+        let buyerGroupRelationshipData = null
         if (response.data.buyer_group) {
           const buyerGroup = getters.getBuyerGroupById(response.data.buyer_group)
-          buyerGroupAncestorData = {
+          buyerGroupRelationshipData = {
             buyer_group: buyerGroup[0].id,
             buyer_group_name: buyerGroup[0].name,
             contract: response.data.id
           }
         }
-        commit('SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA', buyerGroupAncestorData)
+        commit('SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA', buyerGroupRelationshipData)
 
         const children = response.data.children
         if (children) {
@@ -32,14 +32,21 @@ const actions = {
 
         const parent = response.data.parent
         if (parent) {
-          if (buyerGroupAncestorData) {
-            dispatch('addBuyerParentDescendant', parent)
+          if (buyerGroupRelationshipData) {
+            // when a buyer_group was added to buyer,
+            // we add that buyer to parent's descendant_buyer_groups
+            dispatch('addDescendantBuyerGroup', parent)
 
             if (response.data.descendants.length > 0) {
-              dispatch('removeBuyerParentDescendants', { buyer: parent, descendants: response.data.descendants })
+              // when a buyer_group was added to buyer,
+              // and that buyer has descendants,
+              // we remove those descendants from parent's descendant_buyer_groups
+              dispatch('removeDescendantsFromDescendantBuyerGroups', { buyer: parent, descendants: response.data.descendants })
             }
           } else {
-            dispatch('removeBuyerGroupDescendant', { buyer: parent, descendant: updatedBuyer.id })
+            // when a buyer_group was removed from a buyer,
+            // we remove that buyer from parent's descendant_buyer_groups
+            dispatch('removeDescendantBuyerGroup', { buyer: parent, descendant: updatedBuyer.id })
           }
         }
       })
@@ -61,28 +68,28 @@ const actions = {
     buyer.descendant_buyer_groups = []
     commit('UPDATE_BUYER', buyer)
   },
-  async removeBuyerGroupDescendant ({ commit, dispatch, getters }, ids) {
+  async removeDescendantBuyerGroup ({ commit, dispatch, getters }, ids) {
     const buyer = getters.getBuyerById(ids.buyer)
     buyer.descendant_buyer_groups = buyer.descendant_buyer_groups.filter(d => d.contract !== ids.descendant)
     commit('UPDATE_BUYER', buyer)
     if (buyer.parent) {
-      dispatch('removeBuyerGroupDescendant', { buyer: buyer.parent, descendant: ids.descendant })
+      dispatch('removeDescendantBuyerGroup', { buyer: buyer.parent, descendant: ids.descendant })
     }
   },
-  async addBuyerParentDescendant ({ commit, dispatch, getters }, buyerId) {
+  async addDescendantBuyerGroup ({ commit, dispatch, getters }, buyerId) {
     const buyer = getters.getBuyerById(buyerId)
     buyer.descendant_buyer_groups.push(getters.getCurrentBuyerGroupRelationshipData)
     commit('UPDATE_BUYER', buyer)
     if (buyer.parent) {
-      dispatch('addBuyerParentDescendant', buyer.parent)
+      dispatch('addDescendantBuyerGroup', buyer.parent)
     }
   },
-  async removeBuyerParentDescendants ({ commit, dispatch, getters }, ids) {
+  async removeDescendantsFromDescendantBuyerGroups ({ commit, dispatch, getters }, ids) {
     const buyer = getters.getBuyerById(ids.buyer)
     buyer.descendant_buyer_groups = buyer.descendant_buyer_groups.filter(d => !ids.descendants.includes(d.contract))
     commit('UPDATE_BUYER', buyer)
     if (buyer.parent) {
-      dispatch('removeBuyerParentDescendants', { buyer: buyer.parent, descendants: ids.descendants })
+      dispatch('removeDescendantsFromDescendantBuyerGroups', { buyer: buyer.parent, descendants: ids.descendants })
     }
   }
 }
