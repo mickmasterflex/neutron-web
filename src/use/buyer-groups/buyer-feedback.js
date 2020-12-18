@@ -1,6 +1,12 @@
-import { computed, reactive } from '@vue/composition-api'
+import { computed, reactive, inject } from '@vue/composition-api'
 
-export default function useBuyerFeedback (obj, computedState, checkboxState) {
+export default function useBuyerFeedback (buyerId, computedState, checkboxState) {
+  const store = inject('vuex-store')
+
+  const state = reactive({
+    buyer: computed(() => store.getters.getBuyerById(buyerId)),
+  })
+
   const userFeedbackState = reactive({
     conflictingBuyerGroup: computed(
       () => computedState.isBuyerInOtherGroup
@@ -9,17 +15,17 @@ export default function useBuyerFeedback (obj, computedState, checkboxState) {
       () => computedState.descendantsInAnotherGroupCount > 0
     ),
     inheritsBuyerGroup: computed(
-      () => obj.inherited_buyer_group !== null
+      () => state.buyer.inherited_buyer_group !== null
     ),
-    descendantsAssignedSelfUnassigned: computed(
-      () => checkboxState.checkedImplied && obj.inherited_buyer_group === null
+    childrenAssignedSelfUnassigned: computed(
+      () => checkboxState.checkedImplied && state.buyer.inherited_buyer_group === null
     ),
     hasUserFeedback: computed(
       () => {
         return userFeedbackState.conflictingBuyerGroup ||
           userFeedbackState.descendantsInAnotherGroup ||
           userFeedbackState.inheritsBuyerGroup ||
-          userFeedbackState.descendantsAssignedSelfUnassigned
+          userFeedbackState.childrenAssignedSelfUnassigned
       }
     )
   })

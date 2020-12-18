@@ -15,7 +15,7 @@
     <span v-else-if="userFeedbackState.inheritsBuyerGroup">
           Inherits buyer group from the parent<span v-if=" obj.inherited_buyer_group"> with id <span class="font-bold capitalize">{{ obj.inherited_buyer_group.contract }}</span></span>. Unassign parent to modify.
         </span>
-    <span v-else-if="userFeedbackState.descendantsAssignedSelfUnassigned">
+    <span v-else-if="userFeedbackState.childrenAssignedSelfUnassigned">
           Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
         </span>
   </p>

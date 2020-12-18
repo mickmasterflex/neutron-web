@@ -84,14 +84,17 @@ export default {
 
     const currentBuyerGroup = computed(() => store.getters.getCurrentBuyerGroup)
     const currentBuyerGroupId = computed(() => store.getters.getCurrentBuyerGroup.id)
+
     const { check, checkboxState, computedState, state } =
       props.type === 'client'
         ? useClient(props.obj.id, store)
         : useBuyer(props.obj.id, currentBuyerGroupId, store)
+
     const { userFeedbackState } =
       props.type === 'client'
         ? useClientFeedback(state)
-        : useBuyerFeedback(props.obj, computedState, checkboxState, store)
+        : useBuyerFeedback(props.obj.id, computedState, checkboxState, store)
+
     const { expandedState, toggleTrExpanded } = useExpandTr(state.children.length > 0, userFeedbackState)
 
     const showUpdateModal = computed(() => store.getters.getShowUpdateBuyerGroupModal)
