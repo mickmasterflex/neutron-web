@@ -35,27 +35,14 @@
       <node-td class="w-20">{{state.children.length}}</node-td>
     </ul>
     <div v-show="expandedState.expanded">
-      <p v-if="userFeedbackState.hasUserFeedback"
-         class="w-full pl-8 pr-2 pb-2 pt-2 border-t"
-         :class="`bg-${accentColor('gray')}-100 border-${accentColor('gray')}-200 text-${accentColor('gray')}-800`">
-        <span v-if="userFeedbackState.clientHasNoChildren">
-          No buyers have been created for this client, add buyers <router-link :to="{name: 'ClientContracts', params: {slug:obj.slug}}" class="text-link">here</router-link>
-        </span>
-        <span v-if="userFeedbackState.conflictingBuyerGroup">
-          Conflicting Buyer Group: Click the x icon to unassign from
-          <span v-if="state.assignedBuyerGroup" class="font-bold capitalize">{{ state.assignedBuyerGroup.name }}</span>
-          <span v-else>other group</span>.
-        </span>
-        <span v-else-if="userFeedbackState.descendantsInAnotherGroup">
-          Conflicting Descendant Buyer Group: Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
-        </span>
-        <span v-else-if="userFeedbackState.inheritsBuyerGroup">
-          Inherits buyer group from the parent<span v-if=" obj.inherited_buyer_group"> with id <span class="font-bold capitalize">{{ obj.inherited_buyer_group.contract }}</span></span>. Unassign parent to modify.
-        </span>
-        <span v-else-if="userFeedbackState.descendantsAssignedSelfUnassigned">
-          Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
-        </span>
-      </p>
+      <user-feedback
+        v-if="userFeedbackState.hasUserFeedback"
+        :accentColor="accentColor"
+        :currentBuyerGroup="currentBuyerGroup"
+        :obj="obj"
+        :state="state"
+        :userFeedbackState="userFeedbackState"
+      ></user-feedback>
       <div class="p-2" v-if="state.children.length">
         <buyer-tree-node
           v-for="buyer in state.children"
@@ -70,6 +57,7 @@
 import { computed, inject, watch } from '@vue/composition-api'
 import nodeTreeTd from '@/components/buyer-groups/buyer-tree/td'
 import buyerTreeNode from '@/components/buyer-groups/buyer-tree/node'
+import userFeedback from '@/components/buyer-groups/buyer-tree/user-feedback'
 import useBuyer from '@/use/buyer-groups/buyer'
 import useBuyerFeedback from '@/use/buyer-groups/buyer-feedback'
 import useClient from '@/use/buyer-groups/client'
@@ -136,7 +124,8 @@ export default {
   },
   components: {
     'buyer-tree-node': buyerTreeNode,
-    'node-td': nodeTreeTd
+    'node-td': nodeTreeTd,
+    'user-feedback': userFeedback
   }
 }
 </script>
