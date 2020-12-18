@@ -23,23 +23,23 @@ const actions = {
             contract: response.data.id
           }
         }
-
-        const children = response.data.children
         commit('SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA', buyerGroupAncestorData)
 
+        const children = response.data.children
         if (children) {
           dispatch('updateBuyerChildrenInheritedGroup', children)
         }
 
-        if (response.data.parent) {
+        const parent = response.data.parent
+        if (parent) {
           if (buyerGroupAncestorData) {
-            dispatch('addBuyerParentDescendant', response.data.parent)
+            dispatch('addBuyerParentDescendant', parent)
 
             if (response.data.descendants.length > 0) {
-              dispatch('removeBuyerParentDescendants', { buyer: response.data.parent, descendants: response.data.descendants })
+              dispatch('removeBuyerParentDescendants', { buyer: parent, descendants: response.data.descendants })
             }
           } else {
-            dispatch('removeBuyerGroupDescendant', { buyer: response.data.parent, descendant: updatedBuyer.id })
+            dispatch('removeBuyerGroupDescendant', { buyer: parent, descendant: updatedBuyer.id })
           }
         }
       })
