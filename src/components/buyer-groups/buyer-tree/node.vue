@@ -109,6 +109,7 @@ export default {
     const showUpdateModal = computed(() => store.getters.getShowUpdateBuyerGroupModal)
     watch(showUpdateModal, () => {
       if (!showUpdateModal.value && expandedState.expanded) {
+        // Close expanded tr on modal close
         toggleTrExpanded()
       }
     })
