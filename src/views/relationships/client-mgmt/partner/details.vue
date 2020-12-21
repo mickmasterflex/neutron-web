@@ -8,7 +8,7 @@
     </panel-template>
     <panel-template title="Danger Zone" class="col-span-2">
       <template v-slot:content>
-        <delete-partner-contract :client="$route.params.client" :id="partner.id"></delete-partner-contract>
+        <delete-partner-contract :client="$route.params.client" :id="partner.id" :parent="partner.parent"></delete-partner-contract>
       </template>
     </panel-template>
   </base-panel-grid>

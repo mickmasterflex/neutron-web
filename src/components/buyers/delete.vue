@@ -12,6 +12,9 @@ export default {
     },
     id: {
       type: Number
+    },
+    parent: {
+      type: Number
     }
   },
   methods: {
@@ -19,7 +22,17 @@ export default {
     runDelete () {
       this.delete(this.id)
         .then(() => {
-          this.$router.push({ name: 'ClientContracts', params: { slug: this.client } })
+          if (this.parent) {
+            this.$router.push({
+              name: 'BuyerContractChildren',
+              params: { id: this.parent, client: this.client }
+            })
+          } else {
+            this.$router.push({
+              name: 'ClientContracts',
+              params: { slug: this.client }
+            })
+          }
         })
     }
   }

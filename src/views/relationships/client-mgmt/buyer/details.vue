@@ -11,7 +11,7 @@
     <delivery-index :buyer="buyer.id" class="col-span-2"></delivery-index>
     <panel-template title="Danger Zone" class="col-span-2">
       <template v-slot:content>
-        <delete-buyer-contract :client="$route.params.client" :id="buyer.id"></delete-buyer-contract>
+        <delete-buyer-contract :client="$route.params.client" :id="buyer.id" :parent="buyer.parent"></delete-buyer-contract>
       </template>
     </panel-template>
   </base-panel-grid>
