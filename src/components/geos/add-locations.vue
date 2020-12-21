@@ -12,7 +12,15 @@
               <p class="italic text-gray-500" style="max-width: 400px">Enter locations using the form above or by uploading a properly formatted CSV file. <a href="https://s3-us-west-1.amazonaws.com/neutron.neutroninteractive.com/resources/geos/geos-example.csv" class="text-link">Example CSV</a></p>
             </div>
             <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
-            <checkbox-single field_id="nuke_replace" field_label="Nuke & Replace Existing" v-model="nuke_replace"></checkbox-single>
+            <div class="field-group ml-label-width">
+              <checkbox-field field_id="nuke_replace"
+                              v-model="nuke_replace"
+                              class="font-bold bg-white p-2 w-64 rounded shadow"
+                              checkedColor="red"
+                              :label_class="nuke_replace ? 'text-red-500' : 'text-gray-800'">
+                Nuke & Replace Existing
+              </checkbox-field>
+            </div>
           </form>
         </validation-observer>
       </div>

@@ -76,7 +76,6 @@ import tableLink from '@/components/ui/tables/table-link'
 
 /* Field Components */
 import checkboxField from '@/components/ui/forms/base-fields/checkbox'
-import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
 import checkSwitch from '@/components/ui/forms/base-fields/checkbox-switch'
 import selectField from '@/components/ui/forms/base-fields/select-field'
 import vSelectField from '@/components/ui/forms/validation-fields/select-field'
@@ -120,7 +119,6 @@ Vue.component('table-link', tableLink)
 Vue.component('status-indicator', statusIndicator)
 
 // Form Fields
-Vue.component('checkbox-single', checkboxSingle)
 Vue.component('checkbox-field', checkboxField)
 Vue.component('check-switch', checkSwitch)
 Vue.component('text-field', textField)

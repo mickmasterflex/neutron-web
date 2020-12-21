@@ -29,7 +29,7 @@
       :checked="value"
       :indeterminate.prop="indeterminate"
       :disabled="disabled">
-    <span class="ml-2" :class="label_class">
+    <span class="ml-1 select-none" :class="label_class">
       <slot></slot>
     </span>
   </label>

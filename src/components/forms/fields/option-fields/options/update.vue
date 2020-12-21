@@ -17,14 +17,14 @@
       v-model="mapping"
       :field_id="`optionMapping_${option.id}`"
      />
-    <checkbox-single
-      v-model="scrub"
-      label_class="w-12"
-      :field_id="`optionScrub_${option.id}`"/>
-    <checkbox-single
-      v-model="hide"
-      label_class="w-12"
-      :field_id="`optionHide_${option.id}`"/>
+    <check-switch v-model="scrub"
+                  size="sm"
+                  class="w-16 pt-1 field-group"
+                  :field_id="`optionScrub_${option.id}`"></check-switch>
+    <check-switch v-model="hide"
+                  size="sm"
+                  class="w-16 pt-1 field-group"
+                  :field_id="`optionHide_${option.id}`"></check-switch>
   </div>
 </template>
 
