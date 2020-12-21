@@ -18,7 +18,7 @@
         </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Child Contracts" copy="Use the 'New Buyer' button to add children to this contract."></table-empty-state>
+    <table-empty-state v-else heading="No Buyer Contracts" copy="Use the 'New Buyer' button to add buyers to this contract."></table-empty-state>
   </div>
 </template>
 
