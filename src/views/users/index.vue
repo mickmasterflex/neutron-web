@@ -9,7 +9,9 @@
     <template v-slot:content>
       <div class="flex flex-row justify-between">
         <h2 class="h3">Users</h2>
-        <button class="btn btn-green" @click="showCreateUserModal()">Create User</button>
+        <button class="btn btn-turquoise" @click="showCreateUserModal()">
+          <font-awesome-icon icon="plus"></font-awesome-icon> Add User
+        </button>
       </div>
       <user-list :users="users" class="mt-5"></user-list>
       <create-user></create-user>
