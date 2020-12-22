@@ -1,6 +1,6 @@
 
 const state = {
-  show_create_base_field_modal: false,
+  show_create_base_field_modal: false
 }
 
 const getters = {
