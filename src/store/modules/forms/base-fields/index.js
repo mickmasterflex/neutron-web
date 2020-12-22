@@ -1,9 +1,11 @@
 import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
 import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
+import visibility from '@/store/modules/forms/base-fields/visibility'
 
 const modules = {
   baseTextFields,
-  baseOptionFields
+  baseOptionFields,
+  visibility
 }
 
 const state = {
