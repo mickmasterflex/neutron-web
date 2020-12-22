@@ -1,7 +1,9 @@
 import axios from '@/axios'
 import visibility from '@/store/modules/clients/visibility'
+import loading from '@/store/modules/clients/loading'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -20,9 +22,13 @@ const getters = {
 
 const actions = {
   async fetchClients ({ commit }) {
+    commit('SET_CLIENTS_FETCH_LOADING')
     await axios.get('/clients/')
       .then(response => {
         commit('SET_CLIENTS', response.data)
+      })
+      .finally(() => {
+        commit('RESET_CLIENTS_FETCH_LOADING')
       })
   },
   async fetchCurrentClient ({ commit }, slug) {

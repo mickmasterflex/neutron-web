@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="clients" class="table table-striped">
+    <table v-if="clients.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Name</th>
@@ -26,13 +26,18 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
+    <table-loading-state v-else-if="loading"
+                       class="well"
+                       heading="Loading Clients"></table-loading-state>
+    <table-empty-state v-else
+                       class="well"
+                       heading="No Clients Exist"
+                       copy="Use the 'New Client' button to get started."></table-empty-state>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   props: ['clients'],
@@ -43,6 +48,11 @@ export default {
     buyers: function (buyers) {
       return buyers.filter(buyer => buyer.parent === null)
     }
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'getClientsFetchLoading'
+    })
   }
 }
 </script>
