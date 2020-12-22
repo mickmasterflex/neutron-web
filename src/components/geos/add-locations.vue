@@ -15,7 +15,7 @@
             <div class="field-group ml-label-width">
               <checkbox-field field_id="nuke_replace"
                               v-model="nuke_replace"
-                              class="font-bold bg-white p-2 w-64 rounded shadow border border-gray-300"
+                              class="font-bold bg-white px-4 py-2 w-64 rounded shadow border border-gray-300"
                               checkedColor="red"
                               :label_class="nuke_replace ? 'text-red-500' : 'text-gray-800'">
                 Nuke & Replace Existing
