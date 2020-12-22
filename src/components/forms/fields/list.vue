@@ -1,12 +1,12 @@
 <template>
   <div class="well well-light">
-    <div v-if="form.fields.length > 0">
+    <div v-if="formFieldsExist">
       <div class="fields-inline-heading bg-gray-900 rounded-lg flex flex-row items-center mb-2">
         <span class="w-20 th rounded-l-lg fields-inline-heading-item">Order</span>
         <span class="w-20 th fields-inline-heading-item">ID</span>
         <span class="w-64 th fields-inline-heading-item">Label</span>
         <span class="w-64 th fields-inline-heading-item">Mapping</span>
-        <span class="w-20 th rounded-r-lg fields-inline-heading-item">Deliver</span>
+        <span class="w-28 th rounded-r-lg fields-inline-heading-item">Pass to Client</span>
       </div>
       <ul-draggable v-bind="dragOptions" v-model="form.fields">
         <li v-for="(field, index) in form.fields" :key="field.id">
@@ -43,7 +43,14 @@ export default {
   computed: {
     ...mapGetters({
       form: 'getCurrentForm'
-    })
+    }),
+    formFieldsExist () {
+      if (this.form) {
+        return this.form.fields.length
+      } else {
+        return 0
+      }
+    }
   }
 }
 </script>

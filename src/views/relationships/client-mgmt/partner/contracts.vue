@@ -1,6 +1,6 @@
 <template>
   <base-panel-grid>
-    <panel-template title="Child Contracts" class="col-span-2">
+    <panel-template title="Partner Contracts" class="col-span-2">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
       </template>

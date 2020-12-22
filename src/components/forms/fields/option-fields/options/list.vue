@@ -4,8 +4,8 @@
       <li class="w-20 fields-inline-heading-item">Order</li>
       <li class="w-64 fields-inline-heading-item">Label</li>
       <li class="w-64 fields-inline-heading-item">Mapping</li>
-      <li class="w-12 fields-inline-heading-item">Scrub</li>
-      <li class="w-12 fields-inline-heading-item">Hide</li>
+      <li class="w-16 fields-inline-heading-item">Scrub</li>
+      <li class="w-16 fields-inline-heading-item">Hide</li>
     </ul>
     <ul-draggable v-if="options.length" v-bind="dragOptions" v-model="options">
       <li v-for="(option, index) in options" :key="option.id" class="card card-sm mb-1 flex flex-row items-center justify-between">
