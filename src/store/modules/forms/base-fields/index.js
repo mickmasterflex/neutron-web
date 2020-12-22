@@ -1,17 +1,14 @@
 import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
 import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
-import baseOptions from '@/store/modules/forms/base-fields/base-options'
 
 const modules = {
   baseTextFields,
-  baseOptionFields,
-  baseOptions
+  baseOptionFields
 }
 
 const state = {
   base_fields: [],
   available_base_fields: [],
-  show_create_base_field_modal: false,
   current_base_field: null
 }
 
@@ -19,7 +16,6 @@ const getters = {
   getBaseFields: state => state.base_fields,
   getAvailableBaseFields: state => state.available_base_fields,
   getBaseFieldCount: state => state.base_fields.length,
-  getShowCreateBaseFieldModal: state => state.show_create_base_field_modal,
   getCurrentBaseField: state => state.current_base_field
 }
 
@@ -47,8 +43,6 @@ const mutations = {
       window.console.log(error)
     }
   },
-  SHOW_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = true),
-  CLOSE_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = false),
   SET_CURRENT_BASE_FIELD: (state, field) => (state.current_base_field = field),
   RESET_CURRENT_BASE_FIELD: (state) => (state.current_base_field = null)
 }

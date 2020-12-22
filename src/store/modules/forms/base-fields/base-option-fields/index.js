@@ -1,12 +1,14 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/forms/base-fields/base-option-fields/visibility'
+import baseOptions from '@/store/modules/forms/base-fields/base-option-fields/base-options'
 
-const state = {
-  base_option_fields: [],
-  show_update_base_option_field_modal: false
+const modules = {
+  baseOptions,
+  visibility
 }
 
-const getters = {
-  getShowUpdateBaseOptionFieldModal: state => state.show_update_base_option_field_modal
+const state = {
+  base_option_fields: []
 }
 
 const actions = {
@@ -58,14 +60,12 @@ const mutations = {
       state.base_option_fields.splice(index, 1, updatedField)
     }
   },
-  REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id)),
-  SHOW_UPDATE_BASE_OPTION_FIELD_MODAL: (state) => (state.show_update_base_option_field_modal = true),
-  CLOSE_UPDATE_BASE_OPTION_FIELD_MODAL: (state) => (state.show_update_base_option_field_modal = false)
+  REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id))
 }
 
 export default {
+  modules,
   state,
-  getters,
   actions,
   mutations
 }
