@@ -1,9 +1,13 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/users/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   users: [],
-  current_user: {},
-  show_create_user_modal: false
+  current_user: {}
 }
 
 const getters = {
@@ -11,8 +15,7 @@ const getters = {
   getCurrentUser: state => state.current_user,
   getAllUsersCount: (state) => {
     return state.users.length
-  },
-  getShowCreateUserModal: state => state.show_create_user_modal
+  }
 }
 
 const actions = {
@@ -59,12 +62,11 @@ const mutations = {
       state.users.splice(index, 1, updatedUser)
     }
   },
-  REMOVE_USER: (state, id) => (state.users = state.users.filter(user => user.id !== id)),
-  SHOW_CREATE_USER_MODAL: (state) => (state.show_create_user_modal = true),
-  CLOSE_CREATE_USER_MODAL: (state) => (state.show_create_user_modal = false)
+  REMOVE_USER: (state, id) => (state.users = state.users.filter(user => user.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

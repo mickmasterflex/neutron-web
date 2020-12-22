@@ -1,16 +1,18 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/partners/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   partners: [],
-  current_partner: {},
-  show_create_partner_modal: false
+  current_partner: {}
 }
+
 const getters = {
   getAllPartners: state => state.partners,
   getCurrentPartner: state => state.current_partner,
-  getAllPartnersCount: (state) => {
-    return state.partners.length
-  },
   getPartnersByClient: (state) => (clientId) => {
     return state.partners.filter(partner => partner.client === clientId)
   },
@@ -28,7 +30,6 @@ const getters = {
   getPartnersByParent: (state) => (partnerId) => {
     return state.partners.filter(partner => partner.parent === partnerId)
   },
-  getShowCreatePartnerModal: state => state.show_create_partner_modal,
   getPartnerById: (state) => (partnerId) => {
     return state.partners.filter(partner => partner.id === partnerId)[0]
   }
@@ -67,6 +68,7 @@ const actions = {
       })
   }
 }
+
 const mutations = {
   SET_PARTNERS: (state, partners) => (state.partners = partners),
   SET_CURRENT_PARTNER: (state, partner) => (state.current_partner = partner),
@@ -77,12 +79,11 @@ const mutations = {
       state.partners.splice(index, 1, updatedPartner)
     }
   },
-  REMOVE_PARTNER: (state, id) => (state.partners = state.partners.filter(partner => partner.id !== id)),
-  SHOW_CREATE_PARTNER_MODAL: (state) => (state.show_create_partner_modal = true),
-  CLOSE_CREATE_PARTNER_MODAL: (state) => (state.show_create_partner_modal = false)
+  REMOVE_PARTNER: (state, id) => (state.partners = state.partners.filter(partner => partner.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

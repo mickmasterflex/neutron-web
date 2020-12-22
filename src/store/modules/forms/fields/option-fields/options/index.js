@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import inactiveOptions from '@/store/modules/forms/fields/options/inactive.js'
+import inactiveOptions from '@/store/modules/forms/fields/option-fields/options/inactive.js'
 
 const modules = {
   inactiveOptions

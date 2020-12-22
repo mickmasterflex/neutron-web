@@ -1,16 +1,10 @@
 import axios from '@/axios'
-import options from '@/store/modules/forms/fields/options/'
+import options from '@/store/modules/forms/fields/option-fields/options/'
+import visibility from '@/store/modules/forms/fields/option-fields/visibility'
 
 const modules = {
-  options
-}
-
-const state = {
-  show_update_option_field_modal: false
-}
-
-const getters = {
-  getShowUpdateOptionFieldModal: state => state.show_update_option_field_modal
+  options,
+  visibility
 }
 
 const actions = {
@@ -47,15 +41,7 @@ const actions = {
   }
 }
 
-const mutations = {
-  SHOW_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field_modal = true),
-  CLOSE_UPDATE_OPTION_FIELD_MODAL: (state) => (state.show_update_option_field_modal = false)
-}
-
 export default {
   modules,
-  state,
-  getters,
-  actions,
-  mutations
+  actions
 }

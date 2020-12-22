@@ -1,11 +1,11 @@
 import axios from '@/axios'
 import brandLogos from '@/store/modules/brands/logos'
 import brandBanners from '@/store/modules/brands/banners'
+import visibility from '@/store/modules/brands/visibility'
 
 const state = {
   brands: [],
-  current_brand: {},
-  show_create_brand_modal: false
+  current_brand: {}
 }
 
 const getters = {
@@ -13,8 +13,7 @@ const getters = {
   getCurrentBrand: state => state.current_brand,
   getAllBrandsCount: (state) => {
     return state.brands.length
-  },
-  getShowCreateBrandModal: state => state.show_create_brand_modal
+  }
 }
 
 const actions = {
@@ -61,12 +60,11 @@ const mutations = {
       state.brands.splice(index, 1, updatedBrand)
     }
   },
-  REMOVE_BRAND: (state, id) => (state.brands = state.brands.filter(brand => brand.id !== id)),
-  SHOW_CREATE_BRAND_MODAL: (state) => (state.show_create_brand_modal = true),
-  CLOSE_CREATE_BRAND_MODAL: (state) => (state.show_create_brand_modal = false)
+  REMOVE_BRAND: (state, id) => (state.brands = state.brands.filter(brand => brand.id !== id))
 }
 
 const modules = {
+  visibility,
   brandLogos,
   brandBanners
 }

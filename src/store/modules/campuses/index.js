@@ -1,19 +1,18 @@
 import axios from '@/axios'
 import campusLogos from '@/store/modules/campuses/logos'
 import campusBanners from '@/store/modules/campuses/banners'
+import visibility from '@/store/modules/campuses/visibility'
 
 const state = {
   campuses: [],
-  current_campus: {},
-  show_create_campus_modal: false
+  current_campus: {}
 }
 
 const getters = {
   getCurrentCampus: state => state.current_campus,
   getCampusesByBrand: (state) => (brandId) => {
     return state.campuses.filter(campus => campus.brand === brandId)
-  },
-  getShowCreateCampusModal: state => state.show_create_campus_modal
+  }
 }
 
 const actions = {
@@ -60,15 +59,15 @@ const mutations = {
       state.campuses.splice(index, 1, updatedCampus)
     }
   },
-  REMOVE_CAMPUS: (state, id) => (state.campuses = state.campuses.filter(campus => campus.id !== id)),
-  SHOW_CREATE_CAMPUS_MODAL: (state) => (state.show_create_campus_modal = true),
-  CLOSE_CREATE_CAMPUS_MODAL: (state) => (state.show_create_campus_modal = false)
+  REMOVE_CAMPUS: (state, id) => (state.campuses = state.campuses.filter(campus => campus.id !== id))
 }
 
 const modules = {
+  visibility,
   campusLogos,
   campusBanners
 }
+
 export default {
   state,
   getters,

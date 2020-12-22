@@ -1,19 +1,22 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/campaigns/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   campaigns: [],
-  current_campaign: {},
-  show_create_campaign_modal: false
+  current_campaign: {}
 }
 
 const getters = {
   getCurrentCampaign: state => state.current_campaign,
-  getCampaigns: state => state.campaigns,
   getCampaignsByPartner: (state) => (partnerId) => {
     return state.campaigns.filter(campaign => campaign.contract === partnerId)
-  },
-  getShowCreateCampaignModal: state => state.show_create_campaign_modal
+  }
 }
+
 const actions = {
   async fetchCampaigns ({ commit }) {
     await axios.get('/campaigns/')
@@ -58,12 +61,11 @@ const mutations = {
       state.campaigns.splice(index, 1, updatedCampaign)
     }
   },
-  REMOVE_CAMPAIGN: (state, id) => (state.campaigns = state.campaigns.filter(campaign => campaign.id !== id)),
-  SHOW_CREATE_CAMPAIGN_MODAL: (state) => (state.show_create_campaign_modal = true),
-  CLOSE_CREATE_CAMPAIGN_MODAL: (state) => (state.show_create_campaign_modal = false)
+  REMOVE_CAMPAIGN: (state, id) => (state.campaigns = state.campaigns.filter(campaign => campaign.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

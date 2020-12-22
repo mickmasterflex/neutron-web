@@ -1,17 +1,20 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/products/education-products/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   education_products: [],
-  current_education_product: {},
-  show_create_education_product_modal: false
+  current_education_product: {}
 }
 
 const getters = {
   getCurrentEducationProduct: state => state.current_education_product,
   getEducationProductsByCampus: (state) => (campusId) => {
     return state.education_products.filter(educationProduct => educationProduct.product_group === campusId)
-  },
-  getShowCreateEducationProductModal: state => state.show_create_education_product_modal
+  }
 }
 
 const actions = {
@@ -58,12 +61,11 @@ const mutations = {
       state.education_products.splice(index, 1, updatedEducationProduct)
     }
   },
-  REMOVE_EDUCATION_PRODUCT: (state, id) => (state.education_products = state.education_products.filter(educationProduct => educationProduct.id !== id)),
-  SHOW_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_education_product_modal = true),
-  CLOSE_CREATE_EDUCATION_PRODUCT_MODAL: (state) => (state.show_create_education_product_modal = false)
+  REMOVE_EDUCATION_PRODUCT: (state, id) => (state.education_products = state.education_products.filter(educationProduct => educationProduct.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
