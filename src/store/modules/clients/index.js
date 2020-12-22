@@ -32,9 +32,13 @@ const actions = {
       })
   },
   async fetchCurrentClient ({ commit }, slug) {
+    commit('SET_CLIENT_FETCH_LOADING')
     await axios.get(`/clients/${slug}/`)
       .then(response => {
         commit('SET_CURRENT_CLIENT', response.data)
+      })
+      .finally(() => {
+        commit('RESET_CLIENT_FETCH_LOADING')
       })
   },
   async createClient ({ commit }, client) {

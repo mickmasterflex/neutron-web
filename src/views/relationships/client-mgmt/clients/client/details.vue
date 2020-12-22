@@ -1,7 +1,7 @@
 <template>
  <base-panel-grid>
    <update-client :client="client" class="col-span-2 xl:col-span-1"></update-client>
-   <panel-template title="Danger Zone" class="col-span-2">
+   <panel-template title="Danger Zone" class="col-span-2" :showLoader="clientFetchLoading" :loadingText="loadingText">
      <template #content>
        <delete-client :slug="client.slug"></delete-client>
      </template>
@@ -23,7 +23,9 @@ export default {
     ...mapGetters({
       client: 'getCurrentClient',
       getPartnersByClient: 'getPartnersByClient',
-      getBuyersByClient: 'getBuyersByClient'
+      getBuyersByClient: 'getBuyersByClient',
+      clientFetchLoading: 'getClientFetchLoading',
+      loadingText: 'getClientFetchLoadingText'
     }),
     partners: function () {
       return this.getPartnersByClient(this.client.id)
