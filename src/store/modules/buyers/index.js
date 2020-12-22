@@ -1,17 +1,18 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/buyers/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   buyers: [],
-  current_buyer: {},
-  show_create_buyer_modal: false
+  current_buyer: {}
 }
 
 const getters = {
   getAllBuyers: state => state.buyers,
   getCurrentBuyer: state => state.current_buyer,
-  getAllBuyersCount: (state) => {
-    return state.buyers.length
-  },
   getBuyersByClient: (state) => (clientId) => {
     return state.buyers.filter(buyer => buyer.client === clientId)
   },
@@ -29,7 +30,6 @@ const getters = {
   getBuyersByParent: (state) => (buyerId) => {
     return state.buyers.filter(buyer => buyer.parent === buyerId)
   },
-  getShowCreateBuyerModal: state => state.show_create_buyer_modal,
   getBuyerById: (state) => (buyerId) => {
     return state.buyers.filter(buyer => buyer.id === buyerId)[0]
   }
@@ -80,12 +80,11 @@ const mutations = {
       state.buyers.splice(index, 1, updatedBuyer)
     }
   },
-  REMOVE_BUYER: (state, id) => (state.buyers = state.buyers.filter(buyer => buyer.id !== id)),
-  SHOW_CREATE_BUYER_MODAL: (state) => (state.show_create_buyer_modal = true),
-  CLOSE_CREATE_BUYER_MODAL: (state) => (state.show_create_buyer_modal = false)
+  REMOVE_BUYER: (state, id) => (state.buyers = state.buyers.filter(buyer => buyer.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

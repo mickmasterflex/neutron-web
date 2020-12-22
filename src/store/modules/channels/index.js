@@ -1,19 +1,20 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/channels/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   channels: [],
   current_channel: {},
-  channels_fetch_loading: false,
-  show_create_channel_form: false,
-  show_update_channel_form: false
+  channels_fetch_loading: false
 }
 
 const getters = {
   getCurrentChannel: state => state.current_channel,
   getAllChannels: state => state.channels,
-  getChannelsFetchLoading: state => state.channels_fetch_loading,
-  getShowCreateChannelForm: state => state.show_create_channel_form,
-  getShowUpdateChannelForm: state => state.show_update_channel_form
+  getChannelsFetchLoading: state => state.channels_fetch_loading
 }
 
 const actions = {
@@ -57,14 +58,11 @@ const mutations = {
       state.channels.splice(index, 1, updatedChannel)
     }
   },
-  REMOVE_CHANNEL: (state, id) => (state.channels = state.channels.filter(channel => channel.id !== id)),
-  SHOW_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = true),
-  CLOSE_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = false),
-  SHOW_UPDATE_CHANNEL_FORM: (state) => (state.show_update_channel_form = true),
-  CLOSE_UPDATE_CHANNEL_FORM: (state) => (state.show_update_channel_form = false)
+  REMOVE_CHANNEL: (state, id) => (state.channels = state.channels.filter(channel => channel.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

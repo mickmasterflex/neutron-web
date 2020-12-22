@@ -1,23 +1,23 @@
 import axios from '@/axios'
 import dayCaps from '@/store/modules/caps/day/index'
 import monthCaps from '@/store/modules/caps/month/index'
+import visibility from '@/store/modules/caps/visibility'
 
 const modules = {
   dayCaps,
-  monthCaps
+  monthCaps,
+  visibility
 }
 
 const state = {
   current_cap_parent: null,
   caps_calendar_endpoint: '',
-  caps_calendar_params: '',
-  show_caps_modal: false
+  caps_calendar_params: ''
 }
 
 const getters = {
   getCurrentCapParent: state => state.current_cap_parent,
-  getCapsCalendarEndpoint: state => (state.caps_calendar_endpoint + state.caps_calendar_params),
-  getShowCapsModal: state => (state.show_caps_modal)
+  getCapsCalendarEndpoint: state => (state.caps_calendar_endpoint + state.caps_calendar_params)
 }
 
 const actions = {
@@ -37,9 +37,7 @@ const mutations = {
   SET_CAPS_CALENDAR_ENDPOINT: (state, parent) => (state.caps_calendar_endpoint = `/caps-calendar/${parent.type}/${parent.id}/`),
   SET_CAPS_CALENDAR_PARAMS: (state, query) => (state.caps_calendar_params = '?months=' + query.months + '&date=' + query.date),
   RESET_CAPS_CALENDAR_ENDPOINT: (state) => (state.caps_calendar_endpoint = ''),
-  RESET_CAPS_CALENDAR_PARAMS: (state) => (state.caps_calendar_params = ''),
-  SHOW_CAPS_MODAL: (state) => (state.show_caps_modal = true),
-  CLOSE_CAPS_PARENT_MODAL: (state) => (state.show_caps_modal = false)
+  RESET_CAPS_CALENDAR_PARAMS: (state) => (state.caps_calendar_params = '')
 }
 
 export default {
