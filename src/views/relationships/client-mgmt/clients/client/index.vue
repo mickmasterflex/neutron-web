@@ -58,9 +58,11 @@ export default {
     })
   },
   created () {
-    this.fetchCurrentClient(this.slug)
     this.fetchPartners()
     this.fetchBuyers()
+    if (this.client.slug !== this.slug) {
+      this.fetchCurrentClient(this.slug)
+    }
   },
   destroyed () {
     this.resetCurrent()
