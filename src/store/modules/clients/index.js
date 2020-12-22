@@ -1,9 +1,13 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/clients/visibility'
+
+const modules = {
+  visibility
+}
 
 const state = {
   clients: [],
-  current_client: {},
-  show_create_client_modal: false
+  current_client: {}
 }
 
 const getters = {
@@ -11,8 +15,7 @@ const getters = {
   getCurrentClient: state => state.current_client,
   getAllClientsCount: (state) => {
     return state.clients.length
-  },
-  getShowCreateClientModal: state => state.show_create_client_modal
+  }
 }
 
 const actions = {
@@ -59,12 +62,11 @@ const mutations = {
       state.clients.splice(index, 1, updatedClient)
     }
   },
-  REMOVE_CLIENT: (state, slug) => (state.clients = state.clients.filter(client => client.slug !== slug)),
-  SHOW_CREATE_CLIENT_MODAL: (state) => (state.show_create_client_modal = true),
-  CLOSE_CREATE_CLIENT_MODAL: (state) => (state.show_create_client_modal = false)
+  REMOVE_CLIENT: (state, slug) => (state.clients = state.clients.filter(client => client.slug !== slug))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
