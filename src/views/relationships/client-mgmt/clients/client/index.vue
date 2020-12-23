@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -52,12 +52,20 @@ export default {
       fetchPartners: 'fetchPartners',
       fetchBuyers: 'fetchBuyers',
       fetchCurrentClient: 'fetchCurrentClient'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_CLIENT'
     })
   },
   created () {
-    this.fetchCurrentClient(this.slug)
     this.fetchPartners()
     this.fetchBuyers()
+    if (this.client.slug !== this.slug) {
+      this.fetchCurrentClient(this.slug)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>
