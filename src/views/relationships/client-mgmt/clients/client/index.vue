@@ -38,7 +38,9 @@ export default {
     ...mapGetters({
       client: 'getCurrentClient',
       getParentlessPartnersByClient: 'getParentlessPartnersByClient',
-      getParentlessBuyersByClient: 'getParentlessBuyersByClient'
+      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
+      allBuyers: 'getAllBuyers',
+      allPartners: 'getAllPartners'
     }),
     partners: function () {
       return this.getParentlessPartnersByClient(this.client.id)
@@ -58,8 +60,12 @@ export default {
     })
   },
   created () {
-    this.fetchPartners()
-    this.fetchBuyers()
+    if (!this.allBuyers.length) {
+      this.fetchBuyers()
+    }
+    if (!this.allPartners.length) {
+      this.fetchPartners()
+    }
     if (this.client.slug !== this.slug) {
       this.fetchCurrentClient(this.slug)
     }

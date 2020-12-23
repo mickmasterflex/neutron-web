@@ -94,9 +94,13 @@ export default {
   },
   created () {
     if (this.buyerContract()) {
-      this.fetchPartners()
+      if (!this.partners.length) {
+        this.fetchPartners()
+      }
     } else {
-      this.fetchBuyers()
+      if (!this.buyers.length) {
+        this.fetchBuyers()
+      }
     }
   },
   computed: {
