@@ -47,9 +47,6 @@ export default {
     ...mapActions({
       fetchBuyers: 'fetchBuyers'
     })
-  },
-  created () {
-    this.fetchBuyers()
   }
 }
 </script>

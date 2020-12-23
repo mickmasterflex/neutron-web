@@ -7,7 +7,7 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
+          <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
           <select-buyer-group v-model="buyerGroup"></select-buyer-group>
@@ -20,8 +20,9 @@
 
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
+import parentSelect from '@/components/buyers/parent-select'
 import selectBuyerGroup from '@/components/buyer-groups/select'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -85,9 +86,6 @@ export default {
     this.setBuyer()
   },
   computed: {
-    ...mapGetters({
-      siblings: 'getBuyerSiblings'
-    }),
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.buyer.name ||
@@ -103,6 +101,7 @@ export default {
   },
   components: {
     'date-picker': datePicker,
+    'parent-select': parentSelect,
     'select-buyer-group': selectBuyerGroup
   }
 }

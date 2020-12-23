@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/buyers/loading'
 import visibility from '@/store/modules/buyers/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,7 +21,7 @@ const getters = {
   getParentlessBuyersByClient: (state) => (clientId) => {
     return state.buyers.filter(buyer => buyer.client === clientId).filter(buyer => buyer.parent === null)
   },
-  getBuyerSiblings: (state, getters) => {
+  getCurrentBuyerSiblings: (state, getters) => {
     const siblings = getters.getBuyersByClient(state.current_buyer.client)
     const index = siblings.findIndex(buyer => buyer.id === state.current_buyer.id)
     if (index !== -1) {
@@ -37,9 +39,13 @@ const getters = {
 
 const actions = {
   async fetchBuyers ({ commit }) {
+    commit('SET_BUYERS_FETCH_LOADING')
     await axios.get('/buyers/')
       .then(response => {
         commit('SET_BUYERS', response.data)
+      })
+      .finally(() => {
+        commit('RESET_BUYERS_FETCH_LOADING')
       })
   },
   async fetchCurrentBuyer ({ commit }, id) {
