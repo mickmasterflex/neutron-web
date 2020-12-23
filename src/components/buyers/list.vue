@@ -1,8 +1,6 @@
 <template>
   <div>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__faster"
-                leave-active-class="animate__animated animate__fadeOut animate__faster"
-                mode="out-in">
+    <transition-table-state>
       <table v-if="contracts.length" class="table table-white">
         <thead>
           <tr>
@@ -33,7 +31,7 @@
                          heading="No Buyer Contracts"
                          copy="Use the 'New Buyer' button to add buyers to this contract."
       ></table-empty-state>
-    </transition>
+    </transition-table-state>
   </div>
 </template>
 

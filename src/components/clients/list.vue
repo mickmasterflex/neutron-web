@@ -1,8 +1,6 @@
 <template>
   <div>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__faster"
-                leave-active-class="animate__animated animate__fadeOut animate__faster"
-                mode="out-in">
+    <transition-table-state>
       <table v-if="clients.length" class="table table-striped" key="table">
         <thead>
           <tr>
@@ -38,7 +36,7 @@
                          heading="No Clients Exist"
                          key="empty"
                          copy="Use the 'New Client' button to get started."></table-empty-state>
-    </transition>
+    </transition-table-state>
   </div>
 </template>
 
