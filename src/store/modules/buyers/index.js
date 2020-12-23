@@ -49,11 +49,15 @@ const actions = {
       })
   },
   async fetchCurrentBuyer ({ commit }, id) {
+    commit('SET_BUYER_FETCH_LOADING')
     await axios.get(`/buyers/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BUYER', response.data)
         commit('SET_CURRENT_FORM', response.data.form)
         commit('SORT_CURRENT_FORM_FIELDS')
+      })
+      .finally(() => {
+        commit('RESET_BUYER_FETCH_LOADING')
       })
   },
   async createBuyer ({ commit }, buyer) {
