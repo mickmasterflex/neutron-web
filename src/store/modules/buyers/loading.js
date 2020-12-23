@@ -1,10 +1,12 @@
 
 const state = {
-  buyers_fetch_loading: false
+  buyers_fetch_loading: false,
+  buyers_fetch_loading_text: 'Loading Buyers'
 }
 
 const getters = {
-  getBuyersFetchLoading: state => state.buyers_fetch_loading
+  getBuyersFetchLoading: state => state.buyers_fetch_loading,
+  getBuyersFetchLoadingText: state => state.buyers_fetch_loading_text
 }
 
 const mutations = {

@@ -1,6 +1,10 @@
 <template>
   <base-panel-grid>
-    <panel-template title="Buyer Contracts" class="col-span-2">
+    <panel-template
+      title="Buyer Contracts"
+      class="col-span-2"
+      :showLoader="buyersLoading"
+      :loading-text="buyersLoadingText">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
       </template>
@@ -37,11 +41,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      buyer: 'getCurrentBuyer',
       client: 'getCurrentClient',
-      partner: 'getCurrentPartner',
       getParentlessBuyersByClient: 'getParentlessBuyersByClient',
-      getParentlessPartnersByClient: 'getParentlessPartnersByClient'
+      getParentlessPartnersByClient: 'getParentlessPartnersByClient',
+      buyersLoading: 'getBuyersFetchLoading',
+      buyersLoadingText: 'getBuyersFetchLoadingText'
     }),
     partners: function () {
       return this.getParentlessPartnersByClient(this.client.id)
