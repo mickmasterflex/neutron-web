@@ -12,7 +12,7 @@
       <tbody class="tbody">
         <tr class="tr w-64" v-for="contract in this.contracts" :key="contract.id">
           <td class="td">
-            <router-link :to="{name: 'BuyerContract', params: {client:client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
+            <span @click="linkToBuyer(contract)" class="text-link">{{contract.name}}</span>
           </td>
           <td class="td w-32">
             <status-indicator :red="contract.status === 'terminated'"
@@ -31,10 +31,21 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     contracts: Array,
     client: String
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentBuyer: 'SET_CURRENT_BUYER'
+    }),
+    linkToBuyer (contract) {
+      this.setCurrentBuyer(contract)
+      this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
+    }
   }
 }
 </script>

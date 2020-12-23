@@ -73,6 +73,7 @@ const actions = {
 const mutations = {
   SET_BUYERS: (state, buyers) => (state.buyers = buyers),
   SET_CURRENT_BUYER: (state, buyer) => (state.current_buyer = buyer),
+  RESET_CURRENT_BUYER: (state) => (state.current_buyer = {}),
   ADD_BUYER: (state, buyer) => state.buyers.unshift(buyer),
   UPDATE_BUYER: (state, updatedBuyer) => {
     const index = state.buyers.findIndex(buyer => buyer.id === updatedBuyer.id)
