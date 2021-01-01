@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="buyerFetchLoading" :loadingText="buyerFetchLoadingText">
+    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="buyerFetchLoading" loadingText="Loading Contract Fields">
       <template v-slot:action>
         <create-field></create-field>
       </template>
