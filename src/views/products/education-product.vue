@@ -9,7 +9,7 @@
     <template v-slot:content>
       <base-panel-grid>
         <update-education-product :educationProduct="educationProduct" class="col-span-2 xl:col-span-1"></update-education-product>
-        <panel-template title="Danger Zone" class="col-span-2">
+        <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
           <template #content>
             <delete-education-product :educationProduct="educationProduct"></delete-education-product>
           </template>
@@ -36,7 +36,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      educationProduct: 'getCurrentEducationProduct'
+      educationProduct: 'getCurrentEducationProduct',
+      loading: 'getEducationProductFetchLoading',
+      loadingText: 'getEducationProductFetchLoadingText'
     })
   },
   methods: {

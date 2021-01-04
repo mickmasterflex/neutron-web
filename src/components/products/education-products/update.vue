@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Education Product" :actionTransition="true">
+  <panel-template title="Edit Education Product" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -77,7 +77,11 @@ export default {
       } else {
         return false
       }
-    }
+    },
+    ...mapGetters({
+      loading: 'getEducationProductFetchLoading',
+      loadingText: 'getEducationProductFetchLoadingText'
+    })
   },
   methods: {
     ...mapActions({

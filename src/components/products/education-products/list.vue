@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="educationProducts" class="table">
+  <transition-table-state>
+    <table v-if="educationProducts" class="table table-white">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -18,10 +18,12 @@
       </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       class="well"
+                       heading="No Education Products Exist"
+                       key="empty"
+                       copy="Use the 'New Education Product' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
