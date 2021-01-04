@@ -7,7 +7,7 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
-          <v-select-field v-model="product" rules="required" :options="products" field_id="product" field_label="Product"></v-select-field>
+          <select-product v-model="product" rules="required"></select-product>
         </form>
       </validation-observer>
     </template>
@@ -17,6 +17,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import selectProduct from '@/components/products/select'
 
 export default {
   data () {
@@ -36,8 +37,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      update: 'updateOffer',
-      fetchProducts: 'fetchProducts'
+      update: 'updateOffer'
     }),
     setOffer () {
       this.name = this.offer.name
@@ -74,8 +74,10 @@ export default {
     }
   },
   created () {
-    this.fetchProducts()
     this.setOffer()
+  },
+  components: {
+    'select-product': selectProduct
   }
 }
 </script>

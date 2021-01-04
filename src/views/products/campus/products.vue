@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import createEducationProduct from '@/components/education-products/create'
-import educationProductList from '@/components/education-products/list'
+import createEducationProduct from '@/components/products/education-products/create'
+import educationProductList from '@/components/products/education-products/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
