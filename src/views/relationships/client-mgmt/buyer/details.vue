@@ -1,15 +1,15 @@
 <template>
   <base-panel-grid>
-    <update-buyer-contract :buyer="buyer" class="col-span-2 xl:col-span-1"></update-buyer-contract>
+    <update-buyer-contract :buyer="buyer" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"></update-buyer-contract>
     <recruitment-locations :geo="buyer.geo" class="col-span-2 xl:col-span-1"></recruitment-locations>
     <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
       <template v-slot:content>
         <lead-caps :parent="id" type="buyers"></lead-caps>
       </template>
     </panel-template>
-    <update-channels class="col-span-2" :buyer="buyer"></update-channels>
-    <delivery-index :buyer="buyer.id" class="col-span-2"></delivery-index>
-    <panel-template title="Danger Zone" class="col-span-2">
+    <update-channels class="col-span-2" :buyer="buyer" ></update-channels>
+    <delivery-index :buyer="id" class="col-span-2"></delivery-index>
+    <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
       <template v-slot:content>
         <delete-buyer-contract :client="$route.params.client" :id="buyer.id" :parent="buyer.parent"></delete-buyer-contract>
       </template>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import deleteBuyer from '@/components/buyers/delete'
 import updateBuyer from '@/components/buyers/update'
 import recruitmentLocations from '@/components/geos/index'
@@ -32,7 +32,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      buyer: 'getCurrentBuyer'
+      buyer: 'getCurrentBuyer',
+      loading: 'getBuyerFetchLoading',
+      loadingText: 'getBuyerFetchLoadingText'
     })
   },
   components: {
@@ -42,14 +44,6 @@ export default {
     'update-buyer-contract': updateBuyer,
     'recruitment-locations': recruitmentLocations,
     'lead-caps': leadCaps
-  },
-  methods: {
-    ...mapActions({
-      fetchBuyers: 'fetchBuyers'
-    })
-  },
-  created () {
-    this.fetchBuyers()
   }
 }
 </script>

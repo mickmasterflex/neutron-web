@@ -1,5 +1,5 @@
 <template>
-  <div class="well well-light">
+  <transition-table-state>
     <div v-if="formFieldsExist">
       <div class="fields-inline-heading bg-gray-900 rounded-lg flex flex-row items-center mb-2">
         <span class="w-20 th rounded-l-lg fields-inline-heading-item">Order</span>
@@ -21,7 +21,7 @@
       </ul-draggable>
     </div>
     <table-empty-state v-else heading="No Fields" copy="Use the 'Add Field' button to start cloning base fields for this contract."></table-empty-state>
-  </div>
+  </transition-table-state>
 </template>
 
 <script>
@@ -45,7 +45,7 @@ export default {
       form: 'getCurrentForm'
     }),
     formFieldsExist () {
-      if (this.form) {
+      if (this.form.fields) {
         return this.form.fields.length
       } else {
         return 0

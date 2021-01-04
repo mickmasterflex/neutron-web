@@ -1,8 +1,6 @@
 <template>
   <div>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__fast"
-                leave-active-class="animate__animated animate__fadeOut animate__fast"
-                mode="out-in">
+    <transition-table-state>
       <table v-if="clients.length" class="table table-striped" key="table">
         <thead>
           <tr>
@@ -32,13 +30,13 @@
       <table-loading-state v-else-if="loading"
                            class="well"
                            key="loading"
-                           heading="Loading Clients"></table-loading-state>
+                           :heading="loadingText"></table-loading-state>
       <table-empty-state v-else
                          class="well"
                          heading="No Clients Exist"
                          key="empty"
                          copy="Use the 'New Client' button to get started."></table-empty-state>
-    </transition>
+    </transition-table-state>
   </div>
 </template>
 
@@ -68,7 +66,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loading: 'getClientsFetchLoading'
+      loading: 'getClientsFetchLoading',
+      loadingText: 'getClientsFetchLoadingText'
     })
   }
 }

@@ -85,6 +85,9 @@ import vTextareaField from '@/components/ui/forms/validation-fields/textarea-fie
 import textField from '@/components/ui/forms/base-fields/text-field'
 import vTextField from '@/components/ui/forms/validation-fields/text-field'
 
+/* Transition Components */
+import transitionTableState from '@/components/transitions/table-state'
+
 /* -----------------------------------------------
   Authentication
 -------------------------------------------------- */
@@ -129,6 +132,9 @@ Vue.component('textarea-field', textareaField)
 Vue.component('v-textarea-field', vTextareaField)
 Vue.component('select-field', selectField)
 Vue.component('v-select-field', vSelectField)
+
+// Transitions
+Vue.component('transition-table-state', transitionTableState)
 
 /* -----------------------------------------------
   Validation

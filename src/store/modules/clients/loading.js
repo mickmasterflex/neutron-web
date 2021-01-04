@@ -2,12 +2,14 @@
 const state = {
   clients_fetch_loading: false,
   client_fetch_loading: false,
+  clients_fetch_loading_text: 'Loading Clients',
   client_fetch_loading_text: 'Loading Client Data'
 }
 
 const getters = {
   getClientsFetchLoading: state => state.clients_fetch_loading,
   getClientFetchLoading: state => state.client_fetch_loading,
+  getClientsFetchLoadingText: state => state.clients_fetch_loading_text,
   getClientFetchLoadingText: state => state.client_fetch_loading_text
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <transition-table-state>
     <table v-if="contracts.length" class="table table-white">
       <thead>
         <tr>
@@ -12,7 +12,7 @@
       <tbody class="tbody">
         <tr class="tr w-64" v-for="contract in this.contracts" :key="contract.id">
           <td class="td">
-            <router-link :to="{name: 'BuyerContract', params: {client:client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
+            <span @click="linkToBuyer(contract)" class="text-link">{{contract.name}}</span>
           </td>
           <td class="td w-32">
             <status-indicator :red="contract.status === 'terminated'"
@@ -26,15 +26,37 @@
         </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Buyer Contracts" copy="Use the 'New Buyer' button to add buyers to this contract."></table-empty-state>
-  </div>
+    <table-empty-state v-else
+                       :heading="emptyStateHeading"
+                       :copy="emptyStateCopy"
+    ></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     contracts: Array,
-    client: String
+    client: String,
+    emptyStateHeading: {
+      type: String,
+      default: 'No Buyer Contracts'
+    },
+    emptyStateCopy: {
+      type: String,
+      default: 'Use the \'New Buyer\' button to add buyers to this client.'
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentBuyer: 'SET_CURRENT_BUYER'
+    }),
+    linkToBuyer (contract) {
+      this.setCurrentBuyer(contract)
+      this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
+    }
   }
 }
 </script>
