@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/offers/loading'
 import visibility from '@/store/modules/offers/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,15 +21,19 @@ const getters = {
 
 const actions = {
   async fetchOffers ({ commit }) {
+    commit('SET_OFFERS_FETCH_LOADING')
     await axios.get('/offers/')
       .then(response => {
         commit('SET_OFFERS', response.data)
+        commit('RESET_OFFERS_FETCH_LOADING')
       })
   },
   async fetchCurrentOffer ({ commit }, id) {
+    commit('SET_OFFER_FETCH_LOADING')
     await axios.get(`/offers/${id}/`)
       .then(response => {
         commit('SET_CURRENT_OFFER', response.data)
+        commit('RESET_OFFER_FETCH_LOADING')
       })
   },
   async createOffer ({ commit }, offer) {

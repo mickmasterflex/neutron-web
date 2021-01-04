@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="offers" class="table">
+  <transition-table-state>
+    <table v-if="offers.length" class="table table-white">
       <thead>
         <tr>
           <th class="th">Name</th>
@@ -20,10 +20,11 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       heading="No Offers Added"
+                       key="empty"
+                       copy="Use the 'New Offer' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>

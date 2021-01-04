@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Offer" :actionTransition="true">
+  <panel-template title="Edit Offer" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -58,7 +58,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: 'getAllProducts'
+      products: 'getAllProducts',
+      loading: 'getOfferFetchLoading',
+      loadingText: 'getOfferFetchLoadingText'
     }),
     unsavedChanges () {
       if (this.name) {

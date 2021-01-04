@@ -1,14 +1,13 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h2 class="h3">Offers List</h2>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Offers List" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
+      <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
       </template>
-    </action-heading>
-    <offer-list :offers="offers" :client="$route.params.client"></offer-list>
+      <template slot="content">
+        <offer-list :offers="offers" :client="$route.params.client"></offer-list>
+      </template>
+    </panel-template>
     <create-offer :buyer="buyer.id"></create-offer>
   </div>
 </template>
@@ -26,7 +25,9 @@ export default {
   computed: {
     ...mapGetters({
       buyer: 'getCurrentBuyer',
-      getOffersByBuyer: 'getOffersByBuyer'
+      getOffersByBuyer: 'getOffersByBuyer',
+      loading: 'getOffersFetchLoading',
+      loadingText: 'getOffersFetchLoadingText'
     }),
     offers: function () {
       return this.getOffersByBuyer(this.buyer.id)

@@ -9,7 +9,7 @@
     <template v-slot:content>
       <base-panel-grid>
         <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
-        <panel-template title="Danger Zone" class="col-span-2">
+        <panel-template title="Danger Zone" :showLoader="loading" :loadingText="loadingText" class="col-span-2">
           <template #content>
             <delete-offer :offer="offer" :client="$route.params.client"></delete-offer>
           </template>
@@ -35,7 +35,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offer: 'getCurrentOffer'
+      offer: 'getCurrentOffer',
+      loading: 'getOfferFetchLoading',
+      loadingText: 'getOfferFetchLoadingText'
     })
   },
   methods: {
