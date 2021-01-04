@@ -17,9 +17,11 @@ const getters = {
 
 const actions = {
   async fetchContractRelations ({ commit }) {
+    commit('SET_CONTRACT_RELATIONS_FETCH_LOADING')
     await axios.get('/contract-relations/')
       .then(response => {
         commit('SET_CONTRACT_RELATIONS', response.data)
+        commit('RESET_CONTRACT_RELATIONS_FETCH_LOADING')
       })
   },
   async updateContractRelation ({ commit }, data) {

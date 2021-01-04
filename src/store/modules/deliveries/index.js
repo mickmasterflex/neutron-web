@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/deliveries/loading'
 import visibility from '@/store/modules/deliveries/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,9 +21,11 @@ const getters = {
 
 const actions = {
   async fetchDeliveries ({ commit }) {
+    commit('SET_DELIVERIES_FETCH_LOADING')
     await axios.get('/deliveries/')
       .then(response => {
         commit('SET_DELIVERIES', response.data)
+        commit('RESET_DELIVERIES_FETCH_LOADING')
       })
   },
   async createDelivery ({ commit }, delivery) {

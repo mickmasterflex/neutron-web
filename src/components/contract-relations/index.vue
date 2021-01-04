@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Contract Relations">
+  <panel-template title="Contract Relations" :showLoader="loading" :loading-text="loadingText">
     <template v-slot:action>
       <create-contract-relation :currentContract="contract"
                                 :contractType="contractType"
@@ -38,7 +38,9 @@ export default {
   computed: {
     ...mapGetters({
       getContractRelationsByBuyer: 'getContractRelationsByBuyer',
-      getContractRelationsByPartner: 'getContractRelationsByPartner'
+      getContractRelationsByPartner: 'getContractRelationsByPartner',
+      loading: 'getContractRelationsFetchLoading',
+      loadingText: 'getContractRelationsFetchLoadingText'
     }),
     contract_relations: function () {
       if (this.buyerContract() && this.contract) {
