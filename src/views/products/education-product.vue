@@ -47,7 +47,9 @@ export default {
     })
   },
   created () {
-    this.fetchCurrentEducationProduct(this.id)
+    if (this.id !== this.educationProduct.id) {
+      this.fetchCurrentEducationProduct(this.id)
+    }
   }
 }
 </script>

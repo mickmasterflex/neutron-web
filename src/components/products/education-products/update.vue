@@ -61,13 +61,8 @@ export default {
   },
   mixins: [setResponseErrors],
   watch: {
-    educationProduct: function () {
-      this.name = this.educationProduct.name
-      this.short_description = this.educationProduct.short_description
-      this.description = this.educationProduct.description
-      this.area_of_interest = this.educationProduct.area_of_interest
-      this.degree_level = this.educationProduct.degree_level
-      this.product_group = this.educationProduct.product_group
+    educationProduct () {
+      this.setProduct()
     }
   },
   computed: {
@@ -87,6 +82,14 @@ export default {
     ...mapActions({
       update: 'updateEducationProduct'
     }),
+    setProduct () {
+      this.name = this.educationProduct.name
+      this.short_description = this.educationProduct.short_description
+      this.description = this.educationProduct.description
+      this.area_of_interest = this.educationProduct.area_of_interest
+      this.degree_level = this.educationProduct.degree_level
+      this.product_group = this.educationProduct.product_group
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -104,6 +107,9 @@ export default {
         }
       })
     }
+  },
+  created () {
+    this.setProduct()
   }
 }
 </script>
