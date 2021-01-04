@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Deliveries">
+  <panel-template title="Deliveries" :showLoader="loading" :loading-text="loadingText">
     <template v-slot:action>
       <button class="btn btn-turquoise" @click="showCreateDeliveryModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Delivery</button>
     </template>
@@ -26,7 +26,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getDeliveriesByBuyer: 'getDeliveriesByBuyer'
+      getDeliveriesByBuyer: 'getDeliveriesByBuyer',
+      loading: 'getDeliveriesFetchLoading',
+      loadingText: 'getDeliveriesFetchLoadingText'
     }),
     deliveries () {
       return this.getDeliveriesByBuyer(this.buyer)
