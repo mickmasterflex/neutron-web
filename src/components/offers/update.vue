@@ -31,8 +31,7 @@ export default {
   mixins: [setResponseErrors],
   watch: {
     offer: function () {
-      this.name = this.offer.name
-      this.product = this.offer.product
+      this.setOffer()
     }
   },
   methods: {
@@ -40,6 +39,10 @@ export default {
       update: 'updateOffer',
       fetchProducts: 'fetchProducts'
     }),
+    setOffer () {
+      this.name = this.offer.name
+      this.product = this.offer.product
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -72,6 +75,7 @@ export default {
   },
   created () {
     this.fetchProducts()
+    this.setOffer()
   }
 }
 </script>

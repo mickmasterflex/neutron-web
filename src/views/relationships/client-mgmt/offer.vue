@@ -19,7 +19,7 @@
   </content-layout>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteOffer from '@/components/offers/delete'
 import updateOffer from '@/components/offers/update'
 
@@ -45,10 +45,18 @@ export default {
       fetchCurrentOffer: 'fetchCurrentOffer',
       fetchOfferByBuyer: 'fetchOfferByBuyer',
       fetchBuyers: 'fetchBuyers'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_OFFER'
     })
   },
   created () {
-    this.fetchCurrentOffer(this.id)
+    if (this.id !== this.offer.id) {
+      this.fetchCurrentOffer(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

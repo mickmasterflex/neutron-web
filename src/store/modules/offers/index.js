@@ -60,6 +60,7 @@ const actions = {
 const mutations = {
   SET_OFFERS: (state, offers) => (state.offers = offers),
   SET_CURRENT_OFFER: (state, offer) => (state.current_offer = offer),
+  RESET_CURRENT_OFFER: (state, offer) => (state.current_offer = {}),
   ADD_OFFER: (state, offer) => state.offers.unshift(offer),
   UPDATE_OFFER: (state, updatedOffer) => {
     const index = state.offers.findIndex(offer => offer.id === updatedOffer.id)
