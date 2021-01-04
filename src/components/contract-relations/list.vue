@@ -1,38 +1,40 @@
 <template>
   <div>
-    <table v-if="contractRelations.length" class="table table-white">
-      <thead>
-      <tr>
-        <th class="th">{{ getContractType().type }}</th>
-        <th class="th">Suppressed</th>
-        <th class="th">Pricing Tier Group</th>
-        <th class="th">Caps</th>
-        <th class="th"></th>
-      </tr>
-      </thead>
-      <tbody class="tbody">
-      <tr class="tr" v-for="relation in sorted(contractRelations)" :key="relation.id">
-        <td class="td">
-          <span>{{ getContract(relation[getContractType().contract]) }}</span>
-        </td>
-        <td class="td suppressed-cell">
-          <update-suppressions :contractRelation="relation"></update-suppressions>
-        </td>
-        <td class="td">
-          <update-pricing-tiers :contractRelation="relation"></update-pricing-tiers>
-        </td>
-        <td class="td">
-          <update-caps :contractRelation="relation"></update-caps>
-        </td>
-        <td class="td">
-          <span class="flex flex-row justify-end">
-            <delete-contract-relation :id="relation.id"></delete-contract-relation>
-          </span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" />
+    <transition-table-state>
+      <table v-if="contractRelations.length" class="table table-white">
+        <thead>
+        <tr>
+          <th class="th">{{ getContractType().type }}</th>
+          <th class="th">Suppressed</th>
+          <th class="th">Pricing Tier Group</th>
+          <th class="th">Caps</th>
+          <th class="th"></th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <tr class="tr" v-for="relation in sorted(contractRelations)" :key="relation.id">
+          <td class="td">
+            <span>{{ getContract(relation[getContractType().contract]) }}</span>
+          </td>
+          <td class="td suppressed-cell">
+            <update-suppressions :contractRelation="relation"></update-suppressions>
+          </td>
+          <td class="td">
+            <update-pricing-tiers :contractRelation="relation"></update-pricing-tiers>
+          </td>
+          <td class="td">
+            <update-caps :contractRelation="relation"></update-caps>
+          </td>
+          <td class="td">
+            <span class="flex flex-row justify-end">
+              <delete-contract-relation :id="relation.id"></delete-contract-relation>
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" />
+    </transition-table-state>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
     <caps-modal v-if="currentRelation.id" :capParent="currentRelation.id" capType="relations"></caps-modal>
   </div>
