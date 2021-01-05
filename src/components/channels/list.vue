@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="channels" class="table table-striped">
+    <table v-if="channels.length" class="table table-white">
       <thead>
         <tr>
           <th class="th">Name</th>
