@@ -21,7 +21,7 @@ const getters = {
   getParentlessPartnersByClient: (state) => (clientId) => {
     return state.partners.filter(partner => partner.client === clientId).filter(partner => partner.parent === null)
   },
-  getPartnerSiblings: (state, getters) => {
+  getCurrentPartnerSiblings: (state, getters) => {
     const siblings = getters.getPartnersByClient(state.current_partner.client)
     const index = siblings.findIndex(partner => partner.id === state.current_partner.id)
     if (index !== -1) {
