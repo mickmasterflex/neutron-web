@@ -31,8 +31,8 @@
           </td>
           <td class="td">{{ contract.rpl }}</td>
             <td class="td">
-              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">>{{ contract.caps.month_caps.length }} {{ plural('Month Cap', contract.caps.month_caps.length) }},
-                    {{ contract.caps.day_caps.length }} {{ plural('Day Cap', contract.caps.day_caps.length) }}
+              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,
+                    {{ contract.caps.day_caps.length }} Day
               </span>
           <span v-else class="italic text-gray-500">No Caps Set</span>
             </td>
