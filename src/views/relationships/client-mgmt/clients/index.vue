@@ -7,15 +7,14 @@
       </div>
     </template>
     <template v-slot:content>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Client List</h2>
-        </template>
-        <template v-slot:right>
+      <panel-template title="Client List" :showLoader="loading" :loadingText="loadingText">
+        <template slot="action">
           <button class="btn btn-turquoise" @click="showCreateClientModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Client</button>
         </template>
-      </action-heading>
-      <client-list :clients="clients" class="mt-5"></client-list>
+        <template slot="content">
+          <client-list :clients="clients"></client-list>
+        </template>
+      </panel-template>
       <create-client></create-client>
     </template>
   </content-layout>
@@ -34,7 +33,9 @@ export default {
   computed: {
     ...mapGetters({
       clients: 'getAllClients',
-      getAllClientsCount: 'getAllClientsCount'
+      getAllClientsCount: 'getAllClientsCount',
+      loading: 'getClientsFetchLoading',
+      loadingText: 'getClientsFetchLoadingText'
     })
   },
   methods: {
