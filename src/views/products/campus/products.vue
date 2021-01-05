@@ -1,21 +1,20 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h3 class="h3">Education Products List</h3>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Education Products" :showLoader="loading" :loadingText="loadingText">
+      <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateEducationProductModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Education Product</button>
       </template>
-    </action-heading>
-    <education-product-list :educationProducts="educationProducts" class="mt-5"></education-product-list>
+      <template slot="content">
+        <education-product-list :educationProducts="educationProducts"></education-product-list>
+      </template>
+    </panel-template>
     <create-education-product v-if="campus" :campusId="campus.id" :educationProducts="educationProducts"></create-education-product>
   </div>
 </template>
 
 <script>
-import createEducationProduct from '@/components/education-products/create'
-import educationProductList from '@/components/education-products/list'
+import createEducationProduct from '@/components/products/education-products/create'
+import educationProductList from '@/components/products/education-products/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -26,7 +25,9 @@ export default {
   computed: {
     ...mapGetters({
       campus: 'getCurrentCampus',
-      getEducationProductsByCampus: 'getEducationProductsByCampus'
+      getEducationProductsByCampus: 'getEducationProductsByCampus',
+      loading: 'getEducationProductsFetchLoading',
+      loadingText: 'getEducationProductsFetchLoadingText'
     }),
     educationProducts: function () {
       return this.getEducationProductsByCampus(this.campus.id)

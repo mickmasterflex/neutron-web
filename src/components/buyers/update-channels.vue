@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import multiselectCheckboxes from '@/components/ui/forms/validation-fields/multi-select-switch.vue'
 
@@ -32,9 +32,6 @@ export default {
     ...mapActions({
       update: 'updateBuyer',
       fetchChannels: 'fetchChannels'
-    }),
-    ...mapMutations({
-      setChannelsFetchLoading: 'SET_CHANNELS_FETCH_LOADING'
     }),
     setChannels () {
       this.channels = this.buyer.channels
@@ -57,7 +54,6 @@ export default {
     }
   },
   created () {
-    this.setChannelsFetchLoading()
     this.setChannels()
     this.fetchChannels()
   },

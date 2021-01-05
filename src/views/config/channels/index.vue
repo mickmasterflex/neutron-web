@@ -4,15 +4,14 @@
       <h1 class="text-white text-4xl font-hairline">All Channels</h1>
     </template>
     <template v-slot:content>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Channels</h2>
-        </template>
-        <template v-slot:right>
+      <panel-template title="Channels" :showLoader="loading" :loadingText="loadingText">
+        <template slot="action">
           <create-channel></create-channel>
         </template>
-      </action-heading>
-      <channels-list :channels="channelsList" class="mt-5"></channels-list>
+        <template slot="content">
+          <channels-list :channels="channelsList"></channels-list>
+        </template>
+      </panel-template>
     </template>
   </content-layout>
 </template>
@@ -29,7 +28,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      channelsList: 'getAllChannels'
+      channelsList: 'getAllChannels',
+      loading: 'getChannelsFetchLoading',
+      loadingText: 'getChannelsFetchLoadingText'
     })
   },
   methods: {

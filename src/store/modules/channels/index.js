@@ -1,24 +1,25 @@
 import axios from '@/axios'
 import visibility from '@/store/modules/channels/visibility'
+import loading from '@/store/modules/channels/loading'
 
 const modules = {
+  loading,
   visibility
 }
 
 const state = {
   channels: [],
-  current_channel: {},
-  channels_fetch_loading: false
+  current_channel: {}
 }
 
 const getters = {
   getCurrentChannel: state => state.current_channel,
-  getAllChannels: state => state.channels,
-  getChannelsFetchLoading: state => state.channels_fetch_loading
+  getAllChannels: state => state.channels
 }
 
 const actions = {
   async fetchChannels ({ commit }) {
+    commit('SET_CHANNELS_FETCH_LOADING')
     await axios.get('/channels/')
       .then(response => {
         commit('SET_CHANNELS', response.data)
@@ -48,8 +49,6 @@ const actions = {
 
 const mutations = {
   SET_CHANNELS: (state, channels) => (state.channels = channels),
-  SET_CHANNELS_FETCH_LOADING: (state) => (state.channels_fetch_loading = true),
-  RESET_CHANNELS_FETCH_LOADING: (state) => (state.channels_fetch_loading = false),
   SET_CURRENT_CHANNEL: (state, channel) => (state.current_channel = channel),
   ADD_CHANNEL: (state, channel) => state.channels.unshift(channel),
   UPDATE_CHANNEL: (state, updatedChannel) => {

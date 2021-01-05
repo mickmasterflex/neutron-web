@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/offers/loading'
 import visibility from '@/store/modules/offers/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,15 +21,19 @@ const getters = {
 
 const actions = {
   async fetchOffers ({ commit }) {
+    commit('SET_OFFERS_FETCH_LOADING')
     await axios.get('/offers/')
       .then(response => {
         commit('SET_OFFERS', response.data)
+        commit('RESET_OFFERS_FETCH_LOADING')
       })
   },
   async fetchCurrentOffer ({ commit }, id) {
+    commit('SET_OFFER_FETCH_LOADING')
     await axios.get(`/offers/${id}/`)
       .then(response => {
         commit('SET_CURRENT_OFFER', response.data)
+        commit('RESET_OFFER_FETCH_LOADING')
       })
   },
   async createOffer ({ commit }, offer) {
@@ -54,6 +60,7 @@ const actions = {
 const mutations = {
   SET_OFFERS: (state, offers) => (state.offers = offers),
   SET_CURRENT_OFFER: (state, offer) => (state.current_offer = offer),
+  RESET_CURRENT_OFFER: (state, offer) => (state.current_offer = {}),
   ADD_OFFER: (state, offer) => state.offers.unshift(offer),
   UPDATE_OFFER: (state, updatedOffer) => {
     const index = state.offers.findIndex(offer => offer.id === updatedOffer.id)

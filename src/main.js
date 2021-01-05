@@ -72,7 +72,6 @@ import statCard from '@/components/ui/cards/stat-card'
 /* Table Components */
 import statusIndicator from '@/components/ui/tables/status-indicator'
 import tableEmptyState from '@/components/ui/tables/empty-state'
-import tableLoadingState from '@/components/ui/tables/loading-state'
 import tableLink from '@/components/ui/tables/table-link'
 
 /* Field Components */
@@ -119,7 +118,6 @@ Vue.component('action-heading', actionHeading)
 
 // Tables
 Vue.component('table-empty-state', tableEmptyState)
-Vue.component('table-loading-state', tableLoadingState)
 Vue.component('table-link', tableLink)
 Vue.component('status-indicator', statusIndicator)
 

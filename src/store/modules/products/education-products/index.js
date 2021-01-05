@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/products/education-products/loading'
 import visibility from '@/store/modules/products/education-products/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,15 +21,19 @@ const getters = {
 
 const actions = {
   async fetchEducationProducts ({ commit }) {
+    commit('SET_EDUCATION_PRODUCTS_FETCH_LOADING')
     await axios.get('/education-products/')
       .then(response => {
         commit('SET_EDUCATION_PRODUCTS', response.data)
+        commit('RESET_EDUCATION_PRODUCTS_FETCH_LOADING')
       })
   },
   async fetchCurrentEducationProduct ({ commit }, id) {
+    commit('SET_EDUCATION_PRODUCT_FETCH_LOADING')
     await axios.get(`/education-products/${id}/`)
       .then(response => {
         commit('SET_CURRENT_EDUCATION_PRODUCT', response.data)
+        commit('RESET_EDUCATION_PRODUCT_FETCH_LOADING')
       })
   },
   async createEducationProduct ({ commit }, educationProduct) {

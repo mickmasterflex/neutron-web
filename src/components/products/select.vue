@@ -1,34 +1,33 @@
 <template>
   <v-select-field
     :loading="loading"
-    v-model="inner_value"
-    :options="channels"
-    field_label="Channels"
-    field_id="channels"
-    v-bind="$attrs"
     :rules="rules"
-  ></v-select-field>
+    :options="products"
+    v-model="inner_value"
+    v-bind="$attrs"
+    field_id="product"
+    field_label="Product"></v-select-field>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 import validation from '@/mixins/fields/validation'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   mixins: [validation],
   computed: {
     ...mapGetters({
-      channels: 'getAllChannels',
-      loading: 'getChannelsFetchLoading'
+      loading: 'getProductsFetchLoading',
+      products: 'getAllProducts'
     })
   },
   methods: {
     ...mapActions({
-      fetchChannels: 'fetchChannels'
+      fetchProducts: 'fetchProducts'
     })
   },
-  created () {
-    this.fetchChannels()
+  mounted () {
+    this.fetchProducts()
   }
 }
 </script>

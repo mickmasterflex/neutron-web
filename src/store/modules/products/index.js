@@ -1,7 +1,9 @@
 import axios from '@/axios'
 import educationProducts from '@/store/modules/products/education-products'
+import loading from '@/store/modules/products/loading'
 
 const modules = {
+  loading,
   educationProducts
 }
 
@@ -16,8 +18,10 @@ const getters = {
 
 const actions = {
   async fetchProducts ({ commit }) {
+    commit('SET_PRODUCTS_FETCH_LOADING')
     await axios.get('/products/')
       .then(response => {
+        commit('RESET_PRODUCTS_FETCH_LOADING')
         commit('SET_PRODUCTS', response.data)
       })
   }
