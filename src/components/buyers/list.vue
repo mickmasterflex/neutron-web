@@ -7,6 +7,7 @@
           <th class="th w-32">Status</th>
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
+          <th class="th">Children</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -23,6 +24,9 @@
           </td>
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
+          <td class="td">
+            <table-link @table-link-click="linkToBuyer(contract)">{{ contract.children.length }} </table-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -40,6 +44,7 @@ export default {
   props: {
     contracts: Array,
     client: String,
+    children: String,
     emptyStateHeading: {
       type: String,
       default: 'No Buyer Contracts'
