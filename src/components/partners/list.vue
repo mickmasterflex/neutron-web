@@ -13,7 +13,6 @@
         <tr class="tr w-64" v-for="contract in contracts" :key="contract.id">
           <td class="td">
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
-            <router-link :to="{name: 'PartnerContract', params: {client:client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
           </td>
           <td class="td w-32">
             <status-indicator :red="contract.status === 'terminated'"
@@ -55,7 +54,7 @@ export default {
     }),
     linkToPartner (contract) {
       this.setCurrentPartner(contract)
-      this.$router.push({ name: 'PartnerContract', params: { client: this.client, id: this.contract.id } })
+      this.$router.push({ name: 'PartnerContract', params: { client: this.client, id: contract.id } })
     }
   }
 }
