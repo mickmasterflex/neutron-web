@@ -8,6 +8,8 @@
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
           <th class="th">Children</th>
+          <th class="th">RPL</th>
+          <th class="th">Caps</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -27,6 +29,13 @@
           <td class="td">
             <table-link @table-link-click="linkToBuyer(contract)">{{ contract.children.length }} </table-link>
           </td>
+          <td class="td">{{ contract.rpl }}</td>
+            <td class="td">
+              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">>{{ contract.caps.month_caps.length }} {{ plural('Month Cap', contract.caps.month_caps.length) }},
+                    {{ contract.caps.day_caps.length }} {{ plural('Day Cap', contract.caps.day_caps.length) }}
+              </span>
+          <span v-else class="italic text-gray-500">No Caps Set</span>
+            </td>
         </tr>
       </tbody>
     </table>
@@ -39,12 +48,14 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import { plural } from '@/mixins/plural'
 
 export default {
   props: {
     contracts: Array,
     client: String,
     children: String,
+    caps: Object,
     emptyStateHeading: {
       type: String,
       default: 'No Buyer Contracts'
@@ -62,6 +73,7 @@ export default {
       this.setCurrentBuyer(contract)
       this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
     }
-  }
+  },
+  mixins: [plural]
 }
 </script>
