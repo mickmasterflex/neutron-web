@@ -27,7 +27,7 @@
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
           <td class="td">
-            <table-link @table-link-click="linkToBuyer(contract)">{{ contract.children.length }} </table-link>
+            <table-link @table-link-click="linkToBuyerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>
           <td class="td">{{ contract.rpl }}</td>
             <td class="td">
@@ -48,7 +48,6 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { plural } from '@/mixins/plural'
 
 export default {
   props: {
@@ -72,8 +71,11 @@ export default {
     linkToBuyer (contract) {
       this.setCurrentBuyer(contract)
       this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
+    },
+    linkToBuyerContracts (contract) {
+      this.setCurrentBuyer(contract)
+      this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
     }
-  },
-  mixins: [plural]
+  }
 }
 </script>
