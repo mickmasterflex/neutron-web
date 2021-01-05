@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <transition-table-state>
     <table v-if="contracts.length" class="table table-white">
       <thead>
         <tr>
@@ -27,7 +27,7 @@
       </tbody>
     </table>
     <table-empty-state v-else heading="No Partner Contracts" copy="Use the 'New Partner' button to add children to this contract."></table-empty-state>
-  </div>
+  </transition-table-state>
 </template>
 
 <script>

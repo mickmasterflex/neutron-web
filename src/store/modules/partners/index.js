@@ -1,7 +1,9 @@
 import axios from '@/axios'
 import visibility from '@/store/modules/partners/visibility'
+import loading from '@/store/modules/partners/loading'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -37,15 +39,19 @@ const getters = {
 
 const actions = {
   async fetchPartners ({ commit }) {
+    commit('SET_PARTNERS_FETCH_LOADING')
     await axios.get('/partners/')
       .then(response => {
         commit('SET_PARTNERS', response.data)
+        commit('RESET_PARTNERS_FETCH_LOADING')
       })
   },
   async fetchCurrentPartner ({ commit }, id) {
+    commit('SET_PARTNER_FETCH_LOADING')
     await axios.get(`/partners/${id}/`)
       .then(response => {
         commit('SET_CURRENT_PARTNER', response.data)
+        commit('RESET_PARTNER_FETCH_LOADING')
       })
   },
   async createPartner ({ commit }, partner) {
