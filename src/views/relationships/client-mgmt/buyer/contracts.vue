@@ -1,7 +1,13 @@
 <template>
   <base-panel-grid>
-    <buyer-list-panel class="col-span-2" :contracts="children" :client="$route.params.client" emptyStateCopy="Use the 'New Buyer' button to add buyers to this contract."></buyer-list-panel>
-    <contract-relations-index v-if="buyer.id" :contract="buyer.id" contractType="buyer" class="col-span-2"></contract-relations-index>
+    <buyer-list-panel class="col-span-2"
+                      :contracts="children"
+                      :client="$route.params.client"
+                      emptyStateCopy="Use the 'New Buyer' button to add buyers to this buyer."></buyer-list-panel>
+    <contract-relations-index v-if="buyer.id"
+                              :contract="buyer.id"
+                              contractType="buyer"
+                              class="col-span-2"></contract-relations-index>
     <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
   </base-panel-grid>
 </template>

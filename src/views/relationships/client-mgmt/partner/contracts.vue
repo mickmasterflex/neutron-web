@@ -1,6 +1,9 @@
 <template>
   <base-panel-grid>
-    <partner-list-panel :contracts="children" :client="$route.params.client" class="col-span-2"></partner-list-panel>
+    <partner-list-panel :contracts="children"
+                        :client="$route.params.client"
+                        class="col-span-2"
+                        emptyStateCopy="Use the 'New Partner' button to add partners to this partner."></partner-list-panel>
     <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner" class="col-span-2"></contract-relations-index>
     <create-partner-contract :client="partner.client" :parent="partner.id"></create-partner-contract>
   </base-panel-grid>
