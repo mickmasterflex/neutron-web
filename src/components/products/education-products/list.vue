@@ -19,7 +19,6 @@
       </tbody>
     </table>
     <table-empty-state v-else
-                       class="well"
                        heading="No Education Products Exist"
                        key="empty"
                        copy="Use the 'New Education Product' button to get started."></table-empty-state>
