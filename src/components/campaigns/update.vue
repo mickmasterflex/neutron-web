@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Campaign" :actionTransition="true">
+  <panel-template title="Edit Campaign" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -55,6 +55,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      loading: 'getCampaignFetchLoading',
+      loadingText: 'getCampaignFetchLoadingText'
+    }),
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.campaign.name || this.campaign_code !== this.campaign.code

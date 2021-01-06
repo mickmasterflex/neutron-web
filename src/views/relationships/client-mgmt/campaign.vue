@@ -9,7 +9,7 @@
     <template v-slot:content>
       <base-panel-grid>
         <update-campaign :campaign="campaign" class="col-span-2 xl:col-span-1"></update-campaign>
-        <panel-template title="Danger Zone" class="col-span-2">
+        <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
           <template #content>
             <delete-campaign :campaign="campaign" :client="$route.params.client"></delete-campaign>
           </template>
@@ -35,7 +35,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      campaign: 'getCurrentCampaign'
+      campaign: 'getCurrentCampaign',
+      loading: 'getCampaignFetchLoading',
+      loadingText: 'getCampaignFetchLoadingText'
     })
   },
   methods: {
