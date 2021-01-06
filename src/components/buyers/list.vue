@@ -7,6 +7,9 @@
           <th class="th w-32">Status</th>
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
+          <th class="th">Children</th>
+          <th class="th">RPL</th>
+          <th class="th">Caps</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -23,6 +26,16 @@
           </td>
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
+          <td class="td">
+            <table-link @table-link-click="linkToBuyerContracts(contract)">{{ contract.children.length }} </table-link>
+          </td>
+          <td class="td">{{ contract.rpl }}</td>
+            <td class="td">
+              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,
+                    {{ contract.caps.day_caps.length }} Day
+              </span>
+          <span v-else class="italic text-gray-500">No Caps Set</span>
+            </td>
         </tr>
       </tbody>
     </table>
@@ -40,6 +53,8 @@ export default {
   props: {
     contracts: Array,
     client: String,
+    children: String,
+    caps: Object,
     emptyStateHeading: {
       type: String,
       default: 'No Buyer Contracts'
@@ -56,6 +71,10 @@ export default {
     linkToBuyer (contract) {
       this.setCurrentBuyer(contract)
       this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
+    },
+    linkToBuyerContracts (contract) {
+      this.setCurrentBuyer(contract)
+      this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
     }
   }
 }
