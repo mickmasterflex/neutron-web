@@ -7,6 +7,7 @@
           <th class="th w-32">Status</th>
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
+          <th class="th">Pricing Tier Group</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -23,6 +24,7 @@
           </td>
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
+          <td class="td">{{ contract.pricing_tier_group }}</td>
         </tr>
       </tbody>
     </table>
