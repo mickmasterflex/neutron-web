@@ -12,7 +12,7 @@
     <template v-slot:content>
       <base-panel-grid>
         <update-user :user="user" class="col-span-2 xl:col-span-1"></update-user>
-        <panel-template title="Danger Zone" class="col-span-2">
+        <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
           <template #content>
             <delete-user :id="user.id"></delete-user>
           </template>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteUser from '@/components/users/delete'
 import updateUser from '@/components/users/update'
 
@@ -39,16 +39,26 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'getCurrentUser'
+      user: 'getCurrentUser',
+      loading: 'getUserFetchLoading',
+      loadingText: 'getUserFetchLoadingText'
     })
   },
   methods: {
     ...mapActions({
       fetchCurrentUser: 'fetchCurrentUser'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_USER'
     })
   },
   created () {
-    this.fetchCurrentUser(this.id)
+    if (this.id !== this.user.id) {
+      this.fetchCurrentUser(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

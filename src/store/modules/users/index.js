@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/users/loading'
 import visibility from '@/store/modules/users/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -20,15 +22,19 @@ const getters = {
 
 const actions = {
   async fetchUsers ({ commit }) {
+    commit('SET_USERS_FETCH_LOADING')
     await axios.get('/users/')
       .then(response => {
         commit('SET_USERS', response.data)
+        commit('RESET_USERS_FETCH_LOADING')
       })
   },
   async fetchCurrentUser ({ commit }, id) {
+    commit('SET_USER_FETCH_LOADING')
     await axios.get(`/users/${id}/`)
       .then(response => {
         commit('SET_CURRENT_USER', response.data)
+        commit('RESET_USER_FETCH_LOADING')
       })
   },
   async createUser ({ commit }, user) {
@@ -55,6 +61,7 @@ const actions = {
 const mutations = {
   SET_USERS: (state, users) => (state.users = users),
   SET_CURRENT_USER: (state, user) => (state.current_user = user),
+  RESET_CURRENT_USER: (state) => (state.current_user = {}),
   ADD_USER: (state, user) => state.users.unshift(user),
   UPDATE_USER: (state, updatedUser) => {
     const index = state.users.findIndex(user => user.id === updatedUser.id)
