@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Partner" :actionTransition="true">
+  <panel-template title="Edit Partner" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -97,7 +97,9 @@ export default {
   computed: {
     ...mapGetters({
       pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById'
+      getPricingTierGroupById: 'getPricingTierGroupById',
+      loading: 'getPartnerFetchLoading',
+      loadingText: 'getPartnerFetchLoadingText'
     }),
     currentGroup () {
       return this.getPricingTierGroupById(Number(this.pricing_tier_group))

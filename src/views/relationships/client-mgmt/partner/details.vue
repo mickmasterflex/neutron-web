@@ -1,12 +1,12 @@
 <template>
   <base-panel-grid>
     <update-partner-contract :partner="partner" class="col-span-2 xl:col-span-1"></update-partner-contract>
-    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
+    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
       <template v-slot:content>
         <lead-caps :parent="id" type="partners"></lead-caps>
       </template>
     </panel-template>
-    <panel-template title="Danger Zone" class="col-span-2">
+    <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
       <template v-slot:content>
         <delete-partner-contract :client="$route.params.client" :id="partner.id" :parent="partner.parent"></delete-partner-contract>
       </template>
@@ -26,7 +26,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      partner: 'getCurrentPartner'
+      partner: 'getCurrentPartner',
+      loading: 'getPartnerFetchLoading',
+      loadingText: 'getPartnerFetchLoadingText'
     })
   },
   components: {
