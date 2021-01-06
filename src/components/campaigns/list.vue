@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="campaigns" class="table">
+  <transition-table-state>
+    <table v-if="campaigns.length" class="table">
       <thead>
         <tr>
           <th class="th">Name</th>
@@ -20,10 +20,11 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       heading="No Campaigns Exist"
+                       key="empty"
+                       copy="Use the 'New Campaign' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
