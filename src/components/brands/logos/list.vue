@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Logo">
+  <panel-template title="Logo" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <delete-logo></delete-logo>
     </template>
@@ -27,7 +27,9 @@ import deleteLogo from '@/components/brands/logos/delete'
 export default {
   computed: {
     ...mapGetters({
-      brandLogos: 'getCurrentBrandLogos'
+      brandLogos: 'getCurrentBrandLogos',
+      loading: 'getBrandLogosFetchLoading',
+      loadingText: 'getBrandLogosFetchLoadingText'
     })
   },
   components: {

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="brands" class="table table-striped">
+  <transition-table-state>
+    <table v-if="brands.length" class="table table-white">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -13,7 +13,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="brand in brands" :key="brand.id">
         <td class="td">
-          <router-link :to="{name: 'BrandDetails', params: {id:brand.id}}" class="text-link">{{brand.name}}</router-link>
+          <span @click="linkToBrand(brand)" class="text-link">{{ brand.name }}</span>
         </td>
         <td class="td">{{brand.id}}</td>
         <td class="td">{{brand.short_description}}</td>
@@ -22,18 +22,33 @@
       </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       heading="No Brands Exist"
+                       key="empty"
+                       copy="Use the 'New Brands' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     brands: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentBrand: 'SET_CURRENT_BRAND'
+    }),
+    linkToBrand (brand) {
+      this.setCurrentBrand(brand)
+      this.$router.push({
+        name: 'BrandDetails',
+        params: { id: brand.id }
+      })
     }
   }
 }

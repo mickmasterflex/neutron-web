@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import loading from '@/store/modules/brands/logos/loading'
 
 const state = {
   current_brand_logos: []
@@ -10,9 +11,11 @@ const getters = {
 
 const actions = {
   async fetchCurrentBrandLogos ({ commit }, brand) {
+    commit('SET_BRAND_LOGOS_FETCH_LOADING')
     await axios.get(`/brand-logos/brand/${brand}/`)
       .then(response => {
         commit('SET_CURRENT_BRAND_LOGOS', response.data)
+        commit('RESET_BRAND_LOGOS_FETCH_LOADING')
       })
   },
   async uploadBrandLogo ({ commit }, logo) {
@@ -35,9 +38,14 @@ const mutations = {
   REMOVE_BRAND_LOGO: (state, id) => (state.current_brand_logos = state.current_brand_logos.filter(logo => logo.id !== id))
 }
 
+const modules = {
+  loading
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }

@@ -7,15 +7,14 @@
       </div>
     </template>
     <template v-slot:content>
-      <action-heading>
-        <template v-slot:left>
-          <h2 class="h3">Brand List</h2>
-        </template>
-        <template v-slot:right>
+      <panel-template title="Brand List" :showLoader="loading" :loadingText="loadingText">
+        <template slot="action">
           <button class="btn btn-turquoise" @click="showCreateBrandModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Brand</button>
         </template>
-      </action-heading>
-      <brand-list :brands="brands" class="mt-5"></brand-list>
+        <template slot="content">
+          <brand-list :brands="brands"></brand-list>
+        </template>
+      </panel-template>
       <create-brand></create-brand>
     </template>
   </content-layout>
@@ -34,7 +33,9 @@ export default {
   computed: {
     ...mapGetters({
       brands: 'getAllBrands',
-      getAllBrandsCount: 'getAllBrandsCount'
+      getAllBrandsCount: 'getAllBrandsCount',
+      loading: 'getBrandsFetchLoading',
+      loadingText: 'getBrandsFetchLoadingText'
     })
   },
   methods: {

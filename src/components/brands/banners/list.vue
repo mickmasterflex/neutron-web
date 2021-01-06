@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Banner">
+  <panel-template title="Banner" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <delete-banner></delete-banner>
     </template>
@@ -27,7 +27,9 @@ import deleteBanner from '@/components/brands/banners/delete'
 export default {
   computed: {
     ...mapGetters({
-      brandBanners: 'getCurrentBrandBanners'
+      brandBanners: 'getCurrentBrandBanners',
+      loading: 'getBrandBannersFetchLoading',
+      loadingText: 'getBrandBannersFetchLoadingText'
     })
   },
   components: {
