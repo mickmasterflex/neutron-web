@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="campaigns.length" class="table">
+    <table v-if="campaigns.length" class="table table-white">
       <thead>
         <tr>
           <th class="th">Name</th>

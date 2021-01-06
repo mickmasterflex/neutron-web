@@ -1,14 +1,13 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h3 class="h3">Campaigns List</h3>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Campaigns List" :showLoader="loading" :loadingText="loadingText">
+      <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateCampaignModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campaign</button>
       </template>
-    </action-heading>
-    <campaign-list :campaigns="campaigns" :client="$route.params.client"></campaign-list>
+      <template slot="content">
+        <campaign-list :campaigns="campaigns" :client="$route.params.client"></campaign-list>
+      </template>
+    </panel-template>
     <create-campaign :partner="partner.id"></create-campaign>
   </div>
 </template>
@@ -22,7 +21,9 @@ export default {
   computed: {
     ...mapGetters({
       partner: 'getCurrentPartner',
-      getCampaignsByPartner: 'getCampaignsByPartner'
+      getCampaignsByPartner: 'getCampaignsByPartner',
+      loading: 'getCampaignsFetchLoading',
+      loadingText: 'getCampaignsFetchLoadingText'
     }),
     campaigns: function () {
       return this.getCampaignsByPartner(this.partner.id)
