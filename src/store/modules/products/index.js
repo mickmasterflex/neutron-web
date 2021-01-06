@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import educationProducts from '@/store/modules/products/education-products'
+import educationProducts from '@/store/modules/products/education'
 import loading from '@/store/modules/products/loading'
 
 const modules = {
