@@ -60,6 +60,7 @@ const actions = {
 const mutations = {
   SET_EDUCATION_PRODUCTS: (state, educationProducts) => (state.education_products = educationProducts),
   SET_CURRENT_EDUCATION_PRODUCT: (state, educationProduct) => (state.current_education_product = educationProduct),
+  RESET_CURRENT_EDUCATION_PRODUCT: (state) => (state.current_education_product = {}),
   ADD_EDUCATION_PRODUCT: (state, educationProduct) => state.education_products.unshift(educationProduct),
   UPDATE_EDUCATION_PRODUCT: (state, updatedEducationProduct) => {
     const index = state.education_products.findIndex(educationProduct => educationProduct.id === updatedEducationProduct.id)

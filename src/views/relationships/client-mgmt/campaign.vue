@@ -9,7 +9,7 @@
     <template v-slot:content>
       <base-panel-grid>
         <update-campaign :campaign="campaign" class="col-span-2 xl:col-span-1"></update-campaign>
-        <panel-template title="Danger Zone" class="col-span-2">
+        <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
           <template #content>
             <delete-campaign :campaign="campaign" :client="$route.params.client"></delete-campaign>
           </template>
@@ -19,7 +19,7 @@
   </content-layout>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampaign from '@/components/campaigns/delete'
 import updateCampaign from '@/components/campaigns/update'
 
@@ -35,17 +35,27 @@ export default {
   },
   computed: {
     ...mapGetters({
-      campaign: 'getCurrentCampaign'
+      campaign: 'getCurrentCampaign',
+      loading: 'getCampaignFetchLoading',
+      loadingText: 'getCampaignFetchLoadingText'
     })
   },
   methods: {
     ...mapActions({
       fetchCurrentCampaign: 'fetchCurrentCampaign',
       fetchCampaignByPartner: 'fetchCampaignByPartner'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_CAMPAIGN'
     })
   },
   created () {
-    this.fetchCurrentCampaign(this.id)
+    if (this.id !== this.campaign.id) {
+      this.fetchCurrentCampaign(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

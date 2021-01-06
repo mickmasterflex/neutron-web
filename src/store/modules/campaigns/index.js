@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/campaigns/loading'
 import visibility from '@/store/modules/campaigns/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,15 +21,19 @@ const getters = {
 
 const actions = {
   async fetchCampaigns ({ commit }) {
+    commit('SET_CAMPAIGNS_FETCH_LOADING')
     await axios.get('/campaigns/')
       .then(response => {
         commit('SET_CAMPAIGNS', response.data)
+        commit('RESET_CAMPAIGNS_FETCH_LOADING')
       })
   },
   async fetchCurrentCampaign ({ commit }, id) {
+    commit('SET_CAMPAIGN_FETCH_LOADING')
     await axios.get(`/campaigns/${id}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPAIGN', response.data)
+        commit('RESET_CAMPAIGN_FETCH_LOADING')
       })
   },
   async createCampaign ({ commit }, campaign) {
@@ -54,6 +60,7 @@ const actions = {
 const mutations = {
   SET_CAMPAIGNS: (state, campaigns) => (state.campaigns = campaigns),
   SET_CURRENT_CAMPAIGN: (state, campaign) => (state.current_campaign = campaign),
+  RESET_CURRENT_CAMPAIGN: (state) => (state.current_campaign = {}),
   ADD_CAMPAIGN: (state, campaign) => state.campaigns.unshift(campaign),
   UPDATE_CAMPAIGN: (state, updatedCampaign) => {
     const index = state.campaigns.findIndex(campaign => campaign.id === updatedCampaign.id)

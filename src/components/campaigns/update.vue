@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Campaign" :actionTransition="true">
+  <panel-template title="Edit Campaign" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -29,9 +29,8 @@ export default {
     campaign: Object
   },
   watch: {
-    campaign: function () {
-      this.name = this.campaign.name
-      this.campaign_code = this.campaign.code
+    campaign () {
+      this.setCampaign()
     }
   },
   mixins: [setResponseErrors],
@@ -39,6 +38,10 @@ export default {
     ...mapActions({
       update: 'updateCampaign'
     }),
+    setCampaign () {
+      this.name = this.campaign.name
+      this.campaign_code = this.campaign.code
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -55,6 +58,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      loading: 'getCampaignFetchLoading',
+      loadingText: 'getCampaignFetchLoadingText'
+    }),
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.campaign.name || this.campaign_code !== this.campaign.code
@@ -62,6 +69,9 @@ export default {
         return false
       }
     }
+  },
+  created () {
+    this.setCampaign()
   }
 }
 </script>
