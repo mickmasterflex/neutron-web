@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from '@/store/modules/campaigns/loading'
 import visibility from '@/store/modules/campaigns/visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,15 +21,19 @@ const getters = {
 
 const actions = {
   async fetchCampaigns ({ commit }) {
+    commit('SET_CAMPAIGNS_FETCH_LOADING')
     await axios.get('/campaigns/')
       .then(response => {
         commit('SET_CAMPAIGNS', response.data)
+        commit('RESET_CAMPAIGNS_FETCH_LOADING')
       })
   },
   async fetchCurrentCampaign ({ commit }, id) {
+    commit('SET_CAMPAIGN_FETCH_LOADING')
     await axios.get(`/campaigns/${id}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPAIGN', response.data)
+        commit('RESET_CAMPAIGN_FETCH_LOADING')
       })
   },
   async createCampaign ({ commit }, campaign) {
