@@ -41,8 +41,7 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentCampaign: 'fetchCurrentCampaign',
-      fetchCampaignByPartner: 'fetchCampaignByPartner',
-      fetchPartners: 'fetchPartners'
+      fetchCampaignByPartner: 'fetchCampaignByPartner'
     })
   },
   created () {

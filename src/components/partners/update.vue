@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Partner" :actionTransition="true">
+  <panel-template title="Edit Partner" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -7,7 +7,7 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
+          <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
@@ -25,6 +25,7 @@
 import listTiers from '@/components/pricing-tiers/tiers/list'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectChannels from '@/components/channels/select'
+import parentSelect from '@/components/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -45,11 +46,6 @@ export default {
       pricing_tier_group: '',
       scheduledStart: null
     }
-  },
-  components: {
-    'list-tiers': listTiers,
-    'date-picker': datePicker,
-    'select-channels': selectChannels
   },
   props: {
     partner: Object
@@ -100,9 +96,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      siblings: 'getPartnerSiblings',
       pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById'
+      getPricingTierGroupById: 'getPricingTierGroupById',
+      loading: 'getPartnerFetchLoading',
+      loadingText: 'getPartnerFetchLoadingText'
     }),
     currentGroup () {
       return this.getPricingTierGroupById(Number(this.pricing_tier_group))
@@ -120,6 +117,12 @@ export default {
         return false
       }
     }
+  },
+  components: {
+    'list-tiers': listTiers,
+    'date-picker': datePicker,
+    'parent-select': parentSelect,
+    'select-channels': selectChannels
   }
 }
 </script>
