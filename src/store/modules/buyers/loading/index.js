@@ -1,4 +1,4 @@
-import fetch from '@/store/modules/channels/loading/fetch'
+import fetch from '@/store/modules/buyers/loading/fetch'
 
 const modules = {
   fetch

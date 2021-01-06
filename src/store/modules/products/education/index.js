@@ -1,6 +1,6 @@
 import axios from '@/axios'
-import loading from '@/store/modules/products/education-products/loading'
-import visibility from '@/store/modules/products/education-products/visibility'
+import loading from '@/store/modules/products/education/loading'
+import visibility from '@/store/modules/products/education/visibility'
 
 const modules = {
   loading,
