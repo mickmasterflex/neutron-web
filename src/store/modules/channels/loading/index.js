@@ -1,7 +1,7 @@
-import fetchLoading from '@/store/modules/channels/loading/fetch'
+import fetch from '@/store/modules/channels/loading/fetch'
 
 const modules = {
-  fetchLoading
+  fetch
 }
 
 export default {
