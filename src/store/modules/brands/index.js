@@ -1,6 +1,7 @@
 import axios from '@/axios'
 import brandLogos from '@/store/modules/brands/logos'
 import brandBanners from '@/store/modules/brands/banners'
+import loading from '@/store/modules/brands/loading'
 import visibility from '@/store/modules/brands/visibility'
 
 const state = {
@@ -18,15 +19,19 @@ const getters = {
 
 const actions = {
   async fetchBrands ({ commit }) {
+    commit('SET_BRANDS_FETCH_LOADING')
     await axios.get('/brands/')
       .then(response => {
         commit('SET_BRANDS', response.data)
+        commit('RESET_BRANDS_FETCH_LOADING')
       })
   },
   async fetchCurrentBrand ({ commit }, id) {
+    commit('SET_BRAND_FETCH_LOADING')
     await axios.get(`/brands/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BRAND', response.data)
+        commit('RESET_BRAND_FETCH_LOADING')
       })
   },
   async createBrand ({ commit }, brand) {
@@ -64,6 +69,7 @@ const mutations = {
 }
 
 const modules = {
+  loading,
   visibility,
   brandLogos,
   brandBanners
