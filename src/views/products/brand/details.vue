@@ -9,7 +9,7 @@
     <brand-banners v-show="brandBanners.length" class="col-span-2"></brand-banners>
     <upload-banner v-show="!brandBanners.length" class="col-span-2 xl:col-span-1"></upload-banner>
 
-    <panel-template title="Danger Zone" class="col-span-2">
+    <panel-template title="Danger Zone" :showLoader="loading" :loadingText="loadingText" class="col-span-2">
       <template #content>
         <delete-brand :id="brand.id"></delete-brand>
       </template>
@@ -31,7 +31,9 @@ export default {
     ...mapGetters({
       brand: 'getCurrentBrand',
       brandLogos: 'getCurrentBrandLogos',
-      brandBanners: 'getCurrentBrandBanners'
+      brandBanners: 'getCurrentBrandBanners',
+      loading: 'getBrandFetchLoading',
+      loadingText: 'getBrandFetchLoadingText'
     })
   },
   components: {

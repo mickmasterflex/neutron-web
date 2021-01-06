@@ -58,6 +58,7 @@ const actions = {
 const mutations = {
   SET_BRANDS: (state, brands) => (state.brands = brands),
   SET_CURRENT_BRAND: (state, brand) => (state.current_brand = brand),
+  RESET_CURRENT_BRAND: (state) => (state.current_brand = {}),
   ADD_BRAND: (state, brand) => state.brands.unshift(brand),
   UPDATE_BRAND: (state, updatedBrand) => {
     const index = state.brands.findIndex(brand => brand.id === updatedBrand.id)
