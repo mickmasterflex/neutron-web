@@ -19,7 +19,7 @@
   </content-layout>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampaign from '@/components/campaigns/delete'
 import updateCampaign from '@/components/campaigns/update'
 
@@ -44,10 +44,18 @@ export default {
     ...mapActions({
       fetchCurrentCampaign: 'fetchCurrentCampaign',
       fetchCampaignByPartner: 'fetchCampaignByPartner'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_CAMPAIGN'
     })
   },
   created () {
-    this.fetchCurrentCampaign(this.id)
+    if (this.id !== this.campaign.id) {
+      this.fetchCurrentCampaign(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

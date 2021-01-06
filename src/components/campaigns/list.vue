@@ -12,7 +12,7 @@
       <tbody class="tbody">
         <tr class="tr" v-for="campaign in this.campaigns" :key="campaign.id">
           <td class="td">
-            <router-link :to="{name: 'Campaign', params: { client: client, partner:campaign.contract, id:campaign.id}}" class="underline text-blue-500">{{campaign.name}}</router-link>
+            <span @click="linkToCampaign(campaign)" class="text-link">{{campaign.name}}</span>
           </td>
           <td class="td">{{ campaign.id }}</td>
           <td class="td">{{ campaign.contract }}</td>
@@ -28,10 +28,24 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     campaigns: Array,
     client: String
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentCampaign: 'SET_CURRENT_CAMPAIGN'
+    }),
+    linkToCampaign (campaign) {
+      this.setCurrentCampaign(campaign)
+      this.$router.push({
+        name: 'Campaign',
+        params: { client: this.client, partner: campaign.contract, id: campaign.id }
+      })
+    }
   }
 }
 </script>

@@ -29,9 +29,8 @@ export default {
     campaign: Object
   },
   watch: {
-    campaign: function () {
-      this.name = this.campaign.name
-      this.campaign_code = this.campaign.code
+    campaign () {
+      this.setCampaign()
     }
   },
   mixins: [setResponseErrors],
@@ -39,6 +38,10 @@ export default {
     ...mapActions({
       update: 'updateCampaign'
     }),
+    setCampaign () {
+      this.name = this.campaign.name
+      this.campaign_code = this.campaign.code
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -66,6 +69,9 @@ export default {
         return false
       }
     }
+  },
+  created () {
+    this.setCampaign()
   }
 }
 </script>

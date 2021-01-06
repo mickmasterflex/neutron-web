@@ -60,6 +60,7 @@ const actions = {
 const mutations = {
   SET_CAMPAIGNS: (state, campaigns) => (state.campaigns = campaigns),
   SET_CURRENT_CAMPAIGN: (state, campaign) => (state.current_campaign = campaign),
+  RESET_CURRENT_CAMPAIGN: (state) => (state.current_campaign = {}),
   ADD_CAMPAIGN: (state, campaign) => state.campaigns.unshift(campaign),
   UPDATE_CAMPAIGN: (state, updatedCampaign) => {
     const index = state.campaigns.findIndex(campaign => campaign.id === updatedCampaign.id)

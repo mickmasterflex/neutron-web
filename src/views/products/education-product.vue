@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteEducationProduct from '@/components/products/education/delete'
 import updateEducationProduct from '@/components/products/education/update'
 
@@ -44,12 +44,18 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentEducationProduct: 'fetchCurrentEducationProduct'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT'
     })
   },
   created () {
     if (this.id !== this.educationProduct.id) {
       this.fetchCurrentEducationProduct(this.id)
     }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>
