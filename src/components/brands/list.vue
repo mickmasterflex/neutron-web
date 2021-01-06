@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="brands" class="table table-striped">
+  <transition-table-state>
+    <table v-if="brands.length" class="table table-white">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -22,10 +22,11 @@
       </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       heading="No Brands Exist"
+                       key="empty"
+                       copy="Use the 'New Brands' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
