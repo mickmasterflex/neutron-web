@@ -8,6 +8,7 @@
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
+          <th class="th">Children</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -25,6 +26,9 @@
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
           <td class="td">{{ contract.pricing_tier_group }}</td>
+          <td class="td">
+            <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -33,10 +37,22 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     contracts: Array,
-    client: String
+    client: String,
+    children: String
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentPartner: 'SET_CURRENT_PARTNER'
+    }),
+    linkToPartnerContracts (contract) {
+      this.setCurrentPartner(contract)
+      this.$router.push({ name: 'PartnerContractChildren', params: { client: this.client, id: contract.id } })
+    }
   }
 }
 </script>
