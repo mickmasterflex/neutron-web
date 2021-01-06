@@ -16,7 +16,7 @@
 <script>
 import createCampaign from '@/components/campaigns/create'
 import campaignList from '@/components/campaigns/list'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -29,9 +29,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      fetchCampaigns: 'fetchCampaigns'
+    }),
     ...mapMutations({
       showCreateCampaignModal: 'SHOW_CREATE_CAMPAIGN_MODAL'
     })
+  },
+  created () {
+    this.fetchCampaigns()
   },
   components: {
     'create-campaign': createCampaign,

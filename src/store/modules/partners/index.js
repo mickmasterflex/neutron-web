@@ -78,6 +78,7 @@ const actions = {
 const mutations = {
   SET_PARTNERS: (state, partners) => (state.partners = partners),
   SET_CURRENT_PARTNER: (state, partner) => (state.current_partner = partner),
+  RESET_CURRENT_PARTNER: (state) => (state.current_partner = {}),
   ADD_PARTNER: (state, partner) => state.partners.unshift(partner),
   UPDATE_PARTNER: (state, updatedPartner) => {
     const index = state.partners.findIndex(partner => partner.id === updatedPartner.id)

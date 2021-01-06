@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -40,8 +40,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchCurrentPartner: 'fetchCurrentPartner',
-      fetchCampaigns: 'fetchCampaigns'
+      fetchCurrentPartner: 'fetchCurrentPartner'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_PARTNER'
     })
   },
   watch: {
@@ -50,8 +52,12 @@ export default {
     }
   },
   created () {
-    this.fetchCurrentPartner(this.id)
-    this.fetchCampaigns()
+    if (this.partner.id !== this.id) {
+      this.fetchCurrentPartner(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>
