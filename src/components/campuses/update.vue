@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Campus" :actionTransition="true">
+  <panel-template title="Edit Campus" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -104,6 +104,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      loading: 'getCampusFetchLoading',
+      loadingText: 'getCampusFetchLoadingText'
+    }),
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.campus.name || this.short_description !== this.campus.short_description || this.is_online !== this.campus.is_online || this.address1 !== this.campus.address1 || this.address2 !== this.campus.address2 || this.city !== this.campus.city || this.state !== this.campus.state || this.postal_code !== this.campus.postal_code || this.phone_type !== this.campus.phone_type || this.phone_number !== this.campus.phone_number || this.phone_extension !== this.campus.phone_extension || this.description !== this.campus.description || this.brand !== this.campus.brand

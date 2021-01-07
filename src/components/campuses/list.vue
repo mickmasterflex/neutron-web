@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="campuses" class="table table-striped">
+  <transition-table-state>
+    <table v-if="campuses.length" class="table table-white">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -12,7 +12,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="campus in campuses" :key="campus.id">
         <td class="td">
-          <router-link :to="{name: 'CampusDetails', params: {brand:campus.brand, id:campus.id}}" class="text-link">{{campus.name}}</router-link>
+          <span @click="linkToCampus(campus)" class="text-link">{{campus.name}}</span>
         </td>
         <td class="td">{{campus.is_online}}</td>
         <td class="td">{{campus.address1}} {{campus.address2}}</td>
@@ -20,17 +20,32 @@
       </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       heading="No Campuses Exist"
+                       key="empty"
+                       copy="Use the 'New Campus' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     campuses: {
       type: Array
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentCampus: 'SET_CURRENT_CAMPUS'
+    }),
+    linkToCampus (campus) {
+      this.setCurrentCampus(campus)
+      this.$router.push({
+        name: 'CampusDetails',
+        params: { brand: campus.brand, id: campus.id }
+      })
     }
   }
 }

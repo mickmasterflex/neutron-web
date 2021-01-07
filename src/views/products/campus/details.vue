@@ -9,7 +9,7 @@
     <campus-banners v-show="campusBanners.length" class="col-span-2"></campus-banners>
     <upload-banner v-show="!campusBanners.length" class="col-span-2 xl:col-span-1"></upload-banner>
 
-    <panel-template title="Danger Zone" class="col-span-2">
+    <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
       <template #content>
         <delete-campus :campus="campus"></delete-campus>
       </template>
@@ -32,7 +32,9 @@ export default {
     ...mapGetters({
       campus: 'getCurrentCampus',
       campusLogos: 'getCurrentCampusLogos',
-      campusBanners: 'getCurrentCampusBanners'
+      campusBanners: 'getCurrentCampusBanners',
+      loading: 'getCampusFetchLoading',
+      loadingText: 'getCampusFetchLoadingText'
     })
   },
   components: {
