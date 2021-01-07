@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import loading from '@/store/modules/campuses/logos/loading'
 
 const state = {
   current_campus_logos: []
@@ -10,9 +11,11 @@ const getters = {
 
 const actions = {
   async fetchCurrentCampusLogos ({ commit }, campus) {
+    commit('SET_CAMPUS_LOGOS_FETCH_LOADING')
     await axios.get(`/campus-logos/campus/${campus}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPUS_LOGOS', response.data)
+        commit('RESET_CAMPUS_LOGOS_FETCH_LOADING')
       })
   },
   async uploadCampusLogo ({ commit }, logo) {
@@ -35,9 +38,14 @@ const mutations = {
   REMOVE_CAMPUS_LOGO: (state, id) => (state.current_campus_logos = state.current_campus_logos.filter(logo => logo.id !== id))
 }
 
+const modules = {
+  loading
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
