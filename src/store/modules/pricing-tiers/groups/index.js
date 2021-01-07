@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/pricing-tiers/groups/visibility'
 
 const state = {
   pricing_tier_groups: undefined,
@@ -79,9 +80,14 @@ const mutations = {
   }
 }
 
+const modules = {
+  visibility
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
