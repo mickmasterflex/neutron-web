@@ -1,5 +1,8 @@
 <template>
-  <panel-template title="Upload a Logo" :actionTransition="true">
+  <panel-template title="Upload a Logo"
+                  :actionTransition="true"
+                  :showLoader="campusLoading ? logosLoading : logosLoading"
+                  :loadingText="campusLoadingText ? logosLoadingText : logosLoadingText">
     <template v-slot:action>
       <button v-show="image" @click="uploadFile()" class="btn btn-green"><font-awesome-icon icon="upload"></font-awesome-icon> Upload</button>
     </template>
@@ -29,7 +32,11 @@ export default {
   mixins: [setResponseErrors],
   computed: {
     ...mapGetters({
-      campus: 'getCurrentCampus'
+      campus: 'getCurrentCampus',
+      campusLoading: 'getCampusFetchLoading',
+      campusLoadingText: 'getCampusFetchLoadingText',
+      logosLoading: 'getCampusLogosFetchLoading',
+      logosLoadingText: 'getCampusLogosFetchLoadingText'
     })
   },
   watch: {

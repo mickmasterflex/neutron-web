@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import loading from '@/store/modules/campuses/banners/loading'
 
 const state = {
   current_campus_banners: []
@@ -10,9 +11,11 @@ const getters = {
 
 const actions = {
   async fetchCurrentCampusBanners ({ commit }, campus) {
+    commit('SET_CAMPUS_BANNERS_FETCH_LOADING')
     await axios.get(`/campus-banners/campus/${campus}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPUS_BANNERS', response.data)
+        commit('RESET_CAMPUS_BANNERS_FETCH_LOADING')
       })
   },
   async uploadCampusBanner ({ commit }, banner) {
@@ -35,9 +38,14 @@ const mutations = {
   REMOVE_CAMPUS_BANNER: (state, id) => (state.current_campus_banners = state.current_campus_banners.filter(banner => banner.id !== id))
 }
 
+const modules = {
+  loading
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }

@@ -1,5 +1,7 @@
 <template>
-  <panel-template title="Banner" :showLoader="loading" :loadingText="loadingText">
+  <panel-template title="Banner"
+                  :showLoader="brandLoading ? brandLoading : bannersLoading"
+                  :loadingText="brandLoadingText ? brandLoadingText : bannersLoadingText">
     <template v-slot:action>
       <delete-banner></delete-banner>
     </template>
@@ -28,8 +30,10 @@ export default {
   computed: {
     ...mapGetters({
       brandBanners: 'getCurrentBrandBanners',
-      loading: 'getBrandBannersFetchLoading',
-      loadingText: 'getBrandBannersFetchLoadingText'
+      brandLoading: 'getBrandFetchLoading',
+      brandLoadingText: 'getBrandFetchLoadingText',
+      bannersLoading: 'getBrandBannersFetchLoading',
+      bannersLoadingText: 'getBrandBannersFetchLoadingText'
     })
   },
   components: {

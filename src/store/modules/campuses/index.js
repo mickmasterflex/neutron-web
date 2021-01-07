@@ -1,6 +1,7 @@
 import axios from '@/axios'
 import campusLogos from '@/store/modules/campuses/logos'
 import campusBanners from '@/store/modules/campuses/banners'
+import loading from '@/store/modules/campuses/loading'
 import visibility from '@/store/modules/campuses/visibility'
 
 const state = {
@@ -17,15 +18,19 @@ const getters = {
 
 const actions = {
   async fetchCampuses ({ commit }) {
+    commit('SET_CAMPUSES_FETCH_LOADING')
     await axios.get('/campuses/')
       .then(response => {
         commit('SET_CAMPUSES', response.data)
+        commit('RESET_CAMPUSES_FETCH_LOADING')
       })
   },
   async fetchCurrentCampus ({ commit }, id) {
+    commit('SET_CAMPUS_FETCH_LOADING')
     await axios.get(`/campuses/${id}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPUS', response.data)
+        commit('RESET_CAMPUS_FETCH_LOADING')
       })
   },
   async createCampus ({ commit }, campus) {
@@ -52,6 +57,7 @@ const actions = {
 const mutations = {
   SET_CAMPUSES: (state, campuses) => (state.campuses = campuses),
   SET_CURRENT_CAMPUS: (state, campus) => (state.current_campus = campus),
+  RESET_CURRENT_CAMPUS: (state) => (state.current_campus = {}),
   ADD_CAMPUS: (state, campus) => state.campuses.unshift(campus),
   UPDATE_CAMPUS: (state, updatedCampus) => {
     const index = state.campuses.findIndex(campus => campus.id === updatedCampus.id)
@@ -63,6 +69,7 @@ const mutations = {
 }
 
 const modules = {
+  loading,
   visibility,
   campusLogos,
   campusBanners

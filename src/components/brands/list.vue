@@ -25,7 +25,7 @@
     <table-empty-state v-else
                        heading="No Brands Exist"
                        key="empty"
-                       copy="Use the 'New Brands' button to get started."></table-empty-state>
+                       copy="Use the 'New Brand' button to get started."></table-empty-state>
   </transition-table-state>
 </template>
 
