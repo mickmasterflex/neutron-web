@@ -1,8 +1,8 @@
 <template>
   <panel-template
     title="Buyer Contracts"
-    :showLoader="buyersLoading"
-    :loading-text="buyersLoadingText">
+    :showLoader="loading"
+    :loading-text="loadingText">
     <template v-slot:action>
       <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
     </template>
@@ -22,8 +22,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      buyersLoading: 'getBuyersFetchLoading',
-      buyersLoadingText: 'getBuyersFetchLoadingText'
+      loading: 'getBuyersFetchLoading',
+      loadingText: 'getBuyersFetchLoadingText'
     })
   },
   methods: {
