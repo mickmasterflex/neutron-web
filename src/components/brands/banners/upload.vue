@@ -33,8 +33,8 @@ export default {
   computed: {
     ...mapGetters({
       brand: 'getCurrentBrand',
-      brandLoading: 'getBrandBannersFetchLoading',
-      brandLoadingText: 'getBrandBannersFetchLoadingText',
+      brandLoading: 'getBrandFetchLoading',
+      brandLoadingText: 'getBrandFetchLoadingText',
       bannersLoading: 'getBrandBannersFetchLoading',
       bannersLoadingText: 'getBrandBannersFetchLoadingText'
     }),
