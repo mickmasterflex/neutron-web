@@ -25,7 +25,11 @@
           </td>
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
-          <td class="td">{{ contract.pricing_tier_group }}</td>
+          <td class="td">
+            <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
+            </span>
+            <span v-else class="italic text-gray-500">None</span>
+          </td>
           <td class="td">
             <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>
