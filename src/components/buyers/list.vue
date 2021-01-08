@@ -70,16 +70,17 @@ export default {
       setCurrentForm: 'SET_CURRENT_FORM',
       sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
-    linkToBuyer (contract) {
+    setCurrentBuyerAndForm (contract) {
       this.setCurrentBuyer(contract)
       this.setCurrentForm(contract.form)
       this.sortCurrentFormFields()
+    },
+    linkToBuyer (contract) {
+      this.setCurrentBuyerAndForm(contract)
       this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
     },
     linkToBuyerContracts (contract) {
-      this.setCurrentBuyer(contract)
-      this.setCurrentForm(contract.form)
-      this.sortCurrentFormFields()
+      this.setCurrentBuyerAndForm(contract)
       this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
     }
   }
