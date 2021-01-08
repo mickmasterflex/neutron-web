@@ -78,6 +78,8 @@ export default {
     },
     linkToBuyerContracts (contract) {
       this.setCurrentBuyer(contract)
+      this.setCurrentForm(contract.form)
+      this.sortCurrentFormFields()
       this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
     }
   }
