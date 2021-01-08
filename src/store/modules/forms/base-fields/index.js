@@ -1,10 +1,12 @@
 import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
 import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
+import loading from '@/store/modules/forms/base-fields/loading'
 import visibility from '@/store/modules/forms/base-fields/visibility'
 
 const modules = {
   baseTextFields,
   baseOptionFields,
+  loading,
   visibility
 }
 
@@ -23,9 +25,11 @@ const getters = {
 
 const actions = {
   async fetchBaseFields ({ commit, dispatch }) {
+    commit('SET_BASE_FIELDS_FETCH_LOADING')
     await dispatch('fetchBaseTextFields')
     await dispatch('fetchBaseOptionFields')
     commit('SET_BASE_FIELDS')
+    commit('RESET_BASE_FIELDS_FETCH_LOADING')
   }
 }
 

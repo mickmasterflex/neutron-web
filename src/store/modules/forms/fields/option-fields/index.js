@@ -8,15 +8,6 @@ const modules = {
 }
 
 const actions = {
-  async fetchCurrentOptionField ({ commit }, id) {
-    await axios.get(`/option-fields/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_FIELD', response.data)
-        commit('SET_CURRENT_OPTIONS', response.data.options)
-        commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
-        commit('SORT_CURRENT_OPTIONS')
-      })
-  },
   async createOptionField ({ commit }, field) {
     await axios.post('/option-fields/', field)
       .then(response => {

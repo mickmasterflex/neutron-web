@@ -38,7 +38,7 @@
           <span v-else class="italic text-gray-500">No Caps Set</span>
             </td>
           <td class="td">
-           <table-link @table-link-click="linkToBuyerContractOffers(contract)">{{ contract.offers.length }}</table-link>
+           <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offers.length }}</table-link>
           </td>
         </tr>
       </tbody>
@@ -69,18 +69,25 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentBuyer: 'SET_CURRENT_BUYER'
+      setCurrentBuyer: 'SET_CURRENT_BUYER',
+      setCurrentForm: 'SET_CURRENT_FORM',
+      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
-    linkToBuyer (contract) {
+    setCurrentBuyerAndForm (contract) {
       this.setCurrentBuyer(contract)
+      this.setCurrentForm(contract.form)
+      this.sortCurrentFormFields()
+    },
+    linkToBuyer (contract) {
+      this.setCurrentBuyerAndForm(contract)
       this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
     },
     linkToBuyerContracts (contract) {
-      this.setCurrentBuyer(contract)
+      this.setCurrentBuyerAndForm(contract)
       this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
     },
-    linkToBuyerContractOffers (contract) {
-      this.setCurrentBuyer(contract)
+    linkToBuyerOffers (contract) {
+      this.setCurrentBuyerAndForm(contract)
       this.$router.push({ name: 'BuyerContractOffers', params: { client: this.client, id: contract.id } })
     }
   }

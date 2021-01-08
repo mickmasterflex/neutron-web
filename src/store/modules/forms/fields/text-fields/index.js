@@ -6,12 +6,6 @@ const modules = {
 }
 
 const actions = {
-  async fetchCurrentTextField ({ commit }, id) {
-    await axios.get(`/text-fields/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_FIELD', response.data)
-      })
-  },
   async createTextField ({ commit }, field) {
     await axios.post('/text-fields/', field)
       .then(response => {
