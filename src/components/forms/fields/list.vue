@@ -14,7 +14,7 @@
             <field-list-item :field="field" :newOrder="index + 1"></field-list-item>
             <span class="flex flex-row">
               <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
-              <fetch-current-field :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></fetch-current-field>
+              <set-current-field :field="field" :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></set-current-field>
             </span>
           </div>
         </li>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import fetchCurrentField from '@/components/forms/fields/fetch-current-field'
+import setCurrentField from '@/components/forms/fields/set-current-field'
 import deleteField from '@/components/forms/fields/delete'
 import fieldListItem from '@/components/forms/fields/list-item'
 import draggable from 'vuedraggable'
@@ -35,7 +35,7 @@ import { mapGetters } from 'vuex'
 export default {
   components: {
     'delete-field': deleteField,
-    'fetch-current-field': fetchCurrentField,
+    'set-current-field': setCurrentField,
     'field-list-item': fieldListItem,
     'ul-draggable': draggable
   },
