@@ -57,7 +57,6 @@ export default {
   props: {
     contracts: Array,
     client: String,
-    offers: Array,
     caps: Object,
     emptyStateHeading: {
       type: String,
