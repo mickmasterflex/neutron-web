@@ -10,6 +10,7 @@
           <th class="th">Children</th>
           <th class="th">RPL</th>
           <th class="th">Caps</th>
+          <th class="th">Offers</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -36,6 +37,9 @@
               </span>
           <span v-else class="italic text-gray-500">No Caps Set</span>
             </td>
+          <td class="td">
+           <table-link @table-link-click="linkToBuyerContractOffers(contract)">{{ contract.offers.length }}</table-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -53,7 +57,6 @@ export default {
   props: {
     contracts: Array,
     client: String,
-    children: String,
     caps: Object,
     emptyStateHeading: {
       type: String,
@@ -75,6 +78,10 @@ export default {
     linkToBuyerContracts (contract) {
       this.setCurrentBuyer(contract)
       this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
+    },
+    linkToBuyerContractOffers (contract) {
+      this.setCurrentBuyer(contract)
+      this.$router.push({ name: 'BuyerContractOffers', params: { client: this.client, id: contract.id } })
     }
   }
 }
