@@ -12,9 +12,7 @@
           <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channels v-model="channel"></select-channels>
-          <v-select-field :field_wrap_class="pricing_tier_group ? 'well' : ''" v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group">
-            <list-tiers class="mt-3" tableWidth="auto" emptyTableClass="max-w-sm" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
-          </v-select-field>
+          <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
         </form>
       </validation-observer>
     </template>
@@ -22,8 +20,8 @@
 </template>
 
 <script>
-import listTiers from '@/components/pricing-tiers/tiers/list'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
+import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import selectChannels from '@/components/channels/select'
 import parentSelect from '@/components/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
@@ -58,8 +56,7 @@ export default {
   mixins: [setResponseErrors],
   methods: {
     ...mapActions({
-      update: 'updatePartner',
-      fetchPricingTierGroups: 'fetchPricingTierGroups'
+      update: 'updatePartner'
     }),
     setPartner () {
       this.name = this.partner.name
@@ -92,18 +89,12 @@ export default {
   },
   created () {
     this.setPartner()
-    this.fetchPricingTierGroups()
   },
   computed: {
     ...mapGetters({
-      pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById',
       loading: 'getPartnerFetchLoading',
       loadingText: 'getPartnerFetchLoadingText'
     }),
-    currentGroup () {
-      return this.getPricingTierGroupById(Number(this.pricing_tier_group))
-    },
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.partner.name ||
@@ -119,7 +110,7 @@ export default {
     }
   },
   components: {
-    'list-tiers': listTiers,
+    'select-pricing-tier-group': selectPricingTierGroup,
     'date-picker': datePicker,
     'parent-select': parentSelect,
     'select-channels': selectChannels
