@@ -66,10 +66,14 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentBuyer: 'SET_CURRENT_BUYER'
+      setCurrentBuyer: 'SET_CURRENT_BUYER',
+      setCurrentForm: 'SET_CURRENT_FORM',
+      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
     linkToBuyer (contract) {
       this.setCurrentBuyer(contract)
+      this.setCurrentForm(contract.form)
+      this.sortCurrentFormFields()
       this.$router.push({ name: 'BuyerContract', params: { client: this.client, id: contract.id } })
     },
     linkToBuyerContracts (contract) {
