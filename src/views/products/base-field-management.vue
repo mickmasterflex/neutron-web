@@ -7,11 +7,14 @@
       </div>
     </template>
     <template v-slot:content>
-      <div class="flex flex-row justify-between">
-        <h2 class="h2-hairline">Base Fields</h2>
-        <button class="btn btn-turquoise" @click="openCreateBaseField()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
-      </div>
-      <list-base-fields class="mt-5"></list-base-fields>
+      <panel-template title="Base Fields" :showLoader="loading" :loadingText="loadingText">
+        <template slot="action">
+          <button class="btn btn-turquoise" @click="openCreateBaseField()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
+        </template>
+        <template slot="content">
+          <list-base-fields></list-base-fields>
+        </template>
+      </panel-template>
       <component :is="current_base_field_modal" :field="currentBaseField"></component>
     </template>
   </content-layout>
@@ -51,7 +54,9 @@ export default {
   computed: {
     ...mapGetters({
       baseFieldCount: 'getBaseFieldCount',
-      currentBaseField: 'getCurrentBaseField'
+      currentBaseField: 'getCurrentBaseField',
+      loading: 'getBaseFieldsFetchLoading',
+      loadingText: 'getBaseFieldsFetchLoadingText'
     })
   },
   watch: {
