@@ -5,7 +5,7 @@
       <tr>
         <th class="th">Name</th>
         <th class="th">ID</th>
-        <th class="th">Short Description</th>
+        <th class="th">Campuses</th>
         <th class="th">Alias</th>
         <th class="th">Website</th>
       </tr>
@@ -16,7 +16,9 @@
           <span @click="linkToBrand(brand)" class="text-link">{{ brand.name }}</span>
         </td>
         <td class="td">{{brand.id}}</td>
-        <td class="td">{{brand.short_description}}</td>
+        <td class="td">
+          <table-link @table-link-click="linkToBrandCampuses(brand)">{{ brand.campuses.length }}</table-link>
+        </td>
         <td class="td">{{brand.alias}}</td>
         <td class="td">{{brand.website}}</td>
       </tr>
@@ -49,6 +51,10 @@ export default {
         name: 'BrandDetails',
         params: { id: brand.id }
       })
+    },
+    linkToBrandCampuses (brand) {
+      this.setCurrentBrand(brand)
+      this.$router.push({ name: 'BrandCampuses', params: { id: brand.id } })
     }
   }
 }
