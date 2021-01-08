@@ -1,4 +1,6 @@
 import axios from '@/axios'
+import loading from '@/store/modules/pricing-tiers/groups/loading'
+import visibility from '@/store/modules/pricing-tiers/groups/visibility'
 
 const state = {
   pricing_tier_groups: undefined,
@@ -17,10 +19,12 @@ const getters = {
 
 const actions = {
   async fetchPricingTierGroups ({ commit }) {
+    commit('SET_PRICING_TIER_GROUPS_FETCH_LOADING')
     await axios.get('/pricing-tier-groups/')
       .then(response => {
         commit('SET_PRICING_TIER_GROUPS', response.data)
         commit('SORT_PRICING_TIER_GROUPS', response.data)
+        commit('RESET_PRICING_TIER_GROUPS_FETCH_LOADING')
       })
   },
   async createPricingTierGroup ({ commit }, data) {
@@ -79,9 +83,15 @@ const mutations = {
   }
 }
 
+const modules = {
+  loading,
+  visibility
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
