@@ -37,7 +37,9 @@
               </span>
           <span v-else class="italic text-gray-500">No Caps Set</span>
             </td>
-          <td class="td">{{ contract.offers.length }}</td>
+          <td class="td">
+           <table-link @table-link-click="linkToBuyerContractOffers(contract)">{{ contract.offers.length }}</table-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -77,6 +79,10 @@ export default {
     linkToBuyerContracts (contract) {
       this.setCurrentBuyer(contract)
       this.$router.push({ name: 'BuyerContractChildren', params: { client: this.client, id: contract.id } })
+    },
+    linkToBuyerContractOffers (contract) {
+      this.setCurrentBuyer(contract)
+      this.$router.push({ name: 'BuyerContractOffers', params: { client: this.client, id: contract.id } })
     }
   }
 }
