@@ -9,6 +9,7 @@
           <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
           <th class="th">Children</th>
+          <th class="th">Campaigns</th>
         </tr>
       </thead>
       <tbody class="tbody">
@@ -32,6 +33,9 @@
           </td>
           <td class="td">
             <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
+          </td>
+          <td class="td">
+            <table-link @table-link-click="linkToPartnerContractCampaigns(contract)">{{ contract.campaigns.length }}</table-link>
           </td>
         </tr>
       </tbody>
@@ -70,6 +74,10 @@ export default {
     linkToPartner (contract) {
       this.setCurrentPartner(contract)
       this.$router.push({ name: 'PartnerContract', params: { client: this.client, id: contract.id } })
+    },
+    linkToPartnerContractCampaigns (contract) {
+      this.setCurrentPartner(contract)
+      this.$router.push({ name: 'PartnerContractCampaigns', params: { client: this.client, id: contract.id } })
     }
   }
 }
