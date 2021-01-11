@@ -1,8 +1,10 @@
 import axios from '@/axios'
+import constants from '@/store/modules/deliveries/constants'
 import loading from '@/store/modules/deliveries/loading'
 import visibility from '@/store/modules/deliveries/visibility'
 
 const modules = {
+  constants,
   loading,
   visibility
 }

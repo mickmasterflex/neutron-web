@@ -1,6 +1,6 @@
 <template>
   <div class="field-group">
-    <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
+    <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div :class="$attrs.field_wrap_class">
       <div class="relative w-64">
         <div v-if="$attrs.loading" :class="`${$attrs.field_class} ${field_size}`" class="cursor-not-allowed disabled base-field text-gray-800 flex flex-row items-center"><font-awesome-icon class="text-gray-500" icon="spinner" pulse></font-awesome-icon> <span class="ml-1">Loading</span></div>
