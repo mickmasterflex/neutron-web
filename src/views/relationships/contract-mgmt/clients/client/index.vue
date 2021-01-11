@@ -10,10 +10,10 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
-          <router-link :to="{name: 'Client', params: {slug:slug}}">Client Details</router-link>
+          <router-link :to="{name: 'Client', params: {slug: slug}}">Client Details</router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="{name: 'ClientContracts', params: {slug:slug}}">Contracts</router-link>
+          <router-link :to="{name: 'ClientContracts', params: {slug: slug}}">Contracts</router-link>
         </li>
       </ul>
     </template>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -38,7 +38,9 @@ export default {
     ...mapGetters({
       client: 'getCurrentClient',
       getParentlessPartnersByClient: 'getParentlessPartnersByClient',
-      getParentlessBuyersByClient: 'getParentlessBuyersByClient'
+      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
+      allBuyers: 'getAllBuyers',
+      allPartners: 'getAllPartners'
     }),
     partners: function () {
       return this.getParentlessPartnersByClient(this.client.id)
@@ -52,12 +54,24 @@ export default {
       fetchPartners: 'fetchPartners',
       fetchBuyers: 'fetchBuyers',
       fetchCurrentClient: 'fetchCurrentClient'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_CLIENT'
     })
   },
   created () {
-    this.fetchCurrentClient(this.slug)
-    this.fetchPartners()
-    this.fetchBuyers()
+    if (!this.allBuyers.length) {
+      this.fetchBuyers()
+    }
+    if (!this.allPartners.length) {
+      this.fetchPartners()
+    }
+    if (this.client.slug !== this.slug) {
+      this.fetchCurrentClient(this.slug)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

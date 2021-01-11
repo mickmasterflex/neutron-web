@@ -1,14 +1,13 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h2 class="h3">Contract Fields</h2>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="buyerFetchLoading" loadingText="Loading Contract Fields">
+      <template v-slot:action>
         <create-field></create-field>
       </template>
-    </action-heading>
-    <list-fields></list-fields>
+      <template v-slot:content>
+        <list-fields></list-fields>
+      </template>
+    </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
   </div>
 </template>
@@ -33,7 +32,9 @@ export default {
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',
-      buyer: 'getCurrentBuyer'
+      buyer: 'getCurrentBuyer',
+      buyerFetchLoading: 'getBuyerFetchLoading',
+      buyerFetchLoadingText: 'getBuyerFetchLoadingText'
     })
   },
   methods: {

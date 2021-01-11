@@ -12,7 +12,6 @@ import channels from './modules/channels'
 import clients from './modules/clients'
 import contractRelations from '@/store/modules/contract-relations'
 import deliveries from '@/store/modules/deliveries'
-import educationProducts from './modules/education-products'
 import forms from '@/store/modules/forms'
 import geos from '@/store/modules/geos'
 import modals from './modules/modals'
@@ -22,6 +21,8 @@ import pricingTiers from './modules/pricing-tiers'
 import products from './modules/products'
 import users from './modules/users'
 import toast from '@/store/modules/toast'
+
+import constants from '@/store/constants'
 
 Vue.use(Vuex)
 
@@ -37,9 +38,9 @@ export default new Vuex.Store({
     caps,
     channels,
     clients,
+    constants,
     contractRelations,
     deliveries,
-    educationProducts,
     forms,
     geos,
     modals,

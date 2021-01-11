@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import validation from '@/mixins/fields/validation'
 
 export default {
@@ -25,13 +25,9 @@ export default {
   methods: {
     ...mapActions({
       fetchChannels: 'fetchChannels'
-    }),
-    ...mapMutations({
-      setChannelsFetchLoading: 'SET_CHANNELS_FETCH_LOADING'
     })
   },
   created () {
-    this.setChannelsFetchLoading()
     this.fetchChannels()
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="baseFields" class="table table-striped">
+  <transition-table-state>
+    <table v-if="baseFields.length" class="table table-white">
       <thead>
         <tr>
           <th class="th">Label</th>
@@ -28,10 +28,11 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      ...Loading...
-    </div>
-  </div>
+    <table-empty-state v-else
+                       heading="No Base Fields Exist"
+                       key="empty"
+                       copy="Use the 'New Field' button to get started."></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>

@@ -9,7 +9,10 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="label" field_id="label" field_label="Label" rules="required"></v-text-field>
           <text-field v-model="mapping" field_id="mapping" field_label="Mapping"></text-field>
-          <checkbox-single v-model="deliver" field_id="deliver" field_label="Pass to Client"></checkbox-single>
+          <div class="field-group">
+            <label class="field-label">Pass to Client</label>
+            <check-switch v-model="deliver" field_id="deliver"></check-switch>
+          </div>
         </form>
       </validation-observer>
     </template>

@@ -1,17 +1,18 @@
 import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
 import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
-import baseOptions from '@/store/modules/forms/base-fields/base-options'
+import loading from '@/store/modules/forms/base-fields/loading'
+import visibility from '@/store/modules/forms/base-fields/visibility'
 
 const modules = {
   baseTextFields,
   baseOptionFields,
-  baseOptions
+  loading,
+  visibility
 }
 
 const state = {
   base_fields: [],
   available_base_fields: [],
-  show_create_base_field_modal: false,
   current_base_field: null
 }
 
@@ -19,15 +20,16 @@ const getters = {
   getBaseFields: state => state.base_fields,
   getAvailableBaseFields: state => state.available_base_fields,
   getBaseFieldCount: state => state.base_fields.length,
-  getShowCreateBaseFieldModal: state => state.show_create_base_field_modal,
   getCurrentBaseField: state => state.current_base_field
 }
 
 const actions = {
   async fetchBaseFields ({ commit, dispatch }) {
+    commit('SET_BASE_FIELDS_FETCH_LOADING')
     await dispatch('fetchBaseTextFields')
     await dispatch('fetchBaseOptionFields')
     commit('SET_BASE_FIELDS')
+    commit('RESET_BASE_FIELDS_FETCH_LOADING')
   }
 }
 
@@ -47,8 +49,6 @@ const mutations = {
       window.console.log(error)
     }
   },
-  SHOW_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = true),
-  CLOSE_CREATE_BASE_FIELD_MODAL: (state) => (state.show_create_base_field_modal = false),
   SET_CURRENT_BASE_FIELD: (state, field) => (state.current_base_field = field),
   RESET_CURRENT_BASE_FIELD: (state) => (state.current_base_field = null)
 }

@@ -64,22 +64,29 @@ import appLayout from '@/layouts/app-layout'
 import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
+import actionHeading from '@/components/ui/action-heading'
 import baseModal from '@/components/ui/modals/base'
 import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
 import statCard from '@/components/ui/cards/stat-card'
-import actionHeading from '@/components/ui/action-heading'
+
+/* Table Components */
+import statusIndicator from '@/components/ui/tables/status-indicator'
 import tableEmptyState from '@/components/ui/tables/empty-state'
+import tableLink from '@/components/ui/tables/table-link'
+
+/* Field Components */
 import checkboxField from '@/components/ui/forms/base-fields/checkbox'
-import checkboxSingle from '@/components/ui/forms/base-fields/checkbox-single'
-import selectField from '@/components/ui/forms/base-fields/select-field'
-import tableLink from '@/components/ui/buttons/table-link'
-import textField from '@/components/ui/forms/base-fields/text-field'
-import textareaField from '@/components/ui/forms/base-fields/textarea-field'
-import vTextField from '@/components/ui/forms/validation-fields/text-field'
-import vTextareaField from '@/components/ui/forms/validation-fields/textarea-field'
-import vSelectField from '@/components/ui/forms/validation-fields/select-field'
 import checkSwitch from '@/components/ui/forms/base-fields/checkbox-switch'
+import selectField from '@/components/ui/forms/base-fields/select-field'
+import vSelectField from '@/components/ui/forms/validation-fields/select-field'
+import textareaField from '@/components/ui/forms/base-fields/textarea-field'
+import vTextareaField from '@/components/ui/forms/validation-fields/textarea-field'
+import textField from '@/components/ui/forms/base-fields/text-field'
+import vTextField from '@/components/ui/forms/validation-fields/text-field'
+
+/* Transition Components */
+import transitionTableState from '@/components/transitions/table-state'
 
 /* -----------------------------------------------
   Authentication
@@ -113,8 +120,9 @@ Vue.component('action-heading', actionHeading)
 // Tables
 Vue.component('table-empty-state', tableEmptyState)
 Vue.component('table-link', tableLink)
+Vue.component('status-indicator', statusIndicator)
+
 // Form Fields
-Vue.component('checkbox-single', checkboxSingle)
 Vue.component('checkbox-field', checkboxField)
 Vue.component('check-switch', checkSwitch)
 Vue.component('text-field', textField)
@@ -123,6 +131,9 @@ Vue.component('textarea-field', textareaField)
 Vue.component('v-textarea-field', vTextareaField)
 Vue.component('select-field', selectField)
 Vue.component('v-select-field', vSelectField)
+
+// Transitions
+Vue.component('transition-table-state', transitionTableState)
 
 /* -----------------------------------------------
   Validation

@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit User" :actionTransition="true">
+  <panel-template title="Edit User" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -31,13 +31,18 @@ export default {
     user: Object
   },
   watch: {
-    user: function () {
-      this.first_name = this.user.first_name
-      this.last_name = this.user.last_name
-      this.email = this.user.email
+    user () {
+      this.setUser()
     }
   },
+  created () {
+    this.setUser()
+  },
   computed: {
+    ...mapGetters({
+      loading: 'getUserFetchLoading',
+      loadingText: 'getUserFetchLoadingText'
+    }),
     unsavedChanges () {
       if (this.first_name) {
         return this.first_name !== this.user.first_name || this.last_name !== this.user.last_name || this.email !== this.user.email
@@ -51,6 +56,11 @@ export default {
     ...mapActions({
       update: 'updateUser'
     }),
+    setUser () {
+      this.first_name = this.user.first_name
+      this.last_name = this.user.last_name
+      this.email = this.user.email
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {

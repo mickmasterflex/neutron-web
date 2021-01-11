@@ -1,32 +1,84 @@
 <template>
-  <div>
+  <transition-table-state>
     <table v-if="contracts.length" class="table table-white">
       <thead>
         <tr>
-          <th class="th">Name</th>
-          <th class="th">Id</th>
+          <th class="th w-64">Name</th>
+          <th class="th w-32">Status</th>
+          <th class="th w-16">Id</th>
           <th class="th">Client</th>
+          <th class="th">Pricing Tier Group</th>
+          <th class="th">Children</th>
+          <th class="th">Campaigns</th>
         </tr>
       </thead>
       <tbody class="tbody">
-        <tr class="tr" v-for="contract in contracts" :key="contract.id">
+        <tr class="tr w-64" v-for="contract in contracts" :key="contract.id">
           <td class="td">
-            <router-link :to="{name: 'PartnerContract', params: {client:client, id:contract.id}}" class="text-link">{{contract.name}}</router-link>
+            <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
           </td>
-          <td class="td">{{ contract.id }}</td>
+          <td class="td w-32">
+            <status-indicator :red="contract.status === 'terminated'"
+                              :green="contract.status === 'active'"
+                              :yellow="contract.status === 'paused'">
+              {{ contract.status }}
+            </status-indicator>
+          </td>
+          <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
+          <td class="td">
+            <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
+            </span>
+            <span v-else class="italic text-gray-500">None</span>
+          </td>
+          <td class="td">
+            <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
+          </td>
+          <td class="td">
+            <table-link @table-link-click="linkToPartnerContractCampaigns(contract)">{{ contract.campaigns.length }}</table-link>
+          </td>
         </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Child Contracts" copy="Use the 'New Partner' button to add children to this contract."></table-empty-state>
-  </div>
+    <table-empty-state v-else
+                       :heading="emptyStateHeading"
+                       :copy="emptyStateCopy"></table-empty-state>
+  </transition-table-state>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     contracts: Array,
-    client: String
+    client: String,
+    children: String,
+    emptyStateHeading: {
+      type: String,
+      default: 'No Partner Contracts'
+    },
+    emptyStateCopy: {
+      type: String,
+      default: 'Use the \'New Partner\' button to add partners to this client.'
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setCurrentPartner: 'SET_CURRENT_PARTNER'
+    }),
+    linkToPartnerContracts (contract) {
+      this.setCurrentPartner(contract)
+      this.$router.push({ name: 'PartnerContractChildren', params: { client: this.client, id: contract.id } })
+    },
+    linkToPartner (contract) {
+      this.setCurrentPartner(contract)
+      this.$router.push({ name: 'PartnerContract', params: { client: this.client, id: contract.id } })
+    },
+    linkToPartnerContractCampaigns (contract) {
+      this.setCurrentPartner(contract)
+      this.$router.push({ name: 'PartnerContractCampaigns', params: { client: this.client, id: contract.id } })
+    }
   }
 }
 </script>

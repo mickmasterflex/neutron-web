@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="geoLoading" :loadingText="loadingText">
+  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="geoLoading || buyerFetchLoading" :loadingText="computedLoadingText">
     <template #action>
       <slot name="action"></slot>
     </template>
@@ -57,8 +57,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      geoLoading: 'getGeoPanelLoading'
-    })
+      geoLoading: 'getGeoPanelLoading',
+      buyerFetchLoading: 'getBuyerFetchLoading',
+      buyerFetchLoadingText: 'getBuyerFetchLoadingText'
+    }),
+    computedLoadingText () {
+      if (this.buyerFetchLoading) {
+        return this.buyerFetchLoadingText
+      } else if (this.geoLoading) {
+        return this.loadingText
+      }
+      return 'Loading'
+    }
   },
   methods: {
     ...mapActions({

@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Campus" :actionTransition="true">
+  <panel-template title="Edit Campus" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -16,9 +16,9 @@
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
           <text-field v-model="city" field_id="city" field_label="City"></text-field>
-          <text-field v-model="state" field_id="state" field_label="State"></text-field>
+          <select-field v-model="state" field_id="state" field_label="State" :options="formatListForSelectOptions(states)"></select-field>
           <text-field v-model="postal_code" field_id="postal_code" field_label="Postal Code"></text-field>
-          <select-field v-model="phone_type" :options="typeOptions" field_id="createPhoneType" field_label="Type"></select-field>
+          <select-field v-model="phone_type" :options="formatListForSelectOptions(phoneTypes)" field_id="createPhoneType" field_label="Type"></select-field>
           <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="Phone Number"></v-text-field>
           <text-field v-model="phone_extension" field_id="phone_extension" field_label="Phone Extension"></text-field>
         </form>
@@ -28,8 +28,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
   data () {
@@ -43,12 +44,6 @@ export default {
       state: '',
       postal_code: '',
       phone_type: '',
-      typeOptions: {
-        home: { name: 'home', id: 'home' },
-        work: { name: 'work', id: 'work' },
-        mobile: { name: 'mobile', id: 'mobile' },
-        fax: { name: 'fax', id: 'fax' }
-      },
       phone_number: '',
       phone_extension: '',
       description: ''
@@ -57,7 +52,7 @@ export default {
   props: {
     campus: Object
   },
-  mixins: [setResponseErrors],
+  mixins: [setResponseErrors, formatList],
   methods: {
     ...mapActions({
       update: 'updateCampus'
@@ -104,6 +99,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      loading: 'getCampusFetchLoading',
+      loadingText: 'getCampusFetchLoadingText',
+      phoneTypes: 'getPhoneTypes',
+      states: 'getStatesAbbreviated'
+    }),
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.campus.name || this.short_description !== this.campus.short_description || this.is_online !== this.campus.is_online || this.address1 !== this.campus.address1 || this.address2 !== this.campus.address2 || this.city !== this.campus.city || this.state !== this.campus.state || this.postal_code !== this.campus.postal_code || this.phone_type !== this.campus.phone_type || this.phone_number !== this.campus.phone_number || this.phone_extension !== this.campus.phone_extension || this.description !== this.campus.description || this.brand !== this.campus.brand

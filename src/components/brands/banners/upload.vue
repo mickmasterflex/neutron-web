@@ -1,5 +1,8 @@
 <template>
-  <panel-template title="Upload a Banner" :actionTransition="true">
+  <panel-template title="Upload a Banner"
+                  :actionTransition="true"
+                  :showLoader="brandLoading ? brandLoading : bannersLoading"
+                  :loadingText="brandLoadingText ? brandLoadingText : bannersLoadingText">
     <template v-slot:action>
       <button v-show="image" @click="uploadFile()" class="btn btn-green"><font-awesome-icon icon="upload"></font-awesome-icon> Upload</button>
     </template>
@@ -29,7 +32,11 @@ export default {
   mixins: [setResponseErrors],
   computed: {
     ...mapGetters({
-      brand: 'getCurrentBrand'
+      brand: 'getCurrentBrand',
+      brandLoading: 'getBrandFetchLoading',
+      brandLoadingText: 'getBrandFetchLoadingText',
+      bannersLoading: 'getBrandBannersFetchLoading',
+      bannersLoadingText: 'getBrandBannersFetchLoadingText'
     }),
     altBanner: function () {
       const defaultAlt = this.brand.name + ' banner'

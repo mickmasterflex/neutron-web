@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -32,6 +32,9 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentCampus: 'fetchCurrentCampus'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_CAMPUS'
     })
   },
   computed: {
@@ -41,6 +44,9 @@ export default {
   },
   created () {
     this.fetchCurrentCampus(this.id)
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

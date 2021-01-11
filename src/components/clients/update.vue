@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Client" :actionTransition="true">
+  <panel-template title="Edit Client" :actionTransition="true" :showLoader="clientFetchLoading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -38,7 +38,11 @@ export default {
       } else {
         return false
       }
-    }
+    },
+    ...mapGetters({
+      clientFetchLoading: 'getClientFetchLoading',
+      loadingText: 'getClientFetchLoadingText'
+    })
   },
   mixins: [setResponseErrors],
   methods: {

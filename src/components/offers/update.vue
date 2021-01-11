@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Offer" :actionTransition="true">
+  <panel-template title="Edit Offer" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -7,7 +7,7 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
-          <v-select-field v-model="product" rules="required" :options="products" field_id="product" field_label="Product"></v-select-field>
+          <select-product v-model="product" rules="required"></select-product>
         </form>
       </validation-observer>
     </template>
@@ -17,6 +17,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import selectProduct from '@/components/products/select'
 
 export default {
   data () {
@@ -31,15 +32,17 @@ export default {
   mixins: [setResponseErrors],
   watch: {
     offer: function () {
-      this.name = this.offer.name
-      this.product = this.offer.product
+      this.setOffer()
     }
   },
   methods: {
     ...mapActions({
-      update: 'updateOffer',
-      fetchProducts: 'fetchProducts'
+      update: 'updateOffer'
     }),
+    setOffer () {
+      this.name = this.offer.name
+      this.product = this.offer.product
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -58,7 +61,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: 'getAllProducts'
+      products: 'getAllProducts',
+      loading: 'getOfferFetchLoading',
+      loadingText: 'getOfferFetchLoadingText'
     }),
     unsavedChanges () {
       if (this.name) {
@@ -69,7 +74,10 @@ export default {
     }
   },
   created () {
-    this.fetchProducts()
+    this.setOffer()
+  },
+  components: {
+    'select-product': selectProduct
   }
 }
 </script>

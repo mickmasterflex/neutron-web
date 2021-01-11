@@ -9,9 +9,7 @@
         <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
         <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         <select-channels v-model="channel"></select-channels>
-        <v-select-field :field_wrap_class="pricing_tier_group ? 'well' : ''" v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group">
-          <list-tiers class="mt-3" tableWidth="auto" emptyTableClass="max-w-sm" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
-        </v-select-field>
+        <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
       </form>
     </validation-observer>
     </template>
@@ -22,7 +20,7 @@
 </template>
 
 <script>
-import listTiers from '@/components/pricing-tiers/tiers/list'
+import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectChannels from '@/components/channels/select'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
@@ -46,13 +44,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreatePartnerModal',
-      pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById'
-    }),
-    currentGroup () {
-      return this.getPricingTierGroupById(Number(this.pricing_tier_group))
-    }
+      showModal: 'getShowCreatePartnerModal'
+    })
   },
   props: {
     client: {
@@ -65,8 +58,7 @@ export default {
   mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
-      create: 'createPartner',
-      fetchPricingTierGroups: 'fetchPricingTierGroups'
+      create: 'createPartner'
     }),
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_PARTNER_MODAL'
@@ -103,12 +95,9 @@ export default {
       })
     }
   },
-  created () {
-    this.fetchPricingTierGroups()
-  },
   components: {
+    'select-pricing-tier-group': selectPricingTierGroup,
     'date-picker': datePicker,
-    'list-tiers': listTiers,
     'select-channels': selectChannels
   }
 }

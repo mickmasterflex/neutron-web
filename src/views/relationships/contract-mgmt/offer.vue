@@ -9,7 +9,7 @@
     <template v-slot:content>
       <base-panel-grid>
         <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
-        <panel-template title="Danger Zone" class="col-span-2">
+        <panel-template title="Danger Zone" :showLoader="loading" :loadingText="loadingText" class="col-span-2">
           <template #content>
             <delete-offer :offer="offer" :client="$route.params.client"></delete-offer>
           </template>
@@ -19,7 +19,7 @@
   </content-layout>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteOffer from '@/components/offers/delete'
 import updateOffer from '@/components/offers/update'
 
@@ -35,7 +35,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offer: 'getCurrentOffer'
+      offer: 'getCurrentOffer',
+      loading: 'getOfferFetchLoading',
+      loadingText: 'getOfferFetchLoadingText'
     })
   },
   methods: {
@@ -43,10 +45,18 @@ export default {
       fetchCurrentOffer: 'fetchCurrentOffer',
       fetchOfferByBuyer: 'fetchOfferByBuyer',
       fetchBuyers: 'fetchBuyers'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_OFFER'
     })
   },
   created () {
-    this.fetchCurrentOffer(this.id)
+    if (this.id !== this.offer.id) {
+      this.fetchCurrentOffer(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

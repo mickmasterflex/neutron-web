@@ -1,6 +1,6 @@
 <template>
   <label :for="field_id">
-    <switch-toggle :field_id="field_id" :is_on="value" size="lg" :on_color="$attrs.on_color" :off_color="$attrs.off_color">
+    <switch-toggle :field_id="field_id" :is_on="value" :size="$attrs.size" :on_color="$attrs.on_color" :off_color="$attrs.off_color">
       <template v-slot:switch-off><slot name="switch-off"/></template>
       <template v-slot:switch-on><slot name="switch-on"/></template>
     </switch-toggle>
