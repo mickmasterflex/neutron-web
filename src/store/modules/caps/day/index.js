@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import dayCapModals from '@/store/modules/caps/day/modals'
+import dayCapModals from '@/store/modules/caps/day/visibility'
 
 const modules = {
   dayCapModals

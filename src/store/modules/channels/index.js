@@ -1,23 +1,25 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/channels/visibility'
+import loading from '@/store/modules/channels/loading'
+
+const modules = {
+  loading,
+  visibility
+}
 
 const state = {
   channels: [],
-  current_channel: {},
-  channels_fetch_loading: false,
-  show_create_channel_form: false,
-  show_update_channel_form: false
+  current_channel: {}
 }
 
 const getters = {
   getCurrentChannel: state => state.current_channel,
-  getAllChannels: state => state.channels,
-  getChannelsFetchLoading: state => state.channels_fetch_loading,
-  getShowCreateChannelForm: state => state.show_create_channel_form,
-  getShowUpdateChannelForm: state => state.show_update_channel_form
+  getAllChannels: state => state.channels
 }
 
 const actions = {
   async fetchChannels ({ commit }) {
+    commit('SET_CHANNELS_FETCH_LOADING')
     await axios.get('/channels/')
       .then(response => {
         commit('SET_CHANNELS', response.data)
@@ -47,8 +49,6 @@ const actions = {
 
 const mutations = {
   SET_CHANNELS: (state, channels) => (state.channels = channels),
-  SET_CHANNELS_FETCH_LOADING: (state) => (state.channels_fetch_loading = true),
-  RESET_CHANNELS_FETCH_LOADING: (state) => (state.channels_fetch_loading = false),
   SET_CURRENT_CHANNEL: (state, channel) => (state.current_channel = channel),
   ADD_CHANNEL: (state, channel) => state.channels.unshift(channel),
   UPDATE_CHANNEL: (state, updatedChannel) => {
@@ -57,14 +57,11 @@ const mutations = {
       state.channels.splice(index, 1, updatedChannel)
     }
   },
-  REMOVE_CHANNEL: (state, id) => (state.channels = state.channels.filter(channel => channel.id !== id)),
-  SHOW_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = true),
-  CLOSE_CREATE_CHANNEL_FORM: (state) => (state.show_create_channel_form = false),
-  SHOW_UPDATE_CHANNEL_FORM: (state) => (state.show_update_channel_form = true),
-  CLOSE_UPDATE_CHANNEL_FORM: (state) => (state.show_update_channel_form = false)
+  REMOVE_CHANNEL: (state, id) => (state.channels = state.channels.filter(channel => channel.id !== id))
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

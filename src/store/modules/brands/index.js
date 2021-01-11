@@ -1,11 +1,12 @@
 import axios from '@/axios'
 import brandLogos from '@/store/modules/brands/logos'
 import brandBanners from '@/store/modules/brands/banners'
+import loading from '@/store/modules/brands/loading'
+import visibility from '@/store/modules/brands/visibility'
 
 const state = {
   brands: [],
-  current_brand: {},
-  show_create_brand_modal: false
+  current_brand: {}
 }
 
 const getters = {
@@ -13,21 +14,24 @@ const getters = {
   getCurrentBrand: state => state.current_brand,
   getAllBrandsCount: (state) => {
     return state.brands.length
-  },
-  getShowCreateBrandModal: state => state.show_create_brand_modal
+  }
 }
 
 const actions = {
   async fetchBrands ({ commit }) {
+    commit('SET_BRANDS_FETCH_LOADING')
     await axios.get('/brands/')
       .then(response => {
         commit('SET_BRANDS', response.data)
+        commit('RESET_BRANDS_FETCH_LOADING')
       })
   },
   async fetchCurrentBrand ({ commit }, id) {
+    commit('SET_BRAND_FETCH_LOADING')
     await axios.get(`/brands/${id}/`)
       .then(response => {
         commit('SET_CURRENT_BRAND', response.data)
+        commit('RESET_BRAND_FETCH_LOADING')
       })
   },
   async createBrand ({ commit }, brand) {
@@ -54,6 +58,7 @@ const actions = {
 const mutations = {
   SET_BRANDS: (state, brands) => (state.brands = brands),
   SET_CURRENT_BRAND: (state, brand) => (state.current_brand = brand),
+  RESET_CURRENT_BRAND: (state) => (state.current_brand = {}),
   ADD_BRAND: (state, brand) => state.brands.unshift(brand),
   UPDATE_BRAND: (state, updatedBrand) => {
     const index = state.brands.findIndex(brand => brand.id === updatedBrand.id)
@@ -61,12 +66,12 @@ const mutations = {
       state.brands.splice(index, 1, updatedBrand)
     }
   },
-  REMOVE_BRAND: (state, id) => (state.brands = state.brands.filter(brand => brand.id !== id)),
-  SHOW_CREATE_BRAND_MODAL: (state) => (state.show_create_brand_modal = true),
-  CLOSE_CREATE_BRAND_MODAL: (state) => (state.show_create_brand_modal = false)
+  REMOVE_BRAND: (state, id) => (state.brands = state.brands.filter(brand => brand.id !== id))
 }
 
 const modules = {
+  loading,
+  visibility,
   brandLogos,
   brandBanners
 }

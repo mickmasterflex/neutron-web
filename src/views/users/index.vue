@@ -7,11 +7,16 @@
       </div>
     </template>
     <template v-slot:content>
-      <div class="flex flex-row justify-between">
-        <h2 class="h3">Users</h2>
-        <button class="btn btn-green" @click="showCreateUserModal()">Create User</button>
-      </div>
-      <user-list :users="users" class="mt-5"></user-list>
+      <panel-template title="Users" :showLoader="loading" :loadingText="loadingText">
+        <template slot="action">
+          <button class="btn btn-turquoise" @click="showCreateUserModal()">
+            <font-awesome-icon icon="plus"></font-awesome-icon> Add User
+          </button>
+        </template>
+        <template slot="content">
+          <user-list :users="users"></user-list>
+        </template>
+      </panel-template>
       <create-user></create-user>
     </template>
   </content-layout>
@@ -30,7 +35,9 @@ export default {
   computed: {
     ...mapGetters({
       users: 'getAllUsers',
-      getAllUsersCount: 'getAllUsersCount'
+      getAllUsersCount: 'getAllUsersCount',
+      loading: 'getUsersFetchLoading',
+      loadingText: 'getUsersFetchLoadingText'
     })
   },
   methods: {

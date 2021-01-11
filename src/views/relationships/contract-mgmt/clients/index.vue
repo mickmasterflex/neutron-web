@@ -1,20 +1,19 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h2 class="h3">All Clients</h2>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Client List" :showLoader="loading" :loadingText="loadingText">
+      <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateClientModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Client</button>
       </template>
-    </action-heading>
-    <client-list :clients="clients" class="mt-5"></client-list>
+      <template slot="content">
+        <client-list :clients="clients"></client-list>
+      </template>
+    </panel-template>
     <create-client></create-client>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import clientList from '@/components/clients/list'
 import createClient from '@/components/clients/create'
 
@@ -25,7 +24,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      clients: 'getAllClients'
+      clients: 'getAllClients',
+      loading: 'getClientsFetchLoading',
+      loadingText: 'getClientsFetchLoadingText'
     })
   },
   methods: {

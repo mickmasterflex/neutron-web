@@ -8,7 +8,11 @@
         <font-awesome-icon icon="ban"></font-awesome-icon>
       </slot>
     </switch-side>
-    <switch-side :active="is_on" :color="on_color"></switch-side>
+    <switch-side :active="is_on" :color="on_color">
+      <slot name="switch-on">
+        <font-awesome-icon icon="check"></font-awesome-icon>
+      </slot>
+    </switch-side>
   </label>
 </template>
 

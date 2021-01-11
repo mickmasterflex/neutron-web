@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Brand" :actionTransition="true">
+  <panel-template title="Edit Brand" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -62,6 +62,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      loading: 'getBrandFetchLoading',
+      loadingText: 'getBrandFetchLoadingText'
+    }),
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.brand.name || this.id !== this.brand.id || this.short_description !== this.brand.short_description || this.alias !== this.brand.alias || this.website !== this.brand.website

@@ -1,11 +1,9 @@
-import pricingTierGroups from '@/store/modules/pricing-tiers/groups'
-import pricingTiers from '@/store/modules/pricing-tiers/tiers'
-import formVisibility from '@/store/modules/pricing-tiers/visibility'
+import groups from '@/store/modules/pricing-tiers/groups'
+import tiers from '@/store/modules/pricing-tiers/tiers'
 
 const modules = {
-  pricingTierGroups,
-  pricingTiers,
-  formVisibility
+  groups,
+  tiers
 }
 
 export default {

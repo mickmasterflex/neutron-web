@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import monthCapModals from '@/store/modules/caps/month/modals'
+import monthCapModals from '@/store/modules/caps/month/visibility'
 
 const modules = {
   monthCapModals

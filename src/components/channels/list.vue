@@ -1,25 +1,27 @@
 <template>
   <div>
-    <table v-if="channels" class="table table-striped">
-      <thead>
-        <tr>
-          <th class="th">Name</th>
-          <th class="th w-24"></th>
-        </tr>
-      </thead>
-      <tbody class="tbody">
-        <tr class="tr" v-for="channel in channels" :key="channel.id">
-          <td class="td">
-            {{channel.name}}
-          </td>
-          <td class=" w-24 td flex flex-row justify-end">
-            <button @click="setCurrentAndOpenForm(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-            <delete-channel :id="channel.id"></delete-channel>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table-empty-state v-else heading="No Channels" copy="Use the 'New Channel' button to add channels."></table-empty-state>
+    <transition-table-state>
+      <table v-if="channels.length" class="table table-white">
+        <thead>
+          <tr>
+            <th class="th">Name</th>
+            <th class="th w-24"></th>
+          </tr>
+        </thead>
+        <tbody class="tbody">
+          <tr class="tr" v-for="channel in channels" :key="channel.id">
+            <td class="td">
+              {{channel.name}}
+            </td>
+            <td class=" w-24 td flex flex-row justify-end">
+              <button @click="setCurrentAndOpenForm(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+              <delete-channel :id="channel.id"></delete-channel>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table-empty-state v-else heading="No Channels" copy="Use the 'New Channel' button to add channels."></table-empty-state>
+    </transition-table-state>
     <update-channel></update-channel>
   </div>
 </template>

@@ -1,14 +1,14 @@
 <template>
   <div class="field-group">
-    <label class="field-label field-label-top" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
+    <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
     <div :class="$attrs.field_wrap_class">
       <div class="relative w-64">
-        <div v-if="$attrs.loading" class="cursor-not-allowed disabled base-field text-gray-800"><font-awesome-icon class="text-gray-500" icon="spinner" pulse></font-awesome-icon> Loading</div>
+        <div v-if="$attrs.loading" :class="`${$attrs.field_class} ${field_size}`" class="cursor-not-allowed disabled base-field text-gray-800 flex flex-row items-center"><font-awesome-icon class="text-gray-500" icon="spinner" pulse></font-awesome-icon> <span class="ml-1">Loading</span></div>
         <select
           v-else
           @input="handleInput($event.target.value)"
           class="appearance-none base-field"
-          :class="`${$attrs.field_class} ${$attrs.field_size ? $attrs.field_size : 'field-lg'}`"
+          :class="`${$attrs.field_class} ${field_size}`"
           :id="$attrs.field_id">
           <option value="">----------</option>
           <option :selected="option.id === value ? 'selected' : false" v-for="option in $attrs.options" :key="option.id" :value="`${option.id}`">{{option.name}}</option>
@@ -33,6 +33,11 @@ export default {
   methods: {
     handleInput (value) {
       this.$emit('input', value)
+    }
+  },
+  computed: {
+    field_size () {
+      return this.$attrs.field_size ? this.$attrs.field_size : 'field-lg'
     }
   }
 }

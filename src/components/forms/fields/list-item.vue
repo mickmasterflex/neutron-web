@@ -11,7 +11,7 @@
     <text-field field_size="field-sm" :value="this.field.id" field_disabled="true"/>
     <text-field :value="this.field.label" field_disabled="true"/>
     <text-field :value="this.field.mapping" field_disabled="true"/>
-    <text-field field_size="field-sm" :value="this.field.deliver" field_disabled="true"/>
+    <text-field field_size="field-md" :value="this.field.deliver" field_disabled="true"/>
   </div>
 </template>
 

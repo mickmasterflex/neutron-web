@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -40,6 +40,9 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentBuyer: 'fetchCurrentBuyer'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_BUYER'
     })
   },
   computed: {
@@ -53,7 +56,12 @@ export default {
     }
   },
   created () {
-    this.fetchCurrentBuyer(this.id)
+    if (this.buyer.id !== this.id) {
+      this.fetchCurrentBuyer(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

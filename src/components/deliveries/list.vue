@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <transition-table-state>
     <table v-if="deliveries.length" class="table table-white">
       <thead>
         <tr>
@@ -24,7 +24,7 @@
       </tbody>
     </table>
     <table-empty-state v-else heading="No Deliveries Added" copy="Use the 'Create Delivery' button to add deliveries to this contract."></table-empty-state>
-  </div>
+  </transition-table-state>
 </template>
 
 <script>

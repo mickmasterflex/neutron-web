@@ -13,9 +13,9 @@
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
           <text-field v-model="city" field_id="city" field_label="City"></text-field>
-          <text-field v-model="state" field_id="state" field_label="State"></text-field>
+          <select-field v-model="state" field_id="state" field_label="State" :options="formatListForSelectOptions(states)"></select-field>
           <text-field v-model="postal_code" field_id="postal_code" field_label="Postal Code"></text-field>
-          <select-field v-model="phone_type" :options="typeOptions" field_id="createPhoneType" field_label="Type"></select-field>
+          <select-field v-model="phone_type" :options="formatListForSelectOptions(phoneTypes)" field_id="createPhoneType" field_label="Type"></select-field>
           <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="Phone Number"></v-text-field>
           <text-field v-model="phone_extension" field_id="phone_extension" field_label="Phone Extension"></text-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
@@ -32,6 +32,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
   data () {
@@ -45,12 +46,6 @@ export default {
       state: '',
       postal_code: '',
       phone_type: '',
-      typeOptions: {
-        home: { name: 'home', id: 'home' },
-        work: { name: 'work', id: 'work' },
-        mobile: { name: 'mobile', id: 'mobile' },
-        fax: { name: 'fax', id: 'fax' }
-      },
       phone_number: '',
       phone_extension: '',
       description: ''
@@ -58,7 +53,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateCampusModal'
+      showModal: 'getShowCreateCampusModal',
+      phoneTypes: 'getPhoneTypes',
+      states: 'getStatesAbbreviated'
     })
   },
   props: {
@@ -67,7 +64,7 @@ export default {
       required: true
     }
   },
-  mixins: [enterKeyListener, setResponseErrors],
+  mixins: [enterKeyListener, setResponseErrors, formatList],
   methods: {
     ...mapActions({
       create: 'createCampus'

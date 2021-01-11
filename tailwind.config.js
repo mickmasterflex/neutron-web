@@ -117,6 +117,9 @@ module.exports = {
           800: '#6C580B',
           900: '#483B08'
         }
+      },
+      width: {
+        'fit-content': 'fit-content'
       }
     }
   },

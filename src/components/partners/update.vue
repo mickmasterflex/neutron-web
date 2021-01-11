@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Partner" :actionTransition="true">
+  <panel-template title="Edit Partner" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -7,14 +7,12 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <select-field v-model="parent" :options="siblings" field_id="parent" field_label="Parent"></select-field>
+          <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channels v-model="channel"></select-channels>
-          <v-select-field :field_wrap_class="pricing_tier_group ? 'well' : ''" v-model="pricing_tier_group" :options="pricingTierGroups" field_label="Pricing Tier Group">
-            <list-tiers class="mt-3" tableWidth="auto" emptyTableClass="max-w-sm" v-if="currentGroup" :pricingTiers='currentGroup.pricingtier_set'></list-tiers>
-          </v-select-field>
+          <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
         </form>
       </validation-observer>
     </template>
@@ -22,9 +20,10 @@
 </template>
 
 <script>
-import listTiers from '@/components/pricing-tiers/tiers/list'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
+import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import selectChannels from '@/components/channels/select'
+import parentSelect from '@/components/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -46,11 +45,6 @@ export default {
       scheduledStart: null
     }
   },
-  components: {
-    'list-tiers': listTiers,
-    'date-picker': datePicker,
-    'select-channels': selectChannels
-  },
   props: {
     partner: Object
   },
@@ -62,8 +56,7 @@ export default {
   mixins: [setResponseErrors],
   methods: {
     ...mapActions({
-      update: 'updatePartner',
-      fetchPricingTierGroups: 'fetchPricingTierGroups'
+      update: 'updatePartner'
     }),
     setPartner () {
       this.name = this.partner.name
@@ -96,17 +89,12 @@ export default {
   },
   created () {
     this.setPartner()
-    this.fetchPricingTierGroups()
   },
   computed: {
     ...mapGetters({
-      siblings: 'getPartnerSiblings',
-      pricingTierGroups: 'getPricingTierGroups',
-      getPricingTierGroupById: 'getPricingTierGroupById'
+      loading: 'getPartnerFetchLoading',
+      loadingText: 'getPartnerFetchLoadingText'
     }),
-    currentGroup () {
-      return this.getPricingTierGroupById(Number(this.pricing_tier_group))
-    },
     unsavedChanges () {
       if (this.name) {
         return this.name !== this.partner.name ||
@@ -120,6 +108,12 @@ export default {
         return false
       }
     }
+  },
+  components: {
+    'select-pricing-tier-group': selectPricingTierGroup,
+    'date-picker': datePicker,
+    'parent-select': parentSelect,
+    'select-channels': selectChannels
   }
 }
 </script>

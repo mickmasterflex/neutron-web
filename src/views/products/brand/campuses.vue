@@ -1,14 +1,13 @@
 <template>
   <div>
-    <action-heading>
-      <template v-slot:left>
-        <h3 class="h3">Campuses List</h3>
-      </template>
-      <template v-slot:right>
+    <panel-template title="Campuses List" :showLoader="loading" :loadingText="loadingText">
+      <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateCampusModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campus</button>
       </template>
-    </action-heading>
-    <campus-list :campuses="campuses"></campus-list>
+      <template slot="content">
+        <campus-list :campuses="campuses"></campus-list>
+      </template>
+    </panel-template>
     <create-campus :brandId="brand.id" v-if="brand.id"></create-campus>
   </div>
 </template>
@@ -26,7 +25,9 @@ export default {
   computed: {
     ...mapGetters({
       brand: 'getCurrentBrand',
-      getCampusesByBrand: 'getCampusesByBrand'
+      getCampusesByBrand: 'getCampusesByBrand',
+      loading: 'getCampusesFetchLoading',
+      loadingText: 'getCampusesFetchLoadingText'
     }),
     campuses: function () {
       return this.getCampusesByBrand(this.brand.id)

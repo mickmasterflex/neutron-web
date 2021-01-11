@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -29,6 +29,9 @@ export default {
   methods: {
     ...mapActions({
       fetchCurrentBrand: 'fetchCurrentBrand'
+    }),
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_BRAND'
     })
   },
   computed: {
@@ -37,7 +40,12 @@ export default {
     })
   },
   created () {
-    this.fetchCurrentBrand(this.id)
+    if (this.id !== this.brand.id) {
+      this.fetchCurrentBrand(this.id)
+    }
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>
