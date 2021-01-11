@@ -8,6 +8,9 @@
         <th class="th">Campuses</th>
         <th class="th">Alias</th>
         <th class="th">Website</th>
+        <th class="th">Clients</th>
+        <th class="th">Offers</th>
+        <th class="th">Products</th>
       </tr>
       </thead>
       <tbody class="tbody">
@@ -21,6 +24,21 @@
         </td>
         <td class="td">{{brand.alias}}</td>
         <td class="td">{{brand.website}}</td>
+        <td class="td">
+              <span v-if="brand.clients.length">{{ brand.clients.length }}
+              </span>
+          <span v-else class="italic text-gray-500">None</span>
+        </td>
+        <td class="td">
+              <span v-if="brand.offers.length">{{ brand.offers.length }}
+              </span>
+          <span v-else class="italic text-gray-500">None</span>
+        </td>
+        <td class="td">
+              <span v-if="brand.products.length">{{ brand.products.length }}
+              </span>
+          <span v-else class="italic text-gray-500">None</span>
+        </td>
       </tr>
       </tbody>
     </table>
