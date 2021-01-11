@@ -5,7 +5,7 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-select-field v-model="type" rules="required" field_id="delivery_type" field_label="Delivery Type" :options="formatListForSelectOptions(deliveryTypes)"></v-select-field>
-          <v-select-field v-model="response_parser" rules="required" field_id="response_parser" field_label="Response Parser" :options="parsers"></v-select-field>
+          <v-select-field v-model="response_parser" rules="required" field_id="response_parser" field_label="Response Parser" :options="formatListForSelectOptions(parsers)"></v-select-field>
           <v-text-field v-model="target" field_id="target" field_label="Target (URL)" rules="required|url"></v-text-field>
           <v-textarea-field v-model="headers" field_id="headers" field_label="Headers"></v-textarea-field>
         </form>
@@ -29,16 +29,14 @@ export default {
       type: '',
       response_parser: '',
       target: '',
-      headers: '',
-      types: { HttpPostDelivery: { name: 'HttpPostDelivery', id: 'HttpPostDelivery' } },
-      parsers: { Proton: { name: 'Proton', id: 'Proton' } }
+      headers: ''
     }
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateDeliveryModal',
-      getListForSelect: 'getListForSelect',
-      deliveryTypes: 'getDeliveryTypes'
+      deliveryTypes: 'getDeliveryTypes',
+      parsers: 'getParsers'
     })
   },
   props: {
