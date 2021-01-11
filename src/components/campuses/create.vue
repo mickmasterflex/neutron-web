@@ -13,7 +13,7 @@
           <text-field v-model="address1" field_id="address1" field_label="Address1"></text-field>
           <text-field v-model="address2" field_id="address2" field_label="Address2"></text-field>
           <text-field v-model="city" field_id="city" field_label="City"></text-field>
-          <text-field v-model="state" field_id="state" field_label="State"></text-field>
+          <select-field v-model="state" field_id="state" field_label="State" :options="formatListForSelectOptions(states)"></select-field>
           <text-field v-model="postal_code" field_id="postal_code" field_label="Postal Code"></text-field>
           <select-field v-model="phone_type" :options="formatListForSelectOptions(phoneTypes)" field_id="createPhoneType" field_label="Type"></select-field>
           <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="Phone Number"></v-text-field>
@@ -54,7 +54,8 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateCampusModal',
-      phoneTypes: 'getPhoneTypes'
+      phoneTypes: 'getPhoneTypes',
+      states: 'getStatesAbbreviated'
     })
   },
   props: {
