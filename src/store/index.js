@@ -22,6 +22,8 @@ import products from './modules/products'
 import users from './modules/users'
 import toast from '@/store/modules/toast'
 
+import constants from '@/store/constants'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -36,6 +38,7 @@ export default new Vuex.Store({
     caps,
     channels,
     clients,
+    constants,
     contractRelations,
     deliveries,
     forms,
