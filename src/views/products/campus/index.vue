@@ -43,7 +43,9 @@ export default {
     })
   },
   created () {
-    this.fetchCurrentCampus(this.id)
+    if (this.id !== this.campus.id) {
+      this.fetchCurrentCampus(this.id)
+    }
   },
   destroyed () {
     this.resetCurrent()
