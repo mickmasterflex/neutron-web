@@ -31,7 +31,15 @@
         <span class="text-gray-500 ml-3 font-light" v-if="this.type === 'client'">Client</span>
       </node-td>
       <node-td class="w-10">{{obj.id}}</node-td>
-      <node-td class="w-24">{{obj.status ? obj.status : 'n/a'}}</node-td>
+      <node-td class="w-24">
+        <status-indicator :red="obj.status === 'terminated'"
+                          :green="obj.status === 'active'"
+                          :yellow="obj.status === 'paused'"
+                          :weight="obj.status ? 'bold' : 'normal'"
+                          :capitalize="obj.status ? true : false">
+          {{ obj.status ? obj.status : 'n/a' }}
+        </status-indicator>
+      </node-td>
       <node-td class="w-20">{{state.children.length}}</node-td>
     </ul>
     <div v-show="expandedState.expanded">
