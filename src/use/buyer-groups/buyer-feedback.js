@@ -4,7 +4,7 @@ export default function useBuyerFeedback (buyerId, computedState, checkboxState)
   const store = inject('vuex-store')
 
   const state = reactive({
-    buyer: computed(() => store.getters.getBuyerById(buyerId)),
+    buyer: computed(() => store.getters.getBuyerById(buyerId))
   })
 
   const userFeedbackState = reactive({
