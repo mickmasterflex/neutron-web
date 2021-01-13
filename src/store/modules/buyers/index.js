@@ -1,10 +1,8 @@
 import axios from '@/axios'
-import buyerGroups from '@/store/modules/buyers/buyer-groups'
 import loading from '@/store/modules/buyers/loading'
 import visibility from '@/store/modules/buyers/visibility'
 
 const modules = {
-  buyerGroups,
   loading,
   visibility
 }

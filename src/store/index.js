@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import app from './modules/app'
 import auth from './modules/authentication'
 import buyers from './modules/buyers'
+import buyerGroups from '@/store/modules/buyer-groups'
 import brands from './modules/brands'
 import campaigns from '@/store/modules/campaigns'
 import campuses from '@/store/modules/campuses'
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     app,
     auth,
     buyers,
+    buyerGroups,
     brands,
     campuses,
     campaigns,
