@@ -17,6 +17,9 @@ const getters = {
   getCurrentClient: state => state.current_client,
   getAllClientsCount: (state) => {
     return state.clients.length
+  },
+  getClientById: (state) => (clientId) => {
+    return state.clients.filter(client => client.id === clientId)[0]
   }
 }
 

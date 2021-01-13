@@ -1,23 +1,20 @@
 <template>
-  <content-layout>
-    <template v-slot:hud>
-      <h1 class="text-white text-4xl font-hairline">Buyer Groups</h1>
-      <div class="hud--stat-cards"></div>
-    </template>
-    <template v-slot:content>
-      <action-heading>
-        <template v-slot:right>
-          <create-group></create-group>
-        </template>
-      </action-heading>
-      <list-groups></list-groups>
-      <update-group></update-group>
-    </template>
-  </content-layout>
+  <div>
+    <action-heading>
+      <template v-slot:left>
+        <h2 class="h3">All Buyer Groups</h2>
+      </template>
+      <template v-slot:right>
+        <create-group></create-group>
+      </template>
+    </action-heading>
+    <list-groups></list-groups>
+    <update-group></update-group>
+  </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import listGroups from '@/components/buyer-groups/list'
 import createGroup from '@/components/buyer-groups/create'
 import updateGroup from '@/components/buyer-groups/update'
@@ -25,11 +22,20 @@ import updateGroup from '@/components/buyer-groups/update'
 export default {
   methods: {
     ...mapActions({
-      fetchBuyerGroups: 'fetchBuyerGroups'
+      fetchBuyers: 'fetchBuyers',
+      fetchBuyerGroups: 'fetchBuyerGroups',
+      fetchClients: 'fetchClients'
+    }),
+    ...mapGetters({
+      clients: 'getAllClients'
     })
   },
   created () {
     this.fetchBuyerGroups()
+    this.fetchBuyers()
+    if (this.clients.length === 0) {
+      this.fetchClients()
+    }
   },
   components: {
     'list-groups': listGroups,

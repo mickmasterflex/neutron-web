@@ -11,6 +11,7 @@ import router from '@/router'
 import store from '@/store'
 import axios from '@/axios'
 import VCalendar from 'v-calendar'
+import VueCompositionAPI, { provide } from '@vue/composition-api'
 import 'animate.css'
 import '@/assets/css/styles.css'
 
@@ -22,6 +23,8 @@ import {
   faArrowsAltV,
   faBan,
   faCalendarAlt,
+  faCaretDown,
+  faCaretRight,
   faChartArea,
   faCheck,
   faCheckCircle,
@@ -32,6 +35,7 @@ import {
   faDollarSign,
   faDownload,
   faExclamationTriangle,
+  faExternalLinkAlt,
   faFileCsv,
   faImage,
   faKey,
@@ -200,6 +204,8 @@ library.add(
   faArrowsAltV,
   faBan,
   faCalendarAlt,
+  faCaretDown,
+  faCaretRight,
   faChartArea,
   faCheck,
   faCheckCircle,
@@ -210,6 +216,7 @@ library.add(
   faDollarSign,
   faDownload,
   faExclamationTriangle,
+  faExternalLinkAlt,
   faFileCsv,
   faImage,
   faKey,
@@ -240,7 +247,11 @@ Vue.use(VCalendar, {})
   Root Vue Instance
 -------------------------------------------------- */
 
+Vue.use(VueCompositionAPI)
 new Vue({
+  setup () {
+    provide('vuex-store', store)
+  },
   router,
   store,
   render: h => h(App)

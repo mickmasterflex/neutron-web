@@ -10,7 +10,7 @@
           <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
-          <select-buyer-group v-model="buyerGroup"></select-buyer-group>
+          <buyer-group-field :buyer="buyer"></buyer-group-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
@@ -20,8 +20,8 @@
 
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
+import buyerGroupField from '@/components/buyer-groups/buyer-group-field'
 import parentSelect from '@/components/buyers/parent-select'
-import selectBuyerGroup from '@/components/buyer-groups/select'
 import { mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -101,8 +101,8 @@ export default {
   },
   components: {
     'date-picker': datePicker,
-    'parent-select': parentSelect,
-    'select-buyer-group': selectBuyerGroup
+    'buyer-group-field': buyerGroupField,
+    'parent-select': parentSelect
   }
 }
 </script>

@@ -5,7 +5,7 @@
       v-if="buyerGroups === undefined"
       heading="No Buyer Groups Added"
       copy="Use the 'New Buyer Group' button to add buyer groups."></table-empty-state>
-    <panel-template v-for="buyerGroup in buyerGroups" :title="buyerGroup.name" :key="buyerGroup.id" class="col-span-2">
+    <panel-template v-for="buyerGroup in buyerGroups" :title="buyerGroup.name" :subtitle="'id: ' + buyerGroup.id" :key="buyerGroup.id" class="col-span-2">
       <template v-slot:action>
         <span class="flex flex-row mr-2">
           <delete-group :id="buyerGroup.id"></delete-group>
@@ -13,7 +13,7 @@
         </span>
       </template>
       <template v-slot:content>
-        List Contracts
+        <list-buyers :buyers="getBuyersByBuyerGroup(buyerGroup.id)"></list-buyers>
       </template>
     </panel-template>
   </base-panel-grid>
@@ -21,16 +21,19 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import listBuyers from '@/components/buyer-groups/list-buyers'
 import deleteGroup from '@/components/buyer-groups/delete'
 
 export default {
   computed: {
     ...mapGetters({
-      buyerGroups: 'getBuyerGroups'
+      buyerGroups: 'getBuyerGroups',
+      getBuyersByBuyerGroup: 'getBuyersByBuyerGroup'
     })
   },
   components: {
-    'delete-group': deleteGroup
+    'delete-group': deleteGroup,
+    'list-buyers': listBuyers
   },
   methods: {
     ...mapMutations({

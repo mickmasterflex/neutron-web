@@ -1,7 +1,6 @@
 <template>
   <ul class="flex flex-row">
-    <top-nav-item label="Client MGMT" route="Relationships" :active="activeTab === 'clients'"></top-nav-item>
-    <top-nav-item label="Buyer Groups" route="BuyerGroups" :active="activeTab === 'buyer-groups'"></top-nav-item>
+    <top-nav-item label="Contracts" route="Relationships" :active="activeTab === 'contracts'"></top-nav-item>
   </ul>
 </template>
 
@@ -12,7 +11,7 @@ export default {
   props: {
     activeTab: {
       type: String,
-      default: 'clients'
+      default: 'contracts'
     }
   },
   components: {
