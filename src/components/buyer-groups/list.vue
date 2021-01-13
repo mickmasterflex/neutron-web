@@ -13,7 +13,7 @@
         </span>
       </template>
       <template v-slot:content>
-        List Contracts
+        <list-buyers :buyers="getBuyersByBuyerGroup(buyerGroup.id)"></list-buyers>
       </template>
     </panel-template>
   </base-panel-grid>
@@ -21,16 +21,19 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import listBuyers from '@/components/buyer-groups/list-buyers'
 import deleteGroup from '@/components/buyer-groups/delete'
 
 export default {
   computed: {
     ...mapGetters({
-      buyerGroups: 'getBuyerGroups'
+      buyerGroups: 'getBuyerGroups',
+      getBuyersByBuyerGroup: 'getBuyersByBuyerGroup'
     })
   },
   components: {
-    'delete-group': deleteGroup
+    'delete-group': deleteGroup,
+    'list-buyers': listBuyers
   },
   methods: {
     ...mapMutations({

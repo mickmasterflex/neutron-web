@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import clientList from '@/components/clients/list'
 import createClient from '@/components/clients/create'
 

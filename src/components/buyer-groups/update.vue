@@ -8,6 +8,10 @@
             <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           </form>
         </validation-observer>
+        <div class="field-group">
+          <label class="field-label field-label-top">Buyers</label>
+          <buyer-tree class="flex-grow"></buyer-tree>
+        </div>
       </div>
     </template>
     <template v-slot:footer-additional>
@@ -21,6 +25,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
+import buyerTree from '@/components/buyer-groups/buyer-tree'
 
 export default {
   data () {
@@ -67,11 +72,11 @@ export default {
       closeModal: 'CLOSE_UPDATE_BUYER_GROUP_MODAL'
     }),
     close () {
+      this.closeModal()
       this.resetCurrentBuyerGroup()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.closeModal()
       this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
@@ -87,6 +92,9 @@ export default {
         }
       })
     }
+  },
+  components: {
+    'buyer-tree': buyerTree
   }
 }
 </script>

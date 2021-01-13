@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import listGroups from '@/components/buyer-groups/list'
 import createGroup from '@/components/buyer-groups/create'
 import updateGroup from '@/components/buyer-groups/update'
@@ -22,11 +22,20 @@ import updateGroup from '@/components/buyer-groups/update'
 export default {
   methods: {
     ...mapActions({
-      fetchBuyerGroups: 'fetchBuyerGroups'
+      fetchBuyers: 'fetchBuyers',
+      fetchBuyerGroups: 'fetchBuyerGroups',
+      fetchClients: 'fetchClients'
+    }),
+    ...mapGetters({
+      clients: 'getAllClients'
     })
   },
   created () {
     this.fetchBuyerGroups()
+    this.fetchBuyers()
+    if (this.clients.length === 0) {
+      this.fetchClients()
+    }
   },
   components: {
     'list-groups': listGroups,

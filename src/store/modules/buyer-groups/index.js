@@ -1,24 +1,28 @@
 import axios from '@/axios'
+import buyer from '@/store/modules/buyer-groups/buyer'
+import loading from '@/store/modules/buyer-groups/loading'
 import visibility from '@/store/modules/buyer-groups/visibility'
 
 const modules = {
+  buyer,
+  loading,
   visibility
 }
 
 const state = {
   buyer_groups: undefined,
-  current_buyer_group: {},
-  buyer_groups_fetch_loading: false
+  current_buyer_group: {}
 }
 
 const getters = {
   getBuyerGroups: state => state.buyer_groups,
   getCurrentBuyerGroup: state => state.current_buyer_group,
-  getBuyerGroupsFetchLoading: state => state.buyer_groups_fetch_loading
+  getBuyerGroupById: (state) => (id) => state.buyer_groups.filter(group => group.id === id)
 }
 
 const actions = {
   async fetchBuyerGroups ({ commit }) {
+    commit('SET_BUYER_GROUPS_FETCH_LOADING')
     await axios.get('/buyer-groups/')
       .then(response => {
         commit('SET_BUYER_GROUPS', response.data)
@@ -29,6 +33,7 @@ const actions = {
     await axios.post('/buyer-groups/', buyerGroup)
       .then(response => {
         commit('ADD_BUYER_GROUP', response.data)
+        commit('SET_CURRENT_BUYER_GROUP', response.data)
       })
   },
   async updateBuyerGroup ({ commit }, buyerGroup) {
@@ -56,9 +61,7 @@ const mutations = {
   },
   SET_CURRENT_BUYER_GROUP: (state, group) => (state.current_buyer_group = group),
   RESET_CURRENT_BUYER_GROUP: (state) => (state.current_buyer_group = {}),
-  REMOVE_BUYER_GROUP: (state, id) => (state.buyer_groups = state.buyer_groups.filter(group => group.id !== id)),
-  SET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = true),
-  RESET_BUYER_GROUPS_FETCH_LOADING: (state) => (state.buyer_groups_fetch_loading = false)
+  REMOVE_BUYER_GROUP: (state, id) => (state.buyer_groups = state.buyer_groups.filter(group => group.id !== id))
 }
 
 export default {

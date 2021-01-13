@@ -1,6 +1,5 @@
 <template>
-  <span class="font-bold capitalize"
-        :class="`text-${color}-600`">
+  <span :class="`text-${color}-600 font-${weight} ${capitalize ? 'capitalize' : ''}`">
     <slot></slot>
   </span>
 </template>
@@ -10,7 +9,18 @@ export default {
   props: {
     red: Boolean,
     yellow: Boolean,
-    green: Boolean
+    green: Boolean,
+    capitalize: {
+      type: Boolean,
+      default: true
+    },
+    weight: {
+      type: String,
+      default: 'bold',
+      validator: function (value) {
+        return ['bold', 'light', 'normal'].includes(value)
+      }
+    }
   },
   computed: {
     color () {
