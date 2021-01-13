@@ -17,7 +17,7 @@
                 v-on="inputEvents"
                 @input="handleInput($event.target.value)"
                 class="base-field pl-10"
-                :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500 ${finalDate ? ' w-56' : ''}`"
+                :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500 ${finalDate ? ' w-56' : 'w-64'}`"
                 :type="$attrs.field_type ? $attrs.field_type : 'text'"
                 :id="$attrs.field_id"
                 :value="finalDate"
