@@ -22,6 +22,7 @@ const getters = {
 
 const actions = {
   async fetchBuyerGroups ({ commit }) {
+    commit('SET_BUYER_GROUPS_FETCH_LOADING')
     await axios.get('/buyer-groups/')
       .then(response => {
         commit('SET_BUYER_GROUPS', response.data)
