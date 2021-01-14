@@ -9,8 +9,20 @@ const getters = {
 }
 
 const actions = {
-  async bulkUpdateBuyerStatus (status) {
-    await axios.post('/update-status/buyers/', { status: status, contracts: state.bulk_update_buyers })
+  async bulkUpdateBuyerStatus ({ commit, getters }, status) {
+    await axios.post(
+      '/update-status/buyers/',
+      { status: status, contracts: state.bulk_update_buyers })
+      .then(response => {
+        response.data.forEach(buyer => {
+          const updatedBuyer = { ...getters.getBuyerById(buyer.id) }
+          updatedBuyer.status = buyer.status
+          commit('UPDATE_BUYER', updatedBuyer)
+        })
+      })
+      .finally(() => {
+        commit('RESET_BULK_UPDATE_BUYERS')
+      })
   }
 }
 
