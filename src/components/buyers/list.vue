@@ -38,7 +38,7 @@
           <span v-else class="italic text-gray-500">No Caps Set</span>
             </td>
           <td class="td">
-           <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offers.length }}</table-link>
+           <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offer_contracts.length }}</table-link>
           </td>
         </tr>
       </tbody>
