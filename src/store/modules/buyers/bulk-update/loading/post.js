@@ -3,7 +3,7 @@ const state = {
 }
 
 const getters = {
-  getBulkUpdateBuyerStatusPusLoading: state => state.bulk_update_buyer_status_post_loading
+  getBulkUpdateBuyerStatusPostLoading: state => state.bulk_update_buyer_status_post_loading
 }
 
 const mutations = {

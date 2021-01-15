@@ -1,5 +1,9 @@
 <template>
-  <tooltip-dialog-template :show="showTooltip" @close="close" @open="open" :buttonDisabled="selectedContracts.length === 0">
+  <tooltip-dialog-template
+    :show="showTooltip"
+    @close="close"
+    @open="open"
+    :buttonDisabled="selectedContracts.length === 0 || loading">
     <template v-slot:button-text>
       <font-awesome-icon icon="pencil-alt"></font-awesome-icon> Statuses
     </template>
@@ -17,7 +21,11 @@
       <button
         class="btn btn-green w-48"
         @click="submitForm"
-        :disabled="!status || selectedContracts.length === 0">Update Status
+        :disabled="!status || selectedContracts.length === 0">
+        <span v-if="loading">
+          <font-awesome-icon icon="spinner" pulse></font-awesome-icon> Loading
+        </span>
+        <span v-else>Update Status</span>
       </button>
     </template>
   </tooltip-dialog-template>
@@ -37,7 +45,8 @@ export default {
     ...mapGetters({
       statuses: 'getContractStatuses',
       selectedContracts: 'getBulkUpdateBuyers',
-      showTooltip: 'getShowBulkUpdateBuyerStatus'
+      showTooltip: 'getShowBulkUpdateBuyerStatus',
+      loading: 'getBulkUpdateBuyerStatusPostLoading'
     })
   },
   methods: {
