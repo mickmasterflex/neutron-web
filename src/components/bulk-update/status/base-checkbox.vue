@@ -9,7 +9,10 @@
 <script>
 export default {
   props: {
-    contract: Number,
+    contract: {
+      type: Number,
+      required: true
+    },
     type: {
       type: String,
       required: true,
