@@ -4,7 +4,7 @@
       <slot name="button-text">Tooltip</slot>
     </button>
     <transition enter-active-class="animate__animated animate__fadeInUp animate__faster" leave-active-class="animate__animated animate__fadeOutDown animate__faster">
-      <div v-show="visible" :style="`width: ${tooltipWidth}px`" class="tooltip-dialog absolute bg-white rounded-lg block shadow border border-gray-300 z-10">
+      <div v-show="show" :style="`width: ${tooltipWidth}px`" class="tooltip-dialog absolute bg-white rounded-lg block shadow border border-gray-300 z-10">
         <h3 class="modal-header h5 font-bold text-center px-2 py-4">
           <slot name="header">Tooltip Header</slot>
         </h3>
@@ -25,6 +25,7 @@
 <script>
 export default {
   props: {
+    show: Boolean,
     buttonClasses: {
       type: String,
       default: 'btn btn-blue'
@@ -37,12 +38,11 @@ export default {
   },
   methods: {
     toggle () {
-      this.visible = !this.visible
-    }
-  },
-  data () {
-    return {
-      visible: false
+      if (this.show) {
+        this.$emit('close')
+      } else {
+        this.$emit('open')
+      }
     }
   }
 }

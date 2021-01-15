@@ -1,4 +1,11 @@
 import axios from '@/axios'
+import visibility from '@/store/modules/buyers/bulk-update/visibility'
+import loading from '@/store/modules/buyers/bulk-update/loading'
+
+const modules = {
+  loading,
+  visibility
+}
 
 const state = {
   bulk_update_buyers: []
@@ -37,6 +44,7 @@ const mutations = {
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

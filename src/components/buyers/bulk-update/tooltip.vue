@@ -1,5 +1,5 @@
 <template>
-  <tooltip-dialog-template :buttonDisabled="selectedContracts.length === 0">
+  <tooltip-dialog-template :show="showTooltip" @close="close" @open="open" :buttonDisabled="selectedContracts.length === 0">
     <template v-slot:button-text>
       <font-awesome-icon icon="pencil-alt"></font-awesome-icon> Statuses
     </template>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
@@ -36,18 +36,25 @@ export default {
   computed: {
     ...mapGetters({
       statuses: 'getContractStatuses',
-      selectedContracts: 'getBulkUpdateBuyers'
+      selectedContracts: 'getBulkUpdateBuyers',
+      showTooltip: 'getShowBulkUpdateBuyerStatus'
     })
   },
   methods: {
     ...mapActions({
       updateStatuses: 'bulkUpdateBuyerStatus'
     }),
+    ...mapMutations({
+      close: 'CLOSE_BULK_UPDATE_BUYER_STATUS',
+      open: 'SHOW_BULK_UPDATE_BUYER_STATUS'
+    }),
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.updateStatuses(this.status)
-            .then(() => {})
+            .then(() => {
+              this.close()
+            })
         }
       })
     }
