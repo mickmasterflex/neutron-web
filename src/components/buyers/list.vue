@@ -56,7 +56,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import bulkUpdateCheckbox from '@/components/buyers/bulk-update/checkbox'
+import bulkUpdateCheckbox from '@/components/bulk-update/status/buyer-checkbox'
 
 export default {
   props: {
