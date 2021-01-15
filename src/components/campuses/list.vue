@@ -28,7 +28,7 @@
           <span v-else class="italic text-gray-500">None</span>
         </td>
         <td class="td">
-          <span v-if="campus.offers.length">{{ campus.offers.length }}</span>
+          <span v-if="campus.offer_contracts.length">{{ campus.offer_contracts.length }}</span>
           <span v-else class="italic text-gray-500">None</span>
         </td>
       </tr>
