@@ -17,6 +17,7 @@ const getters = {
 
 const actions = {
   async bulkUpdateBuyerStatus ({ commit, getters }, status) {
+    commit('SET_BULK_UPDATE_BUYER_STATUS_POST_LOADING')
     await axios.post(
       '/update-status/buyers/',
       { status: status, contracts: state.bulk_update_buyers })
@@ -29,6 +30,7 @@ const actions = {
       })
       .finally(() => {
         commit('RESET_BULK_UPDATE_BUYERS')
+        commit('RESET_BULK_UPDATE_BUYER_STATUS_POST_LOADING')
       })
   }
 }
