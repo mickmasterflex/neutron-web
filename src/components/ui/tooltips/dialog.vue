@@ -5,7 +5,7 @@
     </button>
     <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
       <div v-show="show" :style="`width: ${tooltipWidth}px`" class="tooltip-dialog absolute bg-white rounded-lg block shadow border border-gray-300 z-10">
-        <h3 class="modal-header h4 font-bold text-center px-2 py-4">
+        <h3 class="modal-header h4 font-bold text-center px-2 py-4 capitalize">
           <slot name="header">Tooltip Header</slot>
         </h3>
         <div class="border-t-2 bg-gray-100 border-b-2 border-gray-200 overflow-x-scroll p-2 flex flex-row items-center justify-center">

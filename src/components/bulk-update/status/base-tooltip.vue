@@ -8,7 +8,7 @@
       <font-awesome-icon icon="pencil-alt"></font-awesome-icon> Status
     </template>
     <template v-slot:header>
-      {{selectedContracts.length}} {{ plural('Buyer', selectedContracts.length) }} Selected
+      {{selectedContracts.length}} {{ plural(type, selectedContracts.length) }} Selected
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { plural } from '@/mixins/plural'
 
@@ -40,6 +40,39 @@ export default {
   data () {
     return {
       status: ''
+    }
+  },
+  props: {
+    type: {
+      type: String,
+      required: true,
+      validator (value) {
+        return ['buyer', 'partner', 'offer'].includes(value)
+      }
+    },
+    open: {
+      type: Function,
+      required: true
+    },
+    close: {
+      type: Function,
+      required: true
+    },
+    updateStatuses: {
+      type: Function,
+      required: true
+    },
+    selectedContracts: {
+      type: Array,
+      required: true
+    },
+    showTooltip: {
+      type: Boolean,
+      required: true
+    },
+    loading: {
+      type: Boolean,
+      required: true
     }
   },
   watch: {
@@ -51,20 +84,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      statuses: 'getContractStatuses',
-      selectedContracts: 'getBulkUpdateBuyers',
-      showTooltip: 'getShowBulkUpdateBuyerStatus',
-      loading: 'getBulkUpdateBuyerStatusPostLoading'
+      statuses: 'getContractStatuses'
     })
   },
   methods: {
-    ...mapActions({
-      updateStatuses: 'bulkUpdateBuyerStatus'
-    }),
-    ...mapMutations({
-      close: 'CLOSE_BULK_UPDATE_BUYER_STATUS',
-      open: 'SHOW_BULK_UPDATE_BUYER_STATUS'
-    }),
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {

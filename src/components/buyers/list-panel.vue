@@ -18,7 +18,7 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex'
 import buyerList from '@/components/buyers/list'
-import tooltip from '@/components/buyers/bulk-update/tooltip'
+import tooltip from '@/components/bulk-update/status/buyer-tooltip'
 
 export default {
   components: {
