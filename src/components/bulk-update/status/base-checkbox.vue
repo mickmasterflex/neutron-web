@@ -1,7 +1,7 @@
 <template>
   <checkbox-field
     @input="handleInput"
-    :field_id="`bulkUpdateBuyers-${contract}`"
+    :field_id="`bulkUpdate-${type}-${contract}`"
     :value="checked"
   ></checkbox-field>
 </template>
@@ -10,6 +10,13 @@
 export default {
   props: {
     contract: Number,
+    type: {
+      type: String,
+      required: true,
+      validator (value) {
+        return ['buyer', 'partner', 'offer'].includes(value)
+      }
+    },
     selectedContracts: {
       type: Array,
       required: true

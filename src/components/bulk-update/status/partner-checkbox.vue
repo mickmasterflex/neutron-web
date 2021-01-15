@@ -1,8 +1,8 @@
 <template>
   <status-checkbox
     :contract="contract"
-    type="buyer"
-    :selectedContracts="bulkUpdateBuyers"
+    type="partner"
+    :selectedContracts="bulkUpdatePartners"
     :addToSelected="addToBulkUpdate"
     :removeFromSelected="removeFromBulkUpdate"
   ></status-checkbox>
@@ -18,13 +18,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      bulkUpdateBuyers: 'getBulkUpdateBuyers'
+      bulkUpdatePartners: 'getBulkUpdatePartners'
     })
   },
   methods: {
     ...mapMutations({
-      addToBulkUpdate: 'ADD_BUYER_TO_BULK_UPDATE',
-      removeFromBulkUpdate: 'REMOVE_BUYER_FROM_BULK_UPDATE'
+      addToBulkUpdate: 'ADD_PARTNER_TO_BULK_UPDATE',
+      removeFromBulkUpdate: 'REMOVE_PARTNER_FROM_BULK_UPDATE'
     })
   },
   components: {
