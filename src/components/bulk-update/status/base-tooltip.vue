@@ -84,7 +84,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      statuses: 'getContractStatuses'
+      statuses: 'getAllContractStatuses'
     })
   },
   methods: {

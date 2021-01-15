@@ -93,7 +93,7 @@ export default {
       }
     },
     ...mapGetters({
-      statuses: 'getContractStatuses'
+      statuses: 'getAllContractStatuses'
     })
   },
   mixins: [formatList, setResponseErrors],

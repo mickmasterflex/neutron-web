@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Edit Partner" :actionTransition="true" :showLoader="loading" :loadingText="loadingText">
+  <panel-template title="Edit Partner" :actionTransition="true" v-bind="$attrs">
     <template v-slot:action>
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
@@ -87,8 +87,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loading: 'getPartnerFetchLoading',
-      loadingText: 'getPartnerFetchLoadingText'
+      statuses: 'getAllContractStatuses'
     }),
     unsavedChanges () {
       if (this.name) {
