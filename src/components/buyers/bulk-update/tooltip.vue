@@ -5,10 +5,10 @@
     @open="open"
     :buttonDisabled="selectedContracts.length === 0 || loading">
     <template v-slot:button-text>
-      <font-awesome-icon icon="pencil-alt"></font-awesome-icon> Statuses
+      <font-awesome-icon icon="pencil-alt"></font-awesome-icon> Status
     </template>
     <template v-slot:header>
-      {{selectedContracts.length}} Buyer Contracts Selected
+      {{selectedContracts.length}} {{ plural('Buyer', selectedContracts.length) }} Selected
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -34,6 +34,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
+import { plural } from '@/mixins/plural'
 
 export default {
   data () {
@@ -68,6 +69,6 @@ export default {
       })
     }
   },
-  mixins: [formatList]
+  mixins: [formatList, plural]
 }
 </script>
