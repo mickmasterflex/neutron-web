@@ -8,7 +8,7 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <parent-select v-model="parent"></parent-select>
-          <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+          <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channels v-model="channel"></select-channels>
@@ -25,6 +25,7 @@ import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import selectChannels from '@/components/channels/select'
 import parentSelect from '@/components/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
+import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -34,12 +35,6 @@ export default {
       parent: '',
       pingbackUrl: '',
       status: undefined,
-      statusOptions: {
-        active: { name: 'Active', id: 'active' },
-        paused: { name: 'Paused', id: 'paused' },
-        archived: { name: 'Archived', id: 'archived' },
-        terminated: { name: 'Terminated', id: 'terminated' }
-      },
       channel: '',
       pricing_tier_group: '',
       scheduledStart: null
@@ -53,7 +48,6 @@ export default {
       this.setPartner()
     }
   },
-  mixins: [setResponseErrors],
   methods: {
     ...mapActions({
       update: 'updatePartner'
@@ -87,6 +81,7 @@ export default {
       })
     }
   },
+  mixins: [formatList, setResponseErrors],
   created () {
     this.setPartner()
   },
