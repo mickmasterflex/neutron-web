@@ -1,13 +1,15 @@
 <template>
-  <checkbox-field
-    @input="handleInput"
-    :field_id="`bulkUpdateBuyers-${contract}`"
-    :value="checked"
-  ></checkbox-field>
+  <status-checkbox
+    :contract="contract"
+    :selectedContracts="bulkUpdateBuyers"
+    :addToSelected="addToBulkUpdate"
+    :removeFromSelected="removeFromBulkUpdate"
+  ></status-checkbox>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import statusCheckbox from '@/components/bulk-update/status/base-checkbox'
 
 export default {
   props: {
@@ -16,23 +18,16 @@ export default {
   computed: {
     ...mapGetters({
       bulkUpdateBuyers: 'getBulkUpdateBuyers'
-    }),
-    checked () {
-      return this.bulkUpdateBuyers.includes(this.contract)
-    }
+    })
   },
   methods: {
     ...mapMutations({
       addToBulkUpdate: 'ADD_BUYER_TO_BULK_UPDATE',
       removeFromBulkUpdate: 'REMOVE_BUYER_FROM_BULK_UPDATE'
-    }),
-    handleInput () {
-      if (this.checked) {
-        this.removeFromBulkUpdate(this.contract)
-      } else {
-        this.addToBulkUpdate(this.contract)
-      }
-    }
+    })
+  },
+  components: {
+    'status-checkbox': statusCheckbox
   }
 }
 </script>
