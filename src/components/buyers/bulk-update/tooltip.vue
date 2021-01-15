@@ -42,6 +42,13 @@ export default {
       status: ''
     }
   },
+  watch: {
+    selectedContracts () {
+      if (this.showTooltip && this.selectedContracts.length === 0) {
+        this.close()
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       statuses: 'getContractStatuses',
