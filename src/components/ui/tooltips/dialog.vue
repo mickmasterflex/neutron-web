@@ -3,7 +3,7 @@
     <button :class="buttonClasses" :disabled="buttonDisabled" @click="toggle">
       <slot name="button-text">Tooltip</slot>
     </button>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOutDown animate__faster">
+    <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
       <div v-show="show" :style="`width: ${tooltipWidth}px`" class="tooltip-dialog absolute bg-white rounded-lg block shadow border border-gray-300 z-10">
         <h3 class="modal-header h4 font-bold text-center px-2 py-4">
           <slot name="header">Tooltip Header</slot>
