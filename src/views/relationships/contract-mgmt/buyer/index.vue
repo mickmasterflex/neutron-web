@@ -42,7 +42,8 @@ export default {
       fetchCurrentBuyer: 'fetchCurrentBuyer'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_BUYER'
+      resetCurrent: 'RESET_CURRENT_BUYER',
+      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
     })
   },
   computed: {
@@ -62,6 +63,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetBulkUpdateBuyers()
   }
 }
 </script>

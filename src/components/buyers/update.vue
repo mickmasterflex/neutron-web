@@ -8,7 +8,7 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <parent-select v-model="parent"></parent-select>
-          <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+          <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
           <buyer-group-field :buyer="buyer"></buyer-group-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
@@ -22,7 +22,8 @@
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import buyerGroupField from '@/components/buyer-groups/buyer-group-field'
 import parentSelect from '@/components/buyers/parent-select'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -33,19 +34,12 @@ export default {
       rpl: undefined,
       status: undefined,
       buyerGroup: undefined,
-      statusOptions: {
-        active: { name: 'Active', id: 'active' },
-        paused: { name: 'Paused', id: 'paused' },
-        archived: { name: 'Archived', id: 'archived' },
-        terminated: { name: 'Terminated', id: 'terminated' }
-      },
       scheduledStart: null
     }
   },
   props: {
     buyer: Object
   },
-  mixins: [setResponseErrors],
   methods: {
     ...mapActions({
       update: 'updateBuyer'
@@ -97,8 +91,12 @@ export default {
       } else {
         return false
       }
-    }
+    },
+    ...mapGetters({
+      statuses: 'getAllContractStatuses'
+    })
   },
+  mixins: [formatList, setResponseErrors],
   components: {
     'date-picker': datePicker,
     'buyer-group-field': buyerGroupField,

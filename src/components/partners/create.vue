@@ -5,7 +5,7 @@
     <validation-observer ref="form">
       <form @submit.prevent="submitForm" class="form-horizontal">
         <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-        <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+        <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
         <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
         <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         <select-channels v-model="channel"></select-channels>
@@ -23,6 +23,7 @@
 import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectChannels from '@/components/channels/select'
+import formatList from '@/mixins/format-list-for-select-options'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
@@ -35,15 +36,12 @@ export default {
       pricing_tier_group: '',
       pingbackUrl: '',
       status: undefined,
-      statusOptions: {
-        active: { name: 'Active', id: 'active' },
-        paused: { name: 'Paused', id: 'paused' }
-      },
       scheduledStart: null
     }
   },
   computed: {
     ...mapGetters({
+      statuses: 'getNewContractStatuses',
       showModal: 'getShowCreatePartnerModal'
     })
   },
@@ -55,7 +53,6 @@ export default {
       type: Number
     }
   },
-  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createPartner'
@@ -95,6 +92,7 @@ export default {
       })
     }
   },
+  mixins: [formatList, enterKeyListener, setResponseErrors],
   components: {
     'select-pricing-tier-group': selectPricingTierGroup,
     'date-picker': datePicker,

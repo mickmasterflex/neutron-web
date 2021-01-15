@@ -1,5 +1,5 @@
 <template>
-  <label :for="field_id" :class="showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'">
+  <label :for="field_id" :class="showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'" class="p-1">
     <slot name="checkbox">
       <font-awesome-icon v-if="indeterminate"
                          icon="minus-square"
