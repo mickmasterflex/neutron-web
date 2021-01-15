@@ -4,10 +4,8 @@
     :showLoader="loading"
     :loading-text="loadingText">
     <template v-slot:action>
-      <div class="flex flex-row">
-        <tool-tip class="mr-2"></tool-tip>
-        <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
-      </div>
+      <bulk-update-status class="mr-2"></bulk-update-status>
+      <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
     </template>
     <template v-slot:content>
       <buyer-list v-bind="$attrs"></buyer-list>
@@ -18,12 +16,12 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex'
 import buyerList from '@/components/buyers/list'
-import tooltip from '@/components/bulk-update/status/buyer-tooltip'
+import bulkUpdateStatus from '@/components/bulk-update/status/buyer-tooltip'
 
 export default {
   components: {
     'buyer-list': buyerList,
-    'tool-tip': tooltip
+    'bulk-update-status': bulkUpdateStatus
   },
   computed: {
     ...mapGetters({
