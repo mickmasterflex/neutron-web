@@ -14,7 +14,8 @@
             <file-field @input="fileSelected($event)" rules="ext:csv" field_id="csv" field_label="CSV Upload" button_text="Select a CSV" icon="file-csv" :field_disabled="!!locations.length"></file-field>
             <div class="field-group ml-label-width">
               <checkbox-field field_id="nuke_replace"
-                              v-model="nuke_replace"
+                              :value="nuke_replace"
+                              @click="check()"
                               class="font-bold bg-white px-4 py-2 w-64 rounded shadow border border-gray-300"
                               checkedColor="red"
                               :label_class="nuke_replace ? 'text-red-500' : 'text-gray-800'"
@@ -54,6 +55,9 @@ export default {
     ...mapActions({
       add: 'addLocations'
     }),
+    check () {
+      this.nuke_replace = !this.nuke_replace
+    },
     fileSelected (file) {
       this.csv = file
     },

@@ -16,7 +16,7 @@
         <checkbox-field
           v-if="type === 'buyer'"
           :field_id="type + obj.id"
-          @input="check()"
+          @click="check()"
           :value="checkboxState.checked"
           :indeterminate="checkboxState.indeterminate"
           :disabledVisually="checkboxState.disabled"

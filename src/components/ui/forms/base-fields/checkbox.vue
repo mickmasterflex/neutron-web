@@ -22,7 +22,7 @@
     </slot>
     <input
       ref="checkbox"
-      @input="$emit('input', $event)"
+      @click="$emit('click', $event)"
       type="checkbox"
       :id="field_id"
       class="hidden"
