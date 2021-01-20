@@ -1,4 +1,5 @@
 import verticals from '@/store/constants/verticals'
+import contracts from '@/store/constants/contracts'
 
 const state = {
   phone_types: ['home', 'work', 'mobile', 'fax'],
@@ -11,6 +12,7 @@ const getters = {
 }
 
 const modules = {
+  contracts,
   verticals
 }
 

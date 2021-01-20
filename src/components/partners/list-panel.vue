@@ -4,6 +4,7 @@
     :showLoader="loading"
     :loadingText="loadingText">
     <template v-slot:action>
+      <bulk-update-status class="mr-2"></bulk-update-status>
       <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
     </template>
     <template v-slot:content>
@@ -14,11 +15,13 @@
 
 <script>
 import partnerList from '@/components/partners/list'
+import bulkUpdateStatus from '@/components/bulk-update/status/partner-tooltip'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
-    'partner-list': partnerList
+    'partner-list': partnerList,
+    'bulk-update-status': bulkUpdateStatus
   },
   computed: {
     ...mapGetters({

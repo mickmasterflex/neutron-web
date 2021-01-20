@@ -56,7 +56,8 @@ export default {
       fetchCurrentClient: 'fetchCurrentClient'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_CLIENT'
+      resetCurrent: 'RESET_CURRENT_CLIENT',
+      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
     })
   },
   created () {
@@ -72,6 +73,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetBulkUpdateBuyers()
   }
 }
 </script>

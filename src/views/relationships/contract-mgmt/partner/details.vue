@@ -1,6 +1,6 @@
 <template>
   <base-panel-grid>
-    <update-partner-contract :partner="partner" class="col-span-2 xl:col-span-1"></update-partner-contract>
+    <update-partner-contract :partner="partner" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"></update-partner-contract>
     <panel-template title="Lead Caps" contentClass="relative" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
       <template v-slot:content>
         <lead-caps :parent="id" type="partners"></lead-caps>

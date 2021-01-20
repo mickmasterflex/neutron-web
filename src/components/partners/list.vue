@@ -3,6 +3,7 @@
     <table v-if="contracts.length" class="table table-white">
       <thead>
         <tr>
+          <th class="th w-4"></th>
           <th class="th w-64">Name</th>
           <th class="th w-32">Status</th>
           <th class="th w-16">Id</th>
@@ -14,6 +15,9 @@
       </thead>
       <tbody class="tbody">
         <tr class="tr w-64" v-for="contract in contracts" :key="contract.id">
+          <td class="td w-4">
+            <bulk-update-checkbox :contract="contract.id"></bulk-update-checkbox>
+          </td>
           <td class="td">
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
           </td>
@@ -48,6 +52,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
 
 export default {
   props: {
@@ -79,6 +84,9 @@ export default {
       this.setCurrentPartner(contract)
       this.$router.push({ name: 'PartnerContractCampaigns', params: { client: this.client, id: contract.id } })
     }
+  },
+  components: {
+    'bulk-update-checkbox': bulkUpdateCheckbox
   }
 }
 </script>
