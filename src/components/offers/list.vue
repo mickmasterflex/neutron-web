@@ -32,8 +32,7 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    offers: Array,
-    client: String
+    offers: Array
   },
   methods: {
     ...mapMutations({
@@ -41,7 +40,7 @@ export default {
     }),
     linkToOffer (offer) {
       this.setCurrentOffer(offer)
-      this.$router.push({ name: 'Offer', params: { client: this.client, buyer: offer.contract, id: offer.id } })
+      this.$router.push({ name: 'Offer', params: { client: offer.client, buyer: offer.contract, id: offer.id } })
     }
   }
 }
