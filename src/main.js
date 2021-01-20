@@ -68,6 +68,7 @@ import baseContentLayout from '@/layouts/content-layout'
 
 /* Components */
 import actionHeading from '@/components/ui/action-heading'
+import baseTooltipDialog from '@/components/ui/tooltips/dialog'
 import baseModal from '@/components/ui/modals/base'
 import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
@@ -116,6 +117,7 @@ Vue.component('content-layout', baseContentLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('modal-template', baseModal)
+Vue.component('tooltip-dialog-template', baseTooltipDialog)
 Vue.component('panel-template', basePanel)
 Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)

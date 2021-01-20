@@ -13,7 +13,7 @@
       <transition v-if="actionTransition" enter-active-class="animate__animated animate__bounceIn" leave-active-class="animate__animated animate__fast animate__fadeOut">
         <slot name="action"></slot>
       </transition>
-      <div v-else>
+      <div v-else class="flex flex-row">
         <slot name="action"></slot>
       </div>
     </div>

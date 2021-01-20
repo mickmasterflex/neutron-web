@@ -1,8 +1,10 @@
 import axios from '@/axios'
+import bulkUpdate from '@/store/modules/buyers/bulk-update'
 import loading from '@/store/modules/buyers/loading'
 import visibility from '@/store/modules/buyers/visibility'
 
 const modules = {
+  bulkUpdate,
   loading,
   visibility
 }

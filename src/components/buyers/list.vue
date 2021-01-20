@@ -3,6 +3,7 @@
     <table v-if="contracts.length" class="table table-white">
       <thead>
         <tr>
+          <th class="th w-4"></th>
           <th class="th w-64">Name</th>
           <th class="th w-32">Status</th>
           <th class="th w-16">Id</th>
@@ -15,6 +16,9 @@
       </thead>
       <tbody class="tbody">
         <tr class="tr w-64" v-for="contract in this.contracts" :key="contract.id">
+          <td class="td w-4">
+            <bulk-update-checkbox :contract="contract.id"></bulk-update-checkbox>
+          </td>
           <td class="td">
             <span @click="linkToBuyer(contract)" class="text-link">{{contract.name}}</span>
           </td>
@@ -38,7 +42,7 @@
           <span v-else class="italic text-gray-500">No Caps Set</span>
             </td>
           <td class="td">
-           <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offers.length }}</table-link>
+           <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offer_contracts.length }}</table-link>
           </td>
         </tr>
       </tbody>
@@ -52,6 +56,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import bulkUpdateCheckbox from '@/components/bulk-update/status/buyer-checkbox'
 
 export default {
   props: {
@@ -90,6 +95,9 @@ export default {
       this.setCurrentBuyerAndForm(contract)
       this.$router.push({ name: 'BuyerContractOffers', params: { client: this.client, id: contract.id } })
     }
+  },
+  components: {
+    'bulk-update-checkbox': bulkUpdateCheckbox
   }
 }
 </script>

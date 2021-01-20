@@ -5,7 +5,7 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <v-select-field v-model="status" rules="required" :options="statusOptions" field_id="status" field_label="Status"></v-select-field>
+          <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Rev. Per Lead"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
         </form>
@@ -22,6 +22,7 @@ import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
   data () {
@@ -30,10 +31,6 @@ export default {
       rpl: undefined,
       status: undefined,
       buyerGroup: undefined,
-      statusOptions: {
-        active: { name: 'Active', id: 'active' },
-        paused: { name: 'Paused', id: 'paused' }
-      },
       scheduledStart: null
     }
   },
@@ -47,10 +44,10 @@ export default {
   },
   computed: {
     ...mapGetters({
+      statuses: 'getNewContractStatuses',
       showModal: 'getShowCreateBuyerModal'
     })
   },
-  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_BUYER_MODAL'
@@ -89,6 +86,7 @@ export default {
       })
     }
   },
+  mixins: [formatList, enterKeyListener, setResponseErrors],
   components: {
     'date-picker': datePicker
   }

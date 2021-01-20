@@ -1,5 +1,5 @@
 <template>
-  <label :for="field_id" :class="showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'">
+  <label :for="field_id" :class="showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'" class="p-1">
     <slot name="checkbox">
       <font-awesome-icon v-if="indeterminate"
                          icon="minus-square"
@@ -29,8 +29,8 @@
       :checked="value"
       :indeterminate.prop="indeterminate"
       :disabled="disabled">
-    <span class="ml-1 select-none" :class="label_class">
-      <slot></slot>
+    <span class="ml-1 select-none" :class="label_class" v-if="label">
+      {{ label }}
     </span>
   </label>
 </template>
@@ -38,9 +38,8 @@
 <script>
 export default {
   props: {
-    label_class: {
-      type: String
-    },
+    label: String,
+    label_class: String,
     field_id: {
       type: [String, Number],
       required: true

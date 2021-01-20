@@ -17,9 +17,9 @@
                               v-model="nuke_replace"
                               class="font-bold bg-white px-4 py-2 w-64 rounded shadow border border-gray-300"
                               checkedColor="red"
-                              :label_class="nuke_replace ? 'text-red-500' : 'text-gray-800'">
-                Nuke & Replace Existing
-              </checkbox-field>
+                              :label_class="nuke_replace ? 'text-red-500' : 'text-gray-800'"
+                              label="Nuke & Replace Existing"
+              ></checkbox-field>
             </div>
           </form>
         </validation-observer>
