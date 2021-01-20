@@ -71,7 +71,7 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentPartner: 'SET_CURRENT_PARTNER',
-      resetShiftClickIndex: 'RESET_BULK_UPDATE_BUYERS_SHIFT_CLICK_INDEX'
+      resetShiftClickIndex: 'RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX'
     }),
     linkToPartnerContracts (contract) {
       this.setCurrentPartner(contract)
