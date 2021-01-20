@@ -1,6 +1,6 @@
 <template>
   <checkbox-field
-    @input="handleInput"
+    @click="handleInput($event)"
     :field_id="`bulkUpdate-${type}-${contract}`"
     :value="checked"
   ></checkbox-field>
@@ -31,6 +31,21 @@ export default {
     removeFromSelected: {
       type: Function,
       required: true
+    },
+    shiftClickIndex: {
+      type: Number,
+      required: true
+    },
+    shiftClickList: {
+      type: Array,
+      required: true
+    },
+    savedShiftClickIndex: {
+      required: true
+    },
+    setSavedShiftClickIndex: {
+      type: Function,
+      required: true
     }
   },
   computed: {
@@ -39,12 +54,28 @@ export default {
     }
   },
   methods: {
-    handleInput () {
-      if (this.checked) {
-        this.removeFromSelected(this.contract)
-      } else {
-        this.addToSelected(this.contract)
+    handleInput (event) {
+      // Prevent Highlighting Text
+      document.getSelection().removeAllRanges()
+
+      const savedShiftClickIndex = this.savedShiftClickIndex
+      this.setSavedShiftClickIndex(this.shiftClickIndex)
+
+      const toggleFunction = this.checked ? this.removeFromSelected : this.addToSelected
+
+      if (savedShiftClickIndex === null || this.shiftClickIndex === savedShiftClickIndex || !event.shiftKey) {
+        toggleFunction(this.contract)
+        return
       }
+
+      const subset = this.shiftClickList.slice(
+        Math.min(this.shiftClickIndex, savedShiftClickIndex),
+        Math.max(this.shiftClickIndex, savedShiftClickIndex) + 1
+      )
+
+      subset.forEach(c => {
+        toggleFunction(c.id)
+      })
     }
   }
 }

@@ -1,8 +1,10 @@
 import axios from '@/axios'
+import shiftClick from '@/store/modules/buyers/bulk-update/shift-click'
 import visibility from '@/store/modules/buyers/bulk-update/visibility'
 import loading from '@/store/modules/buyers/bulk-update/loading'
 
 const modules = {
+  shiftClick,
   loading,
   visibility
 }
@@ -30,6 +32,7 @@ const actions = {
       })
       .finally(() => {
         commit('RESET_BULK_UPDATE_BUYERS')
+        commit('RESET_BULK_UPDATE_BUYERS_SHIFT_CLICK_INDEX')
         commit('RESET_BULK_UPDATE_BUYER_STATUS_POST_LOADING')
       })
   }
