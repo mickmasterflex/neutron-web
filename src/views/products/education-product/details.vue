@@ -2,13 +2,13 @@
   <base-panel-grid>
     <update-product :educationProduct="educationProduct" class="col-span-2 xl:col-span-1"></update-product>
       <template #content>
-        <delete-product :id="educationProduct.id"></delete-product>
+        <delete-education-product :educationProduct="educationProduct"></delete-education-product>
       </template>
   </base-panel-grid>
 </template>
 
 <script>
-import deleteProduct from '@/components/products/education/delete'
+import deleteEducationProduct from '@/components/products/education/delete'
 import updateProduct from '@/components/products/education/update'
 import { mapGetters } from 'vuex'
 
@@ -19,7 +19,7 @@ export default {
     })
   },
   components: {
-    'delete-product': deleteProduct,
+    'delete-education-product': deleteEducationProduct,
     'update-product': updateProduct
   }
 }

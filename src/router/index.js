@@ -136,7 +136,7 @@ const routes = [
       },
       {
         name: 'ProductOffers',
-        path: 'product-offers/',
+        path: 'offers/',
         component: () => import('@/views/products/education-product/offers.vue'),
         meta: {
           requiresAuth: true,

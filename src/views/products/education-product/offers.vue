@@ -3,6 +3,10 @@
     <panel-template title="Offers List">
       <template slot="content">
         <offer-list :offers="offers"></offer-list>
+        <table-empty-state
+                           heading="No Offers Added"
+                           key="empty"
+                           copy="Use the 'New Offer' button to get started."></table-empty-state>
       </template>
     </panel-template>
   </div>
