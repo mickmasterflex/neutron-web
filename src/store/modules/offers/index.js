@@ -16,6 +16,9 @@ const getters = {
   getCurrentOffer: state => state.current_offer,
   getOffersByBuyer: (state) => (buyerId) => {
     return state.offers.filter(offer => offer.contract === buyerId)
+  },
+  getOffersByProduct: (state) => (productId) => {
+    return state.offers.filter(offer => offer.product === productId)
   }
 }
 

@@ -115,19 +115,38 @@ const routes = [
   },
   {
     path: '/products/brands/:brand/campuses/education-products/:id/',
-    name: 'EducationProduct',
-    component: () => import('@/views/products/education-product.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'products',
-      activeAppTab: 'product-mgmt'
-    },
-    pathToRegexpOptions: { strict: true },
+    component: () => import('@/views/products/education-product/index.vue'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
       return props
-    }
+    },
+    children: [
+      {
+        name: 'ProductDetails',
+        path: '',
+        component: () => import('@/views/products/education-product/details.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'products',
+          activeAppTab: 'product-mgmt',
+          contentTab: 'details'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'ProductOffers',
+        path: 'offers/',
+        component: () => import('@/views/products/education-product/offers.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'products',
+          activeAppTab: 'product-mgmt',
+          contentTab: 'offers'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/products/fields/',
