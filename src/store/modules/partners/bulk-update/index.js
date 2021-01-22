@@ -1,8 +1,10 @@
 import axios from '@/axios'
+import shiftClick from '@/store/modules/partners/bulk-update/shift-click'
 import visibility from '@/store/modules/partners/bulk-update/visibility'
 import loading from '@/store/modules/partners/bulk-update/loading'
 
 const modules = {
+  shiftClick,
   loading,
   visibility
 }
@@ -12,7 +14,7 @@ const state = {
 }
 
 const getters = {
-  getBulkUpdatePartners: state => state.bulk_update_partners
+  getBulkUpdatePartners: state => [...new Set(state.bulk_update_partners)]
 }
 
 const actions = {
@@ -30,6 +32,7 @@ const actions = {
       })
       .finally(() => {
         commit('RESET_BULK_UPDATE_PARTNERS')
+        commit('RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX')
         commit('RESET_BULK_UPDATE_PARTNER_STATUS_POST_LOADING')
       })
   }
