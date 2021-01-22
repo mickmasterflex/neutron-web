@@ -1,9 +1,11 @@
 const state = {
-  bulk_update_suppressions_post_loading: false
+  bulk_update_suppressions_post_loading: false,
+  bulk_update_suppressions_post_loading_text: 'Updating Suppressions'
 }
 
 const getters = {
-  getBulkUpdateSuppressionsPostLoading: state => state.bulk_update_suppressions_post_loading
+  getBulkUpdateSuppressionsPostLoading: state => state.bulk_update_suppressions_post_loading,
+  getBulkUpdateSuppressionsPostLoadingText: state => state.bulk_update_suppressions_post_loading_text
 }
 
 const mutations = {
