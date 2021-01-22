@@ -53,6 +53,12 @@ const mutations = {
       state.contract_relations.splice(index, 1, updatedContractRelation)
     }
   },
+  UPDATE_CONTRACT_RELATION_SUPPRESSION: (state, updatedContractRelation) => {
+    const index = state.contract_relations.findIndex(group => group.id === updatedContractRelation.id)
+    if (index !== -1) {
+      state.contract_relations[index].suppressed = updatedContractRelation.suppressed
+    }
+  },
   SET_CURRENT_CONTRACT_RELATION: (state, relation) => (state.current_contract_relation = relation),
   ADD_CONTRACT_RELATION: (state, relation) => state.contract_relations.unshift(relation),
   REMOVE_CONTRACT_RELATION: (state, id) => (state.contract_relations = state.contract_relations.filter(relation => relation.id !== id))

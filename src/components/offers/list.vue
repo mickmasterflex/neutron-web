@@ -21,9 +21,9 @@
       </tbody>
     </table>
     <table-empty-state v-else
-                       heading="No Offers Added"
+                       :heading="emptyStateHeading"
                        key="empty"
-                       copy="Use the 'New Offer' button to get started."></table-empty-state>
+                       :copy="emptyStateCopy"></table-empty-state>
   </transition-table-state>
 </template>
 
@@ -32,7 +32,15 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    offers: Array
+    offers: Array,
+    emptyStateHeading: {
+      type: String,
+      default: 'No Offers Added'
+    },
+    emptyStateCopy: {
+      type: String,
+      default: 'Use the "New Offer" button to get started.'
+    }
   },
   methods: {
     ...mapMutations({
