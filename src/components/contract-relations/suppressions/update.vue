@@ -3,13 +3,14 @@
                   :field_id="`suppressed-${contractRelation.id}`"
                   class="font-bold"
                   :label_class="contractRelation.suppressed ? 'text-red-500' : 'text-green-600'"
-                  @click="updateSuppression($event)"
+                  @click="shiftClick($event, savedShiftClickIndex, shiftClickIndex, shiftClickList, setSavedShiftClickIndex, addToSelected, updateSuppressionStatus)"
                   :label="showSuppressed(suppressed)"
   ></checkbox-field>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { shiftClick } from '@/mixins/shift-click'
 
 export default {
   props: {
@@ -34,6 +35,7 @@ export default {
       return this.contractRelation.suppressed
     }
   },
+  mixins: [shiftClick],
   methods: {
     ...mapMutations({
       addToSelected: 'ADD_SUPPRESSION_TO_BULK_UPDATE',
@@ -43,28 +45,7 @@ export default {
       updateContractRelation: 'updateContractRelation',
       bulkUpdateSuppressions: 'bulkUpdateSuppressions'
     }),
-    updateSuppression (event) {
-      document.getSelection().removeAllRanges() // Prevents highlighting text for shift click functionality
-
-      const savedShiftClickIndex = this.savedShiftClickIndex
-      this.setSavedShiftClickIndex(this.shiftClickIndex)
-
-      const toggleFunction = this.addToSelected
-
-      if (savedShiftClickIndex === null || this.shiftClickIndex === savedShiftClickIndex || !event.shiftKey) {
-        this.updateSuppressionStatus()
-        return
-      }
-
-      const subset = this.shiftClickList.slice(
-        Math.min(this.shiftClickIndex, savedShiftClickIndex),
-        Math.max(this.shiftClickIndex, savedShiftClickIndex) + 1
-      )
-
-      subset.forEach(c => {
-        toggleFunction(c)
-      })
-
+    afterShiftClick () {
       this.bulkUpdateSuppressions(!this.suppressed)
     },
     updateSuppressionStatus () {

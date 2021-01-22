@@ -1,12 +1,14 @@
 <template>
   <checkbox-field
-    @click="handleInput($event)"
+    @click="shiftClick($event, savedShiftClickIndex, shiftClickIndex, shiftClickList, setSavedShiftClickIndex, shiftClickFunction, defaultClickFunction)"
     :field_id="`bulkUpdate-${type}-${contract}`"
     :value="checked"
   ></checkbox-field>
 </template>
 
 <script>
+import { shiftClick } from '@/mixins/shift-click'
+
 export default {
   props: {
     contract: {
@@ -53,29 +55,19 @@ export default {
       return this.selectedContracts.includes(this.contract)
     }
   },
+  mixins: [shiftClick],
   methods: {
-    handleInput (event) {
-      // Prevent Highlighting Text
-      document.getSelection().removeAllRanges()
-
-      const savedShiftClickIndex = this.savedShiftClickIndex
-      this.setSavedShiftClickIndex(this.shiftClickIndex)
-
-      const toggleFunction = this.checked ? this.removeFromSelected : this.addToSelected
-
-      if (savedShiftClickIndex === null || this.shiftClickIndex === savedShiftClickIndex || !event.shiftKey) {
-        toggleFunction(this.contract)
-        return
-      }
-
-      const subset = this.shiftClickList.slice(
-        Math.min(this.shiftClickIndex, savedShiftClickIndex),
-        Math.max(this.shiftClickIndex, savedShiftClickIndex) + 1
-      )
-
-      subset.forEach(c => {
-        toggleFunction(c.id)
-      })
+    defaultClickFunction () {
+      this.checked ? this.runRemoveFromSelected(this.contract) : this.runAddToSelected(this.contract)
+    },
+    shiftClickFunction (contract) {
+      this.checked ? this.runRemoveFromSelected(contract.id) : this.runAddToSelected(contract.id)
+    },
+    runRemoveFromSelected (id) {
+      this.removeFromSelected(id)
+    },
+    runAddToSelected (id) {
+      this.addToSelected(id)
     }
   }
 }

@@ -14,7 +14,7 @@ const state = {
 }
 
 const getters = {
-  getBulkUpdateBuyers: state => state.bulk_update_buyers
+  getBulkUpdateBuyers: state => [...new Set(state.bulk_update_buyers)]
 }
 
 const actions = {
