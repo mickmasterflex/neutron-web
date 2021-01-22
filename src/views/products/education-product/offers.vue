@@ -2,7 +2,7 @@
   <div>
     <panel-template title="Offers List">
       <template slot="content">
-        <offer-list :offers="offers"></offer-list>
+        <offer-list :offers="offers" emptyStateHeading="No Offers Use This Product" emptyStateCopy="When creating an offer under a buyer contract select this offer." ></offer-list>
       </template>
     </panel-template>
   </div>
