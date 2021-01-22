@@ -19,9 +19,9 @@
       </tbody>
     </table>
     <table-empty-state v-else
-                       heading="No offers use this product"
+                       heading="No Education Products Exist"
                        key="empty"
-                       copy="When creating an offer under a buyer contract select this offer."></table-empty-state>
+                       copy="Use the 'New Education Product' button to get started."></table-empty-state>
   </transition-table-state>
 </template>
 

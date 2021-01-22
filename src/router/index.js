@@ -114,7 +114,7 @@ const routes = [
     ]
   },
   {
-    path: '/products/brands/:brand/campuses/education-products/:id/',
+    path: '/products/brands/:brand/campuses/:campus/education-products/:id/',
     component: () => import('@/views/products/education-product/index.vue'),
     props (route) {
       const props = { ...route.params }
