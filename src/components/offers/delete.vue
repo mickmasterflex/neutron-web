@@ -10,7 +10,7 @@ export default {
     offer: {
       type: Object
     },
-    client: String
+    client: [String, Number]
   },
   methods: {
     ...mapActions({ delete: 'deleteOffer' }),

@@ -5,7 +5,7 @@
         <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
       </template>
       <template slot="content">
-        <offer-list :offers="offers" :client="$route.params.client"></offer-list>
+        <offer-list :offers="offers"></offer-list>
       </template>
     </panel-template>
     <create-offer :buyer="buyer.id"></create-offer>
