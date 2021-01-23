@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <button :class="buttonClasses" :disabled="buttonDisabled" @click="toggle">
+    <button :class="`btn btn-${buttonColor}`" class="btn" :disabled="buttonDisabled" @click="toggle">
       <slot name="button-text">Tooltip</slot>
     </button>
     <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
@@ -26,9 +26,21 @@
 export default {
   props: {
     show: Boolean,
-    buttonClasses: {
+    buttonColor: {
       type: String,
-      default: 'btn btn-blue'
+      default: 'blue',
+      validator: (value) => {
+        return [
+          'blue',
+          'gray',
+          'green',
+          'indigo',
+          'orange',
+          'red',
+          'turquoise',
+          'yellow'
+        ].includes(value)
+      }
     },
     tooltipWidth: {
       type: Number,

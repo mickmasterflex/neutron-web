@@ -1,28 +1,31 @@
 <template>
-  <div>
-    <button class="btn btn-turquoise" @click="showForm()" v-show="!formVisible">
+  <tooltip-dialog-template button-color="turquoise" :show="formVisible" @close="closeForm" @open="showForm">
+    <template v-slot:button-text>
       <font-awesome-icon icon="plus"></font-awesome-icon>
       New {{ relationType() }} Relation
-    </button>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__fast">
-      <div class="flex flex-row items-start" v-show="formVisible">
-        <validation-observer ref="form">
-          <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
-            <v-select-field :options="newRelationContracts()"
-                            v-model="selectedContract"
-                            rules="required"
-                            field_class="field-tall"
-                            field_label="Contract"
-                            field_id="contractNewRelation">
-            </v-select-field>
-          </form>
-        </validation-observer>
-        <button @click="submitForm()" class="btn btn-green ml-2">
-           Create {{ relationType() }} Relation
-        </button>
-      </div>
-    </transition>
-  </div>
+    </template>
+    <template v-slot:header>
+      Select a {{ relationType() }} Contract
+    </template>
+    <template v-slot:body>
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm">
+          <v-select-field :options="newRelationContracts()"
+                          v-model="selectedContract"
+                          rules="required"
+                          field_class="field-tall"
+                          field_label="Contract"
+                          field_id="contractNewRelation">
+          </v-select-field>
+        </form>
+      </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-green ml-2">
+        Create {{ relationType() }} Relation
+      </button>
+    </template>
+  </tooltip-dialog-template>
 </template>
 
 <script>
@@ -38,6 +41,9 @@ export default {
   methods: {
     showForm () {
       this.formVisible = true
+    },
+    closeForm () {
+      this.formVisible = false
     },
     resetForm () {
       this.selectedContract = ''
