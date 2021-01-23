@@ -47,7 +47,7 @@ export default {
     },
     resetForm () {
       this.selectedContract = ''
-      this.formVisible = false
+      this.closeForm()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
