@@ -4,8 +4,9 @@
       <thead>
       <tr>
         <th class="th">Name</th>
-        <th class="th">Description</th>
         <th class="th">Product Id</th>
+        <th class="th">Clients</th>
+        <th class="th">Offers</th>
       </tr>
       </thead>
       <tbody class="tbody">
@@ -13,8 +14,14 @@
         <td class="td">
           <span @click="linkToProduct(educationProduct)" class="text-link">{{educationProduct.name}}</span>
         </td>
-        <td class="td">{{educationProduct.description}}</td>
         <td class="td">{{educationProduct.id}}</td>
+        <td class="td">
+          <span v-if="educationProduct.clients.length">{{ educationProduct.clients.length }}</span>
+          <span v-else class="italic text-gray-500">None</span>
+        </td>
+        <td class="td">
+          <table-link @table-link-click="linkToProductOffers(educationProduct)">{{ educationProduct.offer_contracts.length }}</table-link>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -44,6 +51,10 @@ export default {
         name: 'ProductDetails',
         params: { campus: product.campus, id: product.id }
       })
+    },
+    linkToProductOffers (product) {
+      this.setCurrentEduProduct(product)
+      this.$router.push({ name: 'ProductOffers', params: { id: product.id } })
     }
   }
 }
