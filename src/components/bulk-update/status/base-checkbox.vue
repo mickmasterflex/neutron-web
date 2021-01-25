@@ -1,12 +1,14 @@
 <template>
   <checkbox-field
-    @input="handleInput"
+    @click="shiftClick($event, savedShiftClickIndex, shiftClickIndex, shiftClickList, setSavedShiftClickIndex, shiftClickFunction, defaultClickFunction)"
     :field_id="`bulkUpdate-${type}-${contract}`"
     :value="checked"
   ></checkbox-field>
 </template>
 
 <script>
+import { shiftClick } from '@/mixins/shift-click'
+
 export default {
   props: {
     contract: {
@@ -31,6 +33,21 @@ export default {
     removeFromSelected: {
       type: Function,
       required: true
+    },
+    shiftClickIndex: {
+      type: Number,
+      required: true
+    },
+    shiftClickList: {
+      type: Array,
+      required: true
+    },
+    savedShiftClickIndex: {
+      required: true
+    },
+    setSavedShiftClickIndex: {
+      type: Function,
+      required: true
     }
   },
   computed: {
@@ -38,13 +55,19 @@ export default {
       return this.selectedContracts.includes(this.contract)
     }
   },
+  mixins: [shiftClick],
   methods: {
-    handleInput () {
-      if (this.checked) {
-        this.removeFromSelected(this.contract)
-      } else {
-        this.addToSelected(this.contract)
-      }
+    defaultClickFunction () {
+      this.checked ? this.runRemoveFromSelected(this.contract) : this.runAddToSelected(this.contract)
+    },
+    shiftClickFunction (contract) {
+      this.checked ? this.runRemoveFromSelected(contract.id) : this.runAddToSelected(contract.id)
+    },
+    runRemoveFromSelected (id) {
+      this.removeFromSelected(id)
+    },
+    runAddToSelected (id) {
+      this.addToSelected(id)
     }
   }
 }

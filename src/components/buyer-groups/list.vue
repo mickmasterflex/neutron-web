@@ -2,9 +2,9 @@
   <base-panel-grid>
     <table-empty-state
       class="well col-span-2"
-      v-if="buyerGroups === undefined"
-      heading="No Buyer Groups Added"
-      copy="Use the 'New Buyer Group' button to add buyer groups."></table-empty-state>
+      v-if="!buyerGroupsExist"
+      :heading="emptyStateHeading"
+      :copy="emptyStateCopy"></table-empty-state>
     <panel-template v-for="buyerGroup in buyerGroups" :title="buyerGroup.name" :subtitle="'id: ' + buyerGroup.id" :key="buyerGroup.id" class="col-span-2">
       <template v-slot:action>
         <span class="flex flex-row mr-2">
@@ -28,8 +28,18 @@ export default {
   computed: {
     ...mapGetters({
       buyerGroups: 'getBuyerGroups',
-      getBuyersByBuyerGroup: 'getBuyersByBuyerGroup'
-    })
+      getBuyersByBuyerGroup: 'getBuyersByBuyerGroup',
+      loading: 'getBuyerGroupsFetchLoading'
+    }),
+    buyerGroupsExist () {
+      return this.buyerGroups ? this.buyerGroups.length > 0 : false
+    },
+    emptyStateHeading () {
+      return this.loading ? 'Loading Buyer Groups' : 'No Buyer Groups Added'
+    },
+    emptyStateCopy () {
+      return this.loading ? 'This may take a few seconds' : 'Use the \'New Buyer Group\' button to add buyer groups.'
+    }
   },
   components: {
     'delete-group': deleteGroup,

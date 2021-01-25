@@ -12,12 +12,12 @@
         </tr>
         </thead>
         <tbody class="tbody">
-        <tr class="tr" v-for="relation in sorted(contractRelations)" :key="relation.id">
+        <tr class="tr" v-for="(relation, index) in sorted(contractRelations)" :key="relation.id">
           <td class="td">
             <span>{{ getContract(relation[getContractType().contract]) }}</span>
           </td>
           <td class="td suppressed-cell">
-            <update-suppressions :contractRelation="relation"></update-suppressions>
+            <update-suppressions :contractRelation="relation" :shiftClickList="sorted(contractRelations)" :shiftClickIndex="index"></update-suppressions>
           </td>
           <td class="td">
             <update-pricing-tiers :contractRelation="relation"></update-pricing-tiers>

@@ -14,9 +14,9 @@
         </tr>
       </thead>
       <tbody class="tbody">
-        <tr class="tr w-64" v-for="contract in contracts" :key="contract.id">
+        <tr class="tr w-64" v-for="(contract, index) in contracts" :key="contract.id">
           <td class="td w-4">
-            <bulk-update-checkbox :contract="contract.id"></bulk-update-checkbox>
+            <bulk-update-checkbox :contract="contract.id" :contracts="contracts" :index="index"></bulk-update-checkbox>
           </td>
           <td class="td">
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
@@ -70,7 +70,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentPartner: 'SET_CURRENT_PARTNER'
+      setCurrentPartner: 'SET_CURRENT_PARTNER',
+      resetShiftClickIndex: 'RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX'
     }),
     linkToPartnerContracts (contract) {
       this.setCurrentPartner(contract)
@@ -87,6 +88,9 @@ export default {
   },
   components: {
     'bulk-update-checkbox': bulkUpdateCheckbox
+  },
+  destroyed () {
+    this.resetShiftClickIndex()
   }
 }
 </script>
