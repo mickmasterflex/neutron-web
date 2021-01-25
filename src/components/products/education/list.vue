@@ -6,6 +6,7 @@
         <th class="th">Name</th>
         <th class="th">Description</th>
         <th class="th">Product Id</th>
+        <th class="th">Clients</th>
       </tr>
       </thead>
       <tbody class="tbody">
@@ -15,6 +16,10 @@
         </td>
         <td class="td">{{educationProduct.description}}</td>
         <td class="td">{{educationProduct.id}}</td>
+        <td class="td">
+          <span v-if="educationProduct.clients.length">{{ educationProduct.clients.length }}</span>
+          <span v-else class="italic text-gray-500">None</span>
+        </td>
       </tr>
       </tbody>
     </table>
