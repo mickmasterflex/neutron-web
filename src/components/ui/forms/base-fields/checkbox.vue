@@ -1,5 +1,5 @@
 <template>
-  <label :for="field_id" :class="showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'" class="p-1">
+  <label :for="field_id" :class="classes">
     <slot name="checkbox">
       <font-awesome-icon v-if="indeterminate"
                          icon="minus-square"
@@ -39,6 +39,10 @@
 export default {
   props: {
     label: String,
+    padding: {
+      default: true,
+      type: Boolean
+    },
     label_class: String,
     field_id: {
       type: [String, Number],
@@ -74,6 +78,11 @@ export default {
   computed: {
     showDisabled () {
       return this.disabled || this.disabledVisually
+    },
+    classes () {
+      const paddingClass = this.padding ? 'p-1' : ''
+      const cursorClass = this.showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
+      return paddingClass + ' ' + cursorClass
     }
   }
 }
