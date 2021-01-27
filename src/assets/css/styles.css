@@ -113,7 +113,7 @@
 }
 
 .hud--stat-cards {
-    @apply flex flex-row items-center border-l border-gray-800 pl-4
+    @apply col-auto items-center border-l border-gray-800 pl-4
 }
 
 

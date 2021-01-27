@@ -25,12 +25,44 @@ const routes = [
   {
     path: '/analytics/',
     name: 'Analytics',
-    component: () => import('@/views/Analytics.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'analytics'
-    },
-    pathToRegexpOptions: { strict: true }
+    redirect: { name: 'BuyerStats' }
+  },
+  {
+    path: '/analytics/',
+    name: 'PartnerStats',
+    redirect: { name: 'BuyerStats' }
+  },
+  {
+    path: '/analytics/buyer-stats/',
+    name: 'BuyerStats',
+    redirect: { name: 'BuyerStatsClients' },
+    component: () => import('@/views/analytics/buyer-stats/clients'),
+    children: [
+      {
+        name: 'BuyerStatsClients',
+        path: '',
+        component: () => import('@/views/analytics/buyer-stats/clients/clients'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'clients'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'BuyerStatsClientsLeads',
+        path: 'leads/',
+        component: () => import('@/views/analytics/buyer-stats/clients/leads'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'leads'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/products/brands/',
