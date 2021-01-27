@@ -47,7 +47,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_CAMPAIGN'
-    })
+    }),
+    async setCampaign () {
+      if (this.campaign.id !== this.id) {
+        await this.fetchCurrentCampaign(this.id)
+      }
+    }
   },
   created () {
     if (this.id !== this.campaign.id) {

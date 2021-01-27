@@ -32,7 +32,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BRAND'
-    })
+    }),
+    async setBrand () {
+      if (this.brand.id !== this.id) {
+        await this.fetchCurrentBrand(this.id)
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -40,9 +45,9 @@ export default {
     })
   },
   created () {
-    if (this.id !== this.brand.id) {
-      this.fetchCurrentBrand(this.id)
-    }
+    this.setBrand().then(() => {
+      document.title = this.brand.name
+    })
   },
   destroyed () {
     this.resetCurrent()

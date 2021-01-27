@@ -35,7 +35,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_CAMPUS'
-    })
+    }),
+    async setCampus () {
+      if (this.campus.id !== this.id) {
+        await this.fetchCurrentCampus(this.id)
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -43,9 +48,9 @@ export default {
     })
   },
   created () {
-    if (this.id !== this.campus.id) {
-      this.fetchCurrentCampus(this.id)
-    }
+    this.setCampus().then(() => {
+      document.title = this.campus.name
+    })
   },
   destroyed () {
     this.resetCurrent()

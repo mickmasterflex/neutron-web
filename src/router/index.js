@@ -423,7 +423,8 @@ const routes = [
     component: () => import('@/views/users/user.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'users'
+      activeApp: 'users',
+      title: ''
     },
     pathToRegexpOptions: { strict: true },
     props (route) {

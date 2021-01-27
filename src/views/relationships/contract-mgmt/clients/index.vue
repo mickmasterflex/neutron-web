@@ -35,7 +35,12 @@ export default {
     }),
     ...mapMutations({
       showCreateClientModal: 'SHOW_CREATE_CLIENT_MODAL'
-    })
+    }),
+    async setClient () {
+      if (this.client.id !== this.id) {
+        await this.fetchCurrentClient(this.id)
+      }
+    }
   },
   created () {
     this.fetchClients()
