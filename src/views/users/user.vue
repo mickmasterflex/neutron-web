@@ -59,7 +59,7 @@ export default {
   },
   created () {
     this.setUser().then(() => {
-      document.title = this.user.name
+      document.title = this.user.first_name + '  ' + this.user.last_name
     })
   },
   destroyed () {

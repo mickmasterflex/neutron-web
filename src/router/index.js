@@ -475,7 +475,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from) => {
   if (to.meta && to.meta.title) {
     document.title = to.meta.title + ' | Proton'
-  } else { document.title = 'Proton' }
+  }
 })
 
 export default router

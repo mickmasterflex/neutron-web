@@ -34,7 +34,7 @@ export default {
       resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT'
     }),
     async setEducationProduct () {
-      if (this.educationProduct.id !== this.id) {
+      if (this.Product.id !== this.id) {
         await this.fetchCurrentEducationProduct(this.id)
       }
     }
@@ -46,7 +46,7 @@ export default {
   },
   created () {
     this.setEducationProduct().then(() => {
-      document.title = this.educationProduct.name
+      document.title = this.product.name
     })
   },
   destroyed () {
