@@ -1,7 +1,14 @@
 <template>
-  <panel-template title="Clients" :showLoader="loading" :loadingText="loadingText">
-    <template slot="action">
-      Date Picker Here
+  <panel-template :showLoader="loading" :loadingText="loadingText">
+    <template slot="title">
+      <span class="flex flex-row items-center bg-gray-200 rounded-full p-1">
+        <button class="btn-blue btn btn-circle btn-md">
+          <font-awesome-icon icon="calendar-alt"></font-awesome-icon>
+        </button>
+        <span class="font-bold px-2">
+          {{ dateRangeText }}
+        </span>
+      </span>
     </template>
     <template slot="content">
       <buyer-client-list :buyer_clients="clients"></buyer-client-list>
@@ -18,7 +25,8 @@ export default {
     ...mapGetters({
       clients: 'getBuyerClients',
       loading: 'getBuyerClientsFetchLoading',
-      loadingText: 'getBuyerClientsFetchLoadingText'
+      loadingText: 'getBuyerClientsFetchLoadingText',
+      dateRangeText: 'getAnalyticsDateRange'
     })
   },
   components: {

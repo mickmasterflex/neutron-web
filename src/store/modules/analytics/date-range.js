@@ -4,8 +4,11 @@ const state = {
 }
 
 const getters = {
-  getAnalyticsDateRange: state => {
+  getAnalyticsDateRangeUrlFormatted: state => {
     return `start_date=${state.analytics_start_date}&end_date=${state.analytics_end_date}`
+  },
+  getAnalyticsDateRange: state => {
+    return `${state.analytics_start_date} - ${state.analytics_end_date}`
   }
 }
 

@@ -2,17 +2,15 @@
   <content-layout>
     <template v-slot:hud>
       <h1 class="text-white text-4xl font-hairline">Buyer Clients</h1>
-      <div class="hud--stat-cards">
-        <transition-group enter-active-class="animate__animated animate__fadeIn">
-          <stat-card v-if="leadCount" :data="leadCount" title="Leads" color="teal" key="leadCountStatCard" ></stat-card>
-          <stat-card v-if="soldCount" :data="soldCount" title="Sold" color="teal" key="soldCountStatCard" ></stat-card>
-          <stat-card v-if="revenue" :data="revenue" title="Revenue" color="teal" key="revenueStatCard" ></stat-card>
-          <stat-card v-if="margin" :data="margin" title="Margin" color="teal" key="marginStatCard" ></stat-card>
-          <stat-card v-if="payout" :data="payout" title="Payout" color="teal" key="payoutStatCard" ></stat-card>
-          <stat-card v-if="scrubRate" :data="scrubRate" title="Scrub Rate" color="teal" key="scrubRateStatCard" ></stat-card>
-          <stat-card v-if="marginPercent" :data="marginPercent" title="Margin Percent" color="teal" key="marginPercentStatCard" ></stat-card>
-        </transition-group>
-      </div>
+      <hud-stat-cards>
+        <stat-card v-if="leadCount" :data="leadCount" title="Leads" color="teal" key="leadCountStatCard" ></stat-card>
+        <stat-card v-if="soldCount" :data="soldCount" title="Sold" color="teal" key="soldCountStatCard" ></stat-card>
+        <stat-card v-if="revenue" :data="revenue" title="Revenue" color="teal" key="revenueStatCard" ></stat-card>
+        <stat-card v-if="margin" :data="margin" title="Margin" color="teal" key="marginStatCard" ></stat-card>
+        <stat-card v-if="payout" :data="payout" title="Payout" color="teal" key="payoutStatCard" ></stat-card>
+        <stat-card v-if="scrubRate" :data="scrubRate" title="Scrub Rate" color="teal" key="scrubRateStatCard" ></stat-card>
+        <stat-card v-if="marginPercent" :data="marginPercent" title="Margin Percent" color="teal" key="marginPercentStatCard" ></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
