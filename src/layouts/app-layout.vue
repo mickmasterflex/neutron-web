@@ -7,7 +7,7 @@
       <side-nav-item :active="activeApp === 'relationships'" icon="dna" route="Relationships" label="Relationships"></side-nav-item>
       <side-nav-item :active="activeApp === 'products'" icon="tag" route="Brands" label="Products"></side-nav-item>
       <side-nav-item :active="activeApp === 'config'" icon="cog" route="PricingTiers" label="Config"></side-nav-item>
-      <side-nav-item :active="activeApp === 'utilities'" icon="wrench" route="Utilities" label="Utilities"></side-nav-item>
+<!--      <side-nav-item :active="activeApp === 'utilities'" icon="wrench" route="Utilities" label="Utilities"></side-nav-item>-->
       <side-nav-item :active="activeApp === 'users'" icon="key" route="Users" label="Users"></side-nav-item>
     </div>
     <div class="w-full min-h-screen pt-2">
