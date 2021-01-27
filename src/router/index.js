@@ -308,8 +308,7 @@ const routes = [
     component: () => import('@/views/relationships/contract-mgmt/campaign.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'relationships',
-      title: 'Campaign'
+      activeApp: 'relationships'
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
@@ -387,7 +386,6 @@ const routes = [
       requiresAuth: true,
       activeApp: 'relationships'
     },
-    title: 'Offer',
     pathToRegexpOptions: { strict: true },
     props (route) {
       const props = { ...route.params }
@@ -423,8 +421,7 @@ const routes = [
     component: () => import('@/views/users/user.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'users',
-      title: ''
+      activeApp: 'users'
     },
     pathToRegexpOptions: { strict: true },
     props (route) {

@@ -56,9 +56,9 @@ export default {
     }
   },
   created () {
-    if (this.id !== this.offer.id) {
-      this.fetchCurrentOffer(this.id)
-    }
+    this.setOffer().then(() => {
+      document.title = this.offer.name
+    })
   },
   destroyed () {
     this.resetCurrent()

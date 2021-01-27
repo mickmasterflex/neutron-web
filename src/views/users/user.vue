@@ -58,9 +58,9 @@ export default {
     }
   },
   created () {
-    if (this.id !== this.user.id) {
-      this.fetchCurrentUser(this.id)
-    }
+    this.setUser().then(() => {
+      document.title = this.user.name
+    })
   },
   destroyed () {
     this.resetCurrent()

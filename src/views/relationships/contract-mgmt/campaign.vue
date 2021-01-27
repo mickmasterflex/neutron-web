@@ -55,9 +55,9 @@ export default {
     }
   },
   created () {
-    if (this.id !== this.campaign.id) {
-      this.fetchCurrentCampaign(this.id)
-    }
+    this.setCampaign().then(() => {
+      document.title = this.campaign.name
+    })
   },
   destroyed () {
     this.resetCurrent()
