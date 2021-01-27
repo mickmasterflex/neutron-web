@@ -14,6 +14,8 @@
           </div>
         </div>
         <checkbox-field
+          class="pr-2"
+          :padding="false"
           v-if="type === 'buyer'"
           :field_id="type + obj.id"
           @click="check()"
