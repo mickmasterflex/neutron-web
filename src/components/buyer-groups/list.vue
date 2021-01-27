@@ -5,7 +5,14 @@
       v-if="!buyerGroupsExist"
       :heading="emptyStateHeading"
       :copy="emptyStateCopy"></table-empty-state>
-    <panel-template v-for="buyerGroup in buyerGroups" :title="buyerGroup.name" :subtitle="'id: ' + buyerGroup.id" :key="buyerGroup.id" class="col-span-2">
+    <panel-template
+      v-for="buyerGroup in buyerGroups"
+      :title="buyerGroup.name"
+      :subtitle="'id: ' + buyerGroup.id"
+      :key="buyerGroup.id"
+      :show-loader="loadingBuyers"
+      :loading-text="loadingBuyersText"
+      class="col-span-2">
       <template v-slot:action>
         <span class="flex flex-row mr-2">
           <delete-group :id="buyerGroup.id"></delete-group>
@@ -29,7 +36,9 @@ export default {
     ...mapGetters({
       buyerGroups: 'getBuyerGroups',
       getBuyersByBuyerGroup: 'getBuyersByBuyerGroup',
-      loading: 'getBuyerGroupsFetchLoading'
+      loading: 'getBuyerGroupsFetchLoading',
+      loadingBuyers: 'getBuyersFetchLoading',
+      loadingBuyersText: 'getBuyersFetchLoadingText'
     }),
     buyerGroupsExist () {
       return this.buyerGroups ? this.buyerGroups.length > 0 : false
