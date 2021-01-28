@@ -3,7 +3,7 @@
     <div v-show="show" :class="`${modalClass} ${modalPosition} inset-0 z-50 p-5 pt-10 overflow-x-scroll`">
       <transition enter-active-class="animate__animated animate__slideInDown animate__faster"
                   leave-active-class="animate__animated animate__slideOutUp animate__fast">
-        <div v-show="show" :class="`${modalDialogClass} modal-dialog bg-white rounded-lg relative mx-auto w-full z-20`">
+        <div v-show="show" :class="`${modalDialogClass} modal-dialog bg-white rounded-xl relative mx-auto w-full z-20`">
           <div class="modal-padding flex flex-row items-center justify-between">
             <h3 class="modal-header h2">
               <slot name="header">Modal Header</slot>
