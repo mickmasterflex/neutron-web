@@ -34,7 +34,7 @@ export default {
       resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT'
     }),
     async setEducationProduct () {
-      if (this.Product.id !== this.id) {
+      if (this.product.id !== this.id) {
         await this.fetchCurrentEducationProduct(this.id)
       }
     }

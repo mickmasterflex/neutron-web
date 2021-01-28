@@ -38,9 +38,7 @@ export default {
     })
   },
   created () {
-    this.setClient().then(() => {
-      document.title = this.client.name
-    })
+    this.fetchClients()
   }
 }
 </script>
