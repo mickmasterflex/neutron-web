@@ -7,7 +7,7 @@
       </div>
     </template>
     <template v-slot:content>
-      <panel-template title="Base Fields" :showLoader="loading" :loadingText="loadingText">
+      <panel-template title="Base Fields" :showLoader="loading" :loadingText="loadingText" contentBackgroundColor="white">
         <template slot="action">
           <button class="btn btn-turquoise" @click="openCreateBaseField()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
         </template>

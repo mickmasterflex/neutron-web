@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-table-state>
-      <table v-if="contractRelations.length" class="table table-white">
+      <table v-if="contractRelations.length" class="table table-striped">
         <thead>
         <tr>
           <th class="th">{{ getContractType().type }}</th>
@@ -33,7 +33,7 @@
         </tr>
         </tbody>
       </table>
-      <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" />
+      <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" class="well"/>
     </transition-table-state>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
     <caps-modal v-if="currentRelation.id" :capParent="currentRelation.id" capType="relations"></caps-modal>
