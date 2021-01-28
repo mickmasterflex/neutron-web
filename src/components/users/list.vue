@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="users.length" class="table table-white">
+    <table v-if="users.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Email</th>

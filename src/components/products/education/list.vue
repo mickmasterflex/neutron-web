@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="educationProducts.length" class="table table-white">
+    <table v-if="educationProducts.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -28,6 +28,7 @@
     <table-empty-state v-else
                        heading="No Education Products Exist"
                        key="empty"
+                       class="well"
                        copy="Use the 'New Education Product' button to get started."></table-empty-state>
   </transition-table-state>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="panel rounded-xl bg-gray-100 border-gray-200 border-2 relative">
+  <div class="panel rounded-xl relative shadow-md border border-gray-300">
     <transition enter-active-class="animate__animated animate__faster animate__fadeIn" leave-active-class="animate__animated animate__faster animate__fadeOut">
       <div v-show="showLoader" class="absolute inset-0 bg-white bg-opacity-75 flex flex-row items-center justify-center rounded-xl z-10">
         <div class="bg-gray-800 text-white flex flex-row items-center py-2 px-3 rounded-lg w-fit-content">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <slot name="tabs"></slot>
-    <div :class="`p-4 ${contentClass}`">
+    <div :class="`${contentClass} bg-${contentBackgroundColor}`" class="p-4 rounded-b-xl border-t border-gray-200">
       <slot name="content"></slot>
     </div>
     <slot name="footer"></slot>
@@ -30,6 +30,16 @@
 <script>
 export default {
   props: {
+    contentBackgroundColor: {
+      type: String,
+      default: 'gray-100',
+      validator: (value) => {
+        return [
+          'white',
+          'gray-100'
+        ].includes(value)
+      }
+    },
     title: {
       type: String,
       default: 'Panel Title'

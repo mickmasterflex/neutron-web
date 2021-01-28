@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="baseFields.length" class="table table-white">
+    <table v-if="baseFields.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Label</th>

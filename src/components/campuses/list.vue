@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="campuses.length" class="table table-white">
+    <table v-if="campuses.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -37,6 +37,7 @@
     <table-empty-state v-else
                        heading="No Campuses Exist"
                        key="empty"
+                       class="well"
                        copy="Use the 'New Campus' button to get started."></table-empty-state>
   </transition-table-state>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Offers List">
+    <panel-template title="Offers List" :show-loader="loading" :loading-text="loadingText" content-background-color="white">
       <template slot="content">
         <offer-list :offers="offers" emptyStateHeading="No offers use this product" emptyStateCopy="When creating an offer under a buyer contract, select this product."></offer-list>
       </template>
@@ -20,7 +20,9 @@ export default {
     ...mapGetters({
       getOffersByBuyer: 'getOffersByBuyer',
       getOffersByProduct: 'getOffersByProduct',
-      educationProduct: 'getCurrentEducationProduct'
+      educationProduct: 'getCurrentEducationProduct',
+      loading: 'getOffersFetchLoading',
+      loadingText: 'getOffersFetchLoadingText'
     }),
     offers: function () {
       return this.getOffersByProduct(this.educationProduct.id)
