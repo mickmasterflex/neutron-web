@@ -58,17 +58,22 @@ export default {
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_CLIENT',
       resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
-    })
+    }),
+    async setClient () {
+      if (this.client.slug !== this.slug) {
+        await this.fetchCurrentClient(this.slug)
+      }
+    }
   },
   created () {
+    this.setClient().then(() => {
+      document.title = this.client.name
+    })
     if (!this.allBuyers.length) {
       this.fetchBuyers()
     }
     if (!this.allPartners.length) {
       this.fetchPartners()
-    }
-    if (this.client.slug !== this.slug) {
-      this.fetchCurrentClient(this.slug)
     }
   },
   destroyed () {

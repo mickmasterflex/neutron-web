@@ -44,7 +44,12 @@ export default {
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BUYER',
       resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
-    })
+    }),
+    async setBuyer () {
+      if (this.buyer.id !== this.id) {
+        await this.fetchCurrentBuyer(this.id)
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -57,9 +62,9 @@ export default {
     }
   },
   created () {
-    if (this.buyer.id !== this.id) {
-      this.fetchCurrentBuyer(this.id)
-    }
+    this.setBuyer().then(() => {
+      document.title = this.buyer.name
+    })
   },
   destroyed () {
     this.resetCurrent()

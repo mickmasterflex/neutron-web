@@ -32,7 +32,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT'
-    })
+    }),
+    async setEducationProduct () {
+      if (this.product.id !== this.id) {
+        await this.fetchCurrentEducationProduct(this.id)
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -40,9 +45,9 @@ export default {
     })
   },
   created () {
-    if (this.id !== this.product.id) {
-      this.fetchCurrentEducationProduct(this.id)
-    }
+    this.setEducationProduct().then(() => {
+      document.title = this.product.name
+    })
   },
   destroyed () {
     this.resetCurrent()

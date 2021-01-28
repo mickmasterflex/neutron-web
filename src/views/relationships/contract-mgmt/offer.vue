@@ -48,12 +48,17 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_OFFER'
-    })
+    }),
+    async setOffer () {
+      if (this.offer.id !== this.id) {
+        await this.fetchCurrentOffer(this.id)
+      }
+    }
   },
   created () {
-    if (this.id !== this.offer.id) {
-      this.fetchCurrentOffer(this.id)
-    }
+    this.setOffer().then(() => {
+      document.title = this.offer.name
+    })
   },
   destroyed () {
     this.resetCurrent()
