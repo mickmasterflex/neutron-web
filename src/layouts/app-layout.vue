@@ -15,7 +15,7 @@
         <top-nav></top-nav>
         <logout-button class="pb-2"></logout-button>
       </div>
-      <div class="bg-white h-full">
+      <div class="bg-gray-100 h-full">
         <slot/>
       </div>
     </div>
