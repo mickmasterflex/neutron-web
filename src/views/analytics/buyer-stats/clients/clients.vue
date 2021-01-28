@@ -1,5 +1,5 @@
 <template>
-  <panel-template :showLoader="loading" :loadingText="loadingText">
+  <panel-template :showLoader="loading" :loadingText="loadingText" content-background-color="white">
     <template slot="title">
       <span class="flex flex-row items-center bg-gray-200 rounded-full p-1">
         <button class="btn-blue btn btn-circle btn-md">

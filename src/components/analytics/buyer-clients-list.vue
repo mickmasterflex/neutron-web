@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="buyer_clients.length" class="table table-white">
+    <table v-if="buyer_clients.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
