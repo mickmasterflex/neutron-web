@@ -11,7 +11,8 @@ const routes = [
     component: () => import('@/views/Dashboard.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'dashboard'
+      activeApp: 'dashboard',
+      title: 'Dashboard'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -19,7 +20,10 @@ const routes = [
     path: '/login/',
     name: 'Login',
     component: () => import('@/views/authentication/login.vue'),
-    meta: { layout: 'simple' },
+    meta: {
+      layout: 'simple',
+      title: 'Login'
+    },
     pathToRegexpOptions: { strict: true }
   },
   {
@@ -46,7 +50,8 @@ const routes = [
           requiresAuth: true,
           activeApp: 'analytics',
           activeAppTab: 'buyer-stats',
-          contentTab: 'clients'
+          contentTab: 'clients',
+          title: 'Buyer Client Stats'
         },
         pathToRegexpOptions: { strict: true }
       },
@@ -58,7 +63,8 @@ const routes = [
           requiresAuth: true,
           activeApp: 'analytics',
           activeAppTab: 'buyer-stats',
-          contentTab: 'leads'
+          contentTab: 'leads',
+          title: 'Buyer Client Lead Stats'
         },
         pathToRegexpOptions: { strict: true }
       }
@@ -71,7 +77,8 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'products',
-      activeAppTab: 'product-mgmt'
+      activeAppTab: 'product-mgmt',
+      title: 'Brands'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -187,7 +194,8 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'products',
-      activeAppTab: 'field-mgmt'
+      activeAppTab: 'field-mgmt',
+      title: 'Field Management'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -198,7 +206,8 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'config',
-      activeAppTab: 'pricing-tiers'
+      activeAppTab: 'pricing-tiers',
+      title: 'Pricing Tiers'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -209,7 +218,8 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'config',
-      activeAppTab: 'channels'
+      activeAppTab: 'channels',
+      title: 'Channels'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -226,7 +236,8 @@ const routes = [
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'clients'
+          contentTab: 'clients',
+          title: 'Clients'
         },
         pathToRegexpOptions: { strict: true }
       },
@@ -237,7 +248,8 @@ const routes = [
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'buyerGroups'
+          contentTab: 'buyerGroups',
+          title: 'Buyer Groups'
         },
         pathToRegexpOptions: { strict: true }
       }
@@ -420,7 +432,8 @@ const routes = [
     component: () => import('@/views/Utilities.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'utilities'
+      activeApp: 'utilities',
+      title: 'Utilities'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -430,7 +443,8 @@ const routes = [
     component: () => import('@/views/users/index.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'users'
+      activeApp: 'users',
+      title: 'Users'
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -454,7 +468,8 @@ const routes = [
     name: '404',
     component: () => import('@/views/error/404.vue'),
     meta: { layout: 'simple' },
-    pathToRegexpOptions: { strict: true }
+    pathToRegexpOptions: { strict: true },
+    title: '404'
   }
 ]
 
@@ -488,6 +503,11 @@ router.beforeEach((to, from, next) => {
     next({ name: 'Login' })
   } else {
     next()
+  }
+})
+router.afterEach((to, from) => {
+  if (to.meta && to.meta.title) {
+    document.title = to.meta.title + ' | Proton'
   }
 })
 

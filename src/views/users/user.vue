@@ -50,12 +50,17 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_USER'
-    })
+    }),
+    async setUser () {
+      if (this.user.id !== this.id) {
+        await this.fetchCurrentUser(this.id)
+      }
+    }
   },
   created () {
-    if (this.id !== this.user.id) {
-      this.fetchCurrentUser(this.id)
-    }
+    this.setUser().then(() => {
+      document.title = this.user.first_name + '  ' + this.user.last_name
+    })
   },
   destroyed () {
     this.resetCurrent()

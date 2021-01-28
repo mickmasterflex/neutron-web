@@ -44,7 +44,12 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_PARTNER'
-    })
+    }),
+    async setPartner () {
+      if (this.partner.id !== this.id) {
+        await this.fetchCurrentPartner(this.id)
+      }
+    }
   },
   watch: {
     id: function () {
@@ -52,9 +57,9 @@ export default {
     }
   },
   created () {
-    if (this.partner.id !== this.id) {
-      this.fetchCurrentPartner(this.id)
-    }
+    this.setPartner().then(() => {
+      document.title = this.partner.name
+    })
   },
   destroyed () {
     this.resetCurrent()
