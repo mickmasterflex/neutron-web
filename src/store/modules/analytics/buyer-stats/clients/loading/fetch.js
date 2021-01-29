@@ -1,17 +1,17 @@
 
 const state = {
-  buyer_clients_fetch_loading: false,
-  buyer_clients_fetch_loading_text: 'Loading Buyer_clients Data'
+  buyer_stats_clients_fetch_loading: false,
+  buyer_stats_clients_fetch_loading_text: 'Loading Buyer Clients Data'
 }
 
 const getters = {
-  getBuyerClientsFetchLoading: state => state.buyer_clients_fetch_loading,
-  getBuyerClientsFetchLoadingText: state => state.buyer_clients_fetch_loading_text
+  getBuyerStatsClientsFetchLoading: state => state.buyer_stats_clients_fetch_loading,
+  getBuyerStatsClientsFetchLoadingText: state => state.buyer_stats_clients_fetch_loading_text
 }
 
 const mutations = {
-  SET_BUYER_CLIENTS_FETCH_LOADING: (state) => (state.buyer_clients_fetch_loading = true),
-  RESET_BUYER_CLIENTS_FETCH_LOADING: (state) => (state.buyer_clients_fetch_loading = false)
+  SET_BUYER_STATS_CLIENTS_FETCH_LOADING: (state) => (state.buyer_stats_clients_fetch_loading = true),
+  RESET_BUYER_STATS_CLIENTS_FETCH_LOADING: (state) => (state.buyer_stats_clients_fetch_loading = false)
 }
 
 export default {

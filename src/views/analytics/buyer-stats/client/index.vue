@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      buyerClient: 'getCurrentBuyerClient',
+      buyerClient: 'getCurrentBuyerStatsClient',
       leadCount: 'getBuyerContractsTotalLeadCount',
       soldCount: 'getBuyerContractsTotalSoldCount',
       revenue: 'getBuyerContractsTotalRevenue',

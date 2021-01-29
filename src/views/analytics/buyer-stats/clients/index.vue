@@ -33,22 +33,22 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      leadCount: 'getBuyerClientsTotalLeadCount',
-      soldCount: 'getBuyerClientsTotalSoldCount',
-      revenue: 'getBuyerClientsTotalRevenue',
-      margin: 'getBuyerClientsTotalMargin',
-      payout: 'getBuyerClientsTotalPayout',
-      scrubRate: 'getBuyerClientsTotalScrubRate',
-      marginPercent: 'getBuyerClientsTotalMarginPercent'
+      leadCount: 'getBuyerStatsClientsTotalLeadCount',
+      soldCount: 'getBuyerStatsClientsTotalSoldCount',
+      revenue: 'getBuyerStatsClientsTotalRevenue',
+      margin: 'getBuyerStatsClientsTotalMargin',
+      payout: 'getBuyerStatsClientsTotalPayout',
+      scrubRate: 'getBuyerStatsClientsTotalScrubRate',
+      marginPercent: 'getBuyerStatsClientsTotalMarginPercent'
     })
   },
   methods: {
     ...mapActions({
-      fetchBuyerClientStats: 'fetchBuyerClientStats'
+      fetchBuyerClientsStats: 'fetchBuyerClientsStats'
     })
   },
   created () {
-    this.fetchBuyerClientStats()
+    this.fetchBuyerClientsStats()
   }
 }
 </script>

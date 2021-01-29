@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      client: 'getCurrentBuyerClient'
+      client: 'getCurrentBuyerStatsClient'
     })
   },
   methods: {

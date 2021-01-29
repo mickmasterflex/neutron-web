@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="buyer_clients.length" class="table table-striped">
+    <table v-if="buyer_stats_clients.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -14,7 +14,7 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="client in buyer_clients" :key="client.id">
+      <tr class="tr" v-for="client in buyer_stats_clients" :key="client.id">
         <td class="td">
           <span class="text-link" @click="linkToBuyerStatsClient({ name: client.name, id: client.id })">{{client.name}}</span>
         </td>
@@ -41,7 +41,7 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    buyer_clients: {
+    buyer_stats_clients: {
       type: [Object, Array],
       required: true
     }

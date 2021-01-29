@@ -38,11 +38,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchBuyerClientStats: 'fetchBuyerClientStats'
+      fetchBuyerClientsStats: 'fetchBuyerClientsStats'
     })
   },
   created () {
-    this.fetchBuyerClientStats()
+    this.fetchBuyerClientsStats()
   }
 }
 </script>
