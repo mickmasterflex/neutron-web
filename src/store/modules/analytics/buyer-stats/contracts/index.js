@@ -6,12 +6,14 @@ const modules = {
 }
 
 const state = {
+  current_buyer_stats_contract: {},
   buyer_contracts: {},
   buyer_contracts_leads: {},
   buyer_contracts_totals: {}
 }
 
 const getters = {
+  getCurrentBuyerStatsContract: state => state.current_buyer_stats_contract,
   getBuyerContracts: state => state.buyer_contracts,
   getBuyerContractsTotalLeadCount: state => state.buyer_contracts_totals.lead_count,
   getBuyerContractsTotalSoldCount: state => state.buyer_contracts_totals.sold_count,
@@ -38,6 +40,8 @@ const actions = {
 }
 
 const mutations = {
+  SET_CURRENT_BUYER_STATS_CONTRACT: (state, contract) => (state.current_buyer_stats_contract = contract),
+  RESET_CURRENT_BUYER_STATS_CONTRACT: (state) => (state.current_buyer_stats_contract = {}),
   SET_BUYER_CONTRACTS: (state, buyerContracts) => (state.buyer_contracts = buyerContracts),
   SET_BUYER_CONTRACTS_TOTALS: (state, totals) => (state.buyer_contracts_totals = totals),
   SET_BUYER_CONTRACTS_LEADS: (state, leads) => (state.buyer_contracts_leads = leads)

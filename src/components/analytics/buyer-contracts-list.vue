@@ -15,7 +15,9 @@
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="contract in buyer_contracts" :key="contract.id">
-        <td class="td">{{contract.name}}</td>
+        <td class="td">
+          <span class="text-link" @click="linkToBuyerStatsContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
+        </td>
         <td class="td">{{contract.lead_count}}</td>
         <td class="td">{{contract.sold_count}}</td>
         <td class="td">{{contract.revenue}}</td>
@@ -35,6 +37,8 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
+
 export default {
   props: {
     buyer_contracts: {
@@ -42,6 +46,19 @@ export default {
       required: true
     }
   },
-  computed: {}
+  computed: {
+    ...mapGetters({
+      client: 'getCurrentBuyerClient'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      setCurrent: 'SET_CURRENT_BUYER_STATS_CONTRACT'
+    }),
+    linkToBuyerStatsContract (contract) {
+      this.setCurrent(contract)
+      this.$router.push({ name: 'BuyerStatsContract', params: { id: contract.id, clientId: this.client.id } })
+    }
+  }
 }
 </script>

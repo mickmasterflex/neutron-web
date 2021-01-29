@@ -1,7 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <h1 class="text-white text-4xl font-hairline">Buyer Clients</h1>
+      <h1 class="text-white text-4xl font-hairline">All Buyer Clients</h1>
       <hud-stat-cards>
         <stat-card v-if="leadCount" :data="leadCount" title="Leads" color="teal" key="leadCountStatCard" ></stat-card>
         <stat-card v-if="soldCount" :data="soldCount" title="Sold" color="teal" key="soldCountStatCard" ></stat-card>

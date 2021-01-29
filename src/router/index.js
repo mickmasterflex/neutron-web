@@ -83,7 +83,7 @@ const routes = [
     children: [
       {
         name: 'BuyerStatsClientContracts',
-        path: '',
+        path: 'contracts/',
         component: () => import('@/views/analytics/buyer-stats/client/contracts'),
         meta: {
           requiresAuth: true,
@@ -97,6 +97,56 @@ const routes = [
         name: 'BuyerStatsClientLeads',
         path: 'leads/',
         component: () => import('@/views/analytics/buyer-stats/client/leads'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'leads'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
+  },
+  {
+    path: '/analytics/buyer-stats/clients/:clientId/contracts/:id/',
+    name: 'BuyerStatsContract',
+    redirect: { name: 'BuyerStatsContractOffers' },
+    component: () => import('@/views/analytics/buyer-stats/contract'),
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      props.clientId = +props.clientId
+      return props
+    },
+    children: [
+      {
+        name: 'BuyerStatsContractContracts',
+        path: 'contracts/',
+        component: () => import('@/views/analytics/buyer-stats/contract/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'contracts'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'BuyerStatsContractOffers',
+        path: 'offers/',
+        component: () => import('@/views/analytics/buyer-stats/contract/offers'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'offers'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'BuyerStatsContractLeads',
+        path: 'leads/',
+        component: () => import('@/views/analytics/buyer-stats/contract/leads'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
