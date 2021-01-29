@@ -39,22 +39,22 @@ export default {
   computed: {
     ...mapGetters({
       buyerClient: 'getCurrentBuyerStatsClient',
-      leadCount: 'getBuyerContractsTotalLeadCount',
-      soldCount: 'getBuyerContractsTotalSoldCount',
-      revenue: 'getBuyerContractsTotalRevenue',
-      margin: 'getBuyerContractsTotalMargin',
-      payout: 'getBuyerContractsTotalPayout',
-      scrubRate: 'getBuyerContractsTotalScrubRate',
-      marginPercent: 'getBuyerContractsTotalMarginPercent'
+      leadCount: 'getBuyerStatsContractsTotalLeadCount',
+      soldCount: 'getBuyerStatsContractsTotalSoldCount',
+      revenue: 'getBuyerStatsContractsTotalRevenue',
+      margin: 'getBuyerStatsContractsTotalMargin',
+      payout: 'getBuyerStatsContractsTotalPayout',
+      scrubRate: 'getBuyerStatsContractsTotalScrubRate',
+      marginPercent: 'getBuyerStatsContractsTotalMarginPercent'
     })
   },
   methods: {
     ...mapActions({
-      fetchBuyerContractStats: 'fetchBuyerContractStats'
+      fetchBuyerContractsStats: 'fetchBuyerContractsStats'
     })
   },
   created () {
-    this.fetchBuyerContractStats(this.id)
+    this.fetchBuyerContractsStats(this.id)
   }
 }
 </script>

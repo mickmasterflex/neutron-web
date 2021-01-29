@@ -11,7 +11,7 @@
       </span>
     </template>
     <template slot="content">
-      <buyer-contract-list :buyer_contracts="contracts"></buyer-contract-list>
+      <buyer-contract-list :buyer_stats_contracts="contracts"></buyer-contract-list>
     </template>
   </panel-template>
 </template>
@@ -23,9 +23,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      contracts: 'getBuyerContracts',
-      loading: 'getBuyerContractsFetchLoading',
-      loadingText: 'getBuyerContractsFetchLoadingText',
+      contracts: 'getBuyerStatsContracts',
+      loading: 'getBuyerStatsContractsFetchLoading',
+      loadingText: 'getBuyerStatsContractsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     })
   },

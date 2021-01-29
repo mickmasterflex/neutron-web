@@ -28,9 +28,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      leads: 'getBuyerContractsLeads',
-      loading: 'getBuyerContractsFetchLoading',
-      loadingText: 'getBuyerContractsFetchLoadingText',
+      leads: 'getBuyerStatsContractsLeads',
+      loading: 'getBuyerStatsContractsFetchLoading',
+      loadingText: 'getBuyerStatsContractsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     })
   },
