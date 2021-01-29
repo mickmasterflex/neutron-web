@@ -1,8 +1,8 @@
-import buyerClients from '@/store/modules/analytics/buyer-clients'
+import buyerStats from '@/store/modules/analytics/buyer-stats'
 import dateRange from '@/store/modules/analytics/date-range'
 
 const modules = {
-  buyerClients,
+  buyerStats,
   dateRange
 }
 

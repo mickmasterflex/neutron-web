@@ -44,14 +44,14 @@ const routes = [
     children: [
       {
         name: 'BuyerStatsClients',
-        path: '',
+        path: 'clients/',
         component: () => import('@/views/analytics/buyer-stats/clients/clients'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
           activeAppTab: 'buyer-stats',
           contentTab: 'clients',
-          title: 'Buyer Client Stats'
+          title: 'All Buyer Client Stats'
         },
         pathToRegexpOptions: { strict: true }
       },
@@ -64,7 +64,44 @@ const routes = [
           activeApp: 'analytics',
           activeAppTab: 'buyer-stats',
           contentTab: 'leads',
-          title: 'Buyer Client Lead Stats'
+          title: 'All Buyer Client Lead Stats'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
+  },
+  {
+    path: '/analytics/buyer-stats/clients/:id/',
+    name: 'BuyerStatsClient',
+    redirect: { name: 'BuyerStatsClientContracts' },
+    component: () => import('@/views/analytics/buyer-stats/client'),
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    },
+    children: [
+      {
+        name: 'BuyerStatsClientContracts',
+        path: '',
+        component: () => import('@/views/analytics/buyer-stats/client/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'contracts'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'BuyerStatsClientLeads',
+        path: 'leads/',
+        component: () => import('@/views/analytics/buyer-stats/client/leads'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'leads'
         },
         pathToRegexpOptions: { strict: true }
       }

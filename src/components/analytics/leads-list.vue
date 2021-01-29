@@ -33,6 +33,7 @@
     <table-empty-state v-else
                        heading="No leads in selected date range"
                        key="empty"
+                       class="well"
                        copy="Try altering the date range"></table-empty-state>
   </transition-table-state>
 </template>

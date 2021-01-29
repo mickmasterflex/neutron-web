@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import loading from '@/store/modules/analytics/buyer-clients/loading'
+import loading from '@/store/modules/analytics/buyer-stats/clients/loading'
 
 const modules = {
   loading

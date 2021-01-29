@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="buyer_clients.length" class="table table-striped">
+    <table v-if="buyer_contracts.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -14,17 +14,15 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="client in buyer_clients" :key="client.id">
-        <td class="td">
-          <router-link class="text-link" :to="{name: 'BuyerStatsClient', params: {id:client.id}}">{{client.name}}</router-link>
-        </td>
-        <td class="td">{{client.lead_count}}</td>
-        <td class="td">{{client.sold_count}}</td>
-        <td class="td">{{client.revenue}}</td>
-        <td class="td">{{client.margin}}</td>
-        <td class="td">{{client.payout}}</td>
-        <td class="td">{{client.scrub_rate}}</td>
-        <td class="td">{{client.margin_percent}}</td>
+      <tr class="tr" v-for="contract in buyer_contracts" :key="contract.id">
+        <td class="td">{{contract.name}}</td>
+        <td class="td">{{contract.lead_count}}</td>
+        <td class="td">{{contract.sold_count}}</td>
+        <td class="td">{{contract.revenue}}</td>
+        <td class="td">{{contract.margin}}</td>
+        <td class="td">{{contract.payout}}</td>
+        <td class="td">{{contract.scrub_rate}}</td>
+        <td class="td">{{contract.margin_percent}}</td>
       </tr>
       </tbody>
     </table>
@@ -39,7 +37,7 @@
 <script>
 export default {
   props: {
-    buyer_clients: {
+    buyer_contracts: {
       type: [Object, Array],
       required: true
     }
