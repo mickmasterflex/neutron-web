@@ -16,7 +16,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="client in buyer_clients" :key="client.id">
         <td class="td">
-          <router-link class="text-link" :to="{name: 'BuyerStatsClient', params: {id:client.id}}">{{client.name}}</router-link>
+          <span class="text-link" @click="linkToBuyerStatsClient({ name: client.name, id: client.id })">{{client.name}}</span>
         </td>
         <td class="td">{{client.lead_count}}</td>
         <td class="td">{{client.sold_count}}</td>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     buyer_clients: {
@@ -44,6 +46,14 @@ export default {
       required: true
     }
   },
-  computed: {}
+  methods: {
+    ...mapMutations({
+      setCurrent: 'SET_CURRENT_BUYER_CLIENT'
+    }),
+    linkToBuyerStatsClient (client) {
+      this.setCurrent(client)
+      this.$router.push({ name: 'BuyerStatsClient', params: { id: client.id } })
+    }
+  }
 }
 </script>

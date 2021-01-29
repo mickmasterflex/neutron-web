@@ -1,7 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <h1 class="text-white text-4xl font-hairline">Buyer Contracts</h1>
+      <h1 class="text-white text-4xl font-hairline">{{ buyerClient.name }}</h1>
       <hud-stat-cards>
         <stat-card v-if="leadCount" :data="leadCount" title="Leads" color="teal" key="leadCountStatCard" ></stat-card>
         <stat-card v-if="soldCount" :data="soldCount" title="Sold" color="teal" key="soldCountStatCard" ></stat-card>
@@ -38,6 +38,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      buyerClient: 'getCurrentBuyerClient',
       leadCount: 'getBuyerContractsTotalLeadCount',
       soldCount: 'getBuyerContractsTotalSoldCount',
       revenue: 'getBuyerContractsTotalRevenue',
