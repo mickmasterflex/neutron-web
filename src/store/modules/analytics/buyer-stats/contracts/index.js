@@ -7,14 +7,22 @@ const modules = {
 
 const state = {
   current_buyer_stats_contract: {},
-  buyer_stats_contracts: {},
-  buyer_stats_contracts_leads: {},
+  buyer_stats_contracts: [],
+  buyer_stats_contracts_leads: [],
   buyer_stats_contracts_totals: {}
 }
 
 const getters = {
   getCurrentBuyerStatsContract: state => state.current_buyer_stats_contract,
   getBuyerStatsContracts: state => state.buyer_stats_contracts,
+  getBuyerStatsContractsParentless: state => state.buyer_stats_contracts.filter(contract => contract.parent === null),
+  getBuyerStatsContractsByParent: (state) => (contractId) => {
+    return state.buyer_stats_contracts.filter(contract => contract.parent === contractId)
+  },
+  getBuyerStatsContractsByParentCount: (state) => (contractId) => {
+    const contracts = state.buyer_stats_contracts.filter(contract => contract.parent === contractId)
+    return contracts.length
+  },
   getBuyerStatsContractsTotalLeadCount: state => state.buyer_stats_contracts_totals.lead_count,
   getBuyerStatsContractsTotalSoldCount: state => state.buyer_stats_contracts_totals.sold_count,
   getBuyerStatsContractsTotalRevenue: state => state.buyer_stats_contracts_totals.revenue,

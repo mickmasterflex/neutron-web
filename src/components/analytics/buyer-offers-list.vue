@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="buyer_stats_clients.length" class="table table-striped">
+    <table v-if="buyer_stats_offers.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -14,17 +14,17 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="client in buyer_stats_clients" :key="client.id">
+      <tr class="tr" v-for="offer in buyer_stats_offers" :key="offer.id">
         <td class="td">
-          <span class="text-link" @click="linkToBuyerStatsClient({ name: client.name, id: client.id })">{{client.name}}</span>
+          <span class="text-link" @click="linkToBuyerStatsOffer({ name: offer.name, id: offer.id })">{{offer.name}}</span>
         </td>
-        <td class="td">{{client.lead_count}}</td>
-        <td class="td">{{client.sold_count}}</td>
-        <td class="td">{{client.revenue}}</td>
-        <td class="td">{{client.margin}}</td>
-        <td class="td">{{client.payout}}</td>
-        <td class="td">{{client.scrub_rate}}</td>
-        <td class="td">{{client.margin_percent}}</td>
+        <td class="td">{{offer.lead_count}}</td>
+        <td class="td">{{offer.sold_count}}</td>
+        <td class="td">{{offer.revenue}}</td>
+        <td class="td">{{offer.margin}}</td>
+        <td class="td">{{offer.payout}}</td>
+        <td class="td">{{offer.scrub_rate}}</td>
+        <td class="td">{{offer.margin_percent}}</td>
       </tr>
       </tbody>
     </table>
@@ -41,18 +41,18 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    buyer_stats_clients: {
+    buyer_stats_offers: {
       type: [Object, Array],
       required: true
     }
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_BUYER_STATS_CLIENT'
+      setCurrent: 'SET_CURRENT_BUYER_STATS_OFFER'
     }),
-    linkToBuyerStatsClient (client) {
-      this.setCurrent(client)
-      this.$router.push({ name: 'BuyerStatsClient', params: { id: client.id } })
+    linkToBuyerStatsOffer (offer) {
+      this.setCurrent(offer)
+      this.$router.push({ name: 'BuyerStatsOffer', params: { id: offer.id } })
     }
   }
 }

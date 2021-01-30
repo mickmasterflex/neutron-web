@@ -9,11 +9,11 @@ const state = {
   buyer_stats_clients: {},
   buyer_stats_clients_leads: {},
   buyer_stats_clients_totals: {},
-  current_buyer_client: {}
+  current_buyer_stats_client: {}
 }
 
 const getters = {
-  getCurrentBuyerStatsClient: state => state.current_buyer_client,
+  getCurrentBuyerStatsClient: state => state.current_buyer_stats_client,
   getBuyerStatsClients: state => state.buyer_stats_clients,
   getBuyerStatsClientsTotalLeadCount: state => state.buyer_stats_clients_totals.lead_count,
   getBuyerStatsClientsTotalSoldCount: state => state.buyer_stats_clients_totals.sold_count,
@@ -40,7 +40,8 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_BUYER_CLIENT: (state, buyerClient) => (state.current_buyer_client = buyerClient),
+  SET_CURRENT_BUYER_STATS_CLIENT: (state, buyerClient) => (state.current_buyer_stats_client = buyerClient),
+  RESET_CURRENT_BUYER_STATS_CLIENT: (state) => (state.current_buyer_stats_client = {}),
   SET_BUYER_STATS_CLIENTS: (state, buyerClients) => (state.buyer_stats_clients = buyerClients),
   SET_BUYER_STATS_CLIENTS_TOTALS: (state, totals) => (state.buyer_stats_clients_totals = totals),
   SET_BUYER_STATS_CLIENTS_LEADS: (state, leads) => (state.buyer_stats_clients_leads = leads)

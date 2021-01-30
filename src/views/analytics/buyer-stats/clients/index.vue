@@ -1,17 +1,12 @@
 <template>
-  <content-layout>
-    <template v-slot:hud>
-      <h1 class="text-white text-4xl font-hairline">All Buyer Clients</h1>
-      <hud-stat-cards>
-        <stat-card v-if="leadCount" :data="leadCount" title="Leads" color="teal" key="leadCountStatCard" ></stat-card>
-        <stat-card v-if="soldCount" :data="soldCount" title="Sold" color="teal" key="soldCountStatCard" ></stat-card>
-        <stat-card v-if="revenue" :data="revenue" title="Revenue" color="teal" key="revenueStatCard" ></stat-card>
-        <stat-card v-if="margin" :data="margin" title="Margin" color="teal" key="marginStatCard" ></stat-card>
-        <stat-card v-if="payout" :data="payout" title="Payout" color="teal" key="payoutStatCard" ></stat-card>
-        <stat-card v-if="scrubRate" :data="scrubRate" title="Scrub Rate" color="teal" key="scrubRateStatCard" ></stat-card>
-        <stat-card v-if="marginPercent" :data="marginPercent" title="Margin Percent" color="teal" key="marginPercentStatCard" ></stat-card>
-      </hud-stat-cards>
-    </template>
+  <buyer-stats-layout hud-title="All Buyer Clients"
+                      :lead-count="leadCount"
+                      :sold-count="soldCount"
+                      :revenue="revenue"
+                      :margin="margin"
+                      :payout="payout"
+                      :scrub-rate="scrubRate"
+                      :margin-percent="marginPercent">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
@@ -25,10 +20,11 @@
     <template v-slot:content>
       <router-view></router-view>
     </template>
-  </content-layout>
+  </buyer-stats-layout>
 </template>
 
 <script>
+import buyerStatsLayout from '@/views/analytics/buyer-stats/layout.vue'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
@@ -49,6 +45,9 @@ export default {
   },
   created () {
     this.fetchBuyerClientsStats()
+  },
+  components: {
+    'buyer-stats-layout': buyerStatsLayout
   }
 }
 </script>

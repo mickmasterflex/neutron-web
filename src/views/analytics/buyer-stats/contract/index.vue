@@ -1,10 +1,12 @@
 <template>
-  <content-layout>
-    <template v-slot:hud>
-      <h1 class="text-white text-4xl font-hairline">{{ contract.name }}</h1>
-      <hud-stat-cards>
-      </hud-stat-cards>
-    </template>
+  <buyer-stats-layout :hud-title="contract.name"
+                      :lead-count="leadCount"
+                      :sold-count="soldCount"
+                      :revenue="revenue"
+                      :margin="margin"
+                      :payout="payout"
+                      :scrub-rate="scrubRate"
+                      :margin-percent="marginPercent">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
@@ -21,10 +23,11 @@
     <template v-slot:content>
       <router-view></router-view>
     </template>
-  </content-layout>
+  </buyer-stats-layout>
 </template>
 
 <script>
+import buyerStatsLayout from '@/views/analytics/buyer-stats/layout.vue'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
@@ -33,16 +36,26 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentBuyerStatsContract'
+      contract: 'getCurrentBuyerStatsContract',
+      leadCount: 'getBuyerStatsOffersTotalLeadCount',
+      soldCount: 'getBuyerStatsOffersTotalSoldCount',
+      revenue: 'getBuyerStatsOffersTotalRevenue',
+      margin: 'getBuyerStatsOffersTotalMargin',
+      payout: 'getBuyerStatsOffersTotalPayout',
+      scrubRate: 'getBuyerStatsOffersTotalScrubRate',
+      marginPercent: 'getBuyerStatsOffersTotalMarginPercent'
     })
   },
   methods: {
     ...mapActions({
-      fetchBuyerClientsStats: 'fetchBuyerClientsStats'
+      fetchBuyerOffersStats: 'fetchBuyerOffersStats'
     })
   },
   created () {
-    this.fetchBuyerClientsStats()
+    this.fetchBuyerOffersStats(this.id)
+  },
+  components: {
+    'buyer-stats-layout': buyerStatsLayout
   }
 }
 </script>
