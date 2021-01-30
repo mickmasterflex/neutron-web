@@ -14,7 +14,7 @@
 
 <script>
 import buyerClientList from '@/components/analytics/buyer-clients-list'
-import dateRangePicker from '@/components/ui/buttons/date-range-picker'
+import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {

@@ -36,6 +36,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      dateRange: 'getAnalyticsDateRangeUrlFormatted',
       contract: 'getCurrentBuyerStatsContract',
       leadCount: 'getBuyerStatsOffersTotalLeadCount',
       soldCount: 'getBuyerStatsOffersTotalSoldCount',
@@ -53,6 +54,11 @@ export default {
   },
   created () {
     this.fetchBuyerOffersStats(this.id)
+  },
+  watch: {
+    dateRange () {
+      this.fetchBuyerOffersStats(this.id)
+    }
   },
   components: {
     'buyer-stats-layout': buyerStatsLayout

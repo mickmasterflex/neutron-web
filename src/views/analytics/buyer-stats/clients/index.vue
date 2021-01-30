@@ -29,6 +29,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
+      dateRange: 'getAnalyticsDateRangeUrlFormatted',
       leadCount: 'getBuyerStatsClientsTotalLeadCount',
       soldCount: 'getBuyerStatsClientsTotalSoldCount',
       revenue: 'getBuyerStatsClientsTotalRevenue',
@@ -45,6 +46,11 @@ export default {
   },
   created () {
     this.fetchBuyerClientsStats()
+  },
+  watch: {
+    dateRange () {
+      this.fetchBuyerClientsStats()
+    }
   },
   components: {
     'buyer-stats-layout': buyerStatsLayout

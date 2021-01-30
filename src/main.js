@@ -20,6 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faAngleLeft,
   faAngleRight,
+  faArrowRight,
   faArrowsAltV,
   faBan,
   faCalendarAlt,
@@ -205,6 +206,7 @@ configure({
 library.add(
   faAngleLeft,
   faAngleRight,
+  faArrowRight,
   faArrowsAltV,
   faBan,
   faCalendarAlt,
