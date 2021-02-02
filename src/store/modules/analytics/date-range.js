@@ -1,25 +1,15 @@
+import dayjs from 'dayjs'
+
 const state = {
-  analytics_start_date: new Date(),
-  analytics_end_date: new Date()
+  analytics_start_date: dayjs('2020-1-1'),
+  analytics_end_date: dayjs('2021-2-1')
 }
 
 const getters = {
-  getFormatedDate: () => (date) => {
-    // duplicated from src/components/ui/forms/validation-fields/date-picker.vue
-    let month = '' + (date.getMonth() + 1)
-    let day = '' + date.getDate()
-    const year = date.getFullYear()
-
-    if (month.length < 2) {
-      month = '0' + month
-    }
-    if (day.length < 2) {
-      day = '0' + day
-    }
-    return [year, month, day].join('-')
-  },
+  getFormattedStartDate: (state) => dayjs(state.analytics_start_date).format('YYYY-MM-DD'),
+  getFormattedEndDate: (state) => dayjs(state.analytics_end_date).format('YYYY-MM-DD'),
   getAnalyticsDateRangeUrlFormatted: (state, getter) => {
-    return `start_date=${getter.getFormatedDate(state.analytics_start_date)}&end_date=${getter.getFormatedDate(state.analytics_end_date)}`
+    return `start_date=${getter.getFormattedStartDate}&end_date=${getter.getFormattedEndDate}`
   },
   getAnalyticsDateRange: state => {
     return {

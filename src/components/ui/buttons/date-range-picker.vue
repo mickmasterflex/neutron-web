@@ -33,12 +33,19 @@
         <button
           class="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-600"
           @click="moveToDate(lastWeek)">Last Week</button>
+        <button
+          class="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-600"
+          @click="moveToDate(thisMonth)">This Month</button>
+        <button
+          class="bg-blue-500 text-white font-medium px-2 py-1 rounded hover:bg-blue-600"
+          @click="moveToDate(lastMonth)">Last Month</button>
       </div>
     </template>
   </v-date-picker>
 </template>
 
 <script>
+import dayjs from 'dayjs'
 
 export default {
   props: {
@@ -49,17 +56,13 @@ export default {
       return this.$refs.dateRangeCalendar.$data
     },
     today () {
-      return new Date()
+      return dayjs().toString()
     },
     yesterday () {
-      const date = new Date()
-      date.setDate(date.getDate() - 1)
-      return date
+      return dayjs().subtract(1, 'day').toString()
     },
     oneWeekAgo () {
-      const date = new Date()
-      date.setDate(date.getDate() - 7)
-      return date
+      return dayjs().subtract(1, 'week').toString()
     },
     todayAsRange () {
       return {
@@ -80,21 +83,27 @@ export default {
       }
     },
     thisWeek () {
-      const date = new Date()
-      const diff = date.getDate() - date.getDay()
       return {
-        start: new Date(date.setDate(diff)),
-        end: new Date()
+        start: dayjs().day(0).toString(),
+        end: this.today
       }
     },
     lastWeek () {
-      const date = new Date()
-      const lastWeekStart = date.getDay() + 7
-      const endDate = new Date()
-      const lastWeekEnd = endDate.getDate() + endDate.getDay()
       return {
-        start: new Date(date.setDate(date.getDate() - lastWeekStart)),
-        end: new Date(endDate.setDate(endDate.getDate() - lastWeekEnd))
+        start: dayjs().day(-7).toString(),
+        end: dayjs().day(-1).toString()
+      }
+    },
+    thisMonth () {
+      return {
+        start: dayjs().startOf('month').toString(),
+        end: this.today
+      }
+    },
+    lastMonth () {
+      return {
+        start: dayjs().subtract(1, 'month').startOf('month').toString(),
+        end: dayjs().subtract(1, 'month').endOf('month').toString()
       }
     }
   },
