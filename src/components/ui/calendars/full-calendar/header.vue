@@ -2,13 +2,13 @@
   <div class="p-1">
     <div :class="`${headerClass} full-calendar--header card card-border rounded-xl flex flex-row justify-between items-center`">
       <div class="flex flex-row items-center">
-        <pop-over-ref id="month-picker" visibility="click" placement="bottom-start" :isInteractive="true" class="ml-24">
-          <div class="text-link text-3xl flex flex-row">
-            <span class="block lg:hidden xl:hidden">{{ calendarData.shortMonthLabel }}</span>
-            <span class="hidden lg:block xl:block">{{ calendarData.monthLabel }}</span>
-            <span class="ml-1">{{ calendarData.yearLabel }}</span>
-          </div>
-        </pop-over-ref>
+<!--        <pop-over-ref id="month-picker" visibility="click" placement="bottom-start" :isInteractive="true" class="ml-24">-->
+<!--          <div class="text-link text-3xl flex flex-row">-->
+<!--            <span class="block lg:hidden xl:hidden">{{ calendarData.shortMonthLabel }}</span>-->
+<!--            <span class="hidden lg:block xl:block">{{ calendarData.monthLabel }}</span>-->
+<!--            <span class="ml-1">{{ calendarData.yearLabel }}</span>-->
+<!--          </div>-->
+<!--        </pop-over-ref>-->
       </div>
       <slot name="header-right" :date="{month: calendarData.month, year: calendarData.year}"></slot>
     </div>
@@ -20,7 +20,7 @@
 
 <script>
 import popOver from 'v-calendar/src/components/Popover'
-import popOverRef from 'v-calendar/src/components/PopoverRef'
+// import popOverRef from 'v-calendar/src/components/PopoverRow'
 import calendarNav from 'v-calendar/src/components/CalendarNav.vue'
 
 export default {
@@ -31,7 +31,7 @@ export default {
   },
   components: {
     'pop-over': popOver,
-    'pop-over-ref': popOverRef,
+    // 'pop-over-ref': popOverRef,
     'calendar-nav': calendarNav
   }
 }
