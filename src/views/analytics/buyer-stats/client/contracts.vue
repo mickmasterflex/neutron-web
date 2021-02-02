@@ -4,7 +4,7 @@
       <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
     </template>
     <template slot="content">
-      <buyer-contract-list :buyer_client_contracts="contracts"></buyer-contract-list>
+      <buyer-contract-list :buyer_client_stats_contracts="contracts"></buyer-contract-list>
     </template>
   </panel-template>
 </template>
