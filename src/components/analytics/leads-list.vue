@@ -23,10 +23,10 @@
         <td class="td">{{lead.revenue}}</td>
         <td class="td">{{lead.margin}}</td>
         <td class="td">{{lead.payout}}</td>
-        <td class="td">{{lead.reason}}</td>
-        <td class="td">{{lead.sold_at}}</td>
-        <td class="td">{{lead.created_at}}</td>
-        <td class="td">{{lead.updated_at}}</td>
+        <td class="td" :class="!lead.reason ? 'text-gray-500 italic' : ''">{{lead.reason ? lead.reason : 'None'}}</td>
+        <td class="td" :class="!lead.sold_at ? 'text-red-500 font-bold' : ''">{{leadSold(lead.sold_at)}}</td>
+        <td class="td">{{new Date(lead.created_at).toDateString()}}</td>
+        <td class="td">{{new Date(lead.updated_at).toDateString()}}</td>
       </tr>
       </tbody>
     </table>
@@ -44,6 +44,15 @@ export default {
     leads: {
       type: [Object, Array],
       required: true
+    }
+  },
+  methods: {
+    leadSold (soldAt) {
+      if (soldAt) {
+        return new Date(soldAt).toDateString
+      } else {
+        return false
+      }
     }
   }
 }
