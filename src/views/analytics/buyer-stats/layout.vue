@@ -24,20 +24,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     hudTitle: {
       type: String,
-      required: false
-      // required: true - require when ready
-    },
-    leadCount: Number,
-    soldCount: Number,
-    revenue: Number,
-    margin: Number,
-    payout: Number,
-    scrubRate: Number,
-    marginPercent: Number
+      default: 'Loading'
+    }
+  },
+  computed: {
+    ...mapGetters({
+      leadCount: 'getBuyerStatsTotalLeadCount',
+      soldCount: 'getBuyerStatsTotalSoldCount',
+      revenue: 'getBuyerStatsTotalRevenue',
+      margin: 'getBuyerStatsTotalMargin',
+      payout: 'getBuyerStatsTotalPayout',
+      scrubRate: 'getBuyerStatsTotalScrubRate',
+      marginPercent: 'getBuyerStatsTotalMarginPercent'
+    })
   }
 }
 </script>

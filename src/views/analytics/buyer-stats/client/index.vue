@@ -1,12 +1,5 @@
 <template>
-  <buyer-stats-layout :hud-title="buyerClient.name"
-                      :lead-count="leadCount"
-                      :sold-count="soldCount"
-                      :revenue="revenue"
-                      :margin="margin"
-                      :payout="payout"
-                      :scrub-rate="scrubRate"
-                      :margin-percent="marginPercent">
+  <buyer-stats-layout :hud-title="buyerClient.name">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
@@ -35,14 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       dateRange: 'getAnalyticsDateRangeUrlFormatted',
-      buyerClient: 'getCurrentBuyerStatsClient',
-      leadCount: 'getBuyerClientStatsTotalLeadCount',
-      soldCount: 'getBuyerClientStatsTotalSoldCount',
-      revenue: 'getBuyerClientStatsTotalRevenue',
-      margin: 'getBuyerClientStatsTotalMargin',
-      payout: 'getBuyerClientStatsTotalPayout',
-      scrubRate: 'getBuyerClientStatsTotalScrubRate',
-      marginPercent: 'getBuyerClientStatsTotalMarginPercent'
+      buyerClient: 'getCurrentBuyerStatsClient'
     })
   },
   methods: {

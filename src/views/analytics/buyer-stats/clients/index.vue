@@ -1,12 +1,5 @@
 <template>
-  <buyer-stats-layout hud-title="All Buyer Clients"
-                      :lead-count="leadCount"
-                      :sold-count="soldCount"
-                      :revenue="revenue"
-                      :margin="margin"
-                      :payout="payout"
-                      :scrub-rate="scrubRate"
-                      :margin-percent="marginPercent">
+  <buyer-stats-layout hud-title="All Buyer Clients">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
@@ -29,14 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted',
-      leadCount: 'getBuyerStatsClientsTotalLeadCount',
-      soldCount: 'getBuyerStatsClientsTotalSoldCount',
-      revenue: 'getBuyerStatsClientsTotalRevenue',
-      margin: 'getBuyerStatsClientsTotalMargin',
-      payout: 'getBuyerStatsClientsTotalPayout',
-      scrubRate: 'getBuyerStatsClientsTotalScrubRate',
-      marginPercent: 'getBuyerStatsClientsTotalMarginPercent'
+      dateRange: 'getAnalyticsDateRangeUrlFormatted'
     })
   },
   methods: {

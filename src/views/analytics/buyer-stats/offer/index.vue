@@ -1,12 +1,5 @@
 <template>
-  <buyer-stats-layout :hud-title="offer.name"
-                      :lead-count="leadCount"
-                      :sold-count="soldCount"
-                      :revenue="revenue"
-                      :margin="margin"
-                      :payout="payout"
-                      :scrub-rate="scrubRate"
-                      :margin-percent="marginPercent">
+  <buyer-stats-layout :hud-title="offer.name">
     <template v-slot:content>
       <router-view></router-view>
     </template>
@@ -24,14 +17,7 @@ export default {
   computed: {
     ...mapGetters({
       dateRange: 'getAnalyticsDateRangeUrlFormatted',
-      offer: 'getCurrentBuyerStatsOffer',
-      leadCount: 'getOfferContractStatsTotalLeadCount',
-      soldCount: 'getOfferContractStatsTotalSoldCount',
-      revenue: 'getOfferContractStatsTotalRevenue',
-      margin: 'getOfferContractStatsTotalMargin',
-      payout: 'getOfferContractStatsTotalPayout',
-      scrubRate: 'getOfferContractStatsTotalScrubRate',
-      marginPercent: 'getOfferContractStatsTotalMarginPercent'
+      offer: 'getCurrentBuyerStatsOffer'
     })
   },
   methods: {
