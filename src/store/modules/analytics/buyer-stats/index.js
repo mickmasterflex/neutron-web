@@ -1,11 +1,11 @@
-import buyerClients from '@/store/modules/analytics/buyer-stats/clients'
-import buyerContracts from '@/store/modules/analytics/buyer-stats/contracts'
-import buyerOffers from '@/store/modules/analytics/buyer-stats/offers'
+import allBuyerClients from '@/store/modules/analytics/buyer-stats/clients'
+import buyerClient from '@/store/modules/analytics/buyer-stats/client'
+import buyerContract from '@/store/modules/analytics/buyer-stats/buyer-contract'
 
 const modules = {
-  buyerClients,
-  buyerContracts,
-  buyerOffers
+  allBuyerClients,
+  buyerClient,
+  buyerContract
 }
 
 export default {

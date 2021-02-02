@@ -36,26 +36,26 @@ export default {
     ...mapGetters({
       dateRange: 'getAnalyticsDateRangeUrlFormatted',
       buyerClient: 'getCurrentBuyerStatsClient',
-      leadCount: 'getBuyerStatsContractsTotalLeadCount',
-      soldCount: 'getBuyerStatsContractsTotalSoldCount',
-      revenue: 'getBuyerStatsContractsTotalRevenue',
-      margin: 'getBuyerStatsContractsTotalMargin',
-      payout: 'getBuyerStatsContractsTotalPayout',
-      scrubRate: 'getBuyerStatsContractsTotalScrubRate',
-      marginPercent: 'getBuyerStatsContractsTotalMarginPercent'
+      leadCount: 'getBuyerClientStatsTotalLeadCount',
+      soldCount: 'getBuyerClientStatsTotalSoldCount',
+      revenue: 'getBuyerClientStatsTotalRevenue',
+      margin: 'getBuyerClientStatsTotalMargin',
+      payout: 'getBuyerClientStatsTotalPayout',
+      scrubRate: 'getBuyerClientStatsTotalScrubRate',
+      marginPercent: 'getBuyerClientStatsTotalMarginPercent'
     })
   },
   methods: {
     ...mapActions({
-      fetchBuyerContractsStats: 'fetchBuyerContractsStats'
+      fetchBuyerClientStats: 'fetchBuyerClientStats'
     })
   },
   created () {
-    this.fetchBuyerContractsStats(this.id)
+    this.fetchBuyerClientStats(this.id)
   },
   watch: {
     dateRange () {
-      this.fetchBuyerContractsStats(this.id)
+      this.fetchBuyerClientStats(this.id)
     }
   },
   components: {

@@ -38,26 +38,26 @@ export default {
     ...mapGetters({
       dateRange: 'getAnalyticsDateRangeUrlFormatted',
       contract: 'getCurrentBuyerStatsContract',
-      leadCount: 'getBuyerStatsOffersTotalLeadCount',
-      soldCount: 'getBuyerStatsOffersTotalSoldCount',
-      revenue: 'getBuyerStatsOffersTotalRevenue',
-      margin: 'getBuyerStatsOffersTotalMargin',
-      payout: 'getBuyerStatsOffersTotalPayout',
-      scrubRate: 'getBuyerStatsOffersTotalScrubRate',
-      marginPercent: 'getBuyerStatsOffersTotalMarginPercent'
+      leadCount: 'getBuyerContractStatsTotalLeadCount',
+      soldCount: 'getBuyerContractStatsTotalSoldCount',
+      revenue: 'getBuyerContractStatsTotalRevenue',
+      margin: 'getBuyerContractStatsTotalMargin',
+      payout: 'getBuyerContractStatsTotalPayout',
+      scrubRate: 'getBuyerContractStatsTotalScrubRate',
+      marginPercent: 'getBuyerContractStatsTotalMarginPercent'
     })
   },
   methods: {
     ...mapActions({
-      fetchBuyerOffersStats: 'fetchBuyerOffersStats'
+      fetchBuyerContractStats: 'fetchBuyerContractStats'
     })
   },
   created () {
-    this.fetchBuyerOffersStats(this.id)
+    this.fetchBuyerContractStats(this.id)
   },
   watch: {
     dateRange () {
-      this.fetchBuyerOffersStats(this.id)
+      this.fetchBuyerContractStats(this.id)
     }
   },
   components: {

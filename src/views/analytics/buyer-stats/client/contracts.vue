@@ -4,7 +4,7 @@
       <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
     </template>
     <template slot="content">
-      <buyer-contract-list :buyer_stats_contracts="contracts"></buyer-contract-list>
+      <buyer-contract-list :buyer_client_contracts="contracts"></buyer-contract-list>
     </template>
   </panel-template>
 </template>
@@ -17,9 +17,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      contracts: 'getBuyerStatsContractsParentless',
-      loading: 'getBuyerStatsContractsFetchLoading',
-      loadingText: 'getBuyerStatsContractsFetchLoadingText',
+      contracts: 'getBuyerClientContractsParentless',
+      loading: 'getBuyerClientStatsFetchLoading',
+      loadingText: 'getBuyerClientStatsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     })
   },

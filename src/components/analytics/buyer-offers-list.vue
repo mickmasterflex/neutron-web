@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="buyer_stats_offers.length" class="table table-striped">
+    <table v-if="buyer_contract_stats_offers.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -14,7 +14,7 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="offer in buyer_stats_offers" :key="offer.id">
+      <tr class="tr" v-for="offer in buyer_contract_stats_offers" :key="offer.id">
         <td class="td">
           <span class="text-link" @click="linkToBuyerStatsOffer({ name: offer.name, id: offer.id })">{{offer.name}}</span>
         </td>
@@ -41,7 +41,7 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    buyer_stats_offers: {
+    buyer_contract_stats_offers: {
       type: [Object, Array],
       required: true
     }
@@ -52,7 +52,7 @@ export default {
     }),
     linkToBuyerStatsOffer (offer) {
       this.setCurrent(offer)
-      this.$router.push({ name: 'BuyerStatsOffer', params: { id: offer.id } })
+      this.$router.push({ name: 'BuyerStatsOfferContract', params: { id: offer.id } })
     }
   }
 }

@@ -7,7 +7,7 @@
       <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
     </template>
     <template slot="content">
-      <buyer-contract-list :buyer_stats_contracts="contracts"></buyer-contract-list>
+      <buyer-contract-list :buyer_client_stats="contracts"></buyer-contract-list>
     </template>
   </panel-template>
 </template>
@@ -21,13 +21,13 @@ export default {
   computed: {
     ...mapGetters({
       contract: 'getCurrentBuyerStatsContract',
-      getBuyerStatsContractsByParent: 'getBuyerStatsContractsByParent',
-      loading: 'getBuyerStatsContractsFetchLoading',
-      loadingText: 'getBuyerStatsContractsFetchLoadingText',
+      getBuyerClientContractsByParent: 'getBuyerClientContractsByParent',
+      loading: 'getBuyerClientStatsFetchLoading',
+      loadingText: 'getBuyerClientStatsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     }),
     contracts () {
-      return this.getBuyerStatsContractsByParent(this.contract.id)
+      return this.getBuyerClientContractsByParent(this.contract.id)
     }
   },
   components: {
@@ -40,7 +40,7 @@ export default {
     })
   },
   created () {
-    if (this.getBuyerStatsContractsByParent) {
+    if (this.getBuyerClientContractsByParent) {
       this.fetchBuyerClientsStats()
     }
   }
