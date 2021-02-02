@@ -22,8 +22,8 @@ export default {
     ...mapGetters({
       contract: 'getCurrentBuyerStatsContract',
       getBuyerClientContractsByParent: 'getBuyerClientContractsByParent',
-      loading: 'getBuyerClientStatsFetchLoading',
-      loadingText: 'getBuyerClientStatsFetchLoadingText',
+      loading: 'getBuyerStatsFetchLoading',
+      loadingText: 'getBuyerStatsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     }),
     contracts () {

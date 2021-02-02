@@ -15,20 +15,28 @@
 <script>
 import leadsList from '@/components/analytics/leads-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      leads: 'getBuyerStatsClientsLeads',
-      loading: 'getBuyerStatsClientsFetchLoading',
-      loadingText: 'getBuyerStatsClientsFetchLoadingText',
-      dateRangeText: 'getAnalyticsDateRange'
+      leads: 'getBuyerStatsLeads',
+      dateRangeText: 'getAnalyticsDateRange',
+      loading: 'getBuyerStatsFetchLoading',
+      loadingText: 'getBuyerStatsFetchLoadingText'
     })
   },
   components: {
     'leads-list': leadsList,
     'date-range-picker': dateRangePicker
+  },
+  methods: {
+    ...mapMutations({
+      resetLeads: 'RESET_BUYER_STATS_LEADS'
+    })
+  },
+  destroyed () {
+    this.resetLeads()
   }
 }
 </script>

@@ -1,14 +1,9 @@
 import axios from '@/axios'
-import loading from '@/store/modules/analytics/buyer-stats/client/loading'
-
-const modules = {
-  loading
-}
 
 const state = {
   current_buyer_stats_client: {},
   buyer_client_stats_contracts: [],
-  buyer_client_stats_leads: []
+  buyer_client_stats_fetch_loading_text: 'Loading Buyer Contracts Data'
 }
 
 const getters = {
@@ -21,35 +16,33 @@ const getters = {
   getBuyerClientContractsByParentCount: (state) => (contractId) => {
     const contracts = state.buyer_client_stats_contracts.filter(contract => contract.parent === contractId)
     return contracts.length
-  },
-  getBuyerClientStatsLeads: state => state.buyer_client_stats_leads
+  }
 }
 
 const actions = {
-  async fetchBuyerClientStats ({ commit, getters }, id) {
-    commit('SET_BUYER_CLIENT_STATS_FETCH_LOADING')
+  async fetchBuyerClientStats ({ commit, getters, state }, id) {
+    commit('SET_BUYER_STATS_FETCH_LOADING_TEXT', state.buyer_client_stats_fetch_loading_text)
+    commit('SET_BUYER_STATS_FETCH_LOADING')
     await axios.get(`/analytics/buyer-contracts/?${getters.getAnalyticsDateRangeUrlFormatted}&client=${id}`)
       .then(response => {
         commit('SET_BUYER_CLIENT_STATS_CONTRACTS', response.data.contracts)
         commit('SET_BUYER_STATS_TOTALS', response.data.totals)
-        commit('SET_BUYER_CLIENT_STATS_LEADS', response.data.leads)
+        commit('SET_BUYER_STATS_LEADS', response.data.leads)
         commit('SET_CURRENT_BUYER_STATS_CLIENT', response.data.client)
       }).finally(() => {
-        commit('RESET_BUYER_CLIENT_STATS_FETCH_LOADING')
+        commit('RESET_BUYER_STATS_FETCH_LOADING')
       })
   }
 }
 
 const mutations = {
   SET_CURRENT_BUYER_STATS_CLIENT: (state, buyerClient) => (state.current_buyer_stats_client = buyerClient),
-  SET_BUYER_CLIENT_STATS_CONTRACTS: (state, buyerContracts) => (state.buyer_client_stats_contracts = buyerContracts),
-  SET_BUYER_CLIENT_STATS_LEADS: (state, leads) => (state.buyer_client_stats_leads = leads)
+  SET_BUYER_CLIENT_STATS_CONTRACTS: (state, buyerContracts) => (state.buyer_client_stats_contracts = buyerContracts)
 }
 
 export default {
   state,
   getters,
   actions,
-  mutations,
-  modules
+  mutations
 }

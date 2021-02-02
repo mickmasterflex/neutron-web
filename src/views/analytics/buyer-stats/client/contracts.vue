@@ -21,8 +21,8 @@ export default {
   computed: {
     ...mapGetters({
       contracts: 'getBuyerClientContractsParentless',
-      loading: 'getBuyerClientStatsFetchLoading',
-      loadingText: 'getBuyerClientStatsFetchLoadingText',
+      loading: 'getBuyerStatsFetchLoading',
+      loadingText: 'getBuyerStatsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     })
   },

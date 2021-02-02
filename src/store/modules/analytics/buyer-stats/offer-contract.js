@@ -2,34 +2,32 @@ import axios from '@/axios'
 
 const state = {
   current_buyer_stats_offer_contract: {},
-  offer_contract_stats_leads: [],
-  offer_contract_stats_totals: {}
+  offer_contract_stats_fetch_loading_text: 'Loading Offer Contracts Data'
 }
 
 const getters = {
-  getCurrentBuyerStatsOffer: state => state.current_buyer_stats_offer_contract,
-  getOfferContractStatsLeads: state => state.offer_contract_stats_leads
+  getCurrentBuyerStatsOffer: state => state.current_buyer_stats_offer_contract
 }
 
 const actions = {
   async fetchOfferContractStats ({ commit, getters }, id) {
-    // commit('SET_BUYER_CLIENT_STATS_FETCH_LOADING')
+    commit('SET_BUYER_STATS_FETCH_LOADING_TEXT', state.offer_contract_stats_fetch_loading_text)
+    commit('SET_BUYER_STATS_FETCH_LOADING')
     await axios.get(`/analytics/leads/?${getters.getAnalyticsDateRangeUrlFormatted}&offer_contract=${id}`)
       .then(response => {
         commit('SET_BUYER_STATS_TOTALS', response.data.totals)
-        commit('SET_OFFER_CONTRACT_STATS_LEADS', response.data.leads)
+        commit('SET_BUYER_STATS_LEADS', response.data.leads)
         commit('SET_CURRENT_BUYER_STATS_OFFER_CONTRACT', response.data.offer_contract)
         commit('SET_CURRENT_BUYER_STATS_CONTRACT', response.data.contract)
         commit('SET_CURRENT_BUYER_STATS_CLIENT', response.data.client)
       }).finally(() => {
-        // commit('RESET_OFFER_CONTRACT_STATS_FETCH_LOADING')
+        commit('RESET_BUYER_STATS_FETCH_LOADING')
       })
   }
 }
 
 const mutations = {
-  SET_CURRENT_BUYER_STATS_OFFER_CONTRACT: (state, offer) => (state.current_buyer_stats_offer_contract = offer),
-  SET_OFFER_CONTRACT_STATS_LEADS: (state, leads) => (state.offer_contract_stats_leads = leads)
+  SET_CURRENT_BUYER_STATS_OFFER_CONTRACT: (state, offer) => (state.current_buyer_stats_offer_contract = offer)
 }
 
 export default {
