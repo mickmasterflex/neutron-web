@@ -1,5 +1,8 @@
 <template>
-  <panel-template :showLoader="loading" :loadingText="loadingText" content-background-color="white">
+  <panel-template
+    :show-loader="loading"
+    :loading-text="loadingText"
+    content-background-color="white">
     <template slot="title">
       <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
     </template>

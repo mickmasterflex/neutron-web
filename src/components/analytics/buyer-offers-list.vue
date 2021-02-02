@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -46,13 +46,19 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapGetters({
+      contract: 'getCurrentBuyerStatsContract',
+      client: 'getCurrentBuyerStatsClient'
+    })
+  },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_BUYER_STATS_OFFER'
+      setCurrent: 'SET_CURRENT_BUYER_STATS_OFFER_CONTRACT'
     }),
     linkToBuyerStatsOffer (offer) {
       this.setCurrent(offer)
-      this.$router.push({ name: 'BuyerStatsOfferContract', params: { id: offer.id } })
+      this.$router.push({ name: 'BuyerStatsOfferContract', params: { id: offer.id, buyerId: this.contract.id, clientId: this.client.id } })
     }
   }
 }

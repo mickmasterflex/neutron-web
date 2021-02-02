@@ -158,6 +158,31 @@ const routes = [
     ]
   },
   {
+    path: '/analytics/buyer-stats/clients/:clientId/contracts/:buyerId/offers/:id',
+    name: 'BuyerStatsOfferContract',
+    redirect: { name: 'BuyerStatsOfferContractLeads' },
+    component: () => import('@/views/analytics/buyer-stats/offer'),
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      props.clientId = +props.clientId
+      return props
+    },
+    children: [
+      {
+        name: 'BuyerStatsOfferContractLeads',
+        path: 'leads/',
+        component: () => import('@/views/analytics/buyer-stats/offer/leads'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
+  },
+  {
     path: '/products/brands/',
     name: 'Brands',
     component: () => import('@/views/products/index.vue'),

@@ -7,28 +7,28 @@
       <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
     </template>
     <template slot="content">
-      <buyer-offer-list :buyer_contract_stats_offers="offers"></buyer-offer-list>
+      <leads-list :leads="leads"></leads-list>
     </template>
   </panel-template>
 </template>
 
 <script>
-import buyerOfferList from '@/components/analytics/buyer-offers-list'
+import leadsList from '@/components/analytics/leads-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      offers: 'getBuyerContractStatsOffers',
+      leads: 'getOfferContractStatsLeads',
       loading: 'getBuyerContractStatsFetchLoading',
       loadingText: 'getBuyerContractStatsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     })
   },
   components: {
-    'date-range-picker': dateRangePicker,
-    'buyer-offer-list': buyerOfferList
+    'leads-list': leadsList,
+    'date-range-picker': dateRangePicker
   }
 }
 </script>

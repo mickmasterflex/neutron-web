@@ -14,7 +14,7 @@ const state = {
 
 const getters = {
   getCurrentBuyerStatsContract: state => state.current_buyer_stats_contract,
-  getBuyerContractStats: state => state.buyer_contract_stats_offers,
+  getBuyerContractStatsOffers: state => state.buyer_contract_stats_offers,
   getBuyerContractStatsTotalLeadCount: state => state.buyer_contract_stats_totals.lead_count,
   getBuyerContractStatsTotalSoldCount: state => state.buyer_contract_stats_totals.sold_count,
   getBuyerContractStatsTotalRevenue: state => state.buyer_contract_stats_totals.revenue,
@@ -34,6 +34,7 @@ const actions = {
         commit('SET_BUYER_CONTRACT_STATS_TOTALS', response.data.totals)
         commit('SET_BUYER_CONTRACT_STATS_LEADS', response.data.leads)
         commit('SET_CURRENT_BUYER_STATS_CONTRACT', response.data.contract)
+        commit('SET_CURRENT_BUYER_STATS_CLIENT', response.data.client)
       }).finally(() => {
         commit('RESET_BUYER_CONTRACT_STATS_FETCH_LOADING')
       })
