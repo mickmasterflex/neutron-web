@@ -1,5 +1,9 @@
 <template>
-  <date-range-picker :date-range="dateRange" @input="updateDateRange($event)"></date-range-picker>
+  <date-range-picker
+    :date-range="dateRange"
+    @input="updateDateRange($event)"
+    @moveToDate="updateDateRange($event)"
+  ></date-range-picker>
 </template>
 
 <script>
