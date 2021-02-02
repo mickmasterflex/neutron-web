@@ -41,7 +41,6 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_BUYER_STATS_CLIENT: (state, buyerClient) => (state.current_buyer_stats_client = buyerClient),
-  RESET_CURRENT_BUYER_STATS_CLIENT: (state) => (state.current_buyer_stats_client = {}),
   SET_BUYER_STATS_CLIENTS: (state, buyerClients) => (state.buyer_stats_clients = buyerClients),
   SET_BUYER_STATS_CLIENTS_TOTALS: (state, totals) => (state.buyer_stats_clients_totals = totals),
   SET_BUYER_STATS_CLIENTS_LEADS: (state, leads) => (state.buyer_stats_clients_leads = leads)

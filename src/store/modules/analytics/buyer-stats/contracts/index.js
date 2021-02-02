@@ -41,6 +41,7 @@ const actions = {
         commit('SET_BUYER_STATS_CONTRACTS', response.data.contracts)
         commit('SET_BUYER_STATS_CONTRACTS_TOTALS', response.data.totals)
         commit('SET_BUYER_STATS_CONTRACTS_LEADS', response.data.leads)
+        commit('SET_CURRENT_BUYER_STATS_CLIENT', response.data.client)
       }).finally(() => {
         commit('RESET_BUYER_STATS_CONTRACTS_FETCH_LOADING')
       })
@@ -49,7 +50,6 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_BUYER_STATS_CONTRACT: (state, contract) => (state.current_buyer_stats_contract = contract),
-  RESET_CURRENT_BUYER_STATS_CONTRACT: (state) => (state.current_buyer_stats_contract = {}),
   SET_BUYER_STATS_CONTRACTS: (state, buyerContracts) => (state.buyer_stats_contracts = buyerContracts),
   SET_BUYER_STATS_CONTRACTS_TOTALS: (state, totals) => (state.buyer_stats_contracts_totals = totals),
   SET_BUYER_STATS_CONTRACTS_LEADS: (state, leads) => (state.buyer_stats_contracts_leads = leads)
