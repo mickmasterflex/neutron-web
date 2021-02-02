@@ -40,7 +40,7 @@ export default {
     })
   },
   created () {
-    if (this.getBuyerClientContractsByParent) {
+    if (this.contracts) {
       this.fetchBuyerClientsStats()
     }
   }

@@ -48,10 +48,15 @@ export default {
   methods: {
     ...mapActions({
       fetchBuyerClientStats: 'fetchBuyerClientStats'
-    })
+    }),
+    async setBuyerClientStats () {
+      await this.fetchBuyerClientStats(this.id)
+    }
   },
   created () {
-    this.fetchBuyerClientStats(this.id)
+    this.setBuyerClientStats().then(() => {
+      document.title = this.buyerClient.name
+    })
   },
   watch: {
     dateRange () {

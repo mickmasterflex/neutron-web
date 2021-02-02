@@ -50,10 +50,15 @@ export default {
   methods: {
     ...mapActions({
       fetchBuyerContractStats: 'fetchBuyerContractStats'
-    })
+    }),
+    async setBuyerContractStats () {
+      await this.fetchBuyerContractStats(this.id)
+    }
   },
   created () {
-    this.fetchBuyerContractStats(this.id)
+    this.setBuyerContractStats().then(() => {
+      document.title = this.contract.name
+    })
   },
   watch: {
     dateRange () {
