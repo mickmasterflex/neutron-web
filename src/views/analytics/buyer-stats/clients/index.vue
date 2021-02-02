@@ -18,7 +18,7 @@
 
 <script>
 import buyerStatsLayout from '@/views/analytics/buyer-stats/layout.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
@@ -28,10 +28,16 @@ export default {
   methods: {
     ...mapActions({
       fetchBuyerClientsStats: 'fetchBuyerClientsStats'
+    }),
+    ...mapMutations({
+      resetLeads: 'RESET_BUYER_STATS_LEADS'
     })
   },
   created () {
     this.fetchBuyerClientsStats()
+  },
+  destroyed () {
+    this.resetLeads()
   },
   watch: {
     dateRange () {

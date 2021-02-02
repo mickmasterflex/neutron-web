@@ -8,7 +8,7 @@
 
 <script>
 import buyerStatsLayout from '@/views/analytics/buyer-stats/layout.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   props: {
     clientId: Number,
@@ -24,6 +24,9 @@ export default {
     ...mapActions({
       fetchOfferContractStats: 'fetchOfferContractStats'
     }),
+    ...mapMutations({
+      resetLeads: 'RESET_BUYER_STATS_LEADS'
+    }),
     async setOfferContractStats () {
       await this.fetchOfferContractStats(this.id)
     }
@@ -32,6 +35,9 @@ export default {
     this.setOfferContractStats().then(() => {
       document.title = this.offer.name
     })
+  },
+  destroyed () {
+    this.resetLeads()
   },
   watch: {
     dateRange () {
