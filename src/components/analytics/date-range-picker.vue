@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import dateRangePicker from '@/components/ui/buttons/date-range-picker'
+import dateRangePicker from '@/components/ui/calendars/date-range-picker/index'
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
