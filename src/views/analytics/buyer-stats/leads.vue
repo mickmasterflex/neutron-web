@@ -22,8 +22,8 @@ export default {
     ...mapGetters({
       leads: 'getBuyerStatsLeads',
       dateRangeText: 'getAnalyticsDateRange',
-      loading: 'getBuyerStatsFetchLoading',
-      loadingText: 'getBuyerStatsFetchLoadingText'
+      loading: 'getAnalyticsFetchLoading',
+      loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
   components: {

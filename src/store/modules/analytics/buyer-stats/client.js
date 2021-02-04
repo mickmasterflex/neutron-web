@@ -21,8 +21,8 @@ const getters = {
 
 const actions = {
   async fetchBuyerClientStats ({ commit, getters, state }, id) {
-    commit('SET_BUYER_STATS_FETCH_LOADING_TEXT', state.buyer_client_stats_fetch_loading_text)
-    commit('SET_BUYER_STATS_FETCH_LOADING')
+    commit('SET_ANALYTICS_FETCH_LOADING_TEXT', state.buyer_client_stats_fetch_loading_text)
+    commit('SET_ANALYTICS_FETCH_LOADING')
     await axios.get(`/analytics/buyer-contracts/?${getters.getAnalyticsDateRangeUrlFormatted}&client=${id}`)
       .then(response => {
         commit('SET_BUYER_CLIENT_STATS_CONTRACTS', response.data.contracts)
@@ -30,7 +30,7 @@ const actions = {
         commit('SET_BUYER_STATS_LEADS', response.data.leads)
         commit('SET_CURRENT_BUYER_STATS_CLIENT', response.data.client)
       }).finally(() => {
-        commit('RESET_BUYER_STATS_FETCH_LOADING')
+        commit('RESET_ANALYTICS_FETCH_LOADING')
       })
   }
 }

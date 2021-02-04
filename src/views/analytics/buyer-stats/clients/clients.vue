@@ -21,8 +21,8 @@ export default {
   computed: {
     ...mapGetters({
       clients: 'getBuyerStatsClients',
-      loading: 'getBuyerStatsFetchLoading',
-      loadingText: 'getBuyerStatsFetchLoadingText',
+      loading: 'getAnalyticsFetchLoading',
+      loadingText: 'getAnalyticsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
     })
   },

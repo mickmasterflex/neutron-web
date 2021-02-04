@@ -11,15 +11,15 @@ const getters = {
 
 const actions = {
   async fetchBuyerClientsStats ({ commit, getters, state }) {
-    commit('SET_BUYER_STATS_FETCH_LOADING_TEXT', state.buyer_stats_clients_fetch_loading_text)
-    commit('SET_BUYER_STATS_FETCH_LOADING')
+    commit('SET_ANALYTICS_FETCH_LOADING_TEXT', state.buyer_stats_clients_fetch_loading_text)
+    commit('SET_ANALYTICS_FETCH_LOADING')
     await axios.get(`/analytics/buyer-clients/?${getters.getAnalyticsDateRangeUrlFormatted}`)
       .then(response => {
         commit('SET_BUYER_STATS_CLIENTS', response.data.clients)
         commit('SET_BUYER_STATS_TOTALS', response.data.totals)
         commit('SET_BUYER_STATS_LEADS', response.data.leads)
       }).finally(() => {
-        commit('RESET_BUYER_STATS_FETCH_LOADING')
+        commit('RESET_ANALYTICS_FETCH_LOADING')
       })
   }
 }
