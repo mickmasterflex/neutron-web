@@ -18,27 +18,13 @@
       </div>
     </template>
     <template v-slot:footer>
-      <div class="">
-        <div class="flex flex-row space-x-1 justify-center p-2 border-b bg-gray-100">
-          <text-link-button @click="moveToDate(todayAsRange)">Today</text-link-button>
-          <text-link-button @click="moveToDate(yesterdayAsRange)">Yesterday</text-link-button>
-          <text-link-button @click="moveToDate(thisWeek)">This Week</text-link-button>
-          <text-link-button @click="moveToDate(lastWeek)">Last Week</text-link-button>
-          <text-link-button @click="moveToDate(thisMonth)">This Month</text-link-button>
-          <text-link-button @click="moveToDate(lastMonth)">Last Month</text-link-button>
-        </div>
-        <div class="flex-row flex justify-between items-center p-2">
-          <span class="flex flex-col text-gray-600 ml-2">
-            Selected Range:
-            <selected-range
-              :start-date="new Date(dateRange.start).toDateString()"
-              :end-date="new Date(dateRange.end).toDateString()"></selected-range>
-          </span>
-          <button
-            class="btn-green btn btn-lg"
-            @click="$emit('applyRange')">
-            <font-awesome-icon icon="check"></font-awesome-icon> Apply Range</button>
-        </div>
+      <div class="flex flex-row space-x-1 justify-center p-2 border-t bg-white rounded-b-lg">
+        <text-link-button @click="moveToDate(todayAsRange)">Today</text-link-button>
+        <text-link-button @click="moveToDate(yesterdayAsRange)">Yesterday</text-link-button>
+        <text-link-button @click="moveToDate(thisWeek)">This Week</text-link-button>
+        <text-link-button @click="moveToDate(lastWeek)">Last Week</text-link-button>
+        <text-link-button @click="moveToDate(thisMonth)">This Month</text-link-button>
+        <text-link-button @click="moveToDate(lastMonth)">Last Month</text-link-button>
       </div>
     </template>
   </v-date-picker>
@@ -100,6 +86,7 @@ export default {
   methods: {
     moveToDate (dateRange) {
       this.$emit('moveToDate', dateRange)
+      this.$refs.dateRangeCalendar.hidePopover()
       this.$refs.dateRangeCalendar.move(dateRange.end)
     }
   },
