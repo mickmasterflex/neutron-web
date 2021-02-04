@@ -35,13 +35,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      leadCount: 'getBuyerStatsTotalLeadCount',
-      soldCount: 'getBuyerStatsTotalSoldCount',
-      revenue: 'getBuyerStatsTotalRevenue',
-      margin: 'getBuyerStatsTotalMargin',
-      payout: 'getBuyerStatsTotalPayout',
-      scrubRate: 'getBuyerStatsTotalScrubRate',
-      marginPercent: 'getBuyerStatsTotalMarginPercent'
+      leadCount: 'getAnalyticsTotalLeadCount',
+      soldCount: 'getAnalyticsTotalSoldCount',
+      revenue: 'getAnalyticsTotalRevenue',
+      margin: 'getAnalyticsTotalMargin',
+      payout: 'getAnalyticsTotalPayout',
+      scrubRate: 'getAnalyticsTotalScrubRate',
+      marginPercent: 'getAnalyticsTotalMarginPercent'
     })
   }
 }

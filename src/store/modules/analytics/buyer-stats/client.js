@@ -26,7 +26,7 @@ const actions = {
     await axios.get(`/analytics/buyer-contracts/?${getters.getAnalyticsDateRangeUrlFormatted}&client=${id}`)
       .then(response => {
         commit('SET_BUYER_CLIENT_STATS_CONTRACTS', response.data.contracts)
-        commit('SET_BUYER_STATS_TOTALS', response.data.totals)
+        commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
         commit('SET_CURRENT_BUYER_STATS_CLIENT', response.data.client)
       }).finally(() => {

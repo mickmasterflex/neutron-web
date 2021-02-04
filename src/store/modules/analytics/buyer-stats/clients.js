@@ -16,7 +16,7 @@ const actions = {
     await axios.get(`/analytics/buyer-clients/?${getters.getAnalyticsDateRangeUrlFormatted}`)
       .then(response => {
         commit('SET_BUYER_STATS_CLIENTS', response.data.clients)
-        commit('SET_BUYER_STATS_TOTALS', response.data.totals)
+        commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')

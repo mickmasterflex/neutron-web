@@ -58,7 +58,7 @@ const routes = [
       {
         name: 'BuyerStatsClientsLeads',
         path: 'leads/',
-        component: () => import('@/views/analytics/buyer-stats/leads'),
+        component: () => import('@/views/analytics/leads'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -96,7 +96,7 @@ const routes = [
       {
         name: 'BuyerStatsClientLeads',
         path: 'leads/',
-        component: () => import('@/views/analytics/buyer-stats/leads'),
+        component: () => import('@/views/analytics/leads'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -146,7 +146,7 @@ const routes = [
       {
         name: 'BuyerStatsContractLeads',
         path: 'leads/',
-        component: () => import('@/views/analytics/buyer-stats/leads'),
+        component: () => import('@/views/analytics/leads'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -172,7 +172,7 @@ const routes = [
       {
         name: 'BuyerStatsOfferContractLeads',
         path: 'leads/',
-        component: () => import('@/views/analytics/buyer-stats/leads'),
+        component: () => import('@/views/analytics/leads'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',

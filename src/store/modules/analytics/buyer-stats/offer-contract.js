@@ -15,7 +15,7 @@ const actions = {
     commit('SET_ANALYTICS_FETCH_LOADING')
     await axios.get(`/analytics/leads/?${getters.getAnalyticsDateRangeUrlFormatted}&offer_contract=${id}`)
       .then(response => {
-        commit('SET_BUYER_STATS_TOTALS', response.data.totals)
+        commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
         commit('SET_CURRENT_BUYER_STATS_OFFER_CONTRACT', response.data.offer_contract)
         commit('SET_CURRENT_BUYER_STATS_CONTRACT', response.data.contract)
