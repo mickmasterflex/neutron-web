@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  buyer_stats_clients: {},
+  buyer_stats_clients: [],
   buyer_stats_clients_fetch_loading_text: 'Loading Buyer Clients Data'
 }
 

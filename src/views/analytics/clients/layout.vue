@@ -1,12 +1,12 @@
 <template>
-  <analytics-layout hud-title="All Buyer Clients">
+  <analytics-layout :hud-title="hudTitle">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
-          <router-link :to="{ name: 'BuyerStatsClients' }">Clients</router-link>
+          <router-link :to="clientsRoute">Clients</router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="{ name: 'BuyerStatsClientsLeads'}">Leads</router-link>
+          <router-link :to="leadsRoute">Leads</router-link>
         </li>
       </ul>
     </template>
@@ -18,30 +18,40 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
-  computed: {
-    ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted'
-    })
+  props: {
+    hudTitle: {
+      type: String,
+      default: 'All Clients'
+    },
+    fetchClients: {
+      type: Function,
+      required: true
+    },
+    clientsRoute: {
+      type: Object,
+      required: true
+    },
+    leadsRoute: {
+      type: Object,
+      required: true
+    }
   },
   methods: {
-    ...mapActions({
-      fetchBuyerClientsStats: 'fetchBuyerClientsStats'
-    }),
     ...mapMutations({
       resetLeads: 'RESET_ANALYTICS_LEADS'
     })
   },
   created () {
-    this.fetchBuyerClientsStats()
+    this.fetchClients()
   },
   destroyed () {
     this.resetLeads()
   },
   watch: {
     dateRange () {
-      this.fetchBuyerClientsStats()
+      this.fetchClients()
     }
   },
   components: {

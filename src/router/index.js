@@ -32,20 +32,49 @@ const routes = [
     redirect: { name: 'BuyerStats' }
   },
   {
-    path: '/analytics/',
+    path: '/analytics/partner-stats/',
     name: 'PartnerStats',
-    redirect: { name: 'BuyerStats' }
+    redirect: { name: 'PartnerStatsClients' },
+    component: () => import('@/views/analytics/clients/partner-stats'),
+    children: [
+      {
+        name: 'PartnerStatsClients',
+        path: 'clients/',
+        component: () => import('@/views/analytics/clients/clients'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'partner-stats',
+          contentTab: 'clients',
+          title: 'All Partner Client Stats'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'PartnerStatsClientsLeads',
+        path: 'leads/',
+        component: () => import('@/views/analytics/leads'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'partner-stats',
+          contentTab: 'leads',
+          title: 'All Partner Client Lead Stats'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/analytics/buyer-stats/',
     name: 'BuyerStats',
     redirect: { name: 'BuyerStatsClients' },
-    component: () => import('@/views/analytics/buyer-stats/clients'),
+    component: () => import('@/views/analytics/clients/buyer-stats'),
     children: [
       {
         name: 'BuyerStatsClients',
         path: 'clients/',
-        component: () => import('@/views/analytics/buyer-stats/clients/clients'),
+        component: () => import('@/views/analytics/clients/clients'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
