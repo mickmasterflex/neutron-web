@@ -2,7 +2,7 @@ import axios from '@/axios'
 
 const state = {
   current_buyer_stats_contract: {},
-  buyer_contract_stats_offers: {},
+  buyer_contract_stats_offers: [],
   buyer_contract_stats_fetch_loading_text: 'Loading Buyer Contract Data'
 }
 

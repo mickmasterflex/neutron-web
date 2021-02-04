@@ -1,12 +1,12 @@
 <template>
-  <analytics-layout :hud-title="buyerClient.name">
+  <analytics-layout :hud-title="client.name">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="{ name: 'BuyerStatsClientContracts' }">Contracts</router-link>
+          <router-link :to="contractsRoute">Contracts</router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="{ name: 'BuyerStatsClientLeads'}">Leads</router-link>
+          <router-link :to="leadsRoute">Leads</router-link>
         </li>
       </ul>
     </template>
@@ -18,33 +18,45 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   props: {
     id: {
       type: Number
+    },
+    contractsRoute: {
+      type: Object,
+      required: true
+    },
+    leadsRoute: {
+      type: Object,
+      required: true
+    },
+    fetchClient: {
+      type: Function,
+      required: true
+    },
+    client: {
+      type: Object,
+      required: true
     }
   },
   computed: {
     ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted',
-      buyerClient: 'getCurrentBuyerStatsClient'
+      dateRange: 'getAnalyticsDateRangeUrlFormatted'
     })
   },
   methods: {
-    ...mapActions({
-      fetchBuyerClientStats: 'fetchBuyerClientStats'
-    }),
     ...mapMutations({
       resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     async setBuyerClientStats () {
-      await this.fetchBuyerClientStats(this.id)
+      await this.fetchClient(this.id)
     }
   },
   created () {
     this.setBuyerClientStats().then(() => {
-      document.title = this.buyerClient.name
+      document.title = this.client.name
     })
   },
   destroyed () {
@@ -52,7 +64,7 @@ export default {
   },
   watch: {
     dateRange () {
-      this.fetchBuyerClientStats(this.id)
+      this.fetchClient(this.id)
     }
   },
   components: {

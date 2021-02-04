@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="buyer_client_stats_contracts.length" class="table table-striped">
+    <table v-if="contracts.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>
@@ -15,7 +15,7 @@
       </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="contract in buyer_client_stats_contracts" :key="contract.id">
+      <tr class="tr" v-for="contract in contracts" :key="contract.id">
         <td class="td">
           <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
         </td>
@@ -49,36 +49,27 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
-
 export default {
   props: {
-    buyer_client_stats_contracts: {
-      type: [Object, Array],
+    contracts: {
+      type: Array,
       required: true
-    }
-  },
-  computed: {
-    ...mapGetters({
-      client: 'getCurrentBuyerStatsClient',
-      contractsCount: 'getBuyerClientContractsByParentCount'
-    })
-  },
-  methods: {
-    ...mapMutations({
-      setCurrent: 'SET_CURRENT_BUYER_STATS_CONTRACT'
-    }),
-    linkToContractLeads (contract) {
-      this.setCurrent(contract)
-      this.$router.push({ name: 'BuyerStatsContractLeads', params: { id: contract.id, clientId: this.client.id } })
     },
-    linkToContractContracts (contract) {
-      this.setCurrent(contract)
-      this.$router.push({ name: 'BuyerStatsContractContracts', params: { id: contract.id, clientId: this.client.id } })
+    linkToContract: {
+      type: Function,
+      required: true
     },
-    linkToContract (contract) {
-      this.setCurrent(contract)
-      this.$router.push({ name: 'BuyerStatsContract', params: { id: contract.id, clientId: this.client.id } })
+    linkToContractLeads: {
+      type: Function,
+      required: true
+    },
+    linkToContractContracts: {
+      type: Function,
+      required: true
+    },
+    contractsCount: {
+      type: Function,
+      required: true
     }
   }
 }
