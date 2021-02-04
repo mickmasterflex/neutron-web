@@ -1,5 +1,5 @@
 <template>
-  <buyer-stats-layout hud-title="All Buyer Clients">
+  <analytics-layout hud-title="All Buyer Clients">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
@@ -13,11 +13,11 @@
     <template v-slot:content>
       <router-view></router-view>
     </template>
-  </buyer-stats-layout>
+  </analytics-layout>
 </template>
 
 <script>
-import buyerStatsLayout from '@/views/analytics/layout.vue'
+import analyticsLayout from '@/views/analytics/layout.vue'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
   computed: {
@@ -45,7 +45,7 @@ export default {
     }
   },
   components: {
-    'buyer-stats-layout': buyerStatsLayout
+    'analytics-layout': analyticsLayout
   }
 }
 </script>
