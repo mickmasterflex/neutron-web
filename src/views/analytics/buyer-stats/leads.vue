@@ -20,7 +20,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      leads: 'getBuyerStatsLeads',
+      leads: 'getAnalyticsLeads',
       dateRangeText: 'getAnalyticsDateRange',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'

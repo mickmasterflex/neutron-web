@@ -38,7 +38,7 @@ export default {
       fetchBuyerContractStats: 'fetchBuyerContractStats'
     }),
     ...mapMutations({
-      resetLeads: 'RESET_BUYER_STATS_LEADS'
+      resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     async setBuyerContractStats () {
       await this.fetchBuyerContractStats(this.id)

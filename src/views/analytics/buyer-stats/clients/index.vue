@@ -30,7 +30,7 @@ export default {
       fetchBuyerClientsStats: 'fetchBuyerClientsStats'
     }),
     ...mapMutations({
-      resetLeads: 'RESET_BUYER_STATS_LEADS'
+      resetLeads: 'RESET_ANALYTICS_LEADS'
     })
   },
   created () {
