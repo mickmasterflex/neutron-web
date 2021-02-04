@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import buyerStatsLayout from '@/views/analytics/buyer-stats/layout.vue'
+import buyerStatsLayout from '@/views/analytics/layout.vue'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   props: {
