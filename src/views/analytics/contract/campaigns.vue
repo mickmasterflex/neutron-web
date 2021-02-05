@@ -7,42 +7,28 @@
       <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
     </template>
     <template slot="content">
-      <buyer-contract-list :contracts="contracts"></buyer-contract-list>
+      <partner-campaign-list :campaigns="campaigns"></partner-campaign-list>
     </template>
   </panel-template>
 </template>
 
 <script>
-import buyerContractList from '@/components/analytics/contracts/buyer-contracts-list'
+import partnerCampaignList from '@/components/analytics/partner-campaigns-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      contract: 'getCurrentBuyerStatsContract',
-      getBuyerClientContractsByParent: 'getBuyerClientContractsByParent',
+      campaigns: 'getPartnerContractStatsCampaigns',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
-    }),
-    contracts () {
-      return this.getBuyerClientContractsByParent(this.contract.id)
-    }
+    })
   },
   components: {
     'date-range-picker': dateRangePicker,
-    'buyer-contract-list': buyerContractList
-  },
-  methods: {
-    ...mapActions({
-      fetchBuyerClientsStats: 'fetchBuyerClientsStats'
-    })
-  },
-  created () {
-    if (this.contracts) {
-      this.fetchBuyerClientsStats()
-    }
+    'partner-campaign-list': partnerCampaignList
   }
 }
 </script>

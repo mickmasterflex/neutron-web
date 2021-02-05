@@ -28,8 +28,8 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      buyerContracts: 'getBuyerClientContractsParentless',
-      partnerContracts: 'getPartnerClientContractsParentless',
+      buyerContracts: 'getBuyerClientContracts',
+      partnerContracts: 'getPartnerClientContracts',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText',
       dateRangeText: 'getAnalyticsDateRange'
