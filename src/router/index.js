@@ -106,7 +106,7 @@ const routes = [
     path: '/analytics/partner-stats/clients/:clientId/contracts/:id/',
     name: 'PartnerStatsContract',
     redirect: { name: 'PartnerStatsContractCampaigns' },
-    component: () => import('@/views/analytics/contract/partner-contract'),
+    component: () => import('@/views/analytics/contract/partner/partner-contract'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
@@ -135,7 +135,7 @@ const routes = [
       {
         name: 'PartnerStatsContractCampaigns',
         path: 'campaigns/',
-        component: () => import('@/views/analytics/contract/campaigns'),
+        component: () => import('@/views/analytics/contract/partner/campaigns'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -259,7 +259,7 @@ const routes = [
     path: '/analytics/buyer-stats/clients/:clientId/contracts/:id/',
     name: 'BuyerStatsContract',
     redirect: { name: 'BuyerStatsContractOffers' },
-    component: () => import('@/views/analytics/contract/buyer-contract'),
+    component: () => import('@/views/analytics/contract/buyer/buyer-contract'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
@@ -288,7 +288,7 @@ const routes = [
       {
         name: 'BuyerStatsContractOffers',
         path: 'offers/',
-        component: () => import('@/views/analytics/contract/offers'),
+        component: () => import('@/views/analytics/contract/buyer/offers'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
