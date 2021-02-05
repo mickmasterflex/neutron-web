@@ -5,7 +5,7 @@
       New {{ relationType() }} Relation
     </template>
     <template v-slot:header>
-      Select a {{ relationType() }} Contract
+      {{ relationType() }} Contract Selection
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
