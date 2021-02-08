@@ -315,7 +315,7 @@ const routes = [
     path: '/analytics/buyer-stats/clients/:clientId/contracts/:buyerId/offers/:id',
     name: 'BuyerStatsOfferContract',
     redirect: { name: 'BuyerStatsOfferContractLeads' },
-    component: () => import('@/views/analytics/buyer-stats/offer'),
+    component: () => import('@/views/analytics/offer'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
