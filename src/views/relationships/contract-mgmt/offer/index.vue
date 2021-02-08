@@ -6,12 +6,15 @@
         <stat-card :data="offer.id" :title="`Offer`" :color="`teal`"></stat-card>
       </div>
     </template>
-    <template v-slot:content>
+    <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'OfferDetails', params: {id:id, client: client}}">Offer Details</router-link>
         </li>
       </ul>
+    </template>
+    <template v-slot:content>
+      <router-view/>
     </template>
   </content-layout>
 </template>

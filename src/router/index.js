@@ -389,6 +389,7 @@ const routes = [
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
+      props.buyer = +props.buyer
       return props
     },
     children: [
@@ -404,6 +405,7 @@ const routes = [
         props (route) {
           const props = { ...route.params }
           props.id = +props.id
+          props.buyer = +props.buyer
           return props
         },
         pathToRegexpOptions: { strict: true }
