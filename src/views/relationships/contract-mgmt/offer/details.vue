@@ -9,7 +9,7 @@
   </base-panel-grid>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 import deleteOffer from '@/components/offers/delete'
 import updateOffer from '@/components/offers/update'
 
@@ -29,27 +29,6 @@ export default {
       loading: 'getOfferFetchLoading',
       loadingText: 'getOfferFetchLoadingText'
     })
-  },
-  methods: {
-    ...mapActions({
-      fetchCurrentOffer: 'fetchCurrentOffer'
-    }),
-    ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_OFFER'
-    }),
-    async setOffer () {
-      if (this.offer.id !== this.id) {
-        await this.fetchCurrentOffer(this.id)
-      }
-    }
-  },
-  created () {
-    this.setOffer().then(() => {
-      document.title = this.offer.name
-    })
-  },
-  destroyed () {
-    this.resetCurrent()
   }
 }
 </script>
