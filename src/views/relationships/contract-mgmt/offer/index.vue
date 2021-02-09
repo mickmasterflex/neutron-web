@@ -39,9 +39,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchCurrentOffer: 'fetchCurrentOffer',
-      fetchOfferByBuyer: 'fetchOfferByBuyer',
-      fetchBuyers: 'fetchBuyers'
+      fetchCurrentOffer: 'fetchCurrentOffer'
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_OFFER'
