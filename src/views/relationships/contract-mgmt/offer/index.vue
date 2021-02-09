@@ -11,6 +11,9 @@
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
           <router-link :to="{name: 'OfferDetails', params: {id:id, client: client}}">Offer Details</router-link>
         </li>
+        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'field-management' ? 'active' : ''" >
+          <router-link :to="{name: 'OfferFieldManagement', params: {id:id, client: client}}">Field Management</router-link>
+        </li>
       </ul>
     </template>
     <template v-slot:content>

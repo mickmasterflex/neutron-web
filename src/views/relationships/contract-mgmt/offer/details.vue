@@ -1,13 +1,13 @@
 <template>
   <base-panel-grid>
-        <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
-        <panel-template title="Danger Zone" :showLoader="loading" :loadingText="loadingText" class="col-span-2">
-          <template #content>
-            <delete-offer :offer="offer" :client="$route.params.client"></delete-offer>
-          </template>
-        </panel-template>
-      </base-panel-grid>
-    </template>
+    <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
+    <panel-template title="Danger Zone" :showLoader="loading" :loadingText="loadingText" class="col-span-2">
+      <template #content>
+        <delete-offer :offer="offer" :client="$route.params.client"></delete-offer>
+      </template>
+    </panel-template>
+  </base-panel-grid>
+</template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteOffer from '@/components/offers/delete'

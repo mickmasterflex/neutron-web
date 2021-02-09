@@ -409,6 +409,23 @@ const routes = [
           return props
         },
         pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'OfferFieldManagement',
+        path: 'field-management/',
+        component: () => import('@/views/relationships/contract-mgmt/offer/field-management.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'field-management'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.buyer = +props.buyer
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
       }
     ]
   },
