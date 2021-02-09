@@ -5,7 +5,7 @@
         <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
       </template>
       <template slot="content">
-        <offer-list :offers="offers" :client="buyer.client"></offer-list>
+        <offer-list :offers="offers" :client="client"></offer-list>
       </template>
     </panel-template>
     <create-offer :buyer="buyer.id"></create-offer>
@@ -18,6 +18,9 @@ import offerList from '@/components/offers/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    client: String
+  },
   components: {
     'create-offer': createOffer,
     'offer-list': offerList
