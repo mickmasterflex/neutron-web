@@ -7,7 +7,8 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
-          <select-product v-model="product" rules="required"></select-product>
+          <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
+<!--          <select-product v-model="product" rules="required"></select-product>-->
         </form>
       </validation-observer>
     </template>
@@ -17,19 +18,20 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import selectProduct from '@/components/products/select'
+import formatList from '@/mixins/format-list-for-select-options'
+// import selectProduct from '@/components/products/select'
 
 export default {
   data () {
     return {
       name: '',
-      product: ''
+      // product: '',
+      status: undefined
     }
   },
   props: {
     offer: Object
   },
-  mixins: [setResponseErrors],
   watch: {
     offer: function () {
       this.setOffer()
@@ -41,7 +43,8 @@ export default {
     }),
     setOffer () {
       this.name = this.offer.name
-      this.product = this.offer.product
+      // this.product = this.offer.product
+      this.status = this.offer.status
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -50,7 +53,8 @@ export default {
             id: this.offer.id,
             name: this.name,
             contract: this.offer.contract,
-            product: this.product,
+            status: this.status,
+            // product: this.product,
             client: this.offer.client
           }).catch(error => {
             this.error = error
@@ -61,13 +65,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: 'getAllProducts',
+      statuses: 'getAllContractStatuses',
+      // products: 'getAllProducts',
       loading: 'getOfferFetchLoading',
       loadingText: 'getOfferFetchLoadingText'
     }),
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.offer.name || this.product !== this.offer.product
+        return this.name !== this.offer.name || this.status !== this.offer.status
       } else {
         return false
       }
@@ -76,8 +81,9 @@ export default {
   created () {
     this.setOffer()
   },
+  mixins: [formatList, setResponseErrors],
   components: {
-    'select-product': selectProduct
+    // 'select-product': selectProduct
   }
 }
 </script>

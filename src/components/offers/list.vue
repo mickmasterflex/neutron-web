@@ -6,7 +6,8 @@
           <th class="th">Name</th>
           <th class="th">ID</th>
           <th class="th">Contract</th>
-          <th class="th">Product</th>
+          <th class="th">Status</th>
+<!--          <th class="th">Product</th>-->
         </tr>
       </thead>
       <tbody class="tbody">
@@ -15,8 +16,9 @@
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
           <td class="td">{{ offer.id }}</td>
-          <td class="td">{{ offer.contract }}</td>
-          <td class="td">{{ offer.product }}</td>
+          <td class="td">{{ offer.parent }}</td>
+          <td class="td">{{ offer.status }}</td>
+<!--          <td class="td">{{ offer.product }}</td>-->
         </tr>
       </tbody>
     </table>
@@ -49,7 +51,7 @@ export default {
     }),
     linkToOffer (offer) {
       this.setCurrentOffer(offer)
-      this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.contract, id: offer.id } })
+      this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
     }
   }
 }
