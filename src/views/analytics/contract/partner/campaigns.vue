@@ -4,7 +4,7 @@
     :loading-text="loadingText"
     content-background-color="white">
     <template slot="title">
-      <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
+      <date-range-picker></date-range-picker>
     </template>
     <template slot="content">
       <partner-campaign-list :campaigns="campaigns"></partner-campaign-list>
@@ -22,8 +22,7 @@ export default {
     ...mapGetters({
       campaigns: 'getPartnerContractStatsCampaigns',
       loading: 'getAnalyticsFetchLoading',
-      loadingText: 'getAnalyticsFetchLoadingText',
-      dateRangeText: 'getAnalyticsDateRange'
+      loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
   components: {

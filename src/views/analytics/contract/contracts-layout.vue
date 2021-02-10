@@ -4,7 +4,7 @@
     :loading-text="loadingText"
     content-background-color="white">
     <template v-slot:title>
-      <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
+      <date-range-picker></date-range-picker>
     </template>
     <template v-slot:content>
       <slot name="content"></slot>

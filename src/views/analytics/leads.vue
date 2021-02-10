@@ -4,7 +4,7 @@
     :loading-text="loadingText"
     content-background-color="white">
     <template slot="title">
-      <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
+      <date-range-picker></date-range-picker>
     </template>
     <template slot="content">
       <leads-list :leads="leads"></leads-list>
@@ -21,7 +21,6 @@ export default {
   computed: {
     ...mapGetters({
       leads: 'getAnalyticsLeads',
-      dateRangeText: 'getAnalyticsDateRange',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'
     })

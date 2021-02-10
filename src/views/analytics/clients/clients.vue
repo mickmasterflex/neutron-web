@@ -4,7 +4,7 @@
     :loading-text="loadingText"
     content-background-color="white">
     <template slot="title">
-      <date-range-picker :date-range-text="dateRangeText"></date-range-picker>
+      <date-range-picker></date-range-picker>
     </template>
     <template slot="content">
       <buyer-client-list
@@ -31,8 +31,7 @@ export default {
       buyerClients: 'getBuyerStatsClients',
       partnerClients: 'getPartnerStatsClients',
       loading: 'getAnalyticsFetchLoading',
-      loadingText: 'getAnalyticsFetchLoadingText',
-      dateRangeText: 'getAnalyticsDateRange'
+      loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
   components: {
