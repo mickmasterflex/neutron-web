@@ -9,10 +9,10 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
-          <router-link :to="{name: 'OfferDetails', params: {id:id, client: client}}">Offer Details</router-link>
+          <router-link :to="{name: 'OfferDetails', params: {id:id, client: client, buyer:buyer}}">Offer Details</router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'field-management' ? 'active' : ''" >
-          <router-link :to="{name: 'OfferFieldManagement', params: {id:id, client: client}}">Field Management</router-link>
+          <router-link :to="{name: 'OfferFieldManagement', params: {id:id, client: client, buyer:buyer}}">Field Management</router-link>
         </li>
       </ul>
     </template>
