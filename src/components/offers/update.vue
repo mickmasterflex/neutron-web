@@ -56,7 +56,7 @@ export default {
           this.update({
             id: this.offer.id,
             name: this.name,
-            contract: this.offer.contract,
+            parent: this.offer.parent,
             status: this.status,
             // product: this.product,
             client: this.offer.client,
