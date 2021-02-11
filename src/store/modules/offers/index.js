@@ -15,7 +15,7 @@ const state = {
 const getters = {
   getCurrentOffer: state => state.current_offer,
   getOffersByBuyer: (state) => (buyerId) => {
-    return state.offers.filter(offer => offer.contract === buyerId)
+    return state.offers.filter(offer => offer.parent === buyerId)
   },
   getOffersByProduct: (state) => (productId) => {
     return state.offers.filter(offer => offer.product === productId)
@@ -25,7 +25,7 @@ const getters = {
 const actions = {
   async fetchOffers ({ commit }) {
     commit('SET_OFFERS_FETCH_LOADING')
-    await axios.get('/offers/')
+    await axios.get('/offer-contracts/')
       .then(response => {
         commit('SET_OFFERS', response.data)
         commit('RESET_OFFERS_FETCH_LOADING')
@@ -33,27 +33,27 @@ const actions = {
   },
   async fetchCurrentOffer ({ commit }, id) {
     commit('SET_OFFER_FETCH_LOADING')
-    await axios.get(`/offers/${id}/`)
+    await axios.get(`/offer-contracts/${id}/`)
       .then(response => {
         commit('SET_CURRENT_OFFER', response.data)
         commit('RESET_OFFER_FETCH_LOADING')
       })
   },
   async createOffer ({ commit }, offer) {
-    await axios.post('/offers/', offer)
+    await axios.post('/offer-contracts/', offer)
       .then(response => {
         commit('ADD_OFFER', response.data)
       })
   },
   async updateOffer ({ commit }, updatedOffer) {
-    await axios.put(`/offers/${updatedOffer.id}/`, updatedOffer)
+    await axios.put(`/offer-contracts/${updatedOffer.id}/`, updatedOffer)
       .then(response => {
         commit('UPDATE_OFFER', response.data)
         commit('SET_CURRENT_OFFER', response.data)
       })
   },
   async deleteOffer ({ commit }, id) {
-    await axios.delete(`/offers/${id}/`)
+    await axios.delete(`/offer-contracts/${id}/`)
       .then(() => {
         commit('REMOVE_OFFER', id)
       })

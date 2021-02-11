@@ -673,24 +673,60 @@ const routes = [
           activeApp: 'relationships',
           contentTab: 'offers'
         },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          return props
+        },
         pathToRegexpOptions: { strict: true }
       }
     ]
   },
   {
     path: '/relationships/clients/:client/contracts/buyers/:buyer/offers/:id/',
-    name: 'Offer',
-    component: () => import('@/views/relationships/contract-mgmt/offer.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'relationships'
-    },
-    pathToRegexpOptions: { strict: true },
+    component: () => import('@/views/relationships/contract-mgmt/offer/index.vue'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
+      props.buyer = +props.buyer
       return props
-    }
+    },
+    children: [
+      {
+        name: 'OfferDetails',
+        path: '',
+        component: () => import('@/views/relationships/contract-mgmt/offer/details.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'details'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.buyer = +props.buyer
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'OfferFieldManagement',
+        path: 'field-management/',
+        component: () => import('@/views/relationships/contract-mgmt/offer/field-management.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'field-management'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.buyer = +props.buyer
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/utilities/',
