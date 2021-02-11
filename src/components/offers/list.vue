@@ -17,7 +17,13 @@
           </td>
           <td class="td">{{ offer.id }}</td>
           <td class="td">{{ offer.parent }}</td>
-          <td class="td">{{ offer.status }}</td>
+          <td class="td w-32">
+            <status-indicator :red="offer.status === 'terminated'"
+                              :green="offer.status === 'active'"
+                              :yellow="offer.status === 'paused'">
+              {{ offer.status }}
+            </status-indicator>
+          </td>
 <!--          <td class="td">{{ offer.product }}</td>-->
         </tr>
       </tbody>
@@ -34,6 +40,7 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
+    contracts: Array,
     offers: Array,
     client: String,
     emptyStateHeading: {
