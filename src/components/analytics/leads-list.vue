@@ -5,7 +5,14 @@
       <tr>
         <th class="th">Lead Id</th>
         <th class="th">Lead Email</th>
+        <th class="th">Brand</th>
+        <th class="th">Campus</th>
+        <th class="th">Partner Client</th>
+        <th class="th">Partner Contract</th>
         <th class="th">Campaign</th>
+        <th class="th">Buyer Client</th>
+        <th class="th">Buyer Contract</th>
+        <th class="th">Offer</th>
         <th class="th">Revenue</th>
         <th class="th">Margin</th>
         <th class="th">Payout</th>
@@ -19,7 +26,14 @@
       <tr class="tr" v-for="lead in leads" :key="lead.id">
         <td class="td">{{lead.id}}</td>
         <td class="td">{{lead.data.email}}</td>
-        <td class="td">{{lead.campaign}}</td>
+        <td class="td">{{lead.brand.name}}</td>
+        <td class="td">{{lead.campus.name}}</td>
+        <td class="td">{{lead.partner_client.name}}</td>
+        <td class="td">{{lead.partner_contract.name}}</td>
+        <td class="td">{{lead.campaign.name}}</td>
+        <td class="td">{{lead.buyer_client.name}}</td>
+        <td class="td">{{lead.buyer_contract.name}}</td>
+        <td class="td">{{lead.offer_contract.name}}</td>
         <td class="td">{{lead.revenue}}</td>
         <td class="td">{{lead.margin}}</td>
         <td class="td">{{lead.payout}}</td>
