@@ -1,6 +1,6 @@
 <template>
   <clients-index hud-title="All Partner Clients"
-                 :fetch-clients="fetchPartnerClientsStats"
+                 @dateRangeUpdated="fetchPartnerClientsStats"
                  :clients-route="{ name: 'PartnerStatsClients' }"
                  :leads-route="{ name: 'PartnerStatsClientsLeads' }"
   >

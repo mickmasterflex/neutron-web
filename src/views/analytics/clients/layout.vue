@@ -19,16 +19,18 @@
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
 import { mapMutations } from 'vuex'
+import { dateRangeUpdate } from '@/mixins/analytics/date-range'
+
 export default {
   props: {
     hudTitle: {
       type: String,
       default: 'All Clients'
     },
-    fetchClients: {
-      type: Function,
-      required: true
-    },
+    // fetchClients: {
+    //   type: Function,
+    //   required: true
+    // },
     clientsRoute: {
       type: Object,
       required: true
@@ -43,19 +45,12 @@ export default {
       resetLeads: 'RESET_ANALYTICS_LEADS'
     })
   },
-  created () {
-    this.fetchClients()
-  },
   destroyed () {
     this.resetLeads()
   },
-  watch: {
-    dateRange () {
-      this.fetchClients()
-    }
-  },
   components: {
     'analytics-layout': analyticsLayout
-  }
+  },
+  mixins: [dateRangeUpdate]
 }
 </script>
