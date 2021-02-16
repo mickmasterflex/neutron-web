@@ -58,7 +58,11 @@ export default {
     }),
     linkToPartnerStatsCampaign (campaign) {
       this.setCurrent(campaign)
-      this.$router.push({ name: 'PartnerStatsCampaign', params: { id: campaign.id, partnerId: this.contract.id, clientId: this.client.id } })
+      this.$router.push({
+        name: 'PartnerStatsCampaign',
+        params: { id: campaign.id, partnerId: this.contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
     }
   }
 }

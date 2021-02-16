@@ -2,8 +2,8 @@
   <client-layout :id="id"
                  :client="buyerClient"
                  :fetchClient="fetchBuyerClientStats"
-                 :contracts-route="{ name: 'BuyerStatsClientContracts' }"
-                 :leads-route="{ name: 'BuyerStatsClientLeads'}"
+                 :contracts-route="{ name: 'BuyerStatsClientContracts', query: $route.query }"
+                 :leads-route="{ name: 'BuyerStatsClientLeads', query: $route.query }"
   ></client-layout>
 </template>
 

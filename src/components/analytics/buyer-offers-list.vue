@@ -58,7 +58,11 @@ export default {
     }),
     linkToBuyerStatsOffer (offer) {
       this.setCurrent(offer)
-      this.$router.push({ name: 'BuyerStatsOfferContract', params: { id: offer.id, buyerId: this.contract.id, clientId: this.client.id } })
+      this.$router.push({
+        name: 'BuyerStatsOfferContract',
+        params: { id: offer.id, buyerId: this.contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
     }
   }
 }

@@ -1,15 +1,15 @@
 import dayjs from 'dayjs'
 
 const state = {
-  analytics_start_date: dayjs('2020-1-1'),
-  analytics_end_date: dayjs('2021-2-1')
+  analytics_start_date: dayjs(),
+  analytics_end_date: dayjs()
 }
 
 const getters = {
-  getFormattedStartDate: (state) => dayjs(state.analytics_start_date).format('YYYY-MM-DD'),
-  getFormattedEndDate: (state) => dayjs(state.analytics_end_date).format('YYYY-MM-DD'),
+  getAnalyticsFormattedStartDate: (state) => dayjs(state.analytics_start_date).format('YYYY-MM-DD'),
+  getAnalyticsFormattedEndDate: (state) => dayjs(state.analytics_end_date).format('YYYY-MM-DD'),
   getAnalyticsDateRangeUrlFormatted: (state, getter) => {
-    return `start_date=${getter.getFormattedStartDate}&end_date=${getter.getFormattedEndDate}`
+    return `start_date=${getter.getAnalyticsFormattedStartDate}&end_date=${getter.getAnalyticsFormattedEndDate}`
   },
   getAnalyticsDateRange: state => {
     return {

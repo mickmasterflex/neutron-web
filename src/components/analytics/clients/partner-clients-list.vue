@@ -19,7 +19,11 @@ export default {
     }),
     linkToPartnerStatsClient (client) {
       this.setCurrent(client)
-      this.$router.push({ name: 'PartnerStatsClient', params: { id: client.id } })
+      this.$router.push({
+        name: 'PartnerStatsClient',
+        params: { id: client.id },
+        query: this.$route.query
+      })
     }
   },
   components: {

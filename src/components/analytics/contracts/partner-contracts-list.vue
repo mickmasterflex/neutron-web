@@ -33,15 +33,27 @@ export default {
     }),
     linkToContractLeads (contract) {
       this.setCurrent(contract)
-      this.$router.push({ name: 'PartnerStatsContractLeads', params: { id: contract.id, clientId: this.client.id } })
+      this.$router.push({
+        name: 'PartnerStatsContractLeads',
+        params: { id: contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
     },
     linkToContractContracts (contract) {
       this.setCurrent(contract)
-      this.$router.push({ name: 'PartnerStatsContractContracts', params: { id: contract.id, clientId: this.client.id } })
+      this.$router.push({
+        name: 'PartnerStatsContractContracts',
+        params: { id: contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
     },
     linkToContract (contract) {
       this.setCurrent(contract)
-      this.$router.push({ name: 'PartnerStatsContract', params: { id: contract.id, clientId: this.client.id } })
+      this.$router.push({
+        name: 'PartnerStatsContract',
+        params: { id: contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
     }
   }
 }
