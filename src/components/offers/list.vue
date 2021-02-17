@@ -7,6 +7,7 @@
           <th class="th">ID</th>
           <th class="th">Contract</th>
           <th class="th">Status</th>
+          <th class="th">Caps</th>
 <!--          <th class="th">Product</th>-->
         </tr>
       </thead>
@@ -24,7 +25,7 @@
               {{ offer.status }}
             </status-indicator>
           </td>
-<!--          <td class="td">{{ offer.product }}</td>-->
+            <td class="td">{{ offer.cap }}</td>
         </tr>
       </tbody>
     </table>
