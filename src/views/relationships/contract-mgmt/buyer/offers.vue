@@ -8,7 +8,7 @@
         <offer-list :offers="offers" :client="client"></offer-list>
       </template>
     </panel-template>
-    <create-offer :buyer="buyer.id"></create-offer>
+    <create-offer :buyer="buyer.id" :client="buyer.client"></create-offer>
   </div>
 </template>
 

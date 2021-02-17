@@ -19,6 +19,7 @@ import { mapMutations, mapGetters, mapActions } from 'vuex'
 import fullCalendar from '@/components/ui/calendars/full-calendar/index'
 import day from '@/components/caps/day'
 import month from '@/components/caps/month'
+import dayjs from 'dayjs'
 
 export default {
   methods: {
@@ -68,7 +69,7 @@ export default {
       if (this.dayCaps) {
         return this.dayCaps.map(cap => ({
           key: `cap.${cap.id}`,
-          dates: cap.date,
+          dates: dayjs(cap.date).$d,
           customData: cap
         }))
       } else {
