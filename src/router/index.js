@@ -69,7 +69,7 @@ const routes = [
     path: '/analytics/partner-stats/clients/:id/',
     name: 'PartnerStatsClient',
     redirect: { name: 'PartnerStatsClientContracts' },
-    component: () => import('@/views/analytics/client/partner-stats'),
+    component: () => import('@/views/analytics/client/partner-stats-layout'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
@@ -222,7 +222,7 @@ const routes = [
     path: '/analytics/buyer-stats/clients/:id/',
     name: 'BuyerStatsClient',
     redirect: { name: 'BuyerStatsClientContracts' },
-    component: () => import('@/views/analytics/client/buyer-stats'),
+    component: () => import('@/views/analytics/client/buyer-stats-layout'),
     props (route) {
       const props = { ...route.params }
       props.id = +props.id
