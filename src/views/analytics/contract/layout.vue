@@ -2,9 +2,6 @@
   <analytics-layout :hud-title="contract.name">
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
-<!--        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">-->
-<!--          <router-link :to="contractsRoute">Contracts</router-link>-->
-<!--        </li>-->
         <slot name="contentTab"></slot>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
           <router-link :to="leadsRoute">Leads</router-link>
@@ -28,10 +25,6 @@ export default {
       type: Object,
       required: true
     },
-    // contractsRoute: {
-    //   type: Object,
-    //   required: true
-    // },
     leadsRoute: {
       type: Object,
       required: true

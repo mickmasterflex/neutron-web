@@ -2,11 +2,6 @@
   <contract-layout :contract="contract"
                    :clientId="clientId"
                    :id="id"
-                   :contractsRoute="{
-                     name: 'PartnerStatsContractContracts',
-                     params: { clientId: clientId, id: id },
-                     query: $route.query
-                   }"
                    :leadsRoute="{
                      name: 'PartnerStatsContractLeads',
                      params: { clientId: clientId, id: id },
