@@ -55,10 +55,14 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentOffer: 'SET_CURRENT_OFFER'
+      setCurrentOffer: 'SET_CURRENT_OFFER',
+      setCurrentForm: 'SET_CURRENT_FORM',
+      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
     linkToOffer (offer) {
       this.setCurrentOffer(offer)
+      this.setCurrentForm(offer.form)
+      this.sortCurrentFormFields()
       this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
     }
   }
