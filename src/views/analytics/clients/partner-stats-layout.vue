@@ -1,14 +1,13 @@
 <template>
-  <clients-index hud-title="All Partner Clients"
-                 @dateRangeUpdated="fetchPartnerClientsStats"
+  <clients-layout hud-title="All Partner Clients"
                  :clients-route="{ name: 'PartnerStatsClients' }"
                  :leads-route="{ name: 'PartnerStatsClientsLeads' }"
   >
-  </clients-index>
+  </clients-layout>
 </template>
 
 <script>
-import clientsIndex from '@/views/analytics/clients/layout'
+import clientsLayout from '@/views/analytics/clients/layout'
 import { mapActions } from 'vuex'
 export default {
   methods: {
@@ -17,7 +16,7 @@ export default {
     })
   },
   components: {
-    'clients-index': clientsIndex
+    'clients-layout': clientsLayout
   }
 }
 </script>

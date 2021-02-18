@@ -35,7 +35,7 @@ const routes = [
     path: '/analytics/partner-stats/',
     name: 'PartnerStats',
     redirect: { name: 'PartnerStatsClients' },
-    component: () => import('@/views/analytics/clients/partner-stats'),
+    component: () => import('@/views/analytics/clients/partner-stats-layout'),
     children: [
       {
         name: 'PartnerStatsClients',
@@ -188,7 +188,7 @@ const routes = [
     path: '/analytics/buyer-stats/',
     name: 'BuyerStats',
     redirect: { name: 'BuyerStatsClients' },
-    component: () => import('@/views/analytics/clients/buyer-stats'),
+    component: () => import('@/views/analytics/clients/buyer-stats-layout'),
     children: [
       {
         name: 'BuyerStatsClients',

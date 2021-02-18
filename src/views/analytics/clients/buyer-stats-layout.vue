@@ -1,13 +1,13 @@
 <template>
-  <clients-index hud-title="All Buyer Clients"
+  <clients-layout hud-title="All Buyer Clients"
                  :clients-route="{ name: 'BuyerStatsClients', query: $route.query }"
                  :leads-route="{ name: 'BuyerStatsClientsLeads', query: $route.query }"
   >
-  </clients-index>
+  </clients-layout>
 </template>
 
 <script>
-import clientsIndex from '@/views/analytics/clients/layout'
+import clientsLayout from '@/views/analytics/clients/layout'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import dayjs from 'dayjs'
 
@@ -36,7 +36,7 @@ export default {
     }
   },
   components: {
-    'clients-index': clientsIndex
+    'clients-layout': clientsLayout
   }
 }
 </script>
