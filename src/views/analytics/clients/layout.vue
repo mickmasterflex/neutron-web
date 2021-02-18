@@ -19,7 +19,6 @@
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
 import { mapMutations } from 'vuex'
-import { dateRangeUpdate } from '@/mixins/analytics/date-range'
 
 export default {
   props: {
@@ -50,7 +49,6 @@ export default {
   },
   components: {
     'analytics-layout': analyticsLayout
-  },
-  mixins: [dateRangeUpdate]
+  }
 }
 </script>

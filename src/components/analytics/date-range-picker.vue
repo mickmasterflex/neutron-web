@@ -1,18 +1,26 @@
 <template>
   <date-range-picker
     :date-range="dateRange"
-    @input="pushToRouteWithQuery($event)"
-    @moveToDate="pushToRouteWithQuery($event)"
+    @input="updateDateRangeAndRoute($event)"
+    @moveToDate="updateDateRangeAndRoute($event)"
   ></date-range-picker>
 </template>
 
 <script>
 import dateRangePicker from '@/components/ui/calendars/date-range-picker/index'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import dayjs from 'dayjs'
 
 export default {
   methods: {
+    ...mapMutations({
+      setStart: 'SET_ANALYTICS_START_DATE',
+      setEnd: 'SET_ANALYTICS_END_DATE'
+    }),
+    updateDateRange (updatedRange) {
+      this.setStart(dayjs(updatedRange.start))
+      this.setEnd(dayjs(updatedRange.end))
+    },
     pushToRouteWithQuery (updatedRange) {
       this.$router.replace({
         name: this.$route.name,
@@ -23,10 +31,10 @@ export default {
         }
       })
     },
-    ...mapMutations({
-      setStart: 'SET_ANALYTICS_START_DATE',
-      setEnd: 'SET_ANALYTICS_END_DATE'
-    })
+    updateDateRangeAndRoute (updatedRange) {
+      this.updateDateRange(updatedRange)
+      this.pushToRouteWithQuery(updatedRange)
+    }
   },
   computed: {
     ...mapGetters({
