@@ -19,6 +19,7 @@
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
 import { mapGetters, mapMutations } from 'vuex'
+import dayjs from 'dayjs'
 export default {
   props: {
     id: {
@@ -43,29 +44,30 @@ export default {
   },
   computed: {
     ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted'
+      analyticsDateRange: 'getAnalyticsDateRange'
     })
   },
   methods: {
     ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS'
-    }),
-    async setBuyerClientStats () {
-      await this.fetchClient(this.id)
+      resetLeads: 'RESET_ANALYTICS_LEADS',
+      setStart: 'SET_ANALYTICS_START_DATE',
+      setEnd: 'SET_ANALYTICS_END_DATE'
+    })
+  },
+  watch: {
+    analyticsDateRange () {
+      this.fetchClient(this.id)
+    },
+    client () {
+      document.title = this.client.name
     }
   },
-  created () {
-    this.setBuyerClientStats().then(() => {
-      document.title = this.client.name
-    })
+  mounted () {
+    this.setStart(dayjs(this.$route.query.start_date))
+    this.setEnd(dayjs(this.$route.query.end_date))
   },
   destroyed () {
     this.resetLeads()
-  },
-  watch: {
-    dateRange () {
-      this.fetchClient(this.id)
-    }
   },
   components: {
     'analytics-layout': analyticsLayout
