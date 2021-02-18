@@ -1,5 +1,9 @@
 <template>
-  <analytics-layout :hud-title="offer.name">
+  <analytics-layout
+    :hud-title="offer.name"
+    :fetch-stats="fetchOfferContractStats"
+    :fetch-id="id"
+  >
     <template v-slot:content>
       <router-view></router-view>
     </template>
@@ -8,7 +12,7 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     clientId: Number,
@@ -16,32 +20,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted',
       offer: 'getCurrentBuyerStatsOffer'
     })
   },
   methods: {
     ...mapActions({
       fetchOfferContractStats: 'fetchOfferContractStats'
-    }),
-    ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS'
-    }),
-    async setOfferContractStats () {
-      await this.fetchOfferContractStats(this.id)
-    }
-  },
-  created () {
-    this.setOfferContractStats().then(() => {
-      document.title = this.offer.name
     })
   },
-  destroyed () {
-    this.resetLeads()
-  },
   watch: {
-    dateRange () {
-      this.fetchOfferContractStats(this.id)
+    offer () {
+      document.title = this.offer.name
     }
   },
   components: {

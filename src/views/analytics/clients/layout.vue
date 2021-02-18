@@ -1,5 +1,8 @@
 <template>
-  <analytics-layout :hud-title="hudTitle">
+  <analytics-layout
+    :hud-title="hudTitle"
+    :fetch-stats="fetchClients"
+  >
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
@@ -18,8 +21,6 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapGetters, mapMutations } from 'vuex'
-import dayjs from 'dayjs'
 
 export default {
   props: {
@@ -39,30 +40,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  computed: {
-    ...mapGetters({
-      analyticsDateRange: 'getAnalyticsDateRange'
-    })
-  },
-  methods: {
-    ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS',
-      setStart: 'SET_ANALYTICS_START_DATE',
-      setEnd: 'SET_ANALYTICS_END_DATE'
-    })
-  },
-  mounted () {
-    this.setStart(dayjs(this.$route.query.start_date))
-    this.setEnd(dayjs(this.$route.query.end_date))
-  },
-  watch: {
-    analyticsDateRange () {
-      this.fetchClients()
-    }
-  },
-  destroyed () {
-    this.resetLeads()
   },
   components: {
     'analytics-layout': analyticsLayout

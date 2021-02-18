@@ -1,5 +1,9 @@
 <template>
-  <analytics-layout :hud-title="campaign.name">
+  <analytics-layout
+    :hud-title="campaign.name"
+    :fetch-stats="fetchCampaignStats"
+    :fetch-id="id"
+  >
     <template v-slot:content>
       <router-view></router-view>
     </template>
@@ -8,7 +12,7 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     clientId: Number,
@@ -16,32 +20,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted',
       campaign: 'getCurrentBuyerStatsCampaign'
     })
   },
   methods: {
     ...mapActions({
       fetchCampaignStats: 'fetchCampaignStats'
-    }),
-    ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS'
-    }),
-    async setCampaignStats () {
-      await this.fetchCampaignStats(this.id)
-    }
-  },
-  created () {
-    this.setCampaignStats().then(() => {
-      document.title = this.campaign.name
     })
   },
-  destroyed () {
-    this.resetLeads()
-  },
   watch: {
-    dateRange () {
-      this.fetchCampaignStats(this.id)
+    campaign () {
+      document.title = this.campaign.name
     }
   },
   components: {

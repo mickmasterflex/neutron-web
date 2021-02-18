@@ -1,9 +1,14 @@
 <template>
-  <analytics-layout :hud-title="contract.name">
+  <analytics-layout
+    :hud-title="contract.name"
+    :fetchStats="fetchContractStats"
+    :fetch-id="id"
+  >
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <slot name="contentTab"></slot>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
+        <li class="underscore-tab underscore-tab-lg"
+            :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
           <router-link :to="leadsRoute">Leads</router-link>
         </li>
       </ul>
@@ -16,7 +21,6 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapGetters, mapMutations } from 'vuex'
 export default {
   props: {
     clientId: Number,
@@ -34,30 +38,9 @@ export default {
       required: true
     }
   },
-  computed: {
-    ...mapGetters({
-      dateRange: 'getAnalyticsDateRangeUrlFormatted'
-    })
-  },
-  methods: {
-    ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS'
-    }),
-    async setContractStats () {
-      await this.fetchContractStats(this.id)
-    }
-  },
-  created () {
-    this.setContractStats().then(() => {
-      document.title = this.contract.name
-    })
-  },
-  destroyed () {
-    this.resetLeads()
-  },
   watch: {
-    dateRange () {
-      this.fetchContractStats(this.id)
+    contract () {
+      document.title = this.contract.name
     }
   },
   components: {

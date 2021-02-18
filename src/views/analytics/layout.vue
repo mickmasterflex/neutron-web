@@ -24,14 +24,29 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+import dayjs from 'dayjs'
 
 export default {
   props: {
     hudTitle: {
       type: String,
       default: 'Loading'
+    },
+    fetchStats: {
+      type: Function,
+      required: true
+    },
+    fetchId: {
+      type: Number
     }
+  },
+  methods: {
+    ...mapMutations({
+      resetLeads: 'RESET_ANALYTICS_LEADS',
+      setStart: 'SET_ANALYTICS_START_DATE',
+      setEnd: 'SET_ANALYTICS_END_DATE'
+    })
   },
   computed: {
     ...mapGetters({
@@ -41,8 +56,25 @@ export default {
       margin: 'getAnalyticsTotalMargin',
       payout: 'getAnalyticsTotalPayout',
       scrubRate: 'getAnalyticsTotalScrubRate',
-      marginPercent: 'getAnalyticsTotalMarginPercent'
+      marginPercent: 'getAnalyticsTotalMarginPercent',
+      analyticsDateRange: 'getAnalyticsDateRange'
     })
+  },
+  watch: {
+    analyticsDateRange () {
+      if (this.fetchId) {
+        this.fetchStats(this.fetchId)
+      } else {
+        this.fetchStats()
+      }
+    }
+  },
+  mounted () {
+    this.setStart(dayjs(this.$route.query.start_date))
+    this.setEnd(dayjs(this.$route.query.end_date))
+  },
+  destroyed () {
+    this.resetLeads()
   }
 }
 </script>
