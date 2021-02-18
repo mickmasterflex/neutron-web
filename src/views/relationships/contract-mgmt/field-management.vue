@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="offerFetchLoading" loadingText="Loading Contract Fields">
+    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Contract Fields">
       <template v-slot:action>
         <create-field></create-field>
       </template>
@@ -32,10 +32,15 @@ export default {
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',
-      offer: 'getCurrentOffer',
       offerFetchLoading: 'getOfferFetchLoading',
-      offerFetchLoadingText: 'getOfferFetchLoadingText'
-    })
+      buyerFetchLoading: 'getBuyerFetchLoading'
+    }),
+    loading () {
+      if (this.$route.name === 'OfferFieldManagement') {
+        return this.offerFetchLoading
+      }
+      return this.buyerFetchLoading
+    }
   },
   methods: {
     ...mapMutations({
