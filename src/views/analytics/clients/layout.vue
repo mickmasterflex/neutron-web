@@ -18,7 +18,8 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+import dayjs from 'dayjs'
 
 export default {
   props: {
@@ -26,10 +27,10 @@ export default {
       type: String,
       default: 'All Clients'
     },
-    // fetchClients: {
-    //   type: Function,
-    //   required: true
-    // },
+    fetchClients: {
+      type: Function,
+      required: true
+    },
     clientsRoute: {
       type: Object,
       required: true
@@ -39,10 +40,26 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapGetters({
+      analyticsDateRange: 'getAnalyticsDateRange'
+    })
+  },
   methods: {
     ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS'
+      resetLeads: 'RESET_ANALYTICS_LEADS',
+      setStart: 'SET_ANALYTICS_START_DATE',
+      setEnd: 'SET_ANALYTICS_END_DATE'
     })
+  },
+  mounted () {
+    this.setStart(dayjs(this.$route.query.start_date))
+    this.setEnd(dayjs(this.$route.query.end_date))
+  },
+  watch: {
+    analyticsDateRange () {
+      this.fetchClients()
+    }
   },
   destroyed () {
     this.resetLeads()
