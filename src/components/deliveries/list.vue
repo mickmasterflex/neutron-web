@@ -15,10 +15,10 @@
         <td class="td">{{ delivery.response_parser }}</td>
         <td class="td">{{ delivery.target }}</td>
         <td class="td">
-          <span class="flex flex-row justify-end">
+          <btn-group-right>
             <delete-delivery :id="delivery.id"></delete-delivery>
             <button class="btn btn-circle btn-hollow-blue" @click="showSetDelivery(delivery)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-          </span>
+          </btn-group-right>
         </td>
       </tr>
       </tbody>

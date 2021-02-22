@@ -184,7 +184,6 @@
 .btn:disabled,
 .btn.disabled
 { @apply cursor-not-allowed }
-.btn + .btn { @apply ml-2; }
 .btn:focus  { @apply outline-none shadow-outline; }
 
 .btn-circle {

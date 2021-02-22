@@ -14,7 +14,7 @@
           <div :class="`modal-padding ${modalBodyBackground} border-t-2 border-b-2 border-gray-200 overflow-x-scroll`">
             <slot name="body">Modal Body</slot>
           </div>
-          <div class="modal-padding flex flex-row items-center justify-end">
+          <div class="modal-padding flex flex-row items-center justify-end space-x-2">
             <slot name="footer-default">
               <button class="btn btn-lg btn-hollow-default" @click="close">Close</button>
             </slot>
