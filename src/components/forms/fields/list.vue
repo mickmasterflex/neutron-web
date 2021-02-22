@@ -12,10 +12,10 @@
         <li v-for="(field, index) in form.fields" :key="field.id">
           <div :field="field" class="card card-sm mb-1 flex flex-row items-center justify-between">
             <field-list-item :field="field" :newOrder="index + 1"></field-list-item>
-            <span class="flex flex-row">
-              <delete-field :id="field.id" :type="field.type" v-if="field.type" class="ml-1"></delete-field>
-              <set-current-field :field="field" :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type" class="mr-1"></set-current-field>
-            </span>
+            <btn-group-right class="mx-1">
+              <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
+              <set-current-field :field="field" :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type"></set-current-field>
+            </btn-group-right>
           </div>
         </li>
       </ul-draggable>

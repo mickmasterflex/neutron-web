@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="offers.length" class="table table-white">
+    <table v-if="offers.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Name</th>
@@ -31,6 +31,7 @@
     </table>
     <table-empty-state v-else
                        :heading="emptyStateHeading"
+                       class="well"
                        key="empty"
                        :copy="emptyStateCopy"></table-empty-state>
   </transition-table-state>

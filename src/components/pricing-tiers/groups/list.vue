@@ -12,10 +12,10 @@
       copy="Use the 'New Group' button to add pricing tier groups."></table-empty-state>
     <panel-template v-for="pricingTierGroup in pricingTierGroups" :title="pricingTierGroup.name" :key="pricingTierGroup.id" class="col-span-2">
       <template v-slot:action>
-      <span class="flex flex-row mr-2">
+      <btn-group-right>
         <delete-pricing-tier-group :id="pricingTierGroup.id" :type="pricingTierGroup.type"></delete-pricing-tier-group>
         <button @click="showModalSetCurrent(pricingTierGroup)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-      </span>
+      </btn-group-right>
       </template>
       <template v-slot:content>
         <list-tiers :pricingTiers='pricingTierGroup.pricingtier_set'></list-tiers>
