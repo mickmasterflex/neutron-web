@@ -1,8 +1,8 @@
 <template>
   <clients-layout hud-title="All Partner Clients"
                   :fetch-clients="fetchPartnerClientsStats"
-                  :clients-route="{ name: 'PartnerStatsClients' }"
-                  :leads-route="{ name: 'PartnerStatsClientsLeads' }"
+                  :clients-route="{ name: 'PartnerStatsClients', query: $route.query }"
+                  :leads-route="{ name: 'PartnerStatsClientsLeads', query: $route.query }"
   ></clients-layout>
 </template>
 
