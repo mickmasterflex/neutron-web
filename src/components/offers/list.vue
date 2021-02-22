@@ -3,6 +3,7 @@
     <table v-if="offers.length" class="table table-white">
       <thead>
         <tr>
+          <th class="th"></th>
           <th class="th">Name</th>
           <th class="th">ID</th>
           <th class="th">Contract</th>
@@ -12,7 +13,10 @@
         </tr>
       </thead>
       <tbody class="tbody">
-        <tr class="tr" v-for="offer in this.offers" :key="offer.id">
+        <tr class="tr" v-for="(offer, index) in offers" :key="offer.id">
+          <td class="td w-4">
+            <bulk-update-checkbox :contract="offer.id" :contracts="offers" :index="index"></bulk-update-checkbox>
+          </td>
           <td class="td">
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
@@ -38,6 +42,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import bulkUpdateCheckbox from '@/components/bulk-update/status/offer-checkbox'
 
 export default {
   props: {
@@ -57,7 +62,8 @@ export default {
     ...mapMutations({
       setCurrentOffer: 'SET_CURRENT_OFFER',
       setCurrentForm: 'SET_CURRENT_FORM',
-      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
+      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS',
+      resetShiftClickIndex: 'RESET_BULK_UPDATE_OFFERS_SHIFT_CLICK_INDEX'
     }),
     linkToOffer (offer) {
       this.setCurrentOffer(offer)
@@ -65,6 +71,12 @@ export default {
       this.sortCurrentFormFields()
       this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
     }
+  },
+  components: {
+    'bulk-update-checkbox': bulkUpdateCheckbox
+  },
+  destroyed () {
+    this.resetShiftClickIndex()
   }
 }
 </script>

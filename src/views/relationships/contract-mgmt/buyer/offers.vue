@@ -1,20 +1,15 @@
 <template>
-  <div>
-    <panel-template title="Offers List" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
-      <template slot="action">
-        <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
-      </template>
-      <template slot="content">
-        <offer-list :offers="offers" :client="client"></offer-list>
-      </template>
-    </panel-template>
+  <base-panel-grid>
+    <offer-list-panel class="col-span-2"
+                      :offers="offers"
+                      :client="$route.params.client"
+                      emptyStateCopy="Use the 'New Offer' button to add offers"></offer-list-panel>
     <create-offer :buyer="buyer.id" :client="buyer.client"></create-offer>
-  </div>
+  </base-panel-grid>
 </template>
-
 <script>
 import createOffer from '@/components/offers/create'
-import offerList from '@/components/offers/list'
+import offerList from '@/components/offers/list-panel'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -23,14 +18,12 @@ export default {
   },
   components: {
     'create-offer': createOffer,
-    'offer-list': offerList
+    'offer-list-panel': offerList
   },
   computed: {
     ...mapGetters({
       buyer: 'getCurrentBuyer',
-      getOffersByBuyer: 'getOffersByBuyer',
-      loading: 'getOffersFetchLoading',
-      loadingText: 'getOffersFetchLoadingText'
+      getOffersByBuyer: 'getOffersByBuyer'
     }),
     offers: function () {
       return this.getOffersByBuyer(this.buyer.id)
@@ -45,7 +38,9 @@ export default {
     })
   },
   created () {
-    this.fetchOffers()
+    if (!this.offers.length) {
+      this.fetchOffers()
+    }
   }
 }
 </script>
