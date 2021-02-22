@@ -1,12 +1,13 @@
 <template>
   <transition-table-state>
-    <table v-if="offers.length" class="table table-white">
+    <table v-if="offers.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th">Name</th>
           <th class="th">ID</th>
           <th class="th">Contract</th>
           <th class="th">Status</th>
+          <th class="th">Caps</th>
 <!--          <th class="th">Product</th>-->
         </tr>
       </thead>
@@ -24,12 +25,13 @@
               {{ offer.status }}
             </status-indicator>
           </td>
-<!--          <td class="td">{{ offer.product }}</td>-->
+            <td class="td">{{ offer.cap }}</td>
         </tr>
       </tbody>
     </table>
     <table-empty-state v-else
                        :heading="emptyStateHeading"
+                       class="well"
                        key="empty"
                        :copy="emptyStateCopy"></table-empty-state>
   </transition-table-state>
@@ -54,10 +56,14 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentOffer: 'SET_CURRENT_OFFER'
+      setCurrentOffer: 'SET_CURRENT_OFFER',
+      setCurrentForm: 'SET_CURRENT_FORM',
+      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
     linkToOffer (offer) {
       this.setCurrentOffer(offer)
+      this.setCurrentForm(offer.form)
+      this.sortCurrentFormFields()
       this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
     }
   }

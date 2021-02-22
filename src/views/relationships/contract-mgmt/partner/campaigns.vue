@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Campaigns List" :showLoader="loading" :loadingText="loadingText">
+    <panel-template title="Campaigns List" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
       <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateCampaignModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campaign</button>
       </template>

@@ -6,7 +6,7 @@
     <form @submit.prevent="submitForm" class="form-horizontal">
       <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
       <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
-<!--      <select-product v-model="product" rules="required"></select-product>-->
+      <select-product v-model="product_id" rules="required"></select-product>
       <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
     </form>
   </validation-observer>
@@ -21,7 +21,7 @@ import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-// import selectProduct from '@/components/products/select'
+import selectProduct from '@/components/products/select'
 import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
@@ -29,7 +29,7 @@ export default {
     return {
       name: '',
       status: undefined,
-      // product: '',
+      product_id: '',
       scheduledStart: null
     }
   },
@@ -54,7 +54,7 @@ export default {
       this.name = ''
       this.parent = ''
       this.status = undefined
-      // this.product = ''
+      this.product_id = ''
       this.scheduledStart = null
       this.$nextTick(() => {
         this.$refs.form.reset()
@@ -69,8 +69,10 @@ export default {
             parent: this.buyer,
             status: this.status,
             client: this.client,
-            // product: this.product,
-            scheduled_start: this.scheduledStart
+            scheduled_start: this.scheduledStart,
+            offer_data: {
+              product_id: parseInt(this.product_id)
+            }
           }).then(() => {
             this.close()
           }).catch(error => {
@@ -82,7 +84,7 @@ export default {
   },
   mixins: [formatList, enterKeyListener, setResponseErrors],
   components: {
-    // 'select-product': selectProduct,
+    'select-product': selectProduct,
     'date-picker': datePicker
   }
 }
