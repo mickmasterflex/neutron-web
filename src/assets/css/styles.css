@@ -443,7 +443,7 @@
 .underscore-tab {
     @apply
     font-normal text-gray-800
-    border-b-4 border-gray-100
+    border-b-4 border-transparent
     transition-colors duration-300;
 }
 .underscore-tab > * { @apply cursor-pointer; }

@@ -36,6 +36,10 @@ const actions = {
     await axios.get(`/offer-contracts/${id}/`)
       .then(response => {
         commit('SET_CURRENT_OFFER', response.data)
+        commit('SET_CURRENT_FORM', response.data.form)
+        commit('SORT_CURRENT_FORM_FIELDS')
+      })
+      .finally(() => {
         commit('RESET_OFFER_FETCH_LOADING')
       })
   },

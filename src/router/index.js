@@ -656,7 +656,7 @@ const routes = [
       {
         name: 'BuyerContractFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/buyer/field-management'),
+        component: () => import('@/views/relationships/contract-mgmt/field-management'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -712,7 +712,7 @@ const routes = [
       {
         name: 'OfferFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/offer/field-management.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/field-management.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',

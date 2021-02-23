@@ -76,6 +76,9 @@ import basePanelGrid from '@/components/ui/panels/grid/base'
 import hudStatCards from '@/components/ui/hud-stat-cards'
 import statCard from '@/components/ui/cards/stat-card'
 
+/* Buttons */
+import btnGroupRight from '@/components/ui/buttons/btn-group-right'
+
 /* Table Components */
 import statusIndicator from '@/components/ui/tables/status-indicator'
 import tableEmptyState from '@/components/ui/tables/empty-state'
@@ -124,6 +127,9 @@ Vue.component('tooltip-dialog-template', baseTooltipDialog)
 Vue.component('panel-template', basePanel)
 Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)
+
+// Buttons
+Vue.component('btn-group-right', btnGroupRight)
 
 // Tables
 Vue.component('table-empty-state', tableEmptyState)

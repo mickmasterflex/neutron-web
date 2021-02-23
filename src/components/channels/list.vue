@@ -13,9 +13,11 @@
             <td class="td">
               {{channel.name}}
             </td>
-            <td class=" w-24 td flex flex-row justify-end">
-              <button @click="setCurrentAndOpenForm(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-              <delete-channel :id="channel.id"></delete-channel>
+            <td class="td w-24">
+              <btn-group-right>
+                <button @click="setCurrentAndOpenForm(channel)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+                <delete-channel :id="channel.id"></delete-channel>
+              </btn-group-right>
             </td>
           </tr>
         </tbody>
