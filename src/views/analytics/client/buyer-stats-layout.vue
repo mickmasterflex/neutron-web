@@ -4,6 +4,7 @@
                  :fetchClient="fetchBuyerClientStats"
                  :contracts-route="{ name: 'BuyerStatsClientContracts', query: $route.query }"
                  :leads-route="{ name: 'BuyerStatsClientLeads', query: $route.query }"
+                 :contracts-count="contracts.length"
   ></client-layout>
 </template>
 
@@ -24,7 +25,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      buyerClient: 'getCurrentBuyerStatsClient'
+      buyerClient: 'getCurrentBuyerStatsClient',
+      contracts: 'getBuyerClientContracts'
     })
   },
   components: {

@@ -9,6 +9,9 @@
                      }"
                    :fetchContractStats="fetchBuyerContractStats"
   >
+    <template v-slot:statCards>
+      <stat-card :data="offers.length" title="Offers" color="teal" key="offerCountStatCard" ></stat-card>
+    </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
         <router-link :to="{
@@ -32,7 +35,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentBuyerStatsContract'
+      contract: 'getCurrentBuyerStatsContract',
+      offers: 'getBuyerContractStatsOffers'
     })
   },
   methods: {

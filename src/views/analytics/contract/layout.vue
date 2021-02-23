@@ -4,6 +4,9 @@
     :fetchStats="fetchContractStats"
     :fetch-id="id"
   >
+    <template v-slot:statCards>
+      <slot name="statCards"></slot>
+    </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <slot name="contentTab"></slot>

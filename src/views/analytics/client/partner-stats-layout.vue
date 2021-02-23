@@ -4,6 +4,7 @@
                  :fetchClient="fetchPartnerClientStats"
                  :contracts-route="{ name: 'PartnerStatsClientContracts', query: $route.query }"
                  :leads-route="{ name: 'PartnerStatsClientLeads', query: $route.query }"
+                 :contracts-count="contracts.length"
   ></client-layout>
 </template>
 
@@ -24,7 +25,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      partnerClient: 'getCurrentPartnerStatsClient'
+      partnerClient: 'getCurrentPartnerStatsClient',
+      contracts: 'getPartnerClientContracts'
     })
   },
   components: {
