@@ -87,11 +87,11 @@
 /* Misc */
 
 .text-link {
-    @apply text-blue-500 underline cursor-pointer;
+    @apply text-blue-600 underline cursor-pointer;
     transition: color .125s;
 }
 
-.text-link:hover { @apply text-blue-700; }
+.text-link:hover { @apply text-blue-800; }
 
 
 /* ------------------------------------------------
@@ -106,7 +106,7 @@
     HUD
 --------------------------------------------------- */
 
-.hud { @apply bg-gray-900 rounded-xl w-full p-8 grid grid-cols-1 items-center border-3 border-gray-400 }
+.hud { @apply bg-gray-900 rounded-xl w-full p-8 grid grid-cols-1 items-center border-3 border-gray-500 }
 
 @media screen and (min-width: 1024px) {
     .hud { @apply grid-cols-2; }
@@ -184,7 +184,6 @@
 .btn:disabled,
 .btn.disabled
 { @apply cursor-not-allowed }
-.btn + .btn { @apply ml-2; }
 .btn:focus  { @apply outline-none shadow-outline; }
 
 .btn-circle {
@@ -442,15 +441,15 @@
 .underscore-tabs { @apply flex flex-row -mx-3; }
 .underscore-tab {
     @apply
-    font-normal text-gray-700
-    border-b-4 border-white
+    font-normal text-gray-800
+    border-b-4 border-transparent
     transition-colors duration-300;
 }
 .underscore-tab > * { @apply cursor-pointer; }
 .underscore-tab-sm > * { @apply block pt-2 pb-1 px-2 text-base; }
 .underscore-tab-lg > * { @apply block pt-6 pb-4 px-4 text-lg; }
 .underscore-tab.active { @apply text-gray-900 font-bold border-red-500; }
-.underscore-tab:hover:not(.active) { @apply text-gray-800 border-gray-200; }
+.underscore-tab:hover:not(.active) { @apply text-gray-900 border-gray-300; }
 
 
 /* ------------------------------------------------

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Client List" :showLoader="loading" :loadingText="loadingText">
+    <panel-template title="Client List" :show-loader="loading" :loading-text="loadingText" content-background-color="white">
       <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateClientModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Client</button>
       </template>

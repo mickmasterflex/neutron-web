@@ -25,7 +25,7 @@
         </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Buyers Added" copy="Edit the buyer group to add buyers" class="px-4`"></table-empty-state>
+    <table-empty-state v-else heading="No Buyers Added" copy="Edit the buyer group to add buyers" class="px-4"></table-empty-state>
   </div>
 </template>
 

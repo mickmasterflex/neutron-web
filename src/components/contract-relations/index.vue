@@ -1,14 +1,18 @@
 <template>
-  <panel-template title="Contract Relations" :showLoader="loading" :loading-text="loadingText">
+  <panel-template
+    title="Contract Relations"
+    :show-loader="loading"
+    :loading-text="loadingText"
+    content-background-color="white">
     <template v-slot:action>
-      <create-contract-relation :currentContract="contract"
-                                :contractType="contractType"
-                                :contractRelations="contract_relations">
+      <create-contract-relation :current-contract="contract"
+                                :contract-type="contractType"
+                                :contract-relations="contract_relations">
       </create-contract-relation>
     </template>
     <template v-slot:content>
-      <contract-relations-list :contractRelations="contract_relations"
-                               :contractType="contractType">
+      <contract-relations-list :contract-relations="contract_relations"
+                               :contract-type="contractType">
       </contract-relations-list>
     </template>
   </panel-template>

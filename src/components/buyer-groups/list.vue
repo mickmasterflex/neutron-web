@@ -14,10 +14,10 @@
       :loading-text="loadingBuyersText"
       class="col-span-2">
       <template v-slot:action>
-        <span class="flex flex-row mr-2">
+        <btn-group-right>
           <delete-group :id="buyerGroup.id"></delete-group>
           <button @click="showModalSetCurrent(buyerGroup)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-        </span>
+        </btn-group-right>
       </template>
       <template v-slot:content>
         <list-buyers :buyers="getBuyersByBuyerGroup(buyerGroup.id)"></list-buyers>
