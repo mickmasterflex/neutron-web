@@ -1,5 +1,6 @@
 <template>
   <panel-template
+    content-background-color="white"
     title="Offers"
     :showLoader="loading"
     :loading-text="loadingText">

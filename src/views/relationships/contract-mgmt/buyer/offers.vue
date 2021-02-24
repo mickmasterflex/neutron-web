@@ -2,7 +2,7 @@
   <base-panel-grid>
     <offer-list-panel class="col-span-2"
                       :offers="offers"
-                      :client="$route.params.client"
+                      :client="client"
                       emptyStateCopy="Use the 'New Offer' button to add offers"></offer-list-panel>
     <create-offer :buyer="buyer.id" :client="buyer.client"></create-offer>
   </base-panel-grid>

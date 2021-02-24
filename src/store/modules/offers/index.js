@@ -20,7 +20,7 @@ const getters = {
     return state.offers.filter(offer => offer.parent === buyerId)
   },
   getOffersByProduct: (state) => (productId) => {
-    return state.offers.filter(offer => offer.product === productId)
+    return state.offers.filter(offer => offer.offer_data.product_id === productId)
   },
   getOfferById: (state) => (offerId) => {
     return state.offers.filter(offer => offer.id === offerId)[0]
