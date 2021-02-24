@@ -49,7 +49,7 @@ export default {
   methods: {
     leadSold (soldAt) {
       if (soldAt) {
-        return new Date(soldAt).toDateString
+        return new Date(soldAt).toDateString()
       } else {
         return false
       }
