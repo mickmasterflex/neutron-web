@@ -51,6 +51,10 @@ export default {
     linkToClient: {
       type: Function,
       required: true
+    },
+    linkToClientLeads: {
+      type: Function,
+      required: true
     }
   }
 }

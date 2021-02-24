@@ -1,5 +1,9 @@
 <template>
-  <clients-list :clients="clients" :link-to-client="linkToPartnerStatsClient"></clients-list>
+  <clients-list
+    :clients="clients"
+    :link-to-client="linkToPartnerStatsClient"
+    :link-to-client-leads="linkToClientLeads"
+  ></clients-list>
 </template>
 
 <script>
@@ -21,6 +25,14 @@ export default {
       this.setCurrent(client)
       this.$router.push({
         name: 'PartnerStatsClient',
+        params: { id: client.id },
+        query: this.$route.query
+      })
+    },
+    linkToClientLeads (client) {
+      this.setCurrent(client)
+      this.$router.push({
+        name: 'PartnerStatsClientLeads',
         params: { id: client.id },
         query: this.$route.query
       })
