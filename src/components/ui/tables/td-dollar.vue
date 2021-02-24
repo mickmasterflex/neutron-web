@@ -1,13 +1,13 @@
-<tempalte>
+<template>
   <td class="td">${{Number(dollar).toLocaleString()}}</td>
-</tempalte>
+</template>
 
 <script>
 export default {
   props: {
     dollar: {
       required: true,
-      type: Number
+      type: [Number, String]
     }
   }
 }
