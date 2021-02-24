@@ -4,7 +4,7 @@
     :fetch-stats="fetchClients"
   >
     <template v-slot:statCards>
-      <stat-card :data="clientsCount" title="Clients" color="teal" key="clientCountStatCard" ></stat-card>
+      <stat-card :data="clientsCount" title="Clients" key="clientCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">

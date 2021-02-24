@@ -20,9 +20,9 @@
         </td>
         <td class="td">{{campaign.lead_count}}</td>
         <td class="td">{{campaign.sold_count}}</td>
-        <td class="td">{{campaign.revenue}}</td>
-        <td class="td">{{campaign.margin}}</td>
-        <td class="td">{{campaign.payout}}</td>
+        <td-dollar :dollar="campaign.revenue"></td-dollar>
+        <td-dollar :dollar="campaign.margin"></td-dollar>
+        <td-dollar :dollar="campaign.payout"></td-dollar>
         <td class="td">{{campaign.scrub_rate}}</td>
         <td class="td">{{campaign.margin_percent}}</td>
       </tr>

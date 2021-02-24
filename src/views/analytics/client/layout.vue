@@ -5,7 +5,7 @@
     :fetch-id="id"
   >
     <template v-slot:statCards>
-      <stat-card :data="contractsCount" title="Contracts" color="teal" key="contractCountStatCard" ></stat-card>
+      <stat-card :data="contractsCount" title="Contracts" key="contractCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">

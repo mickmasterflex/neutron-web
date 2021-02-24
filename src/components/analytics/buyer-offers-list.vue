@@ -20,9 +20,9 @@
         </td>
         <td class="td">{{offer.lead_count}}</td>
         <td class="td">{{offer.sold_count}}</td>
-        <td class="td">{{offer.revenue}}</td>
-        <td class="td">{{offer.margin}}</td>
-        <td class="td">{{offer.payout}}</td>
+        <td-dollar :dollar="offer.revenue"></td-dollar>
+        <td-dollar :dollar="offer.margin"></td-dollar>
+        <td-dollar :dollar="offer.payout"></td-dollar>
         <td class="td">{{offer.scrub_rate}}</td>
         <td class="td">{{offer.margin_percent}}</td>
       </tr>

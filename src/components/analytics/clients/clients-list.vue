@@ -18,11 +18,16 @@
         <td class="td">
           <span class="text-link" @click="linkToClient(client)">{{client.name}}</span>
         </td>
-        <td class="td">{{client.lead_count}}</td>
+        <td class="td">
+          <table-link v-if="client.lead_count" @table-link-click="linkToClientLeads({ name: client.name, id: client.id })">
+            {{client.lead_count}}
+          </table-link>
+          <span v-else class="italic text-gray-500">None</span>
+        </td>
         <td class="td">{{client.sold_count}}</td>
-        <td class="td">{{client.revenue}}</td>
-        <td class="td">{{client.margin}}</td>
-        <td class="td">{{client.payout}}</td>
+        <td-dollar :dollar="client.revenue"></td-dollar>
+        <td-dollar :dollar="client.margin"></td-dollar>
+        <td-dollar :dollar="client.payout"></td-dollar>
         <td class="td">{{client.scrub_rate}}</td>
         <td class="td">{{client.margin_percent}}</td>
       </tr>

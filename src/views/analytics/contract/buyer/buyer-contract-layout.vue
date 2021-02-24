@@ -10,7 +10,7 @@
                    :fetchContractStats="fetchBuyerContractStats"
   >
     <template v-slot:statCards>
-      <stat-card :data="offers.length" title="Offers" color="teal" key="offerCountStatCard" ></stat-card>
+      <stat-card :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">

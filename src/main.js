@@ -83,6 +83,7 @@ import btnGroupRight from '@/components/ui/buttons/btn-group-right'
 import statusIndicator from '@/components/ui/tables/status-indicator'
 import tableEmptyState from '@/components/ui/tables/empty-state'
 import tableLink from '@/components/ui/tables/table-link'
+import tdDollar from '@/components/ui/tables/td-dollar'
 
 /* Field Components */
 import checkboxField from '@/components/ui/forms/base-fields/checkbox'
@@ -134,6 +135,7 @@ Vue.component('btn-group-right', btnGroupRight)
 // Tables
 Vue.component('table-empty-state', tableEmptyState)
 Vue.component('table-link', tableLink)
+Vue.component('td-dollar', tdDollar)
 Vue.component('status-indicator', statusIndicator)
 
 // Form Fields

@@ -3,7 +3,7 @@
     <template v-slot:hud>
       <h1 class="h1 text-white">{{campaign.name}}</h1>
       <div class="hud--stat-cards">
-        <stat-card :data="campaign.id" :title="`Campaign`" :color="`teal`"></stat-card>
+        <stat-card :data="campaign.id" :title="`Campaign`"></stat-card>
       </div>
     </template>
     <template v-slot:content>
