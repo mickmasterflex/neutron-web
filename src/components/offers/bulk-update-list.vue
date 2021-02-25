@@ -4,8 +4,8 @@
       <th class="th"></th>
     </template>
     <template v-slot:additional-td="slotProps">
-      <td class="td">
-      <bulk-update-checkbox :contract="slotProps.offer.id" :contracts="offers" :index="index"></bulk-update-checkbox>
+      <td class="td w-4">
+      <bulk-update-checkbox :contract="slotProps.offer.id" :contracts="offers" :index="slotProps.index"></bulk-update-checkbox>
     </td>
     </template>
   </offers-list>
@@ -20,7 +20,8 @@ export default {
     offers: {
       type: [Object, Array],
       required: true
-    }
+    },
+    index: Number
   },
   ...mapMutations({
     resetShiftClickIndex: 'RESET_BULK_UPDATE_OFFERS_SHIFT_CLICK_INDEX'

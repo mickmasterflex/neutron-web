@@ -59,8 +59,7 @@ export default {
     ...mapMutations({
       setCurrentOffer: 'SET_CURRENT_OFFER',
       setCurrentForm: 'SET_CURRENT_FORM',
-      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS',
-      resetShiftClickIndex: 'RESET_BULK_UPDATE_OFFERS_SHIFT_CLICK_INDEX'
+      sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
     linkToOffer (offer) {
       this.setCurrentOffer(offer)
@@ -68,9 +67,6 @@ export default {
       this.sortCurrentFormFields()
       this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
     }
-  },
-  destroyed () {
-    this.resetShiftClickIndex()
   }
 }
 </script>
