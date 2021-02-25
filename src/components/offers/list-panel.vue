@@ -16,7 +16,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
-import offerList from '@/components/offers/list'
+import offerList from '@/components/offers/bulk-update-list'
 import bulkUpdateStatus from '@/components/bulk-update/status/offer-tooltip'
 
 export default {

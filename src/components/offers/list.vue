@@ -3,20 +3,17 @@
     <table v-if="offers.length" class="table table-striped">
       <thead>
         <tr>
-          <th class="th"></th>
+          <slot name="additional-th"></slot>
           <th class="th">Name</th>
           <th class="th">ID</th>
           <th class="th">Contract</th>
           <th class="th">Status</th>
           <th class="th">Caps</th>
-<!--          <th class="th">Product</th>-->
         </tr>
       </thead>
       <tbody class="tbody">
         <tr class="tr" v-for="(offer, index) in offers" :key="offer.id">
-          <td class="td w-4">
-            <bulk-update-checkbox :contract="offer.id" :contracts="offers" :index="index"></bulk-update-checkbox>
-          </td>
+          <slot name="additional-td" :offer="offer" :index="index"></slot>
           <td class="td">
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
@@ -43,7 +40,6 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import bulkUpdateCheckbox from '@/components/bulk-update/status/offer-checkbox'
 
 export default {
   props: {
@@ -72,9 +68,6 @@ export default {
       this.sortCurrentFormFields()
       this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
     }
-  },
-  components: {
-    'bulk-update-checkbox': bulkUpdateCheckbox
   },
   destroyed () {
     this.resetShiftClickIndex()
