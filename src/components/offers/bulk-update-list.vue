@@ -23,9 +23,11 @@ export default {
     },
     index: Number
   },
-  ...mapMutations({
-    resetShiftClickIndex: 'RESET_BULK_UPDATE_OFFERS_SHIFT_CLICK_INDEX'
-  }),
+  methods: {
+    ...mapMutations({
+      resetShiftClickIndex: 'RESET_BULK_UPDATE_OFFERS_SHIFT_CLICK_INDEX'
+    })
+  },
   components: {
     'offers-list': offersList,
     'bulk-update-checkbox': bulkUpdateCheckbox
