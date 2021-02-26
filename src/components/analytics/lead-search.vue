@@ -5,7 +5,7 @@
         rules="required"
         v-model="searchData"
         field_id="searchparams"
-        placeholder="example@gmail.com, 1234, test@gmail.com, 4567, "
+        :placeholder="`Search by ID or email address, separate with commas.\nie: example@gmail.com, 1234, test@gmail.com, 4567`"
         field_class="w-full bg-gray-900 border-gray-700 text-gray-200"
       ></v-textarea-field>
     </form>

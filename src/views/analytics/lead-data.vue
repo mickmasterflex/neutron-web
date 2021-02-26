@@ -4,7 +4,6 @@
       <slot name="hud">
         <div>
           <h1 class="text-gray-300 text-4xl font-hairline">Search All Leads</h1>
-          <p class="text-gray-400">Search by ID or email address. Separate with commas.</p>
         </div>
         <lead-search></lead-search>
       </slot>
