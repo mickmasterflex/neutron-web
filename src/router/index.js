@@ -29,7 +29,18 @@ const routes = [
   {
     path: '/analytics/',
     name: 'Analytics',
-    redirect: { name: 'BuyerStats' }
+    redirect: { name: 'LeadData' }
+  },
+  {
+    path: '/analytics/lead-data/',
+    name: 'LeadData',
+    component: () => import('@/views/analytics/lead-data'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'analytics',
+      activeAppTab: 'lead-data',
+      title: 'Search Leads'
+    }
   },
   {
     path: '/analytics/partner-stats/',

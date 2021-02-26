@@ -31,10 +31,10 @@
       </tbody>
     </table>
     <table-empty-state v-else
-                       heading="No leads in selected date range"
+                       :heading="emptyStateHeading"
+                       :copy="emptyStateCopy"
                        key="empty"
-                       class="well"
-                       copy="Try altering the date range"></table-empty-state>
+                       class="well"></table-empty-state>
   </transition-table-state>
 </template>
 
@@ -44,6 +44,14 @@ export default {
     leads: {
       type: [Object, Array],
       required: true
+    },
+    emptyStateHeading: {
+      type: String,
+      default: 'No leads in selected date range'
+    },
+    emptyStateCopy: {
+      type: String,
+      default: 'Try altering the date range'
     }
   },
   methods: {

@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import buyerLeadsList from '@/components/analytics/leads/leads-buyer-stats'
-import partnerLeadsList from '@/components/analytics/leads/leads-partner-stats'
+import buyerLeadsList from '@/components/analytics/leads/buyer-stats-list'
+import partnerLeadsList from '@/components/analytics/leads/partner-stats-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
