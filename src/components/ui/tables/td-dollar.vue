@@ -4,11 +4,6 @@
 
 <script>
 export default {
-  props: {
-    dollar: {
-      required: true,
-      type: [Number, String]
-    }
-  }
+  props: ['dollar']
 }
 </script>

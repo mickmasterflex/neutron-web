@@ -6,6 +6,9 @@
     <template slot="title">
       <date-range-picker></date-range-picker>
     </template>
+    <template slot="action">
+      <button class="btn btn-indigo"><font-awesome-icon icon="download"></font-awesome-icon> Export Stats</button>
+    </template>
     <template slot="content">
       <buyer-offer-list :buyer_contract_stats_offers="offers"></buyer-offer-list>
     </template>
