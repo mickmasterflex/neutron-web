@@ -38,9 +38,13 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    path: '/products/',
+    redirect: { name: 'Brands' }
+  },
+  {
     path: '/products/brands/',
     name: 'Brands',
-    component: () => import('@/views/products/index.vue'),
+    component: () => import('@/views/products/brands.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
@@ -107,7 +111,7 @@ const routes = [
       },
       {
         name: 'CampusProducts',
-        path: 'education-products',
+        path: 'products/',
         component: () => import('@/views/products/campus/products.vue'),
         meta: {
           requiresAuth: true,
@@ -120,7 +124,7 @@ const routes = [
     ]
   },
   {
-    path: '/products/brands/:brand/campuses/education-products/:id/',
+    path: '/products/brands/:brand/campuses/:campus/products/:id/',
     component: () => import('@/views/products/education-product/index.vue'),
     props (route) {
       const props = { ...route.params }

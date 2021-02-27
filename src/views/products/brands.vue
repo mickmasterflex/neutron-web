@@ -43,11 +43,15 @@ export default {
       fetchBrands: 'fetchBrands'
     }),
     ...mapMutations({
-      showCreateBrandModal: 'SHOW_CREATE_BRAND_MODAL'
+      showCreateBrandModal: 'SHOW_CREATE_BRAND_MODAL',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
     this.fetchBrands()
+    this.setBreadcrumbs([
+      { name: 'Brands', text: 'Brands' }
+    ])
   }
 }
 </script>
