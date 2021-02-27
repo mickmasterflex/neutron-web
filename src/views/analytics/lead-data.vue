@@ -16,7 +16,7 @@
         :loading-text="loadingText"
       >
         <template v-slot:action>
-          <button class="btn btn-indigo" :class="leads.length === 0 ? 'disabled' : ''" :disabled="leads.length === 0"><font-awesome-icon icon="download"></font-awesome-icon> Export Leads</button>
+          <button class="btn btn-indigo"><font-awesome-icon icon="download"></font-awesome-icon> Export Leads</button>
         </template>
         <template slot="content">
           <leads-list :leads="leads"></leads-list>

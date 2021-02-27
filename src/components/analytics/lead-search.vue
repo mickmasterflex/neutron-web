@@ -1,5 +1,5 @@
 <template>
-  <validation-observer ref="form" class="bg-gray-800 p-5 pt-3 rounded-lg">
+  <div ref="form" class="bg-gray-800 p-5 pt-3 rounded-lg">
     <form @submit.prevent="submitForm">
       <v-textarea-field
         rules="required"
@@ -10,33 +10,56 @@
       ></v-textarea-field>
     </form>
     <button @click="submitForm()" class="btn btn-green mt-2">Search Leads</button>
-  </validation-observer>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import { Validator } from 'vee-validate'
 
 export default {
   data () {
     return {
-      searchData: ''
+      searchData: '',
+      parsedEmails: '',
+      parsedIds: ''
+    }
+  },
+  computed: {
+    parsedData () {
+      return this.searchData.split(', ')
     }
   },
   methods: {
     ...mapActions({
       searchLeads: 'searchLeads'
     }),
-    submitForm () {
-      this.$refs.form.validate().then(success => {
-        if (success) {
-          this.searchLeads({
-            emails: this.searchData
-          }).catch(error => {
-            this.error = error
-          })
-        }
+    returnEmailz () {
+      const v = new Validator()
+      const { valid } = v.verify('test@searchData.com', 'email')
+      console.log(valid)
+    },
+    async submitForm () {
+      await this.returnEmailz().then(() => {
+        this.searchLeads({
+          emails: this.parsedEmails
+        })
       })
     }
+    // async submitForm () {
+    //   this.$refs.form.validate().then(success => {
+    //     this.getEmails().then(() => {
+    //       if (success) {
+    //         console.log(this.parsedEmails)
+    //         this.searchLeads({
+    //           emails: this.parsedEmails
+    //         }).catch(error => {
+    //           this.error = error
+    //         })
+    //       }
+    //     })
+    //   })
+    // }
   }
 }
 </script>
