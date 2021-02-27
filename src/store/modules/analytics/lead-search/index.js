@@ -5,10 +5,6 @@ const modules = {
   loading
 }
 
-const state = {
-  lead_data_search_loading_text: 'Loading Campaign Contracts Data'
-}
-
 const actions = {
   async searchLeads ({ commit, getters }, data) {
     commit('SET_LEAD_SEARCH_LOADING')
@@ -23,6 +19,5 @@ const actions = {
 
 export default {
   modules,
-  state,
   actions
 }
