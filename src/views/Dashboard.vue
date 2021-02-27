@@ -1,6 +1,10 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-64">
-    <h1 class="h1">🥳 Welcome to Proton</h1>
-    <p class="p">Dashboard in progress</p>
-  </div>
+  <content-layout>
+    <template v-slot:hud>
+      <div class="h-64 flex flex-col justify-center mb-3">
+        <h1 class="text-white text-5xl font-hairline">Welcome to Proton</h1>
+        <p class="p text-white">Dashboard in progress</p>
+      </div>
+    </template>
+  </content-layout>
 </template>
