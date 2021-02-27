@@ -6,6 +6,9 @@
     <template slot="title">
       <date-range-picker></date-range-picker>
     </template>
+    <template slot="action">
+      <button class="btn btn-indigo"><font-awesome-icon icon="download"></font-awesome-icon> Export Leads</button>
+    </template>
     <template slot="content">
       <buyer-leads-list :leads="leads" v-if="$route.meta.activeAppTab === 'buyer-stats'"></buyer-leads-list>
       <partner-leads-list :leads="leads" v-if="$route.meta.activeAppTab === 'partner-stats'"></partner-leads-list>
