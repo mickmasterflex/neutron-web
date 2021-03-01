@@ -43,22 +43,34 @@ export default {
       fetchCurrentPartner: 'fetchCurrentPartner'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_PARTNER'
+      resetCurrent: 'RESET_CURRENT_PARTNER',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setPartner () {
       if (this.partner.id !== this.id) {
         await this.fetchCurrentPartner(this.id)
       }
+    },
+    setPartnerBreadcrumbsAndTitle () {
+      document.title = this.partner.name
+      this.setBreadcrumbs([
+        { name: 'Clients', text: 'Clients' },
+        { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
+        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
+        { name: 'PartnerContract', text: this.partner.name, params: { client: this.$route.params.client, id: this.$route.params.id } }
+      ])
     }
   },
   watch: {
-    id: function () {
-      this.fetchCurrentPartner(this.id)
+    id () {
+      this.setPartner().then(() => {
+        this.setPartnerBreadcrumbsAndTitle()
+      })
     }
   },
   created () {
     this.setPartner().then(() => {
-      document.title = this.partner.name
+      this.setPartnerBreadcrumbsAndTitle()
     })
   },
   destroyed () {

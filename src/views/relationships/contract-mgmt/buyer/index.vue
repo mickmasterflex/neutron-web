@@ -57,7 +57,7 @@ export default {
         { name: 'Clients', text: 'Clients' },
         { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
         { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
-        { name: 'BuyerContract', text: this.buyer.name, params: { client: this.$route.params.slug, id: this.$route.params.id } }
+        { name: 'BuyerContract', text: this.buyer.name, params: { client: this.$route.params.client, id: this.$route.params.id } }
       ])
     }
   },
@@ -67,7 +67,7 @@ export default {
     })
   },
   watch: {
-    id: function () {
+    id () {
       this.setBuyer().then(() => {
         this.setBuyerBreadcrumbsAndTitle()
       })
