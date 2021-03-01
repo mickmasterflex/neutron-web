@@ -42,17 +42,29 @@ export default {
       fetchCurrentOffer: 'fetchCurrentOffer'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_OFFER'
+      resetCurrent: 'RESET_CURRENT_OFFER',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setOffer () {
       if (this.offer.id !== this.id) {
         await this.fetchCurrentOffer(this.id)
       }
+    },
+    setOfferBreadcrumbsAndTitle () {
+      document.title = this.offer.name
+      this.setBreadcrumbs([
+        { name: 'Clients', text: 'Clients' },
+        { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
+        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
+        { name: 'BuyerContract', text: this.$route.params.buyer, params: { client: this.$route.params.client, id: this.$route.params.buyer } },
+        { name: 'BuyerContractOffers', text: 'Offers', params: { client: this.$route.params.client, id: this.$route.params.buyer } },
+        { name: 'OfferDetails', text: this.offer.name, params: { client: this.$route.params.client, buyer: this.$route.params.buyer, id: this.id } }
+      ])
     }
   },
   created () {
     this.setOffer().then(() => {
-      document.title = this.offer.name
+      this.setOfferBreadcrumbsAndTitle()
     })
   },
   destroyed () {
