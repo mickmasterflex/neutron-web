@@ -31,7 +31,8 @@ export default {
       fetchCurrentBrand: 'fetchCurrentBrand'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_BRAND'
+      resetCurrent: 'RESET_CURRENT_BRAND',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setBrand () {
       if (this.brand.id !== this.id) {
@@ -48,6 +49,10 @@ export default {
     this.setBrand().then(() => {
       document.title = this.brand.name
     })
+    this.setBreadcrumbs([
+      { name: 'Brands', text: 'Brands' },
+      { name: 'BrandDetails', text: this.id, params: { id: this.id } }
+    ])
   },
   destroyed () {
     this.resetCurrent()

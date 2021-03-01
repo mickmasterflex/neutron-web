@@ -31,7 +31,8 @@ export default {
       fetchCurrentEducationProduct: 'fetchCurrentEducationProduct'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT'
+      resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setEducationProduct () {
       if (this.product.id !== this.id) {
@@ -48,6 +49,14 @@ export default {
     this.setEducationProduct().then(() => {
       document.title = this.product.name
     })
+    this.setBreadcrumbs([
+      { name: 'Brands', text: 'Brands' },
+      { name: 'BrandDetails', text: this.$route.params.brand, params: { id: this.$route.params.brand } },
+      { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
+      { name: 'CampusDetails', text: this.$route.params.campus, params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
+      { name: 'CampusProducts', text: 'Products', params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
+      { name: 'CampusDetails', text: this.id, params: { id: this.id } }
+    ])
   },
   destroyed () {
     this.resetCurrent()

@@ -173,7 +173,7 @@ const routes = [
   {
     path: '/config/pricing-tiers/',
     name: 'PricingTiers',
-    component: () => import('@/views/config/pricing-tiers/index.vue'),
+    component: () => import('@/views/config/pricing-tiers.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'config',
@@ -185,7 +185,7 @@ const routes = [
   {
     path: '/config/channels/',
     name: 'Channels',
-    component: () => import('@/views/config/channels/index.vue'),
+    component: () => import('@/views/config/channels.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'config',

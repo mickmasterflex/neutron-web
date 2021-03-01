@@ -34,7 +34,8 @@ export default {
       fetchCurrentCampus: 'fetchCurrentCampus'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_CAMPUS'
+      resetCurrent: 'RESET_CURRENT_CAMPUS',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setCampus () {
       if (this.campus.id !== this.id) {
@@ -51,6 +52,12 @@ export default {
     this.setCampus().then(() => {
       document.title = this.campus.name
     })
+    this.setBreadcrumbs([
+      { name: 'Brands', text: 'Brands' },
+      { name: 'BrandDetails', text: this.$route.params.brand, params: { id: this.$route.params.brand } },
+      { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
+      { name: 'CampusDetails', text: this.id, params: { brand: this.$route.params.brand, id: this.id } }
+    ])
   },
   destroyed () {
     this.resetCurrent()

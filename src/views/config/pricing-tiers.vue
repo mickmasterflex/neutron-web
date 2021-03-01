@@ -40,10 +40,12 @@ export default {
       fetchPricingTierGroups: 'fetchPricingTierGroups'
     }),
     ...mapMutations({
-      showCreatePricingTierGroupModal: 'SHOW_CREATE_PRICING_TIER_GROUP_MODAL'
+      showCreatePricingTierGroupModal: 'SHOW_CREATE_PRICING_TIER_GROUP_MODAL',
+      resetBreadCrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
+    this.resetBreadCrumbs()
     this.fetchPricingTierGroups()
   }
 }
