@@ -43,12 +43,10 @@ export default {
       fetchBrands: 'fetchBrands'
     }),
     ...mapMutations({
-      showCreateBrandModal: 'SHOW_CREATE_BRAND_MODAL',
-      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+      showCreateBrandModal: 'SHOW_CREATE_BRAND_MODAL'
     })
   },
   created () {
-    this.resetBreadcrumbs()
     this.fetchBrands()
   }
 }

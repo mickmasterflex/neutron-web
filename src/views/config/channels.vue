@@ -36,13 +36,9 @@ export default {
   methods: {
     ...mapActions({
       fetchChannels: 'fetchChannels'
-    }),
-    ...mapMutations({
-      resetBreadCrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
-    this.resetBreadCrumbs()
     this.fetchChannels()
   }
 }

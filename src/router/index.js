@@ -488,6 +488,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    store.commit('RESET_CURRENT_BREADCRUMBS')
+
     // Set Active App
     if (to.matched.some(record => record.meta.activeApp)) {
       store.commit('SET_ACTIVE_APP', to.meta.activeApp)

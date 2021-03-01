@@ -37,8 +37,7 @@ export default {
     ...mapMutations({
       showCreateBaseFieldModal: 'SHOW_CREATE_BASE_FIELD_MODAL',
       showUpdateBaseOptionFieldModal: 'SHOW_UPDATE_BASE_OPTION_FIELD_MODAL',
-      showUpdateBaseTextFieldModal: 'SHOW_UPDATE_BASE_TEXT_FIELD_MODAL',
-      resetBreadCrumbs: 'RESET_CURRENT_BREADCRUMBS'
+      showUpdateBaseTextFieldModal: 'SHOW_UPDATE_BASE_TEXT_FIELD_MODAL'
     }),
     ...mapActions({
       fetchBaseFields: 'fetchBaseFields'
@@ -82,7 +81,6 @@ export default {
     'list-base-fields': listBaseFields
   },
   created () {
-    this.resetBreadCrumbs()
     this.fetchBaseFields()
   }
 }
