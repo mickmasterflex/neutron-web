@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -32,6 +32,14 @@ export default {
       getAllClientsCount: 'getAllClientsCount',
       getBuyerGroups: 'getBuyerGroups'
     })
+  },
+  methods: {
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
+  },
+  created () {
+    this.resetBreadcrumbs()
   }
 }
 </script>

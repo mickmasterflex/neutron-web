@@ -41,10 +41,16 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ fetchUsers: 'fetchUsers' }),
-    ...mapMutations({ showCreateUserModal: 'SHOW_CREATE_USER_MODAL' })
+    ...mapActions({
+      fetchUsers: 'fetchUsers'
+    }),
+    ...mapMutations({
+      showCreateUserModal: 'SHOW_CREATE_USER_MODAL',
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchUsers()
   }
 }

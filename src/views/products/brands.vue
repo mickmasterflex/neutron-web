@@ -44,14 +44,12 @@ export default {
     }),
     ...mapMutations({
       showCreateBrandModal: 'SHOW_CREATE_BRAND_MODAL',
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchBrands()
-    this.setBreadcrumbs([
-      { name: 'Brands', text: 'Brands' }
-    ])
   }
 }
 </script>

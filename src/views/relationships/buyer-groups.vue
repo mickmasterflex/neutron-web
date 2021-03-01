@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import listGroups from '@/components/buyer-groups/list'
 import createGroup from '@/components/buyer-groups/create'
 import updateGroup from '@/components/buyer-groups/update'
@@ -28,9 +28,13 @@ export default {
     }),
     ...mapGetters({
       clients: 'getAllClients'
+    }),
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchBuyerGroups()
     this.fetchBuyers()
     if (this.clients.length === 0) {

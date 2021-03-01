@@ -49,7 +49,8 @@ export default {
       fetchCurrentUser: 'fetchCurrentUser'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_USER'
+      resetCurrent: 'RESET_CURRENT_USER',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setUser () {
       if (this.user.id !== this.id) {
@@ -60,6 +61,10 @@ export default {
   created () {
     this.setUser().then(() => {
       document.title = this.user.first_name + '  ' + this.user.last_name
+      this.setBreadcrumbs([
+        { name: 'Users', text: 'All Users' },
+        { name: 'User', text: this.user.first_name + ' ' + this.user.last_name, params: { id: this.id } }
+      ])
     })
   },
   destroyed () {
