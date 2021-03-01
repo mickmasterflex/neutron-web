@@ -5,7 +5,9 @@
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
       <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
-      <select-product v-model="product" rules="required"></select-product>
+      <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
+      <select-product v-model="product_id" rules="required"></select-product>
+      <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
     </form>
   </validation-observer>
     </template>
@@ -15,27 +17,32 @@
   </modal-template>
 </template>
 <script>
+import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import selectProduct from '@/components/products/select'
+import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
   data () {
     return {
       name: '',
-      product: ''
+      status: undefined,
+      product_id: '',
+      scheduledStart: null
     }
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateOfferModal'
+      showModal: 'getShowCreateOfferModal',
+      statuses: 'getNewContractStatuses'
     })
   },
   props: {
-    buyer: Number
+    buyer: Number,
+    client: Number
   },
-  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
       create: 'createOffer'
@@ -45,8 +52,10 @@ export default {
     }),
     close () {
       this.name = ''
-      this.contract = ''
-      this.product = ''
+      this.parent = ''
+      this.status = undefined
+      this.product_id = ''
+      this.scheduledStart = null
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -57,8 +66,13 @@ export default {
         if (success) {
           this.create({
             name: this.name,
-            contract: this.buyer,
-            product: this.product
+            parent: this.buyer,
+            status: this.status,
+            client: this.client,
+            scheduled_start: this.scheduledStart,
+            offer_data: {
+              product_id: parseInt(this.product_id)
+            }
           }).then(() => {
             this.close()
           }).catch(error => {
@@ -68,8 +82,10 @@ export default {
       })
     }
   },
+  mixins: [formatList, enterKeyListener, setResponseErrors],
   components: {
-    'select-product': selectProduct
+    'select-product': selectProduct,
+    'date-picker': datePicker
   }
 }
 </script>

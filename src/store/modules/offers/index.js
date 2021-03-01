@@ -1,8 +1,10 @@
 import axios from '@/axios'
+import bulkUpdate from '@/store/modules/offers/bulk-update'
 import loading from '@/store/modules/offers/loading'
 import visibility from '@/store/modules/offers/visibility'
 
 const modules = {
+  bulkUpdate,
   loading,
   visibility
 }
@@ -18,7 +20,10 @@ const getters = {
     return state.offers.filter(offer => offer.parent === buyerId)
   },
   getOffersByProduct: (state) => (productId) => {
-    return state.offers.filter(offer => offer.product === productId)
+    return state.offers.filter(offer => offer.offer_data.product_id === productId)
+  },
+  getOfferById: (state) => (offerId) => {
+    return state.offers.filter(offer => offer.id === offerId)[0]
   }
 }
 
@@ -36,6 +41,10 @@ const actions = {
     await axios.get(`/offer-contracts/${id}/`)
       .then(response => {
         commit('SET_CURRENT_OFFER', response.data)
+        commit('SET_CURRENT_FORM', response.data.form)
+        commit('SORT_CURRENT_FORM_FIELDS')
+      })
+      .finally(() => {
         commit('RESET_OFFER_FETCH_LOADING')
       })
   },

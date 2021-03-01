@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="contracts.length" class="table table-white">
+    <table v-if="contracts.length" class="table table-striped">
       <thead>
         <tr>
           <th class="th w-4"></th>
@@ -50,6 +50,7 @@
     <table-empty-state v-else
                        :heading="emptyStateHeading"
                        :copy="emptyStateCopy"
+                       class="well"
     ></table-empty-state>
   </transition-table-state>
 </template>

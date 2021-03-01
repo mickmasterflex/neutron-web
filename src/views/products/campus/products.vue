@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Education Products" :showLoader="loading" :loadingText="loadingText">
+    <panel-template title="Education Products" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
       <template slot="action">
         <button class="btn btn-turquoise" @click="showCreateEducationProductModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Education Product</button>
       </template>

@@ -7,7 +7,7 @@
       </div>
     </template>
     <template v-slot:content>
-      <panel-template title="Users" :showLoader="loading" :loadingText="loadingText">
+      <panel-template title="Users" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
         <template slot="action">
           <button class="btn btn-turquoise" @click="showCreateUserModal()">
             <font-awesome-icon icon="plus"></font-awesome-icon> Add User

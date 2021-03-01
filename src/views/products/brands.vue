@@ -7,7 +7,7 @@
       </div>
     </template>
     <template v-slot:content>
-      <panel-template title="Brand List" :showLoader="loading" :loadingText="loadingText">
+      <panel-template title="Brand List" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
         <template slot="action">
           <button class="btn btn-turquoise" @click="showCreateBrandModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Brand</button>
         </template>
