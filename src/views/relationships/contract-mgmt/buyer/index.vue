@@ -43,12 +43,22 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BUYER',
-      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
+      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setBuyer () {
       if (this.buyer.id !== this.id) {
         await this.fetchCurrentBuyer(this.id)
       }
+    },
+    setBuyerBreadcrumbsAndTitle () {
+      document.title = this.buyer.name
+      this.setBreadcrumbs([
+        { name: 'Clients', text: 'Clients' },
+        { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
+        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
+        { name: 'BuyerContract', text: this.buyer.name, params: { client: this.$route.params.slug, id: this.$route.params.id } }
+      ])
     }
   },
   computed: {
@@ -58,12 +68,14 @@ export default {
   },
   watch: {
     id: function () {
-      this.fetchCurrentBuyer(this.id)
+      this.setBuyer().then(() => {
+        this.setBuyerBreadcrumbsAndTitle()
+      })
     }
   },
   created () {
     this.setBuyer().then(() => {
-      document.title = this.buyer.name
+      this.setBuyerBreadcrumbsAndTitle()
     })
   },
   destroyed () {

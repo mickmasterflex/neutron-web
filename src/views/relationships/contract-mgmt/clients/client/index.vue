@@ -57,7 +57,8 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_CLIENT',
-      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
+      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setClient () {
       if (this.client.slug !== this.slug) {
@@ -68,6 +69,10 @@ export default {
   created () {
     this.setClient().then(() => {
       document.title = this.client.name
+      this.setBreadcrumbs([
+        { name: 'Clients', text: 'Clients' },
+        { name: 'Client', text: this.client.name, params: { slug: this.$route.params.slug } }
+      ])
     })
     if (!this.allBuyers.length) {
       this.fetchBuyers()
