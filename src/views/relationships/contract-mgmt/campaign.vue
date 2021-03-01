@@ -46,17 +46,29 @@ export default {
       fetchCampaignByPartner: 'fetchCampaignByPartner'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_CAMPAIGN'
+      resetCurrent: 'RESET_CURRENT_CAMPAIGN',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setCampaign () {
       if (this.campaign.id !== this.id) {
         await this.fetchCurrentCampaign(this.id)
       }
+    },
+    setCampaignBreadcrumbsAndTitle () {
+      document.title = this.campaign.name
+      this.setBreadcrumbs([
+        { name: 'Clients', text: 'Clients' },
+        { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
+        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
+        { name: 'PartnerContract', text: this.$route.params.partner, params: { client: this.$route.params.client, id: this.$route.params.partner } },
+        { name: 'PartnerContractCampaigns', text: 'Campaigns', params: { client: this.$route.params.client, id: this.$route.params.partner } },
+        { name: 'Campaign', text: this.campaign.name, params: { client: this.$route.params.client, partner: this.$route.params.partner, id: this.id } }
+      ])
     }
   },
   created () {
     this.setCampaign().then(() => {
-      document.title = this.campaign.name
+      this.setCampaignBreadcrumbsAndTitle()
     })
   },
   destroyed () {
