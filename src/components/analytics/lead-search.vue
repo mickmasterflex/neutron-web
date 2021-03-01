@@ -14,52 +14,58 @@
 </template>
 
 <script>
+import { validate } from 'vee-validate'
 import { mapActions } from 'vuex'
-import { Validator } from 'vee-validate'
 
 export default {
   data () {
     return {
       searchData: '',
-      parsedEmails: '',
-      parsedIds: ''
+      mails: []
     }
   },
   computed: {
     parsedData () {
-      return this.searchData.split(', ')
+      return this.searchData.split(',')
+    },
+    parsedEmails () {
+      return this.parsedData.filter(data => {
+        validate(data, 'email').then(result => {
+          if (result.valid) {
+            return true
+          }
+        })
+      })
+    },
+    parsedIds () {
+      return this.parsedData.filter(async data => {
+        await validate(data, 'integer').then(result => {
+          return result.valid
+        })
+      })
     }
   },
   methods: {
     ...mapActions({
       searchLeads: 'searchLeads'
     }),
-    returnEmailz () {
-      const v = new Validator()
-      const { valid } = v.verify('test@searchData.com', 'email')
-      console.log(valid)
-    },
-    async submitForm () {
-      await this.returnEmailz().then(() => {
-        this.searchLeads({
-          emails: this.parsedEmails
+    parsedEmailz () {
+      this.parsedData.forEach(async data => {
+        await validate(data, 'email').then(result => {
+          if (result.valid) {
+            console.log(result.valid)
+            console.log(data)
+            this.mails.push(data)
+          }
         })
       })
+    },
+    submitForm () {
+      this.parsedEmailz()
+      this.searchLeads({
+        emails: this.mails.join(', ')
+      })
     }
-    // async submitForm () {
-    //   this.$refs.form.validate().then(success => {
-    //     this.getEmails().then(() => {
-    //       if (success) {
-    //         console.log(this.parsedEmails)
-    //         this.searchLeads({
-    //           emails: this.parsedEmails
-    //         }).catch(error => {
-    //           this.error = error
-    //         })
-    //       }
-    //     })
-    //   })
-    // }
   }
 }
 </script>
