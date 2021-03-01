@@ -15,6 +15,7 @@
 </template>
 
 <script>
+// import dayjs from 'dayjs'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 import fullCalendar from '@/components/ui/calendars/full-calendar/index'
 import day from '@/components/caps/day'

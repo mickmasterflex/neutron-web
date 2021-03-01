@@ -6,7 +6,7 @@
         <p class="text-white">{{user.email}}</p>
       </div>
       <div class="hud--stat-cards">
-        <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>
+        <stat-card :data="user.id" title="User ID"></stat-card>
       </div>
     </template>
     <template v-slot:content>
