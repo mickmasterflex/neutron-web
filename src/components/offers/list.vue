@@ -18,7 +18,7 @@
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
           <td class="td">{{ offer.id }}</td>
-          <td class="td">{{ offer.parent }}</td>
+          <td class="td">{{ offer.parent.name }}</td>
           <td class="td w-32">
             <status-indicator :red="offer.status === 'terminated'"
                               :green="offer.status === 'active'"
@@ -65,7 +65,7 @@ export default {
       this.setCurrentOffer(offer)
       this.setCurrentForm(offer.form)
       this.sortCurrentFormFields()
-      this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
+      this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent.id, id: offer.id } })
     }
   }
 }
