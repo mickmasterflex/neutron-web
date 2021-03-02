@@ -15,7 +15,7 @@ const state = {
 const getters = {
   getCurrentCampaign: state => state.current_campaign,
   getCampaignsByPartner: (state) => (partnerId) => {
-    return state.campaigns.filter(campaign => campaign.contract === partnerId)
+    return state.campaigns.filter(campaign => campaign.contract.id === partnerId)
   }
 }
 
