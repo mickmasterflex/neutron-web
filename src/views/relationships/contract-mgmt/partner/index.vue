@@ -53,12 +53,20 @@ export default {
     },
     setPartnerBreadcrumbsAndTitle () {
       document.title = this.partner.name
-      this.setBreadcrumbs([
+      const breadcrumbs = [
         { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
-        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
-        { name: 'PartnerContract', text: this.partner.name, params: { client: this.$route.params.client, id: this.$route.params.id } }
-      ])
+        { name: 'Client', text: this.partner.client.name, params: { slug: this.$route.params.client } },
+        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
+      ]
+      this.partner.ancestors.forEach(ancestor => {
+        const additionalCrumbs = [
+          { name: 'PartnerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } },
+          { name: 'PartnerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
+        ]
+        breadcrumbs.push(...additionalCrumbs)
+      })
+      breadcrumbs.push({ name: 'PartnerContract', text: this.partner.name, params: { client: this.$route.params.client, id: this.$route.params.id } })
+      this.setBreadcrumbs(breadcrumbs)
     }
   },
   watch: {
