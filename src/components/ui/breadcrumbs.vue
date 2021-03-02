@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="breadcrumbs" class="flex flex-row flex-wrap bg-gray-800 shadow-md rounded-full px-2">
+  <ul v-if="breadcrumbs" class="flex flex-row flex-wrap bg-gray-800 shadow-md rounded-xl px-2">
     <li
       class="flex flex-row items-center"
       v-for="(crumb, index) in breadcrumbs"
