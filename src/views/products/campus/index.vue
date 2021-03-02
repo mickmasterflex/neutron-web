@@ -41,6 +41,15 @@ export default {
       if (this.campus.id !== this.id) {
         await this.fetchCurrentCampus(this.id)
       }
+    },
+    setCampusBreadcrumbsAndTitle () {
+      document.title = this.campus.name
+      this.setBreadcrumbs([
+        { name: 'Brands', text: 'Brands' },
+        { name: 'BrandDetails', text: this.campus.brand.name, params: { id: this.$route.params.brand } },
+        { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
+        { name: 'CampusDetails', text: this.campus.name, params: { brand: this.$route.params.brand, id: this.id } }
+      ])
     }
   },
   computed: {
@@ -50,14 +59,8 @@ export default {
   },
   created () {
     this.setCampus().then(() => {
-      document.title = this.campus.name
+      this.setCampusBreadcrumbsAndTitle()
     })
-    this.setBreadcrumbs([
-      { name: 'Brands', text: 'Brands' },
-      { name: 'BrandDetails', text: this.$route.params.brand, params: { id: this.$route.params.brand } },
-      { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
-      { name: 'CampusDetails', text: this.id, params: { brand: this.$route.params.brand, id: this.id } }
-    ])
   },
   destroyed () {
     this.resetCurrent()

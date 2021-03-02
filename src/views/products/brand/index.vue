@@ -38,6 +38,13 @@ export default {
       if (this.brand.id !== this.id) {
         await this.fetchCurrentBrand(this.id)
       }
+    },
+    setBrandBreadcrumbsAndTitle () {
+      document.title = this.brand.name
+      this.setBreadcrumbs([
+        { name: 'Brands', text: 'Brands' },
+        { name: 'BrandDetails', text: this.brand.name, params: { id: this.id } }
+      ])
     }
   },
   computed: {
@@ -47,12 +54,8 @@ export default {
   },
   created () {
     this.setBrand().then(() => {
-      document.title = this.brand.name
+      this.setBrandBreadcrumbsAndTitle()
     })
-    this.setBreadcrumbs([
-      { name: 'Brands', text: 'Brands' },
-      { name: 'BrandDetails', text: this.id, params: { id: this.id } }
-    ])
   },
   destroyed () {
     this.resetCurrent()

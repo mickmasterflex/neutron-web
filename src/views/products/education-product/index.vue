@@ -38,6 +38,17 @@ export default {
       if (this.product.id !== this.id) {
         await this.fetchCurrentEducationProduct(this.id)
       }
+    },
+    setProductBreadcrumbsAndTitle () {
+      document.title = this.product.name
+      this.setBreadcrumbs([
+        { name: 'Brands', text: 'Brands' },
+        { name: 'BrandDetails', text: this.product.brand.name, params: { id: this.$route.params.brand } },
+        { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
+        { name: 'CampusDetails', text: this.product.campus.name, params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
+        { name: 'CampusProducts', text: 'Products', params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
+        { name: 'CampusDetails', text: this.product.name, params: { id: this.id } }
+      ])
     }
   },
   computed: {
@@ -47,16 +58,8 @@ export default {
   },
   created () {
     this.setEducationProduct().then(() => {
-      document.title = this.product.name
+      this.setProductBreadcrumbsAndTitle()
     })
-    this.setBreadcrumbs([
-      { name: 'Brands', text: 'Brands' },
-      { name: 'BrandDetails', text: this.$route.params.brand, params: { id: this.$route.params.brand } },
-      { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
-      { name: 'CampusDetails', text: this.$route.params.campus, params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
-      { name: 'CampusProducts', text: 'Products', params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
-      { name: 'CampusDetails', text: this.id, params: { id: this.id } }
-    ])
   },
   destroyed () {
     this.resetCurrent()
