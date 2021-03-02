@@ -64,15 +64,18 @@ export default {
       if (this.client.slug !== this.slug) {
         await this.fetchCurrentClient(this.slug)
       }
-    }
-  },
-  created () {
-    this.setClient().then(() => {
+    },
+    setClientBreadcrumbsAndTitle () {
       document.title = this.client.name
       this.setBreadcrumbs([
         { name: 'Clients', text: 'Clients' },
         { name: 'Client', text: this.client.name, params: { slug: this.$route.params.slug } }
       ])
+    }
+  },
+  created () {
+    this.setClient().then(() => {
+      this.setClientBreadcrumbsAndTitle()
     })
     if (!this.allBuyers.length) {
       this.fetchBuyers()

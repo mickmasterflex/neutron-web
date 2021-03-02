@@ -52,12 +52,20 @@ export default {
     },
     setBuyerBreadcrumbsAndTitle () {
       document.title = this.buyer.name
-      this.setBreadcrumbs([
+      const breadcrumbs = [
         { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.$route.params.client, params: { slug: this.$route.params.client } },
-        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } },
-        { name: 'BuyerContract', text: this.buyer.name, params: { client: this.$route.params.client, id: this.$route.params.id } }
-      ])
+        { name: 'Client', text: this.buyer.client.name, params: { slug: this.$route.params.client } },
+        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
+      ]
+      this.buyer.ancestors.forEach(ancestor => {
+        const additionalCrumbs = [
+          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } },
+          { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
+        ]
+        breadcrumbs.push(...additionalCrumbs)
+      })
+      breadcrumbs.push({ name: 'BuyerContract', text: this.buyer.name, params: { client: this.$route.params.client, id: this.$route.params.id } })
+      this.setBreadcrumbs(breadcrumbs)
     }
   },
   computed: {
