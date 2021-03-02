@@ -66,7 +66,7 @@ export default {
       })
       const offerBreadcrumbs = [
         { name: 'BuyerContract', text: this.offer.parent.name, params: { client: this.$route.params.client, id: this.$route.params.buyer } },
-        // { name: 'BuyerContractOffers', text: 'Offers', params: { client: this.$route.params.client, id: this.$route.params.buyer } },
+        { name: 'BuyerContractOffers', text: 'Offers', params: { client: this.$route.params.client, id: this.$route.params.buyer } },
         { name: 'OfferDetails', text: this.offer.name, params: { client: this.$route.params.client, buyer: this.$route.params.buyer, id: this.id } }
       ]
       breadcrumbs.push(...offerBreadcrumbs)

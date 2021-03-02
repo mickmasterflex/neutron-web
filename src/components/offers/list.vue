@@ -43,7 +43,6 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    contracts: Array,
     offers: Array,
     client: String,
     emptyStateHeading: {
@@ -65,7 +64,14 @@ export default {
       this.setCurrentOffer(offer)
       this.setCurrentForm(offer.form)
       this.sortCurrentFormFields()
-      this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent.id, id: offer.id } })
+      this.$router.push({
+        name: 'OfferDetails',
+        params: {
+          client: offer.client.id,
+          buyer: offer.parent.id,
+          id: offer.offer
+        }
+      })
     }
   }
 }

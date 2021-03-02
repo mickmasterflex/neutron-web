@@ -70,7 +70,7 @@ export default {
       })
       const campaignBreadcrumbs = [
         { name: 'PartnerContract', text: this.campaign.contract.name, params: { client: this.$route.params.client, id: this.$route.params.partner } },
-        // { name: 'PartnerContractCampaigns', text: 'Campaigns', params: { client: this.$route.params.client, id: this.$route.params.partner } },
+        { name: 'PartnerContractCampaigns', text: 'Campaigns', params: { client: this.$route.params.client, id: this.$route.params.partner } },
         { name: 'Campaign', text: this.campaign.name, params: { client: this.$route.params.client, partner: this.$route.params.partner, id: this.id } }
       ]
       breadcrumbs.push(...campaignBreadcrumbs)

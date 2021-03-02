@@ -47,7 +47,7 @@ export default {
         { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
         { name: 'CampusDetails', text: this.product.campus.name, params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
         { name: 'CampusProducts', text: 'Products', params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
-        { name: 'CampusDetails', text: this.product.name, params: { id: this.id } }
+        { name: 'CampusDetails', text: this.product.name, params: { brand: this.$route.params.brand, id: this.id } }
       ])
     }
   },

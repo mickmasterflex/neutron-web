@@ -50,12 +50,23 @@ export default {
       this.setCurrentEduProduct(product)
       this.$router.push({
         name: 'ProductDetails',
-        params: { campus: product.campus.id, id: product.id }
+        params: {
+          brand: product.brand.id,
+          campus: product.campus.id,
+          id: product.id
+        }
       })
     },
     linkToProductOffers (product) {
       this.setCurrentEduProduct(product)
-      this.$router.push({ name: 'ProductOffers', params: { id: product.id } })
+      this.$router.push({
+        name: 'ProductOffers',
+        params: {
+          brand: product.brand.id,
+          campus: product.campus.id,
+          id: product.id
+        }
+      })
     }
   }
 }
