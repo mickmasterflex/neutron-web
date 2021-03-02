@@ -4,7 +4,7 @@
                       :offers="offers"
                       :client="client"
                       emptyStateCopy="Use the 'New Offer' button to add offers"></offer-list-panel>
-    <create-offer :buyer="buyer.id" :client="buyer.client.id"></create-offer>
+    <create-offer v-if="buyer.client" :buyer="buyer.id" :client="buyer.client.id"></create-offer>
   </base-panel-grid>
 </template>
 <script>

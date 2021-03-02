@@ -70,7 +70,6 @@ export default {
       this.phone_number = this.campus.phone_number
       this.phone_extension = this.campus.phone_extension
       this.description = this.campus.description
-      this.brand = this.campus.brand
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -89,7 +88,7 @@ export default {
             phone_number: this.phone_number,
             phone_extension: this.phone_extension,
             description: this.description,
-            brand: this.brand,
+            brand: this.campus.brand.id,
             id: this.campus.id
           }).catch(error => {
             this.error = error
@@ -107,7 +106,7 @@ export default {
     }),
     unsavedChanges () {
       if (this.name) {
-        return this.name !== this.campus.name || this.short_description !== this.campus.short_description || this.is_online !== this.campus.is_online || this.address1 !== this.campus.address1 || this.address2 !== this.campus.address2 || this.city !== this.campus.city || this.state !== this.campus.state || this.postal_code !== this.campus.postal_code || this.phone_type !== this.campus.phone_type || this.phone_number !== this.campus.phone_number || this.phone_extension !== this.campus.phone_extension || this.description !== this.campus.description || this.brand !== this.campus.brand
+        return this.name !== this.campus.name || this.short_description !== this.campus.short_description || this.is_online !== this.campus.is_online || this.address1 !== this.campus.address1 || this.address2 !== this.campus.address2 || this.city !== this.campus.city || this.state !== this.campus.state || this.postal_code !== this.campus.postal_code || this.phone_type !== this.campus.phone_type || this.phone_number !== this.campus.phone_number || this.phone_extension !== this.campus.phone_extension || this.description !== this.campus.description
       } else {
         return false
       }

@@ -24,8 +24,8 @@ export default {
     buyerGroup () {
       if (this.buyer.buyer_group) {
         return this.buyer.buyer_group
-      } else if (this.buyer.inherited_buyer_group) {
-        return this.buyer.inherited_buyer_group.buyer_group_name + ' (inherited)'
+      } else if (this.buyer.ancestor_buyer_groups) {
+        return this.buyer.ancestor_buyer_groups.buyer_group_name + ' (inherited)'
       }
       return 'None Assigned'
     }

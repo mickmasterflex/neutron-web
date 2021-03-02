@@ -27,12 +27,14 @@ const getters = {
     return state.buyers.filter(buyer => buyer.client.id === clientId).filter(buyer => buyer.parent === null)
   },
   getCurrentBuyerSiblings: (state, getters) => {
-    const siblings = getters.getBuyersByClient(state.current_buyer.client.id)
-    const index = siblings.findIndex(buyer => buyer.id === state.current_buyer.id)
-    if (index !== -1) {
-      siblings.splice(index, 1)
+    if (state.current_buyer.client) {
+      const siblings = getters.getBuyersByClient(state.current_buyer.client.id)
+      const index = siblings.findIndex(buyer => buyer.id === state.current_buyer.id)
+      if (index !== -1) {
+        siblings.splice(index, 1)
+      }
+      return siblings
     }
-    return siblings
   },
   getBuyersByParent: (state) => (buyerId) => {
     return state.buyers.filter(buyer => buyer.parent === buyerId)

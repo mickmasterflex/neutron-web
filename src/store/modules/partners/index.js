@@ -24,12 +24,14 @@ const getters = {
     return state.partners.filter(partner => partner.client.id === clientId).filter(partner => partner.parent === null)
   },
   getCurrentPartnerSiblings: (state, getters) => {
-    const siblings = getters.getPartnersByClient(state.current_partner.client.id)
-    const index = siblings.findIndex(partner => partner.id === state.current_partner.id)
-    if (index !== -1) {
-      siblings.splice(index, 1)
+    if (state.current_partner.client) {
+      const siblings = getters.getPartnersByClient(state.current_partner.client.id)
+      const index = siblings.findIndex(partner => partner.id === state.current_partner.id)
+      if (index !== -1) {
+        siblings.splice(index, 1)
+      }
+      return siblings
     }
-    return siblings
   },
   getPartnersByParent: (state) => (partnerId) => {
     return state.partners.filter(partner => partner.parent === partnerId)

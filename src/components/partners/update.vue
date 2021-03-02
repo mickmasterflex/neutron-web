@@ -37,7 +37,8 @@ export default {
       status: undefined,
       channel: '',
       pricing_tier_group: '',
-      scheduledStart: null
+      scheduledStart: null,
+      client: { id: null, name: null }
     }
   },
   props: {
@@ -60,6 +61,7 @@ export default {
       this.channel = this.partner.channel
       this.pricing_tier_group = this.partner.pricing_tier_group
       this.scheduledStart = this.partner.scheduled_start
+      this.client = this.partner.client
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -67,7 +69,7 @@ export default {
           this.update({
             name: this.name,
             parent: this.parent,
-            client: this.partner.client.id,
+            client: this.client.id,
             id: this.partner.id,
             ping_back_url: this.pingbackUrl,
             status: this.status,
