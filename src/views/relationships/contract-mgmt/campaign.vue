@@ -58,19 +58,19 @@ export default {
       document.title = this.campaign.name
       const breadcrumbs = [
         { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.campaign.client.name, params: { slug: this.$route.params.client } },
-        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
+        { name: 'Client', text: this.campaign.client.name, params: { slug: this.$route.params.client } }
+        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
       ]
       this.campaign.partner_ancestors.forEach(ancestor => {
         const additionalCrumbs = [
-          { name: 'PartnerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } },
-          { name: 'PartnerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
+          { name: 'PartnerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
+          // { name: 'PartnerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
         ]
         breadcrumbs.push(...additionalCrumbs)
       })
       const campaignBreadcrumbs = [
         { name: 'PartnerContract', text: this.campaign.contract.name, params: { client: this.$route.params.client, id: this.$route.params.partner } },
-        { name: 'PartnerContractCampaigns', text: 'Campaigns', params: { client: this.$route.params.client, id: this.$route.params.partner } },
+        // { name: 'PartnerContractCampaigns', text: 'Campaigns', params: { client: this.$route.params.client, id: this.$route.params.partner } },
         { name: 'Campaign', text: this.campaign.name, params: { client: this.$route.params.client, partner: this.$route.params.partner, id: this.id } }
       ]
       breadcrumbs.push(...campaignBreadcrumbs)

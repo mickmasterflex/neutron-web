@@ -54,19 +54,19 @@ export default {
       document.title = this.offer.name
       const breadcrumbs = [
         { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.offer.client.name, params: { slug: this.$route.params.client } },
-        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
+        { name: 'Client', text: this.offer.client.name, params: { slug: this.$route.params.client } }
+        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
       ]
       this.offer.buyer_ancestors.forEach(ancestor => {
         const additionalCrumbs = [
-          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } },
-          { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
+          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
+          // { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
         ]
         breadcrumbs.push(...additionalCrumbs)
       })
       const offerBreadcrumbs = [
         { name: 'BuyerContract', text: this.offer.parent.name, params: { client: this.$route.params.client, id: this.$route.params.buyer } },
-        { name: 'BuyerContractOffers', text: 'Offers', params: { client: this.$route.params.client, id: this.$route.params.buyer } },
+        // { name: 'BuyerContractOffers', text: 'Offers', params: { client: this.$route.params.client, id: this.$route.params.buyer } },
         { name: 'OfferDetails', text: this.offer.name, params: { client: this.$route.params.client, buyer: this.$route.params.buyer, id: this.id } }
       ]
       breadcrumbs.push(...offerBreadcrumbs)

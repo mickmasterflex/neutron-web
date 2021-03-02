@@ -54,13 +54,13 @@ export default {
       document.title = this.buyer.name
       const breadcrumbs = [
         { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.buyer.client.name, params: { slug: this.$route.params.client } },
-        { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
+        { name: 'Client', text: this.buyer.client.name, params: { slug: this.$route.params.client } }
+        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
       ]
       this.buyer.ancestors.forEach(ancestor => {
         const additionalCrumbs = [
-          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } },
-          { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
+          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
+          // { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
         ]
         breadcrumbs.push(...additionalCrumbs)
       })
