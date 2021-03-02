@@ -3,7 +3,7 @@
     <slot name="breadcrumbs">
       <bread-crumbs :breadcrumbs="breadcrumbs"></bread-crumbs>
     </slot>
-    <div class="grid grid-cols-1 items-center md:grid-cols-2 p-4">
+    <div class="hud-content grid grid-cols-1 items-center md:grid-cols-2 p-4">
       <slot name="hud-content"></slot>
     </div>
   </div>
@@ -24,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .hud-content {
+    min-height: 142px;
+  }
+</style>
