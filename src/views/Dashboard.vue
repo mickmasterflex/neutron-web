@@ -8,3 +8,18 @@
     </template>
   </content-layout>
 </template>
+
+<script>
+import { mapMutations } from 'vuex'
+
+export default {
+  methods: {
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
+  },
+  created () {
+    this.resetBreadcrumbs()
+  }
+}
+</script>
