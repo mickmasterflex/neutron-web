@@ -18,16 +18,16 @@ const getters = {
   getAllBuyers: state => state.buyers,
   getCurrentBuyer: state => state.current_buyer,
   getBuyersByClient: (state) => (clientId) => {
-    return state.buyers.filter(buyer => buyer.client === clientId)
+    return state.buyers.filter(buyer => buyer.client.id === clientId)
   },
   getBuyersByBuyerGroup: (state) => (buyerGroupId) => {
     return state.buyers.filter(buyer => buyer.buyer_group === buyerGroupId)
   },
   getParentlessBuyersByClient: (state) => (clientId) => {
-    return state.buyers.filter(buyer => buyer.client === clientId).filter(buyer => buyer.parent === null)
+    return state.buyers.filter(buyer => buyer.client.id === clientId).filter(buyer => buyer.parent === null)
   },
   getCurrentBuyerSiblings: (state, getters) => {
-    const siblings = getters.getBuyersByClient(state.current_buyer.client)
+    const siblings = getters.getBuyersByClient(state.current_buyer.client.id)
     const index = siblings.findIndex(buyer => buyer.id === state.current_buyer.id)
     if (index !== -1) {
       siblings.splice(index, 1)

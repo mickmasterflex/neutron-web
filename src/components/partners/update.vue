@@ -67,7 +67,7 @@ export default {
           this.update({
             name: this.name,
             parent: this.parent,
-            client: this.partner.client,
+            client: this.partner.client.id,
             id: this.partner.id,
             ping_back_url: this.pingbackUrl,
             status: this.status,

@@ -30,7 +30,7 @@
             </status-indicator>
           </td>
           <td class="td w-16">{{ contract.id }}</td>
-          <td class="td">{{ contract.client }}</td>
+          <td class="td">{{ contract.client.name }}</td>
           <td class="td">
             <table-link @table-link-click="linkToBuyerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>

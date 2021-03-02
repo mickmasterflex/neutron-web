@@ -15,12 +15,7 @@
           <td class="td w-16">{{buyer.id}}</td>
           <td class="td w-24">{{buyer.children.length}}</td>
           <td class="td">
-            <span v-if="getClientById(buyer.client)">
-              {{getClientById(buyer.client).name}}
-            </span>
-            <span v-else>
-              {{buyer.client}}
-            </span>
+            {{buyer.client.name}}
           </td>
         </tr>
       </tbody>

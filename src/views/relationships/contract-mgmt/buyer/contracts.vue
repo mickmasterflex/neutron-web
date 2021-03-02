@@ -8,7 +8,7 @@
                               :contract="buyer.id"
                               contractType="buyer"
                               class="col-span-2"></contract-relations-index>
-    <create-buyer-contract :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
+    <create-buyer-contract :client="buyer.client.id" :parent="buyer.id"></create-buyer-contract>
   </base-panel-grid>
 </template>
 

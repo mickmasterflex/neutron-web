@@ -5,7 +5,7 @@
                         class="col-span-2"
                         emptyStateCopy="Use the 'New Partner' button to add partners to this partner."></partner-list-panel>
     <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner" class="col-span-2"></contract-relations-index>
-    <create-partner-contract :client="partner.client" :parent="partner.id"></create-partner-contract>
+    <create-partner-contract :client="partner.client.id" :parent="partner.id"></create-partner-contract>
   </base-panel-grid>
 </template>
 
