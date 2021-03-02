@@ -6,7 +6,7 @@
       :key="'breadcrumb-' + index">
       <router-link
         :to="{ name: crumb.name, params: crumb.params }"
-        class="inline-block p-2 cursor-pointer transition-colors duration-100"
+        class="inline-block p-2 cursor-pointer transition-colors duration-100 text-sm"
         :class="index + 1 === breadcrumbs.length ? 'text-gray-500 hover:text-gray-100' : 'text-gray-300 hover:text-white'"
       >{{ crumb.text }}</router-link>
       <font-awesome-icon v-if="index + 1 !== breadcrumbs.length" icon="angle-right" class="text-xl text-gray-900"></font-awesome-icon>
