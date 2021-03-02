@@ -67,7 +67,8 @@ export default {
       this.$router.push({
         name: 'OfferDetails',
         params: {
-          client: offer.client.id,
+          // will use offer.client.slug once backend is updated to include slug
+          client: this.client,
           buyer: offer.parent.id,
           id: offer.offer
         }
