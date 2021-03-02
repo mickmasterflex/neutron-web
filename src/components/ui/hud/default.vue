@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-gray-900 rounded-xl w-full p-8 border-3 border-gray-400">
+  <div class="bg-gray-900 rounded-xl w-full p-3 border-3 border-gray-400 shadow-inner">
     <slot name="breadcrumbs">
       <bread-crumbs :breadcrumbs="breadcrumbs"></bread-crumbs>
     </slot>
-    <div class="grid grid-cols-1 items-center md:grid-cols-2">
+    <div class="grid grid-cols-1 items-center md:grid-cols-2 p-4">
       <slot name="hud-content"></slot>
     </div>
   </div>
