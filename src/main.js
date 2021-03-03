@@ -30,6 +30,7 @@ import {
   faCheck,
   faCheckCircle,
   faCheckSquare,
+  faCircle,
   faClone,
   faCog,
   faDna,
@@ -84,6 +85,7 @@ import btnGroupRight from '@/components/ui/buttons/btn-group-right'
 import statusIndicator from '@/components/ui/tables/status-indicator'
 import tableEmptyState from '@/components/ui/tables/empty-state'
 import tableLink from '@/components/ui/tables/table-link'
+import tdDate from '@/components/ui/tables/td-date'
 import tdNumber from '@/components/ui/tables/td-number'
 
 /* Field Components */
@@ -137,6 +139,7 @@ Vue.component('btn-group-right', btnGroupRight)
 // Tables
 Vue.component('table-empty-state', tableEmptyState)
 Vue.component('table-link', tableLink)
+Vue.component('td-date', tdDate)
 Vue.component('td-number', tdNumber)
 Vue.component('status-indicator', statusIndicator)
 
@@ -226,6 +229,7 @@ library.add(
   faCheck,
   faCheckCircle,
   faCheckSquare,
+  faCircle,
   faClone,
   faCog,
   faDna,
