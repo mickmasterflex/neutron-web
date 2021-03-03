@@ -1,10 +1,8 @@
 <template>
   <validation-observer ref="form">
-    <form @submit.prevent="submitForm">
-      <v-select-field v-model="revenue_method" rules="required" :options="deliveries" field_id="revenue_method" field_label="Revenue Method"></v-select-field>
-      <template>
-        <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Set Revenue Method</button>
-      </template>
+    <form @submit.prevent="submitForm" class="flex flex-row items-end form-horizontal-slim mb-3">
+      <select-field v-model="revenue_method" :options="deliveries" field_id="revenue_method" field_label="Revenue Method" field_class="field-tall"></select-field>
+        <button @click="submitForm" class="btn btn-green ml-3" v-show="unsavedChanges">Set Revenue Method</button>
     </form>
   </validation-observer>
 </template>
@@ -19,16 +17,11 @@ export default {
       revenue_method: ''
     }
   },
-  updated () {
-    if (this.buyer.revenue_method) {
+  watch: {
+    buyer: function () {
       this.revenue_method = this.buyer.revenue_method
     }
   },
-  // props: {
-  //   buyer: {
-  //     type: Number
-  //   }
-  // },
   computed: {
     ...mapGetters({
       deliveriesByBuyer: 'getDeliveriesByBuyer',
