@@ -3,7 +3,7 @@
     <table v-if="contracts.length" class="table table-striped">
       <thead>
       <tr>
-        <th class="th">Name</th>
+        <th class="th">Contract</th>
         <th class="th">Leads</th>
         <th class="th">Sold Leads</th>
         <th class="th">Revenue</th>
@@ -19,15 +19,16 @@
           <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
         </td>
         <td class="td">
-          <table-link v-if="contract.lead_count" @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })">
-            {{contract.lead_count}}
-          </table-link>
+          <table-link :number="contract.lead_count"
+                      v-if="contract.lead_count"
+                      @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })"
+          ></table-link>
           <span v-else class="italic text-gray-500">None</span>
         </td>
-        <td class="td">{{contract.sold_count}}</td>
-        <td-dollar :dollar="contract.revenue"></td-dollar>
-        <td-dollar :dollar="contract.margin"></td-dollar>
-        <td-dollar :dollar="contract.payout"></td-dollar>
+        <td-number :number="contract.sold_count"></td-number>
+        <td-number :dollar="true" :number="contract.revenue"></td-number>
+        <td-number :dollar="true" :number="contract.margin"></td-number>
+        <td-number :dollar="true" :number="contract.payout"></td-number>
         <td class="td">{{contract.scrub_rate}}</td>
         <td class="td">{{contract.margin_percent}}</td>
       </tr>

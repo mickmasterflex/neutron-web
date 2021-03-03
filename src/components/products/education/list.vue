@@ -20,7 +20,9 @@
           <span v-else class="italic text-gray-500">None</span>
         </td>
         <td class="td">
-          <table-link @table-link-click="linkToProductOffers(educationProduct)">{{ educationProduct.offer_contracts.length }}</table-link>
+          <table-link @table-link-click="linkToProductOffers(educationProduct)"
+                      :number="educationProduct.offer_contracts.length"
+          ></table-link>
         </td>
       </tr>
       </tbody>

@@ -125,24 +125,24 @@ const routes = [
       return props
     },
     children: [
-      // {
-      //   name: 'PartnerStatsContractContracts',
-      //   path: 'contracts/',
-      //   component: () => import('@/views/analytics/contract/partner-contracts'),
-      //   meta: {
-      //     requiresAuth: true,
-      //     activeApp: 'analytics',
-      //     activeAppTab: 'partner-stats',
-      //     contentTab: 'contracts'
-      //   },
-      //   props (route) {
-      //     const props = { ...route.params }
-      //     props.id = +props.id
-      //     props.clientId = +props.clientId
-      //     return props
-      //   },
-      //   pathToRegexpOptions: { strict: true }
-      // },
+      {
+        name: 'PartnerStatsContractContracts',
+        path: 'contracts/',
+        component: () => import('@/views/analytics/contract/partner/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'partner-stats',
+          contentTab: 'contracts'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.clientId = +props.clientId
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
+      },
       {
         name: 'PartnerStatsContractCampaigns',
         path: 'campaigns/',
@@ -278,24 +278,24 @@ const routes = [
       return props
     },
     children: [
-      // {
-      //   name: 'BuyerStatsContractContracts',
-      //   path: 'contracts/',
-      //   component: () => import('@/views/analytics/contract/buyer-contracts'),
-      //   meta: {
-      //     requiresAuth: true,
-      //     activeApp: 'analytics',
-      //     activeAppTab: 'buyer-stats',
-      //     contentTab: 'contracts'
-      //   },
-      //   props (route) {
-      //     const props = { ...route.params }
-      //     props.id = +props.id
-      //     props.clientId = +props.clientId
-      //     return props
-      //   },
-      //   pathToRegexpOptions: { strict: true }
-      // },
+      {
+        name: 'BuyerStatsContractContracts',
+        path: 'contracts/',
+        component: () => import('@/views/analytics/contract/buyer/contracts'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'contracts'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.clientId = +props.clientId
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
+      },
       {
         name: 'BuyerStatsContractOffers',
         path: 'offers/',

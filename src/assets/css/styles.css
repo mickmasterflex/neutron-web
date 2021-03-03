@@ -307,7 +307,7 @@
 .table-white .tr:hover .td { @apply bg-blue-100 }
 
 /* General .th & .td */
-.td, .th { @apply font-normal p-3 }
+.td, .th { @apply font-normal py-3 px-2 }
 .td { @apply border-white bg-gray-100 transition-colors duration-200 }
 .th { @apply border-gray-800 bg-gray-900 text-left text-white }
 

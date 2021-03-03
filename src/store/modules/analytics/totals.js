@@ -1,5 +1,13 @@
 const state = {
-  analytics_totals: {}
+  analytics_totals: {
+    lead_count: 0,
+    sold_count: 0,
+    revenue: 0,
+    margin: 0,
+    payout: 0,
+    scrub_rate: 0,
+    margin_percent: 0
+  }
 }
 
 const getters = {
@@ -14,7 +22,15 @@ const getters = {
 
 const mutations = {
   SET_ANALYTICS_TOTALS: (state, totals) => (state.analytics_totals = totals),
-  RESET_ANALYTICS_TOTALS: (state) => (state.analytics_totals = {})
+  RESET_ANALYTICS_TOTALS: (state) => (state.analytics_totals = {
+    lead_count: 0,
+    sold_count: 0,
+    revenue: 0,
+    margin: 0,
+    payout: 0,
+    scrub_rate: 0,
+    margin_percent: 0
+  })
 }
 
 export default {

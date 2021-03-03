@@ -29,9 +29,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_PARTNER_STATS_CONTRACT'
+      setCurrent: 'SET_CURRENT_PARTNER_STATS_CONTRACT',
+      resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToContractLeads (contract) {
+      this.resetLeads()
       this.setCurrent(contract)
       this.$router.push({
         name: 'PartnerStatsContractLeads',

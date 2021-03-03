@@ -2,16 +2,19 @@
   <content-layout>
     <template v-slot:hud>
       <slot name="hud">
-        <h1 class="text-white text-4xl font-hairline">{{ hudTitle }}</h1>
+        <div>
+          <h1 class="text-white text-4xl font-hairline mb-2">{{ hudTitle }}</h1>
+          <router-link v-if="editRoute" :to="editRoute" class="btn btn-blue rounded-full"><font-awesome-icon icon="pencil-alt"></font-awesome-icon> {{ editText }}</router-link>
+        </div>
         <hud-stat-cards>
           <slot name="statCards"></slot>
-          <stat-card v-if="leadCount" :data="leadCount" title="Leads" color="green" key="leadCountStatCard" :comma-separated="true"></stat-card>
-          <stat-card v-if="soldCount" :data="soldCount" title="Sold" color="green" key="soldCountStatCard" :comma-separated="true"></stat-card>
-          <stat-card v-if="revenue" :data="revenue" title="Revenue" color="green" key="revenueStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-          <stat-card v-if="margin" :data="margin" title="Margin" color="green" key="marginStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-          <stat-card v-if="payout" :data="payout" title="Payout" color="green" key="payoutStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-          <stat-card v-if="scrubRate" :data="scrubRate" title="Scrub Rate" color="green" key="scrubRateStatCard" ></stat-card>
-          <stat-card v-if="marginPercent" :data="marginPercent" title="Margin Percent" key="marginPercentStatCard" ></stat-card>
+          <stat-card :data="leadCount" title="Leads" color="green" key="leadCountStatCard" :comma-separated="true"></stat-card>
+          <stat-card :data="soldCount" title="Sold" color="green" key="soldCountStatCard" :comma-separated="true"></stat-card>
+          <stat-card :data="revenue" title="Revenue" color="green" key="revenueStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
+          <stat-card :data="margin" title="Margin" color="green" key="marginStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
+          <stat-card :data="payout" title="Payout" color="green" key="payoutStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
+          <stat-card :data="scrubRate" title="Scrub Rate" color="green" key="scrubRateStatCard" ></stat-card>
+          <stat-card :data="marginPercent" title="Margin Percent" key="marginPercentStatCard" ></stat-card>
         </hud-stat-cards>
       </slot>
     </template>
@@ -44,9 +47,9 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS',
       setStart: 'SET_ANALYTICS_START_DATE',
-      setEnd: 'SET_ANALYTICS_END_DATE'
+      setEnd: 'SET_ANALYTICS_END_DATE',
+      resetAnalyticsTotals: 'RESET_ANALYTICS_TOTALS'
     })
   },
   computed: {
@@ -75,7 +78,7 @@ export default {
     this.setEnd(dayjs(this.$route.query.end_date))
   },
   destroyed () {
-    this.resetLeads()
+    this.resetAnalyticsTotals()
   }
 }
 </script>
