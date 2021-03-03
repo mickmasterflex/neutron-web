@@ -21,7 +21,7 @@
         <td class="td">{{campus.address1}} {{campus.address2}}</td>
         <td class="td">{{campus.phone_number}}</td>
         <td class="td">
-          <table-link @table-link-click="linkToCampusProducts(campus)">{{ campus.products.length }} </table-link>
+          <table-link @table-link-click="linkToCampusProducts(campus)" :number="campus.products.length"></table-link>
         </td>
         <td class="td">
               <span v-if="campus.clients.length">{{ campus.clients.length }}</span>

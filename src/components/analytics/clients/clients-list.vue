@@ -19,9 +19,10 @@
           <span class="text-link" @click="linkToClient(client)">{{client.name}}</span>
         </td>
         <td class="td">
-          <table-link v-if="client.lead_count" @table-link-click="linkToClientLeads({ name: client.name, id: client.id })">
-            {{client.lead_count ? client.lead_count.toLocaleString() : 0}}
-          </table-link>
+          <table-link :number="client.lead_count"
+                      v-if="client.lead_count"
+                      @table-link-click="linkToClientLeads({ name: client.name, id: client.id })"
+          ></table-link>
           <span v-else class="italic text-gray-500">None</span>
         </td>
         <td-number :number="client.soldCount"></td-number>

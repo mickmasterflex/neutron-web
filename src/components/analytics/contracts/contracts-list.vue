@@ -19,9 +19,10 @@
           <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
         </td>
         <td class="td">
-          <table-link v-if="contract.lead_count" @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })">
-            {{contract.lead_count.toLocaleString()}}
-          </table-link>
+          <table-link :number="contract.lead_count"
+                      v-if="contract.lead_count"
+                      @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })"
+          ></table-link>
           <span v-else class="italic text-gray-500">None</span>
         </td>
         <td-number :number="contract.sold_count"></td-number>
