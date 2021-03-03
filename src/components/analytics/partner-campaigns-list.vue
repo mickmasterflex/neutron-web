@@ -18,11 +18,11 @@
         <td class="td">
           <span class="text-link" @click="linkToPartnerStatsCampaign({ name: campaign.name, id: campaign.id })">{{campaign.name}}</span>
         </td>
-        <td class="td">{{campaign.lead_count}}</td>
-        <td class="td">{{campaign.sold_count}}</td>
-        <td-dollar :dollar="campaign.revenue"></td-dollar>
-        <td-dollar :dollar="campaign.margin"></td-dollar>
-        <td-dollar :dollar="campaign.payout"></td-dollar>
+        <td-number :number="campaign.lead_count"></td-number>
+        <td-number :number="campaign.sold_count"></td-number>
+        <td-number :dollar="true" :number="campaign.revenue"></td-number>
+        <td-number :dollar="true" :number="campaign.margin"></td-number>
+        <td-number :dollar="true" :number="campaign.payout"></td-number>
         <td class="td">{{campaign.scrub_rate}}</td>
         <td class="td">{{campaign.margin_percent}}</td>
       </tr>

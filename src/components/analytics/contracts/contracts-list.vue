@@ -20,14 +20,14 @@
         </td>
         <td class="td">
           <table-link v-if="contract.lead_count" @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })">
-            {{contract.lead_count}}
+            {{contract.lead_count.toLocaleString()}}
           </table-link>
           <span v-else class="italic text-gray-500">None</span>
         </td>
-        <td class="td">{{contract.sold_count}}</td>
-        <td-dollar :dollar="contract.revenue"></td-dollar>
-        <td-dollar :dollar="contract.margin"></td-dollar>
-        <td-dollar :dollar="contract.payout"></td-dollar>
+        <td-number :number="contract.sold_count"></td-number>
+        <td-number :dollar="true" :number="contract.revenue"></td-number>
+        <td-number :dollar="true" :number="contract.margin"></td-number>
+        <td-number :dollar="true" :number="contract.payout"></td-number>
         <td class="td">{{contract.scrub_rate}}</td>
         <td class="td">{{contract.margin_percent}}</td>
       </tr>

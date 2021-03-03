@@ -24,9 +24,9 @@
         <td class="td">{{new Date(lead.created_at).toDateString()}}</td>
         <td class="td">{{new Date(lead.updated_at).toDateString()}}</td>
         <td class="td font-bold" :class="!lead.sold_at ? 'text-red-500' : 'text-green-500'">{{leadSold(lead.sold_at)}}</td>
-        <td-dollar :dollar="lead.revenue"></td-dollar>
-        <td-dollar :dollar="lead.margin"></td-dollar>
-        <td-dollar :dollar="lead.payout"></td-dollar>
+        <td-number :dollar="true" :number="lead.revenue"></td-number>
+        <td-number :dollar="true" :number="lead.margin"></td-number>
+        <td-number :dollar="true" :number="lead.payout"></td-number>
       </tr>
       </tbody>
     </table>
