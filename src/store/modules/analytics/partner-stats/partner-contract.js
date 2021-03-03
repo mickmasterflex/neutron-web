@@ -20,7 +20,7 @@ const actions = {
     await axios.get(`/analytics/campaigns/?${getters.getAnalyticsDateRangeUrlFormatted}&partner_contract=${id}`)
       .then(response => {
         commit('SET_PARTNER_CONTRACT_STATS_CAMPAIGNS', response.data.campaigns)
-        commit('SET_PARTNER_CONTRACT_STATS_CONTRACTS', response.data.contracts)
+        // commit('SET_PARTNER_CONTRACT_STATS_CONTRACTS', response.data.contracts)
         commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
         commit('SET_CURRENT_PARTNER_STATS_CONTRACT', response.data.contract)
