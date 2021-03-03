@@ -1,8 +1,8 @@
 <template>
   <validation-observer ref="form">
-    <form @submit.prevent="submitForm" class="flex flex-row items-end form-horizontal-slim mb-3">
+    <form @submit.prevent="submitRevenueMethodForm" class="flex flex-row items-end form-horizontal-slim mb-3">
       <select-field v-model="revenue_method" :options="deliveries" field_id="revenue_method" field_label="Revenue Method" field_class="field-tall"></select-field>
-        <button @click="submitForm" class="btn btn-green ml-3" v-show="unsavedChanges">Set Revenue Method</button>
+      <button @click.prevent="submitRevenueMethodForm" class="btn btn-green ml-3" v-show="unsavedChanges">Set Revenue Method</button>
     </form>
   </validation-observer>
 </template>
@@ -39,11 +39,7 @@ export default {
       return this.buyer.deliveries ? this.buyer.deliveries : []
     },
     unsavedChanges () {
-      if (this.revenue_method) {
-        return this.revenue_method !== this.buyer.revenue_method
-      } else {
-        return false
-      }
+      return this.revenue_method !== this.buyer.revenue_method
     }
   },
   mixins: [setResponseErrors],
@@ -51,7 +47,7 @@ export default {
     ...mapActions({
       updateBuyer: 'updateBuyer'
     }),
-    submitForm () {
+    submitRevenueMethodForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
           const updatedBuyer = { ...this.buyer }
