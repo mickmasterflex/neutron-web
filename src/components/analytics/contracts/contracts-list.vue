@@ -3,7 +3,7 @@
     <table v-if="contracts.length" class="table table-striped">
       <thead>
       <tr>
-        <th class="th">Name</th>
+        <th class="th">Contract</th>
         <th class="th">Leads</th>
         <th class="th">Sold Leads</th>
         <th class="th">Revenue</th>

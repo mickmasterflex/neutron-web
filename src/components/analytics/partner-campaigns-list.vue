@@ -3,7 +3,7 @@
     <table v-if="campaigns.length" class="table table-striped">
       <thead>
       <tr>
-        <th class="th">Name</th>
+        <th class="th">Campaign</th>
         <th class="th">Leads</th>
         <th class="th">Sold Leads</th>
         <th class="th">Revenue</th>

@@ -3,7 +3,7 @@
     <table v-if="buyer_contract_stats_offers.length" class="table table-striped">
       <thead>
       <tr>
-        <th class="th">Name</th>
+        <th class="th">Offer</th>
         <th class="th">Leads</th>
         <th class="th">Sold Leads</th>
         <th class="th">Revenue</th>
