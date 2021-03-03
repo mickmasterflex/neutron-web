@@ -74,7 +74,7 @@ import baseModal from '@/components/ui/modals/base'
 import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
 import hudStatCards from '@/components/ui/hud-stat-cards'
-import label from '@/components/ui/label'
+import label from '@/components/ui/label-number'
 import statCard from '@/components/ui/cards/stat-card'
 
 /* Buttons */
@@ -129,7 +129,7 @@ Vue.component('tooltip-dialog-template', baseTooltipDialog)
 Vue.component('panel-template', basePanel)
 Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)
-Vue.component('label-template', label)
+Vue.component('label-number', label)
 
 // Buttons
 Vue.component('btn-group-right', btnGroupRight)
