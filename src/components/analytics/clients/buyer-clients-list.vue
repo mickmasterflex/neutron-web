@@ -19,7 +19,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_BUYER_STATS_CLIENT'
+      setCurrent: 'SET_CURRENT_BUYER_STATS_CLIENT',
+      resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToBuyerStatsClient (client) {
       this.setCurrent(client)
@@ -30,6 +31,7 @@ export default {
       })
     },
     linkToClientLeads (client) {
+      this.resetLeads()
       this.setCurrent(client)
       this.$router.push({
         name: 'BuyerStatsClientLeads',

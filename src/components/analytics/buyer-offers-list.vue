@@ -54,9 +54,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_BUYER_STATS_OFFER_CONTRACT'
+      setCurrent: 'SET_CURRENT_BUYER_STATS_OFFER_CONTRACT',
+      resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToBuyerStatsOffer (offer) {
+      this.resetLeads()
       this.setCurrent(offer)
       this.$router.push({
         name: 'BuyerStatsOfferContract',

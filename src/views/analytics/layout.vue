@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetLeads: 'RESET_ANALYTICS_LEADS',
       setStart: 'SET_ANALYTICS_START_DATE',
       setEnd: 'SET_ANALYTICS_END_DATE'
     })
@@ -73,9 +72,6 @@ export default {
   mounted () {
     this.setStart(dayjs(this.$route.query.start_date))
     this.setEnd(dayjs(this.$route.query.end_date))
-  },
-  destroyed () {
-    this.resetLeads()
   }
 }
 </script>

@@ -54,9 +54,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_PARTNER_STATS_CAMPAIGN'
+      setCurrent: 'SET_CURRENT_PARTNER_STATS_CAMPAIGN',
+      resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToPartnerStatsCampaign (campaign) {
+      this.resetLeads()
       this.setCurrent(campaign)
       this.$router.push({
         name: 'PartnerStatsCampaign',
