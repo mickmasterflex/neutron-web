@@ -21,12 +21,17 @@
         <td class="td">{{lead.data.email}}</td>
         <slot name="additional-td" :lead="lead"></slot>
         <td class="td" :class="!lead.reason ? 'text-gray-500 italic' : ''">{{lead.reason ? lead.reason : 'None'}}</td>
-        <td class="td">{{new Date(lead.created_at).toDateString()}}</td>
-        <td class="td">{{new Date(lead.updated_at).toDateString()}}</td>
-        <td class="td font-bold" :class="!lead.sold_at ? 'text-red-500' : 'text-green-500'">{{leadSold(lead.sold_at)}}</td>
-        <td-dollar :dollar="lead.revenue"></td-dollar>
-        <td-dollar :dollar="lead.margin"></td-dollar>
-        <td-dollar :dollar="lead.payout"></td-dollar>
+        <td-date :date="lead.created_at"></td-date>
+        <td-date :date="lead.updated_at"></td-date>
+        <td-date v-if="lead.sold_at" :date="lead.sold_at">
+          <template v-slot:prefix>
+            <font-awesome-icon icon="circle" class="text-green-500"></font-awesome-icon>
+          </template>
+        </td-date>
+        <td v-else class="td font-bold text-red-500"><font-awesome-icon icon="circle"></font-awesome-icon> False</td>
+        <td-number :dollar="true" :number="lead.revenue"></td-number>
+        <td-number :dollar="true" :number="lead.margin"></td-number>
+        <td-number :dollar="true" :number="lead.payout"></td-number>
       </tr>
       </tbody>
     </table>

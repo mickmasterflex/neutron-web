@@ -10,10 +10,10 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="contractsRoute">Contracts</router-link>
+          <router-link :to="contractsRoute">Contracts <label-number :number="contractsCount"></label-number></router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="leadsRoute">Leads</router-link>
+          <router-link :to="leadsRoute">Leads <label-number :number="leadCount"></label-number></router-link>
         </li>
       </ul>
     </template>
@@ -25,6 +25,8 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     id: {
@@ -55,6 +57,11 @@ export default {
     client () {
       document.title = this.client.name
     }
+  },
+  computed: {
+    ...mapGetters({
+      leadCount: 'getAnalyticsTotalLeadCount'
+    })
   },
   components: {
     'analytics-layout': analyticsLayout
