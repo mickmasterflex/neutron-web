@@ -74,7 +74,7 @@ import baseTooltipDialog from '@/components/ui/tooltips/dialog'
 import baseModal from '@/components/ui/modals/base'
 import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
-import hudStatCards from '@/components/ui/hud-stat-cards'
+import hudStatCards from '@/components/ui/hud/stat-cards'
 import label from '@/components/ui/label-number'
 import statCard from '@/components/ui/cards/stat-card'
 
