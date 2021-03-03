@@ -12,7 +12,7 @@
           <router-link :to="clientsRoute">Clients <label-template>{{clientsCount}}</label-template></router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="leadsRoute">Leads <label-template>{{leadCount}}</label-template></router-link>
+          <router-link :to="leadsRoute">Leads <label-template>{{leadCount ? leadCount : 0}}</label-template></router-link>
         </li>
       </ul>
     </template>
