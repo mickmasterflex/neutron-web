@@ -8,6 +8,7 @@
                      query: $route.query
                    }"
                    :fetchContractStats="fetchPartnerContractStats"
+                   :key="$route.params.id"
   >
     <template v-slot:statCards>
       <stat-card :data="campaigns.length" title="Campaigns" key="campaignCountStatCard" ></stat-card>
@@ -34,6 +35,7 @@
 <script>
 import contractLayout from '@/views/analytics/contract/layout'
 import { mapActions, mapGetters } from 'vuex'
+import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics-contract/partner-breadcrumbs'
 
 export default {
   props: {
@@ -51,6 +53,7 @@ export default {
       fetchPartnerContractStats: 'fetchPartnerContractStats'
     })
   },
+  mixins: [partnerContractBreadcrumbs],
   components: {
     'contract-layout': contractLayout
   }

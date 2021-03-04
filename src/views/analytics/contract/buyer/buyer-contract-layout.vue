@@ -34,91 +34,26 @@
 
 <script>
 import contractLayout from '@/views/analytics/contract/layout'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import { buyerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics-contract/buyer-breadcrumbs'
 
 export default {
   props: {
     clientId: Number,
     id: Number
   },
-  data () {
-    return {
-      BuyerStatsClients: {
-        name: 'BuyerStatsClients',
-        text: 'All Clients',
-        query: this.$route.query
-      },
-      BuyerStatsClientContracts: {
-        name: 'BuyerStatsClientContracts',
-        text: this.$route.params.clientId,
-        params: { id: this.$route.params.clientId },
-        query: this.$route.query
-      },
-      BuyerStatsContract: {
-        name: 'BuyerStatsContract',
-        text: this.$route.params.id,
-        params: {
-          clientId: this.$route.params.clientId,
-          id: this.$route.params.id
-        },
-        query: this.$route.query
-      }
-    }
-  },
   computed: {
     ...mapGetters({
       contract: 'getCurrentBuyerStatsContract',
-      buyerClient: 'getCurrentBuyerStatsClient',
-      offers: 'getBuyerContractStatsOffers',
-      ancestors: 'getBuyerContractStatsAncestors',
-      loading: 'getAnalyticsFetchLoading'
+      offers: 'getBuyerContractStatsOffers'
     })
-  },
-  watch: {
-    contract () {
-      this.BuyerStatsContract.text = this.contract.name
-    },
-    buyerClient () {
-      this.BuyerStatsClientContracts.text = this.buyerClient.name
-    },
-    loading () {
-      this.setBreadcrumbsWithAncestors()
-    }
-  },
-  created () {
-    this.setBreadcrumbs([
-      this.BuyerStatsClients,
-      this.BuyerStatsClientContracts,
-      this.BuyerStatsContract
-    ])
   },
   methods: {
-    setBreadcrumbsWithAncestors () {
-      const breadcrumbs = [
-        this.BuyerStatsClients,
-        this.BuyerStatsClientContracts
-      ]
-      this.ancestors.forEach(ancestor => {
-        breadcrumbs.push({
-          name: 'BuyerStatsContract',
-          text: ancestor.name,
-          params: {
-            clientId: this.$route.params.clientId,
-            id: ancestor.id
-          },
-          query: this.$route.query
-        })
-      })
-      breadcrumbs.push(this.BuyerStatsContract)
-      this.setBreadcrumbs(breadcrumbs)
-    },
     ...mapActions({
       fetchBuyerContractStats: 'fetchBuyerContractStats'
-    }),
-    ...mapMutations({
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     })
   },
+  mixins: [buyerContractBreadcrumbs],
   components: {
     'contract-layout': contractLayout
   }
