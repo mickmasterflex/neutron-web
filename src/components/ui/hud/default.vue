@@ -3,7 +3,7 @@
     <slot name="breadcrumbs">
       <bread-crumbs :breadcrumbs="breadcrumbs"></bread-crumbs>
     </slot>
-    <div class="hud-content grid grid-cols-1 items-center md:grid-cols-2 p-4">
+    <div class="hud-content items-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
       <slot name="hud-content"></slot>
     </div>
   </div>

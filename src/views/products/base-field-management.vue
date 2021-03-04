@@ -2,9 +2,9 @@
   <content-layout>
     <template v-slot:hud>
       <h1 class="h1 text-white">Fields</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="baseFieldCount" :title="`Fields`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="baseFieldCount" title="Fields" key="fieldCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:content>
       <panel-template title="Base Fields" :showLoader="loading" :loadingText="loadingText" contentBackgroundColor="white">

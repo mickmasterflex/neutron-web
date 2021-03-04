@@ -2,9 +2,9 @@
   <content-layout v-if="offer">
     <template v-slot:hud>
       <h1 class="h1 text-white">{{offer.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="offer.id" :title="`Offer`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="offer.id" title="Offer" key="offerId"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">

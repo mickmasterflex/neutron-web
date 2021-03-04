@@ -1,7 +1,7 @@
 <template>
   <div
     :class="`${loading ? 'opacity-25' : 'opactiy-100'} bg-${color}-600`"
-    class="transition-opacity duration-200 rounded w-auto inline-block text-white overflow-hidden mx-1"
+    class="transition-opacity duration-200 rounded w-auto inline-block text-white overflow-hidden m-1"
   >
     <div :class="`px-4 py-2 bg-${color}-500`">{{title}}</div>
     <div class="px-4 py-1 text-4xl font-hairline text-right" style="height: 62px;">{{renderedData}}</div>

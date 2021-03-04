@@ -2,9 +2,9 @@
   <content-layout>
     <template v-slot:hud>
       <h1 class="text-white text-4xl font-hairline">All Brands</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="getAllBrandsCount" title="Brands"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="getAllBrandsCount" title="Brands" key="brandCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:content>
       <panel-template title="Brand List" :showLoader="loading" :loadingText="loadingText" content-background-color="white">

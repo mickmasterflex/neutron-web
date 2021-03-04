@@ -2,9 +2,9 @@
   <content-layout>
     <template v-slot:hud>
       <h1 class="h1 text-white">{{campus.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="campus.id" :title="`Campus`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="campus.id" title="Campus" key="campusCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">

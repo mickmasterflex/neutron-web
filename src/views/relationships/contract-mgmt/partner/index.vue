@@ -2,10 +2,10 @@
   <content-layout>
     <template v-slot:hud>
       <h1 class="h1 text-white">{{partner.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card v-if="partner.parent" :data="partner.parent" title="Parent"></stat-card>
-        <stat-card v-if="partner.campaigns" :data="partner.campaigns.length" title="Campaigns"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card v-if="partner.parent" :data="partner.parent" title="Parent" key="parentId"></stat-card>
+        <stat-card v-if="partner.campaigns" :data="partner.campaigns.length" title="Campaigns" key="campaignCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">

@@ -2,9 +2,9 @@
   <content-layout>
     <template v-slot:hud>
       <h1 class="h1 text-white">{{buyer.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card v-if="buyer.parent" :data="buyer.parent" title="Parent"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card v-if="buyer.parent" :data="buyer.parent" title="Parent" key="parentId"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
