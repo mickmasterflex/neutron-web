@@ -62,6 +62,12 @@ export const partnerContractBreadcrumbs = {
         })
       })
       breadcrumbs.push(this.$data.contractBreadcrumb)
+      if (this.$data.offersBreadcrumb) {
+        breadcrumbs.push(this.$data.offersBreadcrumb)
+      }
+      if (this.$data.offerBreadcrumb) {
+        breadcrumbs.push(this.$data.offerBreadcrumb)
+      }
       this.setBreadcrumbs(breadcrumbs)
     },
     ...mapMutations({

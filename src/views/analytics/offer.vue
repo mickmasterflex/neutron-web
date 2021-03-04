@@ -13,6 +13,8 @@
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
 import { mapActions, mapGetters } from 'vuex'
+import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics-contract/offer-breadcrumbs'
+
 export default {
   props: {
     clientId: Number,
@@ -33,6 +35,7 @@ export default {
       document.title = this.offer.name
     }
   },
+  mixins: [offerContractBreadcrumbs],
   components: {
     'analytics-layout': analyticsLayout
   }
