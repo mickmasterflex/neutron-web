@@ -11,7 +11,7 @@
                    :key="$route.params.id"
   >
     <template v-slot:statCards>
-      <stat-card :data="campaigns.length" title="Campaigns" key="campaignCountStatCard" ></stat-card>
+      <stat-card :loading="loading" :data="campaigns.length" title="Campaigns" key="campaignCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
@@ -45,7 +45,8 @@ export default {
   computed: {
     ...mapGetters({
       contract: 'getCurrentPartnerStatsContract',
-      campaigns: 'getPartnerContractStatsCampaigns'
+      campaigns: 'getPartnerContractStatsCampaigns',
+      loading: 'getAnalyticsFetchLoading'
     })
   },
   methods: {

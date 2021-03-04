@@ -4,7 +4,7 @@
     :fetch-stats="fetchClients"
   >
     <template v-slot:statCards>
-      <stat-card :data="clientsCount" title="Clients" key="clientCountStatCard" ></stat-card>
+      <stat-card :loading="loading" :data="clientsCount" title="Clients" key="clientCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
@@ -51,7 +51,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      leadCount: 'getAnalyticsTotalLeadCount'
+      leadCount: 'getAnalyticsTotalLeadCount',
+      loading: 'getAnalyticsFetchLoading'
     })
   },
   methods: {

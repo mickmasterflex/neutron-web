@@ -11,7 +11,7 @@
                    :key="$route.params.id"
   >
     <template v-slot:statCards>
-      <stat-card :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
+      <stat-card :loading="loading" :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
@@ -45,7 +45,8 @@ export default {
   computed: {
     ...mapGetters({
       contract: 'getCurrentBuyerStatsContract',
-      offers: 'getBuyerContractStatsOffers'
+      offers: 'getBuyerContractStatsOffers',
+      loading: 'getAnalyticsFetchLoading'
     })
   },
   methods: {
