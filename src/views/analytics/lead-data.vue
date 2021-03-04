@@ -29,7 +29,7 @@
 <script>
 import leadsList from '@/components/analytics/leads/lead-data-list'
 import leadSearch from '@/components/analytics/lead-search'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -38,6 +38,14 @@ export default {
       loading: 'getLeadSearchLoading',
       loadingText: 'getLeadSearchLoadingText'
     })
+  },
+  methods: {
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
+  },
+  created () {
+    this.resetBreadcrumbs()
   },
   components: {
     'lead-search': leadSearch,

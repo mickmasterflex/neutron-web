@@ -24,7 +24,7 @@
 
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -53,6 +53,14 @@ export default {
     ...mapGetters({
       leadCount: 'getAnalyticsTotalLeadCount'
     })
+  },
+  methods: {
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
+  },
+  created () {
+    this.resetBreadcrumbs()
   },
   components: {
     'analytics-layout': analyticsLayout
