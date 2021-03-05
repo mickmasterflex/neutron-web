@@ -1,4 +1,3 @@
-import { mapGetters } from 'vuex'
 import { baseContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/buyer-partner-base'
 
 export const buyerContractBreadcrumbs = {
@@ -14,10 +13,5 @@ export const buyerContractBreadcrumbs = {
         }
       }
     }
-  },
-  computed: {
-    ...mapGetters({
-      contract: 'getCurrentBuyer'
-    })
   }
 }

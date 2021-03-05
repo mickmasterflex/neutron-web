@@ -1,10 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <h1 class="h1 text-white">{{partner.name}}</h1>
+      <h1 class="h1 text-white">{{contract.name}}</h1>
       <hud-stat-cards>
-        <stat-card v-if="partner.parent" :data="partner.parent" title="Parent" key="parentId"></stat-card>
-        <stat-card v-if="partner.campaigns" :data="partner.campaigns.length" title="Campaigns" key="campaignCount"></stat-card>
+        <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
+        <stat-card v-if="contract.campaigns" :data="contract.campaigns.length" title="Campaigns" key="campaignCount"></stat-card>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -37,7 +37,7 @@ export default {
   mixins: [partnerContractBreadcrumbs],
   computed: {
     ...mapGetters({
-      partner: 'getCurrentPartner'
+      contract: 'getCurrentPartner'
     })
   },
   methods: {
@@ -48,13 +48,13 @@ export default {
       resetCurrent: 'RESET_CURRENT_PARTNER'
     }),
     async setPartner () {
-      if (this.partner.id !== this.id) {
+      if (this.contract.id !== this.id) {
         await this.fetchCurrentPartner(this.id)
       }
     },
     setPartnerWithTitleAndBreadcrumbs () {
       this.setPartner().then(() => {
-        document.title = this.partner.name
+        document.title = this.contract.name
         this.setBreadcrumbsWithAncestors()
       })
     }

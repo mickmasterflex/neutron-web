@@ -1,9 +1,9 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <h1 class="h1 text-white">{{buyer.name}}</h1>
+      <h1 class="h1 text-white">{{contract.name}}</h1>
       <hud-stat-cards>
-        <stat-card v-if="buyer.parent" :data="buyer.parent" title="Parent" key="parentId"></stat-card>
+        <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -40,7 +40,7 @@ export default {
   mixins: [buyerContractBreadcrumbs],
   computed: {
     ...mapGetters({
-      buyer: 'getCurrentBuyer'
+      contract: 'getCurrentBuyer'
     })
   },
   methods: {
@@ -53,13 +53,13 @@ export default {
       setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setBuyer () {
-      if (this.buyer.id !== this.id) {
+      if (this.contract.id !== this.id) {
         await this.fetchCurrentBuyer(this.id)
       }
     },
     setBuyerWithTitleAndBreadcrumbs () {
       this.setBuyer().then(() => {
-        document.title = this.buyer.name
+        document.title = this.contract.name
         this.setBreadcrumbsWithAncestors()
       })
     }
