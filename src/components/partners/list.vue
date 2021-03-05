@@ -9,7 +9,7 @@
           <th class="th w-32">Status</th>
           <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
-          <th class="th">Children</th>
+          <th class="th">Contracts</th>
           <th class="th">Campaigns</th>
         </tr>
       </thead>
