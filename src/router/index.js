@@ -116,7 +116,7 @@ const routes = [
   {
     path: '/analytics/partner-stats/clients/:clientId/contracts/:id/',
     name: 'PartnerStatsContract',
-    redirect: { name: 'PartnerStatsContractCampaigns' },
+    redirect: { name: 'PartnerStatsContractContracts' },
     component: () => import('@/views/analytics/contract/partner/partner-contract-layout'),
     props (route) {
       const props = { ...route.params }
@@ -269,7 +269,7 @@ const routes = [
   {
     path: '/analytics/buyer-stats/clients/:clientId/contracts/:id/',
     name: 'BuyerStatsContract',
-    redirect: { name: 'BuyerStatsContractOffers' },
+    redirect: { name: 'BuyerStatsContractContracts' },
     component: () => import('@/views/analytics/contract/buyer/buyer-contract-layout'),
     props (route) {
       const props = { ...route.params }
