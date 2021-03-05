@@ -28,11 +28,13 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/partner'
 
 export default {
   props: {
     id: Number
   },
+  mixins: [partnerContractBreadcrumbs],
   computed: {
     ...mapGetters({
       partner: 'getCurrentPartner'
@@ -43,43 +45,27 @@ export default {
       fetchCurrentPartner: 'fetchCurrentPartner'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_PARTNER',
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
+      resetCurrent: 'RESET_CURRENT_PARTNER'
     }),
     async setPartner () {
       if (this.partner.id !== this.id) {
         await this.fetchCurrentPartner(this.id)
       }
     },
-    setPartnerBreadcrumbsAndTitle () {
-      document.title = this.partner.name
-      const breadcrumbs = [
-        { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.partner.client.name, params: { slug: this.$route.params.client } }
-        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
-      ]
-      this.partner.ancestors.forEach(ancestor => {
-        const additionalCrumbs = [
-          { name: 'PartnerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
-          // { name: 'PartnerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
-        ]
-        breadcrumbs.push(...additionalCrumbs)
+    setPartnerWithTitleAndBreadcrumbs () {
+      this.setPartner().then(() => {
+        document.title = this.partner.name
+        this.setBreadcrumbsWithAncestors()
       })
-      breadcrumbs.push({ name: 'PartnerContract', text: this.partner.name, params: { client: this.$route.params.client, id: this.$route.params.id } })
-      this.setBreadcrumbs(breadcrumbs)
     }
   },
   watch: {
     id () {
-      this.setPartner().then(() => {
-        this.setPartnerBreadcrumbsAndTitle()
-      })
+      this.setPartnerWithTitleAndBreadcrumbs()
     }
   },
   created () {
-    this.setPartner().then(() => {
-      this.setPartnerBreadcrumbsAndTitle()
-    })
+    this.setPartnerWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()

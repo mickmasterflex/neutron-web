@@ -30,11 +30,18 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { buyerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/buyer'
 
 export default {
   props: {
     id: Number,
     client: String
+  },
+  mixins: [buyerContractBreadcrumbs],
+  computed: {
+    ...mapGetters({
+      buyer: 'getCurrentBuyer'
+    })
   },
   methods: {
     ...mapActions({
@@ -50,40 +57,20 @@ export default {
         await this.fetchCurrentBuyer(this.id)
       }
     },
-    setBuyerBreadcrumbsAndTitle () {
-      document.title = this.buyer.name
-      const breadcrumbs = [
-        { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.buyer.client.name, params: { slug: this.$route.params.client } }
-        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
-      ]
-      this.buyer.ancestors.forEach(ancestor => {
-        const additionalCrumbs = [
-          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
-          // { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
-        ]
-        breadcrumbs.push(...additionalCrumbs)
+    setBuyerWithTitleAndBreadcrumbs () {
+      this.setBuyer().then(() => {
+        document.title = this.buyer.name
+        this.setBreadcrumbsWithAncestors()
       })
-      breadcrumbs.push({ name: 'BuyerContract', text: this.buyer.name, params: { client: this.$route.params.client, id: this.$route.params.id } })
-      this.setBreadcrumbs(breadcrumbs)
     }
-  },
-  computed: {
-    ...mapGetters({
-      buyer: 'getCurrentBuyer'
-    })
   },
   watch: {
     id () {
-      this.setBuyer().then(() => {
-        this.setBuyerBreadcrumbsAndTitle()
-      })
+      this.setBuyerWithTitleAndBreadcrumbs()
     }
   },
   created () {
-    this.setBuyer().then(() => {
-      this.setBuyerBreadcrumbsAndTitle()
-    })
+    this.setBuyerWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()
