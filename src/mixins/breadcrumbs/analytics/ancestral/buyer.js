@@ -1,4 +1,4 @@
-import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics-contract/partner-breadcrumbs'
+import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/partner'
 import { mapGetters } from 'vuex'
 
 export const buyerContractBreadcrumbs = {

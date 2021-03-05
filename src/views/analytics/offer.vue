@@ -13,7 +13,7 @@
 <script>
 import analyticsLayout from '@/views/analytics/layout.vue'
 import { mapActions, mapGetters } from 'vuex'
-import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics-contract/offer-breadcrumbs'
+import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/offer'
 
 export default {
   props: {

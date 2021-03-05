@@ -35,7 +35,7 @@
 <script>
 import contractLayout from '@/views/analytics/contract/layout'
 import { mapActions, mapGetters } from 'vuex'
-import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics-contract/partner-breadcrumbs'
+import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/partner'
 
 export default {
   props: {
