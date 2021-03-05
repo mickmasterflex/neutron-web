@@ -10,7 +10,7 @@ export const buyerContractBreadcrumbs = {
         text: 'All Clients',
         query: this.$route.query
       },
-      clientContractsBreadcrumb: {
+      clientBreadcrumb: {
         name: 'BuyerStatsClientContracts',
         text: this.$route.params.clientId,
         params: { id: this.$route.params.clientId },

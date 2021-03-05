@@ -1,8 +1,8 @@
-import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/partner'
 import { mapGetters } from 'vuex'
+import { baseContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/buyer-partner-base'
 
 export const buyerContractBreadcrumbs = {
-  mixins: [partnerContractBreadcrumbs],
+  mixins: [baseContractBreadcrumbs],
   data () {
     return {
       contractBreadcrumb: {

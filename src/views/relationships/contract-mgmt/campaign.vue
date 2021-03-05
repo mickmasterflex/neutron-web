@@ -22,6 +22,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampaign from '@/components/campaigns/delete'
 import updateCampaign from '@/components/campaigns/update'
+import { campaignContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/campaign'
 
 export default {
   props: {
@@ -29,6 +30,7 @@ export default {
       type: Number
     }
   },
+  mixins: [campaignContractBreadcrumbs],
   components: {
     'delete-campaign': deleteCampaign,
     'update-campaign': updateCampaign
@@ -46,41 +48,22 @@ export default {
       fetchCampaignByPartner: 'fetchCampaignByPartner'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_CAMPAIGN',
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
+      resetCurrent: 'RESET_CURRENT_CAMPAIGN'
     }),
     async setCampaign () {
       if (this.campaign.id !== this.id) {
         await this.fetchCurrentCampaign(this.id)
       }
     },
-    setCampaignBreadcrumbsAndTitle () {
-      document.title = this.campaign.name
-      const breadcrumbs = [
-        { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.campaign.client.name, params: { slug: this.$route.params.client } }
-        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
-      ]
-      this.campaign.partner_ancestors.forEach(ancestor => {
-        const additionalCrumbs = [
-          { name: 'PartnerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
-          // { name: 'PartnerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
-        ]
-        breadcrumbs.push(...additionalCrumbs)
+    setCampaignWithTitleAndBreadcrumbs () {
+      this.setCampaign().then(() => {
+        document.title = this.campaign.name
+        this.setBreadcrumbsWithAncestors()
       })
-      const campaignBreadcrumbs = [
-        { name: 'PartnerContract', text: this.campaign.contract.name, params: { client: this.$route.params.client, id: this.$route.params.partner } },
-        { name: 'PartnerContractCampaigns', text: 'Campaigns', params: { client: this.$route.params.client, id: this.$route.params.partner } },
-        { name: 'Campaign', text: this.campaign.name, params: { client: this.$route.params.client, partner: this.$route.params.partner, id: this.id } }
-      ]
-      breadcrumbs.push(...campaignBreadcrumbs)
-      this.setBreadcrumbs(breadcrumbs)
     }
   },
   created () {
-    this.setCampaign().then(() => {
-      this.setCampaignBreadcrumbsAndTitle()
-    })
+    this.setCampaignWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()

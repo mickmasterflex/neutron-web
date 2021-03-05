@@ -23,6 +23,7 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/offer'
 
 export default {
   props: {
@@ -32,6 +33,7 @@ export default {
     client: String,
     buyer: Number
   },
+  mixins: [offerContractBreadcrumbs],
   computed: {
     ...mapGetters({
       offer: 'getCurrentOffer'
@@ -42,41 +44,22 @@ export default {
       fetchCurrentOffer: 'fetchCurrentOffer'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_OFFER',
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
+      resetCurrent: 'RESET_CURRENT_OFFER'
     }),
     async setOffer () {
       if (this.offer.id !== this.id) {
         await this.fetchCurrentOffer(this.id)
       }
     },
-    setOfferBreadcrumbsAndTitle () {
-      document.title = this.offer.name
-      const breadcrumbs = [
-        { name: 'Clients', text: 'Clients' },
-        { name: 'Client', text: this.offer.client.name, params: { slug: this.$route.params.client } }
-        // { name: 'ClientContracts', text: 'Contracts', params: { slug: this.$route.params.client } }
-      ]
-      this.offer.buyer_ancestors.forEach(ancestor => {
-        const additionalCrumbs = [
-          { name: 'BuyerContract', text: ancestor.name, params: { client: this.$route.params.client, id: ancestor.id } }
-          // { name: 'BuyerContractChildren', text: 'Contracts', params: { client: this.$route.params.client, id: ancestor.id } }
-        ]
-        breadcrumbs.push(...additionalCrumbs)
+    setOfferWithTitleAndBreadcrumbs () {
+      this.setOffer().then(() => {
+        document.title = this.offer.name
+        this.setBreadcrumbsWithAncestors()
       })
-      const offerBreadcrumbs = [
-        { name: 'BuyerContract', text: this.offer.parent.name, params: { client: this.$route.params.client, id: this.$route.params.buyer } },
-        { name: 'BuyerContractOffers', text: 'Offers', params: { client: this.$route.params.client, id: this.$route.params.buyer } },
-        { name: 'OfferDetails', text: this.offer.name, params: { client: this.$route.params.client, buyer: this.$route.params.buyer, id: this.id } }
-      ]
-      breadcrumbs.push(...offerBreadcrumbs)
-      this.setBreadcrumbs(breadcrumbs)
     }
   },
   created () {
-    this.setOffer().then(() => {
-      this.setOfferBreadcrumbsAndTitle()
-    })
+    this.setOfferWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()

@@ -8,7 +8,7 @@ export const partnerClientBreadcrumbs = {
         text: 'All Clients',
         query: this.$route.query
       },
-      clientContractsBreadcrumb: {
+      clientBreadcrumb: {
         name: 'PartnerStatsClientContracts',
         text: this.$route.params.id,
         params: { id: this.$route.params.id },
@@ -20,7 +20,7 @@ export const partnerClientBreadcrumbs = {
     breadcrumbs () {
       return [
         this.$data.clientsBreadcrumb,
-        this.$data.clientContractsBreadcrumb
+        this.$data.clientBreadcrumb
       ]
     },
     ...mapGetters({
@@ -30,7 +30,7 @@ export const partnerClientBreadcrumbs = {
   },
   watch: {
     client () {
-      this.$data.clientContractsBreadcrumb.text = this.client.name
+      this.$data.clientBreadcrumb.text = this.client.name
     },
     loading () {
       this.setBreadcrumbs(this.breadcrumbs)
