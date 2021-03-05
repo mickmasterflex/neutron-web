@@ -1,6 +1,8 @@
-import { mapGetters, mapMutations } from 'vuex'
+import { baseContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/client/buyer-partner-base'
+import { mapGetters } from 'vuex'
 
 export const partnerClientBreadcrumbs = {
+  mixins: [baseContractBreadcrumbs],
   data () {
     return {
       clientsBreadcrumb: {
@@ -17,31 +19,8 @@ export const partnerClientBreadcrumbs = {
     }
   },
   computed: {
-    breadcrumbs () {
-      return [
-        this.$data.clientsBreadcrumb,
-        this.$data.clientBreadcrumb
-      ]
-    },
     ...mapGetters({
-      loading: 'getAnalyticsFetchLoading',
       client: 'getCurrentPartnerStatsClient'
-    })
-  },
-  watch: {
-    client () {
-      this.$data.clientBreadcrumb.text = this.client.name
-    },
-    loading () {
-      this.setBreadcrumbs(this.breadcrumbs)
-    }
-  },
-  created () {
-    this.setBreadcrumbs(this.breadcrumbs)
-  },
-  methods: {
-    ...mapMutations({
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     })
   }
 }
