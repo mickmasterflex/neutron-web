@@ -10,7 +10,8 @@
 
 <script>
 import clientLayout from '@/views/analytics/client/layout'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import { partnerClientBreadcrumbs } from '@/mixins/breadcrumbs/analytics/client/partner'
 
 export default {
   props: {
@@ -18,50 +19,18 @@ export default {
       type: Number
     }
   },
-  data () {
-    return {
-      PartnerStatsClients: {
-        name: 'PartnerStatsClients',
-        text: 'All Clients',
-        query: this.$route.query
-      },
-      PartnerStatsClientContracts: {
-        name: 'PartnerStatsClientContracts',
-        text: this.$route.params.id,
-        params: { id: this.$route.params.id },
-        query: this.$route.query
-      }
-    }
-  },
   computed: {
-    breadcrumbs () {
-      return [
-        this.PartnerStatsClients,
-        this.PartnerStatsClientContracts
-      ]
-    },
     ...mapGetters({
       partnerClient: 'getCurrentPartnerStatsClient',
       contracts: 'getPartnerClientContractsParentless'
     })
   },
-  watch: {
-    partnerClient () {
-      this.PartnerStatsClientContracts.text = this.partnerClient.name
-      this.setBreadcrumbs(this.breadcrumbs)
-    }
-  },
-  created () {
-    this.setBreadcrumbs(this.breadcrumbs)
-  },
   methods: {
     ...mapActions({
       fetchPartnerClientStats: 'fetchPartnerClientStats'
-    }),
-    ...mapMutations({
-      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     })
   },
+  mixins: [partnerClientBreadcrumbs],
   components: {
     'client-layout': clientLayout
   }
