@@ -5,6 +5,15 @@ export const offerContractBreadcrumbs = {
   mixins: [buyerContractBreadcrumbs],
   data () {
     return {
+      contractBreadcrumb: {
+        name: 'BuyerStatsContract',
+        text: this.$route.params.buyerId,
+        params: {
+          clientId: this.$route.params.clientId,
+          id: this.$route.params.buyerId
+        },
+        query: this.$route.query
+      },
       offersBreadcrumb: {
         name: 'BuyerStatsContractOffers',
         text: 'Offers',
