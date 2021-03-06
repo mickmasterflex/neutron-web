@@ -3,9 +3,11 @@
     <partner-list-panel :contracts="children"
                         :client="$route.params.client"
                         class="col-span-2"
-                        emptyStateCopy="Use the 'New Partner' button to add partners to this partner."></partner-list-panel>
+                        emptyStateCopy="Use the 'New Partner' button to add partners to this partner."
+                        :createPartnerDisabled="createPartnerDisabled"
+    ></partner-list-panel>
     <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner" class="col-span-2"></contract-relations-index>
-    <create-partner-contract :client="partner.client.id" :parent="partner.id"></create-partner-contract>
+    <create-partner-contract v-if="!createPartnerDisabled" :client="partner.client.id" :parent="partner.id"></create-partner-contract>
   </base-panel-grid>
 </template>
 
@@ -30,6 +32,9 @@ export default {
     }),
     children: function () {
       return this.getPartnersByParent(this.partner.id)
+    },
+    createPartnerDisabled () {
+      return !this.partner.client
     }
   },
   methods: {

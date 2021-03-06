@@ -6,7 +6,7 @@
     content-background-color="white">
     <template v-slot:action>
       <bulk-update-status class="mr-2"></bulk-update-status>
-      <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
+      <button class="btn btn-turquoise" :disabled="createBuyerDisabled" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
     </template>
     <template v-slot:content>
       <partner-list v-bind="$attrs"></partner-list>
@@ -20,6 +20,11 @@ import bulkUpdateStatus from '@/components/bulk-update/status/partner-tooltip'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    createBuyerDisabled: {
+      type: Boolean
+    }
+  },
   components: {
     'partner-list': partnerList,
     'bulk-update-status': bulkUpdateStatus

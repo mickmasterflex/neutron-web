@@ -6,7 +6,7 @@
     :loading-text="loadingText">
     <template v-slot:action>
       <bulk-update-status class="mr-2"></bulk-update-status>
-      <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
+      <button class="btn btn-turquoise" :disabled="createOfferDisabled" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
     </template>
     <template v-slot:content>
       <offer-list v-bind="$attrs"></offer-list>
@@ -20,6 +20,11 @@ import offerList from '@/components/offers/bulk-update-list'
 import bulkUpdateStatus from '@/components/bulk-update/status/offer-tooltip'
 
 export default {
+  props: {
+    createOfferDisabled: {
+      type: Boolean
+    }
+  },
   components: {
     'offer-list': offerList,
     'bulk-update-status': bulkUpdateStatus

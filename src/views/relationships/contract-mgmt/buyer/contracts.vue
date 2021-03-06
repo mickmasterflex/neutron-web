@@ -3,12 +3,15 @@
     <buyer-list-panel class="col-span-2"
                       :contracts="children"
                       :client="$route.params.client"
-                      emptyStateCopy="Use the 'New Buyer' button to add buyers to this buyer."></buyer-list-panel>
+                      emptyStateCopy="Use the 'New Buyer' button to add buyers to this buyer."
+                      :createBuyerDisabled="createBuyerDisabled"
+    ></buyer-list-panel>
     <contract-relations-index v-if="buyer.id"
                               :contract="buyer.id"
                               contractType="buyer"
-                              class="col-span-2"></contract-relations-index>
-    <create-buyer-contract v-if="buyer.client" :client="buyer.client.id" :parent="buyer.id"></create-buyer-contract>
+                              class="col-span-2"
+    ></contract-relations-index>
+    <create-buyer-contract v-if="!createBuyerDisabled" :client="buyer.client.id" :parent="buyer.id"></create-buyer-contract>
   </base-panel-grid>
 </template>
 
@@ -32,6 +35,9 @@ export default {
     }),
     children: function () {
       return this.getBuyersByParent(this.buyer.id)
+    },
+    createBuyerDisabled () {
+      return !this.buyer.client
     }
   },
   methods: {
