@@ -2,11 +2,10 @@ import { mapMutations } from 'vuex'
 
 export const setBreadcrumbsWithAncestors = {
   methods: {
-    setBreadcrumbText () {
-      console.log('test')
-    },
     setBreadcrumbsWithAncestors () {
-      this.setBreadcrumbText()
+      if (this.setBreadcrumbText) {
+        this.setBreadcrumbText()
+      }
       const breadcrumbs = [
         this.$data.clientsBreadcrumb,
         this.$data.clientBreadcrumb
