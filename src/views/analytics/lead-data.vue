@@ -34,7 +34,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      leads: 'getAnalyticsLeads',
+      leads: 'getLeadSearchResults',
       loading: 'getLeadSearchLoading',
       loadingText: 'getLeadSearchLoadingText'
     })
