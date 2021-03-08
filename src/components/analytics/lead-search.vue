@@ -2,6 +2,7 @@
   <div ref="form" class="bg-gray-800 p-5 pt-3 rounded-lg">
     <form @submit.prevent="submitForm">
       <v-textarea-field
+        ref="searchField"
         rules="required"
         v-model="searchData"
         field_id="searchparams"
@@ -16,6 +17,7 @@
 <script>
 import { validate } from 'vee-validate'
 import { mapActions } from 'vuex'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
 
 export default {
   data () {
@@ -59,7 +61,13 @@ export default {
           this.searchIds = []
         })
       })
+    },
+    enterKeyAction () {
+      if (this.$refs.searchField.$refs.field.$refs.field === document.activeElement) {
+        this.submitForm()
+      }
     }
-  }
+  },
+  mixins: [enterKeyListener]
 }
 </script>
