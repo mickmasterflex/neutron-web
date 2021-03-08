@@ -5,11 +5,11 @@
     :showLoader="loading"
     :loading-text="loadingText">
     <template v-slot:action>
-      <bulk-update-status v-show="$attrs.offers.length" class="mr-2"></bulk-update-status>
+      <bulk-update-status v-show="offers.length" class="mr-2"></bulk-update-status>
       <button class="btn btn-turquoise" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
     </template>
     <template v-slot:content>
-      <offer-list v-bind="$attrs"></offer-list>
+      <offer-list v-bind="$attrs" :offers="offers"></offer-list>
     </template>
   </panel-template>
 </template>
@@ -20,6 +20,9 @@ import offerList from '@/components/offers/bulk-update-list'
 import bulkUpdateStatus from '@/components/bulk-update/status/offer-tooltip'
 
 export default {
+  props: {
+    offers: Array
+  },
   components: {
     'offer-list': offerList,
     'bulk-update-status': bulkUpdateStatus

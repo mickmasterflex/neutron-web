@@ -9,7 +9,7 @@
       <button class="btn btn-turquoise" @click="showCreateBuyerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Buyer</button>
     </template>
     <template v-slot:content>
-      <buyer-list v-bind="$attrs"></buyer-list>
+      <buyer-list v-bind="$attrs" :buyers="buyers"></buyer-list>
     </template>
   </panel-template>
 </template>
@@ -20,6 +20,9 @@ import buyerList from '@/components/buyers/list'
 import bulkUpdateStatus from '@/components/bulk-update/status/buyer-tooltip'
 
 export default {
+  props: {
+    buyers: Array
+  },
   components: {
     'buyer-list': buyerList,
     'bulk-update-status': bulkUpdateStatus

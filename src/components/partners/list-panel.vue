@@ -9,7 +9,7 @@
       <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
     </template>
     <template v-slot:content>
-      <partner-list v-bind="$attrs"></partner-list>
+      <partner-list v-bind="$attrs" :partners="partners"></partner-list>
     </template>
   </panel-template>
 </template>
@@ -20,6 +20,9 @@ import bulkUpdateStatus from '@/components/bulk-update/status/partner-tooltip'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    partners: Array
+  },
   components: {
     'partner-list': partnerList,
     'bulk-update-status': bulkUpdateStatus
