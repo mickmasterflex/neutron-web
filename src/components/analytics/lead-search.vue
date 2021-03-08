@@ -21,49 +21,43 @@ export default {
   data () {
     return {
       searchData: '',
-      mails: []
+      searchEmails: [],
+      searchIds: []
     }
   },
   computed: {
-    parsedData () {
-      return this.searchData.split(',')
-    },
-    parsedEmails () {
-      return this.parsedData.filter(data => {
-        validate(data, 'email').then(result => {
-          if (result.valid) {
-            return true
-          }
-        })
-      })
-    },
-    parsedIds () {
-      return this.parsedData.filter(async data => {
-        await validate(data, 'integer').then(result => {
-          return result.valid
-        })
-      })
+    searchDataArray () {
+      return this.searchData.split(/[ ,]+/)
     }
   },
   methods: {
     ...mapActions({
       searchLeads: 'searchLeads'
     }),
-    parsedEmailz () {
-      this.parsedData.forEach(async data => {
+    async parseData () {
+      for (let i = 0; i < this.searchDataArray.length; i++) {
+        const data = this.searchDataArray[i]
         await validate(data, 'email').then(result => {
           if (result.valid) {
-            console.log(result.valid)
-            console.log(data)
-            this.mails.push(data)
+            this.searchEmails.push(data)
           }
         })
-      })
+        await validate(data, 'integer').then(result => {
+          if (result.valid) {
+            this.searchIds.push(data)
+          }
+        })
+      }
     },
     submitForm () {
-      this.parsedEmailz()
-      this.searchLeads({
-        emails: this.mails.join(', ')
+      this.parseData().then(() => {
+        this.searchLeads({
+          emails: this.searchEmails,
+          ids: this.searchIds
+        }).finally(() => {
+          this.searchEmails = []
+          this.searchIds = []
+        })
       })
     }
   }
