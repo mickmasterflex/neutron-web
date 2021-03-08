@@ -5,7 +5,7 @@
     :loadingText="loadingText"
     content-background-color="white">
     <template v-slot:action>
-      <bulk-update-status class="mr-2"></bulk-update-status>
+      <bulk-update-status v-show="$attrs.contracts.length" class="mr-2"></bulk-update-status>
       <button class="btn btn-turquoise" @click="showCreatePartnerModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Partner</button>
     </template>
     <template v-slot:content>
