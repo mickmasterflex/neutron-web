@@ -4,7 +4,6 @@
       <slot name="hud">
         <div>
           <h1 class="text-white text-4xl font-hairline mb-2">{{ hudTitle }}</h1>
-          <router-link v-if="editRoute" :to="editRoute" class="btn btn-blue rounded-full"><font-awesome-icon icon="pencil-alt"></font-awesome-icon> {{ editText }}</router-link>
         </div>
         <hud-stat-cards>
           <slot name="statCards"></slot>
