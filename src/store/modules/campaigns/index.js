@@ -40,6 +40,9 @@ const actions = {
     await axios.post('/campaigns/', campaign)
       .then(response => {
         commit('ADD_CAMPAIGN', response.data)
+        const parent = getters.getPartnerById(response.data.contract)
+        parent.campaigns.push(response.data.id)
+        commit('UPDATE_PARTNER', parent)
       })
   },
   async updateCampaign ({ commit }, updatedCampaign) {
