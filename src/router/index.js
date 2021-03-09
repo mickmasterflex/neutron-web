@@ -43,6 +43,41 @@ const routes = [
     }
   },
   {
+    path: '/analytics/lead-data/:id/',
+    name: 'LeadPage',
+    component: () => import('@/views/analytics/lead/index'),
+    redirect: { name: 'LeadDetails' },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
+    },
+    children: [
+      {
+        name: 'LeadDetails',
+        path: 'details/',
+        component: () => import('@/views/analytics/lead/details'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'lead-data',
+          contentTab: 'details'
+        }
+      },
+      {
+        name: 'LeadTransactions',
+        path: 'transactions/',
+        component: () => import('@/views/analytics/lead/transactions'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'lead-data',
+          contentTab: 'transactions'
+        }
+      }
+    ]
+  },
+  {
     path: '/analytics/partner-stats/',
     name: 'PartnerStats',
     redirect: { name: 'PartnerStatsClients' },
