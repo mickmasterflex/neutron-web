@@ -70,8 +70,10 @@ const actions = {
       .then(response => {
         commit('ADD_BUYER', response.data)
         const parent = getters.getBuyerById(response.data.parent)
-        parent.children.push(response.data.id)
-        commit('UPDATE_BUYER', parent)
+        if (parent) {
+          parent.children.push(response.data.id)
+          commit('UPDATE_BUYER', parent)
+        }
       })
   },
   async updateBuyer ({ commit }, updatedBuyer) {

@@ -36,13 +36,15 @@ const actions = {
         commit('RESET_CAMPAIGN_FETCH_LOADING')
       })
   },
-  async createCampaign ({ commit }, campaign) {
+  async createCampaign ({ commit, getters }, campaign) {
     await axios.post('/campaigns/', campaign)
       .then(response => {
-        commit('ADD_CAMPAIGN', response.data)
+        commit('ADD_[CAMPAIGN', response.data)
         const parent = getters.getPartnerById(response.data.contract)
-        parent.campaigns.push(response.data.id)
-        commit('UPDATE_PARTNER', parent)
+        if (parent) {
+          parent.campaigns.push(response.data.id)
+          commit('UPDATE_PARTNER', parent)
+        }
       })
   },
   async updateCampaign ({ commit }, updatedCampaign) {

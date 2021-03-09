@@ -48,13 +48,15 @@ const actions = {
         commit('RESET_OFFER_FETCH_LOADING')
       })
   },
-  async createOffer ({ commit }, offer) {
+  async createOffer ({ commit, getters }, offer) {
     await axios.post('/offer-contracts/', offer)
       .then(response => {
         commit('ADD_OFFER', response.data)
         const parent = getters.getBuyerById(response.data.parent)
-        parent.offer_contracts.push(response.data.id)
-        commit('UPDATE_BUYER', parent)
+        if (parent) {
+          parent.offer_contracts.push(response.data.id)
+          commit('UPDATE_BUYER', parent)
+        }
       })
   },
   async updateOffer ({ commit }, updatedOffer) {
