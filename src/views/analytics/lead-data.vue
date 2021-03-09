@@ -2,9 +2,6 @@
   <content-layout>
     <template v-slot:hud>
       <slot name="hud">
-        <div>
-          <h1 class="text-gray-300 text-4xl font-hairline">Search All Leads</h1>
-        </div>
         <lead-search></lead-search>
       </slot>
     </template>
@@ -28,7 +25,7 @@
 
 <script>
 import leadsList from '@/components/analytics/leads/lead-data-list'
-import leadSearch from '@/components/analytics/lead-search'
+import leadSearch from '@/components/analytics/leads/lead-search'
 import { mapGetters } from 'vuex'
 
 export default {

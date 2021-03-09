@@ -1,5 +1,5 @@
 <template>
-  <div ref="form" class="bg-gray-800 p-5 pt-3 rounded-lg">
+  <div ref="form" class="">
     <form @submit.prevent="submitForm">
       <v-textarea-field
         ref="searchField"
