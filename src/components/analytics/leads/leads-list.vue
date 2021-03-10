@@ -17,7 +17,11 @@
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="lead in leads" :key="lead.id">
-        <td class="td">{{lead.id}}</td>
+        <td class="td">
+          <span class="text-link" @click="linkToLeadPage(lead)">
+            {{lead.id}}
+          </span>
+        </td>
         <td class="td">{{lead.data.email}}</td>
         <slot name="additional-td" :lead="lead"></slot>
         <td class="td" :class="!lead.reason ? 'text-gray-500 italic' : ''">{{lead.reason ? lead.reason : 'None'}}</td>
@@ -44,6 +48,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     leads: {
@@ -60,12 +66,12 @@ export default {
     }
   },
   methods: {
-    leadSold (soldAt) {
-      if (soldAt) {
-        return new Date(soldAt).toDateString()
-      } else {
-        return false
-      }
+    ...mapMutations({
+      setCurrentLead: 'SET_CURRENT_LEAD'
+    }),
+    linkToLeadPage (lead) {
+      this.setCurrentLead(lead)
+      this.$router.push({ name: 'LeadPage', params: { id: lead.id } })
     }
   }
 }

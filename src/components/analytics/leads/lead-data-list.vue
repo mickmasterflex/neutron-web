@@ -50,7 +50,7 @@
           :to="{
             name: 'PartnerContract',
             params: {
-              slug: slotProps.lead.partner_client.slug,
+              client: slotProps.lead.partner_client.slug,
               id: slotProps.lead.partner_contract.id
             }
           }"
