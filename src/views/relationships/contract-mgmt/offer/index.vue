@@ -4,6 +4,7 @@
       <h1 class="h1 text-white">{{offer.name}}</h1>
       <div class="hud--stat-cards">
         <stat-card :data="offer.id" :title="`Offer`" :color="`teal`"></stat-card>
+        <status-card :status="offer.status"></status-card>
       </div>
     </template>
     <template v-slot:contentTabs>
@@ -23,8 +24,12 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import statusCard from '@/components/ui/cards/status-card'
 
 export default {
+  components: {
+    'status-card': statusCard
+  },
   props: {
     id: {
       type: Number
