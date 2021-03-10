@@ -53,8 +53,16 @@ export default {
       searchLeads: 'searchLeads'
     }),
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_LEAD'
-    })
+      setCurrent: 'SET_CURRENT_LEAD',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
+    }),
+    setProductBreadcrumbsAndTitle () {
+      document.title = 'Lead Data | ' + this.id
+      this.setBreadcrumbs([
+        { name: 'LeadData', text: 'Search Leads' },
+        { name: 'LeadPage', text: this.id, params: { id: this.id } }
+      ])
+    }
   },
   watch: {
     id () {
@@ -68,6 +76,7 @@ export default {
   },
   created () {
     this.searchLeads({ ids: [this.id], emails: [] })
+    this.setProductBreadcrumbsAndTitle()
   }
 }
 </script>
