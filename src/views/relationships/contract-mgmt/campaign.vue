@@ -1,6 +1,6 @@
 <template>
   <content-layout v-if="campaign">
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">{{campaign.name}}</h1>
       <hud-stat-cards>
         <stat-card :data="campaign.id" title="Campaign" key="campaignId"></stat-card>

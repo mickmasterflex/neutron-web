@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">Overview</h1>
       <hud-stat-cards>
         <stat-card v-if="getAllClientsCount > 0" :data="getAllClientsCount" title="Clients" key="clientCount"></stat-card>

@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">All Brands</h1>
       <hud-stat-cards>
         <stat-card :data="getAllBrandsCount" title="Brands" key="brandCount"></stat-card>

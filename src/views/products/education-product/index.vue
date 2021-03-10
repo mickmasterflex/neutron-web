@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">{{product.name}}</h1>
     </template>
     <template v-slot:contentTabs>

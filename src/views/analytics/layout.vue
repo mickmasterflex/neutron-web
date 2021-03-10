@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <slot name="hud">
         <div>
           <h1

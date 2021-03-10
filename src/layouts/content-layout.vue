@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="px-8 pt-8">
-      <hud-panel>
-        <template v-slot:hud-content>
-          <slot name="hud"></slot>
-        </template>
-      </hud-panel>
+      <slot name="hud">
+        <hud-panel>
+          <template v-slot:hud-content>
+            <slot name="hud-content"></slot>
+          </template>
+        </hud-panel>
+      </slot>
       <slot name="contentTabs"></slot>
     </div>
     <div :class="`px-8 pt-5 ${contentTabsBorder}`">

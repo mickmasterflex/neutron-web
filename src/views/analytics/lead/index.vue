@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <div>
         <h3 class="text-gray-200">Lead Id: {{id}} Created At {{createdAt}}</h3>
         <h1 class="h1 text-white">{{data.email}} {{lead.last_name}}</h1>

@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">All Pricing Tiers</h1>
     </template>
     <template v-slot:content>

@@ -1,6 +1,6 @@
 <template>
   <content-layout v-if="user">
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <div>
         <h1 class="h1 text-white">{{user.first_name}} {{user.last_name}}</h1>
         <p class="text-white">{{user.email}}</p>

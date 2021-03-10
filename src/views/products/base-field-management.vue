@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">Fields</h1>
       <hud-stat-cards>
         <stat-card :data="baseFieldCount" title="Fields" key="fieldCount"></stat-card>
