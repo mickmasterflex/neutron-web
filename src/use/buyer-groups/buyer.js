@@ -70,6 +70,7 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
     store.commit('SET_BUYER_GROUPS_LOADING')
     store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
       store.commit('SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA', null)
+    }).finally(() => {
       store.commit('RESET_BUYER_GROUPS_LOADING')
     })
   }
