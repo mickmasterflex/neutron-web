@@ -19,7 +19,7 @@ export const setResponseErrors = {
   },
   watch: {
     error () {
-      if (this.error.response && this.form_ref) {
+      if (this.error.response.data && this.form_ref) {
         this.form_ref.setErrors(this.error.response.data)
       }
     }
