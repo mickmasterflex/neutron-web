@@ -1,9 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <slot name="hud">
-        <lead-search></lead-search>
-      </slot>
+      <lead-search></lead-search>
     </template>
     <template v-slot:content>
       <panel-template

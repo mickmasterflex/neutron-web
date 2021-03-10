@@ -3,7 +3,7 @@
     <slot name="breadcrumbs">
       <bread-crumbs :breadcrumbs="breadcrumbs"></bread-crumbs>
     </slot>
-    <div class="hud-content items-center grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
+    <div class="hud-content p-4" :class="gridClasses">
       <slot name="hud-content"></slot>
     </div>
   </div>
@@ -14,6 +14,12 @@ import breadcrumbs from '@/components/ui/breadcrumbs'
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    gridClasses: {
+      type: String,
+      default: 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-center'
+    }
+  },
   computed: {
     ...mapGetters({
       breadcrumbs: 'getCurrentBreadCrumbs'
