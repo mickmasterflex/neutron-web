@@ -5,7 +5,7 @@
       <div class="hud--stat-cards">
         <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
         <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
-        <stat-card :data="status.contract" :title="'Status'" :color="'green'"></stat-card>
+        <status-card :status="buyer.status"></status-card>
       </div>
     </template>
     <template v-slot:contentTabs>
@@ -32,8 +32,11 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-
+import statusCard from '@/components/ui/cards/status-card.vue'
 export default {
+  components: {
+    'status-card': statusCard
+  },
   props: {
     contracts: Array,
     id: Number,

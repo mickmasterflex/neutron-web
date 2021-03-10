@@ -1,0 +1,26 @@
+<template>
+  <stat-card :data="status" title="Status" :color="statusCardColor">
+  </stat-card>
+</template>
+
+<script>
+export default {
+  props: {
+    status: String
+  },
+  computed: {
+    statusCardColor () {
+      if (this.status === 'active') {
+        return 'green'
+      }
+      if (this.status === 'paused') {
+        return 'yellow'
+      }
+      if (this.status === 'terminated') {
+        return 'red'
+      }
+      return 'gray'
+    }
+  }
+}
+</script>
