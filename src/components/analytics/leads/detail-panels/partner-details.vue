@@ -44,8 +44,8 @@
           <table class="table table-white mt-3">
             <tbody>
               <tr class="tr">
-                <td class="td font-bold w-40 rounded-tl-md">Campaign Code</td>
-                <td class="td rounded-tr-md">{{ tableData.campaign.code }}</td>
+                <td class="td font-bold w-40 rounded-tl-lg border-t-2">Campaign Code</td>
+                <td class="td rounded-tr-lg border-t-2">{{ tableData.campaign.code }}</td>
               </tr>
             </tbody>
           </table>
