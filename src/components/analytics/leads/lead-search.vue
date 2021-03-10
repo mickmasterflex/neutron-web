@@ -5,16 +5,15 @@
       <p class="text-gray-200">Search by ID or email address, separate with commas.</p>
       <div class="flex flex-col items-start lg:flex-row lg:items-end mt-2">
         <form @submit.prevent="submitForm" class="form">
-          <v-textarea-field
+          <textarea-field
             ref="searchField"
-            rules="required"
             v-model="searchData"
             field_id="searchparams"
             placeholder="example@gmail.com, 1234, test@gmail.com, 4567"
-            field_class="w-full"
-          ></v-textarea-field>
+            field_class="w-full bg-gray-200"
+          ></textarea-field>
         </form>
-        <button @click="submitForm()" class="btn btn-green my-2 lg:ml-4">Search Leads</button>
+        <button @click="submitForm()" class="btn btn-green my-2 lg:ml-4" :disabled="!searchData">Search Leads</button>
       </div>
     </template>
   </hud-panel>
@@ -81,7 +80,7 @@ export default {
       })
     },
     enterKeyAction () {
-      if (this.$refs.searchField.$refs.field.$refs.field === document.activeElement) {
+      if (this.$refs.searchField.$refs.field === document.activeElement && !!this.searchData) {
         this.submitForm()
       }
     }
