@@ -75,6 +75,7 @@ import baseModal from '@/components/ui/modals/base'
 import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
 import hudStatCards from '@/components/ui/hud/stat-cards'
+import hudH1 from '@/components/ui/hud/h1'
 import label from '@/components/ui/label-number'
 import statCard from '@/components/ui/cards/stat-card'
 
@@ -126,6 +127,7 @@ Vue.component('content-layout', baseContentLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('hud-stat-cards', hudStatCards)
+Vue.component('hud-h1', hudH1)
 Vue.component('modal-template', baseModal)
 Vue.component('tooltip-dialog-template', baseTooltipDialog)
 Vue.component('panel-template', basePanel)
