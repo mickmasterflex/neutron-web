@@ -39,10 +39,10 @@ export const offerContractBreadcrumbs = {
   methods: {
     setBreadcrumbText () {
       if (this.offer.parent) {
-        this.$data.contractBreadcrumb.text = this.offer.parent.name
+        this.$data.contractBreadcrumb.text = this.offer.parent_data.name
       }
       if (this.offer.client) {
-        this.$data.clientBreadcrumb.text = this.offer.client.name
+        this.$data.clientBreadcrumb.text = this.offer.client_data.name
       }
       if (this.offer) {
         this.$data.offerBreadcrumb.text = this.offer.name

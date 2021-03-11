@@ -7,7 +7,7 @@
                         :createPartnerDisabled="createPartnerDisabled"
     ></partner-list-panel>
     <contract-relations-index v-if="partner.id" :contract="partner.id" contractType="partner" class="col-span-2"></contract-relations-index>
-    <create-partner-contract v-if="!createPartnerDisabled" :client="partner.client.id" :parent="partner.id"></create-partner-contract>
+    <create-partner-contract v-if="!createPartnerDisabled" :client="partner.client" :parent="partner.id"></create-partner-contract>
   </base-panel-grid>
 </template>
 

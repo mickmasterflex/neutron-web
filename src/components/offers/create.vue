@@ -66,6 +66,7 @@ export default {
         if (success) {
           this.create({
             name: this.name,
+            client: this.client,
             parent: this.buyer,
             status: this.status,
             scheduled_start: this.scheduledStart,

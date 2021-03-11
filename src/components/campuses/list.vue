@@ -59,12 +59,12 @@ export default {
       this.setCurrentCampus(campus)
       this.$router.push({
         name: 'CampusDetails',
-        params: { brand: campus.brand.id, id: campus.id }
+        params: { brand: campus.brand, id: campus.id }
       })
     },
     linkToCampusProducts (campus) {
       this.setCurrentCampus(campus)
-      this.$router.push({ name: 'CampusProducts', params: { brand: campus.brand.id, id: campus.id } })
+      this.$router.push({ name: 'CampusProducts', params: { brand: campus.brand, id: campus.id } })
     }
   }
 }

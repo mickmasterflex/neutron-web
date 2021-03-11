@@ -15,7 +15,7 @@
           <td class="td w-16">{{buyer.id}}</td>
           <td class="td w-24">{{buyer.children.length}}</td>
           <td class="td">
-            {{buyer.client.name}}
+            {{buyer.client_data.name}}
           </td>
         </tr>
       </tbody>

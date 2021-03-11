@@ -46,7 +46,7 @@ export default {
       document.title = this.campus.name
       this.setBreadcrumbs([
         { name: 'Brands', text: 'Brands' },
-        { name: 'BrandDetails', text: this.campus.brand.name, params: { id: this.$route.params.brand } },
+        { name: 'BrandDetails', text: this.campus.brand_data.name, params: { id: this.$route.params.brand } },
         { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
         { name: 'CampusDetails', text: this.campus.name, params: { brand: this.$route.params.brand, id: this.id } }
       ])

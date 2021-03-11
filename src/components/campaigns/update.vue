@@ -48,7 +48,7 @@ export default {
           this.update({
             id: this.campaign.id,
             name: this.name,
-            contract: this.campaign.contract.id,
+            contract: this.campaign.contract,
             code: this.campaign_code
           }).catch(error => {
             this.error = error

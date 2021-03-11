@@ -9,7 +9,7 @@ export const campaignContractBreadcrumbs = {
         text: this.$route.params.partner,
         params: {
           client: this.$route.params.client,
-          partner: this.$route.params.partner
+          id: this.$route.params.partner
         }
       },
       campaignsBreadcrumb: {
@@ -39,10 +39,10 @@ export const campaignContractBreadcrumbs = {
   methods: {
     setBreadcrumbText () {
       if (this.campaign.contract) {
-        this.$data.contractBreadcrumb.text = this.campaign.contract.name
+        this.$data.contractBreadcrumb.text = this.campaign.contract_data.name
       }
       if (this.campaign.client) {
-        this.$data.clientBreadcrumb.text = this.campaign.client.name
+        this.$data.clientBreadcrumb.text = this.campaign.client_data.name
       }
       if (this.campaign) {
         this.$data.campaignBreadcrumb.text = this.campaign.name

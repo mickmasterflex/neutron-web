@@ -30,7 +30,7 @@
               {{ contract.status }}
             </status-indicator>
           </td>
-          <td class="td">{{ contract.client.name }}</td>
+          <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">{{ contract.rpl }}</td>
           <td class="td">
             <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,

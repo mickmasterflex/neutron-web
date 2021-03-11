@@ -60,7 +60,7 @@ export default {
           this.update({
             name: this.name,
             parent: this.parent,
-            client: this.client.id,
+            client: this.client,
             id: this.buyer.id,
             rpl: this.rpl,
             buyer_group: this.buyerGroup,

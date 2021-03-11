@@ -11,7 +11,7 @@
                               contractType="buyer"
                               class="col-span-2"
     ></contract-relations-index>
-    <create-buyer-contract v-if="!createBuyerDisabled" :client="buyer.client.id" :parent="buyer.id"></create-buyer-contract>
+    <create-buyer-contract v-if="!createBuyerDisabled" :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
   </base-panel-grid>
 </template>
 

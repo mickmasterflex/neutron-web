@@ -88,7 +88,7 @@ export default {
             phone_number: this.phone_number,
             phone_extension: this.phone_extension,
             description: this.description,
-            brand: this.campus.brand.id,
+            brand: this.campus.brand,
             id: this.campus.id
           }).catch(error => {
             this.error = error

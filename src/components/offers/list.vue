@@ -25,7 +25,7 @@
               {{ offer.status }}
             </status-indicator>
           </td>
-          <td class="td">{{ offer.parent.name }}</td>
+          <td class="td">{{ offer.parent_data.name }}</td>
           <td class="td">{{ offer.cap }}</td>
         </tr>
       </tbody>
@@ -67,9 +67,9 @@ export default {
       this.$router.push({
         name: 'OfferDetails',
         params: {
-          client: offer.client.slug,
-          buyer: offer.parent.id,
-          id: offer.offer
+          client: offer.client_data.slug,
+          buyer: offer.parent,
+          id: offer.id
         }
       })
     }

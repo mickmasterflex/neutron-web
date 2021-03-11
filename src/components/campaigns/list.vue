@@ -15,7 +15,7 @@
           <td class="td">
             <span @click="linkToCampaign(campaign)" class="text-link">{{campaign.name}}</span>
           </td>
-          <td class="td">{{ campaign.contract.name }}</td>
+          <td class="td">{{ campaign.contract_data.name }}</td>
           <td class="td">{{ campaign.code }}</td>
         </tr>
       </tbody>
@@ -44,7 +44,7 @@ export default {
       this.setCurrentCampaign(campaign)
       this.$router.push({
         name: 'Campaign',
-        params: { client: this.client, partner: campaign.contract.id, id: campaign.id }
+        params: { client: this.client, partner: campaign.contract, id: campaign.id }
       })
     }
   }

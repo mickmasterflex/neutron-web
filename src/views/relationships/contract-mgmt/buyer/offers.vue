@@ -5,7 +5,7 @@
                       emptyStateCopy="Use the 'New Offer' button to add offers"
                       :createOfferDisabled="createOfferDisabled"
     ></offer-list-panel>
-    <create-offer v-if="!createOfferDisabled" :buyer="buyer.id"></create-offer>
+    <create-offer v-if="!createOfferDisabled" :buyer="buyer.id" :client="buyer.client_data.id"></create-offer>
   </base-panel-grid>
 </template>
 <script>

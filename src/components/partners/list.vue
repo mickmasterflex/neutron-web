@@ -29,7 +29,7 @@
               {{ contract.status }}
             </status-indicator>
           </td>
-          <td class="td">{{ contract.client.name }}</td>
+          <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">
             <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
             </span>

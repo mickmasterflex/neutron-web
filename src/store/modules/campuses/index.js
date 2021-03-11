@@ -12,7 +12,7 @@ const state = {
 const getters = {
   getCurrentCampus: state => state.current_campus,
   getCampusesByBrand: (state) => (brandId) => {
-    return state.campuses.filter(campus => campus.brand.id === brandId)
+    return state.campuses.filter(campus => campus.brand === brandId)
   }
 }
 

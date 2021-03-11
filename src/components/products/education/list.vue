@@ -53,8 +53,8 @@ export default {
       this.$router.push({
         name: 'ProductDetails',
         params: {
-          brand: product.brand.id,
-          campus: product.campus.id,
+          brand: product.brand_data.id,
+          campus: product.campus_data.id,
           id: product.id
         }
       })
@@ -64,8 +64,8 @@ export default {
       this.$router.push({
         name: 'ProductOffers',
         params: {
-          brand: product.brand.id,
-          campus: product.campus.id,
+          brand: product.brand_data.id,
+          campus: product.campus_data.id,
           id: product.id
         }
       })

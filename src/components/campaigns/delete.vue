@@ -17,7 +17,7 @@ export default {
     runDelete () {
       this.delete(this.campaign.id)
         .then(() => {
-          this.$router.push({ name: 'PartnerContractCampaigns', params: { id: this.campaign.contract.id, client: this.client } })
+          this.$router.push({ name: 'PartnerContractCampaigns', params: { id: this.campaign.contract, client: this.client } })
         })
     }
   }

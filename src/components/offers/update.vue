@@ -56,7 +56,7 @@ export default {
           this.update({
             id: this.offer.id,
             name: this.name,
-            parent: this.offer.parent.id,
+            parent: this.offer.parent,
             status: this.status,
             client: this.offer.client,
             scheduled_start: this.scheduledStart,

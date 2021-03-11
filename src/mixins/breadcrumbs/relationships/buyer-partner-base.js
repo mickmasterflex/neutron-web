@@ -26,7 +26,7 @@ export const baseContractBreadcrumbs = {
         this.$data.contractBreadcrumb.text = this.contract.name
       }
       if (this.contract.client) {
-        this.$data.clientBreadcrumb.text = this.contract.client.name
+        this.$data.clientBreadcrumb.text = this.contract.client_data.name
       }
     }
   }

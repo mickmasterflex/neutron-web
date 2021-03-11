@@ -18,14 +18,14 @@ const getters = {
   getAllPartners: state => state.partners,
   getCurrentPartner: state => state.current_partner,
   getPartnersByClient: (state) => (clientId) => {
-    return state.partners.filter(partner => partner.client.id === clientId)
+    return state.partners.filter(partner => partner.client === clientId)
   },
   getParentlessPartnersByClient: (state) => (clientId) => {
-    return state.partners.filter(partner => partner.client.id === clientId).filter(partner => partner.parent === null)
+    return state.partners.filter(partner => partner.client === clientId).filter(partner => partner.parent === null)
   },
   getCurrentPartnerSiblings: (state, getters) => {
     if (state.current_partner.client) {
-      const siblings = getters.getPartnersByClient(state.current_partner.client.id)
+      const siblings = getters.getPartnersByClient(state.current_partner.client)
       const index = siblings.findIndex(partner => partner.id === state.current_partner.id)
       if (index !== -1) {
         siblings.splice(index, 1)
