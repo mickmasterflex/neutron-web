@@ -9,6 +9,7 @@
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
+          <th class="th">Caps</th>
           <th class="th">Children</th>
           <th class="th">Campaigns</th>
         </tr>
@@ -35,6 +36,11 @@
             </span>
             <span v-else class="italic text-gray-500">None</span>
           </td>
+          <td class="td">
+              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,
+                    {{ contract.caps.day_caps.length }} Day
+              </span>
+            <span v-else class="italic text-gray-500">No Caps Set</span>
           <td class="td">
             <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>
