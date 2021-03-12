@@ -26,7 +26,12 @@
               {{ offer.status }}
             </status-indicator>
           </td>
-            <td class="td">{{ offer.cap }}</td>
+          <td class="td">
+              <span v-if="offer.caps.month_caps.length || offer.caps.day_caps.length">{{ offer.caps.month_caps.length }} Month,
+                    {{ offer.caps.day_caps.length }} Day
+              </span>
+            <span v-else class="italic text-gray-500">No Caps Set</span>
+          </td>
         </tr>
       </tbody>
     </table>

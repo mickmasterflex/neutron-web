@@ -40,7 +40,7 @@
                     {{ contract.caps.day_caps.length }} Day
               </span>
           <span v-else class="italic text-gray-500">No Caps Set</span>
-            </td>
+        </td>
           <td class="td">
            <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offer_contracts.length }}</table-link>
           </td>
