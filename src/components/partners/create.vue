@@ -35,7 +35,7 @@ export default {
       channel: '',
       pricing_tier_group: '',
       pingbackUrl: '',
-      status: undefined,
+      status: 'active',
       scheduledStart: null
     }
   },
@@ -63,7 +63,7 @@ export default {
     close () {
       this.name = ''
       this.channel = ''
-      this.status = undefined
+      this.status = 'active'
       this.pingbackUrl = ''
       this.scheduledStart = null
       this.$nextTick(() => {
