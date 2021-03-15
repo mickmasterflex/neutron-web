@@ -27,10 +27,7 @@
             </status-indicator>
           </td>
           <td class="td">
-              <span v-if="offer.caps.month_caps.length || offer.caps.day_caps.length">{{ offer.caps.month_caps.length }} Month,
-                    {{ offer.caps.day_caps.length }} Day
-              </span>
-            <span v-else class="italic text-gray-500">No Caps Set</span>
+         <caps-count :caps="offer.caps"></caps-count>
           </td>
         </tr>
       </tbody>
@@ -45,8 +42,12 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
+  components: {
+    'caps-count': capsCount
+  },
   props: {
     contracts: Array,
     offers: Array,

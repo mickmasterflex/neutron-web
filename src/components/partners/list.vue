@@ -37,10 +37,8 @@
             <span v-else class="italic text-gray-500">None</span>
           </td>
           <td class="td">
-              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,
-                    {{ contract.caps.day_caps.length }} Day
-              </span>
-            <span v-else class="italic text-gray-500">No Caps Set</span>
+            <caps-count :caps="contract.caps"></caps-count>
+          </td>
           <td class="td">
             <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>
@@ -60,6 +58,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
   props: {
@@ -94,7 +93,8 @@ export default {
     }
   },
   components: {
-    'bulk-update-checkbox': bulkUpdateCheckbox
+    'bulk-update-checkbox': bulkUpdateCheckbox,
+    'caps-count': capsCount
   },
   destroyed () {
     this.resetShiftClickIndex()
