@@ -31,6 +31,16 @@
               </td>
               <td class="td">{{ tableData.campus.id }}</td>
             </tr>
+            <tr class="tr">
+              <td class="td font-bold">Product</td>
+              <td class="td">
+                <router-link class="text-link"
+                             :to="{ name: 'ProductDetails', params: { id: tableData.product.id, campus: tableData.campus.id, brand: tableData.brand.id } }">
+                  {{ tableData.product.name }}
+                </router-link>
+              </td>
+              <td class="td">{{ tableData.product.id }}</td>
+            </tr>
           </tbody>
         </table>
         <table-empty-state v-else

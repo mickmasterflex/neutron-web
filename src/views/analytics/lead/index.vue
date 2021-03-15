@@ -2,8 +2,9 @@
   <content-layout>
     <template v-slot:hud>
       <div>
-        <h3 class="text-gray-200">Lead Id: {{id}} Created At {{createdAt}}</h3>
+        <h3 class="text-gray-200">Lead Id: {{id}}</h3>
         <h1 class="h1 text-white">{{data.email}} {{lead.last_name}}</h1>
+        <h3 class="text-gray-200">Created At {{createdAt}}</h3>
       </div>
       <hud-stat-cards>
         <stat-card :data="!!lead.sold_at ? 'Sold' : 'Not Sold'" title="Status" :color="!!lead.sold_at ? 'green' : 'red'" key="statusCard"></stat-card>
@@ -50,7 +51,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      searchLeads: 'searchLeads'
+      fetchCurrentLead: 'fetchCurrentLead'
     }),
     ...mapMutations({
       setCurrent: 'SET_CURRENT_LEAD'
@@ -67,7 +68,7 @@ export default {
     }
   },
   created () {
-    this.searchLeads({ ids: [this.id], emails: [] })
+    this.fetchCurrentLead(this.id)
   }
 }
 </script>

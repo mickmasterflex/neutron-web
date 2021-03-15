@@ -47,6 +47,18 @@
                 <td class="td font-bold w-40 rounded-tl-lg border-t-2">Campaign Code</td>
                 <td class="td rounded-tr-lg border-t-2">{{ tableData.campaign.code }}</td>
               </tr>
+              <tr class="tr">
+                <td class="td font-bold w-40">Channel</td>
+                <td class="td">{{ tableData.channel }}</td>
+              </tr>
+              <tr class="tr">
+                <td class="td font-bold w-40">Pricing Tier Group</td>
+                <td class="td">{{ tableData.pricing_tier_group }}</td>
+              </tr>
+              <tr class="tr">
+                <td class="td font-bold w-40">Vertical</td>
+                <td class="td">{{ tableData.vertical }}</td>
+              </tr>
             </tbody>
           </table>
         </div>

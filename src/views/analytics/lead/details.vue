@@ -24,22 +24,26 @@ export default {
     }),
     productDetails () {
       return {
-        brand: this.lead.brand,
-        campus: this.lead.campus
+        brand: this.lead.brand_data,
+        campus: this.lead.campus_data,
+        product: this.lead.product_data
       }
     },
     buyerDetails () {
       return {
-        buyer_client: this.lead.buyer_client,
-        buyer_contract: this.lead.buyer_contract,
-        offer_contract: this.lead.offer_contract
+        buyer_client: this.lead.buyer_client_data,
+        buyer_contract: this.lead.buyer_contract_data,
+        offer_contract: this.lead.offer_contract_data
       }
     },
     partnerDetails () {
       return {
-        partner_client: this.lead.partner_client,
-        partner_contract: this.lead.partner_contract,
-        campaign: this.lead.campaign
+        partner_client: this.lead.partner_client_data,
+        partner_contract: this.lead.partner_contract_data,
+        campaign: this.lead.campaign_data,
+        channel: this.lead.channel_data,
+        pricing_tier_group: this.lead.pricing_tier_group_data,
+        vertical: this.lead.vertical_data
       }
     }
   },
