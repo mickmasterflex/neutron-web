@@ -2,7 +2,6 @@
   <contracts-list :contracts="contracts"
                   :link-to-contract="linkToContract"
                   :link-to-contract-leads="linkToContractLeads"
-                  :link-to-contract-contracts="linkToContractContracts"
                   :contracts-count="contractsCount"
   ></contracts-list>
 </template>
@@ -37,14 +36,6 @@ export default {
       this.setCurrent(contract)
       this.$router.push({
         name: 'PartnerStatsContractLeads',
-        params: { id: contract.id, clientId: this.client.id },
-        query: this.$route.query
-      })
-    },
-    linkToContractContracts (contract) {
-      this.setCurrent(contract)
-      this.$router.push({
-        name: 'PartnerStatsContractContracts',
         params: { id: contract.id, clientId: this.client.id },
         query: this.$route.query
       })

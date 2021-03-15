@@ -14,13 +14,6 @@
       <stat-card :loading="loading" :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTab>
-      <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-        <router-link :to="{
-          name: 'BuyerStatsContractContracts',
-          params: { clientId: clientId, id: id },
-          query: $route.query
-        }">Contracts</router-link>
-      </li>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
         <router-link :to="{
           name: 'BuyerStatsContractOffers',

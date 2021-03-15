@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Product Details">
+  <panel-template title="Product Details" :show-loader="loading" :loading-text="loadingText">
     <template v-slot:content>
       <transition-table-state>
         <table class="table table-white" v-if="tableData.brand">
@@ -31,6 +31,16 @@
               </td>
               <td class="td">{{ tableData.campus.id }}</td>
             </tr>
+            <tr class="tr">
+              <td class="td font-bold">Product</td>
+              <td class="td">
+                <router-link class="text-link"
+                             :to="{ name: 'ProductDetails', params: { id: tableData.product.id, campus: tableData.campus.id, brand: tableData.brand.id } }">
+                  {{ tableData.product.name }}
+                </router-link>
+              </td>
+              <td class="td">{{ tableData.product.id }}</td>
+            </tr>
           </tbody>
         </table>
         <table-empty-state v-else
@@ -42,6 +52,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     tableData: {
@@ -51,6 +63,12 @@ export default {
       type: Object
     },
     title: String
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'getLeadFetchLoading',
+      loadingText: 'getLeadFetchLoadingText'
+    })
   }
 }
 </script>

@@ -16,7 +16,10 @@
       <tbody class="tbody">
       <tr class="tr" v-for="contract in contracts" :key="contract.id">
         <td class="td">
-          <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
+          <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">
+            <span v-if="contract.parent">{{ contract.parent.name }} <font-awesome-icon icon="arrow-right"></font-awesome-icon></span>
+            {{contract.name}}
+          </span>
         </td>
         <td class="td">
           <table-link :number="contract.lead_count"

@@ -5,11 +5,11 @@
     :showLoader="loading"
     :loading-text="loadingText">
     <template v-slot:action>
-      <bulk-update-status class="mr-2"></bulk-update-status>
+      <bulk-update-status v-if="offers.length" class="mr-2"></bulk-update-status>
       <button class="btn btn-turquoise" :disabled="createOfferDisabled" @click="showCreateOfferModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Offer</button>
     </template>
     <template v-slot:content>
-      <offer-list v-bind="$attrs"></offer-list>
+      <offer-list v-bind="$attrs" :offers="offers"></offer-list>
     </template>
   </panel-template>
 </template>
@@ -23,7 +23,8 @@ export default {
   props: {
     createOfferDisabled: {
       type: Boolean
-    }
+    },
+    offers: Array
   },
   components: {
     'offer-list': offerList,

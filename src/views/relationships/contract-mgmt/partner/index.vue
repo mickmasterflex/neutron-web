@@ -5,6 +5,7 @@
       <hud-stat-cards>
         <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
         <stat-card v-if="contract.campaigns" :data="contract.campaigns.length" title="Campaigns" key="campaignCount"></stat-card>
+        <status-card :status="contract.status" key="statusCard"></status-card>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -29,8 +30,12 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { partnerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/partner'
+import statusCard from '@/components/ui/cards/status-card.vue'
 
 export default {
+  components: {
+    'status-card': statusCard
+  },
   props: {
     id: Number
   },

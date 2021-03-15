@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Partner Client Details">
+  <panel-template title="Partner Client Details" :show-loader="loading" :loading-text="loadingText">
     <template v-slot:content>
       <transition-table-state>
         <div v-if="tableData.partner_client">
@@ -44,8 +44,20 @@
           <table class="table table-white mt-3">
             <tbody>
               <tr class="tr">
-                <td class="td font-bold w-40 rounded-tl-md">Campaign Code</td>
-                <td class="td rounded-tr-md">{{ tableData.campaign.code }}</td>
+                <td class="td font-bold w-40 rounded-tl-lg border-t-2">Campaign Code</td>
+                <td class="td rounded-tr-lg border-t-2">{{ tableData.campaign.code }}</td>
+              </tr>
+              <tr class="tr">
+                <td class="td font-bold w-40">Channel</td>
+                <td class="td">{{ tableData.channel }}</td>
+              </tr>
+              <tr class="tr">
+                <td class="td font-bold w-40">Pricing Tier Group</td>
+                <td class="td">{{ tableData.pricing_tier_group }}</td>
+              </tr>
+              <tr class="tr">
+                <td class="td font-bold w-40">Vertical</td>
+                <td class="td">{{ tableData.vertical }}</td>
               </tr>
             </tbody>
           </table>
@@ -59,6 +71,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     tableData: {
@@ -68,6 +82,12 @@ export default {
       type: Object
     },
     title: String
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'getLeadFetchLoading',
+      loadingText: 'getLeadFetchLoadingText'
+    })
   }
 }
 </script>

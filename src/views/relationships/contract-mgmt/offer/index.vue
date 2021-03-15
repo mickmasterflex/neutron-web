@@ -4,6 +4,7 @@
       <h1 class="h1 text-white">{{offer.name}}</h1>
       <hud-stat-cards>
         <stat-card :data="offer.id" title="Offer" key="offerId"></stat-card>
+        <status-card :status="offer.status" key="statusCard"></status-card>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -24,8 +25,12 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/offer'
+import statusCard from '@/components/ui/cards/status-card'
 
 export default {
+  components: {
+    'status-card': statusCard
+  },
   props: {
     id: {
       type: Number

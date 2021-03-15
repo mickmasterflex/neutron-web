@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       name: '',
-      status: undefined,
+      status: 'active',
       product_id: '',
       scheduledStart: null
     }
@@ -53,7 +53,7 @@ export default {
     close () {
       this.name = ''
       this.parent = ''
-      this.status = undefined
+      this.status = 'active'
       this.product_id = ''
       this.scheduledStart = null
       this.$nextTick(() => {

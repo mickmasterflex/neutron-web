@@ -58,10 +58,15 @@ const actions = {
         commit('RESET_PARTNER_FETCH_LOADING')
       })
   },
-  async createPartner ({ commit }, partner) {
+  async createPartner ({ commit, getters }, partner) {
     await axios.post('/partners/', partner)
       .then(response => {
         commit('ADD_PARTNER', response.data)
+        const parent = getters.getPartnerById(response.data.parent)
+        if (parent) {
+          parent.children.push(response.data.id)
+          commit('UPDATE_PARTNER', parent)
+        }
       })
   },
   async updatePartner ({ commit }, updatedPartner) {

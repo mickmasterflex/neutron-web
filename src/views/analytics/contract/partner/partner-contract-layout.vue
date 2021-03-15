@@ -14,13 +14,6 @@
       <stat-card :loading="loading" :data="campaigns.length" title="Campaigns" key="campaignCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTab>
-      <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-        <router-link :to="{
-          name: 'PartnerStatsContractContracts',
-          params: { clientId: clientId, id: id },
-          query: $route.query
-        }">Contracts</router-link>
-      </li>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'campaigns' ? 'active' : ''">
         <router-link :to="{
           name: 'PartnerStatsContractCampaigns',
