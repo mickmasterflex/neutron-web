@@ -3,8 +3,7 @@ import leadsLoading from '@/store/modules/analytics/leads/loading/'
 
 const state = {
   analytics_leads: [],
-  current_lead: {},
-  lead_stats_fetch_loading_text: 'Loading Lead Contracts Data'
+  current_lead: {}
 }
 
 const getters = {

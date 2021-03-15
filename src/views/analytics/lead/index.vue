@@ -7,11 +7,11 @@
         <h3 class="text-gray-200">Created At {{createdAt}}</h3>
       </div>
       <hud-stat-cards>
-        <stat-card :data="!!lead.sold_at ? 'Sold' : 'Not Sold'" title="Status" :color="!!lead.sold_at ? 'green' : 'red'" key="statusCard"></stat-card>
-        <stat-card :data="lead.revenue" title="Revenue" :color="lead.revenue > 0 ? 'green' : 'red'" key="revenueStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-        <stat-card :data="lead.margin" title="Margin" key="marginStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-        <stat-card :data="lead.payout" title="Payout" key="payoutStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-        <stat-card :data="lead.reason ? lead.reason : 'None'" title="Reason" :color="lead.reason ? 'green' : 'gray'" key="reasonStatCard" ></stat-card>
+        <stat-card :data="!!lead.sold_at ? 'Sold' : 'Not Sold'" title="Status" :color="!!lead.sold_at ? 'green' : 'red'" key="statusCard" :loading="loading"></stat-card>
+        <stat-card :data="lead.revenue ? lead.revenue : '0'" title="Revenue" :color="lead.revenue > 0 ? 'green' : 'red'" key="revenueStatCard" :comma-separated="true" :dollar-amount="true" :loading="loading"></stat-card>
+        <stat-card :data="lead.margin ? lead.margin : '0'" title="Margin" key="marginStatCard" :comma-separated="true" :dollar-amount="true" :loading="loading"></stat-card>
+        <stat-card :data="lead.payout ? lead.payout : '0'" title="Payout" key="payoutStatCard" :comma-separated="true" :dollar-amount="true" :loading="loading"></stat-card>
+        <stat-card :data="lead.reason ? lead.reason : 'None'" title="Reason" :color="lead.reason ? 'green' : 'gray'" key="reasonStatCard" :loading="loading"></stat-card>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -40,7 +40,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      lead: 'getCurrentLead'
+      lead: 'getCurrentLead',
+      loading: 'getLeadFetchLoading'
     }),
     createdAt () {
       return dayjs(this.lead.created_at)
