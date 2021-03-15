@@ -3,8 +3,9 @@
     <template v-slot:hud>
       <h1 class="h1 text-white">{{partner.name}}</h1>
       <div class="hud--stat-cards">
-        <stat-card v-if="partner.parent" :data="partner.parent" :title="`Parent`"></stat-card>
-        <stat-card :data="partner.client" :title="`Client`"></stat-card>
+        <stat-card v-if="partner.parent" data="partner.parent" title="Parent"></stat-card>
+        <stat-card :data="partner.client" title="Client"></stat-card>
+        <status-card :status="partner.status"></status-card>
       </div>
     </template>
     <template v-slot:contentTabs>
@@ -28,8 +29,12 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import statusCard from '@/components/ui/cards/status-card.vue'
 
 export default {
+  components: {
+    'status-card': statusCard
+  },
   props: {
     id: Number
   },

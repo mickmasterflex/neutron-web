@@ -65,10 +65,15 @@ const actions = {
         commit('RESET_BUYER_FETCH_LOADING')
       })
   },
-  async createBuyer ({ commit }, buyer) {
+  async createBuyer ({ commit, getters }, buyer) {
     await axios.post('/buyers/', buyer)
       .then(response => {
         commit('ADD_BUYER', response.data)
+        const parent = getters.getBuyerById(response.data.parent)
+        if (parent) {
+          parent.children.push(response.data.id)
+          commit('UPDATE_BUYER', parent)
+        }
       })
   },
   async updateBuyer ({ commit }, updatedBuyer) {
