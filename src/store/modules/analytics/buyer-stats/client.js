@@ -9,10 +9,6 @@ const state = {
 const getters = {
   getCurrentBuyerStatsClient: state => state.current_buyer_stats_client,
   getBuyerClientContracts: state => state.buyer_client_stats_contracts,
-  getBuyerClientContractsParentless: state => state.buyer_client_stats_contracts.filter(contract => contract.parent === null),
-  getBuyerClientContractsByParent: (state) => (contractId) => {
-    return state.buyer_client_stats_contracts.filter(contract => contract.parent === contractId)
-  },
   getBuyerClientContractsByParentCount: (state) => (contractId) => {
     const contracts = state.buyer_client_stats_contracts.filter(contract => contract.parent === contractId)
     return contracts.length
