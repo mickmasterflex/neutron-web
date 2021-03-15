@@ -29,7 +29,7 @@ export default {
     return {
       name: '',
       rpl: undefined,
-      status: undefined,
+      status: 'active',
       buyerGroup: undefined,
       scheduledStart: null
     }
@@ -58,7 +58,7 @@ export default {
     close () {
       this.name = ''
       this.rpl = undefined
-      this.status = undefined
+      this.status = 'active'
       this.scheduledStart = null
       this.buyerGroup = undefined
       this.$nextTick(() => {
