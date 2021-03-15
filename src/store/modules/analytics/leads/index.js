@@ -19,6 +19,13 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_LEAD', response.data)
       })
+  },
+  async updateLeadData ({ commit }, data) {
+    await axios.put(`/leads/${data.id}/`, data)
+      .then(response => {
+        commit('SET_CURRENT_LEAD', response.data)
+        console.log(response)
+      })
   }
 }
 
