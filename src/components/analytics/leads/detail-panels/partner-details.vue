@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Partner Client Details">
+  <panel-template title="Partner Client Details" :show-loader="loading" :loading-text="loadingText">
     <template v-slot:content>
       <transition-table-state>
         <div v-if="tableData.partner_client">
@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     tableData: {
@@ -80,6 +82,12 @@ export default {
       type: Object
     },
     title: String
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'getLeadFetchLoading',
+      loadingText: 'getLeadFetchLoadingText'
+    })
   }
 }
 </script>

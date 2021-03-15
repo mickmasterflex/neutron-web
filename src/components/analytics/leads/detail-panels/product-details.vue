@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Product Details">
+  <panel-template title="Product Details" :show-loader="loading" :loading-text="loadingText">
     <template v-slot:content>
       <transition-table-state>
         <table class="table table-white" v-if="tableData.brand">
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     tableData: {
@@ -61,6 +63,12 @@ export default {
       type: Object
     },
     title: String
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'getLeadFetchLoading',
+      loadingText: 'getLeadFetchLoadingText'
+    })
   }
 }
 </script>

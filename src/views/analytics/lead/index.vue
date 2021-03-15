@@ -54,7 +54,8 @@ export default {
       fetchCurrentLead: 'fetchCurrentLead'
     }),
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_LEAD'
+      setCurrent: 'SET_CURRENT_LEAD',
+      resetCurrent: 'RESET_CURRENT_LEAD'
     })
   },
   watch: {
@@ -69,6 +70,9 @@ export default {
   },
   created () {
     this.fetchCurrentLead(this.id)
+  },
+  destroyed () {
+    this.resetCurrent()
   }
 }
 </script>

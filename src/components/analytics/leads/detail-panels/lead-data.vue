@@ -1,7 +1,9 @@
 <template>
-  <panel-template title="Lead Data">
+  <panel-template title="Lead Data" :show-loader="fetchLoading" :loading-text="fetchLoadingText">
     <template v-slot:action>
-      <button @click="submitForm" class="btn btn-green" v-show="leadUnlocked">Save Changes</button>
+      <button @click="submitForm" class="btn btn-green" v-show="leadUnlocked" :disabled="loadingPut">
+        {{ submitButtonText }}
+      </button>
     </template>
     <template v-slot:content>
       <validation-observer ref="form">
@@ -48,8 +50,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      lead: 'getCurrentLead'
-    })
+      lead: 'getCurrentLead',
+      loadingPut: 'getLeadPutLoading',
+      loadingPutText: 'getLeadPutLoadingText',
+      fetchLoading: 'getLeadFetchLoading',
+      fetchLoadingText: 'getLeadFetchLoadingText'
+    }),
+    submitButtonText () {
+      if (this.loadingPut) {
+        return this.loadingPutText
+      }
+      return 'Save Changes'
+    }
   },
   methods: {
     toggleLeadUnlocked () {
@@ -62,7 +74,9 @@ export default {
     submitForm () {
       const updatedLead = this.lead
       updatedLead.data = this.leadData
-      this.updateLeadData(updatedLead)
+      this.updateLeadData(updatedLead).then(() => {
+        this.toggleLeadUnlocked()
+      })
     },
     ...mapActions({
       updateLeadData: 'updateLeadData'

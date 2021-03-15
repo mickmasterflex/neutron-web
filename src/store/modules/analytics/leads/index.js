@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import leadsLoading from '@/store/modules/analytics/leads/loading/'
 
 const state = {
   analytics_leads: [],
@@ -13,18 +14,21 @@ const getters = {
 
 const actions = {
   async fetchCurrentLead ({ commit }, id) {
-    commit('SET_ANALYTICS_FETCH_LOADING_TEXT', state.lead_stats_fetch_loading_text)
-    commit('SET_ANALYTICS_FETCH_LOADING')
+    commit('SET_LEAD_FETCH_LOADING')
     await axios.get(`/leads/${id}/`)
       .then(response => {
         commit('SET_CURRENT_LEAD', response.data)
+      }).finally(() => {
+        commit('RESET_LEAD_FETCH_LOADING')
       })
   },
   async updateLeadData ({ commit }, data) {
+    commit('SET_LEAD_PUT_LOADING')
     await axios.put(`/leads/${data.id}/`, data)
       .then(response => {
         commit('SET_CURRENT_LEAD', response.data)
-        console.log(response)
+      }).finally(() => {
+        commit('RESET_LEAD_PUT_LOADING')
       })
   }
 }
@@ -36,9 +40,14 @@ const mutations = {
   RESET_CURRENT_LEAD: (state) => (state.current_lead = [])
 }
 
+const modules = {
+  leadsLoading
+}
+
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
