@@ -26,7 +26,7 @@ export default {
   computed: {
     ...mapGetters({
       partnerClient: 'getCurrentPartnerStatsClient',
-      contracts: 'getPartnerClientContractsParentless'
+      contracts: 'getPartnerClientContracts'
     })
   },
   components: {
