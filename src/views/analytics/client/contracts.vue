@@ -7,7 +7,7 @@
       <date-range-picker></date-range-picker>
     </template>
     <template slot="action">
-      <button class="btn btn-indigo"><font-awesome-icon icon="download"></font-awesome-icon> Export Stats</button>
+      <csv-export @click="fetchCSV($route.params.id)"></csv-export>
     </template>
     <template slot="content">
       <buyer-contract-list
@@ -26,7 +26,8 @@
 import buyerContractList from '@/components/analytics/contracts/buyer-contracts-list'
 import partnerContractList from '@/components/analytics/contracts/partner-contracts-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
-import { mapGetters } from 'vuex'
+import csvExport from '@/components/analytics/csv-stats-export'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
@@ -37,10 +38,24 @@ export default {
       loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
+  methods: {
+    ...mapActions({
+      fetchPartnerCSV: 'fetchPartnerClientStatsCSV',
+      fetchBuyerCSV: 'fetchBuyerClientStatsCSV'
+    }),
+    fetchCSV (id) {
+      if (this.$route.name === 'BuyerStatsClientContracts') {
+        this.fetchBuyerCSV(id)
+      } else {
+        this.fetchPartnerCSV(id)
+      }
+    }
+  },
   components: {
     'buyer-contract-list': buyerContractList,
     'partner-contract-list': partnerContractList,
-    'date-range-picker': dateRangePicker
+    'date-range-picker': dateRangePicker,
+    'csv-export': csvExport
   }
 }
 </script>

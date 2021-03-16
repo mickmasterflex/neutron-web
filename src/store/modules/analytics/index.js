@@ -1,5 +1,6 @@
 import buyerStats from '@/store/modules/analytics/buyer-stats'
 import dateRange from '@/store/modules/analytics/date-range'
+import fetchCSV from '@/store/modules/analytics/fetch-csv'
 import leads from '@/store/modules/analytics/leads'
 import leadSearch from '@/store/modules/analytics/leads/lead-search'
 import loading from '@/store/modules/analytics/loading'
@@ -9,6 +10,7 @@ import totals from '@/store/modules/analytics/totals'
 const modules = {
   buyerStats,
   dateRange,
+  fetchCSV,
   leads,
   leadSearch,
   loading,
