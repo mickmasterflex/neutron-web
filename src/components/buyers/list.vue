@@ -35,12 +35,9 @@
             <table-link @table-link-click="linkToBuyerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>
           <td class="td">{{ contract.rpl }}</td>
-            <td class="td">
-              <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,
-                    {{ contract.caps.day_caps.length }} Day
-              </span>
-          <span v-else class="italic text-gray-500">No Caps Set</span>
-            </td>
+          <td class="td">
+            <caps-count :caps="contract.caps"></caps-count>
+          </td>
           <td class="td">
            <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offer_contracts.length }}</table-link>
           </td>
@@ -58,6 +55,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/buyer-checkbox'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
   props: {
@@ -99,7 +97,8 @@ export default {
     }
   },
   components: {
-    'bulk-update-checkbox': bulkUpdateCheckbox
+    'bulk-update-checkbox': bulkUpdateCheckbox,
+    'caps-count': capsCount
   },
   destroyed () {
     this.resetShiftClickIndex()

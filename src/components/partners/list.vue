@@ -9,6 +9,7 @@
           <th class="th w-16">Id</th>
           <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
+          <th class="th">Caps</th>
           <th class="th">Children</th>
           <th class="th">Campaigns</th>
         </tr>
@@ -36,6 +37,9 @@
             <span v-else class="italic text-gray-500">None</span>
           </td>
           <td class="td">
+            <caps-count :caps="contract.caps"></caps-count>
+          </td>
+          <td class="td">
             <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
           </td>
           <td class="td">
@@ -54,6 +58,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
   props: {
@@ -88,7 +93,8 @@ export default {
     }
   },
   components: {
-    'bulk-update-checkbox': bulkUpdateCheckbox
+    'bulk-update-checkbox': bulkUpdateCheckbox,
+    'caps-count': capsCount
   },
   destroyed () {
     this.resetShiftClickIndex()
