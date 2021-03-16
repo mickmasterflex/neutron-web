@@ -1,9 +1,9 @@
 <template>
   <base-panel-grid>
     <lead-data-panel class="col-span-2 xl:col-span-1"></lead-data-panel>
-    <product-panel class="col-span-2 xl:col-span-1" :tableData="productDetails"></product-panel>
-    <buyer-panel class="col-span-2 xl:col-span-1" :tableData="buyerDetails"></buyer-panel>
     <partner-panel class="col-span-2 xl:col-span-1" :tableData="partnerDetails"></partner-panel>
+    <buyer-panel class="col-span-2 xl:col-span-1" :tableData="buyerDetails"></buyer-panel>
+    <product-panel class="col-span-2 xl:col-span-1" :tableData="productDetails"></product-panel>
   </base-panel-grid>
 </template>
 
