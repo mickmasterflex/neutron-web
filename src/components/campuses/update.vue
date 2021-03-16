@@ -19,7 +19,7 @@
           <select-field v-model="state" field_id="state" field_label="State" :options="formatListForSelectOptions(states)"></select-field>
           <text-field v-model="postal_code" field_id="postal_code" field_label="Postal Code"></text-field>
           <select-field v-model="phone_type" :options="formatListForSelectOptions(phoneTypes)" field_id="createPhoneType" field_label="Type"></select-field>
-          <v-text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="Phone Number"></v-text-field>
+          <text-field v-model="phone_number" field_id="phone_number" rules="required" field_label="Phone Number"></text-field>
           <text-field v-model="phone_extension" field_id="phone_extension" field_label="Phone Extension"></text-field>
         </form>
       </validation-observer>

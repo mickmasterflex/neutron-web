@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       name: '',
-      rpl: undefined,
+      rpl: '0.00',
       status: 'active',
       buyerGroup: undefined,
       scheduledStart: null
@@ -57,7 +57,7 @@ export default {
     }),
     close () {
       this.name = ''
-      this.rpl = undefined
+      this.rpl = '0.00'
       this.status = 'active'
       this.scheduledStart = null
       this.buyerGroup = undefined
