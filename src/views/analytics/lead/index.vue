@@ -61,7 +61,6 @@ export default {
   watch: {
     id () {
       if (this.id !== this.lead.id) {
-        console.log(this.id)
         this.searchLeads({ ids: [this.id], emails: [] }).then(response => {
           this.setCurrent(response.data[0])
         })
