@@ -39,6 +39,11 @@
                 </td>
                 <td class="td">{{ tableData.campaign.id }}</td>
               </tr>
+              <tr class="tr" v-if="tableData.pricing_tier_group">
+                <td class="td font-bold w-40">Pricing Tier Group</td>
+                <td class="td">{{ tableData.pricing_tier_group.name }}</td>
+                <td class="td">{{ tableData.pricing_tier_group.id }}</td>
+              </tr>
             </tbody>
           </table>
           <table class="table table-white mt-3">
@@ -50,10 +55,6 @@
               <tr class="tr">
                 <td class="td font-bold w-40">Channel</td>
                 <td class="td">{{ tableData.channel }}</td>
-              </tr>
-              <tr class="tr">
-                <td class="td font-bold w-40">Pricing Tier Group</td>
-                <td class="td">{{ tableData.pricing_tier_group }}</td>
               </tr>
               <tr class="tr">
                 <td class="td font-bold w-40">Vertical</td>
