@@ -27,7 +27,7 @@
             </status-indicator>
           </td>
           <td class="td">
-         <caps-count :caps="offer.caps"></caps-count>
+            <caps-count :caps="offer.caps"></caps-count>
           </td>
         </tr>
       </tbody>
