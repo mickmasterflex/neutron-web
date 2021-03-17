@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      campaign: 'getCurrentBuyerStatsCampaign'
+      campaign: 'getCurrentPartnerStatsCampaign'
     })
   },
   methods: {

@@ -1,12 +1,12 @@
 import axios from '@/axios'
 
 const state = {
-  current_buyer_stats_campaign: {},
+  current_partner_stats_campaign: {},
   campaign_stats_fetch_loading_text: 'Loading Campaign Contracts Data'
 }
 
 const getters = {
-  getCurrentBuyerStatsCampaign: state => state.current_buyer_stats_campaign
+  getCurrentPartnerStatsCampaign: state => state.current_partner_stats_campaign
 }
 
 const actions = {
@@ -23,11 +23,17 @@ const actions = {
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })
+  },
+  async fetchCampaignLeadsCSV ({ dispatch }, id) {
+    dispatch('fetchAnalyticsStatsCSV', {
+      filename: 'campaign-' + id,
+      url: `/analytics/leads/?campaign=${id}`
+    })
   }
 }
 
 const mutations = {
-  SET_CURRENT_PARTNER_STATS_CAMPAIGN: (state, campaign) => (state.current_buyer_stats_campaign = campaign)
+  SET_CURRENT_PARTNER_STATS_CAMPAIGN: (state, campaign) => (state.current_partner_stats_campaign = campaign)
 }
 
 export default {
