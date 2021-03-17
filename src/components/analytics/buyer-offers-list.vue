@@ -49,7 +49,7 @@ export default {
   computed: {
     ...mapGetters({
       contract: 'getCurrentBuyerStatsContract',
-      client: 'getCurrentBuyerStatsClient'
+      client: 'getCurrentClientStats'
     })
   },
   methods: {

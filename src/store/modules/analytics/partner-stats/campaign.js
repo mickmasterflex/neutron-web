@@ -19,7 +19,7 @@ const actions = {
         commit('SET_ANALYTICS_LEADS', response.data.leads)
         commit('SET_CURRENT_PARTNER_STATS_CAMPAIGN', response.data.campaign)
         commit('SET_CURRENT_PARTNER_STATS_CONTRACT', response.data.contract)
-        commit('SET_CURRENT_PARTNER_STATS_CLIENT', response.data.client)
+        commit('SET_CURRENT_CLIENT_STATS', response.data.client)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })

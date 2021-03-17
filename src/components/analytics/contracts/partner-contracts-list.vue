@@ -1,8 +1,6 @@
 <template>
-  <contracts-list :contracts="contracts"
-                  :link-to-contract="linkToContract"
+  <contracts-list :link-to-contract="linkToContract"
                   :link-to-contract-leads="linkToContractLeads"
-                  :contracts-count="contractsCount"
   ></contracts-list>
 </template>
 
@@ -11,19 +9,12 @@ import contractsList from '@/components/analytics/contracts/contracts-list'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  props: {
-    contracts: {
-      type: Array,
-      required: true
-    }
-  },
   components: {
     'contracts-list': contractsList
   },
   computed: {
     ...mapGetters({
-      client: 'getCurrentPartnerStatsClient',
-      contractsCount: 'getPartnerClientContractsByParentCount'
+      client: 'getCurrentClientStats'
     })
   },
   methods: {

@@ -22,18 +22,16 @@
           </span>
         </td>
         <td class="td">
-          <table-link :number="contract.lead_count"
-                      v-if="contract.lead_count"
+          <table-link :number="descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].lead_count : contract.lead_count"
                       @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })"
           ></table-link>
-          <span v-else class="italic text-gray-500">None</span>
         </td>
-        <td-number :number="contract.sold_count"></td-number>
-        <td-number :dollar="true" :number="contract.revenue"></td-number>
-        <td-number :dollar="true" :number="contract.margin"></td-number>
-        <td-number :dollar="true" :number="contract.payout"></td-number>
-        <td class="td">{{contract.scrub_rate}}</td>
-        <td class="td">{{contract.margin_percent}}</td>
+        <td-number :number="descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].sold_count : contract.sold_count"></td-number>
+        <td-number :dollar="true" :number="descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].revenue : contract.revenue"></td-number>
+        <td-number :dollar="true" :number="descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].margin : contract.margin"></td-number>
+        <td-number :dollar="true" :number="descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].payout : contract.payout"></td-number>
+        <td class="td">{{descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].scrub_rate : contract.scrub_rate}}</td>
+        <td class="td">{{descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].margin_percent : contract.margin_percent}}</td>
       </tr>
       </tbody>
     </table>
@@ -46,12 +44,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
-    contracts: {
-      type: Array,
-      required: true
-    },
     linkToContract: {
       type: Function,
       required: true
@@ -59,11 +55,14 @@ export default {
     linkToContractLeads: {
       type: Function,
       required: true
-    },
-    contractsCount: {
-      type: Function,
-      required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      contractsCount: 'getClientStatsContractsByParentCount',
+      contracts: 'getClientStatsContractsParentless',
+      descendantContractDataById: 'getClientStatsDescendantContractDataById'
+    })
   }
 }
 </script>

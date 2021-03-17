@@ -10,14 +10,8 @@
       <csv-export @click="fetchCSV($route.params.id)"></csv-export>
     </template>
     <template slot="content">
-      <buyer-contract-list
-        v-if="$route.name === 'BuyerStatsClientContracts'"
-        :contracts="buyerContracts"
-      ></buyer-contract-list>
-      <partner-contract-list
-        v-if="$route.name === 'PartnerStatsClientContracts'"
-        :contracts="partnerContracts"
-      ></partner-contract-list>
+      <buyer-contract-list v-if="$route.name === 'BuyerStatsClientContracts'"></buyer-contract-list>
+      <partner-contract-list v-if="$route.name === 'PartnerStatsClientContracts'"></partner-contract-list>
     </template>
   </panel-template>
 </template>
@@ -32,8 +26,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      buyerContracts: 'getBuyerClientContracts',
-      partnerContracts: 'getPartnerClientContracts',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'
     })

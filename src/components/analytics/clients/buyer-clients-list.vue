@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_BUYER_STATS_CLIENT',
+      setCurrent: 'SET_CURRENT_CLIENT_STATS',
       resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToBuyerStatsClient (client) {
