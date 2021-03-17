@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  current_pricing_tiers: {}
+  current_pricing_tiers: []
 }
 
 const getters = {
