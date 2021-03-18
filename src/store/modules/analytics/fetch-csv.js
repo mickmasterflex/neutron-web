@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const actions = {
-  async fetchAnalyticsStatsCSV ({ commit, getters }, { url, filename }) {
+  async fetchAnalyticsCSV ({ commit, getters }, { url, filename }) {
     commit('SET_ANALYTICS_FETCH_CSV_LOADING')
     const dateRange = getters.getAnalyticsDateRangeUrlFormatted
     await axios({

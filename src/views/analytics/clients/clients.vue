@@ -6,9 +6,6 @@
     <template slot="title">
       <date-range-picker></date-range-picker>
     </template>
-    <template slot="action">
-      <csv-export @click="fetchCSV($route.params.id)"></csv-export>
-    </template>
     <template slot="content">
       <buyer-client-list
         v-if="$route.name === 'BuyerStatsClients'"
@@ -26,7 +23,6 @@
 import buyerClientList from '@/components/analytics/clients/buyer-clients-list'
 import partnerClientList from '@/components/analytics/clients/partner-clients-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
-import csvExport from '@/components/analytics/csv-stats-export'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -40,8 +36,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPartnerCSV: 'fetchPartnerClientsStatsCSV',
-      fetchBuyerCSV: 'fetchBuyerClientsStatsCSV'
+      fetchPartnerCSV: 'fetchPartnerClientsLeadsCSV',
+      fetchBuyerCSV: 'fetchBuyerClientsLeadsCSV'
     }),
     fetchCSV (id) {
       if (this.$route.name === 'BuyerStatsClients') {
@@ -54,8 +50,7 @@ export default {
   components: {
     'buyer-client-list': buyerClientList,
     'partner-client-list': partnerClientList,
-    'date-range-picker': dateRangePicker,
-    'csv-export': csvExport
+    'date-range-picker': dateRangePicker
   }
 }
 </script>

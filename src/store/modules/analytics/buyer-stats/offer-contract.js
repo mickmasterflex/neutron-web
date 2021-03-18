@@ -25,7 +25,7 @@ const actions = {
       })
   },
   async fetchOfferContractLeadsCSV ({ dispatch }, id) {
-    dispatch('fetchAnalyticsStatsCSV', {
+    dispatch('fetchAnalyticsCSV', {
       filename: 'offer-' + id,
       url: `/analytics/leads/?offer_contract=${id}`
     })

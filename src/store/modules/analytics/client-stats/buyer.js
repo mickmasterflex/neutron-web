@@ -6,8 +6,8 @@ const actions = {
   async fetchBuyerClientStats ({ dispatch }, id) {
     dispatch('fetchClientStats', `/analytics/buyer-contracts/?client=${id}`)
   },
-  async fetchBuyerClientStatsCSV ({ dispatch }, id) {
-    dispatch('fetchAnalyticsStatsCSV', {
+  async fetchBuyerClientLeadsCSV ({ dispatch }, id) {
+    dispatch('fetchAnalyticsCSV', {
       filename: 'buyerClient-' + id,
       url: `/analytics/buyer-contracts/?client=${id}`
     })

@@ -41,7 +41,7 @@ const actions = {
       })
   },
   async fetchPartnerClientStatsCSV ({ dispatch }, id) {
-    dispatch('fetchAnalyticsStatsCSV', {
+    dispatch('fetchAnalyticsCSV', {
       filename: 'partnerClient-' + id,
       url: `/analytics/partner-contracts/?client=${id}`
     })

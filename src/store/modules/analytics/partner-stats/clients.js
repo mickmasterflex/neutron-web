@@ -22,8 +22,8 @@ const actions = {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })
   },
-  async fetchPartnerClientsStatsCSV ({ dispatch }) {
-    dispatch('fetchAnalyticsStatsCSV', {
+  async fetchPartnerClientsLeadsCSV ({ dispatch }) {
+    dispatch('fetchAnalyticsCSV', {
       filename: 'partnerClients',
       url: '/analytics/partner-clients/?'
     })

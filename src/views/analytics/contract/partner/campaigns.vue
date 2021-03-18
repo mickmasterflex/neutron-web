@@ -6,9 +6,6 @@
     <template slot="title">
       <date-range-picker></date-range-picker>
     </template>
-    <template slot="action">
-      <csv-export @click="fetchCSV($route.params.id)"></csv-export>
-    </template>
     <template slot="content">
       <partner-campaign-list :campaigns="campaigns"></partner-campaign-list>
     </template>
@@ -18,8 +15,7 @@
 <script>
 import partnerCampaignList from '@/components/analytics/partner-campaigns-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
-import csvExport from '@/components/analytics/csv-stats-export'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -29,15 +25,9 @@ export default {
       loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
-  methods: {
-    ...mapActions({
-      fetchCSV: 'fetchPartnerContractStatsCSV'
-    })
-  },
   components: {
     'date-range-picker': dateRangePicker,
-    'partner-campaign-list': partnerCampaignList,
-    'csv-export': csvExport
+    'partner-campaign-list': partnerCampaignList
   }
 }
 </script>

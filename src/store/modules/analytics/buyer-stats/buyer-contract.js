@@ -29,8 +29,8 @@ const actions = {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })
   },
-  async fetchBuyerContractStatsCSV ({ dispatch }, id) {
-    dispatch('fetchAnalyticsStatsCSV', {
+  async fetchBuyerContractLeadsCSV ({ dispatch }, id) {
+    dispatch('fetchAnalyticsCSV', {
       filename: 'buyerContract-' + id,
       url: `/analytics/offer-contracts/?buyer_contract=${id}`
     })

@@ -14,7 +14,7 @@ export default {
   props: {
     buttonDefaultText: {
       type: String,
-      default: 'Export Stats'
+      default: 'Export Leads'
     }
   },
   computed: {
