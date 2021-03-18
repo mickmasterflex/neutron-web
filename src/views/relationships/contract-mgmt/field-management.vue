@@ -9,6 +9,14 @@
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
+    <panel-template title="Injected Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Injected Fields">
+      <template v-slot:action>
+        <create-injected-field></create-injected-field>
+      </template>
+      <template v-slot:content>
+<!--        <list-injected-fields></list-injected-fields>-->
+      </template>
+    </panel-template>
   </div>
 </template>
 
@@ -16,6 +24,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
+import createInjectedField from '@/components/forms/fields/injected-fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
 
@@ -55,7 +64,8 @@ export default {
     updateTextField,
     updateOptionField,
     'list-fields': listFields,
-    'create-field': createField
+    'create-field': createField,
+    'create-injected-field': createInjectedField
   },
   watch: {
     currentField () {
