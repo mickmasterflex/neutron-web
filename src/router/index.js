@@ -45,7 +45,7 @@ const routes = [
   {
     path: '/analytics/lead-data/:id/',
     name: 'LeadPage',
-    component: () => import('@/views/analytics/lead-data/lead/index'),
+    component: () => import('@/views/analytics/lead-data/lead-page/index'),
     redirect: { name: 'LeadDetails' },
     props (route) {
       const props = { ...route.params }
@@ -56,7 +56,7 @@ const routes = [
       {
         name: 'LeadDetails',
         path: 'details/',
-        component: () => import('@/views/analytics/lead-data/lead/details'),
+        component: () => import('@/views/analytics/lead-data/lead-page/details'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -67,7 +67,7 @@ const routes = [
       {
         name: 'LeadTransactions',
         path: 'transactions/',
-        component: () => import('@/views/analytics/lead-data/lead/transactions'),
+        component: () => import('@/views/analytics/lead-data/lead-page/transactions'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
