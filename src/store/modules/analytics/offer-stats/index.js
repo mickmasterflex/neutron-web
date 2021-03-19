@@ -27,7 +27,7 @@ const actions = {
         commit('SET_CURRENT_OFFER_CONTRACT_STATS', response.data.offer_contract)
         commit('SET_CURRENT_CONTRACT_STATS', response.data.contract)
         commit('SET_CURRENT_CLIENT_STATS', response.data.client)
-        commit('SET_OFFER_CONTRACT_STATS_ANCESTORS', response.data.buyer_ancestors)
+        commit('SET_OFFER_CONTRACT_STATS_ANCESTORS', response.data.ancestors)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })

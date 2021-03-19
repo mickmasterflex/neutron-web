@@ -38,7 +38,7 @@ export const campaignContractBreadcrumbs = {
   computed: {
     ...mapGetters({
       ancestors: 'getCampaignStatsAncestors',
-      campaign: 'getCurrentPartnerStatsCampaign'
+      campaign: 'getCurrentCampaignStats'
     })
   },
   watch: {

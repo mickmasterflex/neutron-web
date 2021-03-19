@@ -38,7 +38,7 @@ export const offerContractBreadcrumbs = {
   computed: {
     ...mapGetters({
       ancestors: 'getOfferContractStatsAncestors',
-      offer: 'getCurrentBuyerStatsOffer'
+      offer: 'getCurrentOfferContractStats'
     })
   },
   watch: {

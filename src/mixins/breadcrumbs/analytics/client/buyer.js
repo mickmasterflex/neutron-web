@@ -20,7 +20,7 @@ export const buyerClientBreadcrumbs = {
   },
   computed: {
     ...mapGetters({
-      client: 'getCurrentBuyerStatsClient'
+      client: 'getCurrentClientStats'
     })
   }
 }

@@ -48,7 +48,8 @@ export default {
   computed: {
     ...mapGetters({
       leadCount: 'getAnalyticsTotalLeadCount',
-      clients: 'getAllClientsStats'
+      clients: 'getAllClientsStats',
+      loading: 'getAnalyticsFetchLoading'
     }),
     clientsCount () {
       return this.clients.length

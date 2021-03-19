@@ -1,7 +1,12 @@
 import axios from '@/axios'
 
 const state = {
-  buyer_contract_stats_fetch_loading_text: 'Loading Buyer Contract Data'
+  buyer_contract_stats_fetch_loading_text: 'Loading Buyer Contract Data',
+  buyer_contract_stats_ancestors: []
+}
+
+const getters = {
+  getBuyerContractStatsAncestors: state => state.buyer_contract_stats_ancestors
 }
 
 const actions = {
@@ -17,6 +22,7 @@ const actions = {
         commit('SET_ANALYTICS_LEADS', response.data.leads)
         commit('SET_CURRENT_CONTRACT_STATS', response.data.contract)
         commit('SET_CURRENT_CLIENT_STATS', response.data.client)
+        commit('SET_BUYER_CONTRACT_STATS_ANCESTORS', response.data.ancestors)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })
@@ -29,7 +35,13 @@ const actions = {
   }
 }
 
+const mutations = {
+  SET_BUYER_CONTRACT_STATS_ANCESTORS: (state, ancestors) => (state.buyer_contract_stats_ancestors = ancestors)
+}
+
 export default {
   state,
-  actions
+  getters,
+  actions,
+  mutations
 }

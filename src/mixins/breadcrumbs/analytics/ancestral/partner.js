@@ -29,8 +29,8 @@ export const partnerContractBreadcrumbs = {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentPartnerStatsContract',
-      client: 'getCurrentPartnerStatsClient',
+      contract: 'getCurrentContractStats',
+      client: 'getCurrentClientStats',
       ancestors: 'getPartnerContractStatsAncestors'
     })
   }
