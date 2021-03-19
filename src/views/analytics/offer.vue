@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offer: 'getCurrentBuyerStatsOffer'
+      offer: 'getCurrentOfferContractStats'
     })
   },
   methods: {

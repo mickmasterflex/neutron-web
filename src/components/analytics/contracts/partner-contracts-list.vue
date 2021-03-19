@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import contractsList from '@/components/analytics/contracts/contracts-list'
+import contractsList from '@/components/analytics/contracts-list'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {

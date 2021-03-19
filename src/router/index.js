@@ -125,7 +125,7 @@ const routes = [
       {
         name: 'PartnerStatsClientContracts',
         path: 'contracts/',
-        component: () => import('@/views/analytics/client/contracts'),
+        component: () => import('@/views/analytics/contracts/index'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -260,7 +260,7 @@ const routes = [
       {
         name: 'BuyerStatsClientContracts',
         path: 'contracts/',
-        component: () => import('@/views/analytics/client/contracts'),
+        component: () => import('@/views/analytics/contracts/buyer-stats'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
@@ -296,6 +296,24 @@ const routes = [
     },
     children: [
       {
+        name: 'BuyerStatsContractContracts',
+        path: 'contracts/',
+        component: () => import('@/views/analytics/contracts/buyer-stats'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'buyer-stats',
+          contentTab: 'contracts'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.clientId = +props.clientId
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
         name: 'BuyerStatsContractOffers',
         path: 'offers/',
         component: () => import('@/views/analytics/contract/buyer/offers'),
@@ -304,6 +322,12 @@ const routes = [
           activeApp: 'analytics',
           activeAppTab: 'buyer-stats',
           contentTab: 'offers'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.clientId = +props.clientId
+          return props
         },
         pathToRegexpOptions: { strict: true }
       },

@@ -8,21 +8,11 @@ const modules = {
 }
 
 const state = {
-  current_client_stats: {},
-  client_stats_contracts: [],
-  client_stats_descendant_contract_data: []
+  current_client_stats: {}
 }
 
 const getters = {
-  getCurrentClientStats: state => state.current_client_stats,
-  getClientStatsContractsParentless: state => state.client_stats_contracts.filter(contract => contract.parent === null),
-  getClientStatsDescendantContractDataById: (state) => (contractId) => {
-    return state.client_stats_descendant_contract_data.filter(contract => contract.id === contractId)
-  },
-  getClientStatsContractsByParentCount: (state) => (contractId) => {
-    const contracts = state.client_stats_contracts.filter(contract => contract.parent === contractId)
-    return contracts.length
-  }
+  getCurrentClientStats: state => state.current_client_stats
 }
 
 const actions = {
@@ -31,8 +21,8 @@ const actions = {
     commit('SET_ANALYTICS_FETCH_LOADING')
     await axios.get(url + '&' + getters.getAnalyticsDateRangeUrlFormatted)
       .then(response => {
-        commit('SET_CLIENT_STATS_DESCENDANT_CONTRACT_DATA', response.data.descendant_contract_data)
-        commit('SET_CLIENT_STATS_CONTRACTS', response.data.contracts)
+        commit('SET_CURRENT_STATS_DESCENDANT_CONTRACT_DATA', response.data.descendant_contract_data)
+        commit('SET_CURRENT_STATS_CONTRACTS', response.data.contracts)
         commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
         commit('SET_CURRENT_CLIENT_STATS', response.data.client)
@@ -40,7 +30,7 @@ const actions = {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })
   },
-  async fetchPartnerClientStatsCSV ({ dispatch }, id) {
+  async fetchPartnerClientLeadsCSV ({ dispatch }, id) {
     dispatch('fetchAnalyticsCSV', {
       filename: 'partnerClient-' + id,
       url: `/analytics/partner-contracts/?client=${id}`
@@ -49,9 +39,7 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_CLIENT_STATS: (state, client) => (state.current_client_stats = client),
-  SET_CLIENT_STATS_CONTRACTS: (state, contracts) => (state.client_stats_contracts = contracts),
-  SET_CLIENT_STATS_DESCENDANT_CONTRACT_DATA: (state, contractData) => (state.client_stats_descendant_contract_data = contractData)
+  SET_CURRENT_CLIENT_STATS: (state, client) => (state.current_client_stats = client)
 }
 
 export default {

@@ -1,12 +1,17 @@
 import axios from '@/axios'
+import offers from '@/store/modules/analytics/offer-stats/offers'
+
+const modules = {
+  offers
+}
 
 const state = {
-  current_buyer_stats_offer_contract: {},
+  current_offer_contract_stats: {},
   offer_contract_stats_fetch_loading_text: 'Loading Offer Contracts Data'
 }
 
 const getters = {
-  getCurrentBuyerStatsOffer: state => state.current_buyer_stats_offer_contract
+  getCurrentOfferContractStats: state => state.current_offer_contract_stats
 }
 
 const actions = {
@@ -17,8 +22,8 @@ const actions = {
       .then(response => {
         commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
-        commit('SET_CURRENT_BUYER_STATS_OFFER_CONTRACT', response.data.offer_contract)
-        commit('SET_CURRENT_BUYER_STATS_CONTRACT', response.data.contract)
+        commit('SET_CURRENT_OFFER_CONTRACT_STATS', response.data.offer_contract)
+        commit('SET_CURRENT_CONTRACT_STATS', response.data.contract)
         commit('SET_CURRENT_CLIENT_STATS', response.data.client)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
@@ -33,10 +38,11 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_BUYER_STATS_OFFER_CONTRACT: (state, offer) => (state.current_buyer_stats_offer_contract = offer)
+  SET_CURRENT_OFFER_CONTRACT_STATS: (state, offer) => (state.current_offer_contract_stats = offer)
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,

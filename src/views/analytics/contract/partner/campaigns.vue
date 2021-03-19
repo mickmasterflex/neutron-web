@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import partnerCampaignList from '@/components/analytics/partner-campaigns-list'
+import partnerCampaignList from '@/components/analytics/campaigns-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 

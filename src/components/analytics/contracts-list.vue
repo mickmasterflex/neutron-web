@@ -16,10 +16,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="contract in contracts" :key="contract.id">
         <td class="td">
-          <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">
-            <span v-if="contract.parent">{{ contract.parent.name }} <font-awesome-icon icon="arrow-right"></font-awesome-icon></span>
-            {{contract.name}}
-          </span>
+          <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
         </td>
         <td class="td">
           <table-link :number="descendantContractDataById(contract.id)[0] ? descendantContractDataById(contract.id)[0].lead_count : contract.lead_count"
@@ -48,6 +45,17 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: {
+    parentContractId: {
+      type: Number
+    },
+    contractContracts: {
+      type: Boolean,
+      required: true
+    },
+    clientContracts: {
+      type: Boolean,
+      required: true
+    },
     linkToContract: {
       type: Function,
       required: true
@@ -59,10 +67,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contractsCount: 'getClientStatsContractsByParentCount',
-      contracts: 'getClientStatsContractsParentless',
-      descendantContractDataById: 'getClientStatsDescendantContractDataById'
-    })
+      descendantContractDataById: 'getCurrentStatsDescendantContractDataById',
+      parentlessContracts: 'getCurrentStatsContractsParentless',
+      contractsByParent: 'getCurrentStatsContractsByParent'
+    }),
+    contracts () {
+      if (this.contractContracts === true) {
+        return this.contractsByParent(this.parentContractId)
+      }
+      return this.parentlessContracts
+    }
   }
 }
 </script>
