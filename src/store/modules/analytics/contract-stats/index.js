@@ -1,8 +1,10 @@
 import buyer from './buyer'
+import partner from './partner'
 import contracts from './contracts'
 
 const modules = {
   buyer,
+  partner,
   contracts
 }
 

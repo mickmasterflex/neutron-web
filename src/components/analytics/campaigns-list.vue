@@ -42,19 +42,19 @@ import { mapMutations, mapGetters } from 'vuex'
 export default {
   props: {
     campaigns: {
-      type: [Object, Array],
+      type: Array,
       required: true
     }
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentPartnerStatsContract',
+      contract: 'getCurrentContractStats',
       client: 'getCurrentClientStats'
     })
   },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_PARTNER_STATS_CAMPAIGN',
+      setCurrent: 'SET_CURRENT_CAMPAIGN_STATS',
       resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToPartnerStatsCampaign (campaign) {

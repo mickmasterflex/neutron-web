@@ -7,27 +7,27 @@
       <date-range-picker></date-range-picker>
     </template>
     <template slot="content">
-      <partner-campaign-list :campaigns="campaigns"></partner-campaign-list>
+      <campaigns-list :campaigns="campaigns"></campaigns-list>
     </template>
   </panel-template>
 </template>
 
 <script>
-import partnerCampaignList from '@/components/analytics/campaigns-list'
+import campaignsList from '@/components/analytics/campaigns-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      campaigns: 'getPartnerContractStatsCampaigns',
+      campaigns: 'getCurrentStatsCampaigns',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
   components: {
     'date-range-picker': dateRangePicker,
-    'partner-campaign-list': partnerCampaignList
+    'campaigns-list': campaignsList
   }
 }
 </script>

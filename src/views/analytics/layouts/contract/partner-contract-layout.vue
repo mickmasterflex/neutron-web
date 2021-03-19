@@ -35,8 +35,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentPartnerStatsContract',
-      campaigns: 'getPartnerContractStatsCampaigns'
+      contract: 'getCurrentContractStats',
+      campaigns: 'getCurrentStatsCampaigns'
     })
   },
   methods: {

@@ -1,12 +1,17 @@
+import campaigns from './campaigns'
 import axios from '@/axios'
 
+const modules = {
+  campaigns
+}
+
 const state = {
-  current_partner_stats_campaign: {},
+  current_campaign_stats: {},
   campaign_stats_fetch_loading_text: 'Loading Campaign Contracts Data'
 }
 
 const getters = {
-  getCurrentPartnerStatsCampaign: state => state.current_partner_stats_campaign
+  getCurrentCampaignStats: state => state.current_campaign_stats
 }
 
 const actions = {
@@ -17,8 +22,8 @@ const actions = {
       .then(response => {
         commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
-        commit('SET_CURRENT_PARTNER_STATS_CAMPAIGN', response.data.campaign)
-        commit('SET_CURRENT_PARTNER_STATS_CONTRACT', response.data.contract)
+        commit('SET_CURRENT_CAMPAIGN_STATS', response.data.campaign)
+        commit('SET_CURRENT_CONTRACT_STATS', response.data.contract)
         commit('SET_CURRENT_CLIENT_STATS', response.data.client)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
@@ -33,10 +38,11 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_PARTNER_STATS_CAMPAIGN: (state, campaign) => (state.current_partner_stats_campaign = campaign)
+  SET_CURRENT_CAMPAIGN_STATS: (state, campaign) => (state.current_campaign_stats = campaign)
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
