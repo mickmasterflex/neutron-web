@@ -1,20 +1,14 @@
 <template>
-  <panel-template
-    :show-loader="loading"
-    :loading-text="loadingText"
-    content-background-color="white">
-    <template slot="title">
-      <date-range-picker></date-range-picker>
-    </template>
+  <analytics-panel-template>
     <template slot="content">
       <campaigns-list :campaigns="campaigns"></campaigns-list>
     </template>
-  </panel-template>
+  </analytics-panel-template>
 </template>
 
 <script>
+import analyticsPanelTemplate from '@/components/analytics/panel-template'
 import campaignsList from '@/components/analytics/campaigns-list'
-import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -23,16 +17,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getCampaignsByPartner: 'getCurrentStatsCampaignsByPartner',
-      loading: 'getAnalyticsFetchLoading',
-      loadingText: 'getAnalyticsFetchLoadingText'
+      getCampaignsByPartner: 'getCurrentStatsCampaignsByPartner'
     }),
     campaigns () {
       return this.getCampaignsByPartner(this.id)
     }
   },
   components: {
-    'date-range-picker': dateRangePicker,
+    'analytics-panel-template': analyticsPanelTemplate,
     'campaigns-list': campaignsList
   }
 }

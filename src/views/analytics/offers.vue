@@ -1,20 +1,14 @@
 <template>
-  <panel-template
-    :show-loader="loading"
-    :loading-text="loadingText"
-    content-background-color="white">
-    <template slot="title">
-      <date-range-picker></date-range-picker>
-    </template>
+  <analytics-panel-template>
     <template slot="content">
       <offer-contracts-list :offers="offersByParent(id)"></offer-contracts-list>
     </template>
-  </panel-template>
+  </analytics-panel-template>
 </template>
 
 <script>
+import analyticsPanelTemplate from '@/components/analytics/panel-template'
 import offerList from '@/components/analytics/offer-contracts-list'
-import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -23,13 +17,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      offersByParent: 'getCurrentStatsOffersByParent',
-      loading: 'getAnalyticsFetchLoading',
-      loadingText: 'getAnalyticsFetchLoadingText'
+      offersByParent: 'getCurrentStatsOffersByParent'
     })
   },
   components: {
-    'date-range-picker': dateRangePicker,
+    'analytics-panel-template': analyticsPanelTemplate,
     'offer-contracts-list': offerList
   }
 }

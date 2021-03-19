@@ -1,13 +1,13 @@
 <template>
-  <leads-index>
+  <leads-panel-template>
     <template #action>
       <csv-export @click="fetchPartnerContractLeadsCSV($route.params.id)"></csv-export>
     </template>
-  </leads-index>
+  </leads-panel-template>
 </template>
 
 <script>
-import leadsIndex from './index'
+import leadsPanelTemplate from './panel-template'
 import csvExport from '@/components/analytics/csv-stats-export'
 import { mapActions } from 'vuex'
 
@@ -19,7 +19,7 @@ export default {
   },
   components: {
     'csv-export': csvExport,
-    'leads-index': leadsIndex
+    'leads-panel-template': leadsPanelTemplate
   }
 }
 </script>

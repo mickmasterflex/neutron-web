@@ -5,34 +5,29 @@
     content-background-color="white">
     <template slot="title">
       <date-range-picker></date-range-picker>
+      <slot name="title"></slot>
     </template>
     <template slot="action">
       <slot name="action"></slot>
     </template>
     <template slot="content">
-      <buyer-leads-list :leads="leads" v-if="$route.meta.activeAppTab === 'buyer-stats'"></buyer-leads-list>
-      <partner-leads-list :leads="leads" v-if="$route.meta.activeAppTab === 'partner-stats'"></partner-leads-list>
+      <slot name="content"></slot>
     </template>
   </panel-template>
 </template>
 
 <script>
-import buyerLeadsList from '@/components/analytics/leads/lists/buyer-stats-list'
-import partnerLeadsList from '@/components/analytics/leads/lists/partner-stats-list'
 import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      leads: 'getAnalyticsLeads',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'
     })
   },
   components: {
-    'buyer-leads-list': buyerLeadsList,
-    'partner-leads-list': partnerLeadsList,
     'date-range-picker': dateRangePicker
   }
 }

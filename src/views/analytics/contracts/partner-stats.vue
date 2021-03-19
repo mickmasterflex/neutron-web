@@ -1,17 +1,19 @@
 <template>
-  <contracts-index>
-    <contracts-list
-      :link-to-contract="linkToContract"
-      :link-to-contract-leads="linkToContractLeads"
-      :contract-contracts="$route.name === 'PartnerStatsContractContracts'"
-      :client-contracts="$route.name === 'PartnerStatsClientContracts'"
-      :parent-contract-id="id"
-    ></contracts-list>
-  </contracts-index>
+  <analytics-panel-template>
+    <template slot="content">
+      <contracts-list
+        :link-to-contract="linkToContract"
+        :link-to-contract-leads="linkToContractLeads"
+        :contract-contracts="$route.name === 'PartnerStatsContractContracts'"
+        :client-contracts="$route.name === 'PartnerStatsClientContracts'"
+        :parent-contract-id="id"
+      ></contracts-list>
+    </template>
+  </analytics-panel-template>
 </template>
 
 <script>
-import contractsIndex from './index'
+import analyticsPanelTemplate from '@/components/analytics/panel-template'
 import contractsList from '@/components/analytics/contracts-list'
 import { mapMutations, mapGetters } from 'vuex'
 
@@ -20,7 +22,7 @@ export default {
     id: Number
   },
   components: {
-    'contracts-index': contractsIndex,
+    'analytics-panel-template': analyticsPanelTemplate,
     'contracts-list': contractsList
   },
   computed: {
