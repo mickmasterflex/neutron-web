@@ -125,7 +125,7 @@ const routes = [
       {
         name: 'PartnerStatsClientContracts',
         path: 'contracts/',
-        component: () => import('@/views/analytics/contracts/index'),
+        component: () => import('@/views/analytics/contracts/partner-stats'),
         meta: {
           requiresAuth: true,
           activeApp: 'analytics',
