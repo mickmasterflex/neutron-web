@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import baseLeadsList from '@/components/analytics/leads/leads-list'
+import baseLeadsList from '@/components/analytics/leads/lists/leads-list'
 
 export default {
   props: {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import leadsList from '@/components/analytics/leads/lead-data-list'
+import leadsList from '@/components/analytics/leads/lists/lead-data-list'
 import leadSearch from '@/components/analytics/leads/lead-search'
 import { mapGetters } from 'vuex'
 
