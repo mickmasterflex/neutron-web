@@ -71,8 +71,8 @@ export default {
     submitForm () {
       this.parseData().then(() => {
         this.searchLeads({
-          emails: this.searchEmails,
-          ids: this.searchIds
+          emails: this.searchEmails.join(),
+          ids: this.searchIds.join()
         }).finally(() => {
           this.searchEmails = []
           this.searchIds = []

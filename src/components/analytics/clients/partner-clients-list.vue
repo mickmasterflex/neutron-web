@@ -1,6 +1,5 @@
 <template>
   <clients-list
-    :clients="clients"
     :link-to-client="linkToPartnerStatsClient"
     :link-to-client-leads="linkToClientLeads"
   ></clients-list>
@@ -11,15 +10,9 @@ import { mapMutations } from 'vuex'
 import clientsList from '@/components/analytics/clients/clients-list'
 
 export default {
-  props: {
-    clients: {
-      type: [Object, Array],
-      required: true
-    }
-  },
   methods: {
     ...mapMutations({
-      setCurrent: 'SET_CURRENT_PARTNER_STATS_CLIENT',
+      setCurrent: 'SET_CURRENT_CLIENT_STATS',
       resetLeads: 'RESET_ANALYTICS_LEADS'
     }),
     linkToPartnerStatsClient (client) {

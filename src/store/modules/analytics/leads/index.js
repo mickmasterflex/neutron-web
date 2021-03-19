@@ -1,5 +1,6 @@
 import axios from '@/axios'
-import leadsLoading from '@/store/modules/analytics/leads/loading/'
+import leadsLoading from './loading'
+import leadSearch from './lead-search'
 
 const state = {
   analytics_leads: [],
@@ -40,7 +41,8 @@ const mutations = {
 }
 
 const modules = {
-  leadsLoading
+  leadsLoading,
+  leadSearch
 }
 
 export default {

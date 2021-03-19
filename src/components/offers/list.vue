@@ -26,7 +26,9 @@
             </status-indicator>
           </td>
           <td class="td">{{ offer.parent_data.name }}</td>
-          <td class="td">{{ offer.cap }}</td>
+          <td class="td">
+            <caps-count :caps="offer.caps"></caps-count>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -40,8 +42,12 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
+  components: {
+    'caps-count': capsCount
+  },
   props: {
     offers: Array,
     client: String,

@@ -43,6 +43,10 @@
                         :number="contract.children.length"
             ></table-link>
           </td>
+          <td class="td">{{ contract.rpl }}</td>
+          <td class="td">
+            <caps-count :caps="contract.caps"></caps-count>
+          </td>
           <td class="td">
             <table-link @table-link-click="linkToBuyerOffers(contract)"
                         :number="contract.offer_contracts.length"
@@ -62,6 +66,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/buyer-checkbox'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
   props: {
@@ -103,7 +108,8 @@ export default {
     }
   },
   components: {
-    'bulk-update-checkbox': bulkUpdateCheckbox
+    'bulk-update-checkbox': bulkUpdateCheckbox,
+    'caps-count': capsCount
   },
   destroyed () {
     this.resetShiftClickIndex()

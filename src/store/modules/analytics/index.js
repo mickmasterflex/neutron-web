@@ -1,18 +1,24 @@
-import buyerStats from '@/store/modules/analytics/buyer-stats'
-import dateRange from '@/store/modules/analytics/date-range'
-import leads from '@/store/modules/analytics/leads'
-import leadSearch from '@/store/modules/analytics/leads/lead-search'
-import loading from '@/store/modules/analytics/loading'
-import partnerStats from '@/store/modules/analytics/partner-stats'
-import totals from '@/store/modules/analytics/totals'
+import allClientsStats from './all-clients-stats'
+import campaignStats from './campaign-stats'
+import clientStats from './client-stats'
+import contractStats from './contract-stats'
+import dateRange from './date-range'
+import fetchCSV from './fetch-csv'
+import leads from './leads'
+import loading from './loading'
+import offerStats from './offer-stats'
+import totals from './totals'
 
 const modules = {
-  buyerStats,
+  allClientsStats,
+  campaignStats,
+  clientStats,
+  contractStats,
   dateRange,
+  fetchCSV,
   leads,
-  leadSearch,
   loading,
-  partnerStats,
+  offerStats,
   totals
 }
 

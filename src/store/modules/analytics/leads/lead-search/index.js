@@ -19,8 +19,7 @@ const actions = {
     commit('SET_LEAD_SEARCH_LOADING')
     await axios.post('/analytics/lead-search/', data, { showSuccessToast: false })
       .then(response => {
-        commit('SET_LEAD_SEARCH_RESULTS', response.data)
-        commit('SET_CURRENT_LEAD', response.data[0])
+        commit('SET_LEAD_SEARCH_RESULTS', response.data.leads)
       }).finally(() => {
         commit('RESET_LEAD_SEARCH_LOADING')
       })
