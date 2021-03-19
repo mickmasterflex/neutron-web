@@ -9,6 +9,13 @@
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
+        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+          <router-link :to="{
+          name: contractsRouteName,
+          params: { clientId: clientId, id: id },
+          query: $route.query
+        }">Contracts <label-number :number="contracts.length"></label-number></router-link>
+        </li>
         <slot name="contentTab"></slot>
         <li class="underscore-tab underscore-tab-lg"
             :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
@@ -38,6 +45,13 @@ export default {
       type: Object,
       required: true
     },
+    contractsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsContractContracts', 'PartnerStatsContractContracts'].includes(value)
+      }
+    },
     fetchContractStats: {
       type: Function,
       required: true
@@ -50,8 +64,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      leadCount: 'getAnalyticsTotalLeadCount'
-    })
+      leadCount: 'getAnalyticsTotalLeadCount',
+      contractsByParent: 'getCurrentStatsContractsByParent'
+    }),
+    contracts () {
+      return this.contractsByParent(this.id)
+    }
   },
   components: {
     'analytics-layout': analyticsLayout

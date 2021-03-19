@@ -3,24 +3,18 @@
                    :clientId="clientId"
                    :key="id"
                    :id="id"
-                   :leadsRoute="{
+                   contracts-route-name="BuyerStatsContractContracts"
+                   :leads-route="{
                      name: 'BuyerStatsContractLeads',
                      params: { clientId: clientId, id: id },
                      query: $route.query
                      }"
-                   :fetchContractStats="fetchBuyerContractStats"
+                   :fetch-contract-stats="fetchBuyerContractStats"
   >
     <template v-slot:statCards>
       <stat-card :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
     </template>
     <template v-slot:contentTab>
-      <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-        <router-link :to="{
-          name: 'BuyerStatsContractContracts',
-          params: { clientId: clientId, id: id },
-          query: $route.query
-        }">Contracts <label-number :number="contracts.length"></label-number></router-link>
-      </li>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
         <router-link :to="{
           name: 'BuyerStatsContractOffers',
@@ -44,14 +38,10 @@ export default {
   computed: {
     ...mapGetters({
       contract: 'getCurrentContractStats',
-      offersByParent: 'getCurrentStatsOffersByParent',
-      contractsByParent: 'getCurrentStatsContractsByParent'
+      offersByParent: 'getCurrentStatsOffersByParent'
     }),
     offers () {
       return this.offersByParent(this.id)
-    },
-    contracts () {
-      return this.contractsByParent(this.id)
     }
   },
   methods: {

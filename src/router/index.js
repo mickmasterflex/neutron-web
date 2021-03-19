@@ -161,6 +161,24 @@ const routes = [
     },
     children: [
       {
+        name: 'PartnerStatsContractContracts',
+        path: 'contracts/',
+        component: () => import('@/views/analytics/contracts/partner-stats'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'analytics',
+          activeAppTab: 'partner-stats',
+          contentTab: 'contracts'
+        },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.clientId = +props.clientId
+          return props
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
         name: 'PartnerStatsContractCampaigns',
         path: 'campaigns/',
         component: () => import('@/views/analytics/campaigns'),
