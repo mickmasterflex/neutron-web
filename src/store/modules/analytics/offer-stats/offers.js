@@ -4,7 +4,11 @@ const state = {
 
 const getters = {
   getCurrentStatsOffersByParent: (state) => (buyerId) => {
-    return state.current_stats_offers.filter(offer => offer.parent === buyerId)
+    return state.current_stats_offers.filter(offer => {
+      if (offer.parent) {
+        return offer.parent.id === buyerId
+      }
+    })
   }
 }
 

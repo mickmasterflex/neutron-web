@@ -9,7 +9,11 @@ const getters = {
     return state.current_stats_descendant_contract_data.filter(contract => contract.id === contractId)
   },
   getCurrentStatsContractsByParent: (state) => (contractId) => {
-    return state.current_stats_contracts.filter(contract => contract.parent === contractId)
+    return state.current_stats_contracts.filter(contract => {
+      if (contract.parent) {
+        return contract.parent.id === contractId
+      }
+    })
   }
 }
 

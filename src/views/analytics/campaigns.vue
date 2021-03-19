@@ -18,12 +18,18 @@ import dateRangePicker from '@/components/analytics/date-range-picker'
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    id: Number
+  },
   computed: {
     ...mapGetters({
-      campaigns: 'getCurrentStatsCampaigns',
+      getCampaignsByPartner: 'getCurrentStatsCampaignsByPartner',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'
-    })
+    }),
+    campaigns () {
+      return this.getCampaignsByPartner(this.id)
+    }
   },
   components: {
     'date-range-picker': dateRangePicker,

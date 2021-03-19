@@ -170,6 +170,12 @@ const routes = [
           activeAppTab: 'partner-stats',
           contentTab: 'campaigns'
         },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          props.clientId = +props.clientId
+          return props
+        },
         pathToRegexpOptions: { strict: true }
       },
       {

@@ -36,8 +36,11 @@ export default {
   computed: {
     ...mapGetters({
       contract: 'getCurrentContractStats',
-      campaigns: 'getCurrentStatsCampaigns'
-    })
+      getCampaignsByPartner: 'getCurrentStatsCampaignsByPartner'
+    }),
+    campaigns () {
+      return this.getCampaignsByPartner(this.id)
+    }
   },
   methods: {
     ...mapActions({
