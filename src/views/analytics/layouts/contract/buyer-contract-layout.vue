@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import contractLayout from '@/views/analytics/contract/layout'
+import contractLayout from '@/views/analytics/layouts/contract/layout'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {

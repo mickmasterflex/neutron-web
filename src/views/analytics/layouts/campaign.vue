@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import analyticsLayout from '@/views/analytics/layout.vue'
+import analyticsLayout from '@/views/analytics/layouts/analytics-layout.vue'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {

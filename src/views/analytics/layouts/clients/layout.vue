@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import analyticsLayout from '@/views/analytics/layout.vue'
+import analyticsLayout from '@/views/analytics/layouts/analytics-layout.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -43,16 +43,16 @@ export default {
     leadsRoute: {
       type: Object,
       required: true
-    },
-    clientsCount: {
-      type: Number,
-      default: 0
     }
   },
   computed: {
     ...mapGetters({
-      leadCount: 'getAnalyticsTotalLeadCount'
-    })
+      leadCount: 'getAnalyticsTotalLeadCount',
+      clients: 'getAllClientsStats'
+    }),
+    clientsCount () {
+      return this.clients.length
+    }
   },
   components: {
     'analytics-layout': analyticsLayout

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import clientLayout from '@/views/analytics/client/layout'
+import clientLayout from '@/views/analytics/layouts/client/layout'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {

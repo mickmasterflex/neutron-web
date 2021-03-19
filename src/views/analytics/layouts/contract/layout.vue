@@ -1,18 +1,17 @@
 <template>
   <analytics-layout
-    :hud-title="client.name"
-    :fetch-stats="fetchClient"
+    :hud-title="contract.name"
+    :fetchStats="fetchContractStats"
     :fetch-id="id"
   >
     <template v-slot:statCards>
-      <stat-card :data="contractsCount" title="Contracts" key="contractCountStatCard" ></stat-card>
+      <slot name="statCards"></slot>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="contractsRoute">Contracts <label-number :number="contractsCount"></label-number></router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
+        <slot name="contentTab"></slot>
+        <li class="underscore-tab underscore-tab-lg"
+            :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
           <router-link :to="leadsRoute">Leads <label-number :number="leadCount"></label-number></router-link>
         </li>
       </ul>
@@ -24,15 +23,14 @@
 </template>
 
 <script>
-import analyticsLayout from '@/views/analytics/layout.vue'
+import analyticsLayout from '@/views/analytics/layouts/analytics-layout.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   props: {
-    id: {
-      type: Number
-    },
-    contractsRoute: {
+    clientId: Number,
+    id: Number,
+    contract: {
       type: Object,
       required: true
     },
@@ -40,22 +38,14 @@ export default {
       type: Object,
       required: true
     },
-    fetchClient: {
+    fetchContractStats: {
       type: Function,
       required: true
-    },
-    client: {
-      type: Object,
-      required: true
-    },
-    contractsCount: {
-      type: Number,
-      default: 0
     }
   },
   watch: {
-    client () {
-      document.title = this.client.name
+    contract () {
+      document.title = this.contract.name
     }
   },
   computed: {

@@ -43,12 +43,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
-    clients: {
-      type: [Object, Array],
-      required: true
-    },
     linkToClient: {
       type: Function,
       required: true
@@ -57,6 +55,11 @@ export default {
       type: Function,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      clients: 'getAllClientsStats'
+    })
   }
 }
 </script>

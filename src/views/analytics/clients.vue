@@ -7,14 +7,8 @@
       <date-range-picker></date-range-picker>
     </template>
     <template slot="content">
-      <buyer-client-list
-        v-if="$route.name === 'BuyerStatsClients'"
-        :clients="buyerClients"
-      ></buyer-client-list>
-      <partner-client-list
-        v-if="$route.name === 'PartnerStatsClients'"
-        :clients="partnerClients"
-      ></partner-client-list>
+      <buyer-client-list v-if="$route.name === 'BuyerStatsClients'"></buyer-client-list>
+      <partner-client-list v-if="$route.name === 'PartnerStatsClients'"></partner-client-list>
     </template>
   </panel-template>
 </template>
@@ -28,8 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      buyerClients: 'getBuyerStatsClients',
-      partnerClients: 'getPartnerStatsClients',
+      clients: 'getAllClientsStats',
       loading: 'getAnalyticsFetchLoading',
       loadingText: 'getAnalyticsFetchLoadingText'
     })
