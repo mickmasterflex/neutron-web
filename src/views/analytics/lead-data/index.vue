@@ -11,7 +11,7 @@
         :loading-text="loadingText"
       >
         <template v-slot:action>
-          <button class="btn btn-indigo"><font-awesome-icon icon="download"></font-awesome-icon> Export Leads</button>
+          <csv-export @click="searchLeadsCSV()"></csv-export>
         </template>
         <template slot="content">
           <leads-list :leads="leads"></leads-list>
@@ -22,9 +22,10 @@
 </template>
 
 <script>
-import leadsList from '@/components/analytics/leads/lists/lead-data-list'
+import leadsList from '@/components/analytics/leads/lists/lead-search-list'
+import csvExport from '@/components/analytics/csv-stats-export'
 import leadSearch from '@/components/analytics/leads/lead-search'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -37,12 +38,16 @@ export default {
   methods: {
     ...mapMutations({
       resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    }),
+    ...mapActions({
+      searchLeadsCSV: 'searchLeadsCSV'
     })
   },
   created () {
     this.resetBreadcrumbs()
   },
   components: {
+    'csv-export': csvExport,
     'lead-search': leadSearch,
     'leads-list': leadsList
   }

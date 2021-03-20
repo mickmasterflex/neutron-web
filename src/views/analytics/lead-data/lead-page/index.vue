@@ -67,15 +67,6 @@ export default {
       ])
     }
   },
-  watch: {
-    id () {
-      if (this.id !== this.lead.id) {
-        this.searchLeads({ ids: [this.id], emails: [] }).then(response => {
-          this.setCurrent(response.data[0])
-        })
-      }
-    }
-  },
   created () {
     this.fetchCurrentLead(this.id)
     this.setProductBreadcrumbsAndTitle()
