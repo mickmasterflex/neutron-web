@@ -36,7 +36,7 @@ const actions = {
 }
 
 const mutations = {
-  SET_PARTNER_CONTRACT_STATS_ANCESTORS: (state, ancestors) => (state.buyer_contract_stats_ancestors = ancestors)
+  SET_PARTNER_CONTRACT_STATS_ANCESTORS: (state, ancestors) => (state.partner_contract_stats_ancestors = ancestors)
 }
 
 export default {
