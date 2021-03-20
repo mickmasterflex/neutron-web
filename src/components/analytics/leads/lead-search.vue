@@ -16,7 +16,7 @@
 
 <script>
 import { validate } from 'vee-validate'
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 
 export default {
@@ -35,6 +35,9 @@ export default {
   methods: {
     ...mapActions({
       searchLeads: 'searchLeads'
+    }),
+    ...mapMutations({
+      resetCurrentLeadSearch: 'RESET_CURRENT_LEAD_SEARCH'
     }),
     async parseData () {
       for (let i = 0; i < this.searchDataArray.length; i++) {
@@ -67,6 +70,9 @@ export default {
         this.submitForm()
       }
     }
+  },
+  destroyed () {
+    this.resetCurrentLeadSearch()
   },
   mixins: [enterKeyListener]
 }
