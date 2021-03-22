@@ -7,10 +7,10 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="contractsRoute">Contracts <label-number :number="contractsCount"></label-number></router-link>
+          <router-link :to="{ name: contractsRouteName, query: $route.query }">Contracts <label-number :number="contractsCount"></label-number></router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="leadsRoute">Leads <label-number :number="leadCount"></label-number></router-link>
+          <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <label-number :number="leadCount"></label-number></router-link>
         </li>
       </ul>
     </template>
@@ -29,13 +29,19 @@ export default {
     id: {
       type: Number
     },
-    contractsRoute: {
-      type: Object,
-      required: true
+    leadsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsClientLeads', 'PartnerStatsClientLeads'].includes(value)
+      }
     },
-    leadsRoute: {
-      type: Object,
-      required: true
+    contractsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsClientContracts', 'PartnerStatsClientContracts'].includes(value)
+      }
     },
     fetchClient: {
       type: Function,
