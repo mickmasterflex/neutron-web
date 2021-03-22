@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -52,26 +52,56 @@ export default {
       type: Boolean,
       required: true
     },
-    linkToContract: {
-      type: Function,
-      required: true
+    contractRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsContract', 'PartnerStatsContract'].includes(value)
+      }
     },
-    linkToContractLeads: {
-      type: Function,
-      required: true
+    leadsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsContractLeads', 'PartnerStatsContractLeads'].includes(value)
+      }
     }
   },
   computed: {
     ...mapGetters({
       descendantContractDataById: 'getCurrentStatsDescendantContractDataById',
       parentlessContracts: 'getCurrentStatsContractsParentless',
-      contractsByParent: 'getCurrentStatsContractsByParent'
+      contractsByParent: 'getCurrentStatsContractsByParent',
+      client: 'getCurrentClientStats'
     }),
     contracts () {
       if (this.isClientContracts === true) {
         return this.parentlessContracts
       }
       return this.contractsByParent(this.parentContractId)
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setCurrent: 'SET_CURRENT_CONTRACT_STATS',
+      resetLeads: 'RESET_ANALYTICS_LEADS'
+    }),
+    linkToContract (contract) {
+      this.setCurrent(contract)
+      this.$router.push({
+        name: this.contractRouteName,
+        params: { id: contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
+    },
+    linkToContractLeads (contract) {
+      this.resetLeads()
+      this.setCurrent(contract)
+      this.$router.push({
+        name: this.leadsRouteName,
+        params: { id: contract.id, clientId: this.client.id },
+        query: this.$route.query
+      })
     }
   }
 }
