@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th class="th">Contract</th>
+          <slot name="additional-th"></slot>
           <th class="th">Leads</th>
           <th class="th">Sold Leads</th>
           <th class="th">Revenue</th>
@@ -18,6 +19,7 @@
           <td class="td">
             <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
           </td>
+          <slot name="additional-td" :contract="contract"></slot>
           <td class="td">
             <table-link :number="getDescendantData(contract, 'lead_count')"
                         @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })"
