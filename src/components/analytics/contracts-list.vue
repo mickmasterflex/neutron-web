@@ -71,7 +71,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      descendantContractDataById: 'getCurrentStatsDescendantContractDataById',
       parentlessContracts: 'getCurrentStatsContractsParentless',
       contractsByParent: 'getCurrentStatsContractsByParent',
       client: 'getCurrentClientStats'
@@ -106,8 +105,8 @@ export default {
       })
     },
     getDescendantData (contract, key) {
-      if (this.descendantContractDataById(contract.id)[0]) {
-        return this.descendantContractDataById(contract.id)[0][key]
+      if (contract.descendant_contract_data) {
+        return contract.descendant_contract_data[key]
       }
       return contract[key]
     }

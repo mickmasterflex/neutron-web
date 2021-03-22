@@ -1,13 +1,9 @@
 const state = {
-  current_stats_contracts: [],
-  current_stats_descendant_contract_data: []
+  current_stats_contracts: []
 }
 
 const getters = {
   getCurrentStatsContractsParentless: state => state.current_stats_contracts.filter(contract => contract.parent === null),
-  getCurrentStatsDescendantContractDataById: (state) => (contractId) => {
-    return state.current_stats_descendant_contract_data.filter(contract => contract.id === contractId)
-  },
   getCurrentStatsContractsByParent: (state) => (contractId) => {
     return state.current_stats_contracts.filter(contract => {
       if (contract.parent) {
@@ -19,7 +15,6 @@ const getters = {
 
 const actions = {
   async setCurrentContractData ({ commit }, data) {
-    commit('SET_CURRENT_STATS_DESCENDANT_CONTRACT_DATA', data.descendant_contract_data)
     commit('SET_CURRENT_STATS_CONTRACTS', data.descendants)
     commit('SET_ANALYTICS_TOTALS', data.totals)
     commit('SET_ANALYTICS_LEADS', data.leads)
@@ -29,8 +24,7 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_STATS_CONTRACTS: (state, contracts) => (state.current_stats_contracts = contracts),
-  SET_CURRENT_STATS_DESCENDANT_CONTRACT_DATA: (state, contractData) => (state.current_stats_descendant_contract_data = contractData)
+  SET_CURRENT_STATS_CONTRACTS: (state, contracts) => (state.current_stats_contracts = contracts)
 }
 
 export default {
