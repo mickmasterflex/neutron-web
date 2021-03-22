@@ -17,7 +17,7 @@ const actions = {
   async createInjectedField ({ commit }, field) {
     await axios.post('/injected-fields/', field)
       .then(response => {
-        commit('ADD_INJECTED_FIELD', response.data)
+        // commit('ADD_INJECTED_FIELD', response.data)
       })
   },
   async updateInjectedField ({ commit }, updatedField) {

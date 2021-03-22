@@ -11,10 +11,10 @@
     <component :is="updateComponent" :field="currentField"></component>
     <panel-template title="Injected Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Injected Fields">
       <template v-slot:action>
-        <create-injected-field></create-injected-field>
+        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Injected Field</button>
       </template>
       <template v-slot:content>
-<!--        <list-injected-fields></list-injected-fields>-->
+        <create-injected-field></create-injected-field>
       </template>
     </panel-template>
   </div>
@@ -54,7 +54,8 @@ export default {
   methods: {
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
-      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
+      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
+      showCreateInjectedFieldModal: 'SHOW_CREATE_INJECTED_FIELD_MODAL'
     }),
     async setUpdateComponent (component) {
       this.updateComponent = component

@@ -1,110 +1,81 @@
 <template>
-<div>
-  <button class="btn btn-turquoise" @click="showForm()" v-show="!formVisible"><font-awesome-icon icon="plus"></font-awesome-icon> Add Injected Field</button>
-  <transition enter-active-class="animate__animated animate__fadeIn animate__fast">
-    <div class="flex flex-row items-start" v-show="formVisible">
+  <modal-template :show="showModal" @close="close">
+    <template v-slot:header>Create Injected</template>
+    <template v-slot:body>
       <validation-observer ref="form">
-        <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
-<!--          <v-select-field rules="required" field_class="field-tall" v-model="injectedField" field_label="Injected Field" field_id="injectedFieldSelectToClone" :options="injectedFields"></v-select-field>-->
+        <form @submit.prevent="submitForm" class="form-horizontal">
+          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Field Type" :options="fieldTypes"></v-select-field>
+          <v-text-field v-model="key" field_id="field_key" field_label="Key" rules="required"></v-text-field>
+          <v-text-field v-model="value" field_id="field_value" field_label="Field Key" rules="required"></v-text-field>
+          <v-text-field v-model="params" field_id="posting_params" field_label="Posting Params" rules="required"></v-text-field>
         </form>
       </validation-observer>
-      <button @click="submitForm()" class="btn btn-green ml-2"><font-awesome-icon icon="clone"></font-awesome-icon> Clone</button>
-    </div>
-  </transition>
-</div>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create injected Field</button>
+    </template>
+  </modal-template>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
   data () {
     return {
-      baseField: '',
-      formVisible: false
+      type: '',
+      key: '',
+      value: '',
+      params: ''
     }
   },
   computed: {
     ...mapGetters({
-      baseFields: 'getAvailableBaseFields',
-      form: 'getCurrentForm',
-      baseFieldsLoading: 'getBaseFieldsFetchLoading'
-    }),
-    fields () {
-      return this.form.fields
-    },
-    selectedBaseField () {
-      return this.baseFields.find(({ id }) => id === parseInt(this.baseField))
-    },
-    optionFieldSelected () {
-      if (this.selectedBaseField) {
-        return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
-      } else {
-        return null
-      }
-    },
-    textFieldSelected () {
-      if (this.selectedBaseField) {
-        return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
-      } else {
-        return null
-      }
-    },
-    newFieldOrder () {
-      return this.form.fields.length + 1
-    }
+      showModal: 'getShowCreateInjectedFieldModal',
+      fieldTypes: 'getInjectedFieldTypes',
+      currentForm: 'getCurrentForm'
+    })
   },
+  props: {
+    injectedFields: Array
+  },
+  mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
-      createTextField: 'createTextField',
-      createOptionField: 'createOptionField',
-      fetchBaseFields: 'fetchBaseFields'
+      createInjectedField: 'createInjectedField'
     }),
     ...mapMutations({
-      setBaseFields: 'SET_BASE_FIELDS',
-      setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
+      closeModal: 'CLOSE_CREATE_INJECTED_FIELD_MODAL'
     }),
-    resetForm () {
-      this.baseField = ''
+    close () {
+      this.type = ''
+      this.key = ''
+      this.value = ''
+      this.params = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-    },
-    showForm () {
-      this.formVisible = true
-      this.setAvailableBaseFields(this.fields)
+      this.closeModal()
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          if (this.textFieldSelected) {
-            this.createTextField({
-              form: this.form.id,
-              base_field: this.baseField,
-              order: this.newFieldOrder
-            }).then(() => {
-              this.resetForm()
-            })
-          } else if (this.optionFieldSelected) {
-            this.createOptionField({
-              form: this.form.id,
-              base_field: this.baseField,
-              order: this.newFieldOrder
-            }).then(() => {
-              this.resetForm()
-            })
-          }
+          this.createInjectedField({
+            field_type: this.type,
+            field_key: this.key,
+            field_value: this.value,
+            posting_params: this.params,
+            form: this.currentForm.id
+          }).then(() => {
+            this.close()
+          }).catch(error => {
+            this.error = error
+          })
         }
       })
     }
-  },
-  watch: {
-    fields () {
-      this.setAvailableBaseFields(this.fields)
-    }
-  },
-  created () {
-    this.fetchBaseFields()
   }
 }
 </script>
