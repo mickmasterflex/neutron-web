@@ -43,23 +43,52 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    linkToClient: {
-      type: Function,
-      required: true
+    clientRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsClient', 'PartnerStatsClient'].includes(value)
+      }
     },
-    linkToClientLeads: {
-      type: Function,
-      required: true
+    leadsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsClientLeads', 'PartnerStatsClientLeads'].includes(value)
+      }
     }
   },
   computed: {
     ...mapGetters({
       clients: 'getAllClientsStats'
     })
+  },
+  methods: {
+    ...mapMutations({
+      setCurrent: 'SET_CURRENT_CLIENT_STATS',
+      resetLeads: 'RESET_ANALYTICS_LEADS'
+    }),
+    linkToClient (client) {
+      this.setCurrent(client)
+      this.$router.push({
+        name: this.clientRouteName,
+        params: { id: client.id },
+        query: this.$route.query
+      })
+    },
+    linkToClientLeads (client) {
+      this.resetLeads()
+      this.setCurrent(client)
+      this.$router.push({
+        name: this.leadsRouteName,
+        params: { id: client.id },
+        query: this.$route.query
+      })
+    }
   }
 }
 </script>
