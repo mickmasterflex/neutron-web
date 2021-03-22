@@ -11,9 +11,10 @@
         content-background-color="white"
         :show-loader="loading"
         :loading-text="loadingText"
+        :actionTransition="true"
       >
         <template v-slot:action>
-          <csv-export @click="searchLeadsCSV()"></csv-export>
+          <csv-export @click="searchLeadsCSV()" v-show="leads.length"></csv-export>
         </template>
         <template slot="content">
           <leads-list :leads="leads"></leads-list>
