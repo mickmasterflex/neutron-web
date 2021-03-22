@@ -11,9 +11,6 @@
                      }"
                    :fetch-contract-stats="fetchBuyerContractStats"
   >
-    <template v-slot:statCards>
-      <stat-card :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
-    </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
         <router-link :to="{

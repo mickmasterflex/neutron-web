@@ -10,9 +10,6 @@
                    }"
                    :fetchContractStats="fetchPartnerContractStats"
   >
-    <template v-slot:statCards>
-      <stat-card :data="campaigns.length" title="Campaigns" key="campaignCountStatCard" ></stat-card>
-    </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'campaigns' ? 'active' : ''">
         <router-link :to="{

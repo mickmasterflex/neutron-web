@@ -4,9 +4,6 @@
     :fetch-stats="fetchClient"
     :fetch-id="id"
   >
-    <template v-slot:statCards>
-      <stat-card :data="contractsCount" title="Contracts" key="contractCountStatCard" ></stat-card>
-    </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">

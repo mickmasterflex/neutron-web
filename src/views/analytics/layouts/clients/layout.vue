@@ -3,9 +3,6 @@
     :hud-title="hudTitle"
     :fetch-stats="fetchClients"
   >
-    <template v-slot:statCards>
-      <stat-card :data="clientsCount" title="Clients" key="clientCountStatCard" ></stat-card>
-    </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
