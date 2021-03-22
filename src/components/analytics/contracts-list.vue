@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th class="th">Contract</th>
+          <slot name="additional-th"></slot>
           <th class="th">Leads</th>
           <th class="th">Sold Leads</th>
           <th class="th">Revenue</th>
@@ -18,6 +19,7 @@
           <td class="td">
             <span class="text-link" @click="linkToContract({ name: contract.name, id: contract.id })">{{contract.name}}</span>
           </td>
+          <slot name="additional-td" :contract="contract"></slot>
           <td class="td">
             <table-link :number="getDescendantData(contract, 'lead_count')"
                         @table-link-click="linkToContractLeads({ name: contract.name, id: contract.id })"
@@ -69,7 +71,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      descendantContractDataById: 'getCurrentStatsDescendantContractDataById',
       parentlessContracts: 'getCurrentStatsContractsParentless',
       contractsByParent: 'getCurrentStatsContractsByParent',
       client: 'getCurrentClientStats'
@@ -104,8 +105,8 @@ export default {
       })
     },
     getDescendantData (contract, key) {
-      if (this.descendantContractDataById(contract.id)[0]) {
-        return this.descendantContractDataById(contract.id)[0][key]
+      if (contract.descendant_contract_data) {
+        return contract.descendant_contract_data[key]
       }
       return contract[key]
     }

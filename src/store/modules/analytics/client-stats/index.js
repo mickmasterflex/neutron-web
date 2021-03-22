@@ -21,7 +21,6 @@ const actions = {
     commit('SET_ANALYTICS_FETCH_LOADING')
     await axios.get(url + '&' + getters.getAnalyticsDateRangeUrlFormatted)
       .then(response => {
-        commit('SET_CURRENT_STATS_DESCENDANT_CONTRACT_DATA', response.data.descendant_contract_data)
         commit('SET_CURRENT_STATS_CONTRACTS', response.data.contracts)
         commit('SET_ANALYTICS_TOTALS', response.data.totals)
         commit('SET_ANALYTICS_LEADS', response.data.leads)
