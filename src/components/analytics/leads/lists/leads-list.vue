@@ -16,29 +16,29 @@
         </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="lead in leads" :key="lead.id">
-        <td class="td">
-          <router-link
-            :to="{ name: 'LeadPage', params: { id: lead.id } }"
-            class="text-link">
-            {{lead.id}}
-          </router-link>
-        </td>
-        <td class="td">{{lead.data.email}}</td>
-        <slot name="additional-td" :lead="lead"></slot>
-        <td class="td" :class="!lead.reason ? 'text-gray-500 italic' : ''">{{lead.reason ? lead.reason : 'None'}}</td>
-        <td-date :date="lead.created_at"></td-date>
-        <td-date :date="lead.updated_at"></td-date>
-        <td-date v-if="lead.sold_at" :date="lead.sold_at">
-          <template v-slot:prefix>
-            <font-awesome-icon icon="circle" class="text-green-500" size="xs"></font-awesome-icon>
-          </template>
-        </td-date>
-        <td v-else class="td font-bold text-red-500"><font-awesome-icon icon="circle"></font-awesome-icon> False</td>
-        <td-number :dollar="true" :number="lead.revenue"></td-number>
-        <td-number :dollar="true" :number="lead.margin"></td-number>
-        <td-number :dollar="true" :number="lead.payout"></td-number>
-      </tr>
+        <tr class="tr" v-for="lead in leads" :key="lead.id">
+          <td class="td">
+            <router-link
+              :to="{ name: 'LeadPage', params: { id: lead.id } }"
+              class="text-link">
+              {{lead.id}}
+            </router-link>
+          </td>
+          <td class="td">{{lead.data.email}}</td>
+          <slot name="additional-td" :lead="lead"></slot>
+          <td class="td" :class="!lead.reason ? 'text-gray-500 italic' : ''">{{lead.reason ? lead.reason : 'None'}}</td>
+          <td-date :date="lead.created_at"></td-date>
+          <td-date :date="lead.updated_at"></td-date>
+          <td-date v-if="lead.sold_at" :date="lead.sold_at">
+            <template v-slot:prefix>
+              <font-awesome-icon icon="circle" class="text-green-500" size="xs"></font-awesome-icon>
+            </template>
+          </td-date>
+          <td v-else class="td font-bold text-red-500"><font-awesome-icon icon="circle"></font-awesome-icon> False</td>
+          <td-number :dollar="true" :number="lead.revenue"></td-number>
+          <td-number :dollar="true" :number="lead.margin"></td-number>
+          <td-number :dollar="true" :number="lead.payout"></td-number>
+        </tr>
       </tbody>
     </table>
     <table-empty-state v-else
