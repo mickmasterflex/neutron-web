@@ -3,12 +3,8 @@
                    :clientId="clientId"
                    :id="id"
                    contracts-route-name="PartnerStatsContractContracts"
-                   :leadsRoute="{
-                     name: 'PartnerStatsContractLeads',
-                     params: { clientId: clientId, id: id },
-                     query: $route.query
-                   }"
-                   :fetchContractStats="fetchPartnerContractStats"
+                   leads-route-name="PartnerStatsContractLeads"
+                   :fetch-contract-stats="fetchPartnerContractStats"
   >
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'campaigns' ? 'active' : ''">

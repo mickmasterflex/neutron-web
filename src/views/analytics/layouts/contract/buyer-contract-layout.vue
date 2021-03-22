@@ -4,11 +4,7 @@
                    :key="id"
                    :id="id"
                    contracts-route-name="BuyerStatsContractContracts"
-                   :leads-route="{
-                     name: 'BuyerStatsContractLeads',
-                     params: { clientId: clientId, id: id },
-                     query: $route.query
-                     }"
+                   leads-route-name="BuyerStatsContractLeads"
                    :fetch-contract-stats="fetchBuyerContractStats"
   >
     <template v-slot:contentTab>
