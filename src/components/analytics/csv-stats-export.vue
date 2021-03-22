@@ -12,7 +12,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: {
-    buttonDefaultText: {
+    buttonActionText: {
       type: String,
       default: 'Export Leads'
     }
@@ -25,7 +25,7 @@ export default {
       if (this.loading) {
         return 'Downloading'
       }
-      return this.buttonDefaultText
+      return this.buttonActionText
     }
   }
 }
