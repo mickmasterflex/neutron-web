@@ -4,8 +4,7 @@
       <contracts-list
         :link-to-contract="linkToContract"
         :link-to-contract-leads="linkToContractLeads"
-        :contract-contracts="$route.name === 'BuyerStatsContractContracts'"
-        :client-contracts="$route.name === 'BuyerStatsClientContracts'"
+        :is-client-contracts="$route.name === 'BuyerStatsClientContracts'"
         :parent-contract-id="id"
       ></contracts-list>
     </template>

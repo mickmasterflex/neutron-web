@@ -48,11 +48,7 @@ export default {
     parentContractId: {
       type: Number
     },
-    contractContracts: {
-      type: Boolean,
-      required: true
-    },
-    clientContracts: {
+    isClientContracts: {
       type: Boolean,
       required: true
     },
@@ -72,10 +68,10 @@ export default {
       contractsByParent: 'getCurrentStatsContractsByParent'
     }),
     contracts () {
-      if (this.contractContracts === true) {
-        return this.contractsByParent(this.parentContractId)
+      if (this.isClientContracts === true) {
+        return this.parentlessContracts
       }
-      return this.parentlessContracts
+      return this.contractsByParent(this.parentContractId)
     }
   }
 }

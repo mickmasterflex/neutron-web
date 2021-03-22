@@ -2,18 +2,18 @@
   <transition-table-state>
     <table v-if="leads.length" class="table table-striped text-sm">
       <thead>
-      <tr>
-        <th class="th">Lead Id</th>
-        <th class="th">Lead Email</th>
-        <slot name="additional-th"></slot>
-        <th class="th">Scrub Reason</th>
-        <th class="th">Created At</th>
-        <th class="th">Updated At</th>
-        <th class="th">Sold</th>
-        <th class="th">Revenue</th>
-        <th class="th">Margin</th>
-        <th class="th">Payout</th>
-      </tr>
+        <tr>
+          <th class="th">Lead Id</th>
+          <th class="th">Lead Email</th>
+          <slot name="additional-th"></slot>
+          <th class="th">Scrub Reason</th>
+          <th class="th">Created At</th>
+          <th class="th">Updated At</th>
+          <th class="th">Sold</th>
+          <th class="th">Revenue</th>
+          <th class="th">Margin</th>
+          <th class="th">Payout</th>
+        </tr>
       </thead>
       <tbody class="tbody">
       <tr class="tr" v-for="lead in leads" :key="lead.id">
@@ -31,7 +31,7 @@
         <td-date :date="lead.updated_at"></td-date>
         <td-date v-if="lead.sold_at" :date="lead.sold_at">
           <template v-slot:prefix>
-            <font-awesome-icon icon="circle" class="text-green-500"></font-awesome-icon>
+            <font-awesome-icon icon="circle" class="text-green-500" size="xs"></font-awesome-icon>
           </template>
         </td-date>
         <td v-else class="td font-bold text-red-500"><font-awesome-icon icon="circle"></font-awesome-icon> False</td>

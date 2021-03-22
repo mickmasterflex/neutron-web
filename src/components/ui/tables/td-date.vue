@@ -1,10 +1,8 @@
 <template>
   <td class="td">
-    <span class="">
-      <slot name="prefix"/>
+    <slot name="prefix"/>
       {{formattedDate}}
-      <slot name="suffix"/>
-    </span>
+    <slot name="suffix"/>
   </td>
 </template>
 
