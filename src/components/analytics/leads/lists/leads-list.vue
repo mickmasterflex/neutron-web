@@ -53,7 +53,7 @@
 export default {
   props: {
     leads: {
-      type: Array,
+      type: [Object, Array],
       required: true
     },
     emptyStateHeading: {

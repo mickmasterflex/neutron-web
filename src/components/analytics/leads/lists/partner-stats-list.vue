@@ -19,7 +19,7 @@ import baseLeadsList from '@/components/analytics/leads/lists/leads-list'
 export default {
   props: {
     leads: {
-      type: Array,
+      type: [Object, Array],
       required: true
     }
   },
