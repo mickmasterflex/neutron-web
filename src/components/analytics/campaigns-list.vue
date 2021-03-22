@@ -2,30 +2,30 @@
   <transition-table-state>
     <table v-if="campaigns.length" class="table table-striped">
       <thead>
-      <tr>
-        <th class="th">Campaign</th>
-        <th class="th">Leads</th>
-        <th class="th">Sold Leads</th>
-        <th class="th">Revenue</th>
-        <th class="th">Margin</th>
-        <th class="th">Payout</th>
-        <th class="th">Scrub Rate</th>
-        <th class="th">Margin Percent</th>
-      </tr>
+        <tr>
+          <th class="th">Campaign</th>
+          <th class="th">Leads</th>
+          <th class="th">Sold Leads</th>
+          <th class="th">Revenue</th>
+          <th class="th">Margin</th>
+          <th class="th">Payout</th>
+          <th class="th">Scrub Rate</th>
+          <th class="th">Margin Percent</th>
+        </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="campaign in campaigns" :key="campaign.id">
-        <td class="td">
-          <span class="text-link" @click="linkToPartnerStatsCampaign({ name: campaign.name, id: campaign.id })">{{campaign.name}}</span>
-        </td>
-        <td-number :number="campaign.lead_count"></td-number>
-        <td-number :number="campaign.sold_count"></td-number>
-        <td-number :dollar="true" :number="campaign.revenue"></td-number>
-        <td-number :dollar="true" :number="campaign.margin"></td-number>
-        <td-number :dollar="true" :number="campaign.payout"></td-number>
-        <td class="td">{{campaign.scrub_rate}}</td>
-        <td class="td">{{campaign.margin_percent}}</td>
-      </tr>
+        <tr class="tr" v-for="campaign in campaigns" :key="campaign.id">
+          <td class="td">
+            <span class="text-link" @click="linkToPartnerStatsCampaign({ name: campaign.name, id: campaign.id })">{{campaign.name}}</span>
+          </td>
+          <td-number :number="campaign.lead_count"></td-number>
+          <td-number :number="campaign.sold_count"></td-number>
+          <td-number :dollar="true" :number="campaign.revenue"></td-number>
+          <td-number :dollar="true" :number="campaign.margin"></td-number>
+          <td-number :dollar="true" :number="campaign.payout"></td-number>
+          <td class="td">{{campaign.scrub_rate}}</td>
+          <td class="td">{{campaign.margin_percent}}</td>
+        </tr>
       </tbody>
     </table>
     <table-empty-state v-else

@@ -1,5 +1,5 @@
 <template>
-  <leads-panel-template>
+  <leads-panel-template leads-list-type="partner">
     <template #action>
       <csv-export @click="fetchPartnerClientLeadsCSV()"></csv-export>
     </template>

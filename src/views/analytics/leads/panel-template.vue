@@ -4,8 +4,8 @@
       <slot name="action"></slot>
     </template>
     <template slot="content">
-      <buyer-leads-list :leads="leads" v-if="$route.meta.activeAppTab === 'buyer-stats'"></buyer-leads-list>
-      <partner-leads-list :leads="leads" v-if="$route.meta.activeAppTab === 'partner-stats'"></partner-leads-list>
+      <buyer-leads-list :leads="leads" v-if="leadsListType === 'buyer'"></buyer-leads-list>
+      <partner-leads-list :leads="leads" v-if="leadsListType === 'partner'"></partner-leads-list>
     </template>
   </analytics-panel-template>
 </template>
@@ -17,6 +17,14 @@ import analyticsPanelTemplate from '@/components/analytics/panel-template'
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    leadsListType: {
+      required: true,
+      validator (value) {
+        return ['buyer', 'partner'].includes(value)
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       leads: 'getAnalyticsLeads'

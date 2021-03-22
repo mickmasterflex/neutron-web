@@ -1,7 +1,7 @@
 <template>
   <panel-template title="Lead Data" :show-loader="fetchLoading" :loading-text="fetchLoadingText">
     <template v-slot:action>
-      <button @click="submitForm" class="btn btn-green" v-show="leadUnlocked" :disabled="loadingPut">
+      <button @click="submitForm" class="btn btn-green" v-show="leadUnlocked" :disabled="putLoading">
         {{ submitButtonText }}
       </button>
     </template>
@@ -51,14 +51,14 @@ export default {
   computed: {
     ...mapGetters({
       lead: 'getCurrentLead',
-      loadingPut: 'getLeadPutLoading',
-      loadingPutText: 'getLeadPutLoadingText',
+      putLoading: 'getLeadPutLoading',
+      putLoadingText: 'getLeadPutLoadingText',
       fetchLoading: 'getLeadFetchLoading',
       fetchLoadingText: 'getLeadFetchLoadingText'
     }),
     submitButtonText () {
-      if (this.loadingPut) {
-        return this.loadingPutText
+      if (this.putLoading) {
+        return this.putLoadingText
       }
       return 'Save Changes'
     }

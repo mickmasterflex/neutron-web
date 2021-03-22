@@ -19,7 +19,11 @@
         <slot name="contentTab"></slot>
         <li class="underscore-tab underscore-tab-lg"
             :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="leadsRoute">Leads <label-number :number="leadCount"></label-number></router-link>
+          <router-link :to="{
+                     name: leadsRouteName,
+                     params: { clientId: clientId, id: id },
+                     query: $route.query
+          }">Leads <label-number :number="leadCount"></label-number></router-link>
         </li>
       </ul>
     </template>
@@ -41,9 +45,12 @@ export default {
       type: Object,
       required: true
     },
-    leadsRoute: {
-      type: Object,
-      required: true
+    leadsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsContractLeads', 'PartnerStatsContractLeads'].includes(value)
+      }
     },
     contractsRouteName: {
       type: String,

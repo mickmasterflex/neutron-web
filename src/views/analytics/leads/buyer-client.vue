@@ -1,5 +1,5 @@
 <template>
-  <leads-panel-template>
+  <leads-panel-template leads-list-type="buyer">
     <template #action>
       <csv-export @click="fetchBuyerClientLeadsCSV($route.params.id)"></csv-export>
     </template>

@@ -3,17 +3,10 @@
                    :clientId="clientId"
                    :id="id"
                    contracts-route-name="BuyerStatsContractContracts"
-                   :leads-route="{
-                     name: 'BuyerStatsContractLeads',
-                     params: { clientId: clientId, id: id },
-                     query: $route.query
-                     }"
+                   leads-route-name="BuyerStatsContractLeads"
                    :fetch-contract-stats="fetchBuyerContractStats"
                    :key="id"
   >
-    <template v-slot:statCards>
-      <stat-card :loading="loading" :data="offers.length" title="Offers" key="offerCountStatCard" ></stat-card>
-    </template>
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
         <router-link :to="{

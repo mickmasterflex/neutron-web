@@ -3,16 +3,13 @@
     :hud-title="hudTitle"
     :fetch-stats="fetchClients"
   >
-    <template v-slot:statCards>
-      <stat-card :loading="loading" :data="clientsCount" title="Clients" key="clientCountStatCard" ></stat-card>
-    </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
-          <router-link :to="clientsRoute">Clients <label-number :number="clientsCount"></label-number></router-link>
+          <router-link :to="{ name: clientsRouteName, query: $route.query }">Clients <label-number :number="clientsCount"></label-number></router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
-          <router-link :to="leadsRoute">Leads <label-number :number="leadCount"></label-number></router-link>
+          <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <label-number :number="leadCount"></label-number></router-link>
         </li>
       </ul>
     </template>
@@ -36,13 +33,19 @@ export default {
       type: Function,
       required: true
     },
-    clientsRoute: {
-      type: Object,
-      required: true
+    clientsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsClients', 'PartnerStatsClients'].includes(value)
+      }
     },
-    leadsRoute: {
-      type: Object,
-      required: true
+    leadsRouteName: {
+      type: String,
+      required: true,
+      validator: function (value) {
+        return ['BuyerStatsClientsLeads', 'PartnerStatsClientsLeads'].includes(value)
+      }
     }
   },
   computed: {
