@@ -9,14 +9,15 @@
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
-    <panel-template title="Injected Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Injected Fields">
+    <panel-template title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
       <template v-slot:action>
         <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Injected Field</button>
       </template>
       <template v-slot:content>
-        <create-injected-field></create-injected-field>
+        <list-injected-fields></list-injected-fields>
       </template>
     </panel-template>
+    <create-injected-field></create-injected-field>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import createField from '@/components/forms/fields/create'
 import createInjectedField from '@/components/forms/fields/injected-fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
+import listInjectedFields from '@/components/forms/fields/injected-fields/list'
 
 export default {
   data () {
@@ -66,7 +68,8 @@ export default {
     updateOptionField,
     'list-fields': listFields,
     'create-field': createField,
-    'create-injected-field': createInjectedField
+    'create-injected-field': createInjectedField,
+    'list-injected-fields': listInjectedFields
   },
   watch: {
     currentField () {
