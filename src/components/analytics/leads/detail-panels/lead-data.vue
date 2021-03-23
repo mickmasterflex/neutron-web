@@ -85,6 +85,9 @@ export default {
   components: {
     'panel-footer': panelFooter
   },
+  created () {
+    this.setLeadData()
+  },
   watch: {
     lead () {
       this.setLeadData()
