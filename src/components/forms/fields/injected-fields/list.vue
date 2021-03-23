@@ -16,8 +16,11 @@
         <td class="td">{{ injectedField.field_key }}</td>
         <td class="td">{{ injectedField.field_value }}</td>
         <td class="td">{{ injectedField.posting_params }}</td>
-        <td class="td">
-        <delete-injected-field :id="injectedField.id"></delete-injected-field>
+        <td class="td w-24">
+          <btn-group-right>
+            <delete-injected-field :id="injectedField.id"></delete-injected-field>
+            <button class="btn btn-circle btn-hollow-blue" @click="setCurrentInjectedFieldAndShow(injectedField)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
+          </btn-group-right>
         </td>
       </tr>
       </tbody>
@@ -51,7 +54,11 @@ export default {
     ...mapMutations({
       setCurrentInjectedField: 'SET_CURRENT_INJECTED_FIELD',
       showUpdateInjectedFieldModal: 'SHOW_UPDATE_INJECTED_FIELD_MODAL'
-    })
+    }),
+    setCurrentInjectedFieldAndShow (injectedField) {
+      this.setCurrentInjectedField(injectedField)
+      this.showUpdateInjectedFieldModal()
+    }
   }
 }
 </script>

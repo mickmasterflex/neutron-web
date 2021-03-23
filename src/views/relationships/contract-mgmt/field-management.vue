@@ -17,6 +17,7 @@
         <list-injected-fields></list-injected-fields>
       </template>
     </panel-template>
+    <update-injected-field></update-injected-field>
     <create-injected-field></create-injected-field>
   </div>
 </template>
@@ -29,6 +30,7 @@ import createInjectedField from '@/components/forms/fields/injected-fields/creat
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
 import listInjectedFields from '@/components/forms/fields/injected-fields/list'
+import updateInjectedField from '@/components/forms/fields/injected-fields/update'
 
 export default {
   data () {
@@ -69,7 +71,8 @@ export default {
     'list-fields': listFields,
     'create-field': createField,
     'create-injected-field': createInjectedField,
-    'list-injected-fields': listInjectedFields
+    'list-injected-fields': listInjectedFields,
+    'update-injected-field': updateInjectedField
   },
   watch: {
     currentField () {

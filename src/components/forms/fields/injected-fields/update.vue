@@ -1,6 +1,8 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>Create Injected Field</template>
+    <template v-slot:header>
+      Update Injected Field
+    </template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -12,13 +14,14 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Create injected Field</button>
+      <button @click="submitForm" class="btn btn-green btn-lg">Update</button>
     </template>
   </modal-template>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
@@ -33,43 +36,64 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateInjectedFieldModal',
-      fieldTypes: 'getInjectedFieldTypes',
-      currentForm: 'getCurrentForm'
-    })
+      showModal: 'getShowUpdateInjectedFieldModal',
+      injectedField: 'getCurrentInjectedField',
+      fieldTypes: 'getInjectedFieldTypes'
+    }),
+    unsavedChanges () {
+      if (this.injectedField) {
+        return this.type !== this.injectedField.field_type ||
+          this.key !== this.injectedField.field_key ||
+          this.value !== this.injectedField.field_value ||
+          this.params !== this.injectedField.posting_params
+      } else {
+        return false
+      }
+    }
   },
-  props: {
-    injectedFields: Array
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
+    }
   },
-  mixins: [enterKeyListener, setResponseErrors],
+  mixins: [checkUnsavedChangesInModal, enterKeyListener, setResponseErrors],
+  updated () {
+    if (this.injectedField) {
+      this.type = this.injectedField.field_type
+      this.key = this.injectedField.field_key
+      this.value = this.injectedField.field_value
+      this.params = this.injectedField.posting_params
+    }
+  },
   methods: {
     ...mapActions({
-      createInjectedField: 'createInjectedField'
+      update: 'updateInjectedField'
     }),
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_INJECTED_FIELD_MODAL'
+      resetCurrentInjectedField: 'RESET_CURRENT_INJECTED_FIELD',
+      closeModal: 'CLOSE_UPDATE_INJECTED_FIELD_MODAL'
     }),
     close () {
+      this.closeModal()
       this.type = ''
       this.key = ''
       this.value = ''
       this.params = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-      this.closeModal()
+      this.resetCurrentInjectedField()
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.createInjectedField({
+          this.update({
             field_type: this.type,
             field_key: this.key,
             field_value: this.value,
             posting_params: this.params,
-            form: this.currentForm.id
+            form: this.injectedField.form,
+            id: this.injectedField.id
           }).then(() => {
-            this.close()
+            this.closeModal()
+            this.resetCurrentField()
           }).catch(error => {
             this.error = error
           })
