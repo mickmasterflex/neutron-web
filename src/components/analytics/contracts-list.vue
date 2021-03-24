@@ -47,9 +47,6 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    parentContractId: {
-      type: Number
-    },
     isClientContracts: {
       type: Boolean,
       required: true
@@ -73,13 +70,14 @@ export default {
     ...mapGetters({
       parentlessContracts: 'getCurrentStatsContractsParentless',
       contractsByParent: 'getCurrentStatsContractsByParent',
-      client: 'getCurrentClientStats'
+      client: 'getCurrentClientStats',
+      contract: 'getCurrentContractStats'
     }),
     contracts () {
       if (this.isClientContracts === true) {
         return this.parentlessContracts
       }
-      return this.contractsByParent(this.parentContractId)
+      return this.contractsByParent(this.contract.id)
     }
   },
   methods: {
