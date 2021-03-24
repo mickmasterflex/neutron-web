@@ -11,7 +11,7 @@
     <component :is="updateComponent" :field="currentField"></component>
     <panel-template title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
       <template v-slot:action>
-        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Injected Field</button>
+        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon>Add Field</button>
       </template>
       <template v-slot:content>
         <list-injected-fields></list-injected-fields>
