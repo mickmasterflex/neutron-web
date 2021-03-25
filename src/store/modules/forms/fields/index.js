@@ -24,10 +24,7 @@ const mutations = {
   SORT_CURRENT_FORM_FIELDS: (state) => (state.current_form.fields = state.current_form.fields.sort((a, b) => (a.order > b.order) ? 1 : -1)),
   ADD_FIELD: (state, field) => state.current_form[field.type].push(field.data),
   UPDATE_FIELD: (state, updatedField) => {
-    console.log(updatedField)
-    console.log(state.current_form[updatedField.type])
     const index = state.current_form[updatedField.type].findIndex(field => field.id === updatedField.data.id)
-    console.log(index)
     if (index !== -1) {
       // const data = updatedField.data
       state.current_form[updatedField.type].splice(index, 1, updatedField.data)

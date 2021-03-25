@@ -16,13 +16,13 @@ const actions = {
   async updateTextField ({ commit }, updatedField) {
     await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
       .then(response => {
-        commit('UPDATE_FIELD', response.data)
+        commit('UPDATE_FIELD', { data: response.data, type: 'fields' })
       })
   },
   async deleteTextField ({ commit }, id) {
     await axios.delete(`/text-fields/${id}/`)
       .then(() => {
-        commit('REMOVE_FIELD', id)
+        commit('REMOVE_FIELD', { id: id, type: 'fields' })
       })
   }
 }
