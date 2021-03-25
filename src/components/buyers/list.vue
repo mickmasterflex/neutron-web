@@ -33,19 +33,12 @@
           <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">{{ contract.rpl }}</td>
           <td class="td">
-            <span v-if="contract.caps.month_caps.length || contract.caps.day_caps.length">{{ contract.caps.month_caps.length }} Month,
-                  {{ contract.caps.day_caps.length }} Day
-            </span>
-            <span v-else class="italic text-gray-500">No Caps Set</span>
+            <caps-count :caps="contract.caps"></caps-count>
           </td>
           <td class="td">
             <table-link @table-link-click="linkToBuyerContracts(contract)"
                         :number="contract.children.length"
             ></table-link>
-          </td>
-          <td class="td">{{ contract.rpl }}</td>
-          <td class="td">
-            <caps-count :caps="contract.caps"></caps-count>
           </td>
           <td class="td">
             <table-link @table-link-click="linkToBuyerOffers(contract)"

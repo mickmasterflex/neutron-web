@@ -25,16 +25,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: {
     buyers: Array,
     buyerGroup: Number
-  },
-  computed: {
-    ...mapGetters({
-      getClientById: 'getClientById'
-    })
   }
 }
 </script>
