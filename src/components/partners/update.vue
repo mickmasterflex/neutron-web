@@ -38,7 +38,7 @@ export default {
       channel: '',
       pricing_tier_group: '',
       scheduledStart: null,
-      client: { id: null, name: null }
+      client: null
     }
   },
   props: {
