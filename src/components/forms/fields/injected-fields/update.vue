@@ -93,7 +93,6 @@ export default {
             id: this.injectedField.id
           }).then(() => {
             this.closeModal()
-            this.resetCurrentField()
           }).catch(error => {
             this.error = error
           })

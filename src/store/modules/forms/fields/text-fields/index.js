@@ -9,7 +9,7 @@ const actions = {
   async createTextField ({ commit }, field) {
     await axios.post('/text-fields/', field)
       .then(response => {
-        commit('ADD_FIELD', response.data)
+        commit('ADD_FIELD', { data: response.data, type: 'fields' })
         commit('SET_CURRENT_FIELD', response.data)
       })
   },

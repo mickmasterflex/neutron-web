@@ -6,7 +6,7 @@ const state = {
     { name: 'Hidden', id: 'hidden' },
     { name: 'IP Address', id: 'ip_address' },
     { name: 'Lead ID', id: 'lead_id' },
-    { name: 'Universal Lead ID', id: 'universal_lead_id' },
+    { name: 'Universal Lead ID', id: 'leadid_guid' },
     { name: 'Trusted Form', id: 'trusted_form' },
     { name: 'Warm Call Transfer', id: 'warm_call_transfer' }
   ]
