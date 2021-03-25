@@ -113,7 +113,7 @@
 }
 
 .hud--stat-cards {
-    @apply flex flex-row items-center border-l border-gray-800 pl-4
+    @apply col-auto items-center border-l border-gray-800 pl-4
 }
 
 
@@ -195,7 +195,7 @@
 }
 
 .btn-lg {
-    @apply text-lg font-light px-4 py-3;
+    @apply text-lg font-normal px-4 py-3;
     height: 53px;
 }
 
@@ -205,11 +205,12 @@
 
 .btn-md {
     height: 36px;
-    @apply text-lg;
+    @apply font-bold py-1 px-2;
 }
 
 .btn-md.btn-circle {
     width: 36px;
+    @apply text-lg;
 }
 
 /* Standard Buttons */
@@ -269,27 +270,27 @@
 
 .btn-hollow-default                                      { @apply text-gray-800; }
 .btn-hollow-default:hover:not(:disabled):not(.disabled)  { @apply bg-gray-100; }
-.btn-hollow-default:active:not(:disabled):not(.disabled) { @apply bg-gray-100; }
+.btn-hollow-default:active:not(:disabled):not(.disabled) { @apply bg-gray-200; }
 
-.btn-hollow-blue                                         { @apply text-blue-500 border-blue-400; }
-.btn-hollow-blue:hover:not(:disabled):not(.disabled)     { @apply text-white bg-blue-500 border-blue-500; }
-.btn-hollow-blue:active:not(:disabled):not(.disabled)    { @apply bg-blue-500 border-blue-500; }
+.btn-hollow-blue                                         { @apply text-blue-600 border-blue-400; }
+.btn-hollow-blue:hover:not(:disabled):not(.disabled)     { @apply bg-blue-100 border-blue-500; }
+.btn-hollow-blue:active:not(:disabled):not(.disabled)    { @apply bg-blue-200 border-blue-500; }
 
-.btn-hollow-turquoise                                      { @apply text-turquoise-500 border-turquoise-400; }
-.btn-hollow-turquoise:hover:not(:disabled):not(.disabled)  { @apply text-white bg-turquoise-500 border-turquoise-500; }
-.btn-hollow-turquoise:active:not(:disabled):not(.disabled) { @apply bg-turquoise-500 border-turquoise-500; }
+.btn-hollow-turquoise                                      { @apply text-turquoise-600 border-turquoise-400; }
+.btn-hollow-turquoise:hover:not(:disabled):not(.disabled)  { @apply bg-turquoise-100 border-turquoise-500; }
+.btn-hollow-turquoise:active:not(:disabled):not(.disabled) { @apply bg-turquoise-200 border-turquoise-500; }
 
-.btn-hollow-purple                                       { @apply text-purple-500 border-purple-400; }
-.btn-hollow-purple:hover:not(:disabled):not(.disabled)   { @apply text-white bg-purple-500 border-purple-500; }
-.btn-hollow-purple:active:not(:disabled):not(.disabled)  { @apply bg-purple-500 border-purple-500; }
+.btn-hollow-purple                                       { @apply text-purple-600 border-purple-400; }
+.btn-hollow-purple:hover:not(:disabled):not(.disabled)   { @apply bg-purple-100 border-purple-500; }
+.btn-hollow-purple:active:not(:disabled):not(.disabled)  { @apply bg-purple-200 border-purple-500; }
 
-.btn-hollow-green                                        { @apply text-green-500 border-green-400; }
-.btn-hollow-green:hover:not(:disabled):not(.disabled)    { @apply text-white bg-green-500 border-green-500; }
-.btn-hollow-green:active:not(:disabled):not(.disabled)   { @apply bg-green-500 border-green-500; }
+.btn-hollow-green                                        { @apply text-green-600 border-green-400; }
+.btn-hollow-green:hover:not(:disabled):not(.disabled)    { @apply bg-green-100 border-green-500; }
+.btn-hollow-green:active:not(:disabled):not(.disabled)   { @apply bg-green-200 border-green-500; }
 
-.btn-hollow-red                                          { @apply text-red-500 border-red-400; }
-.btn-hollow-red:hover:not(:disabled):not(.disabled)      { @apply text-white bg-red-500 border-red-500; }
-.btn-hollow-red:active:not(:disabled):not(.disabled)     { @apply bg-red-500 border-red-500; }
+.btn-hollow-red                                          { @apply text-red-600 border-red-400; }
+.btn-hollow-red:hover:not(:disabled):not(.disabled)      { @apply bg-red-100 border-red-500; }
+.btn-hollow-red:active:not(:disabled):not(.disabled)     { @apply bg-red-200 border-red-500; }
 
 
 /* Subtle Buttons */
@@ -312,7 +313,7 @@
 .table-white .tr:hover .td { @apply bg-blue-100 }
 
 /* General .th & .td */
-.td, .th { @apply font-normal p-3 }
+.td, .th { @apply font-normal py-3 px-2 }
 .td { @apply border-white bg-gray-100 transition-colors duration-200 }
 .th { @apply border-gray-800 bg-gray-900 text-left text-white }
 

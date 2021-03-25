@@ -3,8 +3,8 @@
     <template v-slot:hud>
       <h1 class="h1 text-white">{{buyer.name}}</h1>
       <div class="hud--stat-cards">
-        <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
-        <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
+        <stat-card v-if="buyer.parent" :data="buyer.parent" title="Parent"></stat-card>
+        <stat-card :data="buyer.client" title="Client"></stat-card>
         <status-card :status="buyer.status"></status-card>
       </div>
     </template>

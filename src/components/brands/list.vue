@@ -20,7 +20,9 @@
         </td>
         <td class="td">{{brand.id}}</td>
         <td class="td">
-          <table-link @table-link-click="linkToBrandCampuses(brand)">{{ brand.campuses.length }}</table-link>
+          <table-link @table-link-click="linkToBrandCampuses(brand)"
+                      :number="brand.campuses.length"
+          ></table-link>
         </td>
         <td class="td">{{brand.alias}}</td>
         <td class="td">{{brand.website}}</td>

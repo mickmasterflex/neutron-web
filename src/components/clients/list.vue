@@ -18,10 +18,14 @@
           <td class="td">{{client.id}}</td>
           <td class="td">{{client.slug}}</td>
           <td class="td">
-            <table-link @table-link-click="linkToClientContracts(client)">{{buyers(client.buyercontract_set).length}}</table-link>
+            <table-link @table-link-click="linkToClientContracts(client)"
+                        :number="buyers(client.buyercontract_set).length"
+            ></table-link>
           </td>
           <td class="td">
-            <table-link @table-link-click="linkToClientContracts(client)">{{partners(client.partnercontract_set).length}}</table-link>
+            <table-link @table-link-click="linkToClientContracts(client)"
+                        :number="partners(client.partnercontract_set).length"
+            ></table-link>
           </td>
         </tr>
       </tbody>

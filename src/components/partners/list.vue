@@ -40,10 +40,14 @@
             <caps-count :caps="contract.caps"></caps-count>
           </td>
           <td class="td">
-            <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
+            <table-link @table-link-click="linkToPartnerContracts(contract)"
+                        :number="contract.children.length"
+            ></table-link>
           </td>
           <td class="td">
-            <table-link @table-link-click="linkToPartnerContractCampaigns(contract)">{{ contract.campaigns.length }}</table-link>
+            <table-link @table-link-click="linkToPartnerContractCampaigns(contract)"
+                        :number="contract.campaigns.length"
+            ></table-link>
           </td>
         </tr>
       </tbody>

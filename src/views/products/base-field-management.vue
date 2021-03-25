@@ -3,7 +3,7 @@
     <template v-slot:hud>
       <h1 class="h1 text-white">Fields</h1>
       <div class="hud--stat-cards">
-        <stat-card :data="baseFieldCount" :title="`Fields`" :color="`teal`"></stat-card>
+        <stat-card :data="baseFieldCount" :title="`Fields`"></stat-card>
       </div>
     </template>
     <template v-slot:content>

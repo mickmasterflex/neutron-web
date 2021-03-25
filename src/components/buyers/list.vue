@@ -32,14 +32,18 @@
           <td class="td w-16">{{ contract.id }}</td>
           <td class="td">{{ contract.client }}</td>
           <td class="td">
-            <table-link @table-link-click="linkToBuyerContracts(contract)">{{ contract.children.length }} </table-link>
+            <table-link @table-link-click="linkToBuyerContracts(contract)"
+                        :number="contract.children.length"
+            ></table-link>
           </td>
           <td class="td">{{ contract.rpl }}</td>
           <td class="td">
             <caps-count :caps="contract.caps"></caps-count>
           </td>
           <td class="td">
-           <table-link @table-link-click="linkToBuyerOffers(contract)">{{ contract.offer_contracts.length }}</table-link>
+           <table-link @table-link-click="linkToBuyerOffers(contract)"
+                       :number="contract.offer_contracts.length"
+           ></table-link>
           </td>
         </tr>
       </tbody>
