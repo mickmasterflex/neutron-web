@@ -329,12 +329,6 @@ const routes = [
           activeAppTab: 'buyer-stats',
           contentTab: 'contracts'
         },
-        props (route) {
-          const props = { ...route.params }
-          props.id = +props.id
-          props.clientId = +props.clientId
-          return props
-        },
         pathToRegexpOptions: { strict: true }
       },
       {

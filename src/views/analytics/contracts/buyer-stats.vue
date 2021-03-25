@@ -5,7 +5,6 @@
         contract-route-name="BuyerStatsContract"
         leads-route-name="BuyerStatsContractLeads"
         :is-client-contracts="$route.name === 'BuyerStatsClientContracts'"
-        :parent-contract-id="id"
       >
         <template v-slot:additional-th>
           <th class="th">Offers</th>
@@ -25,12 +24,13 @@
 <script>
 import analyticsPanelTemplate from '@/components/analytics/panel-template'
 import contractsList from '@/components/analytics/contracts-list'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  props: {
-    id: Number,
-    clientId: Number
+  computed: {
+    ...mapGetters({
+      client: 'getCurrentClientStats'
+    })
   },
   methods: {
     ...mapMutations({
@@ -42,7 +42,7 @@ export default {
       this.setCurrent(contract)
       this.$router.push({
         name: 'BuyerStatsContractOffers',
-        params: { id: contract.id, clientId: this.clientId },
+        params: { id: contract.id, clientId: this.client.id },
         query: this.$route.query
       })
     }
