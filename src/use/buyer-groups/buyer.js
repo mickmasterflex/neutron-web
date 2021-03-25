@@ -13,7 +13,7 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
     ),
     disabled: computed(
       () => computedState.descendantsInAnotherGroupCount > 0 ||
-        state.buyer.ancestor_buyer_groups !== null
+        state.buyer.ancestor_buyer_group !== null
     ),
     indeterminate: computed(
       () => !checkboxState.checked &&
@@ -43,8 +43,8 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
     ),
     buyerInheritsCurrentBuyerGroup: computed(
       () => {
-        if (state.buyer.ancestor_buyer_groups) {
-          return state.buyer.ancestor_buyer_groups.buyer_group === currentBuyerGroupId.value
+        if (state.buyer.ancestor_buyer_group) {
+          return state.buyer.ancestor_buyer_group.buyer_group === currentBuyerGroupId.value
         }
       }
     )

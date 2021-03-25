@@ -35,7 +35,7 @@ export default {
       status: undefined,
       buyerGroup: undefined,
       scheduledStart: null,
-      client: { id: null, name: null }
+      client: null
     }
   },
   props: {

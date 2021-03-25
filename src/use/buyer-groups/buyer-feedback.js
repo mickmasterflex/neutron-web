@@ -15,10 +15,10 @@ export default function useBuyerFeedback (buyerId, computedState, checkboxState)
       () => computedState.descendantsInAnotherGroupCount > 0
     ),
     inheritsBuyerGroup: computed(
-      () => state.buyer.ancestor_buyer_groups !== null
+      () => state.buyer.ancestor_buyer_group !== null
     ),
     childrenAssignedSelfUnassigned: computed(
-      () => checkboxState.checkedImplied && state.buyer.ancestor_buyer_groups === null
+      () => checkboxState.checkedImplied && state.buyer.ancestor_buyer_group === null
     ),
     hasUserFeedback: computed(
       () => {

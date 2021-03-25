@@ -54,7 +54,7 @@ const actions = {
   async updateBuyerChildrenInheritedGroup ({ commit, dispatch, getters }, children) {
     children.forEach(childId => {
       const buyer = getters.getBuyerById(childId)
-      buyer.ancestor_buyer_groups = getters.getCurrentBuyerGroupRelationshipData
+      buyer.ancestor_buyer_group = getters.getCurrentBuyerGroupRelationshipData
       buyer.buyer_group = null
       dispatch('removeAllBuyerGroupDescendants', buyer.id)
       commit('UPDATE_BUYER', buyer)

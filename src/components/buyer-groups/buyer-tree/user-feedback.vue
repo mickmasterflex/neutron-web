@@ -13,7 +13,7 @@
           Conflicting Descendant Buyer Group: Unassign children to modify <span class="font-bold capitalize">{{ obj.name }}</span>.
         </span>
     <span v-else-if="userFeedbackState.inheritsBuyerGroup">
-          Inherits buyer group from the parent<span v-if=" obj.ancestor_buyer_groups"> with id <span class="font-bold capitalize">{{ obj.ancestor_buyer_groups.contract }}</span></span>. Unassign parent to modify.
+          Inherits buyer group from the parent<span v-if=" obj.ancestor_buyer_group"> with id <span class="font-bold capitalize">{{ obj.ancestor_buyer_group.contract }}</span></span>. Unassign parent to modify.
         </span>
     <span v-else-if="userFeedbackState.childrenAssignedSelfUnassigned">
           Not assigned to a buyer group, but all direct children assigned to <span class="font-bold capitalize">{{ currentBuyerGroup.name }}</span>.
