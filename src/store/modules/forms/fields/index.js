@@ -26,7 +26,6 @@ const mutations = {
   UPDATE_FIELD: (state, updatedField) => {
     const index = state.current_form[updatedField.type].findIndex(field => field.id === updatedField.data.id)
     if (index !== -1) {
-      // const data = updatedField.data
       state.current_form[updatedField.type].splice(index, 1, updatedField.data)
     }
   },

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Contract Fields">
+  <base-panel-grid>
+    <panel-template class="col-span-2" title="Contract Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Contract Fields">
       <template v-slot:action>
         <create-field></create-field>
       </template>
@@ -9,9 +9,9 @@
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
-    <panel-template title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
+    <panel-template class="col-span-2" title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
       <template v-slot:action>
-        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon>Add Field</button>
+        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
       </template>
       <template v-slot:content>
         <list-injected-fields></list-injected-fields>
@@ -19,7 +19,7 @@
     </panel-template>
     <update-injected-field></update-injected-field>
     <create-injected-field></create-injected-field>
-  </div>
+  </base-panel-grid>
 </template>
 
 <script>
