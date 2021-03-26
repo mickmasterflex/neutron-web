@@ -17,11 +17,10 @@ export const baseContractBreadcrumbs = {
       this.$data.clientBreadcrumb.text = this.client.name
     },
     loading () {
-      this.setBreadcrumbs(this.breadcrumbs)
+      if (this.loading === false) {
+        this.setBreadcrumbs(this.breadcrumbs)
+      }
     }
-  },
-  created () {
-    this.setBreadcrumbs(this.breadcrumbs)
   },
   methods: {
     ...mapMutations({

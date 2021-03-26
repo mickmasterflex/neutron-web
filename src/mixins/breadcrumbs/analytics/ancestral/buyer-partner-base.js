@@ -11,15 +11,10 @@ export const baseContractBreadcrumbs = {
       this.$data.clientBreadcrumb.text = this.client.name
     },
     loading () {
-      this.setBreadcrumbsWithAncestors()
+      if (this.loading === false) {
+        this.setBreadcrumbsWithAncestors()
+      }
     }
-  },
-  created () {
-    this.setBreadcrumbs([
-      this.$data.clientsBreadcrumb,
-      this.$data.clientBreadcrumb,
-      this.$data.contractBreadcrumb
-    ])
   },
   computed: {
     ...mapGetters({
