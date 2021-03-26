@@ -12,7 +12,7 @@
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
           <router-link :to="{
           name: contractsRouteName,
-          params: { clientId: clientId, id: id },
+          params: { clientId: $route.params.clientId, id: id },
           query: $route.query
         }">Contracts <label-number :number="contracts.length"></label-number></router-link>
         </li>
@@ -21,7 +21,7 @@
             :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
           <router-link :to="{
                      name: leadsRouteName,
-                     params: { clientId: clientId, id: id },
+                     params: { clientId: $route.params.clientId, id: id },
                      query: $route.query
           }">Leads <label-number :number="leadCount"></label-number></router-link>
         </li>
@@ -39,12 +39,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: {
-    clientId: Number,
     id: Number,
-    contract: {
-      type: Object,
-      required: true
-    },
     leadsRouteName: {
       type: String,
       required: true,
@@ -71,6 +66,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      contract: 'getCurrentContractStats',
       leadCount: 'getAnalyticsTotalLeadCount',
       contractsByParent: 'getCurrentStatsContractsByParent'
     }),

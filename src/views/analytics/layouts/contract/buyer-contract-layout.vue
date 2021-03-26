@@ -1,7 +1,5 @@
 <template>
-  <contract-layout :contract="contract"
-                   :clientId="clientId"
-                   :id="id"
+  <contract-layout :id="id"
                    contracts-route-name="BuyerStatsContractContracts"
                    leads-route-name="BuyerStatsContractLeads"
                    :fetch-contract-stats="fetchBuyerContractStats"
@@ -31,7 +29,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentContractStats',
       offersByParent: 'getCurrentStatsOffersByParent'
     }),
     offers () {
