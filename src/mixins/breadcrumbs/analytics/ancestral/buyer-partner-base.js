@@ -5,10 +5,10 @@ export const baseContractBreadcrumbs = {
   mixins: [setBreadcrumbsWithAncestors],
   watch: {
     contract () {
-      this.$data.contractBreadcrumb.text = this.contract.name
+      this.contractBreadcrumb.text = this.contract.name
     },
     client () {
-      this.$data.clientBreadcrumb.text = this.client.name
+      this.clientBreadcrumb.text = this.client.name
     },
     loading () {
       if (this.loading === false) {

@@ -43,7 +43,7 @@ export const offerContractBreadcrumbs = {
   },
   watch: {
     offer () {
-      this.$data.offerBreadcrumb.text = this.offer.name
+      this.offerBreadcrumb.text = this.offer.name
     }
   }
 }

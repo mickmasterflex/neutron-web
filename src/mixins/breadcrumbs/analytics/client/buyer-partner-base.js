@@ -4,8 +4,8 @@ export const baseContractBreadcrumbs = {
   computed: {
     breadcrumbs () {
       return [
-        this.$data.clientsBreadcrumb,
-        this.$data.clientBreadcrumb
+        this.clientsBreadcrumb,
+        this.clientBreadcrumb
       ]
     },
     ...mapGetters({
@@ -14,7 +14,7 @@ export const baseContractBreadcrumbs = {
   },
   watch: {
     client () {
-      this.$data.clientBreadcrumb.text = this.client.name
+      this.clientBreadcrumb.text = this.client.name
     },
     loading () {
       if (this.loading === false) {

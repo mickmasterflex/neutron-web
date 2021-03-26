@@ -43,7 +43,7 @@ export const campaignContractBreadcrumbs = {
   },
   watch: {
     campaign () {
-      this.$data.campaignBreadcrumb.text = this.campaign.name
+      this.campaignBreadcrumb.text = this.campaign.name
     }
   }
 }

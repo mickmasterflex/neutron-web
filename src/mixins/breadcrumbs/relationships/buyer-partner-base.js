@@ -23,10 +23,10 @@ export const baseContractBreadcrumbs = {
   methods: {
     setBreadcrumbText () {
       if (this.contract) {
-        this.$data.contractBreadcrumb.text = this.contract.name
+        this.contractBreadcrumb.text = this.contract.name
       }
       if (this.contract.client) {
-        this.$data.clientBreadcrumb.text = this.contract.client_data.name
+        this.clientBreadcrumb.text = this.contract.client_data.name
       }
     }
   }

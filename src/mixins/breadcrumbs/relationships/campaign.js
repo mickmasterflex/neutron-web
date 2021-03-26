@@ -39,13 +39,13 @@ export const campaignContractBreadcrumbs = {
   methods: {
     setBreadcrumbText () {
       if (this.campaign.contract) {
-        this.$data.contractBreadcrumb.text = this.campaign.contract_data.name
+        this.contractBreadcrumb.text = this.campaign.contract_data.name
       }
       if (this.campaign.client) {
-        this.$data.clientBreadcrumb.text = this.campaign.client_data.name
+        this.clientBreadcrumb.text = this.campaign.client_data.name
       }
       if (this.campaign) {
-        this.$data.campaignBreadcrumb.text = this.campaign.name
+        this.campaignBreadcrumb.text = this.campaign.name
       }
     }
   }

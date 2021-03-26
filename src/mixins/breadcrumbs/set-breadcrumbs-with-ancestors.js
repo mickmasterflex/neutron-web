@@ -7,12 +7,12 @@ export const setBreadcrumbsWithAncestors = {
         this.setBreadcrumbText()
       }
       const breadcrumbs = [
-        this.$data.clientsBreadcrumb,
-        this.$data.clientBreadcrumb
+        this.clientsBreadcrumb,
+        this.clientBreadcrumb
       ]
       this.ancestors.forEach(ancestor => {
         breadcrumbs.push({
-          name: this.$data.contractBreadcrumb.name,
+          name: this.contractBreadcrumb.name,
           text: ancestor.name,
           params: {
             clientId: this.$route.params.clientId,
@@ -21,18 +21,18 @@ export const setBreadcrumbsWithAncestors = {
           query: this.$route.query
         })
       })
-      breadcrumbs.push(this.$data.contractBreadcrumb)
-      if (this.$data.offersBreadcrumb) {
-        breadcrumbs.push(this.$data.offersBreadcrumb)
+      breadcrumbs.push(this.contractBreadcrumb)
+      if (this.offersBreadcrumb) {
+        breadcrumbs.push(this.offersBreadcrumb)
       }
-      if (this.$data.offerBreadcrumb) {
-        breadcrumbs.push(this.$data.offerBreadcrumb)
+      if (this.offerBreadcrumb) {
+        breadcrumbs.push(this.offerBreadcrumb)
       }
-      if (this.$data.campaignsBreadcrumb) {
-        breadcrumbs.push(this.$data.campaignsBreadcrumb)
+      if (this.campaignsBreadcrumb) {
+        breadcrumbs.push(this.campaignsBreadcrumb)
       }
-      if (this.$data.campaignBreadcrumb) {
-        breadcrumbs.push(this.$data.campaignBreadcrumb)
+      if (this.campaignBreadcrumb) {
+        breadcrumbs.push(this.campaignBreadcrumb)
       }
       this.setBreadcrumbs(breadcrumbs)
     },
