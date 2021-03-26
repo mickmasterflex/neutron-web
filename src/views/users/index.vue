@@ -1,10 +1,10 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">All Users</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="getAllUsersCount" title="Users"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="getAllUsersCount" title="Users" key="userCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:content>
       <panel-template title="Users" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
@@ -41,10 +41,16 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ fetchUsers: 'fetchUsers' }),
-    ...mapMutations({ showCreateUserModal: 'SHOW_CREATE_USER_MODAL' })
+    ...mapActions({
+      fetchUsers: 'fetchUsers'
+    }),
+    ...mapMutations({
+      showCreateUserModal: 'SHOW_CREATE_USER_MODAL',
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchUsers()
   }
 }

@@ -103,21 +103,6 @@
 
 
 /* ------------------------------------------------
-    HUD
---------------------------------------------------- */
-
-.hud { @apply bg-gray-900 rounded-xl w-full p-8 grid grid-cols-1 items-center border-3 border-gray-500 }
-
-@media screen and (min-width: 1024px) {
-    .hud { @apply grid-cols-2; }
-}
-
-.hud--stat-cards {
-    @apply col-auto items-center border-l border-gray-800 pl-4
-}
-
-
-/* ------------------------------------------------
     Wells
 --------------------------------------------------- */
 

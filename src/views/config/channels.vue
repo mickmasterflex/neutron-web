@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">All Channels</h1>
     </template>
     <template v-slot:content>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import getAllChannels from '@/components/channels/list'
 import createChannel from '@/components/channels/create'
 
@@ -36,9 +36,13 @@ export default {
   methods: {
     ...mapActions({
       fetchChannels: 'fetchChannels'
+    }),
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchChannels()
   }
 }

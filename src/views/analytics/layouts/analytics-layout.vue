@@ -1,19 +1,23 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <slot name="hud">
         <div>
-          <h1 class="text-white text-4xl font-hairline mb-2">{{ hudTitle }}</h1>
+          <h1
+            :class="loading ? 'animate__animated animate__flash animate__slower' : ''"
+            class="text-white text-4xl font-hairline mb-2">
+            {{ loading ? 'Loading...' : hudTitle }}
+          </h1>
         </div>
         <hud-stat-cards>
           <slot name="statCards"></slot>
-          <stat-card :data="leadCount" title="Leads" color="green" key="leadCountStatCard" :comma-separated="true"></stat-card>
-          <stat-card :data="soldCount" title="Sold" color="green" key="soldCountStatCard" :comma-separated="true"></stat-card>
-          <stat-card :data="revenue" title="Revenue" color="green" key="revenueStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-          <stat-card :data="margin" title="Margin" color="green" key="marginStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-          <stat-card :data="payout" title="Payout" color="green" key="payoutStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
-          <stat-card :data="scrubRate" title="Scrub Rate" color="green" key="scrubRateStatCard" ></stat-card>
-          <stat-card :data="marginPercent" title="Margin Percent" key="marginPercentStatCard" ></stat-card>
+          <stat-card :data="leadCount" :loading="loading" title="Leads" color="green" key="leadCountStatCard" :comma-separated="true"></stat-card>
+          <stat-card :data="soldCount" :loading="loading" title="Sold" color="green" key="soldCountStatCard" :comma-separated="true"></stat-card>
+          <stat-card :data="revenue" :loading="loading" title="Revenue" color="green" key="revenueStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
+          <stat-card :data="margin" :loading="loading" title="Margin" color="green" key="marginStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
+          <stat-card :data="payout" :loading="loading" title="Payout" color="green" key="payoutStatCard" :comma-separated="true" :dollar-amount="true"></stat-card>
+          <stat-card :data="scrubRate" :loading="loading" title="Scrub Rate" color="green" key="scrubRateStatCard" ></stat-card>
+          <stat-card :data="marginPercent" :loading="loading" title="Margin Percent" key="marginPercentStatCard" ></stat-card>
         </hud-stat-cards>
       </slot>
     </template>
@@ -33,8 +37,7 @@ import dayjs from 'dayjs'
 export default {
   props: {
     hudTitle: {
-      type: String,
-      default: 'Loading'
+      type: String
     },
     fetchStats: {
       type: Function,
@@ -60,7 +63,8 @@ export default {
       payout: 'getAnalyticsTotalPayout',
       scrubRate: 'getAnalyticsTotalScrubRate',
       marginPercent: 'getAnalyticsTotalMarginPercent',
-      analyticsDateRange: 'getAnalyticsDateRange'
+      analyticsDateRange: 'getAnalyticsDateRange',
+      loading: 'getAnalyticsFetchLoading'
     })
   },
   watch: {

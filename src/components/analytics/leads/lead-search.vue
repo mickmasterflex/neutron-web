@@ -1,23 +1,40 @@
 <template>
-  <div ref="form" class="">
-    <form @submit.prevent="submitForm">
-      <v-textarea-field
-        ref="searchField"
-        rules="required"
-        v-model="searchData"
-        field_id="searchparams"
-        :placeholder="`Search by ID or email address, separate with commas.\nie: example@gmail.com, 1234, test@gmail.com, 4567`"
-        field_class="w-full bg-gray-900 border-gray-700 text-gray-200"
-      ></v-textarea-field>
-    </form>
-    <button @click="submitForm()" class="btn btn-green mt-2">Search Leads</button>
-  </div>
+  <hud-panel ref="form" grid-classes="w-full">
+    <template v-slot:hud-content>
+      <hud-h1>Search All Leads</hud-h1>
+      <p class="text-gray-200">Search by ID or email address, separate with commas.</p>
+      <div class="flex flex-col items-start lg:flex-row lg:items-end mt-2">
+        <form @submit.prevent="submitForm" class="form">
+          <textarea-field
+            ref="searchField"
+            v-model="searchData"
+            field_id="searchparams"
+            placeholder="example@gmail.com, 1234, test@gmail.com, 4567"
+            field_class="w-full bg-gray-200"
+          ></textarea-field>
+        </form>
+        <button @click="submitForm()" class="btn btn-green my-2 lg:ml-4" :disabled="!searchData">Search Leads</button>
+      </div>
+    </template>
+  </hud-panel>
 </template>
+
+<style scoped>
+  .form {
+    width: 100%;
+  }
+  @media screen and (min-width: 800px) {
+    .form {
+      width: 500px;
+    }
+  }
+</style>
 
 <script>
 import { validate } from 'vee-validate'
 import { mapActions, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
+import hudPanel from '@/components/ui/hud/default'
 
 export default {
   data () {
@@ -66,10 +83,13 @@ export default {
       })
     },
     enterKeyAction () {
-      if (this.$refs.searchField.$refs.field.$refs.field === document.activeElement) {
+      if (this.$refs.searchField.$refs.field === document.activeElement && !!this.searchData) {
         this.submitForm()
       }
     }
+  },
+  components: {
+    'hud-panel': hudPanel
   },
   destroyed () {
     this.resetCurrentLeadSearch()

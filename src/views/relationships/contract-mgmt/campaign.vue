@@ -1,10 +1,10 @@
 <template>
   <content-layout v-if="campaign">
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">{{campaign.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="campaign.id" :title="`Campaign`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="campaign.id" title="Campaign" key="campaignId"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:content>
       <base-panel-grid>
@@ -22,6 +22,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import deleteCampaign from '@/components/campaigns/delete'
 import updateCampaign from '@/components/campaigns/update'
+import { campaignContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/campaign'
 
 export default {
   props: {
@@ -29,6 +30,7 @@ export default {
       type: Number
     }
   },
+  mixins: [campaignContractBreadcrumbs],
   components: {
     'delete-campaign': deleteCampaign,
     'update-campaign': updateCampaign
@@ -52,12 +54,16 @@ export default {
       if (this.campaign.id !== this.id) {
         await this.fetchCurrentCampaign(this.id)
       }
+    },
+    setCampaignWithTitleAndBreadcrumbs () {
+      this.setCampaign().then(() => {
+        document.title = this.campaign.name
+        this.setBreadcrumbsWithAncestors()
+      })
     }
   },
   created () {
-    this.setCampaign().then(() => {
-      document.title = this.campaign.name
-    })
+    this.setCampaignWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()

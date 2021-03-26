@@ -389,9 +389,13 @@ const routes = [
     ]
   },
   {
+    path: '/products/',
+    redirect: { name: 'Brands' }
+  },
+  {
     path: '/products/brands/',
     name: 'Brands',
-    component: () => import('@/views/products/index.vue'),
+    component: () => import('@/views/products/brands.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'products',
@@ -458,7 +462,7 @@ const routes = [
       },
       {
         name: 'CampusProducts',
-        path: 'education-products',
+        path: 'products/',
         component: () => import('@/views/products/campus/products.vue'),
         meta: {
           requiresAuth: true,
@@ -471,7 +475,7 @@ const routes = [
     ]
   },
   {
-    path: '/products/brands/:brand/campuses/education-products/:id/',
+    path: '/products/brands/:brand/campuses/:campus/products/:id/',
     component: () => import('@/views/products/education-product/index.vue'),
     props (route) {
       const props = { ...route.params }
@@ -520,7 +524,7 @@ const routes = [
   {
     path: '/config/pricing-tiers/',
     name: 'PricingTiers',
-    component: () => import('@/views/config/pricing-tiers/index.vue'),
+    component: () => import('@/views/config/pricing-tiers.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'config',
@@ -532,7 +536,7 @@ const routes = [
   {
     path: '/config/channels/',
     name: 'Channels',
-    component: () => import('@/views/config/channels/index.vue'),
+    component: () => import('@/views/config/channels.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'config',

@@ -1,11 +1,9 @@
 <template>
-  <contract-layout :contract="contract"
-                   :clientId="clientId"
-                   :key="id"
-                   :id="id"
+  <contract-layout :id="id"
                    contracts-route-name="BuyerStatsContractContracts"
                    leads-route-name="BuyerStatsContractLeads"
                    :fetch-contract-stats="fetchBuyerContractStats"
+                   :key="id"
   >
     <template v-slot:contentTab>
       <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
@@ -22,6 +20,7 @@
 <script>
 import contractLayout from '@/views/analytics/layouts/contract/layout'
 import { mapActions, mapGetters } from 'vuex'
+import { buyerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/buyer'
 
 export default {
   props: {
@@ -30,7 +29,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentContractStats',
       offersByParent: 'getCurrentStatsOffersByParent'
     }),
     offers () {
@@ -42,6 +40,7 @@ export default {
       fetchBuyerContractStats: 'fetchBuyerContractStats'
     })
   },
+  mixins: [buyerContractBreadcrumbs],
   components: {
     'contract-layout': contractLayout
   }

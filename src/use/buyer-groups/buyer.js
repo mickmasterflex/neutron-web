@@ -13,7 +13,7 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
     ),
     disabled: computed(
       () => computedState.descendantsInAnotherGroupCount > 0 ||
-        state.buyer.inherited_buyer_group !== null
+        state.buyer.ancestor_buyer_group !== null
     ),
     indeterminate: computed(
       () => !checkboxState.checked &&
@@ -43,8 +43,8 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
     ),
     buyerInheritsCurrentBuyerGroup: computed(
       () => {
-        if (state.buyer.inherited_buyer_group) {
-          return state.buyer.inherited_buyer_group.buyer_group === currentBuyerGroupId.value
+        if (state.buyer.ancestor_buyer_group) {
+          return state.buyer.ancestor_buyer_group.buyer_group === currentBuyerGroupId.value
         }
       }
     )
@@ -70,6 +70,7 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
     store.commit('SET_BUYER_GROUPS_LOADING')
     store.dispatch('updateBuyerGroupForBuyer', updatedBuyer).then(() => {
       store.commit('SET_CURRENT_BUYER_GROUP_RELATIONSHIP_DATA', null)
+    }).finally(() => {
       store.commit('RESET_BUYER_GROUPS_LOADING')
     })
   }

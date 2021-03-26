@@ -66,9 +66,9 @@ export default {
         if (success) {
           this.create({
             name: this.name,
+            client: this.client,
             parent: this.buyer,
             status: this.status,
-            client: this.client,
             scheduled_start: this.scheduledStart,
             offer_data: {
               product_id: parseInt(this.product_id)

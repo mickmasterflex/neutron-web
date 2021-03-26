@@ -7,7 +7,7 @@
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
-          <router-link :to="{ name: contractsRouteName, query: $route.query }">Contracts <label-number :number="contractsCount"></label-number></router-link>
+          <router-link :to="{ name: contractsRouteName, query: $route.query }">Contracts <label-number :number="contracts.length"></label-number></router-link>
         </li>
         <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
           <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <label-number :number="leadCount"></label-number></router-link>
@@ -46,14 +46,6 @@ export default {
     fetchClient: {
       type: Function,
       required: true
-    },
-    client: {
-      type: Object,
-      required: true
-    },
-    contractsCount: {
-      type: Number,
-      default: 0
     }
   },
   watch: {
@@ -63,7 +55,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      leadCount: 'getAnalyticsTotalLeadCount'
+      leadCount: 'getAnalyticsTotalLeadCount',
+      loading: 'getAnalyticsFetchLoading',
+      client: 'getCurrentClientStats',
+      contracts: 'getCurrentStatsContractsParentless'
     })
   },
   components: {

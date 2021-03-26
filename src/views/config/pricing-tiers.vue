@@ -1,6 +1,6 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">All Pricing Tiers</h1>
     </template>
     <template v-slot:content>
@@ -40,10 +40,12 @@ export default {
       fetchPricingTierGroups: 'fetchPricingTierGroups'
     }),
     ...mapMutations({
-      showCreatePricingTierGroupModal: 'SHOW_CREATE_PRICING_TIER_GROUP_MODAL'
+      showCreatePricingTierGroupModal: 'SHOW_CREATE_PRICING_TIER_GROUP_MODAL',
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchPricingTierGroups()
   }
 }

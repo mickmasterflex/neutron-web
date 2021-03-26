@@ -43,11 +43,21 @@ export default {
     ...mapGetters({
       getContractRelationsByBuyer: 'getContractRelationsByBuyer',
       getContractRelationsByPartner: 'getContractRelationsByPartner',
-      fetchLoading: 'getContractRelationsFetchLoading',
+      fetchRelationsLoading: 'getContractRelationsFetchLoading',
+      fetchBuyersLoading: 'getBuyersFetchLoading',
+      fetchPartnersLoading: 'getPartnersFetchLoading',
       fetchLoadingText: 'getContractRelationsFetchLoadingText',
       suppressionsPostLoading: 'getBulkUpdateSuppressionsPostLoading',
       suppressionsPostLoadingText: 'getBulkUpdateSuppressionsPostLoadingText'
     }),
+    fetchLoading () {
+      if (this.fetchPartnersLoading) {
+        return this.fetchPartnersLoading
+      } else if (this.fetchBuyersLoading) {
+        return this.fetchBuyersLoading
+      }
+      return this.fetchRelationsLoading
+    },
     loading () {
       return this.fetchLoading ? this.fetchLoading : this.suppressionsPostLoading
     },

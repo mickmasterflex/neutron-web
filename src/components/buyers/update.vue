@@ -34,7 +34,8 @@ export default {
       rpl: undefined,
       status: undefined,
       buyerGroup: undefined,
-      scheduledStart: null
+      scheduledStart: null,
+      client: null
     }
   },
   props: {
@@ -51,6 +52,7 @@ export default {
       this.rpl = this.buyer.rpl
       this.buyerGroup = this.buyer.buyer_group
       this.scheduledStart = this.buyer.scheduled_start
+      this.client = this.buyer.client
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -58,7 +60,7 @@ export default {
           this.update({
             name: this.name,
             parent: this.parent,
-            client: this.buyer.client,
+            client: this.client,
             id: this.buyer.id,
             rpl: this.rpl,
             buyer_group: this.buyerGroup,

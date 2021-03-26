@@ -1,9 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud>
-      <slot name="hud">
-        <lead-search></lead-search>
-      </slot>
+      <lead-search></lead-search>
     </template>
     <template v-slot:content>
       <panel-template
@@ -28,7 +26,7 @@
 import leadsList from '@/components/analytics/leads/lists/lead-search-list'
 import csvExport from '@/components/analytics/csv-stats-export'
 import leadSearch from '@/components/analytics/leads/lead-search'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -39,9 +37,15 @@ export default {
     })
   },
   methods: {
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    }),
     ...mapActions({
       searchLeadsCSV: 'searchLeadsCSV'
     })
+  },
+  created () {
+    this.resetBreadcrumbs()
   },
   components: {
     'csv-export': csvExport,
