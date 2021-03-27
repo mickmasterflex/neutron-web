@@ -4,7 +4,7 @@
       <slot name="action"></slot>
     </template>
     <template #tabs>
-      <panel-tabs>
+      <underscore-tabs-inset>
         <underscore-tab :active="contentTab === 'add'" size="sm">
           <span @click="showAdd()">Add</span>
         </underscore-tab>
@@ -14,7 +14,7 @@
         <underscore-tab :active="contentTab === 'search'" size="sm">
           <span @click="showSearch()">Search</span>
         </underscore-tab>
-      </panel-tabs>
+      </underscore-tabs-inset>
     </template>
     <template #content>
       <slot name="content"></slot>
@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import panelTabs from '@/components/ui/panels/base/tabs'
+import underscoreTabsInset from '@/components/ui/tabs/underscore/tabs-inset'
 import panelFooter from '@/components/ui/panels/base/footer'
 import downloadLocations from '@/components/geos/download-locations'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'panel-tabs': panelTabs,
+    'underscore-tabs-inset': underscoreTabsInset,
     'panel-footer': panelFooter,
     'download-locations': downloadLocations
   },

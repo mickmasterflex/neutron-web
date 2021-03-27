@@ -1,5 +1,5 @@
 <template>
-  <ul class="flex flex-row -mx-3">
+  <ul class="flex flex-row">
     <slot/>
   </ul>
 </template>

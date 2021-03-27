@@ -80,7 +80,7 @@ import hudStatCards from '@/components/ui/hud/stat-cards'
 import hudH1 from '@/components/ui/hud/h1'
 import label from '@/components/ui/label-number'
 import statCard from '@/components/ui/cards/stat-card'
-import underscoreTabs from '@/components/ui/tabs/underscore/index'
+import underscoreTabs from '@/components/ui/tabs/underscore/tabs-base'
 import underscoreTab from '@/components/ui/tabs/underscore/tab'
 
 /* Buttons */
