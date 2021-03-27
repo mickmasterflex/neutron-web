@@ -80,6 +80,8 @@ import hudStatCards from '@/components/ui/hud/stat-cards'
 import hudH1 from '@/components/ui/hud/h1'
 import label from '@/components/ui/label-number'
 import statCard from '@/components/ui/cards/stat-card'
+import underscoreTabs from '@/components/ui/tabs/underscore/index'
+import underscoreTab from '@/components/ui/tabs/underscore/tab'
 
 /* Buttons */
 import btnGroupRight from '@/components/ui/buttons/btn-group-right'
@@ -146,6 +148,10 @@ Vue.component('table-link', tableLink)
 Vue.component('td-date', tdDate)
 Vue.component('td-number', tdNumber)
 Vue.component('status-indicator', statusIndicator)
+
+// Tabs
+Vue.component('underscore-tabs', underscoreTabs)
+Vue.component('underscore-tab', underscoreTab)
 
 // Form Fields
 Vue.component('checkbox-field', checkboxField)
