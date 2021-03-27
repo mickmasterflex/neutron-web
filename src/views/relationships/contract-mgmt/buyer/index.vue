@@ -1,12 +1,11 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
-      <h1 class="h1 text-white">{{buyer.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card v-if="buyer.parent" :data="buyer.parent" :title="`Parent`" :color="`teal`"></stat-card>
-        <stat-card :data="buyer.client" :title="`Client`" :color="`teal`"></stat-card>
-        <status-card :status="buyer.status"></status-card>
-      </div>
+    <template v-slot:hud-content>
+      <h1 class="h1 text-white">{{contract.name}}</h1>
+      <hud-stat-cards>
+        <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
+        <status-card :status="contract.status" key="statusCard"></status-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
@@ -32,7 +31,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { buyerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/buyer'
 import statusCard from '@/components/ui/cards/status-card.vue'
+
 export default {
   components: {
     'status-card': statusCard
@@ -42,34 +43,40 @@ export default {
     id: Number,
     client: String
   },
+  mixins: [buyerContractBreadcrumbs],
+  computed: {
+    ...mapGetters({
+      contract: 'getCurrentBuyer'
+    })
+  },
   methods: {
     ...mapActions({
       fetchCurrentBuyer: 'fetchCurrentBuyer'
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BUYER',
-      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
+      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setBuyer () {
-      if (this.buyer.id !== this.id) {
+      if (this.contract.id !== this.id) {
         await this.fetchCurrentBuyer(this.id)
       }
+    },
+    setBuyerWithTitleAndBreadcrumbs () {
+      this.setBuyer().then(() => {
+        document.title = this.contract.name
+        this.setBreadcrumbsWithAncestors()
+      })
     }
   },
-  computed: {
-    ...mapGetters({
-      buyer: 'getCurrentBuyer'
-    })
-  },
   watch: {
-    id: function () {
-      this.fetchCurrentBuyer(this.id)
+    id () {
+      this.setBuyerWithTitleAndBreadcrumbs()
     }
   },
   created () {
-    this.setBuyer().then(() => {
-      document.title = this.buyer.name
-    })
+    this.setBuyerWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()

@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="px-8 pt-8">
-      <div class="hud">
-        <slot name="hud"></slot>
-      </div>
+      <slot name="hud">
+        <hud-panel>
+          <template v-slot:hud-content>
+            <slot name="hud-content"></slot>
+          </template>
+        </hud-panel>
+      </slot>
       <slot name="contentTabs"></slot>
     </div>
     <div :class="`px-8 pt-5 ${contentTabsBorder}`">
@@ -13,6 +17,8 @@
 </template>
 
 <script>
+import hudPanel from '@/components/ui/hud/default'
+
 export default {
   computed: {
     contentTabsBorder () {
@@ -22,6 +28,9 @@ export default {
         return ''
       }
     }
+  },
+  components: {
+    'hud-panel': hudPanel
   }
 }
 </script>

@@ -15,7 +15,7 @@ const state = {
 const getters = {
   getCurrentEducationProduct: state => state.current_education_product,
   getEducationProductsByCampus: (state) => (campusId) => {
-    return state.education_products.filter(educationProduct => educationProduct.product_group === campusId)
+    return state.education_products.filter(educationProduct => educationProduct.campus_data.id === campusId)
   }
 }
 

@@ -3,19 +3,19 @@
     <table v-if="campaigns.length" class="table table-striped">
       <thead>
         <tr>
-          <th class="th">Name</th>
           <th class="th">ID</th>
+          <th class="th">Name</th>
           <th class="th">Contract</th>
           <th class="th">Campaign Code</th>
         </tr>
       </thead>
       <tbody class="tbody">
         <tr class="tr" v-for="campaign in this.campaigns" :key="campaign.id">
+          <td class="td">{{ campaign.id }}</td>
           <td class="td">
             <span @click="linkToCampaign(campaign)" class="text-link">{{campaign.name}}</span>
           </td>
-          <td class="td">{{ campaign.id }}</td>
-          <td class="td">{{ campaign.contract }}</td>
+          <td class="td">{{ campaign.contract_data.name }}</td>
           <td class="td">{{ campaign.code }}</td>
         </tr>
       </tbody>

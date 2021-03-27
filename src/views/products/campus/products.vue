@@ -2,7 +2,7 @@
   <div>
     <panel-template title="Education Products" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
       <template slot="action">
-        <button class="btn btn-turquoise" @click="showCreateEducationProductModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Education Product</button>
+        <button class="btn btn-turquoise" :disabled="!campus.id" @click="showCreateEducationProductModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Education Product</button>
       </template>
       <template slot="content">
         <education-product-list :educationProducts="educationProducts"></education-product-list>

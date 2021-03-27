@@ -2,7 +2,7 @@
   <div>
     <panel-template title="Campuses List" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
       <template slot="action">
-        <button class="btn btn-turquoise" @click="showCreateCampusModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campus</button>
+        <button class="btn btn-turquoise" :disabled="!brand.id" @click="showCreateCampusModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campus</button>
       </template>
       <template slot="content">
         <campus-list :campuses="campuses"></campus-list>

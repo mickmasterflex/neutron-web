@@ -15,12 +15,7 @@
           <td class="td w-16">{{buyer.id}}</td>
           <td class="td w-24">{{buyer.children.length}}</td>
           <td class="td">
-            <span v-if="getClientById(buyer.client)">
-              {{getClientById(buyer.client).name}}
-            </span>
-            <span v-else>
-              {{buyer.client}}
-            </span>
+            {{buyer.client_data.name}}
           </td>
         </tr>
       </tbody>
@@ -30,16 +25,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: {
     buyers: Array,
     buyerGroup: Number
-  },
-  computed: {
-    ...mapGetters({
-      getClientById: 'getClientById'
-    })
   }
 }
 </script>

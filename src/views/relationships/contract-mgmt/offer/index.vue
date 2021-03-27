@@ -1,11 +1,11 @@
 <template>
   <content-layout v-if="offer">
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">{{offer.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="offer.id" :title="`Offer`" :color="`teal`"></stat-card>
-        <status-card :status="offer.status"></status-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="offer.id" title="Offer" key="offerId"></stat-card>
+        <status-card :status="offer.status" key="statusCard"></status-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
@@ -24,6 +24,7 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/offer'
 import statusCard from '@/components/ui/cards/status-card'
 
 export default {
@@ -37,6 +38,7 @@ export default {
     client: String,
     buyer: Number
   },
+  mixins: [offerContractBreadcrumbs],
   computed: {
     ...mapGetters({
       offer: 'getCurrentOffer'
@@ -53,12 +55,16 @@ export default {
       if (this.offer.id !== this.id) {
         await this.fetchCurrentOffer(this.id)
       }
+    },
+    setOfferWithTitleAndBreadcrumbs () {
+      this.setOffer().then(() => {
+        document.title = this.offer.name
+        this.setBreadcrumbsWithAncestors()
+      })
     }
   },
   created () {
-    this.setOffer().then(() => {
-      document.title = this.offer.name
-    })
+    this.setOfferWithTitleAndBreadcrumbs()
   },
   destroyed () {
     this.resetCurrent()

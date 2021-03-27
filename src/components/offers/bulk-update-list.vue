@@ -1,5 +1,5 @@
 <template>
-  <offers-list :offers="offers">
+  <offers-list :offers="offers" v-bind="$attrs">
     <template v-slot:additional-th>
       <th class="th"></th>
     </template>

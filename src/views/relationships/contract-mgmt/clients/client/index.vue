@@ -1,11 +1,11 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">{{client.name}}</h1>
-      <div class="hud--stat-cards">
-        <stat-card :data="partners.length" :title="`Partner Contracts`" :color="`teal`"></stat-card>
-        <stat-card :data="buyers.length" :title="`Buyer Contracts`" :color="`teal`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="partners.length" title="Partner Contracts" key="partnerCount"></stat-card>
+        <stat-card :data="buyers.length" title="Buyer Contracts" key="buyerCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <ul class="underscore-tabs">
@@ -57,17 +57,25 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_CLIENT',
-      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS'
+      resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setClient () {
       if (this.client.slug !== this.slug) {
         await this.fetchCurrentClient(this.slug)
       }
+    },
+    setClientBreadcrumbsAndTitle () {
+      document.title = this.client.name
+      this.setBreadcrumbs([
+        { name: 'Clients', text: 'Clients' },
+        { name: 'Client', text: this.client.name, params: { slug: this.$route.params.slug } }
+      ])
     }
   },
   created () {
     this.setClient().then(() => {
-      document.title = this.client.name
+      this.setClientBreadcrumbsAndTitle()
     })
     if (!this.allBuyers.length) {
       this.fetchBuyers()

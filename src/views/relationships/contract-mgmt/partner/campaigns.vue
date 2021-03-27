@@ -2,13 +2,13 @@
   <div>
     <panel-template title="Campaigns List" :showLoader="loading" :loadingText="loadingText" content-background-color="white">
       <template slot="action">
-        <button class="btn btn-turquoise" @click="showCreateCampaignModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campaign</button>
+        <button :disabled="createCampaignDisabled" class="btn btn-turquoise" @click="showCreateCampaignModal()"><font-awesome-icon icon="plus"></font-awesome-icon> New Campaign</button>
       </template>
       <template slot="content">
         <campaign-list :campaigns="campaigns" :client="$route.params.client"></campaign-list>
       </template>
     </panel-template>
-    <create-campaign :partner="partner.id"></create-campaign>
+    <create-campaign v-if="!createCampaignDisabled" :partner="partner.id"></create-campaign>
   </div>
 </template>
 
@@ -27,6 +27,9 @@ export default {
     }),
     campaigns: function () {
       return this.getCampaignsByPartner(this.partner.id)
+    },
+    createCampaignDisabled () {
+      return !this.partner
     }
   },
   methods: {

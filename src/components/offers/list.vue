@@ -4,21 +4,20 @@
       <thead>
         <tr>
           <slot name="additional-th"></slot>
-          <th class="th">Name</th>
           <th class="th">ID</th>
-          <th class="th">Contract</th>
+          <th class="th">Name</th>
           <th class="th">Status</th>
+          <th class="th">Contract</th>
           <th class="th">Caps</th>
         </tr>
       </thead>
       <tbody class="tbody">
         <tr class="tr" v-for="(offer, index) in offers" :key="offer.id">
           <slot name="additional-td" :offer="offer" :index="index"></slot>
+          <td class="td">{{ offer.id }}</td>
           <td class="td">
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
-          <td class="td">{{ offer.id }}</td>
-          <td class="td">{{ offer.parent }}</td>
           <td class="td w-32">
             <status-indicator :red="offer.status === 'terminated'"
                               :green="offer.status === 'active'"
@@ -26,7 +25,10 @@
               {{ offer.status }}
             </status-indicator>
           </td>
-            <td class="td">{{ offer.cap }}</td>
+          <td class="td">{{ offer.parent_data.name }}</td>
+          <td class="td">
+            <caps-count :caps="offer.caps"></caps-count>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -40,10 +42,13 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
+  components: {
+    'caps-count': capsCount
+  },
   props: {
-    contracts: Array,
     offers: Array,
     client: String,
     emptyStateHeading: {
@@ -65,7 +70,14 @@ export default {
       this.setCurrentOffer(offer)
       this.setCurrentForm(offer.form)
       this.sortCurrentFormFields()
-      this.$router.push({ name: 'OfferDetails', params: { client: this.client, buyer: offer.parent, id: offer.id } })
+      this.$router.push({
+        name: 'OfferDetails',
+        params: {
+          client: offer.client_data.slug,
+          buyer: offer.parent,
+          id: offer.id
+        }
+      })
     }
   }
 }

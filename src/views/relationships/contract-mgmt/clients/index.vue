@@ -34,10 +34,12 @@ export default {
       fetchClients: 'fetchClients'
     }),
     ...mapMutations({
-      showCreateClientModal: 'SHOW_CREATE_CLIENT_MODAL'
+      showCreateClientModal: 'SHOW_CREATE_CLIENT_MODAL',
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
     })
   },
   created () {
+    this.resetBreadcrumbs()
     this.fetchClients()
   }
 }

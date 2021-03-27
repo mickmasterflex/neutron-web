@@ -4,12 +4,13 @@
       <thead>
         <tr>
           <th class="th w-4"></th>
+          <th class="th w-16">Id</th>
           <th class="th w-64">Name</th>
           <th class="th w-32">Status</th>
-          <th class="th w-16">Id</th>
           <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
-          <th class="th">Children</th>
+          <th class="th">Caps</th>
+          <th class="th">Contracts</th>
           <th class="th">Campaigns</th>
         </tr>
       </thead>
@@ -18,6 +19,7 @@
           <td class="td w-4">
             <bulk-update-checkbox :contract="contract.id" :contracts="contracts" :index="index"></bulk-update-checkbox>
           </td>
+          <td class="td w-16">{{ contract.id }}</td>
           <td class="td">
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
           </td>
@@ -28,18 +30,24 @@
               {{ contract.status }}
             </status-indicator>
           </td>
-          <td class="td w-16">{{ contract.id }}</td>
-          <td class="td">{{ contract.client }}</td>
+          <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">
             <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
             </span>
             <span v-else class="italic text-gray-500">None</span>
           </td>
           <td class="td">
-            <table-link @table-link-click="linkToPartnerContracts(contract)">{{ contract.children.length }} </table-link>
+            <caps-count :caps="contract.caps"></caps-count>
           </td>
           <td class="td">
-            <table-link @table-link-click="linkToPartnerContractCampaigns(contract)">{{ contract.campaigns.length }}</table-link>
+            <table-link @table-link-click="linkToPartnerContracts(contract)"
+                        :number="contract.children.length"
+            ></table-link>
+          </td>
+          <td class="td">
+            <table-link @table-link-click="linkToPartnerContractCampaigns(contract)"
+                        :number="contract.campaigns.length"
+            ></table-link>
           </td>
         </tr>
       </tbody>
@@ -54,6 +62,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
+import capsCount from '@/components/caps/caps-count'
 
 export default {
   props: {
@@ -88,7 +97,8 @@ export default {
     }
   },
   components: {
-    'bulk-update-checkbox': bulkUpdateCheckbox
+    'bulk-update-checkbox': bulkUpdateCheckbox,
+    'caps-count': capsCount
   },
   destroyed () {
     this.resetShiftClickIndex()
