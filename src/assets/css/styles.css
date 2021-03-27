@@ -421,24 +421,6 @@
 
 
 /* ------------------------------------------------
-    Underscore Tabs
---------------------------------------------------- */
-
-.underscore-tabs { @apply flex flex-row -mx-3; }
-.underscore-tab {
-    @apply
-    font-normal text-gray-800
-    border-b-4 border-transparent
-    transition-colors duration-300;
-}
-.underscore-tab > * { @apply cursor-pointer; }
-.underscore-tab-sm > * { @apply block pt-2 pb-1 px-2 text-base; }
-.underscore-tab-lg > * { @apply block pt-6 pb-4 px-4 text-lg; }
-.underscore-tab.active { @apply text-gray-900 font-bold border-red-500; }
-.underscore-tab:hover:not(.active) { @apply text-gray-900 border-gray-300; }
-
-
-/* ------------------------------------------------
     Image List Item
 --------------------------------------------------- */
 
