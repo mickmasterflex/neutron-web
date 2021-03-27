@@ -5,15 +5,15 @@
     </template>
     <template #tabs>
       <panel-tabs>
-        <li class="underscore-tab underscore-tab-sm" :class="contentTab === 'add' ? 'active' : ''">
+        <underscore-tab :active="contentTab === 'add'" size="sm">
           <span @click="showAdd()">Add</span>
-        </li>
-        <li class="underscore-tab underscore-tab-sm" :class="contentTab === 'remove' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="contentTab === 'remove'" size="sm">
           <span @click="showRemove()">Remove</span>
-        </li>
-        <li class="underscore-tab underscore-tab-sm" :class="contentTab === 'search' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="contentTab === 'search'" size="sm">
           <span @click="showSearch()">Search</span>
-        </li>
+        </underscore-tab>
       </panel-tabs>
     </template>
     <template #content>

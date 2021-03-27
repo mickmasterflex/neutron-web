@@ -8,20 +8,20 @@
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
-      <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'details'">
           <router-link :to="{name: 'BuyerContract', params: {id:id, client: client}}">Buyer Details</router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'contracts'">
           <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts</router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'offers'">
           <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers</router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'field-management' ? 'active' : ''" >
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'field-management'">
           <router-link :to="{name: 'BuyerContractFieldManagement', params: {id:id, client: client}}">Field Management</router-link>
-        </li>
-      </ul>
+        </underscore-tab>
+      </underscore-tabs>
     </template>
     <template v-slot:content>
       <router-view/>

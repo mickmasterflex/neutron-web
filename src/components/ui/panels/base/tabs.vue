@@ -1,5 +1,5 @@
 <template>
-  <ul class="underscore-tabs bg-white mx-0 px-3 border-t border-gray-200">
+  <underscore-tabs class="bg-white mx-0 px-3 border-t border-gray-200">
     <slot/>
-  </ul>
+  </underscore-tabs>
 </template>

@@ -6,13 +6,13 @@
                    :key="id"
   >
     <template v-slot:contentTab>
-      <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
+      <underscore-tab :active="$route.meta.contentTab === 'offers'">
         <router-link :to="{
           name: 'BuyerStatsContractOffers',
           params: { clientId: clientId, id: id },
           query: $route.query
         }">Offers <label-number :number="offers.length"></label-number></router-link>
-      </li>
+      </underscore-tab>
     </template>
   </contract-layout>
 </template>
