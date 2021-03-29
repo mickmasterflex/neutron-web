@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
@@ -26,18 +26,14 @@ export default {
         default: null,
         type: Number
       },
-      updateComponent: null,
-      ancestorForms: []
+      updateComponent: null
     }
   },
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',
       offerFetchLoading: 'getOfferFetchLoading',
-      buyerFetchLoading: 'getBuyerFetchLoading',
-      getFormByContract: 'getFormByContract',
-      getAllForms: 'getAllFormsTest',
-      buyer: 'getCurrentBuyer'
+      buyerFetchLoading: 'getBuyerFetchLoading'
     }),
     loading () {
       if (this.$route.name === 'OfferFieldManagement') {
@@ -47,17 +43,9 @@ export default {
     }
   },
   methods: {
-    setAncestorForms () {
-      this.buyer.ancestors.forEach(ancestor => {
-        this.ancestorForms.push(this.getFormByContract(ancestor))
-      })
-    },
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
-    }),
-    ...mapActions({
-      fetchForms: 'fetchForms'
     }),
     async setUpdateComponent (component) {
       this.updateComponent = component
@@ -85,14 +73,7 @@ export default {
       } else {
         this.currentFieldId = null
       }
-    },
-    getAllForms () {
-      console.log(this.getAllForms)
-      this.setAncestorForms()
     }
-  },
-  created () {
-    this.fetchForms()
   }
 }
 </script>
