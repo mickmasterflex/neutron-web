@@ -26,11 +26,11 @@
 import { mapGetters, mapMutations } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
-import createInjectedField from '@/components/forms/fields/injected-fields/create'
+import createInjectedField from '@/components/forms/injected-fields/fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
-import listInjectedFields from '@/components/forms/fields/injected-fields/list'
-import updateInjectedField from '@/components/forms/fields/injected-fields/update'
+import listInjectedFields from '@/components/forms/injected-fields/fields/list'
+import updateInjectedField from '@/components/forms/injected-fields/fields/update'
 
 export default {
   data () {

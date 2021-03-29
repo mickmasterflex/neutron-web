@@ -32,7 +32,7 @@
 <script>
 
 import { mapMutations, mapGetters } from 'vuex'
-import deleteInjectedField from '@/components/forms/fields/injected-fields/delete'
+import deleteInjectedField from '@/components/forms/injected-fields/fields/delete'
 
 export default {
   components: {
