@@ -8,24 +8,23 @@
       <slot name="statCards"></slot>
     </template>
     <template v-slot:contentTabs>
-      <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'contracts' ? 'active' : ''">
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'contracts'">
           <router-link :to="{
           name: contractsRouteName,
           params: { clientId: $route.params.clientId, id: id },
           query: $route.query
         }">Contracts <label-number :number="contracts.length"></label-number></router-link>
-        </li>
+        </underscore-tab>
         <slot name="contentTab"></slot>
-        <li class="underscore-tab underscore-tab-lg"
-            :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
+        <underscore-tab :active="$route.meta.contentTab === 'leads'">
           <router-link :to="{
                      name: leadsRouteName,
                      params: { clientId: $route.params.clientId, id: id },
                      query: $route.query
           }">Leads <label-number :number="leadCount"></label-number></router-link>
-        </li>
-      </ul>
+        </underscore-tab>
+      </underscore-tabs>
     </template>
     <template v-slot:content>
       <router-view></router-view>

@@ -7,14 +7,14 @@
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
-      <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'details'">
           <router-link :to="{name: 'CampusDetails', params: { id: id, brand: $route.params.brand }}">Campus Details</router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'products' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'products'">
           <router-link :to="{name: 'CampusProducts', params: { id: id, brand: $route.params.brand }}">Products</router-link>
-        </li>
-      </ul>
+        </underscore-tab>
+      </underscore-tabs>
     </template>
     <template v-slot:content>
       <router-view></router-view>

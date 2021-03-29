@@ -4,14 +4,14 @@
     :fetch-stats="fetchClients"
   >
     <template v-slot:contentTabs>
-      <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'clients'">
           <router-link :to="{ name: clientsRouteName, query: $route.query }">Clients <label-number :number="clientsCount"></label-number></router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'leads' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'leads'">
           <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <label-number :number="leadCount"></label-number></router-link>
-        </li>
-      </ul>
+        </underscore-tab>
+      </underscore-tabs>
     </template>
     <template v-slot:content>
       <router-view></router-view>
