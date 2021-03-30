@@ -510,12 +510,12 @@ const routes = [
     ]
   },
   {
-    path: '/products/fields/',
+    path: '/config/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/base-field-management.vue'),
+    component: () => import('@/views/products/base-field-management/index.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'products',
+      activeApp: 'config',
       activeAppTab: 'field-mgmt',
       title: 'Field Management'
     },
