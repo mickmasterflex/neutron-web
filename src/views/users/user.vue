@@ -1,13 +1,13 @@
 <template>
   <content-layout v-if="user">
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <div>
         <h1 class="h1 text-white">{{user.first_name}} {{user.last_name}}</h1>
         <p class="text-white">{{user.email}}</p>
       </div>
-      <div class="hud--stat-cards">
-        <stat-card :data="user.id" :title="`User ID`" :color="`teal`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card :data="user.id" title="User ID" key="userId"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:content>
       <base-panel-grid>
@@ -49,7 +49,8 @@ export default {
       fetchCurrentUser: 'fetchCurrentUser'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_USER'
+      resetCurrent: 'RESET_CURRENT_USER',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setUser () {
       if (this.user.id !== this.id) {
@@ -60,6 +61,10 @@ export default {
   created () {
     this.setUser().then(() => {
       document.title = this.user.first_name + '  ' + this.user.last_name
+      this.setBreadcrumbs([
+        { name: 'Users', text: 'All Users' },
+        { name: 'User', text: this.user.first_name + ' ' + this.user.last_name, params: { id: this.id } }
+      ])
     })
   },
   destroyed () {

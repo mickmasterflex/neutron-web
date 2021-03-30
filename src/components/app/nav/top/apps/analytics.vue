@@ -1,6 +1,8 @@
 <template>
   <ul class="flex flex-row">
     <top-nav-item label="Lead Data" route="Analytics" :active="activeTab === 'lead-data'"></top-nav-item>
+    <top-nav-item label="Buyer Stats" route="BuyerStats" :active="activeTab === 'buyer-stats'" :query="$route.query"></top-nav-item>
+    <top-nav-item label="Partner Stats" route="PartnerStats" :active="activeTab === 'partner-stats'" :query="$route.query"></top-nav-item>
   </ul>
 </template>
 

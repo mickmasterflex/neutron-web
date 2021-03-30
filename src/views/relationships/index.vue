@@ -1,21 +1,21 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">Overview</h1>
-      <div class="hud--stat-cards">
-        <stat-card v-if="getAllClientsCount > 0" :data="getAllClientsCount" :title="`Clients`" :color="`teal`"></stat-card>
-        <stat-card v-if="getBuyerGroups" :data="getBuyerGroups.length" :title="`Buyer Groups`" :color="`teal`"></stat-card>
-      </div>
+      <hud-stat-cards>
+        <stat-card v-if="getAllClientsCount > 0" :data="getAllClientsCount" title="Clients" key="clientCount"></stat-card>
+        <stat-card v-if="getBuyerGroups" :data="getBuyerGroups.length" title="Buyer Groups" key="buyerGroupCount"></stat-card>
+      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
-      <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'clients' ? 'active' : ''">
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'clients'">
           <router-link :to="{name: 'Clients'}">Clients</router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'buyerGroups' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'buyerGroups'">
           <router-link :to="{name: 'BuyerGroups'}">Buyer Groups</router-link>
-        </li>
-      </ul>
+        </underscore-tab>
+      </underscore-tabs>
     </template>
     <template v-slot:content>
       <router-view></router-view>

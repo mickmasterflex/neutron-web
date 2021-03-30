@@ -1,17 +1,17 @@
 <template>
   <content-layout>
-    <template v-slot:hud>
+    <template v-slot:hud-content>
       <h1 class="h1 text-white">{{product.name}}</h1>
     </template>
     <template v-slot:contentTabs>
-      <ul class="underscore-tabs">
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'details' ? 'active' : ''">
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'details'">
           <router-link :to="{name: 'ProductDetails', params: {id:id}}">Product Details</router-link>
-        </li>
-        <li class="underscore-tab underscore-tab-lg" :class="$route.meta.contentTab === 'offers' ? 'active' : ''">
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'offers'">
           <router-link :to="{name: 'ProductOffers', params: {id:id}}">Offers</router-link>
-        </li>
-      </ul>
+        </underscore-tab>
+      </underscore-tabs>
     </template>
     <template v-slot:content>
       <router-view></router-view>
@@ -31,12 +31,24 @@ export default {
       fetchCurrentEducationProduct: 'fetchCurrentEducationProduct'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT'
+      resetCurrent: 'RESET_CURRENT_EDUCATION_PRODUCT',
+      setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
     async setEducationProduct () {
       if (this.product.id !== this.id) {
         await this.fetchCurrentEducationProduct(this.id)
       }
+    },
+    setProductBreadcrumbsAndTitle () {
+      document.title = this.product.name
+      this.setBreadcrumbs([
+        { name: 'Brands', text: 'Brands' },
+        { name: 'BrandDetails', text: this.product.brand_data.name, params: { id: this.$route.params.brand } },
+        { name: 'BrandCampuses', text: 'Campuses', params: { id: this.$route.params.brand } },
+        { name: 'CampusDetails', text: this.product.campus_data.name, params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
+        { name: 'CampusProducts', text: 'Products', params: { brand: this.$route.params.brand, id: this.$route.params.campus } },
+        { name: 'CampusDetails', text: this.product.name, params: { brand: this.$route.params.brand, id: this.id } }
+      ])
     }
   },
   computed: {
@@ -46,7 +58,7 @@ export default {
   },
   created () {
     this.setEducationProduct().then(() => {
-      document.title = this.product.name
+      this.setProductBreadcrumbsAndTitle()
     })
   },
   destroyed () {

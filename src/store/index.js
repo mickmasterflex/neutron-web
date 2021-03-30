@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import analytics from '@/store/modules/analytics'
 import app from './modules/app'
 import auth from './modules/authentication'
 import buyers from './modules/buyers'
@@ -28,6 +29,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    analytics,
     app,
     auth,
     buyers,

@@ -20,6 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faAngleLeft,
   faAngleRight,
+  faArrowRight,
   faArrowsAltV,
   faBan,
   faCalendarAlt,
@@ -29,6 +30,7 @@ import {
   faCheck,
   faCheckCircle,
   faCheckSquare,
+  faCircle,
   faClone,
   faCog,
   faDna,
@@ -39,6 +41,8 @@ import {
   faFileCsv,
   faImage,
   faKey,
+  faLock,
+  faLockOpen,
   faMinus,
   faMinusSquare,
   faPencilAlt,
@@ -72,8 +76,12 @@ import baseTooltipDialog from '@/components/ui/tooltips/dialog'
 import baseModal from '@/components/ui/modals/base'
 import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
-import hudStatCards from '@/components/ui/hud-stat-cards'
+import hudStatCards from '@/components/ui/hud/stat-cards'
+import hudH1 from '@/components/ui/hud/h1'
+import label from '@/components/ui/label-number'
 import statCard from '@/components/ui/cards/stat-card'
+import underscoreTabs from '@/components/ui/tabs/underscore/tabs-base'
+import underscoreTab from '@/components/ui/tabs/underscore/tab'
 
 /* Buttons */
 import btnGroupRight from '@/components/ui/buttons/btn-group-right'
@@ -82,6 +90,8 @@ import btnGroupRight from '@/components/ui/buttons/btn-group-right'
 import statusIndicator from '@/components/ui/tables/status-indicator'
 import tableEmptyState from '@/components/ui/tables/empty-state'
 import tableLink from '@/components/ui/tables/table-link'
+import tdDate from '@/components/ui/tables/td-date'
+import tdNumber from '@/components/ui/tables/td-number'
 
 /* Field Components */
 import checkboxField from '@/components/ui/forms/base-fields/checkbox'
@@ -121,11 +131,13 @@ Vue.component('content-layout', baseContentLayout)
 
 Vue.component('stat-card', statCard)
 Vue.component('hud-stat-cards', hudStatCards)
+Vue.component('hud-h1', hudH1)
 Vue.component('modal-template', baseModal)
 Vue.component('tooltip-dialog-template', baseTooltipDialog)
 Vue.component('panel-template', basePanel)
 Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)
+Vue.component('label-number', label)
 
 // Buttons
 Vue.component('btn-group-right', btnGroupRight)
@@ -133,7 +145,13 @@ Vue.component('btn-group-right', btnGroupRight)
 // Tables
 Vue.component('table-empty-state', tableEmptyState)
 Vue.component('table-link', tableLink)
+Vue.component('td-date', tdDate)
+Vue.component('td-number', tdNumber)
 Vue.component('status-indicator', statusIndicator)
+
+// Tabs
+Vue.component('underscore-tabs', underscoreTabs)
+Vue.component('underscore-tab', underscoreTab)
 
 // Form Fields
 Vue.component('checkbox-field', checkboxField)
@@ -211,6 +229,7 @@ configure({
 library.add(
   faAngleLeft,
   faAngleRight,
+  faArrowRight,
   faArrowsAltV,
   faBan,
   faCalendarAlt,
@@ -220,6 +239,7 @@ library.add(
   faCheck,
   faCheckCircle,
   faCheckSquare,
+  faCircle,
   faClone,
   faCog,
   faDna,
@@ -230,6 +250,8 @@ library.add(
   faFileCsv,
   faImage,
   faKey,
+  faLock,
+  faLockOpen,
   faMinus,
   faMinusSquare,
   faPencilAlt,
