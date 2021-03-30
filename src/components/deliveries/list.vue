@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="deliveries.length" class="table table-white">
+    <table v-if="allDeliveries.length" class="table table-white">
       <thead>
         <tr>
           <th class="th">Type</th>
@@ -10,17 +10,21 @@
         </tr>
       </thead>
       <tbody class="tbody">
-      <tr class="tr" v-for="delivery in deliveries" :key="delivery.id">
-        <td class="td">{{ delivery.type }}</td>
-        <td class="td">{{ delivery.response_parser }}</td>
-        <td class="td">{{ delivery.target }}</td>
-        <td class="td">
+        <delivery-tr v-for="delivery in deliveries" :key="delivery.id" :delivery="delivery">
           <btn-group-right>
             <delete-delivery :id="delivery.id"></delete-delivery>
             <button class="btn btn-circle btn-hollow-blue" @click="showSetDelivery(delivery)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           </btn-group-right>
-        </td>
-      </tr>
+        </delivery-tr>
+        <tr-td-section-heading :colspan="5" v-if="ancestorDeliveries.length">
+          Inherited Deliveries
+        </tr-td-section-heading>
+        <delivery-tr v-for="delivery in ancestorDeliveries" :key="delivery.id" :delivery="delivery">
+          <router-link :to="{ name: 'BuyerContract', params: { id: delivery.buyer_contract, client: currentBuyer.client_data.slug } }"
+                       class="text-link text-right w-full text-right">
+            {{ currentBuyer.ancestors.filter(b => b.id === delivery.buyer_contract)[0].name }}
+          </router-link>
+        </delivery-tr>
       </tbody>
     </table>
     <table-empty-state v-else heading="No Deliveries Added" copy="Use the 'Create Delivery' button to add deliveries to this contract."></table-empty-state>
@@ -28,13 +32,31 @@
 </template>
 
 <script>
-import deleteDelivery from '@/components/deliveries/delete'
+import deleteDelivery from './delete'
+import deliveryTr from './tr'
 
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'delete-delivery': deleteDelivery
+    'delete-delivery': deleteDelivery,
+    'delivery-tr': deliveryTr
+  },
+  computed: {
+    ...mapGetters({
+      getDeliveriesByBuyers: 'getDeliveriesByBuyers',
+      getDeliveriesByAncestors: 'getDeliveriesByAncestors',
+      currentBuyer: 'getCurrentBuyer'
+    }),
+    ancestorDeliveries () {
+      if (this.currentBuyer.ancestors) {
+        return this.getDeliveriesByAncestors(this.currentBuyer.ancestors)
+      }
+      return []
+    },
+    allDeliveries () {
+      return this.deliveries.concat(this.ancestorDeliveries)
+    }
   },
   methods: {
     ...mapMutations({
