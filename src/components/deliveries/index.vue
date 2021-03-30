@@ -30,11 +30,19 @@ export default {
   computed: {
     ...mapGetters({
       getDeliveriesByBuyer: 'getDeliveriesByBuyer',
-      loading: 'getDeliveriesFetchLoading',
-      loadingText: 'getDeliveriesFetchLoadingText'
+      loadingDeliveries: 'getDeliveriesFetchLoading',
+      loadingDeliveriesText: 'getDeliveriesFetchLoadingText',
+      loadingBuyer: 'getBuyerFetchLoading',
+      loadingBuyerText: 'getBuyerFetchLoadingText'
     }),
     deliveries () {
       return this.getDeliveriesByBuyer(this.buyer)
+    },
+    loading () {
+      return this.loadingDeliveries ? this.loadingDeliveries : this.loadingBuyer
+    },
+    loadingText () {
+      return this.loadingDeliveries ? this.loadingDeliveriesText : this.loadingBuyerText
     }
   },
   methods: {
