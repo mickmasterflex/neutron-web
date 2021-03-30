@@ -1,7 +1,7 @@
 <template>
   <tr class="tr">
     <td :colspan="colspan"
-        class="font-bold px-3 py-3 bg-gray-200 border-r-2 border-l-2">
+        class="font-bold px-2 py-3 bg-gray-200 border-r-2 border-l-2">
       <slot></slot>
     </td>
   </tr>
