@@ -1,11 +1,9 @@
 import textFields from '@/store/modules/forms/fields/text-fields'
 import optionFields from '@/store/modules/forms/fields/option-fields'
-import injectedFields from '@/store/modules/forms/fields/injected-fields'
 
 const modules = {
   textFields,
-  optionFields,
-  injectedFields
+  optionFields
 }
 
 const state = {

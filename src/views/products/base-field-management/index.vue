@@ -12,7 +12,7 @@
           <router-link :to="{name: 'BaseFields'}">Base Fields</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'injectedFieldTypes'">
-          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Field Types</router-link>
+          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Fields</router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
