@@ -19,8 +19,8 @@ const getters = {
   getDeliveriesByBuyer: (state) => (buyerId) => {
     return state.deliveries.filter(delivery => delivery.buyer_contract === buyerId)
   },
-  getDeliveriesByAncestors: (state) => (ancestors) => {
-    return state.deliveries.filter(delivery => ancestors.some(ancestor => ancestor.id === delivery.buyer_contract))
+  getDeliveriesByBuyers: (state) => (buyers) => {
+    return state.deliveries.filter(deliveries => buyers.includes(deliveries.buyer_contract))
   }
 }
 

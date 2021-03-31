@@ -6,11 +6,12 @@
           <th class="th">Type</th>
           <th class="th">Response Parser</th>
           <th class="th">Target</th>
+          <th class="th w-40">Revenue Method</th>
           <th class="th"></th>
         </tr>
       </thead>
       <tbody class="tbody">
-        <delivery-tr v-for="delivery in deliveries" :key="delivery.id" :delivery="delivery">
+        <delivery-tr v-for="delivery in deliveries" :key="'delivery' + delivery.id" :delivery="delivery">
           <btn-group-right>
             <delete-delivery :id="delivery.id"></delete-delivery>
             <button class="btn btn-circle btn-hollow-blue" @click="showSetDelivery(delivery)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
@@ -19,10 +20,10 @@
         <tr-td-section-heading :colspan="5" v-if="ancestorDeliveries.length">
           Inherited Deliveries
         </tr-td-section-heading>
-        <delivery-tr v-for="delivery in ancestorDeliveries" :key="delivery.id" :delivery="delivery">
-          <router-link :to="{ name: 'BuyerContract', params: { id: delivery.buyer_contract, client: currentBuyer.client_data.slug } }"
+        <delivery-tr v-for="delivery in ancestorDeliveries" :key="'delivery' + delivery.id" :delivery="delivery">
+          <router-link :to="{ name: 'BuyerContract', params: { id: delivery.buyer_contract, client: clientSlug } }"
                        class="text-link text-right w-full text-right">
-            {{ currentBuyer.ancestors.filter(b => b.id === delivery.buyer_contract)[0].name }}
+            {{ ancestors.filter(b => b.id === delivery.buyer_contract)[0].name }}
           </router-link>
         </delivery-tr>
       </tbody>
@@ -35,25 +36,23 @@
 import deleteDelivery from './delete'
 import deliveryTr from './tr'
 
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
+  props: {
+    deliveries: Array,
+    ancestorDeliveries: Array,
+    ancestors: Array,
+    clientSlug: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     'delete-delivery': deleteDelivery,
     'delivery-tr': deliveryTr
   },
   computed: {
-    ...mapGetters({
-      getDeliveriesByBuyers: 'getDeliveriesByBuyers',
-      getDeliveriesByAncestors: 'getDeliveriesByAncestors',
-      currentBuyer: 'getCurrentBuyer'
-    }),
-    ancestorDeliveries () {
-      if (this.currentBuyer.ancestors) {
-        return this.getDeliveriesByAncestors(this.currentBuyer.ancestors)
-      }
-      return []
-    },
     allDeliveries () {
       return this.deliveries.concat(this.ancestorDeliveries)
     }
@@ -67,9 +66,6 @@ export default {
       this.setCurrentDelivery(delivery)
       this.showUpdateDeliveryModal()
     }
-  },
-  props: {
-    deliveries: Array
   }
 }
 </script>
