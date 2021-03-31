@@ -1,9 +1,9 @@
 <template>
   <tr class="tr">
-    <td :colspan="colspan"
-        class="h4 px-3 py-3 bg-gray-200 border-r-2 border-l-2">
+    <th :colspan="colspan"
+        class="h4 px-3 py-3 bg-gray-200 border-r-2 border-l-2 text-left">
       <slot></slot>
-    </td>
+    </th>
   </tr>
 </template>
 

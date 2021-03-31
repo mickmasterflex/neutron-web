@@ -17,9 +17,9 @@
             <button class="btn btn-circle btn-hollow-blue" @click="showSetDelivery(delivery)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           </btn-group-right>
         </delivery-tr>
-        <tr-td-section-heading :colspan="5" v-if="ancestorDeliveries.length">
+        <tr-th-section-heading :colspan="5" v-if="ancestorDeliveries.length">
           Inherited Deliveries
-        </tr-td-section-heading>
+        </tr-th-section-heading>
         <delivery-tr v-for="delivery in ancestorDeliveries" :key="'delivery' + delivery.id" :delivery="delivery">
           <router-link :to="{ name: 'BuyerContract', params: { id: delivery.buyer_contract, client: clientSlug } }"
                        class="text-link text-right w-full text-right">

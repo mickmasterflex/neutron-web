@@ -92,7 +92,7 @@ import tableEmptyState from '@/components/ui/tables/empty-state'
 import tableLink from '@/components/ui/tables/table-link'
 import tdDate from '@/components/ui/tables/td-date'
 import tdNumber from '@/components/ui/tables/td-number'
-import trTdSectionHeading from '@/components/ui/tables/tr-td-section-heading'
+import trThSectionHeading from '@/components/ui/tables/tr-th-section-heading'
 
 /* Field Components */
 import checkboxField from '@/components/ui/forms/base-fields/checkbox'
@@ -148,7 +148,7 @@ Vue.component('table-empty-state', tableEmptyState)
 Vue.component('table-link', tableLink)
 Vue.component('td-date', tdDate)
 Vue.component('td-number', tdNumber)
-Vue.component('tr-td-section-heading', trTdSectionHeading)
+Vue.component('tr-th-section-heading', trThSectionHeading)
 Vue.component('status-indicator', statusIndicator)
 
 // Tabs
