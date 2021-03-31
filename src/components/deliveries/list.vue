@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="allDeliveries.length" class="table table-white">
+    <table v-if="deliveries.length || ancestorDeliveries.length" class="table table-white">
       <thead>
         <tr>
           <th class="th">Type</th>
@@ -51,11 +51,6 @@ export default {
   components: {
     'delete-delivery': deleteDelivery,
     'delivery-tr': deliveryTr
-  },
-  computed: {
-    allDeliveries () {
-      return this.deliveries.concat(this.ancestorDeliveries)
-    }
   },
   methods: {
     ...mapMutations({
