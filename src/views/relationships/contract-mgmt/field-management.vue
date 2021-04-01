@@ -48,7 +48,11 @@ export default {
   methods: {
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
-      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
+      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
+      resetAncestorForms: 'RESET_ANCESTOR_FORMS' // fixme: where do we wanna do this? in each index view?
+    }),
+    ...mapActions({
+      fetchForms: 'fetchForms'
     }),
     async setUpdateComponent (component) {
       this.updateComponent = component
@@ -77,6 +81,10 @@ export default {
         this.currentFieldId = null
       }
     }
+  },
+  created () {
+    this.resetAncestorForms()
+    this.fetchForms()
   }
 }
 </script>
