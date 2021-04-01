@@ -5,7 +5,7 @@
         <create-field></create-field>
       </template>
       <template v-slot:content>
-        <list-fields></list-fields>
+        <list-fields :clientSlug="client"></list-fields>
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
