@@ -7,7 +7,9 @@
       field_size="field-sm"
       field_wrap_class="field-draggable"
       v-model="this.order"
-      :field_id="`fieldOrder_${this.field.id}`"/>
+      :field_id="`fieldOrder_${this.field.id}`"
+      v-if="reorderable"
+    /><text-field v-else field_size="field-sm" :value="this.order" field_disabled="true"/>
     <text-field field_size="field-sm" :value="this.field.id" field_disabled="true"/>
     <text-field :value="this.field.label" field_disabled="true"/>
     <text-field :value="this.field.mapping" field_disabled="true"/>
@@ -25,7 +27,11 @@ export default {
       type: Object,
       required: true
     },
-    newOrder: Number
+    newOrder: Number,
+    reorderable: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
