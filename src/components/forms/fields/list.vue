@@ -33,6 +33,9 @@ import { dragOptions } from '@/mixins/drag-options'
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    clientSlug: String
+  },
   components: {
     'delete-field': deleteField,
     'set-current-field': setCurrentField,

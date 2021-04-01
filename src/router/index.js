@@ -718,6 +718,11 @@ const routes = [
           activeApp: 'relationships',
           contentTab: 'field-management'
         },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          return props
+        },
         pathToRegexpOptions: { strict: true }
       },
       {
