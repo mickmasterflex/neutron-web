@@ -14,7 +14,6 @@
 
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
-import createInjectedFieldType from '@/components/forms/injected-fields/types/create'
 import listInjectedFieldTypes from '@/components/forms/injected-fields/types/list'
 
 export default {
@@ -28,7 +27,7 @@ export default {
       showCreateInjectedFieldTypeModal: 'SHOW_CREATE_INJECTED_FIELD_TYPE_MODAL'
     }),
     ...mapActions({
-      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
+      fetchInjectedFieldTypes: 'getInjectedFieldTypes'
     })
   },
   computed: {
@@ -37,8 +36,7 @@ export default {
     })
   },
   components: {
-    createInjectedFieldType,
-    'list-injected-field-type': listInjectedFieldTypes
+    'list-injected-field-types': listInjectedFieldTypes
   },
   created () {
     this.fetchInjectedFieldTypes()

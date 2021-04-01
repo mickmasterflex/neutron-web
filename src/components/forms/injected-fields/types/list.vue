@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      form: 'getCurrentForm'
+      injectedFieldTypes: 'getInjectedFieldTypes'
     })
   },
   methods: {

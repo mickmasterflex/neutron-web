@@ -10,7 +10,8 @@ const state = {
   current_injected_field_type: null
 }
 const getters = {
-  getCurrentInjectedFieldType: state => state.current_injected_field_type
+  getCurrentInjectedFieldType: state => state.current_injected_field_type,
+  getInjectedFieldTypes: state => state.injected_field_types
 }
 
 const actions = {
