@@ -13,7 +13,6 @@
           <v-select-field
             :loading="baseFieldsLoading"
             rules="required"
-            field_class="field-tall"
             v-model="baseField"
             field_label="Base Field"
             field_id="baseFieldSelectToClone"

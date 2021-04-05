@@ -13,7 +13,6 @@
           <v-select-field :options="newRelationContracts()"
                           v-model="selectedContract"
                           rules="required"
-                          field_class="field-tall"
                           field_label="Contract"
                           field_id="contractNewRelation">
           </v-select-field>
