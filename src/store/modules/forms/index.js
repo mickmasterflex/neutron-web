@@ -1,10 +1,12 @@
 import fields from '@/store/modules/forms/fields'
 import baseFields from '@/store/modules/forms/base-fields'
+import loading from '@/store/modules/forms/loading'
 import axios from '@/axios'
 
 const modules = {
   baseFields,
-  fields
+  fields,
+  loading
 }
 
 const state = {
@@ -19,10 +21,14 @@ const getters = {
 
 const actions = {
   async fetchForms ({ commit, dispatch, getters }) {
+    commit('SET_FETCH_FORMS_LOADING')
     await axios.get('/forms/')
       .then(response => {
         commit('SET_ALL_FORMS', response.data)
         dispatch('setAncestorForms', getters.getCurrentContractAncestorsIds)
+      })
+      .finally(() => {
+        commit('RESET_FETCH_FORMS_LOADING')
       })
   },
   async setAncestorForms ({ getters, commit }, ancestors) {
