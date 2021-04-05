@@ -1,17 +1,32 @@
 <template>
-  <div>
-    <button class="btn btn-turquoise" @click="showForm()" v-show="!formVisible"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
-    <transition enter-active-class="animate__animated animate__fadeIn animate__fast">
-      <div class="flex flex-row items-start" v-show="formVisible">
-        <validation-observer ref="form">
-          <form @submit.prevent="submitForm" class="form-horizontal form-horizontal-slim">
-            <v-select-field :loading="baseFieldsLoading" rules="required" field_class="field-tall" v-model="baseField" field_label="Base Field" field_id="baseFieldSelectToClone" :options="baseFields"></v-select-field>
-          </form>
-        </validation-observer>
-        <button @click="submitForm()" class="btn btn-green ml-2"><font-awesome-icon icon="clone"></font-awesome-icon> Clone</button>
-      </div>
-    </transition>
-  </div>
+  <tooltip-dialog-template button-color="turquoise" :show="formVisible" @close="closeForm" @open="showForm">
+    <template v-slot:button-text>
+      <font-awesome-icon icon="plus"></font-awesome-icon>
+      Add Field
+    </template>
+    <template v-slot:header>
+      Clone a Base Field
+    </template>
+    <template v-slot:body>
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm">
+          <v-select-field
+            :loading="baseFieldsLoading"
+            rules="required"
+            field_class="field-tall"
+            v-model="baseField"
+            field_label="Base Field"
+            field_id="baseFieldSelectToClone"
+            :options="baseFields"></v-select-field>
+        </form>
+      </validation-observer>
+    </template>
+    <template v-slot:footer-additional>
+      <button @click="submitForm()" class="btn btn-green ml-2">
+        <font-awesome-icon icon="clone"></font-awesome-icon> Clone
+      </button>
+    </template>
+  </tooltip-dialog-template>
 </template>
 
 <script>
@@ -74,6 +89,9 @@ export default {
       this.formVisible = true
       this.setAvailableBaseFields(this.fields)
     },
+    closeForm () {
+      this.formVisible = false
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -83,6 +101,7 @@ export default {
               base_field: this.baseField,
               order: this.newFieldOrder
             }).then(() => {
+              this.closeForm()
               this.resetForm()
             })
           } else if (this.optionFieldSelected) {
@@ -91,6 +110,7 @@ export default {
               base_field: this.baseField,
               order: this.newFieldOrder
             }).then(() => {
+              this.closeForm()
               this.resetForm()
             })
           }
