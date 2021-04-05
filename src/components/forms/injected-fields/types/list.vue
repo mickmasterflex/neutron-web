@@ -7,22 +7,29 @@
         <th class="th"></th>
       </tr>
       </thead>
-<!--      <tbody class="tbody">-->
-<!--      <tr class="tr" v-for="injectedFieldTypes in form.injected_field_types" :key="injectedFieldType.id">-->
-<!--        <td class="td">{{ injectedFieldType.field_type }}</td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
+      <tbody class="tbody">
+      <tr class="tr" v-for="injectedFieldType in injectedFieldTypes" :key="'injectedField-'+injectedFieldType.id">
+        <td class="td">{{ injectedFieldType.field_type}}</td>
+        <td class="td">
+          <span class="flex flex-row justify-end">
+            <delete-injected-field-type :id="injectedFieldType.id" :type="injectedFieldType.field_type"></delete-injected-field-type>
+          </span>
+        </td>
+      </tr>
+      </tbody>
     </table>
-    <table-empty-state v-else heading="None Added" copy="Use the 'Create a Injected Field' button."></table-empty-state>
+    <table-empty-state v-else heading="None Added" copy="Use the 'Create Type' button."></table-empty-state>
   </transition-table-state>
 </template>
 
 <script>
 
 import { mapMutations, mapGetters } from 'vuex'
+import deleteInjectedFieldType from '@/components/forms/injected-fields/types/delete.vue'
 
 export default {
   components: {
+    'delete-injected-field-type': deleteInjectedFieldType
   },
   computed: {
     ...mapGetters({
@@ -31,14 +38,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentInjectedFieldType: 'SET_CURRENT_INJECTED_FIELD_TYPE',
-      showUpdateInjectedFieldTypeModal: 'SHOW_UPDATE_INJECTED_FIELD_TYPE_MODAL'
+      setCurrentInjectedFieldType: 'SET_CURRENT_INJECTED_FIELD_TYPE'
     })
   }
-  //   setCurrentInjectedFieldTypeAndShow (injectedFieldType) {
-  //     this.setCurrentInjectedField(injectedField)
-  //     this.showUpdateInjectedFieldModal()
-  //   }
-  // }
 }
 </script>

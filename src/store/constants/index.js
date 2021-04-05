@@ -1,6 +1,5 @@
 import verticals from '@/store/constants/verticals'
 import contracts from '@/store/constants/contracts'
-import injectedFields from '@/store/constants/injected-fields'
 
 const state = {
   phone_types: ['home', 'work', 'mobile', 'fax'],
@@ -14,8 +13,7 @@ const getters = {
 
 const modules = {
   contracts,
-  verticals,
-  injectedFields
+  verticals
 }
 
 export default {

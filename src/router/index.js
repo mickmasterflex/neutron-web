@@ -512,7 +512,7 @@ const routes = [
   {
     name: 'FieldManagement',
     path: '/config/fields/',
-    component: () => import('@/views/products/base-field-management/index.vue'),
+    component: () => import('@/views/config/base-field-management/index.vue'),
     redirect: { name: 'BaseFields' },
     props (route) {
       const props = { ...route.params }
@@ -523,7 +523,7 @@ const routes = [
       {
         name: 'BaseFields',
         path: 'base-fields',
-        component: () => import('@/views/products/base-field-management/base-fields.vue'),
+        component: () => import('@/views/config/base-field-management/base-fields.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'config',
@@ -535,7 +535,7 @@ const routes = [
       {
         path: 'injected-fields',
         name: 'InjectedFieldTypes',
-        component: () => import('@/views/products/base-field-management/injected-field-types.vue'),
+        component: () => import('@/views/config/base-field-management/injected-field-types.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'config',

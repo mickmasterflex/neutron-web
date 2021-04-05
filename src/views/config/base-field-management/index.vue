@@ -25,7 +25,6 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import createBaseField from '@/components/forms/base-fields/create'
-// import listBaseFields from '@/components/forms/base-fields/list'
 import updateBaseTextField from '@/components/forms/base-fields/text-fields/update'
 import updateBaseOptionField from '@/components/forms/base-fields/option-fields/update'
 
@@ -76,12 +75,6 @@ export default {
         }
       }
     }
-  },
-  components: {
-    // createBaseField,
-    // updateBaseTextField,
-    // updateBaseOptionField,
-    // 'list-base-fields': listBaseFields
   },
   created () {
     this.resetBreadcrumbs()

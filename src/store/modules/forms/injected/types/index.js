@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import visibility from '@/store/modules/forms/injected/injected-field-types/visibility'
+import visibility from './visibility'
 
 const modules = {
   visibility
@@ -15,11 +15,17 @@ const getters = {
 }
 
 const actions = {
+  async fetchInjectedFieldTypes ({ commit }) {
+    await axios.get('/injected-field-types/')
+      .then(response => {
+        commit('SET_INJECTED_FIELD_TYPES', response.data)
+      })
+  },
   async createInjectedFieldType ({ commit }, field) {
     await axios.post('/injected-field-types/', field)
       .then(response => {
         commit('ADD_FIELD', { data: response.data, type: 'injected_field_types' })
-      })
+      }).catch(error => console.log(error.response.data))
   },
   async updateInjectedFieldType ({ commit }, updatedField) {
     await axios.put(`/injected-field-types/${updatedField.id}/`, updatedField)
@@ -36,6 +42,7 @@ const actions = {
 }
 
 const mutations = {
+  SET_INJECTED_FIELD_TYPES: (state, injectedFieldTypes) => (state.injected_field_types = injectedFieldTypes),
   SET_CURRENT_INJECTED_FIELD_TYPE: (state, injectedFieldType) => (state.current_injected_field_type = injectedFieldType),
   RESET_CURRENT_INJECTED_FIELD_TYPE: (state) => (state.current_field = null)
 }

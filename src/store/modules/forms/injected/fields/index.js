@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import visibility from '@/store/modules/forms/injected/injected-fields/visibility'
+import visibility from './visibility'
 
 const modules = {
   visibility
