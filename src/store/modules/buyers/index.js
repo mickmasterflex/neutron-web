@@ -61,7 +61,7 @@ const actions = {
       .then(response => {
         commit('SET_CURRENT_BUYER', response.data)
         commit('SET_CURRENT_FORM', response.data.form)
-        commit('SET_CURRENT_CONTRACT_ANCESTORS', response.data.ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
         commit('SORT_CURRENT_FORM_FIELDS')
       })
       .finally(() => {
@@ -84,7 +84,7 @@ const actions = {
       .then(response => {
         commit('UPDATE_BUYER', response.data)
         commit('SET_CURRENT_BUYER', response.data)
-        commit('SET_CURRENT_CONTRACT_ANCESTORS', response.data.ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
       })
   },
   async deleteBuyer ({ commit }, id) {

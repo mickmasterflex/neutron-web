@@ -25,7 +25,7 @@ const actions = {
     await axios.get('/forms/')
       .then(response => {
         commit('SET_ALL_FORMS', response.data)
-        dispatch('setAncestorForms', getters.getCurrentContractAncestorsIds)
+        dispatch('setAncestorForms', getters.getCurrentAncestorsIds)
       })
       .finally(() => {
         commit('RESET_FETCH_FORMS_LOADING')

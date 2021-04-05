@@ -1,16 +1,14 @@
 const state = {
-  current_contract_ancestors: []
+  current_ancestors: []
 }
 
 const getters = {
-  getCurrentContractAncestors: state => state.current_contract_ancestors,
-  getCurrentContractAncestorsIds: state => state.current_contract_ancestors.map(a => a.id),
-  getAncestorById: state => id => state.current_contract_ancestors.find(ancestor => ancestor.id === id)
+  getCurrentAncestorsIds: state => state.current_ancestors.map(a => a.id),
+  getAncestorById: state => id => state.current_ancestors.find(ancestor => ancestor.id === id)
 }
 
 const mutations = {
-  SET_CURRENT_CONTRACT_ANCESTORS: (state, ancestors) => (state.current_contract_ancestors = ancestors),
-  RESET_CURRENT_CONTRACT_ANCESTORS: (state) => (state.current_contract_ancestors = [])
+  SET_CURRENT_ANCESTORS: (state, ancestors) => (state.current_ancestors = ancestors)
 }
 
 export default {

@@ -55,7 +55,7 @@ const actions = {
     await axios.get(`/partners/${id}/`)
       .then(response => {
         commit('SET_CURRENT_PARTNER', response.data)
-        commit('SET_CURRENT_CONTRACT_ANCESTORS', response.data.ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
         commit('RESET_PARTNER_FETCH_LOADING')
       })
   },
@@ -75,7 +75,7 @@ const actions = {
       .then(response => {
         commit('UPDATE_PARTNER', response.data)
         commit('SET_CURRENT_PARTNER', response.data)
-        commit('SET_CURRENT_CONTRACT_ANCESTORS', response.data.ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
       })
   },
   async deletePartner ({ commit }, id) {

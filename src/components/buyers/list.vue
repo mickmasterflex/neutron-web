@@ -79,7 +79,7 @@ export default {
     ...mapMutations({
       setCurrentBuyer: 'SET_CURRENT_BUYER',
       setCurrentForm: 'SET_CURRENT_FORM',
-      setCurrentAncestors: 'SET_CURRENT_CONTRACT_ANCESTORS',
+      setCurrentAncestors: 'SET_CURRENT_ANCESTORS',
       sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS',
       resetShiftClickIndex: 'RESET_BULK_UPDATE_BUYERS_SHIFT_CLICK_INDEX'
     }),

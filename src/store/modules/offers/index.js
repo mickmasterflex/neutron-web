@@ -41,7 +41,7 @@ const actions = {
     await axios.get(`/offer-contracts/${id}/`)
       .then(response => {
         commit('SET_CURRENT_OFFER', response.data)
-        commit('SET_CURRENT_CONTRACT_ANCESTORS', response.data.buyer_ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.buyer_ancestors)
         commit('SET_CURRENT_FORM', response.data.form)
         commit('SORT_CURRENT_FORM_FIELDS')
       })
@@ -65,7 +65,7 @@ const actions = {
       .then(response => {
         commit('UPDATE_OFFER', response.data)
         commit('SET_CURRENT_OFFER', response.data)
-        commit('SET_CURRENT_CONTRACT_ANCESTORS', response.data.buyer_ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.buyer_ancestors)
       })
   },
   async deleteOffer ({ commit }, id) {

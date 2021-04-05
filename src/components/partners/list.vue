@@ -81,7 +81,7 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentPartner: 'SET_CURRENT_PARTNER',
-      setCurrentPartnerAncestors: 'SET_CURRENT_CONTRACT_ANCESTORS',
+      setCurrentPartnerAncestors: 'SET_CURRENT_ANCESTORS',
       resetShiftClickIndex: 'RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX'
     }),
     setCurrentPartnerWithAncestors (contract) {

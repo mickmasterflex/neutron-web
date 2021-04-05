@@ -63,7 +63,7 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentOffer: 'SET_CURRENT_OFFER',
-      setCurrentAncestors: 'SET_CURRENT_CONTRACT_ANCESTORS',
+      setCurrentAncestors: 'SET_CURRENT_ANCESTORS',
       setCurrentForm: 'SET_CURRENT_FORM',
       sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS'
     }),
