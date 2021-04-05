@@ -71,9 +71,7 @@ export default {
       this.setCurrentOffer(offer)
       this.setCurrentForm(offer.form)
       this.sortCurrentFormFields()
-      const ancestors = offer.buyer_ancestors
-      ancestors.push(offer.parent_data)
-      this.setCurrentAncestors(ancestors) // fixme: should backend update to include parent_data?
+      this.setCurrentAncestors(offer.buyer_ancestors)
       this.$router.push({
         name: 'OfferDetails',
         params: {
