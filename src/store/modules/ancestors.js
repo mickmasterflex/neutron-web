@@ -4,7 +4,8 @@ const state = {
 
 const getters = {
   getCurrentContractAncestors: state => state.current_contract_ancestors,
-  getCurrentContractAncestorsIds: state => state.current_contract_ancestors.map(a => a.id)
+  getCurrentContractAncestorsIds: state => state.current_contract_ancestors.map(a => a.id),
+  getAncestorById: state => id => state.current_contract_ancestors.find(ancestor => ancestor.id === id)
 }
 
 const mutations = {

@@ -10,7 +10,10 @@
       </div>
       <div v-for="ancestorForm in ancestorForms" :key="'form' + ancestorForm.id" class="mb-3">
         <h5 class="font-bold">
-          Inherited fields from <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: clientSlug, id: ancestorForm.buyer_contract } }">{{ ancestorForm.buyer_contract }}</router-link></h5> <!-- fixme: getter for ancestor.name -->
+          Inherited fields from
+          <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: clientSlug, id: ancestorForm.buyer_contract } }">
+            {{ getAncestorById(ancestorForm.buyer_contract).name }}
+          </router-link></h5>
         <ul>
           <li v-for="(field, index) in ancestorForm.fields" :key="field.id">
             <div :field="field" class="card card-sm mb-1 flex flex-row items-center justify-between">
@@ -19,7 +22,7 @@
           </li>
         </ul>
       </div>
-      <h5 class="font-bold" v-if="ancestorForms.length && formFieldsExist">Local Fields</h5> <!-- fixme: get Offer or Buyer Name -->
+      <h5 class="font-bold" v-if="ancestorForms.length && formFieldsExist">{{ contractName }} Fields</h5>
       <ul-draggable v-bind="dragOptions" v-model="form.fields">
         <li v-for="(field, index) in form.fields" :key="field.id">
           <div :field="field" class="card card-sm mb-1 flex flex-row items-center justify-between">
@@ -46,7 +49,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: {
-    clientSlug: String
+    clientSlug: String,
+    contractName: String
   },
   components: {
     'delete-field': deleteField,
@@ -58,7 +62,8 @@ export default {
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',
-      ancestorForms: 'getAncestorForms'
+      ancestorForms: 'getAncestorForms',
+      getAncestorById: 'getAncestorById'
     }),
     formFieldsExist () {
       if (this.form.fields) {
