@@ -22,7 +22,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green ml-2">
+      <button @click="submitForm()" class="btn btn-green">
         <font-awesome-icon icon="clone"></font-awesome-icon> Clone
       </button>
     </template>
