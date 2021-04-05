@@ -773,7 +773,7 @@ const routes = [
       {
         name: 'OfferFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/field-management.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/field-management'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
