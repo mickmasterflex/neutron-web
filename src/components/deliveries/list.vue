@@ -35,14 +35,13 @@
 <script>
 import deleteDelivery from './delete'
 import deliveryTr from './tr'
-
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   props: {
-    deliveries: Array,
-    ancestorDeliveries: Array,
-    ancestors: Array,
+    buyerId: {
+      type: Number
+    },
     clientSlug: {
       type: String,
       required: true
@@ -51,6 +50,22 @@ export default {
   components: {
     'delete-delivery': deleteDelivery,
     'delivery-tr': deliveryTr
+  },
+  computed: {
+    ...mapGetters({
+      getDeliveriesByBuyer: 'getDeliveriesByBuyer',
+      getDeliveriesByBuyers: 'getDeliveriesByBuyers',
+      ancestorsIds: 'getCurrentAncestorsIds'
+    }),
+    deliveries () {
+      return this.getDeliveriesByBuyer(this.buyerId)
+    },
+    ancestorDeliveries () {
+      if (this.ancestorsIds) {
+        return this.getDeliveriesByBuyers(this.ancestorsIds)
+      }
+      return []
+    }
   },
   methods: {
     ...mapMutations({

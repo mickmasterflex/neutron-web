@@ -5,9 +5,7 @@
     </template>
     <template v-slot:content>
       <delivery-list
-        :deliveries="deliveries"
-        :ancestor-deliveries="ancestorDeliveries"
-        :ancestors="buyer.ancestors"
+        :buyerId="buyer.id"
         :client-slug="buyer.client_data ? buyer.client_data.slug : ''"
       ></delivery-list>
       <create-delivery :buyer="buyer.id"></create-delivery>
@@ -34,8 +32,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getDeliveriesByBuyer: 'getDeliveriesByBuyer',
-      getDeliveriesByBuyers: 'getDeliveriesByBuyers',
       loadingDeliveries: 'getDeliveriesFetchLoading',
       loadingDeliveriesText: 'getDeliveriesFetchLoadingText',
       loadingBuyer: 'getBuyerFetchLoading',
@@ -43,15 +39,6 @@ export default {
       loadingRevenueMethodPut: 'getBuyerRevenueMethodPutLoading',
       loadingRevenueMethodPutText: 'getBuyerRevenueMethodPutLoadingText'
     }),
-    deliveries () {
-      return this.getDeliveriesByBuyer(this.buyer.id)
-    },
-    ancestorDeliveries () {
-      if (this.buyer.ancestors) {
-        return this.getDeliveriesByBuyers(this.buyer.ancestors.map(a => a.id))
-      }
-      return []
-    },
     loading () {
       if (this.loadingRevenueMethodPut) {
         return this.loadingRevenueMethodPut
