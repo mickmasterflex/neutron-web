@@ -109,8 +109,7 @@ export default {
         this.currentFieldId = null
       }
     },
-    id () {
-      // Changes when navigating from a buyer to an ancestor buyer
+    id () { // id prop changes when navigating from a buyer to an ancestor buyer
       this.resetAncestorForms()
       this.fetchForms()
     }
