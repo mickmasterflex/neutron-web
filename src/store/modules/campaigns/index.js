@@ -33,6 +33,7 @@ const actions = {
     await axios.get(`/campaigns/${id}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPAIGN', response.data)
+        commit('SET_CURRENT_ANCESTORS', response.data.partner_ancestors)
         commit('RESET_CAMPAIGN_FETCH_LOADING')
       })
   },
