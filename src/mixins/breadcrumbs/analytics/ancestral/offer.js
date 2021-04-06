@@ -1,5 +1,4 @@
 import { buyerContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/buyer'
-import { mapGetters } from 'vuex'
 
 export const offerContractBreadcrumbs = {
   mixins: [buyerContractBreadcrumbs],
@@ -25,10 +24,5 @@ export const offerContractBreadcrumbs = {
         query: this.$route.query
       }
     }
-  },
-  computed: {
-    ...mapGetters({
-      current: 'getCurrentOfferContractStats'
-    })
   }
 }
