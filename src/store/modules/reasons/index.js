@@ -33,12 +33,22 @@ const actions = {
       }).finally(() => {
         commit('RESET_REASONS_POST_LOADING')
       })
+  },
+  async deleteReason ({ commit }, id) {
+    commit('SET_REASONS_DELETE_LOADING')
+    await axios.delete(`/reasons/${id}/`)
+      .then(() => {
+        commit('REMOVE_CLIENT', id)
+      }).finally(() => {
+        commit('RESET_REASONS_DELETE_LOADING')
+      })
   }
 }
 
 const mutations = {
   SET_ALL_REASONS: (state, reasons) => (state.all_reasons = reasons),
-  ADD_REASON: (state, reason) => (state.all_reasons.unshift(reason))
+  ADD_REASON: (state, reason) => (state.all_reasons.unshift(reason)),
+  REMOVE_CLIENT: (state, id) => (state.all_reasons = state.all_reasons.filter(reason => reason.id !== id))
 }
 
 export default {

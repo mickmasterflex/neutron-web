@@ -1,9 +1,11 @@
-import post from '@/store/modules/reasons/loading/post'
-import fetch from '@/store/modules/reasons/loading/fetch'
+import deleteLoading from '@/store/modules/reasons/loading/delete'
+import postLoading from '@/store/modules/reasons/loading/post'
+import fetchLoading from '@/store/modules/reasons/loading/fetch'
 
 const modules = {
-  post,
-  fetch
+  deleteLoading,
+  postLoading,
+  fetchLoading
 }
 
 export default {
