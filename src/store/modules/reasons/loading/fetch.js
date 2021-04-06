@@ -1,10 +1,12 @@
 
 const state = {
-  reasons_fetch_loading: false
+  reasons_fetch_loading: false,
+  reasons_fetch_loading_text: 'Loading Reasons'
 }
 
 const getters = {
-  getReasonsFetchLoading: state => state.reasons_fetch_loading
+  getReasonsFetchLoading: state => state.reasons_fetch_loading,
+  getReasonsFetchLoadingText: state => state.reasons_fetch_loading_text
 }
 
 const mutations = {
