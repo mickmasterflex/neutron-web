@@ -26,9 +26,12 @@ const actions = {
       })
   },
   async createReason ({ commit }, reason) {
+    commit('SET_REASONS_POST_LOADING')
     await axios.post('/reasons/', reason)
       .then(response => {
         commit('ADD_REASON', response.data)
+      }).finally(() => {
+        commit('RESET_REASONS_POST_LOADING')
       })
   }
 }
