@@ -12,7 +12,7 @@ export const setBreadcrumbsWithAncestors = {
       ]
       this.ancestors.forEach(ancestor => {
         breadcrumbs.push({
-          name: this.contractBreadcrumb.name,
+          name: this.ancestorBreadcrumbRouteName,
           text: ancestor.name,
           params: {
             clientId: this.$route.params.clientId,
@@ -21,7 +21,9 @@ export const setBreadcrumbsWithAncestors = {
           query: this.$route.query
         })
       })
-      breadcrumbs.push(this.contractBreadcrumb)
+      if (this.contractBreadcrumb) {
+        breadcrumbs.push(this.contractBreadcrumb)
+      }
       if (this.offersBreadcrumb) {
         breadcrumbs.push(this.offersBreadcrumb)
       }

@@ -1,17 +1,10 @@
-import { buyerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/buyer'
+import { baseContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/base'
 
 export const offerContractBreadcrumbs = {
-  mixins: [buyerContractBreadcrumbs],
+  mixins: [baseContractBreadcrumbs],
   data () {
     return {
-      contractBreadcrumb: {
-        name: 'BuyerContract',
-        text: this.$route.params.buyer,
-        params: {
-          client: this.$route.params.client,
-          id: this.$route.params.buyer
-        }
-      },
+      ancestorBreadcrumbRouteName: 'BuyerContract',
       offersBreadcrumb: {
         name: 'BuyerContractOffers',
         text: 'Offers',
@@ -31,16 +24,8 @@ export const offerContractBreadcrumbs = {
       }
     }
   },
-  computed: {
-    ancestors () {
-      return this.offer.buyer_ancestors
-    }
-  },
   methods: {
     setBreadcrumbText () {
-      if (this.offer.parent) {
-        this.contractBreadcrumb.text = this.offer.parent_data.name
-      }
       if (this.offer.client) {
         this.clientBreadcrumb.text = this.offer.client_data.name
       }
