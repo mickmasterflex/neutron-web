@@ -7,9 +7,8 @@ const modules = {
 }
 
 const state = {
-  current_form: [],
-  current_field: null,
-  modified_fields: []
+  current_form: {},
+  current_field: null
 }
 
 const getters = {

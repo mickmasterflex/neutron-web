@@ -81,18 +81,23 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentPartner: 'SET_CURRENT_PARTNER',
+      setCurrentPartnerAncestors: 'SET_CURRENT_ANCESTORS',
       resetShiftClickIndex: 'RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX'
     }),
-    linkToPartnerContracts (contract) {
+    setCurrentPartnerWithAncestors (contract) {
       this.setCurrentPartner(contract)
+      this.setCurrentPartnerAncestors(contract.ancestors)
+    },
+    linkToPartnerContracts (contract) {
+      this.setCurrentPartnerWithAncestors(contract)
       this.$router.push({ name: 'PartnerContractChildren', params: { client: this.client, id: contract.id } })
     },
     linkToPartner (contract) {
-      this.setCurrentPartner(contract)
+      this.setCurrentPartnerWithAncestors(contract)
       this.$router.push({ name: 'PartnerContract', params: { client: this.client, id: contract.id } })
     },
     linkToPartnerContractCampaigns (contract) {
-      this.setCurrentPartner(contract)
+      this.setCurrentPartnerWithAncestors(contract)
       this.$router.push({ name: 'PartnerContractCampaigns', params: { client: this.client, id: contract.id } })
     }
   },
