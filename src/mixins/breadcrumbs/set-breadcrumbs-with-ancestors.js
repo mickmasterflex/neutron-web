@@ -36,6 +36,9 @@ export const setBreadcrumbsWithAncestors = {
       if (this.campaignBreadcrumb) {
         breadcrumbs.push(this.campaignBreadcrumb)
       }
+      if (this.currentBreadcrumb) {
+        breadcrumbs.push(this.currentBreadcrumb)
+      }
       this.setBreadcrumbs(breadcrumbs)
     },
     ...mapMutations({
