@@ -6,7 +6,7 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'reasons'">
-          <router-link :to="{ name: 'Reasons' }">Reasons</router-link>
+          <router-link :to="{ name: 'Reasons' }">Reasons <label-number :number="allReasons.length"></label-number></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'mappings'">
           <router-link :to="{ name: 'ResponseMappings' }">Response Mappings</router-link>
@@ -18,3 +18,15 @@
     </template>
   </content-layout>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({
+      allReasons: 'getAllReasons'
+    })
+  }
+}
+</script>
