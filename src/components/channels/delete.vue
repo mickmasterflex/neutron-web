@@ -7,15 +7,14 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    id: Number,
-    type: Object
+    id: Number
   },
   methods: {
     ...mapActions({
-      delete: 'deleteChannel'
+      deleteChannel: 'deleteChannel'
     }),
     runDelete () {
-      this.delete(this.id)
+      this.deleteChannel(this.id)
     }
   }
 }
