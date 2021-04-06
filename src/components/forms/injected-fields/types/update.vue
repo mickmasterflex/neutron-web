@@ -1,19 +1,24 @@
 <template>
-   <tooltip-dialog-template :show="showForm" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>
       Update Injected Field Type
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="injectedFieldtype" rules="required" field_id="injected_field_type" field_label="Injected Field Type"></v-text-field>
+          <v-text-field  rules="required"
+                         field_class="field-tall"
+                         v-model="injectedFieldType"
+                         field_label="Injected Field Type"
+                         field_id="field_type">
+          </v-text-field>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm" class="btn btn-green btn-lg">Update</button>
     </template>
-  </tooltip-dialog-template>
+</modal-template>
 </template>
 
 <script>
@@ -30,16 +35,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showForm: 'getShowUpdateInjectedFieldModal',
-      injectedField: 'getCurrentInjectedField',
+      showModal: 'getShowUpdateInjectedFieldTypeModal',
+      injectedField: 'getCurrentInjectedFieldType',
       fieldTypes: 'getInjectedFieldTypes'
     }),
     unsavedChanges () {
-      if (this.injectedField) {
-        return this.type !== this.injectedField.field_type ||
-          this.key !== this.injectedField.field_key ||
-          this.value !== this.injectedField.field_value ||
-          this.params !== this.injectedField.posting_params
+      if (this.injectedFieldType) {
+        return this.field_type !== this.injectedFieldType.field_type
       } else {
         return false
       }
@@ -52,38 +54,28 @@ export default {
   },
   mixins: [checkUnsavedChangesInModal, enterKeyListener, setResponseErrors],
   updated () {
-    if (this.injectedField) {
-      this.type = this.injectedField.field_type
-      this.key = this.injectedField.field_key
-      this.value = this.injectedField.field_value
-      this.params = this.injectedField.posting_params
+    if (this.injectedFieldType) {
+      this.type = this.injectedFieldType.field_type
     }
   },
   methods: {
     ...mapActions({
-      update: 'updateInjectedField'
+      update: 'updateInjectedFieldType'
     }),
     ...mapMutations({
-      resetCurrentInjectedField: 'RESET_CURRENT_INJECTED_FIELD',
-      closeModal: 'CLOSE_UPDATE_INJECTED_FIELD_MODAL'
+      resetCurrentInjectedFieldType: 'RESET_CURRENT_INJECTED_FIELD_TYPE',
+      closeModal: 'CLOSE_UPDATE_INJECTED_FIELD_TYPE_MODAL'
     }),
     close () {
       this.closeModal()
       this.type = ''
-      this.key = ''
-      this.value = ''
-      this.params = ''
-      this.resetCurrentInjectedField()
+      this.resetCurrentInjectedFieldType()
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.update({
             field_type: this.type,
-            field_key: this.key,
-            field_value: this.value,
-            posting_params: this.params,
-            form: this.injectedField.form,
             id: this.injectedField.id
           }).then(() => {
             this.closeModal()

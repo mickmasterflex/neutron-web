@@ -13,6 +13,7 @@
         <td class="td">
           <span class="flex flex-row justify-end">
             <delete-injected-field-type :id="injectedFieldType.id" :type="injectedFieldType.field_type"></delete-injected-field-type>
+            <button @click="showUpdateInjectedFieldTypeModal(injectedFieldType)" class="btn btn-hollow-blue btn-circle"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
           </span>
         </td>
       </tr>
@@ -38,8 +39,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setCurrentInjectedFieldType: 'SET_CURRENT_INJECTED_FIELD_TYPE'
-    })
+      setCurrentInjectedFieldType: 'SET_CURRENT_INJECTED_FIELD_TYPE',
+      showModal: 'SHOW_UPDATE_INJECTED_FIELD_TYPE_MODAL'
+    }),
+    showUpdateInjectedFieldTypeModal () {
+      this.showModal()
+    }
   }
 }
 </script>

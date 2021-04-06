@@ -8,6 +8,7 @@
         <list-injected-field-types></list-injected-field-types>
       </template>
     </panel-template>
+    <update-injected-field-type></update-injected-field-type>
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import listInjectedFieldTypes from '@/components/forms/injected-fields/types/list'
 import createInjectedFieldType from '@/components/forms/injected-fields/types/create'
+import updateInjectedFieldType from '@/components/forms/injected-fields/types/update'
 
 export default {
   data () {
@@ -37,7 +39,8 @@ export default {
   },
   components: {
     'list-injected-field-types': listInjectedFieldTypes,
-    'create-injected-field-type': createInjectedFieldType
+    'create-injected-field-type': createInjectedFieldType,
+    'update-injected-field-type': updateInjectedFieldType
   },
   created () {
     this.fetchInjectedFieldTypes()
