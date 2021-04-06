@@ -7,6 +7,9 @@ export const baseContractBreadcrumbs = {
     client () {
       this.clientBreadcrumb.text = this.client.name
     },
+    current () {
+      this.currentBreadcrumb.text = this.current.name
+    },
     loading () {
       if (this.loading === false) {
         this.setBreadcrumbsWithAncestors()

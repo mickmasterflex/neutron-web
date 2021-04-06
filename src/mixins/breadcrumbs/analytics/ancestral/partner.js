@@ -33,10 +33,5 @@ export const partnerContractBreadcrumbs = {
       current: 'getCurrentContractStats',
       client: 'getCurrentClientStats'
     })
-  },
-  watch: {
-    current () {
-      this.currentBreadcrumb.text = this.current.name
-    }
   }
 }
