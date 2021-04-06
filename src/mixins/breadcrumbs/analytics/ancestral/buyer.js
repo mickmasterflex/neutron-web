@@ -31,8 +31,7 @@ export const buyerContractBreadcrumbs = {
   computed: {
     ...mapGetters({
       current: 'getCurrentContractStats',
-      client: 'getCurrentClientStats',
-      ancestors: 'getBuyerContractStatsAncestors'
+      client: 'getCurrentClientStats'
     })
   },
   watch: {

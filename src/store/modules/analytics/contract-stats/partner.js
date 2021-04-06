@@ -1,12 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  partner_contract_stats_fetch_loading_text: 'Loading Partner Contract Data',
-  partner_contract_stats_ancestors: []
-}
-
-const getters = {
-  getPartnerContractStatsAncestors: state => state.partner_contract_stats_ancestors
+  partner_contract_stats_fetch_loading_text: 'Loading Partner Contract Data'
 }
 
 const actions = {
@@ -16,7 +11,7 @@ const actions = {
     await axios.get(`/analytics/campaigns/?${getters.getAnalyticsDateRangeUrlFormatted}&partner_contract=${id}`)
       .then(response => {
         commit('SET_CURRENT_STATS_CAMPAIGNS', response.data.campaigns)
-        commit('SET_PARTNER_CONTRACT_STATS_ANCESTORS', response.data.ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
         dispatch('setCurrentContractData', response.data)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
@@ -30,13 +25,7 @@ const actions = {
   }
 }
 
-const mutations = {
-  SET_PARTNER_CONTRACT_STATS_ANCESTORS: (state, ancestors) => (state.partner_contract_stats_ancestors = ancestors)
-}
-
 export default {
   state,
-  getters,
-  actions,
-  mutations
+  actions
 }

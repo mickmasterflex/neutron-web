@@ -1,6 +1,11 @@
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export const setBreadcrumbsWithAncestors = {
+  computed: {
+    ...mapGetters({
+      ancestors: 'getCurrentAncestors'
+    })
+  },
   methods: {
     setBreadcrumbsWithAncestors () {
       if (this.setBreadcrumbText) {

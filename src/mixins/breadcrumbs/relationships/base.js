@@ -1,5 +1,4 @@
 import { setBreadcrumbsWithAncestors } from '@/mixins/breadcrumbs/set-breadcrumbs-with-ancestors'
-import { mapGetters } from 'vuex'
 
 export const baseContractBreadcrumbs = {
   mixins: [setBreadcrumbsWithAncestors],
@@ -15,11 +14,6 @@ export const baseContractBreadcrumbs = {
         params: { slug: this.$route.params.client }
       }
     }
-  },
-  computed: {
-    ...mapGetters({
-      ancestors: 'getCurrentAncestors'
-    })
   },
   methods: {
     setBreadcrumbText () {
