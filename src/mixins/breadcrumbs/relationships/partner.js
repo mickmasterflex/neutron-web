@@ -5,7 +5,7 @@ export const partnerContractBreadcrumbs = {
   data () {
     return {
       ancestorBreadcrumbRouteName: 'PartnerContract',
-      contractBreadcrumb: {
+      currentBreadcrumb: {
         name: this.ancestorBreadcrumbRouteName,
         text: this.$route.params.id,
         params: {

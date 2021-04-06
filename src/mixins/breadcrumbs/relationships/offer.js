@@ -5,7 +5,7 @@ export const offerContractBreadcrumbs = {
   data () {
     return {
       ancestorBreadcrumbRouteName: 'BuyerContract',
-      offersBreadcrumb: {
+      parentBreadcrumb: {
         name: 'BuyerContractOffers',
         text: 'Offers',
         params: {
@@ -13,7 +13,7 @@ export const offerContractBreadcrumbs = {
           id: this.$route.params.buyer
         }
       },
-      offerBreadcrumb: {
+      currentBreadcrumb: {
         name: 'OfferDetails',
         text: this.$route.params.id,
         params: {
@@ -30,7 +30,7 @@ export const offerContractBreadcrumbs = {
         this.clientBreadcrumb.text = this.offer.client_data.name
       }
       if (this.offer) {
-        this.offerBreadcrumb.text = this.offer.name
+        this.currentBreadcrumb.text = this.offer.name
       }
     }
   }

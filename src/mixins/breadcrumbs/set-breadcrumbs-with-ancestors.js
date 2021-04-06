@@ -26,24 +26,10 @@ export const setBreadcrumbsWithAncestors = {
           query: this.$route.query
         })
       })
-      if (this.contractBreadcrumb) {
-        breadcrumbs.push(this.contractBreadcrumb)
+      if (this.parentBreadcrumb) {
+        breadcrumbs.push(this.parentBreadcrumb)
       }
-      if (this.offersBreadcrumb) {
-        breadcrumbs.push(this.offersBreadcrumb)
-      }
-      if (this.offerBreadcrumb) {
-        breadcrumbs.push(this.offerBreadcrumb)
-      }
-      if (this.campaignsBreadcrumb) {
-        breadcrumbs.push(this.campaignsBreadcrumb)
-      }
-      if (this.campaignBreadcrumb) {
-        breadcrumbs.push(this.campaignBreadcrumb)
-      }
-      if (this.currentBreadcrumb) {
-        breadcrumbs.push(this.currentBreadcrumb)
-      }
+      breadcrumbs.push(this.currentBreadcrumb)
       this.setBreadcrumbs(breadcrumbs)
     },
     ...mapMutations({

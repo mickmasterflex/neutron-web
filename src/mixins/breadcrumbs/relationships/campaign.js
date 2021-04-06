@@ -5,7 +5,7 @@ export const campaignContractBreadcrumbs = {
   data () {
     return {
       ancestorBreadcrumbRouteName: 'PartnerContract',
-      campaignsBreadcrumb: {
+      parentBreadcrumb: {
         name: 'PartnerContractCampaigns',
         text: 'Campaigns',
         params: {
@@ -13,7 +13,7 @@ export const campaignContractBreadcrumbs = {
           id: this.$route.params.partner
         }
       },
-      campaignBreadcrumb: {
+      currentBreadcrumb: {
         name: 'Campaign',
         text: this.$route.params.id,
         params: {
@@ -24,18 +24,13 @@ export const campaignContractBreadcrumbs = {
       }
     }
   },
-  computed: {
-    ancestors () {
-      return this.campaign.partner_ancestors
-    }
-  },
   methods: {
     setBreadcrumbText () {
       if (this.campaign.client) {
         this.clientBreadcrumb.text = this.campaign.client_data.name
       }
       if (this.campaign) {
-        this.campaignBreadcrumb.text = this.campaign.name
+        this.currentBreadcrumb.text = this.campaign.name
       }
     }
   }

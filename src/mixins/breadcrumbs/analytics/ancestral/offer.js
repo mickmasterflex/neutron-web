@@ -5,7 +5,7 @@ export const offerContractBreadcrumbs = {
   mixins: [buyerContractBreadcrumbs],
   data () {
     return {
-      offersBreadcrumb: {
+      parentBreadcrumb: {
         name: 'BuyerStatsContractOffers',
         text: 'Offers',
         params: {

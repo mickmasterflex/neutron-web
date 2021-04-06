@@ -5,7 +5,7 @@ export const campaignContractBreadcrumbs = {
   mixins: [partnerContractBreadcrumbs],
   data () {
     return {
-      campaignsBreadcrumb: {
+      parentBreadcrumb: {
         name: 'PartnerStatsContractCampaigns',
         text: 'Campaigns',
         params: {
