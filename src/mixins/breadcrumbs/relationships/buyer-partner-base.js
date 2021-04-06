@@ -17,7 +17,7 @@ export const baseContractBreadcrumbs = {
   },
   computed: {
     ancestors () {
-      return this.contract.ancestors
+      return this.contract.ancestors ? this.contract.ancestors : []
     }
   },
   methods: {
