@@ -1,8 +1,10 @@
 import axios from '@/axios'
 import loading from './loading'
+import visibility from './visibility'
 
 const modules = {
-  loading
+  loading,
+  visibility
 }
 
 const state = {
@@ -22,11 +24,18 @@ const actions = {
       }).finally(() => {
         commit('RESET_REASONS_FETCH_LOADING')
       })
+  },
+  async createReason ({ commit }, reason) {
+    await axios.post('/reasons/', reason)
+      .then(response => {
+        commit('ADD_REASON', response.data)
+      })
   }
 }
 
 const mutations = {
-  SET_ALL_REASONS: (state, reasons) => (state.all_reasons = reasons)
+  SET_ALL_REASONS: (state, reasons) => (state.all_reasons = reasons),
+  ADD_REASON: (state, reason) => (state.all_reasons.unshift(reason))
 }
 
 export default {

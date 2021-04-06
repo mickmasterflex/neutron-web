@@ -11,7 +11,7 @@
       <tbody class="tbody">
       <tr class="tr" v-for="reason in reasons" :key="reason.id">
         <td class="td">{{ reason.id }}</td>
-        <td class="td">{{ reason.name }}</td>
+        <td class="td font-bold">{{ reason.name }}</td>
         <td class="td">{{ reason.description }}</td>
       </tr>
       </tbody>
