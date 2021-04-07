@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="showModal" @close="close">
+  <modal-template :show="modalVisible" @close="close">
     <template v-slot:header>Create Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateReasonModal',
+      modalVisible: 'getShowCreateReasonModal',
       loading: 'getReasonsPostLoading'
     })
   },

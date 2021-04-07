@@ -1,8 +1,6 @@
 <template>
   <modal-template :show="modalVisible" @close="close">
-    <template v-slot:header>
-      <slot name="header">Update Reason</slot>
-    </template>
+    <template v-slot:header>Update Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -31,6 +29,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { setResponseErrors } from '@/mixins/set-response-errors'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
@@ -54,7 +54,7 @@ export default {
       }
     }
   },
-  mixins: [checkUnsavedChangesInModal],
+  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   watch: {
     unsavedChanges () {
       this.checkUnsavedChanges(this.modalVisible, this.unsavedChanges)
