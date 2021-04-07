@@ -4,7 +4,9 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Type" :options="fieldTypes"></v-select-field>
+          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Type" :options="fieldTypes">
+            <template v-slot:option="slotProps">{{ slotProps.option.field_type }}</template>
+          </v-select-field>
           <v-text-field v-model="key" field_id="field_key" field_label="Key" rules="required"></v-text-field>
           <v-text-field v-model="value" field_id="field_value" field_label="Value" rules="required"></v-text-field>
           <v-text-field v-model="params" field_id="posting_params" field_label="Posting Params" rules="required"></v-text-field>
