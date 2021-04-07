@@ -20,13 +20,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
       allReasons: 'getAllReasons'
     })
+  },
+  methods: {
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    }),
+    ...mapActions({
+      fetchReasons: 'fetchReasons'
+    })
+  },
+  created () {
+    this.resetBreadcrumbs()
+    this.fetchReasons()
   }
 }
 </script>

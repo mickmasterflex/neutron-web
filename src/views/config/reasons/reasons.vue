@@ -20,7 +20,7 @@
 import reasonsList from '@/components/reasons/list'
 import reasonCreate from '@/components/reasons/create'
 import reasonUpdate from '@/components/reasons/update'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
@@ -31,17 +31,9 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      fetchReasons: 'fetchReasons'
-    }),
     ...mapMutations({
-      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS',
       showCreateModal: 'SHOW_CREATE_REASON_MODAL'
     })
-  },
-  created () {
-    this.resetBreadcrumbs()
-    this.fetchReasons()
   },
   components: {
     'reasons-list': reasonsList,
