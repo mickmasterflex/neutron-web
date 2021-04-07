@@ -571,6 +571,40 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    name: 'ReasonManagement',
+    path: '/config/reasons/',
+    redirect: { name: 'Reasons' },
+    component: () => import('@/views/config/reasons/index'),
+    children: [
+      {
+        name: 'Reasons',
+        path: '',
+        component: () => import('@/views/config/reasons/reasons'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'reasons',
+          title: 'Reasons',
+          contentTab: 'reasons'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'ResponseMappings',
+        path: 'response-mappings/',
+        component: () => import('@/views/config/reasons/response-mappings'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'reasons',
+          title: 'Response Mappings',
+          contentTab: 'mappings'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
+  },
+  {
     path: '/relationships/',
     name: 'Relationships',
     component: () => import('@/views/relationships/index.vue'),
