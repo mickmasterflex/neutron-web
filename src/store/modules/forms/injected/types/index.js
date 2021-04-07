@@ -11,7 +11,8 @@ const state = {
 }
 const getters = {
   getCurrentInjectedFieldType: state => state.current_injected_field_type,
-  getInjectedFieldTypes: state => state.injected_field_types
+  getInjectedFieldTypes: state => state.injected_field_types,
+  getInjectedFieldTypesCount: state => state.injected_field_types.length
 }
 
 const actions = {

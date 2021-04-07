@@ -36,7 +36,7 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateInjectedFieldTypeModal',
-      injectedField: 'getCurrentInjectedFieldType',
+      injectedFieldTypes: 'getCurrentInjectedFieldType',
       fieldTypes: 'getInjectedFieldTypes'
     }),
     unsavedChanges () {
@@ -76,7 +76,7 @@ export default {
         if (success) {
           this.update({
             field_type: this.type,
-            id: this.injectedField.id
+            id: this.injectedFieldTypes.id
           }).then(() => {
             this.closeModal()
           }).catch(error => {

@@ -9,10 +9,10 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'baseFields'">
-          <router-link :to="{name: 'BaseFields'}">Base Fields</router-link>
+          <router-link :to="{name: 'BaseFields'}">Base Fields <label-number :number="baseFieldCount"></label-number></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'injectedFieldTypes'">
-          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Fields</router-link>
+          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Fields <label-number :number="injectedFieldTypesCount"></label-number></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
@@ -42,7 +42,8 @@ export default {
       resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
     }),
     ...mapActions({
-      fetchBaseFields: 'fetchBaseFields'
+      fetchBaseFields: 'fetchBaseFields',
+      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
     }),
     async setModalComponent (component) {
       this.current_base_field_modal = component
@@ -56,6 +57,7 @@ export default {
   computed: {
     ...mapGetters({
       baseFieldCount: 'getBaseFieldCount',
+      injectedFieldTypesCount: 'getInjectedFieldTypesCount',
       currentBaseField: 'getCurrentBaseField',
       loading: 'getBaseFieldsFetchLoading',
       loadingText: 'getBaseFieldsFetchLoadingText'
@@ -79,6 +81,7 @@ export default {
   created () {
     this.resetBreadcrumbs()
     this.fetchBaseFields()
+    this.fetchInjectedFieldTypes()
   }
 }
 </script>
