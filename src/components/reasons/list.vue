@@ -17,6 +17,9 @@
         <td class="td">
           <btn-group-right>
             <delete-reason :id="reason.id"></delete-reason>
+            <button class="btn btn-circle btn-hollow-blue" @click="openUpdateModal(reason)">
+              <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+            </button>
           </btn-group-right>
         </td>
       </tr>
@@ -28,10 +31,21 @@
 
 <script>
 import deleteReason from '@/components/reasons/delete'
+import { mapMutations } from 'vuex'
 
 export default {
   props: {
     reasons: Array
+  },
+  methods: {
+    ...mapMutations({
+      showUpdateModal: 'SHOW_UPDATE_REASON_MODAL',
+      setCurrentReason: 'SET_CURRENT_REASON'
+    }),
+    openUpdateModal (reason) {
+      this.showUpdateModal()
+      this.setCurrentReason(reason)
+    }
   },
   components: {
     'delete-reason': deleteReason

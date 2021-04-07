@@ -12,12 +12,14 @@
       </template>
     </panel-template>
     <reason-create></reason-create>
+    <reason-update></reason-update>
   </div>
 </template>
 
 <script>
 import reasonsList from '@/components/reasons/list'
 import reasonCreate from '@/components/reasons/create'
+import reasonUpdate from '@/components/reasons/update'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -43,7 +45,8 @@ export default {
   },
   components: {
     'reasons-list': reasonsList,
-    'reason-create': reasonCreate
+    'reason-create': reasonCreate,
+    'reason-update': reasonUpdate
   }
 }
 </script>
