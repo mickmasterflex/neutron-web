@@ -4,13 +4,25 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <v-textarea-field v-model="description" rules="required|standard_chars" field_id="description" field_label="Description"></v-textarea-field>
+          <v-text-field
+            v-model="name"
+            rules="required|standard_chars"
+            field_id="name"
+            field_label="Name"
+            :field_disabled="loading"></v-text-field>
+          <v-textarea-field
+            v-model="description"
+            rules="required|standard_chars"
+            field_id="description"
+            field_label="Description"
+            :field_disabled="loading"></v-textarea-field>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Create Reason</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Create Reason
+      </button>
     </template>
   </modal-template>
 </template>
@@ -29,7 +41,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateReasonModal'
+      showModal: 'getShowCreateReasonModal',
+      loading: 'getReasonsPostLoading'
     })
   },
   mixins: [enterKeyListener, setResponseErrors],
