@@ -1,28 +1,31 @@
 <template>
-  <button class="btn btn-circle btn-hollow-red" @click="this.runDelete" :disabled="deleteLoading">
-    <font-awesome-icon v-if="!deleteLoading" icon="minus"></font-awesome-icon>
+  <button class="btn btn-circle btn-hollow-red" @click="this.runDelete" :disabled="loading">
+    <font-awesome-icon v-if="!loading" icon="minus"></font-awesome-icon>
     <font-awesome-icon v-else icon="spinner" pulse></font-awesome-icon>
   </button>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      loading: false
+    }
+  },
   props: {
     id: Number
-  },
-  computed: {
-    ...mapGetters({
-      deleteLoading: 'getReasonsDeleteLoading'
-    })
   },
   methods: {
     ...mapActions({
       deleteReason: 'deleteReason'
     }),
     runDelete () {
-      this.deleteReason(this.id)
+      this.loading = true
+      this.deleteReason(this.id).then(() => {
+        this.loading = false
+      })
     }
   }
 }

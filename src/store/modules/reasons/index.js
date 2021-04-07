@@ -46,13 +46,8 @@ const actions = {
       })
   },
   async deleteReason ({ commit }, id) {
-    commit('SET_REASONS_DELETE_LOADING')
     await axios.delete(`/reasons/${id}/`)
-      .then(() => {
-        commit('REMOVE_REASON', id)
-      }).finally(() => {
-        commit('RESET_REASONS_DELETE_LOADING')
-      })
+      .then(() => { commit('REMOVE_REASON', id) })
   }
 }
 
