@@ -528,7 +528,8 @@ const routes = [
           requiresAuth: true,
           activeApp: 'config',
           activeAppTab: 'field-mgmt',
-          contentTab: 'baseFields'
+          contentTab: 'baseFields',
+          title: 'Base Field Management'
         },
         pathToRegexpOptions: { strict: true }
       },
@@ -540,7 +541,8 @@ const routes = [
           requiresAuth: true,
           activeApp: 'config',
           activeAppTab: 'field-mgmt',
-          contentTab: 'injectedFieldTypes'
+          contentTab: 'injectedFieldTypes',
+          title: 'Injected Field Management'
         },
         pathToRegexpOptions: { strict: true }
       }

@@ -14,7 +14,7 @@
             rules="required"
             field_class="field-tall"
             v-model="injectedFieldType"
-            field_label="Injected Field Type"
+            field_label="Field Type"
             field_id="field_type">
           </v-text-field>
         </form>
@@ -22,7 +22,7 @@
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-green ml-2">
-        <font-awesome-icon icon="plus"></font-awesome-icon> Submit
+        <font-awesome-icon icon="plus"></font-awesome-icon> Create
       </button>
     </template>
   </tooltip-dialog-template>
