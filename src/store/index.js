@@ -15,13 +15,12 @@ import contractRelations from '@/store/modules/contract-relations'
 import deliveries from '@/store/modules/deliveries'
 import forms from '@/store/modules/forms'
 import geos from '@/store/modules/geos'
-import modals from './modules/modals'
 import offers from './modules/offers'
 import partners from './modules/partners'
 import pricingTiers from './modules/pricing-tiers'
 import products from './modules/products'
+import reasons from './modules/reasons'
 import users from './modules/users'
-import toast from '@/store/modules/toast'
 
 import constants from '@/store/constants'
 
@@ -45,12 +44,11 @@ export default new Vuex.Store({
     deliveries,
     forms,
     geos,
-    modals,
     offers,
     partners,
     pricingTiers,
     products,
-    users,
-    toast
+    reasons,
+    users
   }
 })

@@ -58,12 +58,11 @@ export default {
   mixins: [setResponseErrors, checkUnsavedChangesInModal],
   methods: {
     ...mapActions({
-      update: 'updateChannel'
+      updateChannel: 'updateChannel'
     }),
     ...mapMutations({
       closeForm: 'CLOSE_UPDATE_CHANNEL_FORM',
-      closeCreateForm: 'CLOSE_CREATE_CHANNEL_FORM',
-      setCurrentChannel: 'SET_CURRENT_CHANNEL'
+      closeCreateForm: 'CLOSE_CREATE_CHANNEL_FORM'
     }),
     close () {
       this.$nextTick(() => {
@@ -76,7 +75,7 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.update({
+          this.updateChannel({
             name: this.name,
             id: this.channel.id
           }).then(() => { this.close() })
