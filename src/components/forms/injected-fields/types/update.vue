@@ -36,12 +36,12 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowUpdateInjectedFieldTypeModal',
-      injectedFieldTypes: 'getCurrentInjectedFieldType',
+      currentInjectedFieldType: 'getCurrentInjectedFieldType',
       fieldTypes: 'getInjectedFieldTypes'
     }),
     unsavedChanges () {
-      if (this.injectedFieldType) {
-        return this.field_type !== this.injectedFieldType.field_type
+      if (this.currentInjectedFieldType) {
+        return this.injectedFieldType !== this.currentInjectedFieldType.field_type
       } else {
         return false
       }
@@ -54,8 +54,8 @@ export default {
   },
   mixins: [checkUnsavedChangesInModal, enterKeyListener, setResponseErrors],
   updated () {
-    if (this.injectedFieldType) {
-      this.type = this.injectedFieldType.field_type
+    if (this.currentInjectedFieldType) {
+      this.injectedFieldType = this.currentInjectedFieldType.field_type
     }
   },
   methods: {
@@ -68,15 +68,15 @@ export default {
     }),
     close () {
       this.closeModal()
-      this.type = ''
+      this.injectedFieldType = ''
       this.resetCurrentInjectedFieldType()
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.update({
-            field_type: this.type,
-            id: this.injectedFieldTypes.id
+            field_type: this.injectedFieldType,
+            id: this.currentInjectedFieldType.id
           }).then(() => {
             this.closeModal()
           }).catch(error => {

@@ -42,8 +42,9 @@ export default {
       setCurrentInjectedFieldType: 'SET_CURRENT_INJECTED_FIELD_TYPE',
       showModal: 'SHOW_UPDATE_INJECTED_FIELD_TYPE_MODAL'
     }),
-    showUpdateInjectedFieldTypeModal () {
+    showUpdateInjectedFieldTypeModal (injectedFieldType) {
       this.showModal()
+      this.setCurrentInjectedFieldType(injectedFieldType)
     }
   }
 }

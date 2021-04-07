@@ -528,7 +528,7 @@ const routes = [
           requiresAuth: true,
           activeApp: 'config',
           activeAppTab: 'field-mgmt',
-          contentTab: 'base-fields'
+          contentTab: 'baseFields'
         },
         pathToRegexpOptions: { strict: true }
       },
@@ -540,7 +540,7 @@ const routes = [
           requiresAuth: true,
           activeApp: 'config',
           activeAppTab: 'field-mgmt',
-          contentTab: 'injected-fields'
+          contentTab: 'injectedFieldTypes'
         },
         pathToRegexpOptions: { strict: true }
       }

@@ -22,22 +22,23 @@ const actions = {
         commit('SET_INJECTED_FIELD_TYPES', response.data)
       })
   },
-  async createInjectedFieldType ({ commit }, field) {
-    await axios.post('/injected-field-types/', field)
+  async createInjectedFieldType ({ commit }, injectedFieldType) {
+    await axios.post('/injected-field-types/', injectedFieldType)
       .then(response => {
-        commit('ADD_FIELD', { data: response.data, type: 'injected_field_types' })
-      }).catch(error => console.log(error.response.data))
+        commit('ADD_INJECTED_FIELD_TYPE', response.data)
+      })
   },
-  async updateInjectedFieldType ({ commit }, updatedField) {
-    await axios.put(`/injected-field-types/${updatedField.id}/`, updatedField)
+  async updateInjectedFieldType ({ commit }, updatedInjectedFieldType) {
+    await axios.put(`/injected-field-types/${updatedInjectedFieldType.id}/`, updatedInjectedFieldType)
       .then(response => {
-        commit('UPDATE_FIELD', { data: response.data, type: 'injected_field_types' })
+        commit('UPDATE_INJECTED_FIELD_TYPE', response.data)
+        commit('SET_CURRENT_INJECTED_FIELD_TYPE', response.data)
       })
   },
   async deleteInjectedFieldType ({ commit }, id) {
     await axios.delete(`/injected-field-types/${id}/`)
       .then(() => {
-        commit('REMOVE_FIELD', { id: id, type: 'injected_field_types' })
+        commit('REMOVE_INJECTED_FIELD_TYPE', id)
       })
   }
 }
@@ -45,9 +46,16 @@ const actions = {
 const mutations = {
   SET_INJECTED_FIELD_TYPES: (state, injectedFieldTypes) => (state.injected_field_types = injectedFieldTypes),
   SET_CURRENT_INJECTED_FIELD_TYPE: (state, injectedFieldType) => (state.current_injected_field_type = injectedFieldType),
-  RESET_CURRENT_INJECTED_FIELD_TYPE: (state) => (state.current_field = null)
+  RESET_CURRENT_INJECTED_FIELD_TYPE: (state) => (state.current_field = null),
+  ADD_INJECTED_FIELD_TYPE: (state, injectedFieldType) => state.injected_field_types.unshift(injectedFieldType),
+  UPDATE_INJECTED_FIELD_TYPE: (state, updatedInjectedFieldType) => {
+    const index = state.injected_field_types.findIndex(injectedFieldType => injectedFieldType.id === updatedInjectedFieldType.id)
+    if (index !== -1) {
+      state.injected_field_types.splice(index, 1, updatedInjectedFieldType)
+    }
+  },
+  REMOVE_INJECTED_FIELD_TYPE: (state, id) => (state.injected_field_types = state.injected_field_types.filter(injectedFieldType => injectedFieldType.id !== id))
 }
-
 export default {
   modules,
   state,
