@@ -1,0 +1,87 @@
+<template>
+  <content-layout>
+    <template v-slot:hud-content>
+      <h1 class="h1 text-white">Fields</h1>
+      <hud-stat-cards>
+        <stat-card :data="baseFieldCount" title="Fields" key="fieldCount"></stat-card>
+      </hud-stat-cards>
+    </template>
+    <template v-slot:contentTabs>
+      <underscore-tabs>
+        <underscore-tab :active="$route.meta.contentTab === 'baseFields'">
+          <router-link :to="{name: 'BaseFields'}">Base Fields <label-number :number="baseFieldCount"></label-number></router-link>
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'injectedFieldTypes'">
+          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Fields <label-number :number="injectedFieldTypesCount"></label-number></router-link>
+        </underscore-tab>
+      </underscore-tabs>
+    </template>
+    <template v-slot:content>
+      <router-view></router-view>
+    </template>
+  </content-layout>
+</template>
+
+<script>
+import { mapActions, mapMutations, mapGetters } from 'vuex'
+import createBaseField from '@/components/forms/base-fields/create'
+import updateBaseTextField from '@/components/forms/base-fields/text-fields/update'
+import updateBaseOptionField from '@/components/forms/base-fields/option-fields/update'
+
+export default {
+  data () {
+    return {
+      current_base_field_modal: null
+    }
+  },
+  methods: {
+    ...mapMutations({
+      showCreateBaseFieldModal: 'SHOW_CREATE_BASE_FIELD_MODAL',
+      showUpdateBaseOptionFieldModal: 'SHOW_UPDATE_BASE_OPTION_FIELD_MODAL',
+      showUpdateBaseTextFieldModal: 'SHOW_UPDATE_BASE_TEXT_FIELD_MODAL',
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    }),
+    ...mapActions({
+      fetchBaseFields: 'fetchBaseFields',
+      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
+    }),
+    async setModalComponent (component) {
+      this.current_base_field_modal = component
+    },
+    openCreateBaseField () {
+      this.setModalComponent(createBaseField).then(() => {
+        this.showCreateBaseFieldModal()
+      })
+    }
+  },
+  computed: {
+    ...mapGetters({
+      baseFieldCount: 'getBaseFieldCount',
+      injectedFieldTypesCount: 'getInjectedFieldTypesCount',
+      currentBaseField: 'getCurrentBaseField',
+      loading: 'getBaseFieldsFetchLoading',
+      loadingText: 'getBaseFieldsFetchLoadingText'
+    })
+  },
+  watch: {
+    currentBaseField () {
+      if (this.currentBaseField) {
+        if (this.currentBaseField.type === 'select' || this.currentBaseField.type === 'radio') {
+          this.setModalComponent(updateBaseOptionField).then(() => {
+            this.showUpdateBaseOptionFieldModal()
+          })
+        } else if (this.currentBaseField.type === 'text' || this.currentBaseField.type === 'textarea') {
+          this.setModalComponent(updateBaseTextField).then(() => {
+            this.showUpdateBaseTextFieldModal()
+          })
+        }
+      }
+    }
+  },
+  created () {
+    this.resetBreadcrumbs()
+    this.fetchBaseFields()
+    this.fetchInjectedFieldTypes()
+  }
+}
+</script>

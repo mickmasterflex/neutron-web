@@ -1,11 +1,15 @@
-import activeApp from '@/store/modules/app/active-app'
-import activeAppTab from '@/store/modules/app/active-app-tab'
-import breadcrumbs from '@/store/modules/app/breadcrumbs'
+import activeApp from './active-app'
+import activeAppTab from './active-app-tab'
+import breadcrumbs from './breadcrumbs'
+import modals from './modals'
+import toast from './toast'
 
 const modules = {
   activeApp,
   activeAppTab,
-  breadcrumbs
+  breadcrumbs,
+  modals,
+  toast
 }
 
 export default {

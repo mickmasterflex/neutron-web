@@ -10,11 +10,9 @@ export default {
     id: Number
   },
   methods: {
-    ...mapActions({
-      deleteChannel: 'deleteChannel'
-    }),
+    ...mapActions({ delete: 'deleteInjectedField' }),
     runDelete () {
-      this.deleteChannel(this.id)
+      this.delete(this.id)
     }
   }
 }

@@ -1,23 +1,15 @@
 <template>
-  <content-layout>
-    <template v-slot:hud-content>
-      <h1 class="h1 text-white">Fields</h1>
-      <hud-stat-cards>
-        <stat-card :data="baseFieldCount" title="Fields" key="fieldCount"></stat-card>
-      </hud-stat-cards>
-    </template>
-    <template v-slot:content>
-      <panel-template title="Base Fields" :showLoader="loading" :loadingText="loadingText" contentBackgroundColor="white">
-        <template slot="action">
-          <button class="btn btn-turquoise" @click="openCreateBaseField()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
-        </template>
-        <template slot="content">
-          <list-base-fields></list-base-fields>
-        </template>
-      </panel-template>
-      <component :is="current_base_field_modal" :field="currentBaseField"></component>
-    </template>
-  </content-layout>
+  <div>
+    <panel-template title="Base Fields" :showLoader="loading" :loadingText="loadingText" contentBackgroundColor="white">
+      <template slot="action">
+        <button class="btn btn-turquoise" @click="openCreateBaseField()"><font-awesome-icon icon="plus"></font-awesome-icon> New Field</button>
+      </template>
+      <template slot="content">
+        <list-base-fields></list-base-fields>
+      </template>
+    </panel-template>
+    <component :is="current_base_field_modal" :field="currentBaseField"></component>
+  </div>
 </template>
 
 <script>
