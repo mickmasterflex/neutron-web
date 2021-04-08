@@ -25,8 +25,8 @@ export default {
   props: {
     loading: Boolean,
     loadingText: String,
-    contractName: String, // fixme: passing this prop many components deep
-    clientSlug: String // fixme: passing this prop many components deep
+    contractName: String,
+    clientSlug: String
   },
   data () {
     return {
