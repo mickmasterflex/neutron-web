@@ -6,7 +6,7 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'clients'">
-          <router-link :to="{name: 'Clients'}">Clients <label-number :number="getAllClientsCount"></label-number></router-link>
+          <router-link :to="{name: 'Clients'}">Clients <label-number :number="getAllClientsCount"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'buyerGroups'">
           <router-link :to="{name: 'BuyerGroups'}">Buyer Groups</router-link>
