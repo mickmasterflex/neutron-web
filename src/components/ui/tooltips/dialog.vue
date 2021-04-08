@@ -11,7 +11,7 @@
         <div class="border-t-2 bg-gray-100 border-b-2 border-gray-200 overflow-x-scroll p-2 flex flex-row items-center justify-center">
           <slot name="body">Tooltip Body</slot>
         </div>
-        <div class="flex flex-row p-2">
+        <div class="flex flex-row p-2 space-x-2">
           <slot name="footer-default">
             <button class="btn btn-hollow-default flex-grow" @click="toggle">Close</button>
           </slot>

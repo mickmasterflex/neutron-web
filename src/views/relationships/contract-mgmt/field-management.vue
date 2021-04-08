@@ -1,11 +1,16 @@
 <template>
   <base-panel-grid>
-    <panel-template class="col-span-2" title="Contract Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Contract Fields">
+    <panel-template
+      title="Contract Fields"
+      :actionTransition="true"
+      :showLoader="loading"
+      :loadingText="loadingText"
+      class="col-span-2">
       <template v-slot:action>
         <create-field></create-field>
       </template>
       <template v-slot:content>
-        <list-fields></list-fields>
+        <list-fields :clientSlug="client" :contractName="contractName"></list-fields>
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
@@ -33,10 +38,13 @@ import listInjectedFields from '@/components/forms/injected-fields/fields/list'
 import updateInjectedField from '@/components/forms/injected-fields/fields/update'
 
 export default {
+  props: {
+    client: String,
+    id: Number
+  },
   data () {
     return {
       currentFieldId: {
-        default: null,
         type: Number
       },
       updateComponent: null
@@ -45,24 +53,50 @@ export default {
   computed: {
     ...mapGetters({
       currentField: 'getCurrentField',
+      fetchFormsLoading: 'getFetchFormsLoading',
+      fetchFormsLoadingText: 'getFetchFormsLoadingText',
       offerFetchLoading: 'getOfferFetchLoading',
+      offerFetchLoadingText: 'getOfferFetchLoadingText',
       buyerFetchLoading: 'getBuyerFetchLoading',
+      buyerFetchLoadingText: 'getBuyerFetchLoadingText',
+      getCurrentOffer: 'getCurrentOffer',
+      getCurrentBuyer: 'getCurrentBuyer',
       injectedFieldTypes: 'getInjectedFieldTypes'
     }),
-    loading () {
-      if (this.$route.name === 'OfferFieldManagement') {
+    contractType () {
+      return this.$route.name === 'OfferFieldManagement' ? 'offer' : 'buyer'
+    },
+    contractName () {
+      return this.contractType === 'offer' ? this.getCurrentOffer.name : this.getCurrentBuyer.name
+    },
+    contractLoading () {
+      if (this.contractType === 'offer') {
         return this.offerFetchLoading
       }
       return this.buyerFetchLoading
+    },
+    contractLoadingText () {
+      if (this.contractType === 'offer') {
+        return this.offerFetchLoadingText
+      }
+      return this.buyerFetchLoadingText
+    },
+    loading () {
+      return this.contractLoading ? this.contractLoading : this.fetchFormsLoading
+    },
+    loadingText () {
+      return this.contractLoading ? this.contractLoadingText : this.fetchFormsLoadingText
     }
   },
   methods: {
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
+      resetAncestorForms: 'RESET_ANCESTOR_FORMS',
       showCreateInjectedFieldModal: 'SHOW_CREATE_INJECTED_FIELD_MODAL'
     }),
     ...mapActions({
+      fetchForms: 'fetchForms',
       fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
     }),
     async setUpdateComponent (component) {
@@ -94,9 +128,15 @@ export default {
       } else {
         this.currentFieldId = null
       }
+    },
+    id () { // id prop changes when navigating from a buyer to an ancestor buyer
+      this.resetAncestorForms()
+      this.fetchForms()
     }
   },
   created () {
+    this.resetAncestorForms()
+    this.fetchForms()
     this.fetchInjectedFieldTypes()
   }
 }
