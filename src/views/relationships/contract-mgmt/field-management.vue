@@ -46,7 +46,8 @@ export default {
     ...mapGetters({
       currentField: 'getCurrentField',
       offerFetchLoading: 'getOfferFetchLoading',
-      buyerFetchLoading: 'getBuyerFetchLoading'
+      buyerFetchLoading: 'getBuyerFetchLoading',
+      injectedFieldTypes: 'getInjectedFieldTypes'
     }),
     loading () {
       if (this.$route.name === 'OfferFieldManagement') {
@@ -90,6 +91,9 @@ export default {
       } else {
         this.currentFieldId = null
       }
+    },
+    created () {
+      this.fetchInjectedFieldTypes()
     }
   }
 }
