@@ -2,15 +2,11 @@
   <content-layout>
     <template v-slot:hud-content>
       <h1 class="text-white text-4xl font-hairline">Overview</h1>
-      <hud-stat-cards>
-        <stat-card v-if="getAllClientsCount > 0" :data="getAllClientsCount" title="Clients" key="clientCount"></stat-card>
-        <stat-card v-if="getBuyerGroups" :data="getBuyerGroups.length" title="Buyer Groups" key="buyerGroupCount"></stat-card>
-      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'clients'">
-          <router-link :to="{name: 'Clients'}">Clients</router-link>
+          <router-link :to="{name: 'Clients'}">Clients <label-number :number="getAllClientsCount"></label-number></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'buyerGroups'">
           <router-link :to="{name: 'BuyerGroups'}">Buyer Groups</router-link>
@@ -24,14 +20,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      getAllClientsCount: 'getAllClientsCount',
-      getBuyerGroups: 'getBuyerGroups'
+      getAllClientsCount: 'getAllClientsCount'
     })
+  },
+  methods: {
+    ...mapActions({
+      fetchClients: 'fetchClients'
+    }),
+    ...mapMutations({
+      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    })
+  },
+  created () {
+    this.fetchClients()
+    this.resetBreadcrumbs()
   }
 }
 </script>

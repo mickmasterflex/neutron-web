@@ -588,7 +588,7 @@ const routes = [
       {
         name: 'Clients',
         path: 'clients/',
-        component: () => import('@/views/relationships/contract-mgmt/clients/index.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/clients.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -613,7 +613,7 @@ const routes = [
   },
   {
     path: '/relationships/clients/:slug/',
-    component: () => import('@/views/relationships/contract-mgmt/clients/client/index.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/client/index.vue'),
     props (route) {
       return { ...route.params }
     },
@@ -621,7 +621,7 @@ const routes = [
       {
         name: 'Client',
         path: '',
-        component: () => import('@/views/relationships/contract-mgmt/clients/client/details.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/client/details.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -632,7 +632,7 @@ const routes = [
       {
         path: 'contracts/',
         name: 'ClientContracts',
-        component: () => import('@/views/relationships/contract-mgmt/clients/client/contracts.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/client/contracts.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
