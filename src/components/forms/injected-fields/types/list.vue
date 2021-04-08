@@ -2,9 +2,9 @@
   <transition-table-state>
     <table v-if="injectedFieldTypes.length" class="table table-striped">
       <thead>
-      <tr class="w-20">
+      <tr>
         <th class="th">Type</th>
-        <th class="th"></th>
+        <th class="th w-20"></th>
       </tr >
       </thead>
       <tbody class="tbody">

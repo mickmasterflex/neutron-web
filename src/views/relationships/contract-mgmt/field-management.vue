@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
 import createInjectedField from '@/components/forms/injected-fields/fields/create'
@@ -62,6 +62,9 @@ export default {
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
       showCreateInjectedFieldModal: 'SHOW_CREATE_INJECTED_FIELD_MODAL'
     }),
+    ...mapActions({
+      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
+    }),
     async setUpdateComponent (component) {
       this.updateComponent = component
     }
@@ -91,10 +94,10 @@ export default {
       } else {
         this.currentFieldId = null
       }
-    },
-    created () {
-      this.fetchInjectedFieldTypes()
     }
+  },
+  created () {
+    this.fetchInjectedFieldTypes()
   }
 }
 </script>

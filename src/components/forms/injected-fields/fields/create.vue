@@ -40,9 +40,6 @@ export default {
       currentForm: 'getCurrentForm'
     })
   },
-  props: {
-    injectedFields: Array
-  },
   mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({

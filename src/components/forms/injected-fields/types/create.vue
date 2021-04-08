@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -37,19 +37,9 @@ export default {
       formVisible: false
     }
   },
-  computed: {
-    ...mapGetters({
-      injectedFieldTypes: 'getInjectedFieldTypes',
-      form: 'getCurrentForm'
-    })
-  },
   methods: {
     ...mapActions({
-      createInjectedFieldType: 'createInjectedFieldType',
-      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
-    }),
-    ...mapMutations({
-      setInjectedFieldTypes: 'SET_INJECTED_FIELD_TYPES'
+      createInjectedFieldType: 'createInjectedFieldType'
     }),
     resetForm () {
       this.injectedFieldType = ''

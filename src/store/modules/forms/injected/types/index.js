@@ -46,7 +46,7 @@ const actions = {
 const mutations = {
   SET_INJECTED_FIELD_TYPES: (state, injectedFieldTypes) => (state.injected_field_types = injectedFieldTypes),
   SET_CURRENT_INJECTED_FIELD_TYPE: (state, injectedFieldType) => (state.current_injected_field_type = injectedFieldType),
-  RESET_CURRENT_INJECTED_FIELD_TYPE: (state) => (state.current_field = null),
+  RESET_CURRENT_INJECTED_FIELD_TYPE: (state) => (state.current_injected_field_type = null),
   ADD_INJECTED_FIELD_TYPE: (state, injectedFieldType) => state.injected_field_types.unshift(injectedFieldType),
   UPDATE_INJECTED_FIELD_TYPE: (state, updatedInjectedFieldType) => {
     const index = state.injected_field_types.findIndex(injectedFieldType => injectedFieldType.id === updatedInjectedFieldType.id)
