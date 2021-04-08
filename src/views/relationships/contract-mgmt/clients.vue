@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import clientList from '@/components/clients/list'
 import createClient from '@/components/clients/create'
 
@@ -30,17 +30,9 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      fetchClients: 'fetchClients'
-    }),
     ...mapMutations({
-      showCreateClientModal: 'SHOW_CREATE_CLIENT_MODAL',
-      resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+      showCreateClientModal: 'SHOW_CREATE_CLIENT_MODAL'
     })
-  },
-  created () {
-    this.resetBreadcrumbs()
-    this.fetchClients()
   }
 }
 </script>

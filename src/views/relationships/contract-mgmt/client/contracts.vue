@@ -24,15 +24,9 @@ export default {
   computed: {
     ...mapGetters({
       client: 'getCurrentClient',
-      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
-      getParentlessPartnersByClient: 'getParentlessPartnersByClient'
-    }),
-    partners: function () {
-      return this.getParentlessPartnersByClient(this.client.id)
-    },
-    buyers: function () {
-      return this.getParentlessBuyersByClient(this.client.id)
-    }
+      buyers: 'getCurrentClientParentlessBuyerContractSet',
+      partners: 'getCurrentClientParentlessPartnerContractSet'
+    })
   }
 }
 </script>
