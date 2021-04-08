@@ -67,9 +67,6 @@ export default {
         }
       })
     }
-  },
-  created () {
-    this.fetchInjectedFieldTypes()
   }
 }
 </script>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import listInjectedFieldTypes from '@/components/forms/injected-fields/types/list'
 import createInjectedFieldType from '@/components/forms/injected-fields/types/create'
 import updateInjectedFieldType from '@/components/forms/injected-fields/types/update'
@@ -27,9 +27,6 @@ export default {
   methods: {
     ...mapMutations({
       showCreateInjectedFieldTypeModal: 'SHOW_CREATE_INJECTED_FIELD_TYPE_MODAL'
-    }),
-    ...mapActions({
-      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
     })
   },
   computed: {
@@ -41,9 +38,6 @@ export default {
     'list-injected-field-types': listInjectedFieldTypes,
     'create-injected-field-type': createInjectedFieldType,
     'update-injected-field-type': updateInjectedFieldType
-  },
-  created () {
-    this.fetchInjectedFieldTypes()
   }
 }
 </script>
