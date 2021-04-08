@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <panel-template title="Contract Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Contract Fields">
+  <base-panel-grid>
+    <panel-template class="col-span-2" title="Contract Fields" :actionTransition="true" :showLoader="loading" loadingText="Loading Contract Fields">
       <template v-slot:action>
         <create-field></create-field>
       </template>
@@ -9,15 +9,28 @@
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
-  </div>
+    <panel-template class="col-span-2" title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
+      <template v-slot:action>
+        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
+      </template>
+      <template v-slot:content>
+        <list-injected-fields></list-injected-fields>
+      </template>
+    </panel-template>
+    <update-injected-field></update-injected-field>
+    <create-injected-field></create-injected-field>
+  </base-panel-grid>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
+import createInjectedField from '@/components/forms/injected-fields/fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
+import listInjectedFields from '@/components/forms/injected-fields/fields/list'
+import updateInjectedField from '@/components/forms/injected-fields/fields/update'
 
 export default {
   data () {
@@ -33,7 +46,8 @@ export default {
     ...mapGetters({
       currentField: 'getCurrentField',
       offerFetchLoading: 'getOfferFetchLoading',
-      buyerFetchLoading: 'getBuyerFetchLoading'
+      buyerFetchLoading: 'getBuyerFetchLoading',
+      injectedFieldTypes: 'getInjectedFieldTypes'
     }),
     loading () {
       if (this.$route.name === 'OfferFieldManagement') {
@@ -45,7 +59,11 @@ export default {
   methods: {
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
-      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
+      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
+      showCreateInjectedFieldModal: 'SHOW_CREATE_INJECTED_FIELD_MODAL'
+    }),
+    ...mapActions({
+      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
     }),
     async setUpdateComponent (component) {
       this.updateComponent = component
@@ -55,7 +73,10 @@ export default {
     updateTextField,
     updateOptionField,
     'list-fields': listFields,
-    'create-field': createField
+    'create-field': createField,
+    'create-injected-field': createInjectedField,
+    'list-injected-fields': listInjectedFields,
+    'update-injected-field': updateInjectedField
   },
   watch: {
     currentField () {
@@ -74,6 +95,9 @@ export default {
         this.currentFieldId = null
       }
     }
+  },
+  created () {
+    this.fetchInjectedFieldTypes()
   }
 }
 </script>

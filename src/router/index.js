@@ -510,16 +510,43 @@ const routes = [
     ]
   },
   {
-    path: '/products/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/base-field-management.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'products',
-      activeAppTab: 'field-mgmt',
-      title: 'Field Management'
+    path: '/config/fields/',
+    component: () => import('@/views/config/base-field-management/index.vue'),
+    redirect: { name: 'BaseFields' },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
     },
-    pathToRegexpOptions: { strict: true }
+    children: [
+      {
+        name: 'BaseFields',
+        path: 'base-fields',
+        component: () => import('@/views/config/base-field-management/base-fields.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'field-mgmt',
+          contentTab: 'baseFields',
+          title: 'Base Field Management'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        path: 'injected-fields',
+        name: 'InjectedFieldTypes',
+        component: () => import('@/views/config/base-field-management/injected-field-types.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'field-mgmt',
+          contentTab: 'injectedFieldTypes',
+          title: 'Injected Field Management'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/config/pricing-tiers/',

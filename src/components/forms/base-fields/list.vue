@@ -21,9 +21,9 @@
           <td class="td">{{field.description}}</td>
           <td class="td">{{field.type}}</td>
           <td class="td">
-            <span class="flex flex-row justify-end">
+            <btn-group-right>
               <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
-            </span>
+            </btn-group-right>
           </td>
         </tr>
       </tbody>

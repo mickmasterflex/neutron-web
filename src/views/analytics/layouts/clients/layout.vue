@@ -1,8 +1,7 @@
 <template>
   <analytics-layout
     :hud-title="hudTitle"
-    :fetch-stats="fetchClients"
-  >
+    :fetch-stats="fetchClients">
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'clients'">

@@ -2,6 +2,7 @@
   <ul class="flex flex-row">
     <top-nav-item label="Pricing Tiers" route="PricingTiers" :active="activeTab === 'pricing-tiers'"></top-nav-item>
     <top-nav-item label="Channels" route="Channels" :active="activeTab === 'channels'"></top-nav-item>
+    <top-nav-item label="Field Mgmt" route="FieldManagement" :active="activeTab === 'field-mgmt'"></top-nav-item>
     <top-nav-item label="Reasons" route="Reasons" :active="activeTab === 'reasons'"></top-nav-item>
   </ul>
 </template>

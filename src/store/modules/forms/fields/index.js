@@ -20,14 +20,14 @@ const getters = {
 const mutations = {
   SET_CURRENT_FORM: (state, form) => (state.current_form = form),
   SORT_CURRENT_FORM_FIELDS: (state) => (state.current_form.fields = state.current_form.fields.sort((a, b) => (a.order > b.order) ? 1 : -1)),
-  ADD_FIELD: (state, field) => state.current_form.fields.push(field),
+  ADD_FIELD: (state, field) => state.current_form[field.type].push(field.data),
   UPDATE_FIELD: (state, updatedField) => {
-    const index = state.current_form.fields.findIndex(field => field.id === updatedField.id)
+    const index = state.current_form[updatedField.type].findIndex(field => field.id === updatedField.data.id)
     if (index !== -1) {
-      state.current_form.fields.splice(index, 1, updatedField)
+      state.current_form[updatedField.type].splice(index, 1, updatedField.data)
     }
   },
-  REMOVE_FIELD: (state, id) => (state.current_form.fields = state.current_form.fields.filter(field => field.id !== id)),
+  REMOVE_FIELD: (state, deletedField) => (state.current_form[deletedField.type] = state.current_form[deletedField.type].filter(field => field.id !== deletedField.id)),
   SET_CURRENT_FIELD: (state, field) => (state.current_field = field),
   RESET_CURRENT_FIELD: (state) => (state.current_field = null)
 }
