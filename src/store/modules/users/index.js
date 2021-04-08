@@ -1,10 +1,12 @@
 import axios from '@/axios'
 import loading from '@/store/modules/users/loading'
 import visibility from '@/store/modules/users/visibility'
+import currentUser from '@/store/modules/users/current-user'
 
 const modules = {
   loading,
-  visibility
+  visibility,
+  currentUser
 }
 
 const state = {
