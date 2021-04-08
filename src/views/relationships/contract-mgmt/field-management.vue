@@ -8,6 +8,7 @@
       class="col-span-2"/>
     <injected-panel-template
       :loading="loading"
+      :loading-text="loadingText"
       class="col-span-2"/>
   </base-panel-grid>
 </template>
@@ -31,7 +32,7 @@ export default {
       buyerFetchLoading: 'getBuyerFetchLoading',
       buyerFetchLoadingText: 'getBuyerFetchLoadingText',
       getCurrentOffer: 'getCurrentOffer',
-      getCurrentBuyer: 'getCurrentBuyer',
+      getCurrentBuyer: 'getCurrentBuyer'
     }),
     contractType () {
       return this.$route.name === 'OfferFieldManagement' ? 'offer' : 'buyer'

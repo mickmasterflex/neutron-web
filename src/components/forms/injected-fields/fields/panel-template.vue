@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
+  <panel-template title="Injected Fields" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
       <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Injected Field</button>
     </template>
@@ -19,7 +19,8 @@ import updateInjectedField from '@/components/forms/injected-fields/fields/updat
 
 export default {
   props: {
-    loading: Boolean // fixme: need a loading module for injected fields
+    loading: Boolean,
+    loadingText: String
   },
   computed: {
     ...mapGetters({
