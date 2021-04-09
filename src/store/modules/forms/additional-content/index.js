@@ -24,7 +24,7 @@ const actions = {
   },
   async deleteAdditionalFormContent ({ commit }, contentId) {
     await axios.delete(`/additional-form-content/${contentId}/`)
-      .then(response => {
+      .then(() => {
         commit('REMOVE_FIELD', { id: contentId, type: 'additional_form_content_tcpa' })
       })
   }

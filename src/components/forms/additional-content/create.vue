@@ -95,6 +95,13 @@ export default {
     },
     close () {
       this.closeModal()
+      this.contentType = 'tcpa'
+      this.contentBlock = ''
+      this.leadIdToggle = false
+      this.doubleOptin = false
+      this.$nextTick(() => {
+        this.$refs.form.reset()
+      })
     }
   }
 }
