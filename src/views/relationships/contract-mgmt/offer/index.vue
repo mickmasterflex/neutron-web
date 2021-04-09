@@ -25,7 +25,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { offerContractBreadcrumbs } from '@/mixins/breadcrumbs/relationships/offer'
-import statusCard from '@/components/ui/cards/status-card'
+import statusCard from '@/components/ui/cards/stat-cards/status'
 
 export default {
   components: {

@@ -79,7 +79,7 @@ import basePanelGrid from '@/components/ui/panels/grid/base'
 import hudStatCards from '@/components/ui/hud/stat-cards'
 import hudH1 from '@/components/ui/hud/h1'
 import label from '@/components/ui/label-number'
-import statCard from '@/components/ui/cards/stat-card'
+import statCard from '@/components/ui/cards/stat-cards/base'
 import underscoreTabs from '@/components/ui/tabs/underscore/tabs-base'
 import underscoreTab from '@/components/ui/tabs/underscore/tab'
 
