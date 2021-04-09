@@ -11,7 +11,7 @@
           name: 'BuyerStatsContractOffers',
           params: { clientId: clientId, id: id },
           query: $route.query
-        }">Offers <label-number :number="offers.length"></label-number></router-link>
+        }">Offers <number-label :number="offers.length"></number-label></router-link>
       </underscore-tab>
     </template>
   </contract-layout>

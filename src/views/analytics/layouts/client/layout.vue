@@ -7,10 +7,10 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{ name: contractsRouteName, query: $route.query }">Contracts <label-number :number="contracts.length"></label-number></router-link>
+          <router-link :to="{ name: contractsRouteName, query: $route.query }">Contracts <number-label :number="contracts.length"></number-label></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'leads'">
-          <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <label-number :number="leadCount"></label-number></router-link>
+          <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <number-label :number="leadCount"></number-label></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
