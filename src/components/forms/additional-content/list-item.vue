@@ -3,6 +3,11 @@
     :title="content.additional_content_type"
     contentBackgroundColor="white"
   >
+    <template #action>
+      <btn-group-right>
+        <delete-content :id="content.id"/>
+      </btn-group-right>
+    </template>
     <template #content>
       <div class="space-x-4 mb-3">
           <span v-if="content.additional_content_type === 'tcpa'">
@@ -18,12 +23,17 @@
 </template>
 
 <script>
+import deleteContent from './delete'
+
 export default {
   props: {
     content: {
       type: Object,
       required: true
     }
+  },
+  components: {
+    'delete-content': deleteContent
   }
 }
 </script>

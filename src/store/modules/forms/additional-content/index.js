@@ -19,10 +19,13 @@ const actions = {
   async createAdditionalFormContent ({ commit }, content) {
     await axios.post('/additional-form-content/', content)
       .then(response => {
-        console.log(response)
-        console.log(response.data)
         commit('ADD_FIELD', { data: response.data, type: 'additional_form_content_tcpa' })
-        // commit('ADD_ADDITIONAL_FORM_CONTENT', response.data)
+      })
+  },
+  async deleteAdditionalFormContent ({ commit }, contentId) {
+    await axios.delete(`/additional-form-content/${contentId}/`)
+      .then(response => {
+        commit('REMOVE_FIELD', { id: contentId, type: 'additional_form_content_tcpa' })
       })
   }
 }
