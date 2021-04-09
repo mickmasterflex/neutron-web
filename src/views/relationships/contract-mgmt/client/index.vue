@@ -13,7 +13,7 @@
           <router-link :to="{name: 'Client', params: {slug: slug}}">Client Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'ClientContracts', params: {slug: slug}}">Contracts <label-number :number="contractLength"/></router-link>
+          <router-link :to="{name: 'ClientContracts', params: {slug: slug}}">Contracts <number-label :number="contractLength"/></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

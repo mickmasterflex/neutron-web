@@ -13,10 +13,10 @@
           <router-link :to="{name: 'BuyerContract', params: {id:id, client: client}}">Buyer Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts <label-number :number="contract.children ? contract.children.length : 0"/></router-link>
+          <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'offers'">
-          <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers <label-number :number="contract.offer_contracts ? contract.offer_contracts.length : 0"/></router-link>
+          <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers <number-label :number="contract.offer_contracts ? contract.offer_contracts.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'field-management'">
           <router-link :to="{name: 'BuyerContractFieldManagement', params: {id:id, client: client}}">Field Management</router-link>

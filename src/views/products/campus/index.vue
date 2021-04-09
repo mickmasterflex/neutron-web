@@ -12,7 +12,7 @@
           <router-link :to="{name: 'CampusDetails', params: { id: id, brand: $route.params.brand }}">Campus Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'products'">
-          <router-link :to="{name: 'CampusProducts', params: { id: id, brand: $route.params.brand }}">Products <label-number :number="campus.products ? campus.products.length : 0"/></router-link>
+          <router-link :to="{name: 'CampusProducts', params: { id: id, brand: $route.params.brand }}">Products <number-label :number="campus.products ? campus.products.length : 0"/></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
