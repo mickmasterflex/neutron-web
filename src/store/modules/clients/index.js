@@ -15,6 +15,8 @@ const state = {
 const getters = {
   getAllClients: state => state.clients,
   getCurrentClient: state => state.current_client,
+  getCurrentClientParentlessBuyerContractSet: state => state.current_client.buyercontract_set ? state.current_client.buyercontract_set.filter(contract => contract.parent === null) : [],
+  getCurrentClientParentlessPartnerContractSet: state => state.current_client.partnercontract_set ? state.current_client.partnercontract_set.filter(contract => contract.parent === null) : [],
   getAllClientsCount: (state) => {
     return state.clients.length
   },

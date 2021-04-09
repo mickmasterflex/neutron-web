@@ -1,11 +1,13 @@
+import axios from '@/axios'
 import fields from '@/store/modules/forms/fields'
 import baseFields from '@/store/modules/forms/base-fields'
 import loading from '@/store/modules/forms/loading'
-import axios from '@/axios'
+import injected from '@/store/modules/forms/injected'
 
 const modules = {
   baseFields,
   fields,
+  injected,
   loading
 }
 

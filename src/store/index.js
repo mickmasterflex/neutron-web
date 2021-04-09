@@ -20,6 +20,7 @@ import offers from './modules/offers'
 import partners from './modules/partners'
 import pricingTiers from './modules/pricing-tiers'
 import products from './modules/products'
+import reasons from './modules/reasons'
 import users from './modules/users'
 
 import constants from '@/store/constants'
@@ -49,6 +50,7 @@ export default new Vuex.Store({
     partners,
     pricingTiers,
     products,
+    reasons,
     users
   }
 })
