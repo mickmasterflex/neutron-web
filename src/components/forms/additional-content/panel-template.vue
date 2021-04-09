@@ -4,6 +4,7 @@
       <button class="btn btn-turquoise" @click="showCreateAdditionalFormContentModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Content</button>
     </template>
     <template v-slot:content>
+      <list-content></list-content>
       <create-content></create-content>
     </template>
   </panel-template>
@@ -11,7 +12,8 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import createContentModal from '@/components/forms/additional-content/create'
+import createContentModal from './create'
+import listContent from './list'
 
 export default {
   props: {
@@ -24,7 +26,8 @@ export default {
     })
   },
   components: {
-    'create-content': createContentModal
+    'create-content': createContentModal,
+    'list-content': listContent
   }
 }
 </script>
