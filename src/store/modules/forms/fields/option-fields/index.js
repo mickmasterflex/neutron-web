@@ -11,7 +11,7 @@ const actions = {
   async createOptionField ({ commit }, field) {
     await axios.post('/option-fields/', field)
       .then(response => {
-        commit('ADD_FIELD', response.data)
+        commit('ADD_FIELD', { data: response.data, type: 'fields' })
         commit('SET_CURRENT_FIELD', response.data)
         commit('SET_CURRENT_OPTIONS', response.data.options)
         commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
@@ -21,13 +21,13 @@ const actions = {
   async updateOptionField ({ commit }, updatedField) {
     await axios.put(`/option-fields/${updatedField.id}/`, updatedField)
       .then(response => {
-        commit('UPDATE_FIELD', response.data)
+        commit('UPDATE_FIELD', { data: response.data, type: 'fields' })
       })
   },
   async deleteOptionField ({ commit }, id) {
     await axios.delete(`/option-fields/${id}/`)
       .then(() => {
-        commit('REMOVE_FIELD', id)
+        commit('REMOVE_FIELD', { id: id, type: 'fields' })
       })
   }
 }

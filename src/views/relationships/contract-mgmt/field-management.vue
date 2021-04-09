@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <base-panel-grid>
     <panel-template
       title="Contract Fields"
       :actionTransition="true"
       :showLoader="loading"
-      :loadingText="loadingText">
+      :loadingText="loadingText"
+      class="col-span-2">
       <template v-slot:action>
         <create-field></create-field>
       </template>
@@ -13,15 +14,28 @@
       </template>
     </panel-template>
     <component :is="updateComponent" :field="currentField"></component>
-  </div>
+    <panel-template class="col-span-2" title="Injected Fields" :showLoader="loading" loadingText="Loading Injected Fields">
+      <template v-slot:action>
+        <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Field</button>
+      </template>
+      <template v-slot:content>
+        <list-injected-fields></list-injected-fields>
+      </template>
+    </panel-template>
+    <update-injected-field></update-injected-field>
+    <create-injected-field></create-injected-field>
+  </base-panel-grid>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
+import createInjectedField from '@/components/forms/injected-fields/fields/create'
 import updateTextField from '@/components/forms/fields/text-fields/update'
 import updateOptionField from '@/components/forms/fields/option-fields/update'
+import listInjectedFields from '@/components/forms/injected-fields/fields/list'
+import updateInjectedField from '@/components/forms/injected-fields/fields/update'
 
 export default {
   props: {
@@ -46,7 +60,8 @@ export default {
       buyerFetchLoading: 'getBuyerFetchLoading',
       buyerFetchLoadingText: 'getBuyerFetchLoadingText',
       getCurrentOffer: 'getCurrentOffer',
-      getCurrentBuyer: 'getCurrentBuyer'
+      getCurrentBuyer: 'getCurrentBuyer',
+      injectedFieldTypes: 'getInjectedFieldTypes'
     }),
     contractType () {
       return this.$route.name === 'OfferFieldManagement' ? 'offer' : 'buyer'
@@ -77,10 +92,12 @@ export default {
     ...mapMutations({
       showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
-      resetAncestorForms: 'RESET_ANCESTOR_FORMS'
+      resetAncestorForms: 'RESET_ANCESTOR_FORMS',
+      showCreateInjectedFieldModal: 'SHOW_CREATE_INJECTED_FIELD_MODAL'
     }),
     ...mapActions({
-      fetchForms: 'fetchForms'
+      fetchForms: 'fetchForms',
+      fetchInjectedFieldTypes: 'fetchInjectedFieldTypes'
     }),
     async setUpdateComponent (component) {
       this.updateComponent = component
@@ -90,7 +107,10 @@ export default {
     updateTextField,
     updateOptionField,
     'list-fields': listFields,
-    'create-field': createField
+    'create-field': createField,
+    'create-injected-field': createInjectedField,
+    'list-injected-fields': listInjectedFields,
+    'update-injected-field': updateInjectedField
   },
   watch: {
     currentField () {
@@ -117,6 +137,7 @@ export default {
   created () {
     this.resetAncestorForms()
     this.fetchForms()
+    this.fetchInjectedFieldTypes()
   }
 }
 </script>

@@ -13,7 +13,7 @@
           <router-link :to="{name: 'Client', params: {slug: slug}}">Client Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'ClientContracts', params: {slug: slug}}">Contracts</router-link>
+          <router-link :to="{name: 'ClientContracts', params: {slug: slug}}">Contracts <label-number :number="contractLength"/></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
@@ -37,22 +37,15 @@ export default {
   computed: {
     ...mapGetters({
       client: 'getCurrentClient',
-      getParentlessPartnersByClient: 'getParentlessPartnersByClient',
-      getParentlessBuyersByClient: 'getParentlessBuyersByClient',
-      allBuyers: 'getAllBuyers',
-      allPartners: 'getAllPartners'
+      buyers: 'getCurrentClientParentlessBuyerContractSet',
+      partners: 'getCurrentClientParentlessPartnerContractSet'
     }),
-    partners: function () {
-      return this.getParentlessPartnersByClient(this.client.id)
-    },
-    buyers: function () {
-      return this.getParentlessBuyersByClient(this.client.id)
+    contractLength () {
+      return this.partners.length + this.buyers.length
     }
   },
   methods: {
     ...mapActions({
-      fetchPartners: 'fetchPartners',
-      fetchBuyers: 'fetchBuyers',
       fetchCurrentClient: 'fetchCurrentClient'
     }),
     ...mapMutations({
@@ -77,12 +70,6 @@ export default {
     this.setClient().then(() => {
       this.setClientBreadcrumbsAndTitle()
     })
-    if (!this.allBuyers.length) {
-      this.fetchBuyers()
-    }
-    if (!this.allPartners.length) {
-      this.fetchPartners()
-    }
   },
   destroyed () {
     this.resetCurrent()

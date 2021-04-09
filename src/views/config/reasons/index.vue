@@ -1,15 +1,15 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="text-white text-4xl font-hairline">Overview</h1>
+      <h1 class="h1 text-white">Reasons Management</h1>
     </template>
     <template v-slot:contentTabs>
       <underscore-tabs>
-        <underscore-tab :active="$route.meta.contentTab === 'clients'">
-          <router-link :to="{name: 'Clients'}">Clients <label-number :number="getAllClientsCount"/></router-link>
+        <underscore-tab :active="$route.meta.contentTab === 'reasons'">
+          <router-link :to="{ name: 'Reasons' }">Reasons <label-number :number="allReasons.length"/></router-link>
         </underscore-tab>
-        <underscore-tab :active="$route.meta.contentTab === 'buyerGroups'">
-          <router-link :to="{name: 'BuyerGroups'}">Buyer Groups</router-link>
+        <underscore-tab :active="$route.meta.contentTab === 'mappings'">
+          <router-link :to="{ name: 'ResponseMappings' }">Response Mappings</router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
@@ -25,20 +25,20 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      getAllClientsCount: 'getAllClientsCount'
+      allReasons: 'getAllReasons'
     })
   },
   methods: {
-    ...mapActions({
-      fetchClients: 'fetchClients'
-    }),
     ...mapMutations({
       resetBreadcrumbs: 'RESET_CURRENT_BREADCRUMBS'
+    }),
+    ...mapActions({
+      fetchReasons: 'fetchReasons'
     })
   },
   created () {
-    this.fetchClients()
     this.resetBreadcrumbs()
+    this.fetchReasons()
   }
 }
 </script>

@@ -510,16 +510,43 @@ const routes = [
     ]
   },
   {
-    path: '/products/fields/',
     name: 'FieldManagement',
-    component: () => import('@/views/products/base-field-management.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'products',
-      activeAppTab: 'field-mgmt',
-      title: 'Field Management'
+    path: '/config/fields/',
+    component: () => import('@/views/config/base-field-management/index.vue'),
+    redirect: { name: 'BaseFields' },
+    props (route) {
+      const props = { ...route.params }
+      props.id = +props.id
+      return props
     },
-    pathToRegexpOptions: { strict: true }
+    children: [
+      {
+        name: 'BaseFields',
+        path: 'base-fields',
+        component: () => import('@/views/config/base-field-management/base-fields.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'field-mgmt',
+          contentTab: 'baseFields',
+          title: 'Base Field Management'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        path: 'injected-fields',
+        name: 'InjectedFieldTypes',
+        component: () => import('@/views/config/base-field-management/injected-field-types.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'field-mgmt',
+          contentTab: 'injectedFieldTypes',
+          title: 'Injected Field Management'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
   },
   {
     path: '/config/pricing-tiers/',
@@ -546,6 +573,40 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    name: 'ReasonManagement',
+    path: '/config/reasons/',
+    redirect: { name: 'Reasons' },
+    component: () => import('@/views/config/reasons/index'),
+    children: [
+      {
+        name: 'Reasons',
+        path: '',
+        component: () => import('@/views/config/reasons/reasons'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'reasons',
+          title: 'Reasons',
+          contentTab: 'reasons'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        name: 'ResponseMappings',
+        path: 'response-mappings/',
+        component: () => import('@/views/config/reasons/response-mappings'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'config',
+          activeAppTab: 'reasons',
+          title: 'Response Mappings',
+          contentTab: 'mappings'
+        },
+        pathToRegexpOptions: { strict: true }
+      }
+    ]
+  },
+  {
     path: '/relationships/',
     name: 'Relationships',
     component: () => import('@/views/relationships/index.vue'),
@@ -554,7 +615,7 @@ const routes = [
       {
         name: 'Clients',
         path: 'clients/',
-        component: () => import('@/views/relationships/contract-mgmt/clients/index.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/clients.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -579,7 +640,7 @@ const routes = [
   },
   {
     path: '/relationships/clients/:slug/',
-    component: () => import('@/views/relationships/contract-mgmt/clients/client/index.vue'),
+    component: () => import('@/views/relationships/contract-mgmt/client/index.vue'),
     props (route) {
       return { ...route.params }
     },
@@ -587,7 +648,7 @@ const routes = [
       {
         name: 'Client',
         path: '',
-        component: () => import('@/views/relationships/contract-mgmt/clients/client/details.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/client/details.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
@@ -598,7 +659,7 @@ const routes = [
       {
         path: 'contracts/',
         name: 'ClientContracts',
-        component: () => import('@/views/relationships/contract-mgmt/clients/client/contracts.vue'),
+        component: () => import('@/views/relationships/contract-mgmt/client/contracts.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',

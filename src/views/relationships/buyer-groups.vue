@@ -23,8 +23,7 @@ export default {
   methods: {
     ...mapActions({
       fetchBuyers: 'fetchBuyers',
-      fetchBuyerGroups: 'fetchBuyerGroups',
-      fetchClients: 'fetchClients'
+      fetchBuyerGroups: 'fetchBuyerGroups'
     }),
     ...mapGetters({
       clients: 'getAllClients'
@@ -33,9 +32,6 @@ export default {
   created () {
     this.fetchBuyerGroups()
     this.fetchBuyers()
-    if (this.clients.length === 0) {
-      this.fetchClients()
-    }
   },
   components: {
     'list-groups': listGroups,

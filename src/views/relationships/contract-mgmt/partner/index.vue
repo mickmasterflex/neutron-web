@@ -4,7 +4,6 @@
       <h1 class="h1 text-white">{{contract.name}}</h1>
       <hud-stat-cards>
         <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
-        <stat-card v-if="contract.campaigns" :data="contract.campaigns.length" title="Campaigns" key="campaignCount"></stat-card>
         <status-card :status="contract.status" key="statusCard"></status-card>
       </hud-stat-cards>
     </template>
@@ -14,10 +13,10 @@
           <router-link :to="{name: 'PartnerContract', params: {id:id}}">Partner Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'PartnerContractChildren', params: {id:id}}">Contracts</router-link>
+          <router-link :to="{name: 'PartnerContractChildren', params: {id:id}}">Contracts <label-number :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'campaigns'">
-          <router-link :to="{name: 'PartnerContractCampaigns', params: {id:id}}">Campaigns</router-link>
+          <router-link :to="{name: 'PartnerContractCampaigns', params: {id:id}}">Campaigns <label-number :number="contract.campaigns ? contract.campaigns.length : 0"/></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
