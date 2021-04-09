@@ -11,7 +11,7 @@
           name: 'PartnerStatsContractCampaigns',
           params: { clientId: clientId, id: id },
           query: $route.query
-        }">Campaigns <label-number :number="campaigns.length"></label-number></router-link>
+        }">Campaigns <number-label :number="campaigns.length"></number-label></router-link>
       </underscore-tab>
     </template>
   </contract-layout>

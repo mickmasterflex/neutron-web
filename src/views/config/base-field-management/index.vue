@@ -9,10 +9,10 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'baseFields'">
-          <router-link :to="{name: 'BaseFields'}">Base Fields <label-number :number="baseFieldCount"></label-number></router-link>
+          <router-link :to="{name: 'BaseFields'}">Base Fields <number-label :number="baseFieldCount"></number-label></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'injectedFieldTypes'">
-          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Fields <label-number :number="injectedFieldTypesCount"></label-number></router-link>
+          <router-link :to="{name: 'InjectedFieldTypes'}">Injected Fields <number-label :number="injectedFieldTypesCount"></number-label></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

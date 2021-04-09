@@ -13,10 +13,10 @@
           <router-link :to="{name: 'PartnerContract', params: {id:id}}">Partner Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'PartnerContractChildren', params: {id:id}}">Contracts <label-number :number="contract.children ? contract.children.length : 0"/></router-link>
+          <router-link :to="{name: 'PartnerContractChildren', params: {id:id}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'campaigns'">
-          <router-link :to="{name: 'PartnerContractCampaigns', params: {id:id}}">Campaigns <label-number :number="contract.campaigns ? contract.campaigns.length : 0"/></router-link>
+          <router-link :to="{name: 'PartnerContractCampaigns', params: {id:id}}">Campaigns <number-label :number="contract.campaigns ? contract.campaigns.length : 0"/></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

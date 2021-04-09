@@ -6,7 +6,7 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'reasons'">
-          <router-link :to="{ name: 'Reasons' }">Reasons <label-number :number="allReasons.length"/></router-link>
+          <router-link :to="{ name: 'Reasons' }">Reasons <number-label :number="allReasons.length"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'mappings'">
           <router-link :to="{ name: 'ResponseMappings' }">Response Mappings</router-link>
