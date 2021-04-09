@@ -10,6 +10,10 @@
       :loading="loading"
       :loading-text="loadingText"
       class="col-span-2"/>
+    <additional-content-panel-template
+      :loading="loading"
+      :loading-text="loadingText"
+      class="col-span-2"/>
   </base-panel-grid>
 </template>
 
@@ -17,6 +21,7 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import fieldsPanel from '@/components/forms/fields/panel-template'
 import injectedFieldsPanel from '@/components/forms/injected-fields/fields/panel-template'
+import additionalContentPanel from '@/components/forms/additional-content/panel-template'
 
 export default {
   props: {
@@ -79,7 +84,8 @@ export default {
   },
   components: {
     'fields-panel-template': fieldsPanel,
-    'injected-panel-template': injectedFieldsPanel
+    'injected-panel-template': injectedFieldsPanel,
+    'additional-content-panel-template': additionalContentPanel
   }
 }
 </script>
