@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="show" @close="close">
+  <modal-template :show="showModal" @close="close">
     <template v-slot:header>{{ modalPurpose }} Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -61,7 +61,7 @@ export default {
     }
   },
   props: {
-    show: {
+    showModal: {
       type: Boolean,
       required: true
     },
@@ -119,7 +119,7 @@ export default {
   },
   watch: {
     unsavedChanges () {
-      this.checkUnsavedChanges(this.show, this.unsavedChanges)
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
   methods: {
