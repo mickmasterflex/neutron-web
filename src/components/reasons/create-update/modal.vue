@@ -91,7 +91,7 @@ export default {
   },
   watch: {
     unsavedChanges () {
-      this.checkUnsavedChanges(this.show, this.unsavedChanges)
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
   methods: {
