@@ -146,7 +146,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.resetCurrent()
+      if (this.currentReason) {
+        this.resetCurrent()
+      }
       this.toggleChangesInModalUnsaved(false)
     }
   },
