@@ -1,6 +1,6 @@
 <template>
-  <modal-template :show="showModal" @close="close">
-    <template v-slot:header>Add Additional Form Content</template>
+  <modal-template :show="show" @close="close">
+    <template v-slot:header>{{ modalPurpose }} Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -36,18 +36,22 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Add Content</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> {{ modalPurpose }} Content
+      </button>
     </template>
   </modal-template>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import { mapGetters, mapMutations } from 'vuex'
+import { enterKeyListener } from '@/mixins/enter-key-listener'
+import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
-  mixins: [formatList, setResponseErrors],
+  mixins: [formatList, enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
   data () {
     return {
       contentType: 'tcpa',
@@ -56,11 +60,36 @@ export default {
       doubleOptin: false
     }
   },
+  props: {
+    show: {
+      type: Boolean,
+      required: true
+    },
+    loading: {
+      type: Boolean,
+      required: true
+    },
+    submitAction: {
+      type: Function,
+      required: true
+    },
+    closeModal: {
+      type: Function,
+      required: true
+    },
+    modalPurpose: {
+      type: String,
+      required: true,
+      validator (value) {
+        return ['Add', 'Update'].includes(value)
+      }
+    }
+  },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateAdditionalFormContentModal',
       contentTypes: 'getAdditionalFormContentTypes',
-      currentForm: 'getCurrentForm'
+      currentForm: 'getCurrentForm',
+      currentAdditionalFormContent: 'getCurrentAdditionalFormContent'
     }),
     submitData () {
       const data = {
@@ -72,20 +101,35 @@ export default {
       if (this.contentType === 'tcpa') {
         data.leadid_toggle = this.leadIdToggle
       }
+      if (this.currentAdditionalFormContent.id) {
+        data.id = this.currentAdditionalFormContent.id
+      }
       return data
+    },
+    unsavedChanges () {
+      if (this.currentAdditionalFormContent.id) {
+        return this.contentType !== this.currentAdditionalFormContent.additional_content_type ||
+          this.contentBlock !== this.currentAdditionalFormContent.additional_content_block ||
+          this.leadIdToggle !== this.currentAdditionalFormContent.leadid_toggle ||
+          this.doubleOptin !== this.currentAdditionalFormContent.double_optin
+      } else {
+        return false
+      }
+    }
+  },
+  watch: {
+    unsavedChanges () {
+      this.checkUnsavedChanges(this.show, this.unsavedChanges)
     }
   },
   methods: {
-    ...mapActions({
-      createAdditionalFormContent: 'createAdditionalFormContent'
-    }),
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_ADDITIONAL_FORM_CONTENT_MODAL'
+      resetCurrent: 'RESET_CURRENT_ADDITIONAL_FORM_CONTENT'
     }),
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.createAdditionalFormContent(this.submitData).then(() => {
+          this.submitAction(this.submitData).then(() => {
             this.close()
           }).catch(error => {
             this.error = error
@@ -102,6 +146,16 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
+      this.resetCurrent()
+      this.toggleChangesInModalUnsaved(false)
+    }
+  },
+  updated () {
+    if (this.currentAdditionalFormContent.id) {
+      this.contentType = this.currentAdditionalFormContent.additional_content_type
+      this.contentBlock = this.currentAdditionalFormContent.additional_content_block
+      this.leadIdToggle = this.currentAdditionalFormContent.leadid_toggle
+      this.doubleOptin = this.currentAdditionalFormContent.double_optin
     }
   }
 }

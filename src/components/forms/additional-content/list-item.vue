@@ -6,6 +6,9 @@
     <template #action>
       <btn-group-right>
         <delete-content :id="content.id"/>
+        <button class="btn btn-hollow-blue btn-circle" @click="showModalAndSetCurrent(content)">
+          <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+        </button>
       </btn-group-right>
     </template>
     <template #content>
@@ -24,12 +27,25 @@
 
 <script>
 import deleteContent from './delete'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   props: {
     content: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setCurrent: 'SET_CURRENT_ADDITIONAL_FORM_CONTENT'
+    }),
+    ...mapActions({
+      showModal: 'showAdditionalFormContentModal'
+    }),
+    showModalAndSetCurrent (content) {
+      this.setCurrent(content)
+      this.showModal('update')
     }
   },
   components: {
