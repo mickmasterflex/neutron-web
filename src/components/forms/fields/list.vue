@@ -13,7 +13,8 @@
           Inherited fields from
           <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: clientSlug, id: ancestorForm.buyer_contract } }">
             {{ getAncestorById(ancestorForm.buyer_contract).name }}
-          </router-link></h5>
+          </router-link>
+        </h5>
         <ul>
           <li v-for="(field, index) in ancestorForm.fields" :key="field.id">
             <div :field="field" class="card card-sm mb-1 flex flex-row items-center justify-between">

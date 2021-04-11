@@ -13,6 +13,7 @@
     <additional-content-panel-template
       :loading="loading"
       :loading-text="loadingText"
+      :client-slug="client"
       class="col-span-2"/>
   </base-panel-grid>
 </template>

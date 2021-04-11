@@ -1,9 +1,19 @@
 <template>
-  <div class="space-y-2" v-if="contentExists">
+  <div class="space-y-2" v-if="contentExists || ancestorForms.length > 0">
+    <div class="space-y-2" v-for="ancestorForm in ancestorFormsWithContent" :key="`contentForm-${ancestorForm.id}`">
+      <list-item
+        v-for="content in ancestorForm.additional_form_content_tcpa"
+        :key="`additionalAncestorContent-${content.id}`"
+        :content="content"
+        :client-slug="clientSlug"
+        :inherited-from="getAncestorById(ancestorForm.buyer_contract)"
+      />
+    </div>
     <list-item
       v-for="content in form.additional_form_content_tcpa"
       :key="`additionalContent-${content.id}`"
       :content="content"
+      :client-slug="clientSlug"
     />
   </div>
   <table-empty-state v-else
@@ -16,13 +26,21 @@ import { mapGetters } from 'vuex'
 import listItem from './list-item'
 
 export default {
+  props: {
+    clientSlug: String
+  },
   components: {
     'list-item': listItem
   },
   computed: {
     ...mapGetters({
-      form: 'getCurrentForm'
+      form: 'getCurrentForm',
+      ancestorForms: 'getAncestorForms',
+      getAncestorById: 'getAncestorById'
     }),
+    ancestorFormsWithContent () {
+      return this.ancestorForms.filter(form => form.additional_form_content_tcpa.length > 0)
+    },
     contentExists () {
       return this.form.additional_form_content_tcpa ? this.form.additional_form_content_tcpa.length > 0 : null
     }

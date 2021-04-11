@@ -4,7 +4,10 @@
     contentBackgroundColor="white"
   >
     <template #action>
-      <btn-group-right>
+      <span v-if="inheritedFrom">
+        Inherited From <router-link :to="{ name: 'BuyerContractFieldManagement', params: { id: inheritedFrom.id, client: clientSlug } }" class="text-link">{{inheritedFrom.name}}</router-link>
+      </span>
+      <btn-group-right v-else>
         <delete-content :id="content.id"/>
         <button class="btn btn-hollow-blue btn-circle" @click="showModalAndSetCurrent(content)">
           <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
@@ -34,6 +37,12 @@ export default {
     content: {
       type: Object,
       required: true
+    },
+    inheritedFrom: {
+      type: Object
+    },
+    clientSlug: {
+      type: String
     }
   },
   methods: {
