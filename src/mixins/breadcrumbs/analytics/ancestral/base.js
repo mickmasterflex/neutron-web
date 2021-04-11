@@ -4,11 +4,11 @@ import { mapGetters } from 'vuex'
 export const baseContractBreadcrumbs = {
   mixins: [setBreadcrumbsWithAncestors],
   watch: {
-    contract () {
-      this.contractBreadcrumb.text = this.contract.name
-    },
     client () {
       this.clientBreadcrumb.text = this.client.name
+    },
+    current () {
+      this.currentBreadcrumb.text = this.current.name
     },
     loading () {
       if (this.loading === false) {

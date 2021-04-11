@@ -1,6 +1,11 @@
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export const setBreadcrumbsWithAncestors = {
+  computed: {
+    ...mapGetters({
+      ancestors: 'getCurrentAncestors'
+    })
+  },
   methods: {
     setBreadcrumbsWithAncestors () {
       if (this.setBreadcrumbText) {
@@ -12,7 +17,7 @@ export const setBreadcrumbsWithAncestors = {
       ]
       this.ancestors.forEach(ancestor => {
         breadcrumbs.push({
-          name: this.contractBreadcrumb.name,
+          name: this.ancestorBreadcrumbRouteName,
           text: ancestor.name,
           params: {
             clientId: this.$route.params.clientId,
@@ -21,19 +26,10 @@ export const setBreadcrumbsWithAncestors = {
           query: this.$route.query
         })
       })
-      breadcrumbs.push(this.contractBreadcrumb)
-      if (this.offersBreadcrumb) {
-        breadcrumbs.push(this.offersBreadcrumb)
+      if (this.parentBreadcrumb) {
+        breadcrumbs.push(this.parentBreadcrumb)
       }
-      if (this.offerBreadcrumb) {
-        breadcrumbs.push(this.offerBreadcrumb)
-      }
-      if (this.campaignsBreadcrumb) {
-        breadcrumbs.push(this.campaignsBreadcrumb)
-      }
-      if (this.campaignBreadcrumb) {
-        breadcrumbs.push(this.campaignBreadcrumb)
-      }
+      breadcrumbs.push(this.currentBreadcrumb)
       this.setBreadcrumbs(breadcrumbs)
     },
     ...mapMutations({

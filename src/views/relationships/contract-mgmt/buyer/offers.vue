@@ -5,7 +5,7 @@
                       emptyStateCopy="Use the 'New Offer' button to add offers"
                       :createOfferDisabled="createOfferDisabled"
     ></offer-list-panel>
-    <create-offer v-if="!createOfferDisabled" :buyer="buyer.id" :client="buyer.client_data.id"></create-offer>
+    <create-offer v-if="!createOfferDisabled" :buyer="id" :client="buyer.client"></create-offer>
   </base-panel-grid>
 </template>
 <script>
@@ -14,6 +14,9 @@ import offerList from '@/components/offers/list-panel'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    id: Number
+  },
   components: {
     'create-offer': createOffer,
     'offer-list-panel': offerList

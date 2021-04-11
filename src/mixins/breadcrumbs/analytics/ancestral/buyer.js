@@ -1,10 +1,11 @@
-import { baseContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/buyer-partner-base'
+import { baseContractBreadcrumbs } from '@/mixins/breadcrumbs/analytics/ancestral/base'
 import { mapGetters } from 'vuex'
 
 export const buyerContractBreadcrumbs = {
   mixins: [baseContractBreadcrumbs],
   data () {
     return {
+      ancestorBreadcrumbRouteName: 'BuyerStatsContract',
       clientsBreadcrumb: {
         name: 'BuyerStatsClients',
         text: 'All Clients',
@@ -16,8 +17,8 @@ export const buyerContractBreadcrumbs = {
         params: { id: this.$route.params.clientId },
         query: this.$route.query
       },
-      contractBreadcrumb: {
-        name: 'BuyerStatsContract',
+      currentBreadcrumb: {
+        name: this.ancestorBreadcrumbRouteName,
         text: this.$route.params.id,
         params: {
           clientId: this.$route.params.clientId,
@@ -29,9 +30,8 @@ export const buyerContractBreadcrumbs = {
   },
   computed: {
     ...mapGetters({
-      contract: 'getCurrentContractStats',
-      client: 'getCurrentClientStats',
-      ancestors: 'getBuyerContractStatsAncestors'
+      current: 'getCurrentContractStats',
+      client: 'getCurrentClientStats'
     })
   }
 }

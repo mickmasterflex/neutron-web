@@ -5,16 +5,7 @@ export const campaignContractBreadcrumbs = {
   mixins: [partnerContractBreadcrumbs],
   data () {
     return {
-      contractBreadcrumb: {
-        name: 'PartnerStatsContract',
-        text: this.$route.params.partnerId,
-        params: {
-          clientId: this.$route.params.clientId,
-          id: this.$route.params.partnerId
-        },
-        query: this.$route.query
-      },
-      campaignsBreadcrumb: {
+      parentBreadcrumb: {
         name: 'PartnerStatsContractCampaigns',
         text: 'Campaigns',
         params: {
@@ -23,7 +14,7 @@ export const campaignContractBreadcrumbs = {
         },
         query: this.$route.query
       },
-      campaignBreadcrumb: {
+      currentBreadcrumb: {
         name: 'PartnerStatsCampaign',
         text: this.$route.params.id,
         params: {
@@ -37,13 +28,7 @@ export const campaignContractBreadcrumbs = {
   },
   computed: {
     ...mapGetters({
-      ancestors: 'getCampaignStatsAncestors',
-      campaign: 'getCurrentCampaignStats'
+      current: 'getCurrentCampaignStats'
     })
-  },
-  watch: {
-    campaign () {
-      this.campaignBreadcrumb.text = this.campaign.name
-    }
   }
 }

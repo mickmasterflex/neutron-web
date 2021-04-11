@@ -5,16 +5,7 @@ export const offerContractBreadcrumbs = {
   mixins: [buyerContractBreadcrumbs],
   data () {
     return {
-      contractBreadcrumb: {
-        name: 'BuyerStatsContract',
-        text: this.$route.params.buyerId,
-        params: {
-          clientId: this.$route.params.clientId,
-          id: this.$route.params.buyerId
-        },
-        query: this.$route.query
-      },
-      offersBreadcrumb: {
+      parentBreadcrumb: {
         name: 'BuyerStatsContractOffers',
         text: 'Offers',
         params: {
@@ -23,7 +14,7 @@ export const offerContractBreadcrumbs = {
         },
         query: this.$route.query
       },
-      offerBreadcrumb: {
+      currentBreadcrumb: {
         name: 'BuyerStatsOfferContract',
         text: this.$route.params.id,
         params: {
@@ -37,13 +28,7 @@ export const offerContractBreadcrumbs = {
   },
   computed: {
     ...mapGetters({
-      ancestors: 'getOfferContractStatsAncestors',
-      offer: 'getCurrentOfferContractStats'
+      current: 'getCurrentOfferContractStats'
     })
-  },
-  watch: {
-    offer () {
-      this.offerBreadcrumb.text = this.offer.name
-    }
   }
 }

@@ -33,13 +33,14 @@ const actions = {
     await axios.get(`/campaigns/${id}/`)
       .then(response => {
         commit('SET_CURRENT_CAMPAIGN', response.data)
+        commit('SET_CURRENT_ANCESTORS', response.data.partner_ancestors)
         commit('RESET_CAMPAIGN_FETCH_LOADING')
       })
   },
   async createCampaign ({ commit, getters }, campaign) {
     await axios.post('/campaigns/', campaign)
       .then(response => {
-        commit('ADD_[CAMPAIGN', response.data)
+        commit('ADD_CAMPAIGN', response.data)
         const parent = getters.getPartnerById(response.data.contract)
         if (parent) {
           parent.campaigns.push(response.data.id)
