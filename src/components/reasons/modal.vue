@@ -1,5 +1,5 @@
 <template>
-  <modal-template :show="modalVisible" @close="close">
+  <modal-template :show="show" @close="close">
     <template v-slot:header>{{ modalPurpose }} Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -42,7 +42,7 @@ export default {
     }
   },
   props: {
-    modalVisible: {
+    show: {
       type: Boolean,
       required: true
     },

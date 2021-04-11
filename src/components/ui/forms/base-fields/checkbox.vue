@@ -73,6 +73,10 @@ export default {
     indeterminateColor: {
       default: 'yellow',
       type: String
+    },
+    styleAsField: {
+      default: false,
+      type: Boolean
     }
   },
   computed: {
@@ -82,7 +86,8 @@ export default {
     classes () {
       const paddingClass = this.padding ? 'p-1' : ''
       const cursorClass = this.showDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
-      return paddingClass + ' ' + cursorClass
+      const fieldStyle = this.styleAsField ? 'font-bold bg-white px-4 py-2 w-64 rounded shadow border border-gray-300' : ''
+      return paddingClass + ' ' + cursorClass + ' ' + fieldStyle
     }
   }
 }
