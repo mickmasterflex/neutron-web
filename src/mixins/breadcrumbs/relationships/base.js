@@ -15,15 +15,10 @@ export const baseContractBreadcrumbs = {
       }
     }
   },
-  computed: {
-    ancestors () {
-      return this.contract.ancestors ? this.contract.ancestors : []
-    }
-  },
   methods: {
     setBreadcrumbText () {
       if (this.contract) {
-        this.contractBreadcrumb.text = this.contract.name
+        this.currentBreadcrumb.text = this.contract.name
       }
       if (this.contract.client) {
         this.clientBreadcrumb.text = this.contract.client_data.name

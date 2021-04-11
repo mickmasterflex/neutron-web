@@ -3,6 +3,7 @@ const state = {
 }
 
 const getters = {
+  getCurrentAncestors: state => state.current_ancestors,
   getCurrentAncestorsIds: state => state.current_ancestors.map(a => a.id),
   getAncestorById: state => id => state.current_ancestors.find(ancestor => ancestor.id === id)
 }

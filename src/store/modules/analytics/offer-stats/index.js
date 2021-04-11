@@ -6,13 +6,11 @@ const modules = {
 }
 
 const state = {
-  offer_contract_stats_ancestors: [],
   current_offer_contract_stats: {},
   offer_contract_stats_fetch_loading_text: 'Loading Offer Contracts Data'
 }
 
 const getters = {
-  getOfferContractStatsAncestors: state => state.offer_contract_stats_ancestors,
   getCurrentOfferContractStats: state => state.current_offer_contract_stats
 }
 
@@ -27,7 +25,7 @@ const actions = {
         commit('SET_CURRENT_OFFER_CONTRACT_STATS', response.data.offer_contract)
         commit('SET_CURRENT_CONTRACT_STATS', response.data.contract)
         commit('SET_CURRENT_CLIENT_STATS', response.data.client)
-        commit('SET_OFFER_CONTRACT_STATS_ANCESTORS', response.data.ancestors)
+        commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
       }).finally(() => {
         commit('RESET_ANALYTICS_FETCH_LOADING')
       })
@@ -41,7 +39,6 @@ const actions = {
 }
 
 const mutations = {
-  SET_OFFER_CONTRACT_STATS_ANCESTORS: (state, ancestors) => (state.offer_contract_stats_ancestors = ancestors),
   SET_CURRENT_OFFER_CONTRACT_STATS: (state, offer) => (state.current_offer_contract_stats = offer)
 }
 
