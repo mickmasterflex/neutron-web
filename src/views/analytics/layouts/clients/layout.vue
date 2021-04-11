@@ -5,10 +5,10 @@
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'clients'">
-          <router-link :to="{ name: clientsRouteName, query: $route.query }">Clients <label-number :number="clientsCount"></label-number></router-link>
+          <router-link :to="{ name: clientsRouteName, query: $route.query }">Clients <number-label :number="clientsCount"></number-label></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'leads'">
-          <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <label-number :number="leadCount"></label-number></router-link>
+          <router-link :to="{ name: leadsRouteName, query: $route.query }">Leads <number-label :number="leadCount"></number-label></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

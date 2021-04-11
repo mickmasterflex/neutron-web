@@ -14,7 +14,7 @@
           name: contractsRouteName,
           params: { clientId: $route.params.clientId, id: id },
           query: $route.query
-        }">Contracts <label-number :number="contracts.length"></label-number></router-link>
+        }">Contracts <number-label :number="contracts.length"></number-label></router-link>
         </underscore-tab>
         <slot name="contentTab"></slot>
         <underscore-tab :active="$route.meta.contentTab === 'leads'">
@@ -22,7 +22,7 @@
                      name: leadsRouteName,
                      params: { clientId: $route.params.clientId, id: id },
                      query: $route.query
-          }">Leads <label-number :number="leadCount"></label-number></router-link>
+          }">Leads <number-label :number="leadCount"></number-label></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

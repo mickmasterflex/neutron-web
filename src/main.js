@@ -78,8 +78,9 @@ import basePanel from '@/components/ui/panels/base/index'
 import basePanelGrid from '@/components/ui/panels/grid/base'
 import hudStatCards from '@/components/ui/hud/stat-cards'
 import hudH1 from '@/components/ui/hud/h1'
-import label from '@/components/ui/label-number'
-import statCard from '@/components/ui/cards/stat-card'
+import numberLabel from '@/components/ui/labels/number'
+import baseLabel from '@/components/ui/labels/base'
+import statCard from '@/components/ui/cards/stat-cards/base'
 import underscoreTabs from '@/components/ui/tabs/underscore/tabs-base'
 import underscoreTab from '@/components/ui/tabs/underscore/tab'
 
@@ -138,7 +139,8 @@ Vue.component('tooltip-dialog-template', baseTooltipDialog)
 Vue.component('panel-template', basePanel)
 Vue.component('base-panel-grid', basePanelGrid)
 Vue.component('action-heading', actionHeading)
-Vue.component('label-number', label)
+Vue.component('number-label', numberLabel)
+Vue.component('base-label', baseLabel)
 
 // Buttons
 Vue.component('btn-group-right', btnGroupRight)

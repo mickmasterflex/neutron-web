@@ -1,6 +1,5 @@
 <template>
-  <stat-card :data="status" title="Status" :color="statusCardColor">
-  </stat-card>
+  <stat-card :data="status" title="Status" :color="statusCardColor"/>
 </template>
 
 <script>
