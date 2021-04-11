@@ -1,6 +1,6 @@
 <template>
   <additional-content-modal
-    :show="showModal"
+    :show-modal="showModal"
     :close-modal="close"
     :modal-purpose="modalPurpose"
     :loading="loading"
