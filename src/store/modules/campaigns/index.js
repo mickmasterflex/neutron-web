@@ -40,7 +40,7 @@ const actions = {
   async createCampaign ({ commit, getters }, campaign) {
     await axios.post('/campaigns/', campaign)
       .then(response => {
-        commit('ADD_[CAMPAIGN', response.data)
+        commit('ADD_CAMPAIGN', response.data)
         const parent = getters.getPartnerById(response.data.contract)
         if (parent) {
           parent.campaigns.push(response.data.id)
