@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>{{ modalPurpose }} Reason</template>
+    <template v-slot:header>{{ modalPurpose }} Content</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
