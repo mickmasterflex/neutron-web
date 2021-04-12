@@ -26,7 +26,8 @@ export default {
     },
     ...mapGetters({
       toast_messages: 'getToastMessages',
-      current_active_user: 'getCurrentActiveUser'
+      current_active_user: 'getCurrentActiveUser',
+      isAuthenticated: 'isAuthenticated'
     })
   },
   methods: {
@@ -38,8 +39,10 @@ export default {
   components: {
     toast: toast
   },
-  created () {
-    this.fetchCurrentActiveUser()
+  updated () {
+    if (!this.current_active_user && this.isAuthenticated) {
+      this.fetchCurrentActiveUser()
+    }
   }
 }
 </script>

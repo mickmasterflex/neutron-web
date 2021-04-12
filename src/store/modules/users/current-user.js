@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import router from '@/router'
 
 const modules = {
 }
@@ -16,6 +17,9 @@ const actions = {
     await axios.get('/current-user/')
       .then(response => {
         commit('SET_CURRENT_ACTIVE_USER', response.data)
+        if (!state.current_active_user.pass_valid) {
+          router.push({ name: 'ResetPassword' })
+        }
       })
   }
 }
