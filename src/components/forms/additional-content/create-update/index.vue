@@ -1,49 +1,34 @@
 <template>
   <additional-content-modal
-    :show-modal="showModal"
-    :close-modal="close"
     :loading="loading"
     :submit-action="submitAction"
   />
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import contentModal from './modal'
 
 export default {
   computed: {
     ...mapGetters({
-      showUpdateModal: 'getShowUpdateAdditionalFormContentModal',
-      showCreateModal: 'getShowCreateAdditionalFormContentModal',
       putLoading: 'getAdditionalFormContentPutLoading',
-      postLoading: 'getAdditionalFormContentPostLoading'
+      postLoading: 'getAdditionalFormContentPostLoading',
+      purposeIsUpdate: 'getModalPurposeIsUpdate'
     }),
     loading () {
-      return this.showUpdateModal
+      return this.purposeIsUpdate
         ? this.putLoading : this.postLoading
     },
-    showModal () {
-      return this.showUpdateModal
-        ? this.showUpdateModal : this.showCreateModal
-    },
     submitAction () {
-      return this.showUpdateModal
+      return this.purposeIsUpdate
         ? this.updateAdditionalFormContent : this.createAdditionalFormContent
-    },
-    close () {
-      return this.showUpdateModal
-        ? this.closeUpdateModal : this.closeCreateModal
     }
   },
   methods: {
     ...mapActions({
       createAdditionalFormContent: 'createAdditionalFormContent',
       updateAdditionalFormContent: 'updateAdditionalFormContent'
-    }),
-    ...mapMutations({
-      closeUpdateModal: 'CLOSE_UPDATE_ADDITIONAL_FORM_CONTENT_MODAL',
-      closeCreateModal: 'CLOSE_CREATE_ADDITIONAL_FORM_CONTENT_MODAL'
     })
   },
   components: {

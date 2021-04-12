@@ -65,19 +65,11 @@ export default {
     }
   },
   props: {
-    showModal: {
-      type: Boolean,
-      required: true
-    },
     loading: {
       type: Boolean,
       required: true
     },
     submitAction: {
-      type: Function,
-      required: true
-    },
-    closeModal: {
       type: Function,
       required: true
     }
@@ -86,6 +78,7 @@ export default {
     ...mapGetters({
       contentTypes: 'getAdditionalFormContentTypes',
       currentForm: 'getCurrentForm',
+      showModal: 'getShowAdditionalFormContentModal',
       currentAdditionalFormContent: 'getCurrentAdditionalFormContent',
       modalPurpose: 'getAdditionalFormContentModalPurpose'
     }),
@@ -122,7 +115,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_ADDITIONAL_FORM_CONTENT'
+      resetCurrent: 'RESET_CURRENT_ADDITIONAL_FORM_CONTENT',
+      closeModal: 'CLOSE_ADDITIONAL_FORM_CONTENT_MODAL'
     }),
     submitForm () {
       this.$refs.form.validate().then(success => {
