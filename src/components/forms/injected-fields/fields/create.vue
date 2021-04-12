@@ -14,7 +14,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Create injected Field</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green">Create Injected Field</button>
     </template>
   </modal-template>
 </template>

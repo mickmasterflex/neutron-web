@@ -6,7 +6,6 @@ const modules = {
 }
 
 const state = {
-  injected_fields: [],
   current_injected_field: null
 }
 const getters = {

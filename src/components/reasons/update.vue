@@ -1,6 +1,6 @@
 <template>
   <reason-modal
-    :modal-visible="modalVisible"
+    :show="modalVisible"
     :loading="loading"
     :submit-action="updateReason"
     :close-modal="closeModalAndReset"
