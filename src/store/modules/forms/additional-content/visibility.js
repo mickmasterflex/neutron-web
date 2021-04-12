@@ -6,12 +6,15 @@ const state = {
 const getters = {
   getShowAdditionalFormContentModal: state => state.show_additional_form_content_modal,
   getAdditionalFormContentModalPurpose: state => state.additional_form_content_modal_purpose,
-  getModalPurposeIsAdd: state => state.additional_form_content_modal_purpose === 'add',
-  getModalPurposeIsUpdate: state => state.additional_form_content_modal_purpose === 'update'
+  getAdditionalFormContentModalPurposeIsUpdate: state => state.additional_form_content_modal_purpose === 'update'
 }
 
 const actions = {
   async showAdditionalFormContentModal ({ commit }, type) {
+    if (!['add', 'update'].includes(type)) {
+      const error = new Error('type must be equal to add or update')
+      window.console.log(error)
+    }
     commit('SET_ADDITIONAL_FORM_CONTENT_MODAL_PURPOSE', type)
     commit('SHOW_ADDITIONAL_FORM_CONTENT_MODAL')
   }

@@ -14,7 +14,7 @@ export default {
     ...mapGetters({
       putLoading: 'getAdditionalFormContentPutLoading',
       postLoading: 'getAdditionalFormContentPostLoading',
-      purposeIsUpdate: 'getModalPurposeIsUpdate'
+      purposeIsUpdate: 'getAdditionalFormContentModalPurposeIsUpdate'
     }),
     loading () {
       return this.purposeIsUpdate
