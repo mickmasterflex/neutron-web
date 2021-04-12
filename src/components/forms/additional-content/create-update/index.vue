@@ -2,7 +2,6 @@
   <additional-content-modal
     :show-modal="showModal"
     :close-modal="close"
-    :modal-purpose="modalPurpose"
     :loading="loading"
     :submit-action="submitAction"
   />
@@ -27,10 +26,6 @@ export default {
     showModal () {
       return this.showUpdateModal
         ? this.showUpdateModal : this.showCreateModal
-    },
-    modalPurpose () {
-      return this.showUpdateModal
-        ? 'Update' : 'Add'
     },
     submitAction () {
       return this.showUpdateModal

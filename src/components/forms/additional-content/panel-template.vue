@@ -1,7 +1,7 @@
 <template>
   <panel-template title="Additional Content" :showLoader="loading" :loadingText="loadingText">
     <template v-slot:action>
-      <button class="btn btn-turquoise" @click="showCreateAdditionalFormContentModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Content</button>
+      <button class="btn btn-turquoise" @click="showModal('add')"><font-awesome-icon icon="plus"></font-awesome-icon> Add Content</button>
     </template>
     <template v-slot:content>
       <list-content/>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 import createUpdateModal from './create-update/index'
 import listContent from './list'
 
@@ -21,8 +21,8 @@ export default {
     loadingText: String
   },
   methods: {
-    ...mapMutations({
-      showCreateAdditionalFormContentModal: 'SHOW_CREATE_ADDITIONAL_FORM_CONTENT_MODAL'
+    ...mapActions({
+      showModal: 'showAdditionalFormContentModal'
     })
   },
   components: {

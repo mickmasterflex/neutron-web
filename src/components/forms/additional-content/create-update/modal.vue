@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>{{ modalPurpose }} Content</template>
+    <template v-slot:header><span class="capitalize">{{ modalPurpose }}</span> Content</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -41,7 +41,7 @@
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
-        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> {{ modalPurpose }} Content
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> <span class="capitalize">{{ modalPurpose }}</span> Content
       </button>
     </template>
   </modal-template>
@@ -80,20 +80,14 @@ export default {
     closeModal: {
       type: Function,
       required: true
-    },
-    modalPurpose: {
-      type: String,
-      required: true,
-      validator (value) {
-        return ['Add', 'Update'].includes(value)
-      }
     }
   },
   computed: {
     ...mapGetters({
       contentTypes: 'getAdditionalFormContentTypes',
       currentForm: 'getCurrentForm',
-      currentAdditionalFormContent: 'getCurrentAdditionalFormContent'
+      currentAdditionalFormContent: 'getCurrentAdditionalFormContent',
+      modalPurpose: 'getAdditionalFormContentModalPurpose'
     }),
     submitData () {
       const data = {
