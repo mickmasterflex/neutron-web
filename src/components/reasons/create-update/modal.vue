@@ -1,6 +1,6 @@
 <template>
-  <modal-template :show="show" @close="close">
-    <template v-slot:header>{{ modalPurpose }} Reason</template>
+  <modal-template :show="showModal" @close="close">
+    <template v-slot:header><span class="capitalize">{{ modalPurpose }}</span> Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -21,7 +21,7 @@
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
-        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> {{ modalPurpose }} Reason
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> <span class="capitalize">{{ modalPurpose }}</span> Reason
       </button>
     </template>
   </modal-template>
@@ -30,7 +30,7 @@
 <script>
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 
 export default {
@@ -42,10 +42,6 @@ export default {
     }
   },
   props: {
-    show: {
-      type: Boolean,
-      required: true
-    },
     loading: {
       type: Boolean,
       required: true
@@ -53,22 +49,13 @@ export default {
     submitAction: {
       type: Function,
       required: true
-    },
-    closeModal: {
-      type: Function,
-      required: true
-    },
-    modalPurpose: {
-      type: String,
-      required: true,
-      validator (value) {
-        return ['Create', 'Update'].includes(value)
-      }
     }
   },
   computed: {
     ...mapGetters({
-      currentReason: 'getCurrentReason'
+      currentReason: 'getCurrentReason',
+      showModal: 'getShowCreateUpdateReasonModal',
+      modalPurpose: 'getCreateUpdateReasonModalPurpose'
     }),
     submitData () {
       const data = {
@@ -81,8 +68,9 @@ export default {
       return data
     },
     unsavedChanges () {
-      if (this.currentReason.name) {
-        return this.name !== this.currentReason.name || this.description !== this.currentReason.description
+      if (this.currentReason.id) {
+        return this.name !== this.currentReason.name ||
+          this.description !== this.currentReason.description
       } else {
         return false
       }
@@ -90,10 +78,14 @@ export default {
   },
   watch: {
     unsavedChanges () {
-      this.checkUnsavedChanges(this.modalVisible, this.unsavedChanges)
+      this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
   methods: {
+    ...mapMutations({
+      resetCurrent: 'RESET_CURRENT_REASON',
+      closeModal: 'CLOSE_CREATE_UPDATE_REASON_MODAL'
+    }),
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -112,6 +104,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
+      if (this.currentReason) {
+        this.resetCurrent()
+      }
       this.toggleChangesInModalUnsaved(false)
     }
   },

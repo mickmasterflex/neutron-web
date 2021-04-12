@@ -5,22 +5,20 @@
       :showLoader="loading"
       :loadingText="loadingText">
       <template slot="action">
-        <button @click="showCreateModal()" class="btn btn-turquoise"><font-awesome-icon icon="plus"></font-awesome-icon> New Reason</button>
+        <button @click="showCreateModal('create')" class="btn btn-turquoise"><font-awesome-icon icon="plus"></font-awesome-icon> New Reason</button>
       </template>
       <template slot="content">
-        <reasons-list :reasons="allReasons"></reasons-list>
+        <reasons-list :reasons="allReasons"/>
       </template>
     </panel-template>
-    <reason-create></reason-create>
-    <reason-update></reason-update>
+    <reason-create-update/>
   </div>
 </template>
 
 <script>
 import reasonsList from '@/components/reasons/list'
-import reasonCreate from '@/components/reasons/create'
-import reasonUpdate from '@/components/reasons/update'
-import { mapGetters, mapMutations } from 'vuex'
+import reasonCreateUpdate from '@/components/reasons/create-update'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
@@ -31,14 +29,13 @@ export default {
     })
   },
   methods: {
-    ...mapMutations({
-      showCreateModal: 'SHOW_CREATE_REASON_MODAL'
+    ...mapActions({
+      showCreateModal: 'showReasonsCreateUpdateModal'
     })
   },
   components: {
     'reasons-list': reasonsList,
-    'reason-create': reasonCreate,
-    'reason-update': reasonUpdate
+    'reason-create-update': reasonCreateUpdate
   }
 }
 </script>
