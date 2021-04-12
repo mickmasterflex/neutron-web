@@ -31,19 +31,21 @@
 
 <script>
 import deleteReason from '@/components/reasons/delete'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   props: {
     reasons: Array
   },
   methods: {
+    ...mapActions({
+      showModal: 'showReasonsCreateUpdateModal'
+    }),
     ...mapMutations({
-      showUpdateModal: 'SHOW_UPDATE_REASON_MODAL',
       setCurrentReason: 'SET_CURRENT_REASON'
     }),
     openUpdateModal (reason) {
-      this.showUpdateModal()
+      this.showModal('update')
       this.setCurrentReason(reason)
     }
   },
