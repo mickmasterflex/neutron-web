@@ -25,7 +25,7 @@
       </tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="None Added" copy="Use the 'Create a Injected Field' button."></table-empty-state>
+    <table-empty-state v-else heading="None Added" copy="Use the 'Add Injected Field' button."></table-empty-state>
   </transition-table-state>
 </template>
 

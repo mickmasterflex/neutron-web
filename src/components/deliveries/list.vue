@@ -55,6 +55,7 @@ export default {
     ...mapGetters({
       getDeliveriesByBuyer: 'getDeliveriesByBuyer',
       getDeliveriesByBuyers: 'getDeliveriesByBuyers',
+      ancestors: 'getCurrentAncestors',
       ancestorsIds: 'getCurrentAncestorsIds'
     }),
     deliveries () {

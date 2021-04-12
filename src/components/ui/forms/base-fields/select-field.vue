@@ -9,6 +9,7 @@
           @input="handleInput($event.target.value)"
           class="appearance-none base-field"
           :class="`${$attrs.field_class} ${field_size}`"
+          :disabled="$attrs.field_disabled"
           :id="$attrs.field_id">
           <option value="">----------</option>
           <option class="capitalize" :selected="option.id === value ? 'selected' : false" v-for="option in $attrs.options" :key="option.id" :value="`${option.id}`">
