@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>{{ modalPurpose }} Reason</template>
+    <template v-slot:header><span class="capitalize">{{ modalPurpose }}</span> Content</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -9,7 +9,8 @@
             rules="required"
             field_id="contentType"
             field_label="Type"
-            :options="formatListForSelectOptions(contentTypes)"/>
+            :options="formatListForSelectOptions(contentTypes)"
+            :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
               @click="leadIdToggle = !leadIdToggle"
@@ -17,27 +18,30 @@
               v-if="contentType === 'tcpa'"
               label="Leadid Toggle"
               field_id="leadid_toggle"
-              :style-as-field="true"/>
+              :style-as-field="true"
+              :disabled="loading"/>
           </div>
           <v-textarea-field
             v-model="contentBlock"
             field_id="additional_content_block"
             field_label="Content"
-            rules="required"/>
+            rules="required"
+            :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
               :value="doubleOptin"
               @click="doubleOptin = !doubleOptin"
               label="Double Opt-in"
               field_id="double_optin"
-              :style-as-field="true"/>
+              :style-as-field="true"
+              :disabled="loading"/>
           </div>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
-        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> {{ modalPurpose }} Content
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> <span class="capitalize">{{ modalPurpose }}</span> Content
       </button>
     </template>
   </modal-template>
@@ -61,10 +65,6 @@ export default {
     }
   },
   props: {
-    showModal: {
-      type: Boolean,
-      required: true
-    },
     loading: {
       type: Boolean,
       required: true
@@ -72,24 +72,15 @@ export default {
     submitAction: {
       type: Function,
       required: true
-    },
-    closeModal: {
-      type: Function,
-      required: true
-    },
-    modalPurpose: {
-      type: String,
-      required: true,
-      validator (value) {
-        return ['Add', 'Update'].includes(value)
-      }
     }
   },
   computed: {
     ...mapGetters({
       contentTypes: 'getAdditionalFormContentTypes',
       currentForm: 'getCurrentForm',
-      currentAdditionalFormContent: 'getCurrentAdditionalFormContent'
+      showModal: 'getShowAdditionalFormContentModal',
+      currentAdditionalFormContent: 'getCurrentAdditionalFormContent',
+      modalPurpose: 'getAdditionalFormContentModalPurpose'
     }),
     submitData () {
       const data = {
@@ -124,7 +115,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_ADDITIONAL_FORM_CONTENT'
+      resetCurrent: 'RESET_CURRENT_ADDITIONAL_FORM_CONTENT',
+      closeModal: 'CLOSE_ADDITIONAL_FORM_CONTENT_MODAL'
     }),
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -146,7 +138,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      if (this.currentReason) {
+      if (this.currentAdditionalFormContent) {
         this.resetCurrent()
       }
       this.toggleChangesInModalUnsaved(false)
