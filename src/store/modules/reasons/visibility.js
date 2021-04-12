@@ -1,32 +1,30 @@
 
 const state = {
-  show_create_reason_modal: false,
-  show_update_reason_modal: false
+  show_create_update_reason_modal: false,
+  create_update_reason_modal_purpose: ''
 }
 
 const getters = {
-  getShowCreateReasonModal: state => state.show_create_reason_modal,
-  getShowUpdateReasonModal: state => state.show_update_reason_modal
+  getShowCreateUpdateReasonModal: state => state.show_create_update_reason_modal,
+  getCreateUpdateReasonModalPurpose: state => state.create_update_reason_modal_purpose,
+  getCreateUpdateReasonModalPurposeIsUpdate: state => state.create_update_reason_modal_purpose === 'update'
 }
 
 const actions = {
   async showReasonsCreateUpdateModal ({ commit }, type) {
-    if (type === 'create') {
-      commit('SHOW_CREATE_REASON_MODAL')
-      commit('CLOSE_UPDATE_REASON_MODAL')
+    if (!['create', 'update'].includes(type)) {
+      const error = new Error('type must be equal to create or update')
+      window.console.log(error)
     }
-    if (type === 'update') {
-      commit('SHOW_UPDATE_REASON_MODAL')
-      commit('CLOSE_CREATE_REASON_MODAL')
-    }
+    commit('SET_CREATE_UPDATE_REASON_MODAL_PURPOSE', type)
+    commit('SHOW_CREATE_UPDATE_REASON_MODAL')
   }
 }
 
 const mutations = {
-  SHOW_CREATE_REASON_MODAL: (state) => (state.show_create_reason_modal = true),
-  CLOSE_CREATE_REASON_MODAL: (state) => (state.show_create_reason_modal = false),
-  SHOW_UPDATE_REASON_MODAL: (state) => (state.show_update_reason_modal = true),
-  CLOSE_UPDATE_REASON_MODAL: (state) => (state.show_update_reason_modal = false)
+  SHOW_CREATE_UPDATE_REASON_MODAL: (state) => (state.show_create_update_reason_modal = true),
+  CLOSE_CREATE_UPDATE_REASON_MODAL: (state) => (state.show_create_update_reason_modal = false),
+  SET_CREATE_UPDATE_REASON_MODAL_PURPOSE: (state, purpose) => (state.create_update_reason_modal_purpose = purpose)
 }
 
 export default {

@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>{{ modalPurpose }} Reason</template>
+    <template v-slot:header><span class="capitalize">{{ modalPurpose }}</span> Reason</template>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
@@ -21,7 +21,7 @@
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
-        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> {{ modalPurpose }} Reason
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> <span class="capitalize">{{ modalPurpose }}</span> Reason
       </button>
     </template>
   </modal-template>
@@ -42,10 +42,6 @@ export default {
     }
   },
   props: {
-    showModal: {
-      type: Boolean,
-      required: true
-    },
     loading: {
       type: Boolean,
       required: true
@@ -53,22 +49,13 @@ export default {
     submitAction: {
       type: Function,
       required: true
-    },
-    closeModal: {
-      type: Function,
-      required: true
-    },
-    modalPurpose: {
-      type: String,
-      required: true,
-      validator (value) {
-        return ['Create', 'Update'].includes(value)
-      }
     }
   },
   computed: {
     ...mapGetters({
-      currentReason: 'getCurrentReason'
+      currentReason: 'getCurrentReason',
+      showModal: 'getShowCreateUpdateReasonModal',
+      modalPurpose: 'getCreateUpdateReasonModalPurpose'
     }),
     submitData () {
       const data = {
@@ -96,7 +83,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_REASON'
+      resetCurrent: 'RESET_CURRENT_REASON',
+      closeModal: 'CLOSE_CREATE_UPDATE_REASON_MODAL'
     }),
     submitForm () {
       this.$refs.form.validate().then(success => {
