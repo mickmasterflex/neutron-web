@@ -9,7 +9,8 @@
             rules="required"
             field_id="contentType"
             field_label="Type"
-            :options="formatListForSelectOptions(contentTypes)"/>
+            :options="formatListForSelectOptions(contentTypes)"
+            :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
               @click="leadIdToggle = !leadIdToggle"
@@ -17,20 +18,23 @@
               v-if="contentType === 'tcpa'"
               label="Leadid Toggle"
               field_id="leadid_toggle"
-              :style-as-field="true"/>
+              :style-as-field="true"
+              :disabled="loading"/>
           </div>
           <v-textarea-field
             v-model="contentBlock"
             field_id="additional_content_block"
             field_label="Content"
-            rules="required"/>
+            rules="required"
+            :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
               :value="doubleOptin"
               @click="doubleOptin = !doubleOptin"
               label="Double Opt-in"
               field_id="double_optin"
-              :style-as-field="true"/>
+              :style-as-field="true"
+              :disabled="loading"/>
           </div>
         </form>
       </validation-observer>
@@ -146,7 +150,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      if (this.currentReason) {
+      if (this.currentAdditionalFormContent) {
         this.resetCurrent()
       }
       this.toggleChangesInModalUnsaved(false)
