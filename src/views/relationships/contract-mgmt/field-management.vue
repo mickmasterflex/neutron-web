@@ -4,7 +4,6 @@
       :loading="loading"
       :loading-text="loadingText"
       :contract-name="contractName"
-      :client-slug="client"
       class="col-span-2"/>
     <injected-panel-template
       :loading="loading"
@@ -13,7 +12,6 @@
     <additional-content-panel-template
       :loading="loading"
       :loading-text="loadingText"
-      :client-slug="client"
       class="col-span-2"/>
   </base-panel-grid>
 </template>
@@ -26,7 +24,6 @@ import additionalContentPanel from '@/components/forms/additional-content/panel-
 
 export default {
   props: {
-    client: String,
     id: Number
   },
   computed: {

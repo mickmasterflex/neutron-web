@@ -5,7 +5,6 @@
         v-for="content in ancestorForm.additional_form_content_tcpa"
         :key="`additionalAncestorContent-${content.id}`"
         :content="content"
-        :client-slug="clientSlug"
         :inherited-from="getAncestorById(ancestorForm.buyer_contract)"
       />
     </div>
@@ -13,7 +12,6 @@
       v-for="content in form.additional_form_content_tcpa"
       :key="`additionalContent-${content.id}`"
       :content="content"
-      :client-slug="clientSlug"
     />
   </div>
   <table-empty-state v-else
@@ -26,9 +24,6 @@ import { mapGetters } from 'vuex'
 import listItem from './list-item'
 
 export default {
-  props: {
-    clientSlug: String
-  },
   components: {
     'list-item': listItem
   },

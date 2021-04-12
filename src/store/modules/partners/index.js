@@ -55,6 +55,7 @@ const actions = {
     await axios.get(`/partners/${id}/`)
       .then(response => {
         commit('SET_CURRENT_PARTNER', response.data)
+        commit('SET_CURRENT_CLIENT_DATA', response.data.client_data)
         commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
         commit('RESET_PARTNER_FETCH_LOADING')
       })

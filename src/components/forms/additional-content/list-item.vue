@@ -5,7 +5,7 @@
   >
     <template #action>
       <span v-if="inheritedFrom">
-        Inherited From <router-link :to="{ name: 'BuyerContractFieldManagement', params: { id: inheritedFrom.id, client: clientSlug } }" class="text-link">{{inheritedFrom.name}}</router-link>
+        Inherited From <router-link :to="{ name: 'BuyerContractFieldManagement', params: { id: inheritedFrom.id, client: currentClientData.slug } }" class="text-link">{{inheritedFrom.name}}</router-link>
       </span>
       <btn-group-right v-else>
         <delete-content :id="content.id"/>
@@ -30,7 +30,7 @@
 
 <script>
 import deleteContent from './delete'
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -40,10 +40,12 @@ export default {
     },
     inheritedFrom: {
       type: Object
-    },
-    clientSlug: {
-      type: String
     }
+  },
+  computed: {
+    ...mapGetters({
+      currentClientData: 'getCurrentClientData'
+    })
   },
   methods: {
     ...mapMutations({

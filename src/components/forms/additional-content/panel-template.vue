@@ -4,7 +4,7 @@
       <button class="btn btn-turquoise" @click="showModal('add')"><font-awesome-icon icon="plus"></font-awesome-icon> Add Content</button>
     </template>
     <template v-slot:content>
-      <list-content :client-slug="clientSlug"/>
+      <list-content/>
       <create-update-modal/>
     </template>
   </panel-template>
@@ -18,8 +18,7 @@ import listContent from './list'
 export default {
   props: {
     loading: Boolean,
-    loadingText: String,
-    clientSlug: String
+    loadingText: String
   },
   methods: {
     ...mapActions({

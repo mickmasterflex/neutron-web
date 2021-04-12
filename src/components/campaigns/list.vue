@@ -39,10 +39,12 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentCampaign: 'SET_CURRENT_CAMPAIGN',
+      setCurrentClientData: 'SET_CURRENT_CLIENT_DATA',
       setCurrentAncestors: 'SET_CURRENT_ANCESTORS'
     }),
     linkToCampaign (campaign) {
       this.setCurrentCampaign(campaign)
+      this.setCurrentClientData(campaign.client_data)
       this.setCurrentAncestors(campaign.partner_ancestors)
       this.$router.push({
         name: 'Campaign',

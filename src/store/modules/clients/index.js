@@ -9,12 +9,14 @@ const modules = {
 
 const state = {
   clients: [],
-  current_client: {}
+  current_client: {},
+  current_client_data: {}
 }
 
 const getters = {
   getAllClients: state => state.clients,
   getCurrentClient: state => state.current_client,
+  getCurrentClientData: state => state.current_client_data,
   getCurrentClientParentlessBuyerContractSet: state => state.current_client.buyercontract_set ? state.current_client.buyercontract_set.filter(contract => contract.parent === null) : [],
   getCurrentClientParentlessPartnerContractSet: state => state.current_client.partnercontract_set ? state.current_client.partnercontract_set.filter(contract => contract.parent === null) : [],
   getAllClientsCount: (state) => {
@@ -70,7 +72,8 @@ const actions = {
 const mutations = {
   SET_CLIENTS: (state, clients) => (state.clients = clients),
   SET_CURRENT_CLIENT: (state, client) => (state.current_client = client),
-  RESET_CURRENT_CLIENT: (state, client) => (state.current_client = {}),
+  SET_CURRENT_CLIENT_DATA: (state, clientData) => (state.current_client_data = clientData),
+  RESET_CURRENT_CLIENT: (state) => (state.current_client = {}),
   ADD_CLIENT: (state, client) => state.clients.unshift(client),
   UPDATE_CLIENT: (state, updatedClient) => {
     const index = state.clients.findIndex(client => client.slug === updatedClient.slug)
