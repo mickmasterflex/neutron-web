@@ -20,7 +20,10 @@ const state = {
 
 const getters = {
   getFormByBuyerContract: state => contract => state.all_forms.find(form => form.buyer_contract === contract),
-  getAncestorForms: state => state.current_ancestor_forms
+  getAncestorForms: state => state.current_ancestor_forms,
+  getAncestorFormsWithAdditionalContent: state => state.current_ancestor_forms.filter(form => form.additional_form_content_tcpa.length > 0),
+  getAncestorFormsWithFields: state => state.current_ancestor_forms.filter(form => form.fields.length > 0),
+  getAncestorFormsWithInjectedFields: state => state.current_ancestor_forms.filter(form => form.injected_fields.length > 0)
 }
 
 const actions = {

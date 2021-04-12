@@ -63,7 +63,7 @@ export default {
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',
-      ancestorForms: 'getAncestorForms',
+      ancestorForms: 'getAncestorFormsWithFields',
       getAncestorById: 'getAncestorById'
     }),
     formFieldsExist () {

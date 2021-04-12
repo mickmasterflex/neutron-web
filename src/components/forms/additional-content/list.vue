@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2" v-if="contentExists || ancestorForms.length > 0">
-    <div class="space-y-2" v-for="ancestorForm in ancestorFormsWithContent" :key="`contentForm-${ancestorForm.id}`">
+    <div class="space-y-2" v-for="ancestorForm in ancestorForms" :key="`contentForm-${ancestorForm.id}`">
       <list-item
         v-for="content in ancestorForm.additional_form_content_tcpa"
         :key="`additionalAncestorContent-${content.id}`"
@@ -35,12 +35,9 @@ export default {
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',
-      ancestorForms: 'getAncestorForms',
+      ancestorForms: 'getAncestorFormsWithAdditionalContent',
       getAncestorById: 'getAncestorById'
     }),
-    ancestorFormsWithContent () {
-      return this.ancestorForms.filter(form => form.additional_form_content_tcpa.length > 0)
-    },
     contentExists () {
       return this.form.additional_form_content_tcpa ? this.form.additional_form_content_tcpa.length > 0 : null
     }
