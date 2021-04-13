@@ -1,7 +1,6 @@
 <template>
   <tr class="tr">
-    <th :colspan="colspan"
-        class="h4 px-3 py-3 bg-gray-200 border-r-2 border-l-2 text-left">
+    <th :colspan="colspan" class="h5 pt-3 pb-2 text-left">
       <slot></slot>
     </th>
   </tr>
