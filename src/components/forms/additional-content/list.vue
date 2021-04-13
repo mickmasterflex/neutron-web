@@ -1,13 +1,11 @@
 <template>
-  <div class="space-y-2" v-if="contentExists || ancestorForms.length > 0">
-    <div class="space-y-2" v-for="ancestorForm in ancestorForms" :key="`contentForm-${ancestorForm.id}`">
-      <list-item
-        v-for="content in ancestorForm.additional_form_content_tcpa"
-        :key="`additionalAncestorContent-${content.id}`"
-        :content="content"
-        :inherited-from="getAncestorById(ancestorForm.buyer_contract)"
-      />
-    </div>
+  <div class="space-y-2" v-if="contentExists || ancestorContent.length > 0">
+    <list-item
+      v-for="content in ancestorContent"
+      :key="`additionalAncestorContent-${content.id}`"
+      :content="content"
+      :inherited-from="getAncestorById(getFormById(content.form).buyer_contract)"
+    />
     <list-item
       v-for="content in form.additional_form_content_tcpa"
       :key="`additionalContent-${content.id}`"
@@ -30,8 +28,9 @@ export default {
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',
-      ancestorForms: 'getAncestorFormsWithAdditionalContent',
-      getAncestorById: 'getAncestorById'
+      ancestorContent: 'getAncestorAdditionalContent',
+      getAncestorById: 'getAncestorById',
+      getFormById: 'getFormById'
     }),
     contentExists () {
       return this.form.additional_form_content_tcpa ? this.form.additional_form_content_tcpa.length > 0 : null
