@@ -8,7 +8,7 @@
         <span class="w-64 th fields-inline-heading-item">Mapping</span>
         <span class="w-28 th rounded-r-lg fields-inline-heading-item">Pass to Client</span>
       </div>
-      <div v-for="ancestorForm in ancestorForms" :key="'form' + ancestorForm.id" class="mb-3">
+      <div v-for="ancestorForm in ancestorForms" :key="'formFields' + ancestorForm.id" class="mb-3">
         <h5 class="font-bold">
           Inherited fields from
           <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">

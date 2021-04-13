@@ -12,7 +12,7 @@
       </thead>
       <tbody
         v-for="ancestorForm in ancestorForms"
-        :key="ancestorForm.id"
+        :key="`formInjectedFields-${ancestorForm.id}`"
       >
         <tr-th-section-heading :colspan="5">
           <h5 class="font-bold">
@@ -23,20 +23,20 @@
           </h5>
         </tr-th-section-heading>
         <injected-tr
-          v-for="(field, index) in ancestorForm.injected_fields"
-          :key="`inheritedinjected-${field.id}`"
-          :injected-field="field"
+          v-for="(injectedField, index) in ancestorForm.injected_fields"
+          :key="`inheritedinjected-${injectedField.id}`"
+          :injected-field="injectedField"
           :class="index === 0 ? 'first-child': ''"
           :editable="false"
         ></injected-tr>
       </tbody>
       <tbody class="tbody">
-        <tr-th-section-heading :colspan="5" v-if="ancestorForms.length">
+        <tr-th-section-heading :colspan="5" v-if="ancestorForms.length && formInjectedFieldsExist">
           <h5 class="font-bold">{{ contractName }} Injected Fields</h5>
         </tr-th-section-heading>
         <injected-tr
           v-for="(injectedField, index) in form.injected_fields"
-          :key="injectedField.id"
+          :key="`injected-${injectedField.id}`"
           :injected-field="injectedField"
           :class="index === 0 ? 'first-child': ''"
         ></injected-tr>
