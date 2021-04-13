@@ -23,7 +23,11 @@ const getters = {
   getAncestorForms: state => state.current_ancestor_forms,
   getAncestorFormsWithAdditionalContent: state => state.current_ancestor_forms.filter(form => form.additional_form_content_tcpa.length > 0),
   getAncestorFormsWithFields: state => state.current_ancestor_forms.filter(form => form.fields.length > 0),
-  getAncestorFormsWithInjectedFields: state => state.current_ancestor_forms.filter(form => form.injected_fields.length > 0)
+  getAncestorFormsWithInjectedFields: state => state.current_ancestor_forms.filter(form => form.injected_fields.length > 0),
+  getAncestorInjectedFields: state => {
+    const forms = state.current_ancestor_forms.filter(form => form.injected_fields.length > 0)
+    return forms.reduce((acc, k) => { return acc.concat(k.injected_fields) }, [])
+  }
 }
 
 const actions = {

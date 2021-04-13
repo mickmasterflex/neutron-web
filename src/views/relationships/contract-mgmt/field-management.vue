@@ -8,6 +8,7 @@
     <injected-panel-template
       :loading="loading"
       :loading-text="loadingText"
+      :contract-name="contractName"
       class="col-span-2"/>
     <additional-content-panel-template
       :loading="loading"
@@ -29,7 +30,6 @@ export default {
   computed: {
     ...mapGetters({
       fetchFormsLoading: 'getFetchFormsLoading',
-      fetchFormsLoadingText: 'getFetchFormsLoadingText',
       offerFetchLoading: 'getOfferFetchLoading',
       offerFetchLoadingText: 'getOfferFetchLoadingText',
       buyerFetchLoading: 'getBuyerFetchLoading',
@@ -59,7 +59,7 @@ export default {
       return this.contractLoading ? this.contractLoading : this.fetchFormsLoading
     },
     loadingText () {
-      return this.contractLoading ? this.contractLoadingText : this.fetchFormsLoadingText
+      return this.contractLoading ? this.contractLoadingText : 'Loading Inherited Fields'
     }
   },
   methods: {

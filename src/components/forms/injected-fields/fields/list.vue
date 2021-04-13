@@ -1,28 +1,45 @@
 <template>
   <transition-table-state>
-    <table v-if="formInjectedFieldsExist" class="table table-white">
-      <thead>
-      <tr>
-        <th class="th">Type</th>
-        <th class="th">Key</th>
-        <th class="th">Value</th>
-        <th class="th">Params</th>
-        <th class="th"></th>
-      </tr>
+    <table v-if="formInjectedFieldsExist || ancestorForms.length > 0" class="table table-white">
+      <thead class="thead">
+        <tr>
+          <th class="th">Type</th>
+          <th class="th">Key</th>
+          <th class="th">Value</th>
+          <th class="th">Params</th>
+          <th class="th"></th>
+        </tr>
       </thead>
+      <tbody
+        v-for="ancestorForm in ancestorForms"
+        :key="ancestorForm.id"
+      >
+        <tr-th-section-heading :colspan="5">
+          <h5 class="font-bold">
+            Inherited fields from
+            <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
+              {{ getAncestorById(ancestorForm.buyer_contract).name }}
+            </router-link>
+          </h5>
+        </tr-th-section-heading>
+        <injected-tr
+          v-for="(field, index) in ancestorForm.injected_fields"
+          :key="`inheritedinjected-${field.id}`"
+          :injected-field="field"
+          :class="index === 0 ? 'first-child': ''"
+          :editable="false"
+        ></injected-tr>
+      </tbody>
       <tbody class="tbody">
-      <tr class="tr" v-for="injectedField in form.injected_fields" :key="injectedField.id">
-        <td class="td">{{ injectedField.field_type }}</td>
-        <td class="td">{{ injectedField.field_key }}</td>
-        <td class="td">{{ injectedField.field_value }}</td>
-        <td class="td">{{ injectedField.posting_params }}</td>
-        <td class="td w-24">
-          <btn-group-right>
-            <delete-injected-field :id="injectedField.id"></delete-injected-field>
-            <button class="btn btn-circle btn-hollow-blue" @click="setCurrentInjectedFieldAndShow(injectedField)"><font-awesome-icon icon="pencil-alt"></font-awesome-icon></button>
-          </btn-group-right>
-        </td>
-      </tr>
+        <tr-th-section-heading :colspan="5" v-if="ancestorForms.length">
+          <h5 class="font-bold">{{ contractName }} Injected Fields</h5>
+        </tr-th-section-heading>
+        <injected-tr
+          v-for="(injectedField, index) in form.injected_fields"
+          :key="injectedField.id"
+          :injected-field="injectedField"
+          :class="index === 0 ? 'first-child': ''"
+        ></injected-tr>
       </tbody>
     </table>
     <table-empty-state v-else heading="None Added" copy="Use the 'Add Injected Field' button."></table-empty-state>
@@ -31,16 +48,22 @@
 
 <script>
 
-import { mapMutations, mapGetters } from 'vuex'
-import deleteInjectedField from '@/components/forms/injected-fields/fields/delete'
+import { mapGetters } from 'vuex'
+import injectedTr from './tr'
 
 export default {
+  props: {
+    contractName: String
+  },
   components: {
-    'delete-injected-field': deleteInjectedField
+    'injected-tr': injectedTr
   },
   computed: {
     ...mapGetters({
-      form: 'getCurrentForm'
+      form: 'getCurrentForm',
+      ancestorForms: 'getAncestorFormsWithInjectedFields',
+      currentClientData: 'getCurrentClientData',
+      getAncestorById: 'getAncestorById'
     }),
     formInjectedFieldsExist () {
       if (this.form.injected_fields) {
@@ -48,16 +71,6 @@ export default {
       } else {
         return 0
       }
-    }
-  },
-  methods: {
-    ...mapMutations({
-      setCurrentInjectedField: 'SET_CURRENT_INJECTED_FIELD',
-      showUpdateInjectedFieldModal: 'SHOW_UPDATE_INJECTED_FIELD_MODAL'
-    }),
-    setCurrentInjectedFieldAndShow (injectedField) {
-      this.setCurrentInjectedField(injectedField)
-      this.showUpdateInjectedFieldModal()
     }
   }
 }
