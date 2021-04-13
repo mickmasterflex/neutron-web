@@ -4,10 +4,7 @@
     contentBackgroundColor="white"
   >
     <template #action>
-      <span v-if="inheritedFrom">
-        Inherited From <router-link :to="{ name: 'BuyerContractFieldManagement', params: { id: inheritedFrom.id, client: currentClientData.slug } }" class="text-link">{{inheritedFrom.name}}</router-link>
-      </span>
-      <btn-group-right v-else>
+      <btn-group-right v-if="editable">
         <delete-content :id="content.id"/>
         <button class="btn btn-hollow-blue btn-circle" @click="showModalAndSetCurrent(content)">
           <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
@@ -30,7 +27,7 @@
 
 <script>
 import deleteContent from './delete'
-import { mapMutations, mapActions, mapGetters } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -38,14 +35,10 @@ export default {
       type: Object,
       required: true
     },
-    inheritedFrom: {
-      type: Object
+    editable: {
+      default: true,
+      type: Boolean
     }
-  },
-  computed: {
-    ...mapGetters({
-      currentClientData: 'getCurrentClientData'
-    })
   },
   methods: {
     ...mapMutations({

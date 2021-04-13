@@ -10,7 +10,7 @@
       </div>
       <div v-for="ancestorForm in ancestorForms" :key="'formFields' + ancestorForm.id" class="mb-3">
         <h5 class="font-bold">
-          Inherited fields from
+          Inherited Fields From
           <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
             {{ getAncestorById(ancestorForm.buyer_contract).name }}
           </router-link>

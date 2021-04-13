@@ -1,11 +1,20 @@
 <template>
-  <div class="space-y-2" v-if="contentExists || ancestorContent.length > 0">
-    <list-item
-      v-for="content in ancestorContent"
-      :key="`additionalAncestorContent-${content.id}`"
-      :content="content"
-      :inherited-from="getAncestorById(getFormById(content.form).buyer_contract)"
-    />
+  <div class="space-y-2" v-if="contentExists || ancestorForms.length > 0">
+    <div v-for="ancestorForm of ancestorForms" :key="`ancestorContentForm-${ancestorForm.id}`" class="space-y-2">
+      <h5 class="h5 font-bold">
+        Inherited Content From
+        <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
+          {{ getAncestorById(ancestorForm.buyer_contract).name }}
+        </router-link>
+      </h5>
+      <list-item
+        v-for="content in ancestorForm.additional_form_content_tcpa"
+        :key="`additionalAncestorContent-${content.id}`"
+        :content="content"
+        :editable="false"
+      />
+    </div>
+    <h5 class="h5 font-bold" v-if="ancestorForms.length > 0">{{ contractName }} Content</h5>
     <list-item
       v-for="content in form.additional_form_content_tcpa"
       :key="`additionalContent-${content.id}`"
@@ -22,13 +31,17 @@ import { mapGetters } from 'vuex'
 import listItem from './list-item'
 
 export default {
+  props: {
+    contractName: String
+  },
   components: {
     'list-item': listItem
   },
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',
-      ancestorContent: 'getAncestorAdditionalContent',
+      currentClientData: 'getCurrentClientData',
+      ancestorForms: 'getAncestorFormsWithAdditionalContent',
       getAncestorById: 'getAncestorById',
       getFormById: 'getFormById'
     }),
