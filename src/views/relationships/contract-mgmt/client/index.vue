@@ -37,9 +37,15 @@ export default {
   computed: {
     ...mapGetters({
       client: 'getCurrentClient',
-      buyers: 'getCurrentClientParentlessBuyerContractSet',
-      partners: 'getCurrentClientParentlessPartnerContractSet'
+      buyersByClient: 'getParentlessBuyersByClient',
+      partnersByClient: 'getParentlessPartnersByClient'
     }),
+    buyers () {
+      return this.buyersByClient(this.client.id)
+    },
+    partners () {
+      return this.partnersByClient(this.client.id)
+    },
     contractLength () {
       return this.partners.length + this.buyers.length
     }
