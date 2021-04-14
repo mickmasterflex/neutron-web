@@ -36,7 +36,7 @@ export default {
       name: '',
       parent: '',
       ping_back_url: '',
-      minimum_rpl: '',
+      minimum_rpl: null,
       status: undefined,
       channel: '',
       pricing_tier_group: '',
