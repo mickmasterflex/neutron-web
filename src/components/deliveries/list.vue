@@ -22,7 +22,8 @@
         </tr-th-section-heading>
         <delivery-tr
           v-for="(delivery, index) in ancestorDeliveries"
-          :key="'delivery' + delivery.id" :delivery="delivery"
+          :key="'delivery' + delivery.id"
+          :delivery="delivery"
           :class="index === 0 ? 'first-child': ''"
         >
           <router-link :to="{ name: 'BuyerContract', params: { id: delivery.buyer_contract, client: clientSlug } }"
