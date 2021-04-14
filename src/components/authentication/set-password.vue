@@ -3,11 +3,12 @@
     <h1>Set New Password</h1>
     <validation-observer ref="form" v-slot="{ handleSubmit }">
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(submitForm)">
-        <v-text-field v-model="new_password" rules="required|password:@confirm_password" mode="passive" field_id="new_password" field_label="New Password" field_type="new_password"></v-text-field>
-        <v-text-field v-model="confirm_password" rules="required" field_id="confirm_password" field_label="Confirm Password" field_type="confirm_password"></v-text-field>
-        <button type="submit" class="btn btn-green mt-3">Save Password </button>
+        <v-text-field v-model="new_password" rules="required|password:@confirm_password" mode="passive" field_id="new_password" field_label="New Password" :field_type="password_field_type"></v-text-field>
+        <v-text-field v-model="confirm_password" rules="required" field_id="confirm_password" field_label="Confirm Password" :field_type="password_field_type"></v-text-field>
+        <button type="submit" class="btn btn-green mt-3"> Save Password</button>
       </form>
     </validation-observer>
+    <button class="btn btn-green mt-3" @click="showPassword"> Show</button>
   </div>
 </template>
 
@@ -19,7 +20,8 @@ export default {
   data () {
     return {
       new_password: '',
-      confirm_password: ''
+      confirm_password: '',
+      password_field_type: 'password'
     }
   },
   mixins: [setResponseErrors],
@@ -30,6 +32,9 @@ export default {
   },
   methods: {
     ...mapActions({ setPassword: 'setPassword' }),
+    showPassword () {
+      this.password_field_type = 'text'
+    },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {

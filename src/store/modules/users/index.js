@@ -60,8 +60,8 @@ const actions = {
         commit('REMOVE_USER', id)
       })
   },
-  async setPassword ({ commit }, id) {
-    await axios.post(`/reset-password/${id}/`)
+  async setPassword ({ commit }, password) {
+    await axios.post('/reset-password/', password)
       .then(() => {
         commit('UPDATE_CURRENT_USER_PASS_VALID', true)
       })
