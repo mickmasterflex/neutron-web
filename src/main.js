@@ -177,6 +177,13 @@ extend('required', { ...required, message: 'Required' })
 extend('integer', { ...integer, message: 'Must be an integer' })
 extend('image', { ...image, message: 'Must be an image file' })
 extend('ext', { ...ext, message: 'Incorrect file type' })
+extend('password', {
+  params: ['target'],
+  validate: (value, { target }) => {
+    return value === target
+  },
+  message: 'Password confirmation does not match'
+})
 extend('url', {
   message: 'Must be a valid URL including "http://"',
   validate: (value) => {

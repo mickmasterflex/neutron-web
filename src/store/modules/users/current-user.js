@@ -25,7 +25,8 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_ACTIVE_USER: (state, user) => (state.current_active_user = user)
+  SET_CURRENT_ACTIVE_USER: (state, user) => (state.current_active_user = user),
+  UPDATE_CURRENT_USER_PASS_VALID: (state, newPassValid) => (state.current_active_user.pass_valid = newPassValid)
 }
 
 export default {

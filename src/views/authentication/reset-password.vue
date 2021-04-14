@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import resetPasswordForm from '@/components/authentication/reset-password'
+import resetPasswordForm from '@/components/authentication/set-password'
 
 export default {
-  name: 'reset-password',
+  name: 'set-password',
   components: {
     'reset-password-form': resetPasswordForm
   }
