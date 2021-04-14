@@ -14,7 +14,7 @@
         :editable="false"
       />
     </div>
-    <h5 class="h5 font-bold" v-if="ancestorForms.length > 0">{{ contractName }} Content</h5>
+    <h5 class="h5 font-bold" v-if="contentExists && ancestorForms.length > 0">{{ contractName }} Content</h5>
     <list-item
       v-for="content in form.additional_form_content_tcpa"
       :key="`additionalContent-${content.id}`"
