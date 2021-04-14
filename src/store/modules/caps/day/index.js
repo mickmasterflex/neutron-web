@@ -1,7 +1,9 @@
 import axios from '@/axios'
 import dayCapModals from '@/store/modules/caps/day/visibility'
+import bulkUpdate from '@/store/modules/caps/day/bulk-update'
 
 const modules = {
+  bulkUpdate,
   dayCapModals
 }
 
