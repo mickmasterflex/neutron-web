@@ -95,6 +95,9 @@ import tdDate from '@/components/ui/tables/td-date'
 import tdNumber from '@/components/ui/tables/td-number'
 import trThSectionHeading from '@/components/ui/tables/tr-th-section-heading'
 
+/* Heading Components */
+import heading5 from '@/components/ui/typography/heading-5'
+
 /* Field Components */
 import checkboxField from '@/components/ui/forms/base-fields/checkbox'
 import checkSwitch from '@/components/ui/forms/base-fields/checkbox-switch'
@@ -166,6 +169,9 @@ Vue.component('textarea-field', textareaField)
 Vue.component('v-textarea-field', vTextareaField)
 Vue.component('select-field', selectField)
 Vue.component('v-select-field', vSelectField)
+
+// Headings
+Vue.component('heading-5', heading5)
 
 // Transitions
 Vue.component('transition-table-state', transitionTableState)

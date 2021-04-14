@@ -15,12 +15,10 @@
         :key="`formInjectedFields-${ancestorForm.id}`"
       >
         <tr-th-section-heading :colspan="5">
-          <h5 class="font-bold">
-            Inherited Fields From
-            <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
-              {{ getAncestorById(ancestorForm.buyer_contract).name }}
-            </router-link>
-          </h5>
+          Inherited Fields From
+          <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
+            {{ getAncestorById(ancestorForm.buyer_contract).name }}
+          </router-link>
         </tr-th-section-heading>
         <injected-tr
           v-for="(injectedField, index) in ancestorForm.injected_fields"
@@ -32,7 +30,7 @@
       </tbody>
       <tbody class="tbody">
         <tr-th-section-heading :colspan="5" v-if="ancestorForms.length && formInjectedFieldsExist">
-          <h5 class="font-bold">{{ contractName }} Injected Fields</h5>
+          {{ contractName }} Injected Fields
         </tr-th-section-heading>
         <injected-tr
           v-for="(injectedField, index) in form.injected_fields"

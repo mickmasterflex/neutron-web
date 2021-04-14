@@ -1,7 +1,7 @@
 <template>
   <tr class="tr">
-    <th :colspan="colspan" class="h5 pt-3 pb-2 text-left">
-      <slot></slot>
+    <th :colspan="colspan" class="text-left">
+      <heading-5><slot/></heading-5>
     </th>
   </tr>
 </template>

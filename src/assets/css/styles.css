@@ -75,7 +75,7 @@
 .h1 { @apply text-4xl font-hairline; }
 .h3 { @apply text-2xl font-hairline; }
 .h4 { @apply text-xl font-medium; }
-
+.h5 { @apply font-bold; }
 .h2,
 .h2-hairline {
     @apply text-3xl
