@@ -8,7 +8,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduled_start" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
-          <select-channels v-model="channel"></select-channels>
+          <select-channel v-model="channel"/>
           <min-rpl-field v-model="minimum_rpl"/>
           <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
         </form>
@@ -24,7 +24,7 @@
 import minRplField from './min-rpl-text-field'
 import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
-import selectChannels from '@/components/channels/select'
+import selectChannel from '@/components/channels/select'
 import formatList from '@/mixins/format-list-for-select-options'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
@@ -101,7 +101,7 @@ export default {
   components: {
     'select-pricing-tier-group': selectPricingTierGroup,
     'date-picker': datePicker,
-    'select-channels': selectChannels,
+    'select-channel': selectChannel,
     'min-rpl-field': minRplField
   }
 }
