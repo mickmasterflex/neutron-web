@@ -9,6 +9,7 @@
       </form>
     </validation-observer>
     <button class="btn btn-green mt-3" @click="showPassword"> Show</button>
+    <button class="btn btn-green mt-3" @click="hidePassword"> Hide</button>
   </div>
 </template>
 
@@ -34,6 +35,9 @@ export default {
     ...mapActions({ setPassword: 'setPassword' }),
     showPassword () {
       this.password_field_type = 'text'
+    },
+    hidePassword () {
+      this.password_field_type = 'password'
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
