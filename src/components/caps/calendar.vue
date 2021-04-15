@@ -6,7 +6,7 @@
     </template>
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth">
-        <day-content :today="today" :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
+        <day-content :today="new Date()" :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
         <span v-else class="full-calendar--day m-1 border-2 flex flex-row items-center justify-center">
           <font-awesome-icon class="text-gray-700 text-lg" icon="spinner" pulse></font-awesome-icon>
         </span>
@@ -77,9 +77,6 @@ export default {
       } else {
         return null
       }
-    },
-    today () {
-      return new Date()
     }
   },
   components: {
