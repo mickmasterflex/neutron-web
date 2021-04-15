@@ -21,7 +21,7 @@ import fullCalendar from '@/components/ui/calendars/full-calendar/index'
 import day from '@/components/caps/day'
 import month from '@/components/caps/month'
 import dayjs from 'dayjs'
-import bulkTools from '@/components/caps/day/bulk-tools'
+import bulkTools from '@/components/caps/day/bulk/tools'
 
 export default {
   methods: {

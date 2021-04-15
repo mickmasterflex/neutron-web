@@ -25,7 +25,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { cardColor } from '@/mixins/card-color'
-import bulkCheckbox from './bulk-checkbox'
+import bulkCheckbox from './bulk/checkbox'
 import dayjs from 'dayjs'
 import capDisplay from './cap-display'
 
