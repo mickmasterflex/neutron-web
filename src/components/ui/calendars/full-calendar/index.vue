@@ -1,6 +1,11 @@
 <template>
   <div class="full-calendar mx-auto block relative">
-    <v-calendar title-position="right" :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
+    <v-calendar
+      title-position="right"
+      :attributes="attributes"
+      is-expanded ref="calendar"
+      @update:to-page="$emit('update:to-page', $event)"
+      @update:from-page="$emit('update:from-page', $event)">
       <template v-slot:header="slotProps">
         <slot name="header" :calendarData="slotProps" :calendarRefs="$refs">
           <calendar-header :calendarData="slotProps" :calendarRefs="$refs"></calendar-header>
