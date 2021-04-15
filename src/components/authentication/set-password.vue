@@ -8,8 +8,8 @@
         <button type="submit" class="btn btn-green mt-3"> Save Password</button>
       </form>
     </validation-observer>
-    <button class="btn btn-green mt-3" @click="showPassword"> Show</button>
-    <button class="btn btn-green mt-3" @click="hidePassword"> Hide</button>
+    <button class="btn btn-green mt-3" @click="showPassword" v-if="password_field_type === 'password'"> Show</button>
+    <button class="btn btn-green mt-3" @click="hidePassword" v-if="password_field_type === 'text'"> Hide</button>
   </div>
 </template>
 
