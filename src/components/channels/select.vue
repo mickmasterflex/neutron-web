@@ -3,8 +3,8 @@
     :loading="loading"
     v-model="inner_value"
     :options="channels"
-    field_label="Channels"
-    field_id="channels"
+    field_label="Channel"
+    field_id="channel"
     v-bind="$attrs"
     :rules="rules"
   ></v-select-field>
