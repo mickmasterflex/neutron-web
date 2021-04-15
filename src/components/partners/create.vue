@@ -37,7 +37,7 @@ export default {
       channel: '',
       pricing_tier_group: '',
       ping_back_url: '',
-      minimum_rpl: '',
+      minimum_rpl: null,
       status: 'active',
       scheduled_start: null
     }
@@ -68,7 +68,7 @@ export default {
       this.channel = ''
       this.status = 'active'
       this.ping_back_url = ''
-      this.minimum_rpl = ''
+      this.minimum_rpl = null
       this.scheduled_start = null
       this.$nextTick(() => {
         this.$refs.form.reset()
