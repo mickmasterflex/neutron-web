@@ -3,7 +3,7 @@
        :class="`${hasCap(day.attributes) ? dayCardColor(day.attributes[0].customData) : 'card-gray'}`">
     <span class="full-calendar--day-title card-colored-text leading-none px-3 py-2 font-bold text-gray-700 text-lg flex flex-row justify-between items-center">
       {{ day.day }}
-      <bulk-checkbox :date="date" :checked="checked"/>
+      <bulk-checkbox :date="date" :checked="selectedForBulkUpdate"/>
     </span>
     <span class="w-full text-center font-bold text-gray-700 text-sm md:text-base xl:text-lg" v-if="soldCount">
       <span class="card-colored-text">Sold: </span>{{ soldCount }}
@@ -41,7 +41,7 @@ export default {
     capLimit () {
       return Number(this.day.attributes[0].customData.limit).toLocaleString()
     },
-    checked () {
+    selectedForBulkUpdate () {
       return this.daysForBulkUpdate.includes(this.date)
     }
   },
