@@ -9,9 +9,10 @@
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
-          <v-text-field v-model="pingbackUrl" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
+          <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
-          <select-channels v-model="channel"></select-channels>
+          <select-channel v-model="channel"/>
+          <min-rpl-field v-model="minimum_rpl"/>
           <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
         </form>
       </validation-observer>
@@ -20,9 +21,10 @@
 </template>
 
 <script>
+import minRplField from './min-rpl-text-field'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
-import selectChannels from '@/components/channels/select'
+import selectChannel from '@/components/channels/select'
 import parentSelect from '@/components/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
@@ -33,7 +35,8 @@ export default {
     return {
       name: '',
       parent: '',
-      pingbackUrl: '',
+      ping_back_url: '',
+      minimum_rpl: null,
       status: undefined,
       channel: '',
       pricing_tier_group: '',
@@ -56,7 +59,8 @@ export default {
     setPartner () {
       this.name = this.partner.name
       this.parent = this.partner.parent
-      this.pingbackUrl = this.partner.ping_back_url
+      this.ping_back_url = this.partner.ping_back_url
+      this.minimum_rpl = this.partner.minimum_rpl
       this.status = this.partner.status
       this.channel = this.partner.channel
       this.pricing_tier_group = this.partner.pricing_tier_group
@@ -71,7 +75,8 @@ export default {
             parent: this.parent,
             client: this.client,
             id: this.partner.id,
-            ping_back_url: this.pingbackUrl,
+            ping_back_url: this.ping_back_url,
+            minimum_rpl: this.minimum_rpl,
             status: this.status,
             channel: this.channel,
             pricing_tier_group: this.pricing_tier_group,
@@ -96,8 +101,9 @@ export default {
         return this.name !== this.partner.name ||
           this.parent !== this.partner.parent ||
           this.status !== this.partner.status ||
-          this.pingbackUrl !== this.partner.ping_back_url ||
+          this.ping_back_url !== this.partner.ping_back_url ||
           this.channel !== this.partner.channel ||
+          this.minimum_rpl !== this.partner.minimum_rpl ||
           this.pricing_tier_group !== this.partner.pricing_tier_group ||
           this.scheduledStart !== this.partner.scheduled_start
       } else {
@@ -109,7 +115,8 @@ export default {
     'select-pricing-tier-group': selectPricingTierGroup,
     'date-picker': datePicker,
     'parent-select': parentSelect,
-    'select-channels': selectChannels
+    'select-channel': selectChannel,
+    'min-rpl-field': minRplField
   }
 }
 </script>
