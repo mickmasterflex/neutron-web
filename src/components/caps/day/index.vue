@@ -1,18 +1,23 @@
 <template>
   <div class="full-calendar--day card card-border m-1 flex flex-col"
-       :class="`${hasCap(day.attributes) ? dayCardColor(day.attributes[0].customData) : 'card-gray'}`">
+       :class="`${hasCap() ? dayCardColor(day.attributes[0].customData) : 'card-gray'}`">
     <span class="full-calendar--day-title card-colored-text leading-none px-3 py-2 font-bold text-gray-700 text-lg flex flex-row justify-between items-center">
       {{ day.day }}
-      <bulk-checkbox :date="date" :checked="selectedForBulkUpdate"/>
+      <bulk-checkbox :date="date" :checked="selectedForBulkUpdate" v-if="!dayInPast"/>
     </span>
     <span class="w-full text-center font-bold text-gray-700 text-sm md:text-base xl:text-lg" v-if="soldCount">
       <span class="card-colored-text">Sold: </span>{{ soldCount }}
     </span>
-    <span class="flex-grow flex flex-col pb-4 items-center justify-center px-1">
-      <span v-if="hasCap(day.attributes)" class="text-link text-lg lg:text-2xl xl:text-3xl cursor-pointer lg:font-light" @click="updateCap(day)">
+    <span class="flex-grow flex flex-col pb-4 items-center justify-center px-1" v-if="!dayInPast">
+      <cap-display v-if="hasCap(day.attributes)" class="text-link cursor-pointer" @click="updateCap()">
         {{ capLimit }}
-      </span>
-      <button v-else class="btn btn-hollow-turquoise border-2 border-gray-300 btn-md btn-circle" @click="addCap(day)"><font-awesome-icon icon="plus"></font-awesome-icon></button>
+      </cap-display>
+      <button v-else class="btn btn-hollow-turquoise border-2 border-gray-300 btn-md btn-circle" @click="addCap()">
+        <font-awesome-icon icon="plus"></font-awesome-icon>
+      </button>
+    </span>
+    <span v-else class="flex-grow flex flex-col pb-4 items-center justify-end px-1">
+      <cap-display>{{ hasCap() ? capLimit : 'n/a' }}</cap-display>
     </span>
   </div>
 </template>
@@ -22,10 +27,12 @@ import { mapGetters, mapMutations } from 'vuex'
 import { cardColor } from '@/mixins/card-color'
 import bulkCheckbox from './bulk-checkbox'
 import dayjs from 'dayjs'
+import capDisplay from './cap-display'
 
 export default {
   props: {
-    day: Object
+    day: Object,
+    today: Date
   },
   mixins: [cardColor],
   computed: {
@@ -43,6 +50,11 @@ export default {
     },
     selectedForBulkUpdate () {
       return this.daysForBulkUpdate.includes(this.date)
+    },
+    dayInPast () {
+      const today = dayjs(this.today)
+      const day = dayjs(this.day.date)
+      return day.diff(today, 'day') < 0
     }
   },
   methods: {
@@ -52,16 +64,16 @@ export default {
       setSelectedCapDay: 'SET_SELECTED_CAP_DAY',
       setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS'
     }),
-    hasCap (attributes) {
-      const id = attributes[0].customData.id
+    hasCap () {
+      const id = this.day.attributes[0].customData.id
       return id !== null
     },
-    addCap (day) {
-      this.setSelectedCapDay(day)
+    addCap () {
+      this.setSelectedCapDay(this.day)
       this.showCreate()
     },
-    updateCap (day) {
-      this.setSelectedCapDay(day)
+    updateCap () {
+      this.setSelectedCapDay(this.day)
       this.showUpdate()
     },
     dayCardColor (attributes) {
@@ -69,7 +81,8 @@ export default {
     }
   },
   components: {
-    'bulk-checkbox': bulkCheckbox
+    'bulk-checkbox': bulkCheckbox,
+    'cap-display': capDisplay
   }
 }
 </script>
