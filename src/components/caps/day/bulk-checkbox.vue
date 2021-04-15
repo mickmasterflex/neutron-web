@@ -7,11 +7,12 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    date: String
+    date: String,
+    checked: Boolean
   },
   methods: {
     ...mapMutations({
@@ -24,14 +25,6 @@ export default {
       } else {
         this.addDay(date)
       }
-    }
-  },
-  computed: {
-    ...mapGetters({
-      daysForBulkUpdate: 'getBulkUpdateDayCaps'
-    }),
-    checked () {
-      return this.daysForBulkUpdate.includes(this.date)
     }
   }
 }
