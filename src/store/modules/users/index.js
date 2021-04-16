@@ -1,13 +1,13 @@
 import axios from '@/axios'
 import loading from '@/store/modules/users/loading'
 import visibility from '@/store/modules/users/visibility'
-import currentUser from '@/store/modules/users/current-user'
+import currentActiveUser from '@/store/modules/users/current-active-user'
 import setPassword from '@/components/authentication/set-password'
 
 const modules = {
   loading,
   visibility,
-  currentUser,
+  currentActiveUser,
   setPassword
 }
 
