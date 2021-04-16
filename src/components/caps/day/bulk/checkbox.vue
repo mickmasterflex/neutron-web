@@ -1,8 +1,8 @@
 <template>
   <checkbox-field
-    :field_id="date"
+    :field_id="day.date"
     :value="checked"
-    @click="check(date)"
+    @click="check()"
   />
 </template>
 
@@ -11,19 +11,19 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: {
-    date: String,
+    day: Object,
     checked: Boolean
   },
   methods: {
     ...mapMutations({
-      addDay: 'ADD_DATE_TO_BULK_UPDATE_DAY_CAPS',
-      removeDay: 'REMOVE_DATE_TO_BULK_UPDATE_DAY_CAPS'
+      addDay: 'ADD_DAY_TO_BULK_UPDATE_DAY_CAPS',
+      removeDay: 'REMOVE_DAY_FROM_BULK_UPDATE_DAY_CAPS'
     }),
-    check (date) {
+    check () {
       if (this.checked) {
-        this.removeDay(date)
+        this.removeDay(this.day.date)
       } else {
-        this.addDay(date)
+        this.addDay(this.day)
       }
     }
   }

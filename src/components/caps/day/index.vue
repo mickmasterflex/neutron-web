@@ -1,9 +1,9 @@
 <template>
   <div class="full-calendar--day card card-border m-1 flex flex-col"
-       :class="dayCardColor(day.attributes[0].customData)">
+       :class="dayCardColor(dayData)">
     <span class="full-calendar--day-title card-colored-text leading-none h-10 px-3 py-2 font-bold text-gray-700 text-lg flex flex-row justify-between items-center">
       {{ day.day }}
-      <bulk-checkbox :date="date" :checked="selectedForBulkUpdate" v-if="!dayInPast"/>
+      <bulk-checkbox :day="dayData" :checked="selectedForBulkUpdate" v-if="!dayInPast"/>
     </span>
     <span class="w-full text-center font-bold text-gray-700 text-sm md:text-base xl:text-lg" v-if="soldCount">
       <span class="card-colored-text">Sold: </span>{{ soldCount }}
@@ -37,20 +37,23 @@ export default {
     ...mapGetters({
       daysForBulkUpdate: 'getBulkUpdateDayCaps'
     }),
+    dayData () {
+      return this.day.attributes[0].customData
+    },
     date () {
       return dayjs(this.day.date).format('YYYY-MM-DD')
     },
     soldCount () {
-      return Number(this.day.attributes[0].customData.sold)
+      return Number(this.dayData.sold)
     },
     capLimit () {
-      return Number(this.day.attributes[0].customData.limit).toLocaleString()
+      return Number(this.dayData.limit).toLocaleString()
     },
     selectedForBulkUpdate () {
-      return this.daysForBulkUpdate.includes(this.date)
+      return this.daysForBulkUpdate.some(d => d.date === this.dayData.date)
     },
     hasCap () {
-      const id = this.day.attributes[0].customData.id
+      const id = this.dayData.id
       return id !== null
     },
     dayInPast () {

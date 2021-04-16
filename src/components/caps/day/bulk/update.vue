@@ -11,7 +11,7 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-<!--      <delete-cap></delete-cap>-->
+      <delete-cap></delete-cap>
       <button class="btn btn-green flex-grow" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save</button>
     </template>
   </panel-modal>
@@ -22,7 +22,7 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import panelModal from '@/components/ui/modals/panel-modal'
-// import deleteCap from '@/components/caps/day/delete'
+import deleteCap from '@/components/caps/day/bulk/delete'
 
 export default {
   data () {
@@ -36,7 +36,7 @@ export default {
       closeModal: 'CLOSE_BULK_DAY_CAP_MODAL'
     }),
     ...mapActions({
-      update: 'bulkUpdateDayCap'
+      update: 'bulkUpdateDayCaps'
     }),
     close () {
       this.closeModal()
@@ -50,7 +50,7 @@ export default {
         if (success) {
           this.update({
             limit: this.limit,
-            dates: this.selectedDates.join(),
+            dates: this.selectedDates.map(d => d.date).join(),
             parent: this.parent
           }).then(() => {
             this.close()
@@ -76,8 +76,8 @@ export default {
     })
   },
   components: {
-    'panel-modal': panelModal
-    // 'delete-cap': deleteCap
+    'panel-modal': panelModal,
+    'delete-cap': deleteCap
   }
 }
 </script>

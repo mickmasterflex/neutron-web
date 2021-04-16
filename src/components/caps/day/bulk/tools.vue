@@ -7,7 +7,7 @@
             <span class="capitalize font-bold">{{ filter.name }}</span>
             <span>
               <button class="btn btn-md btn-blue rounded-r-none border-r-0 w-10" @click="removeDates(formatDates(filter.days))"><font-awesome-icon :icon="['far', 'square']"></font-awesome-icon></button>
-              <button class="btn btn-md btn-blue rounded-l-none w-10" @click="addDates(formatDates(filter.days))"><font-awesome-icon icon="check-square"></font-awesome-icon></button>
+              <button class="btn btn-md btn-blue rounded-l-none w-10" @click="addDays(formatDates(filter.days))"><font-awesome-icon icon="check-square"></font-awesome-icon></button>
             </span>
           </li>
         </ul>
@@ -17,7 +17,7 @@
     <ul class="grid grid-cols-7 gap-2 justify-center p-2 pb-0 mt-3">
       <li v-for="filter in dayFilters" :key="filter.name" class="flex flex-row flex-grow items-center">
         <button class="w-1/2 btn btn-md btn-blue rounded-r-none border-r-0" @click="removeDates(formatDates(filter.days))"><font-awesome-icon :icon="['far', 'square']"></font-awesome-icon></button>
-        <button class="w-1/2 btn btn-md btn-blue rounded-l-none" @click="addDates(formatDates(filter.days))"><font-awesome-icon icon="check-square"></font-awesome-icon></button>
+        <button class="w-1/2 btn btn-md btn-blue rounded-l-none" @click="addDays(formatDates(filter.days))"><font-awesome-icon icon="check-square"></font-awesome-icon></button>
       </li>
     </ul>
   </div>
@@ -98,11 +98,11 @@ export default {
         }
         return d
       })
-      return datesNotInPast.map(day => dayjs(day.date).format('YYYY-MM-DD'))
+      return datesNotInPast.map(day => day.attributes[0].customData)
     },
     ...mapMutations({
-      addDates: 'ADD_DATES_TO_BULK_UPDATE_DAY_CAPS',
-      removeDates: 'REMOVE_DATES_FROM_BULK_UPDATE_DAY_CAPS',
+      addDays: 'ADD_DAYS_TO_BULK_UPDATE_DAY_CAPS',
+      removeDates: 'REMOVE_DAYS_FROM_BULK_UPDATE_DAY_CAPS',
       showModal: 'SHOW_BULK_DAY_CAP_MODAL'
     })
   }
