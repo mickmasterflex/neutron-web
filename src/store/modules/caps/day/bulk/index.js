@@ -17,8 +17,11 @@ const actions = {
   async bulkUpdateDayCap ({ commit }, caps) {
     await axios.post('/day-cap-bulk/', caps)
       .then(response => {
-        console.log(response)
-      }).catch(e => console.log(e))
+        response.data.caps.forEach(cap => {
+          commit('UPDATE_DAY_CAP', cap)
+        })
+        commit('RESET_BULK_UPDATE_DAY_CAPS')
+      })
   }
 }
 
