@@ -1,7 +1,7 @@
 <template>
   <panel-modal :show="showModal" @close="close">
     <template v-slot:header>
-      <span>COUNT OF DAYS</span>
+      <span>{{ selectedDates.length }} Days Selected</span>
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -40,6 +40,7 @@ export default {
     }),
     close () {
       this.closeModal()
+      this.limit = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
