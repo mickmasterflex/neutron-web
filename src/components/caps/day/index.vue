@@ -8,16 +8,14 @@
     <span class="w-full text-center font-bold text-gray-700 text-sm md:text-base xl:text-lg" v-if="soldCount">
       <span class="card-colored-text">Sold: </span>{{ soldCount }}
     </span>
-    <span class="flex-grow flex flex-col pb-4 items-center justify-center px-1" v-if="!dayInPast">
-      <cap-display v-if="hasCap(day.attributes)" class="text-link cursor-pointer" @click="updateCap()">
+    <span class="flex-grow flex flex-col pb-4 items-center justify-center px-1">
+      <cap-display v-if="dayInPast">{{ hasCap() ? capLimit : 'n/a' }}</cap-display>
+      <cap-display v-else-if="hasCap(day.attributes)" class="text-link cursor-pointer" @click="updateCap()">
         {{ capLimit }}
       </cap-display>
       <button v-else class="btn btn-hollow-turquoise border-2 border-gray-300 btn-md btn-circle" @click="addCap()">
         <font-awesome-icon icon="plus"></font-awesome-icon>
       </button>
-    </span>
-    <span v-else class="flex-grow flex flex-col pb-4 items-center justify-end px-1">
-      <cap-display>{{ hasCap() ? capLimit : 'n/a' }}</cap-display>
     </span>
   </div>
 </template>
