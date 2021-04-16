@@ -40,7 +40,7 @@ export default {
       daysForBulkUpdate: 'getBulkUpdateDayCaps'
     }),
     date () {
-      return dayjs(this.day.date).format('DD/MM/YYYY')
+      return dayjs(this.day.date).format('YYYY-MM-DD')
     },
     soldCount () {
       return Number(this.day.attributes[0].customData.sold)

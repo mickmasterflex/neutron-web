@@ -2,7 +2,7 @@
   <div class="mt-4 well">
     <div class="flex flex-row justify-between items-center">
       <h4 class="h4">Bulk Update Day Caps</h4>
-      <button class="btn btn-turquoise rounded-full">Update Selected Day Caps</button>
+      <button class="btn btn-turquoise rounded-full" @click="showModal()">Update Selected Day Caps</button>
     </div>
     <ul class="flex flex-row flex-wrap justify-center">
       <li v-for="filter in filters" :key="filter.name" class="flex flex-col items-center w-24">
@@ -87,11 +87,12 @@ export default {
         }
         return d
       })
-      return datesNotInPast.map(day => dayjs(day.date).format('DD/MM/YYYY'))
+      return datesNotInPast.map(day => dayjs(day.date).format('YYYY-MM-DD'))
     },
     ...mapMutations({
       addDates: 'ADD_DATES_TO_BULK_UPDATE_DAY_CAPS',
-      removeDates: 'REMOVE_DATES_FROM_BULK_UPDATE_DAY_CAPS'
+      removeDates: 'REMOVE_DATES_FROM_BULK_UPDATE_DAY_CAPS',
+      showModal: 'SHOW_BULK_DAY_CAP_MODAL'
     })
   }
 }

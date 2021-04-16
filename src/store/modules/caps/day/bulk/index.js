@@ -1,3 +1,10 @@
+import visibility from './visibility'
+import axios from '@/axios'
+
+const modules = {
+  visibility
+}
+
 const state = {
   bulk_update_day_caps: []
 }
@@ -6,7 +13,14 @@ const getters = {
   getBulkUpdateDayCaps: state => state.bulk_update_day_caps
 }
 
-const actions = {}
+const actions = {
+  async bulkUpdateDayCap ({ commit }, caps) {
+    await axios.post('/day-cap-bulk/', caps)
+      .then(response => {
+        console.log(response)
+      }).catch(e => console.log(e))
+  }
+}
 
 const mutations = {
   ADD_DATE_TO_BULK_UPDATE_DAY_CAPS: (state, date) => (state.bulk_update_day_caps.push(date)),
@@ -17,6 +31,7 @@ const mutations = {
 }
 
 export default {
+  modules,
   state,
   getters,
   actions,
