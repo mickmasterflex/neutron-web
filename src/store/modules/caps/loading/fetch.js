@@ -1,10 +1,12 @@
 
 const state = {
-  caps_fetch_loading: false
+  caps_fetch_loading: false,
+  caps_fetch_loading_text: 'Loading Caps Calendar'
 }
 
 const getters = {
-  getCapsFetchLoading: state => state.caps_fetch_loading
+  getCapsFetchLoading: state => state.caps_fetch_loading,
+  getCapsFetchLoadingText: state => state.caps_fetch_loading_text
 }
 
 const mutations = {
