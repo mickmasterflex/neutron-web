@@ -69,8 +69,8 @@ const actions = {
 const mutations = {
   SET_CLIENTS: (state, clients) => (state.clients = clients),
   SET_CURRENT_CLIENT: (state, client) => (state.current_client = client),
-  SET_CURRENT_CLIENT_DATA: (state, clientData) => (state.current_client_data = clientData),
   RESET_CURRENT_CLIENT: (state) => (state.current_client = {}),
+  SET_CURRENT_CLIENT_DATA: (state, clientData) => (state.current_client_data = clientData),
   ADD_CLIENT: (state, client) => state.clients.unshift(client),
   UPDATE_CLIENT: (state, updatedClient) => {
     const index = state.clients.findIndex(client => client.slug === updatedClient.slug)
