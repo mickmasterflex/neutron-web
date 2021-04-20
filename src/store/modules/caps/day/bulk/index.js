@@ -26,11 +26,12 @@ const actions = {
   },
   async bulkDeleteDayCaps ({ commit }, caps) {
     console.log(caps)
-    await axios.delete('/day-cap-bulk/', caps)
+    await axios.delete('/day-cap-bulk/', { data: { caps } })
       .then(response => {
         response.data.caps.forEach(cap => {
           commit('REMOVE_DAY_CAP', cap.id)
         })
+        commit('RESET_BULK_UPDATE_DAY_CAPS')
       })
   }
 }

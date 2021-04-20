@@ -36,7 +36,7 @@ export default {
       closeModal: 'CLOSE_BULK_DAY_CAP_MODAL'
     }),
     ...mapActions({
-      update: 'bulkUpdateDayCaps'
+      updateCaps: 'bulkUpdateDayCaps'
     }),
     close () {
       this.closeModal()
@@ -48,7 +48,7 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.update({
+          this.updateCaps({
             limit: this.limit,
             dates: this.selectedDates.map(d => d.date).join(),
             parent: this.parent
