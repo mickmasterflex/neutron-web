@@ -16,22 +16,27 @@ const getters = {
 
 const actions = {
   async bulkUpdateDayCaps ({ commit }, caps) {
+    commit('SET_CAPS_POST_LOADING')
     await axios.post('/day-cap-bulk/', caps)
       .then(response => {
         response.data.caps.forEach(cap => {
           commit('UPDATE_DAY_CAP', cap)
         })
         commit('RESET_BULK_UPDATE_DAY_CAPS')
+      }).finally(() => {
+        commit('RESET_CAPS_POST_LOADING')
       })
   },
   async bulkDeleteDayCaps ({ commit }, caps) {
-    console.log(caps)
+    commit('SET_CAPS_DELETE_LOADING')
     await axios.delete('/day-cap-bulk/', { data: { caps } })
       .then(response => {
         response.data.caps.forEach(cap => {
           commit('REMOVE_DAY_CAP', cap.id)
         })
         commit('RESET_BULK_UPDATE_DAY_CAPS')
+      }).finally(() => {
+        commit('RESET_CAPS_DELETE_LOADING')
       })
   }
 }

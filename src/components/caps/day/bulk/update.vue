@@ -6,13 +6,22 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
-          <v-text-field ref="focusField" v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Day Cap"></v-text-field>
+          <v-text-field
+            ref="focusField"
+            v-model="limit"
+            rules="required|integer|min_value:0"
+            field_id="limit"
+            field_label="Day Cap"
+            :field_disabled="loading"/>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
       <delete-cap></delete-cap>
-      <button class="btn btn-green flex-grow" @click="submitForm"><font-awesome-icon icon="check"></font-awesome-icon> Save</button>
+      <button class="btn btn-green flex-grow" @click="submitForm" :disabled="loading">
+        <font-awesome-icon icon="spinner" pulse v-if="loadingPost"></font-awesome-icon>
+        <font-awesome-icon icon="check" v-else></font-awesome-icon> Save
+      </button>
     </template>
   </panel-modal>
 </template>
@@ -72,7 +81,9 @@ export default {
     ...mapGetters({
       showModal: 'getShowBulkDayCapModal',
       parent: 'getCurrentCapParent',
-      selectedDates: 'getBulkUpdateDayCaps'
+      selectedDates: 'getBulkUpdateDayCaps',
+      loading: 'getCapsLoading',
+      loadingPost: 'getCapsPostLoading'
     })
   },
   components: {

@@ -6,8 +6,16 @@
           <li v-for="filter in massFilters" :key="filter.name" class="flex flex-row items-center space-x-2 well">
             <span class="capitalize font-bold">{{ filter.name }}</span>
             <span>
-              <button class="btn btn-md btn-blue rounded-r-none border-r-0 w-12" @click="removeDates(formatDates(filter.days))"><font-awesome-icon :icon="['far', 'square']"></font-awesome-icon></button>
-              <button class="btn btn-md btn-blue rounded-l-none w-12" @click="addDays(formatDates(filter.days))"><font-awesome-icon icon="check-square"></font-awesome-icon></button>
+              <button class="btn btn-md btn-blue rounded-r-none border-r-0 w-12"
+                      @click="removeDates(formatDates(filter.days))"
+                      :disabled="loading">
+                <font-awesome-icon :icon="['far', 'square']"></font-awesome-icon>
+              </button>
+              <button class="btn btn-md btn-blue rounded-l-none w-12"
+                      @click="addDays(formatDates(filter.days))"
+                      :disabled="loading">
+                <font-awesome-icon icon="check-square"></font-awesome-icon>
+              </button>
             </span>
           </li>
         </ul>
@@ -16,8 +24,16 @@
     </div>
     <ul class="grid grid-cols-7 gap-2 justify-center pb-0 mt-3">
       <li v-for="filter in dayFilters" :key="filter.name" class="flex flex-row flex-grow items-center">
-        <button class="w-1/2 btn btn-md btn-blue rounded-r-none border-r-0" @click="removeDates(formatDates(filter.days))"><font-awesome-icon :icon="['far', 'square']"></font-awesome-icon></button>
-        <button class="w-1/2 btn btn-md btn-blue rounded-l-none" @click="addDays(formatDates(filter.days))"><font-awesome-icon icon="check-square"></font-awesome-icon></button>
+        <button class="w-1/2 btn btn-md btn-blue rounded-r-none border-r-0"
+                @click="removeDates(formatDates(filter.days))"
+                :disabled="loading">
+          <font-awesome-icon :icon="['far', 'square']"></font-awesome-icon>
+        </button>
+        <button class="w-1/2 btn btn-md btn-blue rounded-l-none"
+                @click="addDays(formatDates(filter.days))"
+                :disabled="loading">
+          <font-awesome-icon icon="check-square"></font-awesome-icon>
+        </button>
       </li>
     </ul>
   </div>
@@ -37,7 +53,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      selectedDates: 'getBulkUpdateDayCaps'
+      selectedDates: 'getBulkUpdateDayCaps',
+      loading: 'getCapsLoading'
     }),
     weekdays () { return this.days.filter(day => [2, 3, 4, 5, 6].includes(day.weekday)) },
     weekends () { return this.days.filter(day => [1, 7].includes(day.weekday)) },
@@ -50,13 +67,13 @@ export default {
     saturdays () { return this.days.filter(day => [7].includes(day.weekday)) },
     massFilters () {
       return {
-        weekdays: {
-          name: 'weekdays',
-          days: this.weekdays
-        },
         weekends: {
           name: 'weekends',
           days: this.weekends
+        },
+        weekdays: {
+          name: 'weekdays',
+          days: this.weekdays
         }
       }
     },
