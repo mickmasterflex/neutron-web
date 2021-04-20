@@ -8,7 +8,7 @@
 import resetPasswordForm from '@/components/authentication/set-password'
 
 export default {
-  name: 'set-password',
+  name: 'reset-password',
   components: {
     'reset-password-form': resetPasswordForm
   }
