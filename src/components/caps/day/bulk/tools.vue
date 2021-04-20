@@ -6,7 +6,7 @@
           <li v-for="filter in massFilters" :key="filter.name" class="flex flex-row items-center space-x-2 well">
             <span class="capitalize font-bold">{{ filter.name }}</span>
             <span>
-              <button class="btn btn-md btn-blue rounded-r-none border-r-0 w-12"
+              <button class="btn btn-md btn-hollow-blue rounded-r-none border-r-0 w-12"
                       @click="removeDates(formatDates(filter.days))"
                       :disabled="loading">
                 <font-awesome-icon :icon="['far', 'square']"></font-awesome-icon>
@@ -24,7 +24,7 @@
     </div>
     <ul class="grid grid-cols-7 gap-2 justify-center pb-0 mt-3">
       <li v-for="filter in dayFilters" :key="filter.name" class="flex flex-row flex-grow items-center">
-        <button class="w-1/2 btn btn-md btn-blue rounded-r-none border-r-0"
+        <button class="w-1/2 btn btn-md btn-hollow-blue rounded-r-none border-r-0"
                 @click="removeDates(formatDates(filter.days))"
                 :disabled="loading">
           <font-awesome-icon :icon="['far', 'square']"></font-awesome-icon>
