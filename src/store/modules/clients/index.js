@@ -17,8 +17,6 @@ const getters = {
   getAllClients: state => state.clients,
   getCurrentClient: state => state.current_client,
   getCurrentClientData: state => state.current_client_data,
-  getCurrentClientParentlessBuyerContractSet: state => state.current_client.buyercontract_set ? state.current_client.buyercontract_set.filter(contract => contract.parent === null) : [],
-  getCurrentClientParentlessPartnerContractSet: state => state.current_client.partnercontract_set ? state.current_client.partnercontract_set.filter(contract => contract.parent === null) : [],
   getAllClientsCount: (state) => {
     return state.clients.length
   },
@@ -43,6 +41,8 @@ const actions = {
     await axios.get(`/clients/${slug}/`)
       .then(response => {
         commit('SET_CURRENT_CLIENT', response.data)
+        commit('SET_PARTNERS', response.data.partnercontract_set)
+        commit('SET_BUYERS', response.data.buyercontract_set)
       })
       .finally(() => {
         commit('RESET_CLIENT_FETCH_LOADING')

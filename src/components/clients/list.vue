@@ -44,7 +44,9 @@ export default {
   props: ['clients'],
   methods: {
     ...mapMutations({
-      setCurrentClient: 'SET_CURRENT_CLIENT'
+      setCurrentClient: 'SET_CURRENT_CLIENT',
+      setPartners: 'SET_PARTNERS',
+      setBuyers: 'SET_BUYERS'
     }),
     partners: function (partners) {
       return partners.filter(partner => partner.parent === null)
@@ -52,12 +54,17 @@ export default {
     buyers: function (buyers) {
       return buyers.filter(buyer => buyer.parent === null)
     },
-    linkToClient (client) {
+    setCurrentClientAndContracts (client) {
       this.setCurrentClient(client)
+      this.setPartners(client.partnercontract_set)
+      this.setBuyers(client.buyercontract_set)
+    },
+    linkToClient (client) {
+      this.setCurrentClientAndContracts(client)
       this.$router.push({ name: 'Client', params: { slug: client.slug } })
     },
     linkToClientContracts (client) {
-      this.setCurrentClient(client)
+      this.setCurrentClientAndContracts(client)
       this.$router.push({ name: 'ClientContracts', params: { slug: client.slug } })
     }
   },

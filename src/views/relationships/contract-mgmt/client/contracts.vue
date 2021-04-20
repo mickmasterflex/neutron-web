@@ -1,8 +1,8 @@
 <template>
   <base-panel-grid>
-    <buyer-list-panel class="col-span-2" :contracts="buyers" :client="$route.params.slug"></buyer-list-panel>
+    <buyer-list-panel class="col-span-2" :contracts="buyersByClient(client.id)" :client="$route.params.slug"></buyer-list-panel>
     <create-buyer-contract :client="client.id"></create-buyer-contract>
-    <partner-list-panel class="col-span-2" :contracts="partners" :client="$route.params.slug"></partner-list-panel>
+    <partner-list-panel class="col-span-2" :contracts="partnersByClient(client.id)" :client="$route.params.slug"></partner-list-panel>
     <create-partner-contract :client="client.id"></create-partner-contract>
   </base-panel-grid>
 </template>
@@ -24,8 +24,8 @@ export default {
   computed: {
     ...mapGetters({
       client: 'getCurrentClient',
-      buyers: 'getCurrentClientParentlessBuyerContractSet',
-      partners: 'getCurrentClientParentlessPartnerContractSet'
+      buyersByClient: 'getParentlessBuyersByClient',
+      partnersByClient: 'getParentlessPartnersByClient'
     })
   }
 }
