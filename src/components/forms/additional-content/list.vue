@@ -1,12 +1,12 @@
 <template>
   <div class="space-y-2" v-if="contentExists || ancestorForms.length > 0">
     <div v-for="ancestorForm of ancestorForms" :key="`ancestorContentForm-${ancestorForm.id}`" class="space-y-2">
-      <h5 class="h5 pt-3 pb-2">
+      <heading-5>
         Inherited Content From
         <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
           {{ getAncestorById(ancestorForm.buyer_contract).name }}
         </router-link>
-      </h5>
+      </heading-5>
       <list-item
         v-for="content in ancestorForm.additional_form_content_tcpa"
         :key="`additionalAncestorContent-${content.id}`"
@@ -14,7 +14,7 @@
         :editable="false"
       />
     </div>
-    <h5 class="h5 pt-3 pb-2" v-if="contentExists && ancestorForms.length > 0">{{ contractName }} Content</h5>
+    <heading-5 v-if="contentExists && ancestorForms.length > 0">{{ contractName }} Content</heading-5>
     <list-item
       v-for="content in form.additional_form_content_tcpa"
       :key="`additionalContent-${content.id}`"
