@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import resetPasswordForm from '@/components/authentication/set-password'
+import resetPasswordForm from '@/components/authentication/reset-password'
 
 export default {
   name: 'reset-password',

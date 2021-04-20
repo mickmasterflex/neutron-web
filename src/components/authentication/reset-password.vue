@@ -32,7 +32,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ setPassword: 'setPassword' }),
+    ...mapActions({ setPassword: 'resetPassword' }),
     showPassword () {
       this.password_field_type = 'text'
     },
