@@ -31,8 +31,8 @@ const actions = {
     commit('SET_CAPS_DELETE_LOADING')
     await axios.delete('/day-cap-bulk/', { data: { caps } })
       .then(response => {
-        response.data.caps.forEach(cap => {
-          commit('REMOVE_DAY_CAP', cap.id)
+        response.data.caps.forEach(capId => {
+          commit('REMOVE_DAY_CAP', capId)
         })
         commit('RESET_BULK_UPDATE_DAY_CAPS')
       }).finally(() => {
