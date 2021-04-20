@@ -6,12 +6,22 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
-          <v-text-field ref="focusField" v-model="limit" rules="required|integer|min_value:0" field_id="limit" field_label="Month Cap"></v-text-field>
+          <v-text-field
+            ref="focusField"
+            v-model="limit"
+            rules="required|integer|min_value:0"
+            field_id="limit"
+            field_label="Month Cap"
+            :field_disabled="loading"
+          />
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green" @click="submitForm"><font-awesome-icon icon="plus"></font-awesome-icon> Create Cap</button>
+      <button class="btn btn-green" @click="submitForm" :disabled="loading">
+        <font-awesome-icon icon="spinner" pulse v-if="loadingPost"></font-awesome-icon>
+        <font-awesome-icon icon="plus" v-else></font-awesome-icon> Create Cap
+      </button>
     </template>
   </panel-modal>
 </template>
@@ -70,7 +80,9 @@ export default {
       showModal: 'getShowCreateMonthCapModal',
       monthCap: 'getSelectedCapMonth',
       parent: 'getCurrentCapParent',
-      currentCapMonthFormats: 'getCurrentCapMonthFormats'
+      currentCapMonthFormats: 'getCurrentCapMonthFormats',
+      loading: 'getCapsLoading',
+      loadingPost: 'getCapsPostLoading'
     })
   },
   components: {
