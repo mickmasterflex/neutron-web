@@ -2,12 +2,11 @@
   <modal-template :show="showModal" @close="close">
     <template v-slot:header>Create Campaign</template>
     <template v-slot:body>
-  <validation-observer ref="form">
-    <form @submit.prevent="submitForm" class="form-horizontal">
-      <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
-      <v-text-field v-model="campaign_code" rules="required|alpha_dash" field_id="code" field_label="Code"></v-text-field>
-    </form>
-  </validation-observer>
+      <validation-observer ref="form">
+        <form @submit.prevent="submitForm" class="form-horizontal">
+          <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
+        </form>
+      </validation-observer>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-lg btn-green">Create Campaign</button>
@@ -23,8 +22,7 @@ import { setResponseErrors } from '@/mixins/set-response-errors'
 export default {
   data () {
     return {
-      name: '',
-      campaign_code: ''
+      name: ''
     }
   },
   props: {
@@ -45,7 +43,6 @@ export default {
     }),
     close () {
       this.name = ''
-      this.campaign_code = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -56,8 +53,7 @@ export default {
         if (success) {
           this.create({
             name: this.name,
-            contract: this.partner,
-            code: this.campaign_code
+            contract: this.partner
           }).then(() => {
             this.close()
           }).catch(error => {
