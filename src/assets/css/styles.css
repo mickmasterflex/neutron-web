@@ -331,6 +331,7 @@
 .table-white:not(.table-border-none) .td:first-child { @apply border-l-2 }
 .table-white:not(.table-border-none) .td:last-child { @apply border-r-2 }
 .table-white:not(.table-border-none) .tr:last-child .td { @apply border-b-2 }
+.table-white:not(.table-border-none) .tr:first-child .td { @apply border-t-2 }
 .table-white:not(.table-border-none) .th + .th,
 .table-white:not(.table-border-none) .td + .td { @apply border-l }
 .table-white:not(.table-border-none) .td { @apply border-b }
