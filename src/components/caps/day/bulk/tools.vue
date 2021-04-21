@@ -112,11 +112,11 @@ export default {
   },
   methods: {
     formatDates (dates) {
-      const datesNotInPast = dates.filter(d => {
-        if (d.month === currentMonth && d.day < currentDay) {
+      const datesNotInPast = dates.filter(date => {
+        if (date.month === currentMonth && date.day < currentDay) {
           return
         }
-        return d
+        return date
       })
       return datesNotInPast.map(day => day.attributes[0].customData)
     },
