@@ -6,6 +6,7 @@
         <v-text-field v-model="email" rules="required" mode="passive" field_id="email" field_label="Email" :field_type="email"></v-text-field>
         <button type="submit" class="btn btn-green mt-3"> Send Temporary Password</button>
       </form>
+      <router-link :to="{ name: 'Login'}" class="text-link">Back to Login</router-link>
     </validation-observer>
   </div>
 </template>
@@ -27,11 +28,11 @@ export default {
     })
   },
   methods: {
-    ...mapActions({ setPassword: 'setPassword' }),
+    ...mapActions({ forgotPassword: 'forgotPassword' }),
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.setPassword({
+          this.forgotPassword({
             email: this.email
           }).then(() => {
             this.$router.push({

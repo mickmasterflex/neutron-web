@@ -37,6 +37,16 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    path: '/forgot-password/',
+    name: 'ForgotPassword',
+    component: () => import('@/views/authentication/forgot-password.vue'),
+    meta: {
+      layout: 'simple',
+      title: 'Forgot Password'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
     path: '/analytics/',
     name: 'Analytics',
     redirect: { name: 'LeadData' }

@@ -65,6 +65,9 @@ const actions = {
       .then(() => {
         commit('UPDATE_CURRENT_USER_PASS_VALID', true)
       })
+  },
+  async forgotPassword ({ commit }, email) {
+    await axios.post('/forgot-password/', email)
   }
 }
 
