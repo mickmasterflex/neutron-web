@@ -17,7 +17,7 @@
         <tr-th-section-heading :colspan="5">
           Inherited Fields From
           <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
-            {{ getAncestorById(ancestorForm.buyer_contract).name }}
+            {{ ancestorName(ancestorForm.buyer_contract) }}
           </router-link>
         </tr-th-section-heading>
         <injected-tr
@@ -45,9 +45,9 @@
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex'
 import injectedTr from './tr'
+import { ancestorName } from '@/mixins/ancestors/get-name'
 
 export default {
   props: {
@@ -56,6 +56,7 @@ export default {
   components: {
     'injected-tr': injectedTr
   },
+  mixins: [ancestorName],
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',

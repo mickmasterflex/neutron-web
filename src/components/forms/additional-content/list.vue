@@ -4,7 +4,7 @@
       <heading-5>
         Inherited Content From
         <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
-          {{ getAncestorById(ancestorForm.buyer_contract).name }}
+          {{ ancestorName(ancestorForm.buyer_contract) }}
         </router-link>
       </heading-5>
       <list-item
@@ -28,6 +28,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { ancestorName } from '@/mixins/ancestors/get-name'
 import listItem from './list-item'
 
 export default {
@@ -37,6 +38,7 @@ export default {
   components: {
     'list-item': listItem
   },
+  mixins: [ancestorName],
   computed: {
     ...mapGetters({
       form: 'getCurrentForm',

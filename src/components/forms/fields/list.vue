@@ -12,7 +12,7 @@
         <heading-5>
           Inherited Fields From
           <router-link class="text-link" :to="{ name: 'BuyerContractFieldManagement', params: { client: currentClientData.slug, id: ancestorForm.buyer_contract } }">
-            {{ getAncestorById(ancestorForm.buyer_contract).name }}
+            {{ ancestorName(ancestorForm.buyer_contract) }}
           </router-link>
         </heading-5>
         <ul class="space-y-1">
@@ -46,6 +46,7 @@ import deleteField from '@/components/forms/fields/delete'
 import fieldListItem from '@/components/forms/fields/list-item'
 import draggable from 'vuedraggable'
 import { dragOptions } from '@/mixins/drag-options'
+import { ancestorName } from '@/mixins/ancestors/get-name'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -58,7 +59,7 @@ export default {
     'field-list-item': fieldListItem,
     'ul-draggable': draggable
   },
-  mixins: [dragOptions],
+  mixins: [dragOptions, ancestorName],
   computed: {
     ...mapGetters({
       currentClientData: 'getCurrentClientData',
