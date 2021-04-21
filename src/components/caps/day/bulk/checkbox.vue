@@ -21,7 +21,7 @@ export default {
     }),
     check () {
       if (this.checked) {
-        this.removeDay(this.day.date)
+        this.removeDay(this.day)
       } else {
         this.addDay(this.day)
       }

@@ -26,16 +26,9 @@ export default {
     ...mapMutations({
       closeModal: 'CLOSE_BULK_DAY_CAP_MODAL'
     }),
-    close () {
-      this.closeModal()
-      this.limit = ''
-      this.$nextTick(() => {
-        this.$refs.form.reset()
-      })
-    },
     runDelete () {
       this.deleteCaps(this.selectedDates.map(d => d.id)).then(() => {
-        this.close()
+        this.closeModal()
       })
     }
   }
