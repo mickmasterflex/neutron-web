@@ -30,6 +30,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      allForms: 'getAllForms',
+      contractAncestorIds: 'getCurrentAncestorsIds',
       fetchFormsLoading: 'getFetchFormsLoading',
       offerFetchLoading: 'getOfferFetchLoading',
       offerFetchLoadingText: 'getOfferFetchLoadingText',
@@ -68,23 +70,37 @@ export default {
       resetAncestorForms: 'RESET_ANCESTOR_FORMS'
     }),
     ...mapActions({
-      fetchForms: 'fetchForms'
-    })
+      fetchForms: 'fetchForms',
+      setAncestorForms: 'setAncestorForms'
+    }),
+    fetchAncestorForms () {
+      // If the contract is no longer loading, we can assume that ancestors have been set
+      if (this.contractLoading === false) {
+        this.resetAncestorForms()
+        // No need to fetch if we already have the forms
+        if (this.allForms.length === 0) {
+          this.fetchForms()
+        } else {
+          this.setAncestorForms(this.contractAncestorIds)
+        }
+      }
+    }
   },
   watch: {
-    id () { // id prop changes when navigating from a buyer to an ancestor buyer
-      this.resetAncestorForms()
-      this.fetchForms()
+    contractLoading () {
+      this.fetchAncestorForms()
     }
   },
   created () {
-    this.resetAncestorForms()
-    this.fetchForms()
+    this.fetchAncestorForms()
   },
   components: {
     'fields-panel-template': fieldsPanel,
     'injected-panel-template': injectedFieldsPanel,
     'additional-content-panel-template': additionalContentPanel
+  },
+  destroyed () {
+    this.resetAncestorForms()
   }
 }
 </script>
