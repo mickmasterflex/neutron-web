@@ -1,20 +1,31 @@
 <template>
-  <span class="btn btn-circle btn-hollow-red" @click="runDelete"><font-awesome-icon icon="minus"></font-awesome-icon></span>
+  <button class="btn btn-circle btn-hollow-red" @click="runDelete" :disabled="loading">
+    <font-awesome-icon v-if="!loading" icon="minus"></font-awesome-icon>
+    <font-awesome-icon v-else icon="spinner" pulse></font-awesome-icon>
+  </button>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      loading: false
+    }
+  },
   props: {
     option: Object
   },
   methods: {
     ...mapActions({
-      delete: 'deleteBaseOption'
+      deleteOption: 'deleteBaseOption'
     }),
-    runDelete () {
-      this.delete(this.option.id)
+    async runDelete () {
+      this.loading = true
+      await this.deleteOption(this.option.id).finally(() => {
+        this.loading = false
+      })
     }
   }
 }
