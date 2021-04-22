@@ -19,7 +19,7 @@
           <td class="td">
             <btn-group-right>
               <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
-              <button class="btn btn-circle btn-hollow-blue mr-1"
+              <button class="btn btn-circle btn-hollow-blue"
                       @click="editBaseField(field)">
                 <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
               </button>
