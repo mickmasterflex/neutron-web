@@ -2,7 +2,7 @@
   <base-panel-grid>
     <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
     <recruitment-locations :geo="offer.geo" class="col-span-2 xl:col-span-1"></recruitment-locations>
-    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
+    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2" :show-loader="loadingCaps" :loading-text="loadingCapsText">
       <template v-slot:content>
         <lead-caps :parent="id" type="offer-contracts"></lead-caps>
       </template>
@@ -37,7 +37,9 @@ export default {
     ...mapGetters({
       offer: 'getCurrentOffer',
       loading: 'getOfferFetchLoading',
-      loadingText: 'getOfferFetchLoadingText'
+      loadingText: 'getOfferFetchLoadingText',
+      loadingCaps: 'getCapsFetchLoading',
+      loadingCapsText: 'getCapsFetchLoadingText'
     })
   }
 }

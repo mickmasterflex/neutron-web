@@ -1,7 +1,9 @@
 import axios from '@/axios'
 import dayCapModals from '@/store/modules/caps/day/visibility'
+import bulkUpdate from '@/store/modules/caps/day/bulk'
 
 const modules = {
+  bulkUpdate,
   dayCapModals
 }
 
@@ -17,22 +19,31 @@ const getters = {
 
 const actions = {
   async createDayCap ({ commit }, cap) {
+    commit('SET_CAPS_POST_LOADING')
     await axios.post('/day-cap/', cap)
       .then(response => {
         commit('UPDATE_DAY_CAP', response.data)
+      }).finally(() => {
+        commit('RESET_CAPS_POST_LOADING')
       })
   },
   async updateDayCap ({ commit }, cap) {
+    commit('SET_CAPS_PUT_LOADING')
     await axios.put(`/day-cap/${cap.id}/`, cap)
       .then(response => {
         commit('UPDATE_DAY_CAP', response.data)
+      }).finally(() => {
+        commit('RESET_CAPS_PUT_LOADING')
       })
   },
   async deleteDayCap ({ commit }, id) {
+    commit('SET_CAPS_DELETE_LOADING')
     await axios.delete(`/day-cap/${id}/`)
       .then(() => {
         commit('CLOSE_UPDATE_DAY_CAP_MODAL')
         commit('REMOVE_DAY_CAP', id)
+      }).finally(() => {
+        commit('RESET_CAPS_DELETE_LOADING')
       })
   }
 }

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -14,16 +14,22 @@ export default {
   },
   computed: {
     ...mapGetters({
+      selectedDates: 'getBulkUpdateDayCapsWithIds',
       loading: 'getCapsLoading',
       loadingDelete: 'getCapsDeleteLoading'
     })
   },
   methods: {
     ...mapActions({
-      delete: 'deleteMonthCap'
+      deleteCaps: 'bulkDeleteDayCaps'
+    }),
+    ...mapMutations({
+      closeModal: 'CLOSE_BULK_DAY_CAP_MODAL'
     }),
     runDelete () {
-      this.delete(this.id)
+      this.deleteCaps(this.selectedDates.map(d => d.id)).then(() => {
+        this.closeModal()
+      })
     }
   }
 }
