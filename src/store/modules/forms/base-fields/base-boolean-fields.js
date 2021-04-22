@@ -24,6 +24,13 @@ const actions = {
         commit('UPDATE_BASE_BOOLEAN_FIELD', response.data)
         commit('SET_BASE_FIELDS')
       })
+  },
+  async deleteBaseBooleanField ({ commit }, id) {
+    await axios.delete(`/base-boolean-fields/${id}/`)
+      .then(() => {
+        commit('REMOVE_BASE_BOOLEAN_FIELD', id)
+        commit('SET_BASE_FIELDS')
+      })
   }
 }
 
@@ -35,7 +42,8 @@ const mutations = {
     if (index !== -1) {
       state.base_boolean_fields.splice(index, 1, updatedField)
     }
-  }
+  },
+  REMOVE_BASE_BOOLEAN_FIELD: (state, id) => (state.base_boolean_fields = state.base_boolean_fields.filter(field => field.id !== id))
 }
 
 export default {
