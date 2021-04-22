@@ -29,8 +29,9 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitCreateForm()" class="btn btn-green">
-        <font-awesome-icon icon="plus"></font-awesome-icon> Create
+      <button @click="submitCreateForm()" class="btn btn-green" :disabled="loading">
+        <font-awesome-icon icon="spinner" pulse v-if="loading"></font-awesome-icon>
+        <font-awesome-icon icon="plus" v-else></font-awesome-icon> Create
       </button>
     </template>
   </tooltip-dialog-template>
@@ -50,7 +51,8 @@ export default {
   computed: {
     ...mapGetters({
       fieldId: 'getCurrentBaseOptionsFieldId',
-      options: 'getCurrentBaseOptions'
+      options: 'getCurrentBaseOptions',
+      loading: 'getBaseOptionsPostLoading'
     }),
     order () {
       return this.options.length + 1

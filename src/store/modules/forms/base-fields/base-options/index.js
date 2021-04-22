@@ -1,7 +1,9 @@
 import axios from '@/axios'
+import loading from './loading'
 import visibility from './visibility'
 
 const modules = {
+  loading,
   visibility
 }
 
@@ -19,13 +21,17 @@ const getters = {
 
 const actions = {
   async createBaseOption ({ commit }, option) {
+    commit('SET_BASE_OPTIONS_POST_LOADING')
     await axios.post('/base-options/', option)
       .then(response => {
         commit('ADD_BASE_OPTION', response.data)
         commit('ADD_BASE_OPTION_FIELD_OPTION', response.data)
+      }).finally(() => {
+        commit('RESET_BASE_OPTIONS_POST_LOADING')
       })
   },
-  async updateModifiedBaseOptions ({ commit }) {
+  async updateModifiedBaseOptions ({ commit, getters }) {
+    commit('SET_BASE_OPTIONS_PUT_LOADING')
     for (let i = 0; i < state.modified_base_options.length; i++) {
       const option = state.modified_base_options[i]
       await axios.put(`/base-options/${option.id}/`, option, { showSuccessToast: false })
@@ -33,6 +39,15 @@ const actions = {
           commit('UPDATE_BASE_OPTION_FIELD_OPTION', option)
         })
     }
+    commit('ADD_TOAST', {
+      color: 'green',
+      icon: 'thumbs-up',
+      content: '',
+      id: Date.now() + Math.random(),
+      heading: `${getters.getModifiedBaseOptions.length} Base Options Updated`
+    })
+    commit('RESET_BASE_OPTIONS_PUT_LOADING')
+    commit('RESET_MODIFIED_BASE_OPTIONS')
   },
   async deleteBaseOption ({ commit, getters }, option) {
     await axios.delete(`/base-options/${option.id}/`)

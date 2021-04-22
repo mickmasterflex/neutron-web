@@ -29,17 +29,13 @@ import fieldOptions from '@/components/forms/base-fields/options/list'
 import createOption from '@/components/forms/base-fields/options/create'
 
 export default {
-  data () {
-    return {
-      loading: false
-    }
-  },
   computed: {
     ...mapGetters({
       modifiedBaseOptions: 'getModifiedBaseOptions',
       showModal: 'getShowUpdateBaseOptionsModal',
       baseOptionsField: 'getCurrentBaseOptionsFieldId',
-      getBaseOptionFieldById: 'getBaseOptionFieldById'
+      getBaseOptionFieldById: 'getBaseOptionFieldById',
+      loading: 'getBaseOptionsPutLoading'
     }),
     field () {
       return this.getBaseOptionFieldById(this.baseOptionsField)
@@ -55,8 +51,7 @@ export default {
     ...mapMutations({
       resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
       resetCurrentBaseOptionsField: 'RESET_CURRENT_BASE_OPTIONS_FIELD_ID',
-      closeModal: 'CLOSE_UPDATE_BASE_OPTIONS_MODAL',
-      resetModifiedBaseOptions: 'RESET_MODIFIED_BASE_OPTIONS'
+      closeModal: 'CLOSE_UPDATE_BASE_OPTIONS_MODAL'
     }),
     close () {
       this.resetCurrentBaseOptions()
@@ -71,7 +66,6 @@ export default {
       this.$refs.form.validate().then(success => {
         if (success) {
           this.updateOptions().then(() => {
-            this.resetModifiedBaseOptions()
             this.close()
           })
         }
