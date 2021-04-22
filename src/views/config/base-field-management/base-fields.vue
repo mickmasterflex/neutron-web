@@ -47,7 +47,7 @@ export default {
     ...mapGetters({
       baseFieldCount: 'getBaseFieldCount',
       currentBaseField: 'getCurrentBaseField',
-      currentBaseOptionsField: 'getCurrentBaseOptionsField',
+      currentBaseOptionsField: 'getCurrentBaseOptionsFieldId',
       loading: 'getBaseFieldsFetchLoading',
       loadingText: 'getBaseFieldsFetchLoadingText'
     })

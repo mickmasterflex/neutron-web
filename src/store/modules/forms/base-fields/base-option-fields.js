@@ -54,11 +54,30 @@ const mutations = {
       state.base_option_fields.splice(index, 1, updatedField)
     }
   },
-  REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id))
+  REMOVE_BASE_OPTION_FIELD: (state, id) => (state.base_option_fields = state.base_option_fields.filter(field => field.id !== id)),
+  UPDATE_BASE_OPTION_FIELD_OPTION: (state, option) => {
+    const field = state.base_option_fields.find(f => f.id === option.field)
+    const index = field.base_options.findIndex(o => o.id === option.id)
+    if (index !== -1) {
+      field.base_options.splice(index, 1, option)
+    }
+  },
+  ADD_BASE_OPTION_FIELD_OPTION: (state, option) => {
+    const field = state.base_option_fields.find(f => f.id === option.field)
+    const index = field.base_options.findIndex(o => o.id === option.id)
+    if (index === -1) {
+      field.base_options.push(option)
+    }
+  },
+  REMOVE_BASE_OPTION_FIELD_OPTION: (state, option) => {
+    const field = state.base_option_fields.find(f => f.id === option.field)
+    field.base_options = field.base_options.filter(o => o.id !== option.id)
+  }
 }
 
 export default {
   state,
+  getters,
   actions,
   mutations
 }

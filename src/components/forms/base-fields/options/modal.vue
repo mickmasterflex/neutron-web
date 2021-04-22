@@ -54,8 +54,9 @@ export default {
     }),
     ...mapMutations({
       resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
-      resetCurrentBaseOptionsField: 'RESET_CURRENT_BASE_OPTIONS_FIELD',
-      closeModal: 'CLOSE_UPDATE_BASE_OPTIONS_MODAL'
+      resetCurrentBaseOptionsField: 'RESET_CURRENT_BASE_OPTIONS_FIELD_ID',
+      closeModal: 'CLOSE_UPDATE_BASE_OPTIONS_MODAL',
+      resetModifiedBaseOptions: 'RESET_MODIFIED_BASE_OPTIONS'
     }),
     close () {
       this.resetCurrentBaseOptions()
@@ -69,8 +70,10 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          console.log('asd')
-          this.updateOptions().then(() => { this.close() })
+          this.updateOptions().then(() => {
+            this.resetModifiedBaseOptions()
+            this.close()
+          })
         }
       })
     }
