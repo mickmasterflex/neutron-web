@@ -1,10 +1,8 @@
 import axios from '@/axios'
-import visibility from '@/store/modules/forms/base-fields/base-option-fields/visibility'
 import baseOptions from '@/store/modules/forms/base-fields/base-option-fields/base-options'
 
 const modules = {
-  baseOptions,
-  visibility
+  baseOptions
 }
 
 const state = {
@@ -30,7 +28,7 @@ const actions = {
     await axios.put(`/base-option-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_BASE_OPTION_FIELD', response.data)
-        commit('SET_BASE_FIELDS', response.data)
+        commit('SET_BASE_FIELDS')
       })
   },
   async deleteBaseOptionField ({ commit }, id) {

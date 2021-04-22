@@ -17,8 +17,8 @@
 <script>
 import draggable from 'vuedraggable'
 import { dragOptions } from '@/mixins/drag-options'
-import updateOption from '@/components/forms/base-fields/option-fields/options/update'
-import deleteOption from '@/components/forms/base-fields/option-fields/options/delete'
+import updateOption from '@/components/forms/base-fields/options/update'
+import deleteOption from '@/components/forms/base-fields/options/delete'
 
 export default {
   computed: {

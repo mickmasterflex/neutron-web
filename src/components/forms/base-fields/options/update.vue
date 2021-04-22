@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 import textFieldPrefixed from '@/components/ui/forms/base-fields/text-field-prefixed'
 
 export default {
@@ -41,10 +41,7 @@ export default {
   computed: {
     optionData () {
       return [this.order, this.label, this.value]
-    },
-    ...mapGetters({
-      showUpdateOptionModal: 'getShowUpdateBaseOptionFieldModal'
-    })
+    }
   },
   watch: {
     optionData () {

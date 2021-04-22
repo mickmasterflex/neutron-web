@@ -4,10 +4,6 @@ const state = {
   base_boolean_fields: []
 }
 
-// const getters = {
-//   getShowUpdateBaseTextFieldModal: state => state.show_update_base_text_field_modal
-// }
-
 const actions = {
   async fetchBaseBooleanFields ({ commit }) {
     await axios.get('/base-boolean-fields/')
@@ -21,17 +17,29 @@ const actions = {
         commit('ADD_BASE_BOOLEAN_FIELD', response.data)
         commit('SET_BASE_FIELDS')
       })
+  },
+  async updateBaseBooleanField ({ commit }, updatedField) {
+    await axios.put(`/base-boolean-fields/${updatedField.id}/`, updatedField)
+      .then(response => {
+        commit('UPDATE_BASE_BOOLEAN_FIELD', response.data)
+        commit('SET_BASE_FIELDS')
+      })
   }
 }
 
 const mutations = {
   ADD_BASE_BOOLEAN_FIELD: (state, field) => state.base_boolean_fields.unshift(field),
-  SET_BASE_BOOLEAN_FIELDS: (state, fields) => (state.base_boolean_fields = fields)
+  SET_BASE_BOOLEAN_FIELDS: (state, fields) => (state.base_boolean_fields = fields),
+  UPDATE_BASE_BOOLEAN_FIELD: (state, updatedField) => {
+    const index = state.base_boolean_fields.findIndex(field => field.id === updatedField.id)
+    if (index !== -1) {
+      state.base_boolean_fields.splice(index, 1, updatedField)
+    }
+  }
 }
 
 export default {
   state,
-  // getters,
   actions,
   mutations
 }
