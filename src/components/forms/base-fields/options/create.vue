@@ -19,13 +19,11 @@
             v-model="label"
             field_id="newOption_label"
             field_label="Label"
-            class="field-error-inside"
             rules="required"/>
           <v-text-field
             v-model="value"
             field_id="newOption_mapping"
             field_label="Value"
-            class="field-error-inside"
             rules="required"/>
         </form>
       </validation-observer>
@@ -51,7 +49,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      field: 'getCurrentBaseField',
+      field: 'getCurrentBaseOptionsField',
       options: 'getCurrentBaseOptions'
     }),
     order () {

@@ -55,11 +55,9 @@ export default {
   methods: {
     ...mapMutations({
       addBaseOptionToModified: 'ADD_BASE_OPTION_TO_MODIFIED',
-      updateBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER',
-      setUnsavedBaseOptionChanges: 'SET_UNSAVED_BASE_OPTION_CHANGES'
+      updateBaseOptionOrder: 'UPDATE_BASE_OPTION_ORDER'
     }),
     addToModified () {
-      this.setUnsavedBaseOptionChanges()
       this.addBaseOptionToModified({
         id: this.option.id,
         order: this.order,

@@ -12,7 +12,7 @@
           </div>
           <status-bar :show="unsavedChangesInModal" icon="exclamation-triangle" color="yellow" copy="Unsaved Changes"></status-bar>
           <slot name="tabs"></slot>
-          <div :class="`modal-padding ${modalBodyBackground} border-t-2 border-b-2 border-gray-200 overflow-x-scroll`">
+          <div :class="`modal-padding ${modalBodyBackground} border-t-2 border-b-2 border-gray-200`">
             <slot name="body">Modal Body</slot>
           </div>
           <div class="modal-padding flex flex-row items-center justify-end space-x-2">

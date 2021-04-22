@@ -9,13 +9,10 @@
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
           <v-select-field v-model="type" :options="formatListForSelectOptions(typeOptions)" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
-        <div v-if="optionFieldSelected && optionFieldOptions.length" class="border-t mt-6">
-          <field-options></field-options>
-        </div>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading">
+      <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading" v-if="unsavedChanges">
         <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Field
       </button>
     </template>
@@ -28,7 +25,6 @@ import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import formatList from '@/mixins/format-list-for-select-options'
-import fieldOptions from '@/components/forms/base-fields/options/list'
 
 export default {
   data () {
@@ -59,7 +55,6 @@ export default {
       baseTextFieldTypes: 'getBaseTextFieldTypes',
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
-      optionFieldOptions: 'getCurrentBaseOptions',
       loading: 'getBaseFieldsPutLoading'
     }),
     unsavedChanges () {
@@ -100,35 +95,34 @@ export default {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
-  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal, formatList],
+  mixins: [
+    enterKeyListener,
+    setResponseErrors,
+    checkUnsavedChangesInModal,
+    formatList
+  ],
   methods: {
     ...mapActions({
       updateBaseTextField: 'updateBaseTextField',
       updateBaseOptionField: 'updateBaseOptionField',
-      updateBaseBooleanField: 'updateBaseBooleanField',
-      updateOptions: 'updateModifiedBaseOptions'
+      updateBaseBooleanField: 'updateBaseBooleanField'
     }),
     ...mapMutations({
       resetCurrentBaseField: 'RESET_CURRENT_BASE_FIELD',
-      resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
-      resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
-      closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL'
+      closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
     }),
-    updateField (data) {
+    async updateField (data) {
       if (this.optionFieldSelected) {
-        return this.updateBaseOptionField(data)
+        await this.updateBaseOptionField(data)
       } else if (this.textFieldSelected) {
-        return this.updateBaseTextField(data)
+        await this.updateBaseTextField(data)
       } else if (this.booleanFieldSelected) {
-        return this.updateBaseBooleanField(data)
+        await this.updateBaseBooleanField(data)
       }
     },
     close () {
       this.resetCurrentBaseField()
-      if (this.optionFieldSelected) {
-        this.resetCurrentBaseOptions()
-        this.resetUnsavedBaseOptionChanges()
-      }
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -138,9 +132,6 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          if (this.optionFieldSelected) {
-            this.updateOptions()
-          }
           this.updateField({
             name: this.name,
             label: this.label,
@@ -154,9 +145,6 @@ export default {
         }
       })
     }
-  },
-  components: {
-    'field-options': fieldOptions
   }
 }
 </script>

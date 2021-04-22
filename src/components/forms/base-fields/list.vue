@@ -7,6 +7,7 @@
           <th class="th">Name</th>
           <th class="th">Description</th>
           <th class="th">Type</th>
+          <th class="th">Options</th>
           <th class="th"></th>
         </tr>
       </thead>
@@ -16,6 +17,12 @@
           <td class="td">{{field.name}}</td>
           <td class="td">{{field.description}}</td>
           <td class="td">{{field.type}}</td>
+          <td class="td">
+            <span v-if="isOptionField(field.type)">
+              <table-link icon="pencil-alt" @table-link-click="editBaseOptions(field)" :number="field.base_options.length"/>
+            </span>
+            <span v-else>n/a</span>
+          </td>
           <td class="td">
             <btn-group-right>
               <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
@@ -53,14 +60,19 @@ export default {
     ...mapMutations({
       setCurrentBaseField: 'SET_CURRENT_BASE_FIELD',
       setCurrentBaseOptions: 'SET_CURRENT_BASE_OPTIONS',
+      setCurrentBaseOptionsField: 'SET_CURRENT_BASE_OPTIONS_FIELD',
       sortCurrentBaseOptions: 'SORT_CURRENT_BASE_OPTIONS'
     }),
+    isOptionField (fieldType) {
+      return this.baseOptionFieldTypes.includes(fieldType)
+    },
     editBaseField (field) {
       this.setCurrentBaseField(field)
-      if (this.baseOptionFieldTypes.includes(field.type)) {
-        this.setCurrentBaseOptions(field.base_options)
-        this.sortCurrentBaseOptions()
-      }
+    },
+    editBaseOptions (field) {
+      this.setCurrentBaseOptions(field.base_options)
+      this.setCurrentBaseOptionsField(field)
+      this.sortCurrentBaseOptions()
     }
   }
 }
