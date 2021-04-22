@@ -9,7 +9,7 @@
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
           <v-select-field v-model="type" :options="formatListForSelectOptions(typeOptions)" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
-        <div v-if="optionFieldSelected && optionFieldOptions.length" class="field-group">
+        <div v-if="optionFieldSelected && optionFieldOptions.length" class="border-t mt-6">
           <field-options></field-options>
         </div>
       </validation-observer>

@@ -1,9 +1,10 @@
 <template>
-  <panel-template title="Options">
-    <template v-slot:action>
+  <div class="">
+    <div class="flex flex-row justify-between items-center py-4">
+      <h4 class="h4">Base Options</h4>
       <create-option></create-option>
-    </template>
-    <template v-slot:content>
+    </div>
+    <div class="well">
       <ul class="fields-inline-heading px-1">
         <li class="w-20 fields-inline-heading-item">Order</li>
         <li class="w-64 fields-inline-heading-item">Label</li>
@@ -15,8 +16,8 @@
           <delete-option :option="option" class="mx-1"></delete-option>
         </li>
       </ul-draggable>
-    </template>
-  </panel-template>
+    </div>
+  </div>
 </template>
 
 <script>
