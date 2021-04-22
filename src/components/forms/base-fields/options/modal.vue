@@ -1,9 +1,9 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>{{ field ? field.label : '' }} Base Options</template>
+    <template v-slot:header>Base Option Management</template>
     <template v-slot:body>
       <div class="flex flex-row justify-between items-center pb-4">
-        <h4 class="h4">Base Options</h4>
+        <h4 class="h4">{{ field ? field.label : '' }} Options</h4>
         <create-option></create-option>
       </div>
       <validation-observer ref="form">
