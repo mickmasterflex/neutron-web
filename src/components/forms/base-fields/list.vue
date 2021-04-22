@@ -12,17 +12,17 @@
       </thead>
       <tbody class="tbody">
         <tr class="tr" v-for="field in baseFields" :key="field.id">
-          <td class="td">
-            <span class="text-link"
-              @click="editBaseField(field)">
-              {{field.label}}</span>
-          </td>
+          <td class="td font-bold">{{field.label}}</td>
           <td class="td">{{field.name}}</td>
           <td class="td">{{field.description}}</td>
           <td class="td">{{field.type}}</td>
           <td class="td">
             <btn-group-right>
               <delete-base-field :id="field.id" :type="field.type" v-if="field.type"></delete-base-field>
+              <button class="btn btn-circle btn-hollow-blue mr-1"
+                      @click="editBaseField(field)">
+                <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+              </button>
             </btn-group-right>
           </td>
         </tr>
