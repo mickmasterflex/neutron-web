@@ -51,18 +51,19 @@ export default {
     },
     textFieldSelected () {
       return this.baseTextFieldTypes.includes(this.type)
-    },
-    createField () {
-      if (this.optionFieldSelected) {
-        return this.createBaseOptionField
-      } else if (this.textFieldSelected) {
-        return this.createBaseTextField
-      }
-      return this.createBaseBooleanField
     }
   },
   mixins: [enterKeyListener, setResponseErrors, formatList],
   methods: {
+    createField (data) {
+      if (this.optionFieldSelected) {
+        return this.createBaseOptionField(data)
+      } else if (this.textFieldSelected) {
+        return this.createBaseTextField(data)
+      } else if (this.booleanFieldSelected) {
+        return this.createBaseBooleanField(data)
+      }
+    },
     ...mapActions({
       createBaseOptionField: 'createBaseOptionField',
       createBaseTextField: 'createBaseTextField',
