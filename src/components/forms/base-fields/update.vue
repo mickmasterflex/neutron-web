@@ -10,14 +10,9 @@
           <v-select-field v-model="type" :options="formatListForSelectOptions(typeOptions)" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
         <div v-if="optionFieldSelected && optionFieldOptions.length" class="field-group">
-          <label class="field-label">Options</label>
           <field-options></field-options>
         </div>
       </validation-observer>
-      <div class="field-group" v-if="optionFieldSelected">
-        <label class="field-label">Create Option</label>
-        <create-option></create-option>
-      </div>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading">
@@ -34,7 +29,6 @@ import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-mo
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import formatList from '@/mixins/format-list-for-select-options'
 import fieldOptions from '@/components/forms/base-fields/options/list'
-import createOption from '@/components/forms/base-fields/options/create'
 
 export default {
   data () {
@@ -162,8 +156,7 @@ export default {
     }
   },
   components: {
-    'field-options': fieldOptions,
-    'create-option': createOption
+    'field-options': fieldOptions
   }
 }
 </script>
