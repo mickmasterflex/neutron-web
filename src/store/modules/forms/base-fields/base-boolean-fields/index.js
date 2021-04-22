@@ -9,6 +9,12 @@ const state = {
 // }
 
 const actions = {
+  async fetchBaseBooleanFields ({ commit }) {
+    await axios.get('/base-boolean-fields/')
+      .then(response => {
+        commit('SET_BASE_BOOLEAN_FIELDS', response.data)
+      })
+  },
   async createBaseBooleanField ({ commit }, field) {
     await axios.post('/base-boolean-fields/', field)
       .then(response => {
@@ -19,7 +25,8 @@ const actions = {
 }
 
 const mutations = {
-  ADD_BASE_BOOLEAN_FIELD: (state, field) => state.base_boolean_fields.unshift(field)
+  ADD_BASE_BOOLEAN_FIELD: (state, field) => state.base_boolean_fields.unshift(field),
+  SET_BASE_BOOLEAN_FIELDS: (state, fields) => (state.base_boolean_fields = fields)
 }
 
 export default {

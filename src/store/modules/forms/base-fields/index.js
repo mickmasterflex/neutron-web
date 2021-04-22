@@ -28,6 +28,7 @@ const getters = {
 const actions = {
   async fetchBaseFields ({ commit, dispatch }) {
     commit('SET_BASE_FIELDS_FETCH_LOADING')
+    await dispatch('fetchBaseBooleanFields')
     await dispatch('fetchBaseTextFields')
     await dispatch('fetchBaseOptionFields')
     commit('SET_BASE_FIELDS')
