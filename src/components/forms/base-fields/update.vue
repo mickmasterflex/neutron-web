@@ -20,7 +20,9 @@
       </div>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green btn-lg">Update Field</button>
+      <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Field
+      </button>
     </template>
   </modal-template>
 </template>
@@ -63,7 +65,8 @@ export default {
       baseTextFieldTypes: 'getBaseTextFieldTypes',
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
-      optionFieldOptions: 'getCurrentBaseOptions'
+      optionFieldOptions: 'getCurrentBaseOptions',
+      loading: 'getBaseFieldsPutLoading'
     }),
     unsavedChanges () {
       if (this.field) {

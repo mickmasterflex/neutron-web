@@ -12,17 +12,23 @@ const actions = {
       })
   },
   async createBaseTextField ({ commit }, field) {
+    commit('SET_BASE_FIELDS_POST_LOADING')
     await axios.post('/base-text-fields/', field)
       .then(response => {
         commit('ADD_BASE_TEXT_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_POST_LOADING')
       })
   },
   async updateBaseTextField ({ commit }, updatedField) {
+    commit('SET_BASE_FIELDS_PUT_LOADING')
     await axios.put(`/base-text-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_BASE_TEXT_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_PUT_LOADING')
       })
   },
   async deleteBaseTextField ({ commit }, id) {

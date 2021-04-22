@@ -12,7 +12,8 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">
+      <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse class="mr-1"></font-awesome-icon>
         <span v-if="optionFieldSelected">Create then add Options</span>
         <span v-else>Create Field</span>
       </button>
@@ -41,7 +42,8 @@ export default {
       allBaseFieldTypeOptions: 'getAllBaseFieldTypes',
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
-      baseTextFieldTypes: 'getBaseTextFieldTypes'
+      baseTextFieldTypes: 'getBaseTextFieldTypes',
+      loading: 'getBaseFieldsPostLoading'
     }),
     booleanFieldSelected () {
       return this.baseBooleanFieldTypes.includes(this.type)

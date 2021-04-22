@@ -12,18 +12,24 @@ const actions = {
       })
   },
   async createBaseOptionField ({ commit }, field) {
+    commit('SET_BASE_FIELDS_POST_LOADING')
     await axios.post('/base-option-fields/', field)
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
         commit('SET_CURRENT_BASE_FIELD', response.data)
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_POST_LOADING')
       })
   },
   async updateBaseOptionField ({ commit }, updatedField) {
+    commit('SET_BASE_FIELDS_PUT_LOADING')
     await axios.put(`/base-option-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_PUT_LOADING')
       })
   },
   async deleteBaseOptionField ({ commit }, id) {

@@ -12,17 +12,23 @@ const actions = {
       })
   },
   async createBaseBooleanField ({ commit }, field) {
+    commit('SET_BASE_FIELDS_POST_LOADING')
     await axios.post('/base-boolean-fields/', field)
       .then(response => {
         commit('ADD_BASE_BOOLEAN_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_POST_LOADING')
       })
   },
   async updateBaseBooleanField ({ commit }, updatedField) {
+    commit('SET_BASE_FIELDS_PUT_LOADING')
     await axios.put(`/base-boolean-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_BASE_BOOLEAN_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_PUT_LOADING')
       })
   },
   async deleteBaseBooleanField ({ commit }, id) {
