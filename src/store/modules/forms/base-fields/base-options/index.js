@@ -8,12 +8,12 @@ const modules = {
 const state = {
   modified_base_options: [],
   current_base_options: [],
-  current_base_options_field: null
+  current_base_options_field_id: null
 }
 
 const getters = {
   getCurrentBaseOptions: state => state.current_base_options,
-  getCurrentBaseOptionsField: state => state.current_base_options_field,
+  getCurrentBaseOptionsFieldId: state => state.current_base_options_field_id,
   getModifiedBaseOptions: state => state.modified_base_options
 }
 

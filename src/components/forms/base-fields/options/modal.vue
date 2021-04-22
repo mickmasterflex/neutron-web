@@ -1,6 +1,6 @@
 <template>
   <modal-template :show="showModal" @close="close">
-    <template v-slot:header>{{ baseOptionsField ? baseOptionsField.label : '' }} Base Options</template>
+    <template v-slot:header>{{ field ? field.label : '' }} Base Options</template>
     <template v-slot:body>
       <div class="flex flex-row justify-between items-center pb-4">
         <h4 class="h4">Base Options</h4>
@@ -38,8 +38,12 @@ export default {
     ...mapGetters({
       modifiedBaseOptions: 'getModifiedBaseOptions',
       showModal: 'getShowUpdateBaseOptionsModal',
-      baseOptionsField: 'getCurrentBaseOptionsField'
+      baseOptionsField: 'getCurrentBaseOptionsFieldId',
+      getBaseOptionFieldById: 'getBaseOptionFieldById'
     }),
+    field () {
+      return this.getBaseOptionFieldById(this.baseOptionsField)
+    },
     unsavedChanges () {
       return this.modifiedBaseOptions.length > 0
     }

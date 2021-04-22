@@ -60,7 +60,7 @@ export default {
     ...mapMutations({
       setCurrentBaseField: 'SET_CURRENT_BASE_FIELD',
       setCurrentBaseOptions: 'SET_CURRENT_BASE_OPTIONS',
-      setCurrentBaseOptionsField: 'SET_CURRENT_BASE_OPTIONS_FIELD',
+      setCurrentBaseOptionsField: 'SET_CURRENT_BASE_OPTIONS_FIELD_ID',
       sortCurrentBaseOptions: 'SORT_CURRENT_BASE_OPTIONS'
     }),
     isOptionField (fieldType) {
@@ -71,7 +71,7 @@ export default {
     },
     editBaseOptions (field) {
       this.setCurrentBaseOptions(field.base_options)
-      this.setCurrentBaseOptionsField(field)
+      this.setCurrentBaseOptionsField(field.id)
       this.sortCurrentBaseOptions()
     }
   }

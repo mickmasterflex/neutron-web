@@ -4,6 +4,10 @@ const state = {
   base_option_fields: []
 }
 
+const getters = {
+  getBaseOptionFieldById: (state) => (id) => state.base_option_fields.find(field => field.id === id)
+}
+
 const actions = {
   async fetchBaseOptionFields ({ commit }) {
     await axios.get('/base-option-fields/')

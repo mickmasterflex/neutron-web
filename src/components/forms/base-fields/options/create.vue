@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      field: 'getCurrentBaseOptionsField',
+      fieldId: 'getCurrentBaseOptionsFieldId',
       options: 'getCurrentBaseOptions'
     }),
     order () {
@@ -78,7 +78,7 @@ export default {
             order: this.order,
             label: this.label,
             value: this.value,
-            field: this.field.id
+            field: this.fieldId
           }).then(() => {
             this.closeForm()
           }).catch(error => {
