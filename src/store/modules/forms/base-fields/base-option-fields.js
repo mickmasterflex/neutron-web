@@ -1,9 +1,4 @@
 import axios from '@/axios'
-import baseOptions from '@/store/modules/forms/base-fields/base-option-fields/base-options'
-
-const modules = {
-  baseOptions
-}
 
 const state = {
   base_option_fields: []
@@ -53,7 +48,6 @@ const mutations = {
 }
 
 export default {
-  modules,
   state,
   actions,
   mutations

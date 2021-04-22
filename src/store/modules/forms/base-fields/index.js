@@ -1,6 +1,7 @@
-import baseBooleanFields from '@/store/modules/forms/base-fields/base-boolean-fields'
-import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
-import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
+import baseBooleanFields from '@/store/modules/forms/base-fields/base-boolean-fields.js'
+import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields.js'
+import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields.js'
+import baseOptions from '@/store/modules/forms/base-fields/base-options.js'
 import loading from '@/store/modules/forms/base-fields/loading'
 import visibility from '@/store/modules/forms/base-fields/visibility'
 
@@ -8,6 +9,7 @@ const modules = {
   baseBooleanFields,
   baseTextFields,
   baseOptionFields,
+  baseOptions,
   loading,
   visibility
 }
