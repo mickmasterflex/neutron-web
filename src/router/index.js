@@ -22,7 +22,8 @@ const routes = [
     component: () => import('@/views/authentication/login.vue'),
     meta: {
       layout: 'simple',
-      title: 'Login'
+      title: 'Login',
+      requiresUnAuth: true
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -42,7 +43,8 @@ const routes = [
     component: () => import('@/views/authentication/forgot-password.vue'),
     meta: {
       layout: 'simple',
-      title: 'Forgot Password'
+      title: 'Forgot Password',
+      requiresUnAuth: true
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -933,13 +935,14 @@ router.beforeEach((to, from, next) => {
     } else {
       store.commit('RESET_ACTIVE_APP')
     }
-
     // Check Authentication
     if (store.getters.isAuthenticated) {
       next()
       return
     }
     next({ name: 'Login' })
+  } else if (to.matched.some(record => record.meta.requiresUnAuth)) {
+    next({ name: 'Dashboard' })
   } else {
     next()
   }
