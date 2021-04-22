@@ -7,11 +7,6 @@
     <template v-slot:header>
       Add an Option
     </template>
-    <ul class="fields-inline-heading px-1">
-      <li class="w-20 fields-inline-heading-item">Order</li>
-      <li class="w-64 fields-inline-heading-item">Label</li>
-      <li class="w-64 fields-inline-heading-item">Value</li>
-    </ul>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitCreateForm">
