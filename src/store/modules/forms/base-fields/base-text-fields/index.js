@@ -16,12 +16,6 @@ const actions = {
         commit('SET_BASE_TEXT_FIELDS', response.data)
       })
   },
-  async fetchCurrentBaseTextField ({ commit }, id) {
-    await axios.get(`/base-text-fields/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_BASE_FIELD', response.data)
-      })
-  },
   async createBaseTextField ({ commit }, field) {
     await axios.post('/base-text-fields/', field)
       .then(response => {

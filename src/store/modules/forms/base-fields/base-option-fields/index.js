@@ -18,14 +18,6 @@ const actions = {
         commit('SET_BASE_OPTION_FIELDS', response.data)
       })
   },
-  async fetchCurrentBaseOptionField ({ commit }, id) {
-    await axios.get(`/base-option-fields/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_BASE_FIELD', response.data)
-        commit('SET_CURRENT_BASE_OPTIONS', response.data.base_options)
-        commit('SORT_CURRENT_BASE_OPTIONS')
-      })
-  },
   async createBaseOptionField ({ commit }, field) {
     await axios.post('/base-option-fields/', field)
       .then(response => {

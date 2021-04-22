@@ -14,7 +14,7 @@
         <tr class="tr" v-for="field in baseFields" :key="field.id">
           <td class="td">
             <span class="text-link"
-              @click="editBaseField(field.id, field.type)">
+              @click="editBaseField(field)">
               {{field.label}}</span>
           </td>
           <td class="td">{{field.name}}</td>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 import deleteBaseField from '@/components/forms/base-fields/delete'
 
 export default {
@@ -45,26 +45,22 @@ export default {
   },
   computed: {
     ...mapGetters({
-      baseFields: 'getBaseFields'
+      baseFields: 'getBaseFields',
+      baseOptionFieldTypes: 'getBaseOptionFieldTypes'
     })
   },
   methods: {
-    ...mapActions({
-      fetchCurrentBaseOptionField: 'fetchCurrentBaseOptionField',
-      fetchCurrentBaseTextField: 'fetchCurrentBaseTextField'
+    ...mapMutations({
+      setCurrentBaseField: 'SET_CURRENT_BASE_FIELD',
+      setCurrentBaseOptions: 'SET_CURRENT_BASE_OPTIONS',
+      sortCurrentBaseOptions: 'SORT_CURRENT_BASE_OPTIONS'
     }),
-    editBaseField (id, type) {
-      if (type === 'text' || type === 'textarea') {
-        this.editBaseTextField(id)
-      } else {
-        this.editBaseOptionField(id)
+    editBaseField (field) {
+      this.setCurrentBaseField(field)
+      if (this.baseOptionFieldTypes.includes(field.type)) {
+        this.setCurrentBaseOptions(field.base_options)
+        this.sortCurrentBaseOptions()
       }
-    },
-    editBaseTextField (id) {
-      this.fetchCurrentBaseTextField(id)
-    },
-    editBaseOptionField (id) {
-      this.fetchCurrentBaseOptionField(id)
     }
   }
 }
