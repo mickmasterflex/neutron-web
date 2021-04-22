@@ -21,7 +21,7 @@ const actions = {
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
-        commit('SET_CURRENT_BASE_FIELD', response.data)
+        commit('SET_CURRENT_BASE_OPTIONS_FIELD_ID', response.data.id)
       }).finally(() => {
         commit('RESET_BASE_FIELDS_POST_LOADING')
       })
