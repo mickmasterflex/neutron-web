@@ -79,12 +79,14 @@ export default {
     ...mapMutations({
       setCurrentBuyer: 'SET_CURRENT_BUYER',
       setCurrentForm: 'SET_CURRENT_FORM',
+      setCurrentClientData: 'SET_CURRENT_CLIENT_DATA',
       setCurrentAncestors: 'SET_CURRENT_ANCESTORS',
       sortCurrentFormFields: 'SORT_CURRENT_FORM_FIELDS',
       resetShiftClickIndex: 'RESET_BULK_UPDATE_BUYERS_SHIFT_CLICK_INDEX'
     }),
     setCurrentBuyerAndForm (contract) {
       this.setCurrentBuyer(contract)
+      this.setCurrentClientData(contract.client_data)
       this.setCurrentAncestors(contract.ancestors)
       this.setCurrentForm(contract.form)
       this.sortCurrentFormFields()

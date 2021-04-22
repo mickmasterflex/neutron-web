@@ -12,7 +12,6 @@
         <form @submit.prevent="submitForm">
           <v-text-field
             rules="required"
-            field_class="field-tall"
             v-model="injectedFieldType"
             field_label="Field Type"
             field_id="field_type">

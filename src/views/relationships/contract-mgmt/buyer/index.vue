@@ -19,7 +19,7 @@
           <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers <number-label :number="contract.offer_contracts ? contract.offer_contracts.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'field-management'">
-          <router-link :to="{name: 'BuyerContractFieldManagement', params: {id:id, client: client}}">Field Management</router-link>
+          <router-link :to="{name: 'BuyerContractFieldManagement', params: {id:id, client: client}}">Form Fields</router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

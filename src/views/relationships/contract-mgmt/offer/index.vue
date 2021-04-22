@@ -13,7 +13,7 @@
           <router-link :to="{name: 'OfferDetails', params: {id:id, client: client, buyer:buyer}}">Offer Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'field-management'" >
-          <router-link :to="{name: 'OfferFieldManagement', params: {id:id, client: client, buyer:buyer}}">Field Management</router-link>
+          <router-link :to="{name: 'OfferFieldManagement', params: {id:id, client: client, buyer:buyer}}">Form Fields</router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>

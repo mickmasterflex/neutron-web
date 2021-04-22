@@ -8,7 +8,7 @@
       <create-field></create-field>
     </template>
     <template v-slot:content>
-      <list-fields :clientSlug="clientSlug" :contractName="contractName"></list-fields>
+      <list-fields :contractName="contractName"></list-fields>
       <component :is="updateComponent" :field="currentField"></component>
     </template>
   </panel-template>
@@ -25,8 +25,7 @@ export default {
   props: {
     loading: Boolean,
     loadingText: String,
-    contractName: String,
-    clientSlug: String
+    contractName: String
   },
   data () {
     return {

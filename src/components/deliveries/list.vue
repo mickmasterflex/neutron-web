@@ -20,7 +20,12 @@
         <tr-th-section-heading :colspan="5" v-if="ancestorDeliveries.length">
           Inherited Deliveries
         </tr-th-section-heading>
-        <delivery-tr v-for="delivery in ancestorDeliveries" :key="'delivery' + delivery.id" :delivery="delivery">
+        <delivery-tr
+          v-for="(delivery, index) in ancestorDeliveries"
+          :key="'delivery' + delivery.id"
+          :delivery="delivery"
+          :class="index === 0 ? 'first-child': ''"
+        >
           <router-link :to="{ name: 'BuyerContract', params: { id: delivery.buyer_contract, client: clientSlug } }"
                        class="text-link text-right w-full text-right">
             {{ ancestors.filter(b => b.id === delivery.buyer_contract)[0].name }}
