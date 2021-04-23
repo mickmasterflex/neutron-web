@@ -21,8 +21,8 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green">
-        <font-awesome-icon icon="clone"></font-awesome-icon> Clone
+      <button @click="submitForm()" class="btn btn-green" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Clone
       </button>
     </template>
   </tooltip-dialog-template>
@@ -45,7 +45,8 @@ export default {
       baseFieldsLoading: 'getBaseFieldsFetchLoading',
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
-      baseTextFieldTypes: 'getBaseTextFieldTypes'
+      baseTextFieldTypes: 'getBaseTextFieldTypes',
+      loading: 'getFieldsPostLoading'
     }),
     fields () {
       return this.form.fields

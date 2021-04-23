@@ -7,6 +7,7 @@ const modules = {
 
 const actions = {
   async createOptionField ({ commit }, field) {
+    commit('SET_FIELDS_POST_LOADING')
     await axios.post('/option-fields/', field)
       .then(response => {
         commit('ADD_FIELD', { data: response.data, type: 'fields' })
@@ -14,6 +15,8 @@ const actions = {
         commit('SET_CURRENT_OPTIONS', response.data.options)
         commit('SET_INACTIVE_OPTIONS', response.data.inactive_options)
         commit('SORT_CURRENT_OPTIONS')
+      }).finally(() => {
+        commit('RESET_FIELDS_POST_LOADING')
       })
   },
   async updateOptionField ({ commit }, updatedField) {

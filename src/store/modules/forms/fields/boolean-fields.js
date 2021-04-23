@@ -2,10 +2,13 @@ import axios from '@/axios'
 
 const actions = {
   async createBooleanField ({ commit }, field) {
+    commit('SET_FIELDS_POST_LOADING')
     await axios.post('/boolean-fields/', field)
       .then(response => {
         commit('ADD_FIELD', { data: response.data, type: 'fields' })
         commit('SET_CURRENT_FIELD', response.data)
+      }).finally(() => {
+        commit('RESET_FIELDS_POST_LOADING')
       })
   },
   async updateBooleanField ({ commit }, updatedField) {

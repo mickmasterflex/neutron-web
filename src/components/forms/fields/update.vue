@@ -30,7 +30,8 @@
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm" class="btn btn-green btn-lg" :disabled="loading">
-        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Field</button>
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Field
+      </button>
     </template>
   </modal-template>
 </template>
