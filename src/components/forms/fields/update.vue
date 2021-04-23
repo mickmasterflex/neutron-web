@@ -64,7 +64,8 @@ export default {
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
       baseTextFieldTypes: 'getBaseTextFieldTypes',
-      loading: 'getFieldsPutLoading'
+      loading: 'getFieldsPutLoading',
+      unsavedOptionChangesInModal: 'getUnsavedOptionChangesInModal'
     }),
     booleanFieldSelected () {
       return this.baseBooleanFieldTypes.includes(this.fieldType)
@@ -77,7 +78,10 @@ export default {
     },
     unsavedChanges () {
       if (this.field) {
-        return this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+        return this.unsavedOptionChangesInModal ||
+          this.label !== this.field.label ||
+          this.mapping !== this.field.mapping ||
+          this.deliver !== this.field.deliver
       } else {
         return false
       }
