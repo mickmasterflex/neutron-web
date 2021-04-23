@@ -6,7 +6,6 @@ const modules = {
 }
 
 const state = {
-  // used_base_fields_form: null,
   used_base_fields: [],
   used_base_fields_forms: []
 }
@@ -18,7 +17,6 @@ const getters = {
 
 const actions = {
   async fetchUsedBaseFields ({ commit, dispatch }, formId) {
-    // commit('SET_USED_BASE_FIELDS_FORM', formId)
     commit('RESET_USED_BASE_FIELDS')
     commit('RESET_USED_BASE_FIELDS_FORMS')
     commit('SET_FETCH_USED_BASE_FIELDS_LOADING')
@@ -38,7 +36,6 @@ const actions = {
 }
 
 const mutations = {
-  // SET_USED_BASE_FIELDS_FORM: (state, formId) => (state.used_base_fields_form = formId),
   SET_USED_BASE_FIELDS_FORMS: (state, forms) => (state.used_base_fields_forms = forms),
   RESET_USED_BASE_FIELDS_FORMS: (state, forms) => (state.used_base_fields_forms = forms),
   ADD_USED_BASE_FIELDS: (state, fields) => (state.used_base_fields = state.used_base_fields.concat(fields)),
