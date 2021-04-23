@@ -941,8 +941,6 @@ router.beforeEach((to, from, next) => {
       return
     }
     next({ name: 'Login' })
-  } else if (to.matched.some(record => record.meta.requiresUnAuth)) {
-    next({ name: 'Dashboard' })
   } else {
     next()
   }
