@@ -17,9 +17,12 @@ const actions = {
       })
   },
   async updateOptionField ({ commit }, updatedField) {
+    commit('SET_FIELDS_PUT_LOADING')
     await axios.put(`/option-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_FIELD', { data: response.data, type: 'fields' })
+      }).finally(() => {
+        commit('RESET_FIELDS_PUT_LOADING')
       })
   },
   async deleteOptionField ({ commit }, id) {

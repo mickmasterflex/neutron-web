@@ -9,9 +9,12 @@ const actions = {
       })
   },
   async updateBooleanField ({ commit }, updatedField) {
+    commit('SET_FIELDS_PUT_LOADING')
     await axios.put(`/boolean-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_FIELD', { data: response.data, type: 'fields' })
+      }).finally(() => {
+        commit('RESET_FIELDS_PUT_LOADING')
       })
   },
   async deleteBooleanField ({ commit }, id) {
