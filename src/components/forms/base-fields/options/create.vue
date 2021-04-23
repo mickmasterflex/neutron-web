@@ -7,32 +7,27 @@
     <template v-slot:header>
       Add an Option
     </template>
-    <ul class="fields-inline-heading px-1">
-      <li class="w-20 fields-inline-heading-item">Order</li>
-      <li class="w-64 fields-inline-heading-item">Label</li>
-      <li class="w-64 fields-inline-heading-item">Value</li>
-    </ul>
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitCreateForm">
           <v-text-field
+            ref="focusField"
             v-model="label"
             field_id="newOption_label"
             field_label="Label"
-            class="field-error-inside"
             rules="required"/>
           <v-text-field
             v-model="value"
             field_id="newOption_mapping"
             field_label="Value"
-            class="field-error-inside"
             rules="required"/>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitCreateForm()" class="btn btn-green">
-        <font-awesome-icon icon="plus"></font-awesome-icon> Create
+      <button @click="submitCreateForm()" class="btn btn-green" :disabled="loading">
+        <font-awesome-icon icon="spinner" pulse v-if="loading"></font-awesome-icon>
+        <font-awesome-icon icon="plus" v-else></font-awesome-icon> Create
       </button>
     </template>
   </tooltip-dialog-template>
@@ -51,8 +46,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      field: 'getCurrentBaseField',
-      options: 'getCurrentBaseOptions'
+      fieldId: 'getCurrentBaseOptionsFieldId',
+      options: 'getCurrentBaseOptions',
+      loading: 'getBaseOptionsPostLoading'
     }),
     order () {
       return this.options.length + 1
@@ -80,7 +76,7 @@ export default {
             order: this.order,
             label: this.label,
             value: this.value,
-            field: this.field.id
+            field: this.fieldId
           }).then(() => {
             this.closeForm()
           }).catch(error => {
@@ -88,6 +84,13 @@ export default {
           })
         }
       })
+    }
+  },
+  watch: {
+    formVisible () {
+      if (this.formVisible === true) {
+        this.$refs.focusField.focusOnField()
+      }
     }
   }
 }

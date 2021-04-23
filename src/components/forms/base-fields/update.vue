@@ -15,7 +15,7 @@
       </div>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading">
+      <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading" v-if="unsavedChanges">
         <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Field
       </button>
     </template>
@@ -28,7 +28,6 @@ import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import formatList from '@/mixins/format-list-for-select-options'
-import fieldOptions from '@/components/forms/base-fields/options/list'
 
 export default {
   data () {
@@ -59,7 +58,6 @@ export default {
       baseTextFieldTypes: 'getBaseTextFieldTypes',
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
-      optionFieldOptions: 'getCurrentBaseOptions',
       loading: 'getBaseFieldsPutLoading'
     }),
     unsavedChanges () {
@@ -100,23 +98,25 @@ export default {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
-  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal, formatList],
+  mixins: [
+    enterKeyListener,
+    setResponseErrors,
+    checkUnsavedChangesInModal,
+    formatList
+  ],
   methods: {
     ...mapActions({
       updateBaseTextField: 'updateBaseTextField',
       updateBaseOptionField: 'updateBaseOptionField',
-      updateBaseBooleanField: 'updateBaseBooleanField',
-      updateOptions: 'updateModifiedBaseOptions'
+      updateBaseBooleanField: 'updateBaseBooleanField'
     }),
     ...mapMutations({
       resetCurrentBaseField: 'RESET_CURRENT_BASE_FIELD',
-      resetCurrentBaseOptions: 'RESET_CURRENT_BASE_OPTIONS',
-      resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
-      closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL'
+      closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED'
     }),
     async updateField (data) {
       if (this.optionFieldSelected) {
-        await this.updateOptions()
         await this.updateBaseOptionField(data)
       } else if (this.textFieldSelected) {
         await this.updateBaseTextField(data)
@@ -126,10 +126,6 @@ export default {
     },
     close () {
       this.resetCurrentBaseField()
-      if (this.optionFieldSelected) {
-        this.resetCurrentBaseOptions()
-        this.resetUnsavedBaseOptionChanges()
-      }
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -152,9 +148,6 @@ export default {
         }
       })
     }
-  },
-  components: {
-    'field-options': fieldOptions
   }
 }
 </script>

@@ -1,33 +1,59 @@
 import axios from '@/axios'
+import loading from './loading'
+import visibility from './visibility'
+
+const modules = {
+  loading,
+  visibility
+}
 
 const state = {
   modified_base_options: [],
   current_base_options: [],
-  unsaved_base_option_changes_in_modal: false
+  current_base_options_field_id: null
 }
 
 const getters = {
   getCurrentBaseOptions: state => state.current_base_options,
-  getUnsavedBaseOptionChangesInModal: state => state.unsaved_base_option_changes_in_modal
+  getCurrentBaseOptionsFieldId: state => state.current_base_options_field_id,
+  getModifiedBaseOptions: state => state.modified_base_options
 }
 
 const actions = {
   async createBaseOption ({ commit }, option) {
+    commit('SET_BASE_OPTIONS_POST_LOADING')
     await axios.post('/base-options/', option)
       .then(response => {
         commit('ADD_BASE_OPTION', response.data)
+        commit('ADD_BASE_OPTION_FIELD_OPTION', response.data)
+      }).finally(() => {
+        commit('RESET_BASE_OPTIONS_POST_LOADING')
       })
   },
-  async updateModifiedBaseOptions ({ commit }) {
-    await state.modified_base_options.forEach(option => {
-      axios.put(`/base-options/${option.id}/`, option, { showSuccessToast: false })
+  async updateModifiedBaseOptions ({ commit, getters }) {
+    commit('SET_BASE_OPTIONS_PUT_LOADING')
+    for (let i = 0; i < state.modified_base_options.length; i++) {
+      const option = state.modified_base_options[i]
+      await axios.put(`/base-options/${option.id}/`, option, { showSuccessToast: false })
+        .then(() => {
+          commit('UPDATE_BASE_OPTION_FIELD_OPTION', option)
+        })
+    }
+    commit('ADD_TOAST', {
+      color: 'green',
+      icon: 'thumbs-up',
+      content: '',
+      id: Date.now() + Math.random(),
+      heading: `${getters.getModifiedBaseOptions.length} Base Options Updated`
     })
+    commit('RESET_BASE_OPTIONS_PUT_LOADING')
     commit('RESET_MODIFIED_BASE_OPTIONS')
   },
-  async deleteBaseOption ({ commit }, id) {
-    await axios.delete(`/base-options/${id}/`)
+  async deleteBaseOption ({ commit, getters }, option) {
+    await axios.delete(`/base-options/${option.id}/`)
       .then(() => {
-        commit('REMOVE_BASE_OPTION', id)
+        commit('REMOVE_BASE_OPTION', option.id)
+        commit('REMOVE_BASE_OPTION_FIELD_OPTION', option)
       })
   }
 }
@@ -49,20 +75,21 @@ const mutations = {
   },
   RESET_MODIFIED_BASE_OPTIONS: (state) => (state.modified_base_options = []),
   SET_CURRENT_BASE_OPTIONS: (state, options) => (state.current_base_options = options),
+  RESET_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = []),
   SORT_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = state.current_base_options.sort((a, b) => (a.order > b.order) ? 1 : -1)),
+  SET_CURRENT_BASE_OPTIONS_FIELD_ID: (state, field) => (state.current_base_options_field_id = field),
+  RESET_CURRENT_BASE_OPTIONS_FIELD_ID: (state) => (state.current_base_options_field_id = null),
   ADD_BASE_OPTION: (state, option) => (state.current_base_options.push(option)),
   REMOVE_BASE_OPTION: (state, id) => {
     state.current_base_options = state.current_base_options.filter(option => option.id !== id)
     state.modified_base_options = state.modified_base_options.filter(option => option.id !== id)
-  },
-  RESET_CURRENT_BASE_OPTIONS: (state) => (state.current_base_options = []),
-  SET_UNSAVED_BASE_OPTION_CHANGES: (state) => (state.unsaved_base_option_changes_in_modal = true),
-  RESET_UNSAVED_BASE_OPTION_CHANGES: (state) => (state.unsaved_base_option_changes_in_modal = false)
+  }
 }
 
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules
 }
