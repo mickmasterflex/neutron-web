@@ -1,11 +1,15 @@
-import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields'
-import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields'
+import baseBooleanFields from '@/store/modules/forms/base-fields/base-boolean-fields.js'
+import baseTextFields from '@/store/modules/forms/base-fields/base-text-fields.js'
+import baseOptionFields from '@/store/modules/forms/base-fields/base-option-fields.js'
+import baseOptions from '@/store/modules/forms/base-fields/base-options.js'
 import loading from '@/store/modules/forms/base-fields/loading'
 import visibility from '@/store/modules/forms/base-fields/visibility'
 
 const modules = {
+  baseBooleanFields,
   baseTextFields,
   baseOptionFields,
+  baseOptions,
   loading,
   visibility
 }
@@ -26,6 +30,7 @@ const getters = {
 const actions = {
   async fetchBaseFields ({ commit, dispatch }) {
     commit('SET_BASE_FIELDS_FETCH_LOADING')
+    await dispatch('fetchBaseBooleanFields')
     await dispatch('fetchBaseTextFields')
     await dispatch('fetchBaseOptionFields')
     commit('SET_BASE_FIELDS')
@@ -34,7 +39,7 @@ const actions = {
 }
 
 const mutations = {
-  SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields)),
+  SET_BASE_FIELDS: (state) => (state.base_fields = state.baseTextFields.base_text_fields.concat(state.baseOptionFields.base_option_fields).concat(state.baseBooleanFields.base_boolean_fields)),
   SET_AVAILABLE_BASE_FIELDS: (state, fields) => {
     if (fields) {
       state.available_base_fields = [...state.base_fields]

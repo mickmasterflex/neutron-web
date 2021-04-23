@@ -1,12 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  base_text_fields: [],
-  show_update_base_text_field_modal: false
-}
-
-const getters = {
-  getShowUpdateBaseTextFieldModal: state => state.show_update_base_text_field_modal
+  base_text_fields: []
 }
 
 const actions = {
@@ -16,24 +11,24 @@ const actions = {
         commit('SET_BASE_TEXT_FIELDS', response.data)
       })
   },
-  async fetchCurrentBaseTextField ({ commit }, id) {
-    await axios.get(`/base-text-fields/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_BASE_FIELD', response.data)
-      })
-  },
   async createBaseTextField ({ commit }, field) {
+    commit('SET_BASE_FIELDS_POST_LOADING')
     await axios.post('/base-text-fields/', field)
       .then(response => {
         commit('ADD_BASE_TEXT_FIELD', response.data)
         commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_POST_LOADING')
       })
   },
   async updateBaseTextField ({ commit }, updatedField) {
+    commit('SET_BASE_FIELDS_PUT_LOADING')
     await axios.put(`/base-text-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_BASE_TEXT_FIELD', response.data)
-        commit('SET_BASE_FIELDS', response.data)
+        commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_PUT_LOADING')
       })
   },
   async deleteBaseTextField ({ commit }, id) {
@@ -54,14 +49,11 @@ const mutations = {
       state.base_text_fields.splice(index, 1, updatedField)
     }
   },
-  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id)),
-  SHOW_UPDATE_BASE_TEXT_FIELD_MODAL: (state) => (state.show_update_base_text_field_modal = true),
-  CLOSE_UPDATE_BASE_TEXT_FIELD_MODAL: (state) => (state.show_update_base_text_field_modal = false)
+  REMOVE_BASE_TEXT_FIELD: (state, id) => (state.base_text_fields = state.base_text_fields.filter(field => field.id !== id))
 }
 
 export default {
   state,
-  getters,
   actions,
   mutations
 }

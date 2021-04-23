@@ -522,7 +522,7 @@ const routes = [
     children: [
       {
         name: 'BaseFields',
-        path: 'base-fields',
+        path: 'base-fields/',
         component: () => import('@/views/config/base-field-management/base-fields.vue'),
         meta: {
           requiresAuth: true,
@@ -534,8 +534,8 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        path: 'injected-fields',
         name: 'InjectedFieldTypes',
+        path: 'injected-fields/',
         component: () => import('@/views/config/base-field-management/injected-field-types.vue'),
         meta: {
           requiresAuth: true,

@@ -25,7 +25,7 @@ const actions = {
     commit('RESET_MODIFIED_BASE_OPTIONS')
   },
   async deleteBaseOption ({ commit }, id) {
-    await axios.delete(`/base-options/${id}/`, id)
+    await axios.delete(`/base-options/${id}/`)
       .then(() => {
         commit('REMOVE_BASE_OPTION', id)
       })

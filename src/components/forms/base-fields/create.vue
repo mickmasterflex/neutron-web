@@ -7,12 +7,13 @@
           <v-text-field v-model="label" rules="required" field_id="label" field_label="Label"></v-text-field>
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Name"></v-text-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-          <v-select-field v-model="type" :options="options" rules="required" field_id="type" field_label="Type"></v-select-field>
+          <v-select-field v-model="type" :options="formatListForSelectOptions(allBaseFieldTypeOptions)" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">
+      <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse class="mr-1"></font-awesome-icon>
         <span v-if="optionFieldSelected">Create then add Options</span>
         <span v-else>Create Field</span>
       </button>
@@ -24,6 +25,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import formatList from '@/mixins/format-list-for-select-options'
 
 export default {
   data () {
@@ -31,31 +33,43 @@ export default {
       name: '',
       label: '',
       description: '',
-      type: '',
-      options: {
-        text: { name: 'text', id: 'text' },
-        textarea: { name: 'textarea', id: 'textarea' },
-        select: { name: 'select', id: 'select' },
-        radio: { name: 'radio', id: 'radio' }
-      }
+      type: ''
     }
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateBaseFieldModal'
+      showModal: 'getShowCreateBaseFieldModal',
+      allBaseFieldTypeOptions: 'getAllBaseFieldTypes',
+      baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
+      baseOptionFieldTypes: 'getBaseOptionFieldTypes',
+      baseTextFieldTypes: 'getBaseTextFieldTypes',
+      loading: 'getBaseFieldsPostLoading'
     }),
+    booleanFieldSelected () {
+      return this.baseBooleanFieldTypes.includes(this.type)
+    },
     optionFieldSelected () {
-      return this.type === 'select' || this.type === 'radio'
+      return this.baseOptionFieldTypes.includes(this.type)
     },
     textFieldSelected () {
-      return this.type === 'text' || this.type === 'textarea'
+      return this.baseTextFieldTypes.includes(this.type)
     }
   },
-  mixins: [enterKeyListener, setResponseErrors],
+  mixins: [enterKeyListener, setResponseErrors, formatList],
   methods: {
+    async createField (data) {
+      if (this.optionFieldSelected) {
+        await this.createBaseOptionField(data)
+      } else if (this.textFieldSelected) {
+        await this.createBaseTextField(data)
+      } else if (this.booleanFieldSelected) {
+        await this.createBaseBooleanField(data)
+      }
+    },
     ...mapActions({
       createBaseOptionField: 'createBaseOptionField',
-      createBaseTextField: 'createBaseTextField'
+      createBaseTextField: 'createBaseTextField',
+      createBaseBooleanField: 'createBaseBooleanField'
     }),
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_BASE_FIELD_MODAL'
@@ -73,27 +87,13 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          if (this.optionFieldSelected) {
-            this.createBaseOptionField({
-              name: this.name,
-              label: this.label,
-              description: this.description,
-              type: this.type
-            }).then(() => { this.close() })
-              .catch(error => {
-                this.error = error
-              })
-          } else if (this.textFieldSelected) {
-            this.createBaseTextField({
-              name: this.name,
-              label: this.label,
-              description: this.description,
-              type: this.type
-            }).then(() => { this.close() })
-              .catch(error => {
-                this.error = error
-              })
-          }
+          this.createField({
+            name: this.name,
+            label: this.label,
+            description: this.description,
+            type: this.type
+          }).then(() => { this.close() })
+            .catch(error => { this.error = error })
         }
       })
     }

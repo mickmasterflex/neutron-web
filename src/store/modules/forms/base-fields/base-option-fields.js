@@ -1,11 +1,4 @@
 import axios from '@/axios'
-import visibility from '@/store/modules/forms/base-fields/base-option-fields/visibility'
-import baseOptions from '@/store/modules/forms/base-fields/base-option-fields/base-options'
-
-const modules = {
-  baseOptions,
-  visibility
-}
 
 const state = {
   base_option_fields: []
@@ -18,27 +11,25 @@ const actions = {
         commit('SET_BASE_OPTION_FIELDS', response.data)
       })
   },
-  async fetchCurrentBaseOptionField ({ commit }, id) {
-    await axios.get(`/base-option-fields/${id}/`)
-      .then(response => {
-        commit('SET_CURRENT_BASE_FIELD', response.data)
-        commit('SET_CURRENT_BASE_OPTIONS', response.data.base_options)
-        commit('SORT_CURRENT_BASE_OPTIONS')
-      })
-  },
   async createBaseOptionField ({ commit }, field) {
+    commit('SET_BASE_FIELDS_POST_LOADING')
     await axios.post('/base-option-fields/', field)
       .then(response => {
         commit('ADD_BASE_OPTION_FIELD', response.data)
         commit('SET_BASE_FIELDS')
         commit('SET_CURRENT_BASE_FIELD', response.data)
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_POST_LOADING')
       })
   },
   async updateBaseOptionField ({ commit }, updatedField) {
+    commit('SET_BASE_FIELDS_PUT_LOADING')
     await axios.put(`/base-option-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_BASE_OPTION_FIELD', response.data)
-        commit('SET_BASE_FIELDS', response.data)
+        commit('SET_BASE_FIELDS')
+      }).finally(() => {
+        commit('RESET_BASE_FIELDS_PUT_LOADING')
       })
   },
   async deleteBaseOptionField ({ commit }, id) {
@@ -63,7 +54,6 @@ const mutations = {
 }
 
 export default {
-  modules,
   state,
   actions,
   mutations
