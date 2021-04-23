@@ -11,12 +11,13 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
           <v-select-field
-            :loading="baseFieldsLoading"
+            :loading="loading"
             rules="required"
             v-model="baseField"
             field_label="Base Field"
             field_id="baseFieldSelectToClone"
-            :options="baseFields"></v-select-field>
+            :options="baseFields"
+          />
         </form>
       </validation-observer>
     </template>
@@ -42,8 +43,12 @@ export default {
     ...mapGetters({
       baseFields: 'getAvailableBaseFields',
       form: 'getCurrentForm',
-      baseFieldsLoading: 'getBaseFieldsFetchLoading'
+      baseFieldsLoading: 'getBaseFieldsFetchLoading',
+      usedBaseFieldsLoading: 'getFetchUsedBaseFieldsLoading'
     }),
+    loading () {
+      return this.baseFieldsLoading ? this.baseFieldsLoading : this.usedBaseFieldsLoading
+    },
     fields () {
       return this.form.fields
     },
