@@ -9,7 +9,7 @@
     </template>
     <template v-slot:content>
       <list-fields :contractName="contractName"></list-fields>
-      <component :is="updateComponent" :field="currentField"></component>
+      <update-field :field="currentField"/>
     </template>
   </panel-template>
 </template>
@@ -17,8 +17,7 @@
 <script>
 import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
-import updateTextField from '@/components/forms/fields/text-fields/update'
-import updateOptionField from '@/components/forms/fields/option-fields/update'
+import updateField from '@/components/forms/fields/update'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -29,15 +28,11 @@ export default {
   },
   data () {
     return {
-      currentFieldId: {
-        type: Number
-      },
       updateComponent: null
     }
   },
   components: {
-    updateTextField,
-    updateOptionField,
+    updateField,
     'list-fields': listFields,
     'create-field': createField
   },
@@ -49,29 +44,15 @@ export default {
   watch: {
     currentField () {
       if (this.currentField) {
-        this.currentFieldId = this.currentField.id
-        if (this.currentField.type === 'select' || this.currentField.type === 'radio') {
-          this.setUpdateComponent(updateOptionField).then(() => {
-            this.showUpdateOptionFieldModal()
-          })
-        } else if (this.currentField.type === 'text' || this.currentField.type === 'textarea') {
-          this.setUpdateComponent(updateTextField).then(() => {
-            this.showUpdateTextFieldModal()
-          })
-        }
-      } else {
-        this.currentFieldId = null
+        this.showUpdateFieldModal()
       }
     }
   },
   methods: {
     ...mapMutations({
-      showUpdateTextFieldModal: 'SHOW_UPDATE_TEXT_FIELD_MODAL',
+      showUpdateFieldModal: 'SHOW_UPDATE_FIELD_MODAL',
       showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
-    }),
-    async setUpdateComponent (component) {
-      this.updateComponent = component
-    }
+    })
   }
 }
 </script>

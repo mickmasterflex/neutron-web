@@ -1,12 +1,19 @@
 <template>
-  <button class="btn btn-hollow-green btn-circle" @click="addOptionToForm">
-    <font-awesome-icon icon="plus"></font-awesome-icon>
+  <button class="btn btn-hollow-green btn-circle" @click="addOptionToForm" :disabled="loading">
+    <font-awesome-icon v-if="!loading" icon="plus"></font-awesome-icon>
+    <font-awesome-icon v-else icon="spinner" pulse></font-awesome-icon>
   </button>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
+  data () {
+    return {
+      loading: false
+    }
+  },
   props: {
     option: {
       type: Object,
@@ -32,8 +39,11 @@ export default {
     ...mapActions({
       add: 'addInactiveOption'
     }),
-    addOptionToForm () {
-      this.add(this.optionData)
+    async addOptionToForm () {
+      this.loading = true
+      await this.add(this.optionData).finally(() => {
+        this.loading = false
+      })
     }
   }
 }

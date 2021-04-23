@@ -1,22 +1,23 @@
 import axios from '@/axios'
-import visibility from '@/store/modules/forms/fields/text-fields/visibility'
-
-const modules = {
-  visibility
-}
 
 const actions = {
   async createTextField ({ commit }, field) {
+    commit('SET_FIELDS_POST_LOADING')
     await axios.post('/text-fields/', field)
       .then(response => {
         commit('ADD_FIELD', { data: response.data, type: 'fields' })
         commit('SET_CURRENT_FIELD', response.data)
+      }).finally(() => {
+        commit('RESET_FIELDS_POST_LOADING')
       })
   },
   async updateTextField ({ commit }, updatedField) {
+    commit('SET_FIELDS_PUT_LOADING')
     await axios.put(`/text-fields/${updatedField.id}/`, updatedField)
       .then(response => {
         commit('UPDATE_FIELD', { data: response.data, type: 'fields' })
+      }).finally(() => {
+        commit('RESET_FIELDS_PUT_LOADING')
       })
   },
   async deleteTextField ({ commit }, id) {
@@ -28,6 +29,5 @@ const actions = {
 }
 
 export default {
-  actions,
-  modules
+  actions
 }
