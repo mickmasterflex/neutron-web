@@ -114,13 +114,13 @@ export default {
       resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
       closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL'
     }),
-    updateField (data) {
+    async updateField (data) {
       if (this.optionFieldSelected) {
-        return this.updateBaseOptionField(data)
+        await this.updateBaseOptionField(data)
       } else if (this.textFieldSelected) {
-        return this.updateBaseTextField(data)
+        await this.updateBaseTextField(data)
       } else if (this.booleanFieldSelected) {
-        return this.updateBaseBooleanField(data)
+        await this.updateBaseBooleanField(data)
       }
     },
     close () {
