@@ -59,11 +59,11 @@ export default {
   methods: {
     createField (data) {
       if (this.optionFieldSelected) {
-        return this.createBaseOptionField(data)
+        this.createBaseOptionField(data)
       } else if (this.textFieldSelected) {
-        return this.createBaseTextField(data)
+        this.createBaseTextField(data)
       } else if (this.booleanFieldSelected) {
-        return this.createBaseBooleanField(data)
+        this.createBaseBooleanField(data)
       }
     },
     ...mapActions({

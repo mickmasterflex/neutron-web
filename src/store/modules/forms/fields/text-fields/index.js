@@ -1,9 +1,4 @@
 import axios from '@/axios'
-import visibility from '@/store/modules/forms/fields/text-fields/visibility'
-
-const modules = {
-  visibility
-}
 
 const actions = {
   async createTextField ({ commit }, field) {
@@ -28,6 +23,5 @@ const actions = {
 }
 
 export default {
-  actions,
-  modules
+  actions
 }

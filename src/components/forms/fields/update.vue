@@ -1,7 +1,7 @@
 <template>
-  <modal-template :show="showModal" @close="close" modalClass="modal-md">
+  <modal-template :show="showModal" @close="close" :modalClass="optionFieldSelected ? 'modal-md' : ''">
     <template v-slot:header>
-      Field Configuration
+      Field Configurations
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
     </template>
     <template v-slot:body>
@@ -17,12 +17,12 @@
           </form>
         </validation-observer>
 
-        <div class="field-group">
+        <div class="field-group" v-if="optionFieldSelected">
           <label class="field-label">Options</label>
           <field-options class="flex-grow"></field-options>
         </div>
 
-        <div class="field-group">
+        <div class="field-group" v-if="optionFieldSelected">
           <label class="field-label">Available Field Options</label>
           <field-inactive-options class="flex-grow"></field-inactive-options>
         </div>
@@ -36,18 +36,19 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import fieldOptions from '@/components/forms/fields/option-fields/options/list'
-import fieldInactiveOptions from '@/components/forms/fields/option-fields/options/inactive_list'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
-import { setResponseErrors } from '@/mixins/set-response-errors'
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
+import { setResponseErrors } from '@/mixins/set-response-errors'
+import fieldOptions from '@/components/forms/fields/options/list'
+import fieldInactiveOptions from '@/components/forms/fields/options/inactive_list'
 
 export default {
   data () {
     return {
       label: '',
       mapping: '',
-      deliver: ''
+      deliver: '',
+      fieldType: null
     }
   },
   props: {
@@ -57,12 +58,23 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateOptionFieldModal',
-      unsavedOptionChangesInModal: 'getUnsavedOptionChangesInModal'
+      showModal: 'getShowUpdateFieldModal',
+      baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
+      baseOptionFieldTypes: 'getBaseOptionFieldTypes',
+      baseTextFieldTypes: 'getBaseTextFieldTypes'
     }),
+    booleanFieldSelected () {
+      return this.baseBooleanFieldTypes.includes(this.fieldType)
+    },
+    optionFieldSelected () {
+      return this.baseOptionFieldTypes.includes(this.fieldType)
+    },
+    textFieldSelected () {
+      return this.baseTextFieldTypes.includes(this.fieldType)
+    },
     unsavedChanges () {
       if (this.field) {
-        return this.unsavedOptionChangesInModal || this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
+        return this.label !== this.field.label || this.mapping !== this.field.mapping || this.deliver !== this.field.deliver
       } else {
         return false
       }
@@ -73,41 +85,62 @@ export default {
       this.checkUnsavedChanges(this.showModal, this.unsavedChanges)
     }
   },
-  mixins: [enterKeyListener, setResponseErrors, checkUnsavedChangesInModal],
+  mixins: [
+    enterKeyListener,
+    setResponseErrors,
+    checkUnsavedChangesInModal
+  ],
   updated () {
     if (this.field) {
       this.label = this.field.label
       this.mapping = this.field.mapping
       this.deliver = this.field.deliver
+      this.fieldType = this.field.type
     }
   },
   methods: {
     ...mapActions({
-      updateField: 'updateOptionField',
+      updateTextField: 'updateTextField',
+      updateBooleanField: 'updateBooleanField',
+      updateOptionField: 'updateOptionField',
       updateOptions: 'updateModifiedOptions'
     }),
     ...mapMutations({
       resetCurrentField: 'RESET_CURRENT_FIELD',
-      closeModal: 'CLOSE_UPDATE_OPTION_FIELD_MODAL',
-      resetUnsavedOptionChanges: 'RESET_UNSAVED_OPTION_CHANGES',
-      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
       resetCurrentOptions: 'RESET_CURRENT_OPTIONS',
       resetModifiedOptions: 'RESET_MODIFIED_OPTIONS',
-      resetInactiveOptions: 'RESET_INACTIVE_OPTIONS'
+      resetInactiveOptions: 'RESET_INACTIVE_OPTIONS',
+      resetUnsavedOptionChanges: 'RESET_UNSAVED_OPTION_CHANGES',
+      toggleChangesInModalUnsaved: 'TOGGLE_CHANGES_IN_MODAL_UNSAVED',
+      closeModal: 'CLOSE_UPDATE_TEXT_FIELD_MODAL'
     }),
-    close () {
+    async updateField (data) {
+      if (this.optionFieldSelected) {
+        await this.updateOptions()
+        await this.updateOptionField(data)
+      } else if (this.textFieldSelected) {
+        await this.updateTextField(data)
+      } else if (this.booleanFieldSelected) {
+        await this.updateBooleanField(data)
+      }
+    },
+    async close () {
       this.closeModal()
+      if (this.optionFieldSelected) {
+        this.resetCurrentOptions()
+        this.resetModifiedOptions()
+        this.resetInactiveOptions()
+        this.resetUnsavedOptionChanges()
+      }
+      this.label = ''
+      this.mapping = ''
+      this.deliver = ''
       this.resetCurrentField()
-      this.resetCurrentOptions()
-      this.resetModifiedOptions()
-      this.resetInactiveOptions()
-      this.resetUnsavedOptionChanges()
       this.toggleChangesInModalUnsaved(false)
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.updateOptions()
           this.updateField({
             label: this.label,
             mapping: this.mapping,
@@ -117,7 +150,6 @@ export default {
             id: this.field.id
           }).then(() => {
             this.closeModal()
-            this.resetCurrentField()
           }).catch(error => {
             this.error = error
           })
