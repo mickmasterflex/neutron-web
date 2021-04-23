@@ -1,7 +1,7 @@
 <template>
   <modal-template :show="showModal" @close="close" :modalClass="optionFieldSelected ? 'modal-md' : ''">
     <template v-slot:header>
-      Field Configurations
+      Field Configuration
       <span class="text-lg text-gray-700 block">Current Field: {{label}}</span>
     </template>
     <template v-slot:body>
