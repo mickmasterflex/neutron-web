@@ -1,6 +1,6 @@
-import textFields from '@/store/modules/forms/fields/text-fields'
+import textFields from '@/store/modules/forms/fields/text-fields.js'
 import optionFields from '@/store/modules/forms/fields/option-fields'
-import booleanFields from '@/store/modules/forms/fields/boolean-fields'
+import booleanFields from '@/store/modules/forms/fields/boolean-fields.js'
 import visibility from '@/store/modules/forms/fields/visibility'
 
 const modules = {

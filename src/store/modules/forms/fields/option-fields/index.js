@@ -2,7 +2,7 @@ import axios from '@/axios'
 import options from '@/store/modules/forms/fields/option-fields/options/'
 
 const modules = {
-  options,
+  options
 }
 
 const actions = {
