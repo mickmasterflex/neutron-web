@@ -1,7 +1,9 @@
 import textFields from '@/store/modules/forms/fields/text-fields'
 import optionFields from '@/store/modules/forms/fields/option-fields'
+import booleanFields from '@/store/modules/forms/fields/boolean-fields'
 
 const modules = {
+  booleanFields,
   textFields,
   optionFields
 }
