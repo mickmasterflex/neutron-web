@@ -5,7 +5,7 @@
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(submitForm)">
         <v-text-field v-model="new_password" rules="required|password:@confirm_password" mode="passive" field_id="new_password" field_label="New Password" :field_type="password_field_type"></v-text-field>
         <v-text-field v-model="confirm_password" rules="required" field_id="confirm_password" field_label="Confirm Password" :field_type="password_field_type"></v-text-field>
-        <button type="submit" class="btn btn-green mt-3"> Save Password</button>
+        <button :disabled="loading" type="submit" class="btn btn-green mt-3"> Save Password</button>
       </form>
     </validation-observer>
     <button class="btn btn-green mt-3" @click="showPassword" v-if="password_field_type === 'password'"> Show</button>
@@ -22,7 +22,8 @@ export default {
     return {
       new_password: '',
       confirm_password: '',
-      password_field_type: 'password'
+      password_field_type: 'password',
+      loading: false
     }
   },
   mixins: [setResponseErrors],
