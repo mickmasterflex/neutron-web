@@ -58,6 +58,9 @@ export default {
       }
       return this.buyerFetchLoadingText
     },
+    formId () {
+      return this.contractType === 'offer' ? this.getCurrentOffer.form.id : this.getCurrentBuyer.form.id
+    },
     loading () {
       return this.contractLoading ? this.contractLoading : this.fetchFormsLoading
     },
@@ -71,18 +74,15 @@ export default {
     }),
     ...mapActions({
       fetchForms: 'fetchForms',
+      fetchUsedBaseFields: 'fetchUsedBaseFields',
       setAncestorForms: 'setAncestorForms'
     }),
     fetchAncestorForms () {
       // If the contract is no longer loading, we can assume that ancestors have been set
       if (this.contractLoading === false) {
         this.resetAncestorForms()
-        // No need to fetch if we already have the forms
-        if (this.allForms.length === 0) {
-          this.fetchForms()
-        } else {
-          this.setAncestorForms(this.contractAncestorIds)
-        }
+        this.fetchUsedBaseFields(this.formId)
+        this.fetchForms()
       }
     }
   },

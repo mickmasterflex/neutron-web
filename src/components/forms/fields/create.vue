@@ -75,8 +75,7 @@ export default {
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      setBaseFields: 'SET_BASE_FIELDS',
-      setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
+      addUsedBaseField: 'ADD_USED_BASE_FIELD'
     }),
     resetForm () {
       this.baseField = ''
@@ -86,7 +85,6 @@ export default {
     },
     showForm () {
       this.formVisible = true
-      this.setAvailableBaseFields(this.fields)
     },
     closeForm () {
       this.formVisible = false
@@ -100,6 +98,7 @@ export default {
               base_field: this.baseField,
               order: this.newFieldOrder
             }).then(() => {
+              this.addUsedBaseField(parseInt(this.baseField))
               this.closeForm()
               this.resetForm()
             })
@@ -109,17 +108,13 @@ export default {
               base_field: this.baseField,
               order: this.newFieldOrder
             }).then(() => {
+              this.addUsedBaseField(parseInt(this.baseField))
               this.closeForm()
               this.resetForm()
             })
           }
         }
       })
-    }
-  },
-  watch: {
-    fields () {
-      this.setAvailableBaseFields(this.fields)
     }
   },
   created () {
