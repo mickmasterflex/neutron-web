@@ -1,10 +1,8 @@
 import axios from '@/axios'
 import options from '@/store/modules/forms/fields/option-fields/options/'
-import visibility from '@/store/modules/forms/fields/option-fields/visibility'
 
 const modules = {
   options,
-  visibility
 }
 
 const actions = {
