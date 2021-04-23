@@ -4,7 +4,7 @@
     contentBackgroundColor="white"
   >
     <template #action>
-      <btn-group-right>
+      <btn-group-right v-if="editable">
         <delete-content :id="content.id"/>
         <button class="btn btn-hollow-blue btn-circle" @click="showModalAndSetCurrent(content)">
           <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
@@ -34,6 +34,10 @@ export default {
     content: {
       type: Object,
       required: true
+    },
+    editable: {
+      default: true,
+      type: Boolean
     }
   },
   methods: {

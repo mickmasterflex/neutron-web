@@ -2,10 +2,11 @@
   <full-calendar :attributes="mappedDayCaps" @update:to-page="capInitialization($event.month, $event.year)">
     <template v-slot:header="slotProps">
       <month-content :calendarData="slotProps.calendarData" :calendarRefs="slotProps.calendarRefs"></month-content>
+      <bulk-day-tools :days="slotProps.calendarData.days.filter(day => day.inMonth)"/>
     </template>
     <template v-slot:day="slotProps">
       <div v-if="slotProps.day.inMonth">
-        <day-content :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
+        <day-content :today="new Date()" :day="slotProps.day" v-if="dayHasAttributes(slotProps.day.attributes)"></day-content>
         <span v-else class="full-calendar--day m-1 border-2 flex flex-row items-center justify-center">
           <font-awesome-icon class="text-gray-700 text-lg" icon="spinner" pulse></font-awesome-icon>
         </span>
@@ -20,6 +21,7 @@ import fullCalendar from '@/components/ui/calendars/full-calendar/index'
 import day from '@/components/caps/day'
 import month from '@/components/caps/month'
 import dayjs from 'dayjs'
+import bulkTools from '@/components/caps/day/bulk/tools'
 
 export default {
   methods: {
@@ -78,6 +80,7 @@ export default {
     }
   },
   components: {
+    'bulk-day-tools': bulkTools,
     'full-calendar': fullCalendar,
     'day-content': day,
     'month-content': month

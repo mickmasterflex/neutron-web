@@ -3,7 +3,7 @@
     <update-buyer-contract :buyer="buyer" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"></update-buyer-contract>
     <recruitment-locations :geo="buyer.geo" class="col-span-2 xl:col-span-1"></recruitment-locations>
     <delivery-index :buyer="buyer" class="col-span-2"></delivery-index>
-    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2">
+    <panel-template title="Lead Caps" contentClass="relative" class="col-span-2" :show-loader="loadingCaps" :loading-text="loadingCapsText">
       <template v-slot:content>
         <lead-caps :parent="id" type="buyers"></lead-caps>
       </template>
@@ -34,7 +34,9 @@ export default {
     ...mapGetters({
       buyer: 'getCurrentBuyer',
       loading: 'getBuyerFetchLoading',
-      loadingText: 'getBuyerFetchLoadingText'
+      loadingText: 'getBuyerFetchLoadingText',
+      loadingCaps: 'getCapsFetchLoading',
+      loadingCapsText: 'getCapsFetchLoadingText'
     })
   },
   components: {
