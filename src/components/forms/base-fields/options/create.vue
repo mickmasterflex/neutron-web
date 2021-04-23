@@ -11,6 +11,7 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitCreateForm">
           <v-text-field
+            ref="focusField"
             v-model="label"
             field_id="newOption_label"
             field_label="Label"
@@ -83,6 +84,13 @@ export default {
           })
         }
       })
+    }
+  },
+  watch: {
+    formVisible () {
+      if (this.formVisible === true) {
+        this.$refs.focusField.focusOnField()
+      }
     }
   }
 }
