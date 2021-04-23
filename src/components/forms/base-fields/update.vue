@@ -10,6 +10,9 @@
           <v-select-field v-model="type" :options="formatListForSelectOptions(typeOptions)" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
       </validation-observer>
+      <div v-if="optionFieldSelected" class="border-t mt-6">
+        <field-options></field-options>
+      </div>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading" v-if="unsavedChanges">
