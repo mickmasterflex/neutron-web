@@ -29,7 +29,7 @@
           <div class="card card-sm flex flex-row items-center justify-between">
             <field-list-item :field="field" :newOrder="index + 1"></field-list-item>
             <btn-group-right class="mx-1">
-              <delete-field :id="field.id" :type="field.type" v-if="field.type"></delete-field>
+              <delete-field :field="field" v-if="field.type"></delete-field>
               <set-current-field :field="field" :id="field.id" :type="field.type" icon="pencil-alt" v-if="field.type"></set-current-field>
             </btn-group-right>
           </div>

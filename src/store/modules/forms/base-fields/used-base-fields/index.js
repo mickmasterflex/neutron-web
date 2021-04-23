@@ -43,6 +43,7 @@ const mutations = {
   RESET_USED_BASE_FIELDS_FORMS: (state, forms) => (state.used_base_fields_forms = forms),
   ADD_USED_BASE_FIELDS: (state, fields) => (state.used_base_fields = state.used_base_fields.concat(fields)),
   ADD_USED_BASE_FIELD: (state, fieldId) => (state.used_base_fields = [fieldId, ...state.used_base_fields]),
+  REMOVE_USED_BASE_FIELD: (state, fieldId) => (state.used_base_fields = state.used_base_fields.filter(field => field !== fieldId)),
   RESET_USED_BASE_FIELDS: (state) => (state.used_base_fields = [])
 }
 
