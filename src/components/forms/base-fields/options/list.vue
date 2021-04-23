@@ -13,7 +13,7 @@
         </li>
       </ul-draggable>
     </div>
-    <table-empty-state v-else heading="No Base Options" copy="Add some with the button above."/>
+    <table-empty-state v-else heading="No Base Options Added" copy="Base options will be available when cloning the field they are associated with."/>
   </div>
 </template>
 
