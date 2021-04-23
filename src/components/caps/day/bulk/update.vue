@@ -1,7 +1,7 @@
 <template>
   <panel-modal :show="showModal" @close="close">
     <template v-slot:header>
-      <p v-if="monthCap">{{currentCapMonthFormats.MM_YYYY}}</p>
+      <span>{{ selectedDates.length }} Days Selected</span>
     </template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -11,26 +11,27 @@
             v-model="limit"
             rules="required|integer|min_value:0"
             field_id="limit"
-            field_label="Month Cap"
-            :field_disabled="loading"
-          />
+            field_label="Day Cap"
+            :field_disabled="loading"/>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button class="btn btn-green" @click="submitForm" :disabled="loading">
+      <delete-cap></delete-cap>
+      <button class="btn btn-green flex-grow" @click="submitForm" :disabled="loading">
         <font-awesome-icon icon="spinner" pulse v-if="loadingPost"></font-awesome-icon>
-        <font-awesome-icon icon="plus" v-else></font-awesome-icon> Create Cap
+        <font-awesome-icon icon="check" v-else></font-awesome-icon> Save
       </button>
     </template>
   </panel-modal>
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
 import panelModal from '@/components/ui/modals/panel-modal'
+import deleteCap from '@/components/caps/day/bulk/delete'
 
 export default {
   data () {
@@ -41,28 +42,29 @@ export default {
   mixins: [setResponseErrors, enterKeyListener],
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_CREATE_MONTH_CAP_MODAL',
-      resetCapMonth: 'RESET_SELECTED_CAP_MONTH'
+      closeModal: 'CLOSE_BULK_DAY_CAP_MODAL'
     }),
     ...mapActions({
-      create: 'createMonthCap'
+      updateCaps: 'bulkUpdateDayCaps'
     }),
     close () {
+      this.closeModal()
       this.limit = ''
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
-      this.closeModal()
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          this.create({
-            date: this.monthCap.date,
+          this.updateCaps({
             limit: this.limit,
+            dates: this.selectedDates.map(d => d.date).join(),
             parent: this.parent
           }).then(() => {
             this.close()
+          }).catch(error => {
+            this.error = error
           })
         }
       })
@@ -77,19 +79,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateMonthCapModal',
-      monthCap: 'getSelectedCapMonth',
+      showModal: 'getShowBulkDayCapModal',
       parent: 'getCurrentCapParent',
-      currentCapMonthFormats: 'getCurrentCapMonthFormats',
+      selectedDates: 'getBulkUpdateDayCaps',
       loading: 'getCapsLoading',
       loadingPost: 'getCapsPostLoading'
     })
   },
   components: {
-    'panel-modal': panelModal
-  },
-  destroyed () {
-    this.resetCapMonth()
+    'panel-modal': panelModal,
+    'delete-cap': deleteCap
   }
 }
 </script>

@@ -1,6 +1,12 @@
 <template>
   <div class="full-calendar mx-auto block relative">
-    <v-calendar title-position="right" :attributes="attributes" is-expanded ref="calendar" @update:to-page="$emit('update:to-page', $event)" @update:from-page="$emit('update:from-page', $event)">
+    <v-calendar
+      title-position="right"
+      :attributes="attributes"
+      is-expanded ref="calendar"
+      :trim-weeks="true"
+      @update:to-page="$emit('update:to-page', $event)"
+      @update:from-page="$emit('update:from-page', $event)">
       <template v-slot:header="slotProps">
         <slot name="header" :calendarData="slotProps" :calendarRefs="$refs">
           <calendar-header :calendarData="slotProps" :calendarRefs="$refs"></calendar-header>
@@ -47,7 +53,6 @@ export default {
 
   /* Arrow Positioning and Resets */
   .full-calendar .vc-arrows-container > *:hover { background: none; opacity: 1 }
-  .full-calendar .vc-weeks { @apply mt-4 }
 
   /* Days out of scope of month */
   .full-calendar .in-prev-month > div,

@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import loading from '@/store/modules/caps/loading/'
 import dayCaps from '@/store/modules/caps/day/index'
 import monthCaps from '@/store/modules/caps/month/index'
 import visibility from '@/store/modules/caps/visibility'
@@ -6,6 +7,7 @@ import visibility from '@/store/modules/caps/visibility'
 const modules = {
   dayCaps,
   monthCaps,
+  loading,
   visibility
 }
 
@@ -22,11 +24,14 @@ const getters = {
 
 const actions = {
   async fetchCurrentCaps ({ commit, getters }) {
+    commit('SET_CAPS_FETCH_LOADING')
     await axios.get(getters.getCapsCalendarEndpoint)
       .then(response => {
         commit('SET_CURRENT_CAP_PARENT', response.data.parent)
         commit('SET_CURRENT_DAY_CAPS', response.data.day_caps)
         commit('SET_CURRENT_MONTH_CAPS', response.data.month_caps)
+      }).finally(() => {
+        commit('RESET_CAPS_FETCH_LOADING')
       })
   }
 }

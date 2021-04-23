@@ -4,7 +4,7 @@
       <button class="btn btn-turquoise" @click="showCreateInjectedFieldModal()"><font-awesome-icon icon="plus"></font-awesome-icon> Add Injected Field</button>
     </template>
     <template v-slot:content>
-      <list-injected-fields></list-injected-fields>
+      <list-injected-fields :contract-name="contractName"></list-injected-fields>
       <update-injected-field></update-injected-field>
       <create-injected-field></create-injected-field>
     </template>
@@ -20,7 +20,8 @@ import updateInjectedField from '@/components/forms/injected-fields/fields/updat
 export default {
   props: {
     loading: Boolean,
-    loadingText: String
+    loadingText: String,
+    contractName: String
   },
   computed: {
     ...mapGetters({

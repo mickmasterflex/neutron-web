@@ -75,7 +75,7 @@
 .h1 { @apply text-4xl font-hairline; }
 .h3 { @apply text-2xl font-hairline; }
 .h4 { @apply text-xl font-medium; }
-
+.h5 { @apply font-bold; }
 .h2,
 .h2-hairline {
     @apply text-3xl
@@ -308,10 +308,20 @@
 .table:not(.table-border-none) .td { @apply border-b-2 }
 
 /* Rounded Table Styles */
-.tr:last-child td:first-child { @apply rounded-bl-lg }
-.tr:last-child td:last-child { @apply rounded-br-lg }
-.th:first-child { @apply rounded-tl-lg }
-.th:last-child { @apply rounded-tr-lg }
+.th:first-child { @apply rounded-l-lg }
+.th:last-child { @apply rounded-r-lg }
+
+.tr:last-child td:first-child,
+.tr.last-child td:first-child { @apply rounded-bl-lg }
+
+.tr:last-child td:last-child,
+.tr.last-child td:last-child { @apply rounded-br-lg }
+
+.tr:first-child td:first-child,
+.tr.first-child td:first-child { @apply rounded-tl-lg }
+
+.tr:first-child td:last-child,
+.tr.first-child td:last-child { @apply rounded-tr-lg }
 
 /* Transparent th */
 .thead-transparent .th { @apply text-gray-900 bg-transparent font-bold py-1 }
@@ -321,6 +331,7 @@
 .table-white:not(.table-border-none) .td:first-child { @apply border-l-2 }
 .table-white:not(.table-border-none) .td:last-child { @apply border-r-2 }
 .table-white:not(.table-border-none) .tr:last-child .td { @apply border-b-2 }
+.table-white:not(.table-border-none) .tr:first-child .td { @apply border-t-2 }
 .table-white:not(.table-border-none) .th + .th,
 .table-white:not(.table-border-none) .td + .td { @apply border-l }
 .table-white:not(.table-border-none) .td { @apply border-b }
