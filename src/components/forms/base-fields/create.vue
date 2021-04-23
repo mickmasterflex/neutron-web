@@ -57,13 +57,13 @@ export default {
   },
   mixins: [enterKeyListener, setResponseErrors, formatList],
   methods: {
-    createField (data) {
+    async createField (data) {
       if (this.optionFieldSelected) {
-        this.createBaseOptionField(data)
+        await this.createBaseOptionField(data)
       } else if (this.textFieldSelected) {
-        this.createBaseTextField(data)
+        await this.createBaseTextField(data)
       } else if (this.booleanFieldSelected) {
-        this.createBaseBooleanField(data)
+        await this.createBaseBooleanField(data)
       }
     },
     ...mapActions({

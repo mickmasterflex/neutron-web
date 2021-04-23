@@ -9,10 +9,10 @@
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
           <v-select-field v-model="type" :options="formatListForSelectOptions(typeOptions)" rules="required" field_id="type" field_label="Type"></v-select-field>
         </form>
-        <div v-if="optionFieldSelected && optionFieldOptions.length" class="border-t mt-6">
-          <field-options></field-options>
-        </div>
       </validation-observer>
+      <div v-if="optionFieldSelected" class="border-t mt-6">
+        <field-options></field-options>
+      </div>
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading">
@@ -114,13 +114,14 @@ export default {
       resetUnsavedBaseOptionChanges: 'RESET_UNSAVED_BASE_OPTION_CHANGES',
       closeModal: 'CLOSE_UPDATE_BASE_FIELD_MODAL'
     }),
-    updateField (data) {
+    async updateField (data) {
       if (this.optionFieldSelected) {
-        return this.updateBaseOptionField(data)
+        await this.updateOptions()
+        await this.updateBaseOptionField(data)
       } else if (this.textFieldSelected) {
-        return this.updateBaseTextField(data)
+        await this.updateBaseTextField(data)
       } else if (this.booleanFieldSelected) {
-        return this.updateBaseBooleanField(data)
+        await this.updateBaseBooleanField(data)
       }
     },
     close () {
@@ -138,9 +139,6 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          if (this.optionFieldSelected) {
-            this.updateOptions()
-          }
           this.updateField({
             name: this.name,
             label: this.label,
