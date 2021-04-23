@@ -14,7 +14,7 @@
     </template>
     <template v-slot:footer-additional>
       <button @click="submitForm()" class="btn btn-green btn-lg" :disabled="loading" v-if="unsavedChanges">
-        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Field
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Update Base Options
       </button>
     </template>
   </modal-template>
