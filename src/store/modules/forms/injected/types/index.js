@@ -12,6 +12,7 @@ const state = {
 const getters = {
   getCurrentInjectedFieldType: state => state.current_injected_field_type,
   getInjectedFieldTypes: state => state.injected_field_types,
+  getInjectedFieldTypeById: (state) => (id) => state.injected_field_types.find(type => type.id === id),
   getInjectedFieldTypesCount: state => state.injected_field_types.length
 }
 
