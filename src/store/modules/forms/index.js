@@ -14,11 +14,13 @@ const modules = {
 }
 
 const state = {
+  current_form: {},
   all_forms: [],
   current_ancestor_forms: []
 }
 
 const getters = {
+  getCurrentForm: state => state.current_form,
   getFormByBuyerContract: state => contract => state.all_forms.find(form => form.buyer_contract === contract),
   getFormById: state => formId => state.all_forms.find(form => form.id === formId),
   getAllForms: state => state.all_forms,
@@ -50,6 +52,16 @@ const actions = {
 }
 
 const mutations = {
+  SET_CURRENT_FORM: (state, form) => (state.current_form = form),
+  SORT_CURRENT_FORM_FIELDS: (state) => (state.current_form.fields = state.current_form.fields.sort((a, b) => (a.order > b.order) ? 1 : -1)),
+  ADD_FIELD: (state, field) => state.current_form[field.type].push(field.data),
+  REMOVE_FIELD: (state, deletedField) => (state.current_form[deletedField.type] = state.current_form[deletedField.type].filter(field => field.id !== deletedField.id)),
+  UPDATE_FIELD: (state, updatedField) => {
+    const index = state.current_form[updatedField.type].findIndex(field => field.id === updatedField.data.id)
+    if (index !== -1) {
+      state.current_form[updatedField.type].splice(index, 1, updatedField.data)
+    }
+  },
   SET_ALL_FORMS: (state, forms) => (state.all_forms = forms),
   ADD_ANCESTOR_FORM: (state, form) => (state.current_ancestor_forms.push(form)),
   RESET_ANCESTOR_FORMS: (state) => (state.current_ancestor_forms = [])
