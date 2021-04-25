@@ -17,6 +17,7 @@ import { mapActions, mapMutations, mapGetters } from 'vuex'
 import createBaseField from '@/components/forms/base-fields/create'
 import listBaseFields from '@/components/forms/base-fields/list'
 import updateBaseField from '@/components/forms/base-fields/update'
+import updateBaseOptions from '@/components/forms/base-fields/options/modal'
 
 export default {
   data () {
@@ -27,7 +28,8 @@ export default {
   methods: {
     ...mapMutations({
       showCreateBaseFieldModal: 'SHOW_CREATE_BASE_FIELD_MODAL',
-      showUpdateBaseFieldModal: 'SHOW_UPDATE_BASE_FIELD_MODAL'
+      showUpdateBaseFieldModal: 'SHOW_UPDATE_BASE_FIELD_MODAL',
+      showUpdateBaseOptionsModal: 'SHOW_UPDATE_BASE_OPTIONS_MODAL'
     }),
     ...mapActions({
       fetchBaseFields: 'fetchBaseFields'
@@ -45,6 +47,7 @@ export default {
     ...mapGetters({
       baseFieldCount: 'getBaseFieldCount',
       currentBaseField: 'getCurrentBaseField',
+      currentBaseOptionsField: 'getCurrentBaseOptionsFieldId',
       loading: 'getBaseFieldsFetchLoading',
       loadingText: 'getBaseFieldsFetchLoadingText'
     })
@@ -56,11 +59,19 @@ export default {
           this.showUpdateBaseFieldModal()
         })
       }
+    },
+    currentBaseOptionsField () {
+      if (this.currentBaseOptionsField) {
+        this.setModalComponent(updateBaseOptions).then(() => {
+          this.showUpdateBaseOptionsModal()
+        })
+      }
     }
   },
   components: {
     createBaseField,
     updateBaseField,
+    updateBaseOptions,
     listBaseFields
   }
 }

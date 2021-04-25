@@ -23,7 +23,7 @@ export default {
     }),
     async runDelete () {
       this.loading = true
-      await this.deleteOption(this.option.id).finally(() => {
+      await this.deleteOption(this.option).finally(() => {
         this.loading = false
       })
     }
