@@ -14,7 +14,10 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Create Injected Field</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="postLoading">
+        <font-awesome-icon v-if="postLoading" icon="spinner" pulse></font-awesome-icon>
+        <font-awesome-icon v-else icon="plus"></font-awesome-icon> Create Injected Field
+      </button>
     </template>
   </modal-template>
 </template>
@@ -38,7 +41,8 @@ export default {
       showModal: 'getShowCreateInjectedFieldModal',
       fieldTypes: 'getInjectedFieldTypes',
       currentForm: 'getCurrentForm',
-      loadingTypes: 'getInjectedFieldTypesFetchLoading'
+      loadingTypes: 'getInjectedFieldTypesFetchLoading',
+      postLoading: 'getInjectedFieldsPostLoading'
     })
   },
   mixins: [enterKeyListener, setResponseErrors],
@@ -50,7 +54,6 @@ export default {
       closeModal: 'CLOSE_CREATE_INJECTED_FIELD_MODAL'
     }),
     close () {
-      this.type = ''
       this.key = ''
       this.value = ''
       this.params = ''

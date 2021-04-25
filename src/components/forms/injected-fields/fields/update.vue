@@ -16,7 +16,9 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm" class="btn btn-green btn-lg">Update</button>
+      <button @click="submitForm" class="btn btn-green btn-lg" :disabled="putLoading">
+        <font-awesome-icon v-if="putLoading" icon="spinner" pulse></font-awesome-icon> Update
+      </button>
     </template>
   </modal-template>
 </template>
@@ -41,7 +43,8 @@ export default {
       showModal: 'getShowUpdateInjectedFieldModal',
       injectedField: 'getCurrentInjectedField',
       fieldTypes: 'getInjectedFieldTypes',
-      loadingTypes: 'getInjectedFieldTypesFetchLoading'
+      loadingTypes: 'getInjectedFieldTypesFetchLoading',
+      putLoading: 'getInjectedFieldsPutLoading'
     }),
     unsavedChanges () {
       if (this.injectedField) {
