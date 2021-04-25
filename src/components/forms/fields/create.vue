@@ -21,8 +21,8 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green">
-        <font-awesome-icon icon="clone"></font-awesome-icon> Clone
+      <button @click="submitForm()" class="btn btn-green" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon> Clone
       </button>
     </template>
   </tooltip-dialog-template>
@@ -42,7 +42,11 @@ export default {
     ...mapGetters({
       baseFields: 'getAvailableBaseFields',
       form: 'getCurrentForm',
-      baseFieldsLoading: 'getBaseFieldsFetchLoading'
+      baseFieldsLoading: 'getBaseFieldsFetchLoading',
+      baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
+      baseOptionFieldTypes: 'getBaseOptionFieldTypes',
+      baseTextFieldTypes: 'getBaseTextFieldTypes',
+      loading: 'getFieldsPostLoading'
     }),
     fields () {
       return this.form.fields
@@ -50,28 +54,33 @@ export default {
     selectedBaseField () {
       return this.baseFields.find(({ id }) => id === parseInt(this.baseField))
     },
+    booleanFieldSelected () {
+      return this.baseBooleanFieldTypes.includes(this.selectedBaseField.type)
+    },
     optionFieldSelected () {
-      if (this.selectedBaseField) {
-        return this.selectedBaseField.type === 'select' || this.selectedBaseField.type === 'radio'
-      } else {
-        return null
-      }
+      return this.baseOptionFieldTypes.includes(this.selectedBaseField.type)
     },
     textFieldSelected () {
-      if (this.selectedBaseField) {
-        return this.selectedBaseField.type === 'text' || this.selectedBaseField.type === 'textarea'
-      } else {
-        return null
-      }
+      return this.baseTextFieldTypes.includes(this.selectedBaseField.type)
     },
     newFieldOrder () {
       return this.form.fields.length + 1
     }
   },
   methods: {
+    async cloneField (data) {
+      if (this.optionFieldSelected) {
+        await this.cloneOptionField(data)
+      } else if (this.textFieldSelected) {
+        await this.cloneTextField(data)
+      } else if (this.booleanFieldSelected) {
+        await this.cloneBooleanField(data)
+      }
+    },
     ...mapActions({
-      createTextField: 'createTextField',
-      createOptionField: 'createOptionField',
+      cloneTextField: 'createTextField',
+      cloneOptionField: 'createOptionField',
+      cloneBooleanField: 'createBooleanField',
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
@@ -94,25 +103,14 @@ export default {
     submitForm () {
       this.$refs.form.validate().then(success => {
         if (success) {
-          if (this.textFieldSelected) {
-            this.createTextField({
-              form: this.form.id,
-              base_field: this.baseField,
-              order: this.newFieldOrder
-            }).then(() => {
-              this.closeForm()
-              this.resetForm()
-            })
-          } else if (this.optionFieldSelected) {
-            this.createOptionField({
-              form: this.form.id,
-              base_field: this.baseField,
-              order: this.newFieldOrder
-            }).then(() => {
-              this.closeForm()
-              this.resetForm()
-            })
-          }
+          this.cloneField({
+            form: this.form.id,
+            base_field: this.baseField,
+            order: this.newFieldOrder
+          }).then(() => {
+            this.closeForm()
+            this.resetForm()
+          })
         }
       })
     }

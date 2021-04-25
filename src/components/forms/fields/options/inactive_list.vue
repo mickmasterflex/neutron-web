@@ -20,7 +20,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import addInactiveOption from '@/components/forms/fields/option-fields/options/add_inactive_option'
+import addInactiveOption from '@/components/forms/fields/options/add_inactive_option'
 export default {
   computed: {
     ...mapGetters({
