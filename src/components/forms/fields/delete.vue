@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -15,8 +15,7 @@ export default {
     }
   },
   props: {
-    id: Number,
-    type: String
+    field: Object
   },
   computed: {
     ...mapGetters({
@@ -25,13 +24,13 @@ export default {
       baseTextFieldTypes: 'getBaseTextFieldTypes'
     }),
     booleanFieldSelected () {
-      return this.baseBooleanFieldTypes.includes(this.type)
+      return this.baseBooleanFieldTypes.includes(this.field.type)
     },
     optionFieldSelected () {
-      return this.baseOptionFieldTypes.includes(this.type)
+      return this.baseOptionFieldTypes.includes(this.field.type)
     },
     textFieldSelected () {
-      return this.baseTextFieldTypes.includes(this.type)
+      return this.baseTextFieldTypes.includes(this.field.type)
     }
   },
   methods: {
@@ -39,6 +38,9 @@ export default {
       deleteOptionField: 'deleteOptionField',
       deleteTextField: 'deleteTextField',
       deleteBooleanField: 'deleteBooleanField'
+    }),
+    ...mapMutations({
+      removeFromUsedFields: 'REMOVE_USED_BASE_FIELD'
     }),
     async deleteMethod (id) {
       if (this.optionFieldSelected) {
@@ -51,9 +53,13 @@ export default {
     },
     async runDelete () {
       this.loading = true
-      await this.deleteMethod(this.id).finally(() => {
-        this.loading = false
-      })
+      await this.deleteMethod(this.field.id)
+        .then(() => {
+          this.removeFromUsedFields(this.field.base_field)
+        })
+        .finally(() => {
+          this.loading = false
+        })
     }
   }
 }

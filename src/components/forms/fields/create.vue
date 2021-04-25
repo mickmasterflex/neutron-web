@@ -11,12 +11,13 @@
       <validation-observer ref="form">
         <form @submit.prevent="submitForm">
           <v-select-field
-            :loading="baseFieldsLoading"
+            :loading="optionsLoading"
             rules="required"
             v-model="baseField"
             field_label="Base Field"
             field_id="baseFieldSelectToClone"
-            :options="baseFields"></v-select-field>
+            :options="baseFields"
+          />
         </form>
       </validation-observer>
     </template>
@@ -43,11 +44,15 @@ export default {
       baseFields: 'getAvailableBaseFields',
       form: 'getCurrentForm',
       baseFieldsLoading: 'getBaseFieldsFetchLoading',
+      usedBaseFieldsLoading: 'getFetchUsedBaseFieldsLoading',
       baseBooleanFieldTypes: 'getBaseBooleanFieldTypes',
       baseOptionFieldTypes: 'getBaseOptionFieldTypes',
       baseTextFieldTypes: 'getBaseTextFieldTypes',
       loading: 'getFieldsPostLoading'
     }),
+    optionsLoading () {
+      return this.baseFieldsLoading ? this.baseFieldsLoading : this.usedBaseFieldsLoading
+    },
     fields () {
       return this.form.fields
     },
@@ -84,8 +89,7 @@ export default {
       fetchBaseFields: 'fetchBaseFields'
     }),
     ...mapMutations({
-      setBaseFields: 'SET_BASE_FIELDS',
-      setAvailableBaseFields: 'SET_AVAILABLE_BASE_FIELDS'
+      addUsedBaseField: 'ADD_USED_BASE_FIELD'
     }),
     resetForm () {
       this.baseField = ''
@@ -95,7 +99,6 @@ export default {
     },
     showForm () {
       this.formVisible = true
-      this.setAvailableBaseFields(this.fields)
     },
     closeForm () {
       this.formVisible = false
@@ -108,16 +111,12 @@ export default {
             base_field: this.baseField,
             order: this.newFieldOrder
           }).then(() => {
+            this.addUsedBaseField(parseInt(this.baseField))
             this.closeForm()
             this.resetForm()
           })
         }
       })
-    }
-  },
-  watch: {
-    fields () {
-      this.setAvailableBaseFields(this.fields)
     }
   },
   created () {

@@ -3,17 +3,17 @@
     <fields-panel-template
       :loading="loading"
       :loading-text="loadingText"
-      :contract-name="contractName"
+      :contract-name="contract.name"
       class="col-span-2"/>
     <injected-panel-template
       :loading="loading"
       :loading-text="loadingText"
-      :contract-name="contractName"
+      :contract-name="contract.name"
       class="col-span-2"/>
     <additional-content-panel-template
       :loading="loading"
       :loading-text="loadingText"
-      :contract-name="contractName"
+      :contract-name="contract.name"
       class="col-span-2"/>
   </base-panel-grid>
 </template>
@@ -31,6 +31,7 @@ export default {
   computed: {
     ...mapGetters({
       allForms: 'getAllForms',
+      currentForm: 'getCurrentForm',
       contractAncestorIds: 'getCurrentAncestorsIds',
       fetchFormsLoading: 'getFetchFormsLoading',
       offerFetchLoading: 'getOfferFetchLoading',
@@ -43,8 +44,8 @@ export default {
     contractType () {
       return this.$route.name === 'OfferFieldManagement' ? 'offer' : 'buyer'
     },
-    contractName () {
-      return this.contractType === 'offer' ? this.getCurrentOffer.name : this.getCurrentBuyer.name
+    contract () {
+      return this.contractType === 'offer' ? this.getCurrentOffer : this.getCurrentBuyer
     },
     contractLoading () {
       if (this.contractType === 'offer') {
@@ -71,18 +72,15 @@ export default {
     }),
     ...mapActions({
       fetchForms: 'fetchForms',
+      fetchUsedBaseFields: 'fetchUsedBaseFields',
       setAncestorForms: 'setAncestorForms'
     }),
     fetchAncestorForms () {
       // If the contract is no longer loading, we can assume that ancestors have been set
       if (this.contractLoading === false) {
         this.resetAncestorForms()
-        // No need to fetch if we already have the forms
-        if (this.allForms.length === 0) {
-          this.fetchForms()
-        } else {
-          this.setAncestorForms(this.contractAncestorIds)
-        }
+        this.fetchUsedBaseFields(this.contract.form.id)
+        this.fetchForms()
       }
     }
   },
