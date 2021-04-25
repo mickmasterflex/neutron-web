@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel-template title="Injected Field Types" contentBackgroundColor="white">
+    <panel-template title="Injected Field Types" contentBackgroundColor="white" :show-loader="loading" :loading-text="loadingText">
       <template slot="action">
         <create-injected-field-type></create-injected-field-type>
       </template>
@@ -31,7 +31,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentInjectedFieldType: 'getCurrentInjectedFieldType'
+      currentInjectedFieldType: 'getCurrentInjectedFieldType',
+      loading: 'getInjectedFieldTypesFetchLoading',
+      loadingText: 'getInjectedFieldTypesFetchLoadingText'
     })
   },
   components: {
