@@ -7,9 +7,15 @@
           <v-select-field
             v-model="contentType"
             rules="required"
-            field_id="contentType"
+            field_id="additional_content_type"
             field_label="Type"
             :options="formatListForSelectOptions(contentTypes)"
+            :field_disabled="loading"/>
+          <v-textarea-field
+            v-model="contentBlock"
+            field_id="additional_content_block"
+            field_label="Content"
+            rules="required"
             :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
@@ -21,11 +27,13 @@
               :style-as-field="true"
               :disabled="loading"/>
           </div>
-          <v-textarea-field
-            v-model="contentBlock"
-            field_id="additional_content_block"
-            field_label="Content"
+          <v-select-field
+            v-if="leadIdToggle"
+            v-model="leadIdToggleFieldName"
             rules="required"
+            field_id="leadid_toggle_field_name"
+            field_label="Leadid Field"
+            :options="injectedFieldOptions"
             :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
@@ -61,6 +69,7 @@ export default {
       contentType: 'tcpa',
       contentBlock: '',
       leadIdToggle: false,
+      leadIdToggleFieldName: '',
       doubleOptin: false
     }
   },
@@ -80,17 +89,31 @@ export default {
       currentForm: 'getCurrentForm',
       showModal: 'getShowAdditionalFormContentModal',
       currentAdditionalFormContent: 'getCurrentAdditionalFormContent',
-      modalPurpose: 'getAdditionalFormContentModalPurpose'
+      modalPurpose: 'getAdditionalFormContentModalPurpose',
+      form: 'getCurrentForm',
+      ancestorForms: 'getAncestorFormsWithInjectedFields'
     }),
+    injectedFieldOptions () {
+      let fields = this.form ? this.form.injected_fields : []
+      if (this.ancestorForms.length > 0) {
+        const ancestorFields = this.ancestorForms.map(ancestor => ancestor.injected_fields)
+        fields = fields.concat(ancestorFields[0])
+      }
+      fields = fields.map(field => {
+        return { id: field.field_key, name: field.field_key }
+      })
+      return fields
+    },
     submitData () {
       const data = {
         additional_content_type: this.contentType,
         additional_content_block: this.contentBlock,
-        double_optin: this.doubleOptin,
         form: this.currentForm.id
       }
       if (this.contentType === 'tcpa') {
+        data.double_optin = this.doubleOptin
         data.leadid_toggle = this.leadIdToggle
+        data.leadid_toggle_field_name = this.leadIdToggleFieldName
       }
       if (this.currentAdditionalFormContent.id) {
         data.id = this.currentAdditionalFormContent.id
@@ -102,6 +125,7 @@ export default {
         return this.contentType !== this.currentAdditionalFormContent.additional_content_type ||
           this.contentBlock !== this.currentAdditionalFormContent.additional_content_block ||
           this.leadIdToggle !== this.currentAdditionalFormContent.leadid_toggle ||
+          this.leadIdToggleFieldName !== this.currentAdditionalFormContent.leadid_toggle_field_name ||
           this.doubleOptin !== this.currentAdditionalFormContent.double_optin
       } else {
         return false
@@ -129,12 +153,16 @@ export default {
         }
       })
     },
-    close () {
-      this.closeModal()
+    resetData () {
       this.contentType = 'tcpa'
       this.contentBlock = ''
       this.leadIdToggle = false
+      this.leadIdToggleFieldName = ''
       this.doubleOptin = false
+    },
+    close () {
+      this.closeModal()
+      this.resetData()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -149,6 +177,7 @@ export default {
       this.contentType = this.currentAdditionalFormContent.additional_content_type
       this.contentBlock = this.currentAdditionalFormContent.additional_content_block
       this.leadIdToggle = this.currentAdditionalFormContent.leadid_toggle
+      this.leadIdToggleFieldName = this.currentAdditionalFormContent.leadid_toggle_field_name
       this.doubleOptin = this.currentAdditionalFormContent.double_optin
     }
   }
