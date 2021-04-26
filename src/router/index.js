@@ -773,18 +773,43 @@ const routes = [
       {
         name: 'BuyerContractFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/field-management'),
-        meta: {
-          requiresAuth: true,
-          activeApp: 'relationships',
-          contentTab: 'field-management'
-        },
-        props (route) {
-          const props = { ...route.params }
-          props.id = +props.id
-          return props
-        },
-        pathToRegexpOptions: { strict: true }
+        redirect: { name: 'BuyerContractFields' },
+        component: () => import('@/views/relationships/contract-mgmt/field-management/index'),
+        pathToRegexpOptions: { strict: true },
+        children: [
+          {
+            name: 'BuyerContractFields',
+            path: '',
+            component: () => import('@/views/relationships/contract-mgmt/field-management/fields'),
+            meta: {
+              requiresAuth: true,
+              activeApp: 'relationships',
+              contentTab: 'field-management'
+            },
+            props (route) {
+              const props = { ...route.params }
+              props.id = +props.id
+              return props
+            },
+            pathToRegexpOptions: { strict: true }
+          },
+          {
+            name: 'BuyerContractFPI',
+            path: 'fpi/',
+            component: () => import('@/views/relationships/contract-mgmt/field-management/fpi'),
+            meta: {
+              requiresAuth: true,
+              activeApp: 'relationships',
+              contentTab: 'field-management'
+            },
+            props (route) {
+              const props = { ...route.params }
+              props.id = +props.id
+              return props
+            },
+            pathToRegexpOptions: { strict: true }
+          }
+        ]
       },
       {
         name: 'BuyerContractOffers',
@@ -834,7 +859,7 @@ const routes = [
       {
         name: 'OfferFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/field-management'),
+        component: () => import('@/views/relationships/contract-mgmt/field-management/index'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
