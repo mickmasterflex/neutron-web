@@ -31,6 +31,7 @@ const actions = {
   async authLogout ({ commit }) {
     return new Promise((resolve) => {
       commit('RESET_AUTH_STATE')
+      commit('RESET_CURRENT_ACTIVE_USER')
       localStorage.removeItem('user-token')
       delete axios.defaults.headers.common.Authorization
       resolve()

@@ -25,16 +25,24 @@ export default {
       return (this.$route.meta.layout || appLayout) + '-layout'
     },
     ...mapGetters({
-      toast_messages: 'getToastMessages'
+      toast_messages: 'getToastMessages',
+      current_active_user: 'getCurrentActiveUser',
+      isAuthenticated: 'isAuthenticated'
     })
   },
   methods: {
     ...mapActions({
-      logout: 'authLogout'
+      logout: 'authLogout',
+      fetchCurrentActiveUser: 'fetchCurrentActiveUser'
     })
   },
   components: {
     toast: toast
+  },
+  updated () {
+    if (!this.current_active_user && this.isAuthenticated) {
+      this.fetchCurrentActiveUser()
+    }
   }
 }
 </script>

@@ -8,6 +8,7 @@
         <v-text-field v-model="password" rules="required" field_id="password" field_label="Password" field_type="password"></v-text-field>
         <button type="submit" class="btn btn-green mt-3" :disabled="formStatus === 'loading'">Login</button>
       </form>
+      <router-link :to="{ name: 'ForgotPassword'}" class="text-link">Forgot Password</router-link>
     </validation-observer>
   </div>
 </template>
