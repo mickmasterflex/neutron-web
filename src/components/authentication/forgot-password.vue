@@ -4,7 +4,7 @@
     <h1>Reset Password</h1>
     <validation-observer ref="form" v-slot="{ handleSubmit }">
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(submitForm)">
-        <v-text-field v-model="email" rules="required" mode="passive" field_id="email" field_label="Email" :field_type="email"></v-text-field>
+        <v-text-field v-model="email" rules="email|required" mode="passive" field_id="email" field_label="Email" field_type="email"></v-text-field>
         <button :disabled="loading" type="submit" class="btn btn-green mt-3"> Send Temporary Password</button>
       </form>
       <router-link :to="{ name: 'Login'}" class="text-link">Back to Login</router-link>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 
 export default {
@@ -29,17 +29,13 @@ export default {
     }
   },
   mixins: [setResponseErrors],
-  computed: {
-    ...mapGetters({
-      currentUser: 'getCurrentUser'
-    })
-  },
   methods: {
     ...mapActions({
       forgotPassword: 'forgotPassword'
     }),
     submitForm () {
       this.$refs.form.validate().then(success => {
+        this.loading = true
         if (success) {
           this.forgotPassword({
             email: this.email
@@ -54,8 +50,6 @@ export default {
         }
       })
     }
-  },
-  components: {
   }
 }
 </script>
