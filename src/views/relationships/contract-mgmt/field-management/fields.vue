@@ -1,6 +1,5 @@
 <template>
   <base-panel-grid>
-    <router-link :to="{ name: 'BuyerContractFPI', params: $route.params }">FPI</router-link>
     <fields-panel-template
       :loading="loading"
       :loading-text="loadingText"

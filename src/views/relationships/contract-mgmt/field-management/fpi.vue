@@ -1,6 +1,5 @@
 <template>
   <base-panel-grid>
-   <router-link :to="{ name: 'BuyerContractFieldManagement', params: $route.params }">Field Management</router-link>
    <panel-template
      title="Fields"
      content-background-color="white"
