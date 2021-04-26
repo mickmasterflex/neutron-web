@@ -766,7 +766,8 @@ const routes = [
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'contracts'
+          contentTab: 'contracts',
+          title: 'Contracts'
         },
         pathToRegexpOptions: { strict: true }
       },
@@ -784,7 +785,8 @@ const routes = [
             meta: {
               requiresAuth: true,
               activeApp: 'relationships',
-              contentTab: 'field-management'
+              contentTab: 'field-management',
+              title: 'Field Management'
             },
             props (route) {
               const props = { ...route.params }
@@ -800,7 +802,8 @@ const routes = [
             meta: {
               requiresAuth: true,
               activeApp: 'relationships',
-              contentTab: 'field-management'
+              contentTab: 'field-management',
+              title: 'FPI'
             },
             props (route) {
               const props = { ...route.params }
@@ -818,7 +821,8 @@ const routes = [
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'offers'
+          contentTab: 'offers',
+          title: 'Offers'
         },
         props (route) {
           const props = { ...route.params }

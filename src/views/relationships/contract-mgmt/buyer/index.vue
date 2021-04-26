@@ -65,7 +65,11 @@ export default {
     },
     setBuyerWithTitleAndBreadcrumbs () {
       this.setBuyer().then(() => {
-        document.title = this.contract.name
+        let title = this.contract.name
+        if (this.$route.meta.title) {
+          title = title + ' | ' + this.$route.meta.title
+        }
+        document.title = title
         this.setBreadcrumbsWithAncestors()
       })
     }
