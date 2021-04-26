@@ -859,7 +859,7 @@ const routes = [
       {
         name: 'OfferFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/field-management/index'),
+        component: () => import('@/views/relationships/contract-mgmt/field-management/fields'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
