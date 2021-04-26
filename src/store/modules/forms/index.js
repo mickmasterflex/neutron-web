@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import fpi from '@/store/modules/forms/fpi'
+import fpi from '@/store/modules/forms/fpi/'
 import fields from '@/store/modules/forms/fields'
 import baseFields from '@/store/modules/forms/base-fields'
 import loading from '@/store/modules/forms/loading'
