@@ -6,7 +6,7 @@ const modules = {
 }
 
 const state = {
-  current_fpi: {}
+  current_fpi: null
 }
 
 const getters = {
@@ -27,7 +27,7 @@ const actions = {
 
 const mutations = {
   SET_CURRENT_FPI: (state, fpi) => (state.current_fpi = fpi),
-  RESET_CURRENT_FPI: (state) => (state.current_fpi = {})
+  RESET_CURRENT_FPI: (state) => (state.current_fpi = null)
 }
 
 export default {
