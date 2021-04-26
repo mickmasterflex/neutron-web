@@ -42,6 +42,7 @@ export default {
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
+        this.loading = true
         if (success) {
           this.setPassword({
             new_password: this.new_password,
@@ -59,8 +60,6 @@ export default {
         }
       })
     }
-  },
-  components: {
   }
 }
 </script>
