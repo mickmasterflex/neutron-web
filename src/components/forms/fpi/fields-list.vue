@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="fields.length > 0" class="table table-striped">
+    <table v-if="fields.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Name</th>

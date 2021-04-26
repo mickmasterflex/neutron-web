@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="locations.length > 0" class="table table-striped">
+    <table v-if="locations.length" class="table table-striped">
       <thead>
       <tr>
         <th class="th">Location</th>
