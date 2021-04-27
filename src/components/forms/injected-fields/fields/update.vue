@@ -6,7 +6,7 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Type" :options="fieldTypes">
+          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Type" :options="fieldTypes" :loading="loadingTypes">
             <template v-slot:option="slotProps">{{ slotProps.option.field_type }}</template>
           </v-select-field>
           <v-text-field v-model="key" field_id="field_key" field_label="Key" rules="required"></v-text-field>
@@ -16,7 +16,9 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm" class="btn btn-green btn-lg">Update</button>
+      <button @click="submitForm" class="btn btn-green btn-lg" :disabled="putLoading">
+        <font-awesome-icon v-if="putLoading" icon="spinner" pulse></font-awesome-icon> Update
+      </button>
     </template>
   </modal-template>
 </template>
@@ -40,7 +42,9 @@ export default {
     ...mapGetters({
       showModal: 'getShowUpdateInjectedFieldModal',
       injectedField: 'getCurrentInjectedField',
-      fieldTypes: 'getInjectedFieldTypes'
+      fieldTypes: 'getInjectedFieldTypes',
+      loadingTypes: 'getInjectedFieldTypesFetchLoading',
+      putLoading: 'getInjectedFieldsPutLoading'
     }),
     unsavedChanges () {
       if (this.injectedField) {
