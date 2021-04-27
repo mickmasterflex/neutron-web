@@ -55,6 +55,7 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BUYER',
+      resetCurrentFpi: 'RESET_CURRENT_FPI',
       resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
       setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
@@ -84,6 +85,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetCurrentFpi()
     this.resetBulkUpdateBuyers()
   }
 }
