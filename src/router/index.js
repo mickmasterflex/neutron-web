@@ -799,6 +799,11 @@ const routes = [
         redirect: { name: 'BuyerContractFields' },
         component: () => import('@/views/relationships/contract-mgmt/field-management/index'),
         pathToRegexpOptions: { strict: true },
+        props (route) {
+          const props = { ...route.params }
+          props.id = +props.id
+          return props
+        },
         children: [
           {
             name: 'BuyerContractFields',
