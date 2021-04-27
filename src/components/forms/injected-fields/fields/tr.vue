@@ -1,6 +1,6 @@
 <template>
   <tr class="tr">
-    <td class="td">{{ injectedField.field_type }}</td>
+    <td class="td">{{ typeById(injectedField.field_type) ? typeById(injectedField.field_type).field_type : injectedField.field_type }}</td>
     <td class="td">{{ injectedField.field_key }}</td>
     <td class="td">{{ injectedField.field_value }}</td>
     <td class="td">{{ injectedField.posting_params }}</td>
@@ -19,7 +19,7 @@
 
 <script>
 import deleteInjectedField from '@/components/forms/injected-fields/fields/delete'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   props: {
     injectedField: Object,
@@ -30,6 +30,11 @@ export default {
   },
   components: {
     'delete-injected-field': deleteInjectedField
+  },
+  computed: {
+    ...mapGetters({
+      typeById: 'getInjectedFieldTypeById'
+    })
   },
   methods: {
     ...mapMutations({
