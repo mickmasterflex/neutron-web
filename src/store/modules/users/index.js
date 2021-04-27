@@ -1,10 +1,14 @@
 import axios from '@/axios'
 import loading from '@/store/modules/users/loading'
 import visibility from '@/store/modules/users/visibility'
+import currentActiveUser from '@/store/modules/users/current-active-user'
+import setPassword from '@/components/authentication/reset-password'
 
 const modules = {
   loading,
-  visibility
+  visibility,
+  currentActiveUser,
+  setPassword
 }
 
 const state = {
@@ -55,6 +59,15 @@ const actions = {
       .then(() => {
         commit('REMOVE_USER', id)
       })
+  },
+  async resetPassword ({ commit }, password) {
+    await axios.post('/reset-password/', password)
+      .then(() => {
+        commit('UPDATE_CURRENT_USER_PASS_VALID', true)
+      })
+  },
+  async forgotPassword ({ commit }, email) {
+    await axios.post('/forgot-password/', email)
   }
 }
 
