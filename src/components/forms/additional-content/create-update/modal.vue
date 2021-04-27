@@ -27,11 +27,12 @@
               :style-as-field="true"
               :disabled="loading"/>
           </div>
-          <select-field
+          <v-select-field
             v-if="leadIdToggle"
             v-model="leadIdToggleFieldName"
             field_id="leadid_toggle_field_name"
             field_label="Leadid Field"
+            :rules="leadIdToggle ? 'required' : ''"
             :options="injectedFieldOptions"
             :field_disabled="loading"/>
           <div class="field-group ml-label-width">
@@ -43,9 +44,10 @@
               :style-as-field="true"
               :disabled="loading"/>
           </div>
-          <select-field
+          <v-select-field
             v-if="doubleOptin"
             v-model="doubleOptinFieldName"
+            :rules="doubleOptin ? 'required' : ''"
             field_id="leadid_toggle_field_name"
             field_label="Double Optin Field"
             :options="booleanFieldOptions"
