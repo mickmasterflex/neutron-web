@@ -873,17 +873,6 @@ const routes = [
     ]
   },
   {
-    path: '/utilities/',
-    name: 'Utilities',
-    component: () => import('@/views/Utilities.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'utilities',
-      title: 'Utilities'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
     path: '/users/',
     name: 'Users',
     component: () => import('@/views/users/index.vue'),
