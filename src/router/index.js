@@ -22,7 +22,29 @@ const routes = [
     component: () => import('@/views/authentication/login.vue'),
     meta: {
       layout: 'simple',
-      title: 'Login'
+      title: 'Login',
+      requiresUnAuth: true
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/reset-password/',
+    name: 'ResetPassword',
+    component: () => import('@/views/authentication/reset-password.vue'),
+    meta: {
+      layout: 'simple',
+      title: 'Reset Password'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
+    path: '/forgot-password/',
+    name: 'ForgotPassword',
+    component: () => import('@/views/authentication/forgot-password.vue'),
+    meta: {
+      layout: 'simple',
+      title: 'Forgot Password',
+      requiresUnAuth: true
     },
     pathToRegexpOptions: { strict: true }
   },
@@ -880,17 +902,6 @@ const routes = [
     ]
   },
   {
-    path: '/utilities/',
-    name: 'Utilities',
-    component: () => import('@/views/Utilities.vue'),
-    meta: {
-      requiresAuth: true,
-      activeApp: 'utilities',
-      title: 'Utilities'
-    },
-    pathToRegexpOptions: { strict: true }
-  },
-  {
     path: '/users/',
     name: 'Users',
     component: () => import('@/views/users/index.vue'),
@@ -947,7 +958,6 @@ router.beforeEach((to, from, next) => {
     } else {
       store.commit('RESET_ACTIVE_APP')
     }
-
     // Check Authentication
     if (store.getters.isAuthenticated) {
       next()
