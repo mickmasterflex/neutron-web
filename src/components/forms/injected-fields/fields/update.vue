@@ -10,8 +10,8 @@
             <template v-slot:option="slotProps">{{ slotProps.option.field_type }}</template>
           </v-select-field>
           <v-text-field v-model="key" field_id="field_key" field_label="Key" rules="required"></v-text-field>
-          <v-text-field v-model="value" field_id="field_value" field_label="Value" rules="required"></v-text-field>
-          <v-text-field v-model="params" field_id="posting_params" field_label="Posting Params" rules="required"></v-text-field>
+          <text-field v-model="value" field_id="field_value" field_label="Value"></text-field>
+          <text-field v-model="params" field_id="posting_params" field_label="Posting Params"></text-field>
         </form>
       </validation-observer>
     </template>
