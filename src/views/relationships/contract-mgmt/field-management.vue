@@ -80,7 +80,9 @@ export default {
       if (this.contractLoading === false) {
         this.resetAncestorForms()
         this.fetchUsedBaseFields(this.contract.form.id)
-        this.fetchForms()
+        if (this.contract.parent) {
+          this.fetchForms()
+        }
       }
     }
   },
