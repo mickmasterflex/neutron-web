@@ -29,8 +29,8 @@
           </div>
           <v-select-field
             v-if="leadIdToggle"
-            v-model="leadIdToggleFieldName"
-            field_id="leadid_toggle_field_name"
+            v-model="leadIdToggleField"
+            field_id="leadid_toggle_field"
             field_label="Leadid Field"
             :rules="leadIdToggle ? 'required' : ''"
             :options="injectedFieldOptions"
@@ -46,9 +46,9 @@
           </div>
           <v-select-field
             v-if="doubleOptin"
-            v-model="doubleOptinFieldName"
+            v-model="doubleOptinField"
             :rules="doubleOptin ? 'required' : ''"
-            field_id="leadid_toggle_field_name"
+            field_id="leadid_toggle_field"
             field_label="Double Optin Field"
             :options="booleanFieldOptions"
             :field_disabled="loading"/>
@@ -77,9 +77,9 @@ export default {
       contentType: 'tcpa',
       contentBlock: '',
       leadIdToggle: false,
-      leadIdToggleFieldName: '',
+      leadIdToggleField: '',
       doubleOptin: false,
-      doubleOptinFieldName: ''
+      doubleOptinField: ''
     }
   },
   props: {
@@ -111,7 +111,7 @@ export default {
         fields = fields.concat(ancestorFields[0])
       }
       fields = fields.map(field => {
-        return { id: field.field_key, name: field.field_key }
+        return { id: field.id, name: field.field_key }
       })
       return fields
     },
@@ -123,7 +123,7 @@ export default {
       }
       fields = fields.filter(field => this.booleanFieldTypes.includes(field.type))
       fields = fields.map(field => {
-        return { id: field.label, name: field.label }
+        return { id: field.id, name: field.label }
       })
       return fields
     },
@@ -135,9 +135,9 @@ export default {
       }
       if (this.contentType === 'tcpa') {
         data.double_optin = this.doubleOptin
-        data.double_optin_field_name = this.doubleOptinFieldName
+        data.double_optin_field = this.doubleOptinField
         data.leadid_toggle = this.leadIdToggle
-        data.leadid_toggle_field_name = this.leadIdToggleFieldName
+        data.leadid_toggle_field = this.leadIdToggleField
       }
       if (this.currentAdditionalFormContent.id) {
         data.id = this.currentAdditionalFormContent.id
@@ -149,9 +149,9 @@ export default {
         return this.contentType !== this.currentAdditionalFormContent.additional_content_type ||
           this.contentBlock !== this.currentAdditionalFormContent.additional_content_block ||
           this.leadIdToggle !== this.currentAdditionalFormContent.leadid_toggle ||
-          this.leadIdToggleFieldName !== this.currentAdditionalFormContent.leadid_toggle_field_name ||
+          this.leadIdToggleField !== this.currentAdditionalFormContent.leadid_toggle_field ||
           this.doubleOptin !== this.currentAdditionalFormContent.double_optin ||
-          this.doubleOptinFieldName !== this.currentAdditionalFormContent.double_optin_field_name
+          this.doubleOptinField !== this.currentAdditionalFormContent.double_optin_field
       } else {
         return false
       }
@@ -182,9 +182,9 @@ export default {
       this.contentType = 'tcpa'
       this.contentBlock = ''
       this.leadIdToggle = false
-      this.leadIdToggleFieldName = ''
+      this.leadIdToggleField = ''
       this.doubleOptin = false
-      this.doubleOptinFieldName = ''
+      this.doubleOptinField = ''
     },
     close () {
       this.closeModal()
@@ -203,9 +203,9 @@ export default {
       this.contentType = this.currentAdditionalFormContent.additional_content_type
       this.contentBlock = this.currentAdditionalFormContent.additional_content_block
       this.leadIdToggle = this.currentAdditionalFormContent.leadid_toggle
-      this.leadIdToggleFieldName = this.currentAdditionalFormContent.leadid_toggle_field_name
+      this.leadIdToggleField = this.currentAdditionalFormContent.leadid_toggle_field
       this.doubleOptin = this.currentAdditionalFormContent.double_optin
-      this.doubleOptinFieldName = this.currentAdditionalFormContent.double_optin_field_name
+      this.doubleOptinField = this.currentAdditionalFormContent.double_optin_field
     }
   }
 }
