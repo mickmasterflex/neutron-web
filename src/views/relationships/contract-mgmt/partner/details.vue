@@ -1,6 +1,7 @@
 <template>
   <base-panel-grid>
-    <update-partner-contract :partner="partner" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"></update-partner-contract>
+    <update-partner-contract :partner="partner" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"/>
+    <financial-info :partner="partner" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"/>
     <panel-template title="Lead Caps" contentClass="relative" class="col-span-2" :show-loader="loadingCaps" :loading-text="loadingCapsText">
       <template v-slot:content>
         <lead-caps :parent="id" type="partners"></lead-caps>
@@ -18,6 +19,7 @@
 import { mapGetters } from 'vuex'
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
+import financialInfo from '@/components/partners/financial-update'
 import leadCaps from '@/components/caps/'
 
 export default {
@@ -36,6 +38,7 @@ export default {
   components: {
     'delete-partner-contract': deletePartner,
     'update-partner-contract': updatePartner,
+    'financial-info': financialInfo,
     'lead-caps': leadCaps
   }
 }
