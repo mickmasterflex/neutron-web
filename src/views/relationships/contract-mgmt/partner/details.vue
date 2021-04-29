@@ -7,6 +7,7 @@
         <lead-caps :parent="id" type="partners"></lead-caps>
       </template>
     </panel-template>
+    <alternate-ids :partner="partner" class="col-span-2" :showLoader="loading" loadingText="Loading Partner and Alternate Ids"/>
     <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
       <template v-slot:content>
         <delete-partner-contract :client="$route.params.client" :id="partner.id" :parent="partner.parent"></delete-partner-contract>
@@ -20,6 +21,7 @@ import { mapGetters } from 'vuex'
 import deletePartner from '@/components/partners/delete'
 import updatePartner from '@/components/partners/update'
 import financialInfo from '@/components/partners/financial-update'
+import altIds from '@/components/partners/alternate-ids/index'
 import leadCaps from '@/components/caps/'
 
 export default {
@@ -36,9 +38,10 @@ export default {
     })
   },
   components: {
+    'alternate-ids': altIds,
     'delete-partner-contract': deletePartner,
-    'update-partner-contract': updatePartner,
     'financial-info': financialInfo,
+    'update-partner-contract': updatePartner,
     'lead-caps': leadCaps
   }
 }
