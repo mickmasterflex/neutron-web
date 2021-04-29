@@ -2,18 +2,17 @@
   <content-layout>
     <template v-slot:hud-content>
       <hud-h1 :loading="loading" :content="client.name"/>
-      <hud-stat-cards>
-        <stat-card :data="partners.length" title="Partner Contracts" key="partnerCount" :loading="loading"/>
-        <stat-card :data="buyers.length" title="Buyer Contracts" key="buyerCount" :loading="loading"/>
-      </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
       <underscore-tabs>
         <underscore-tab :active="$route.meta.contentTab === 'details'">
           <router-link :to="{name: 'Client', params: {slug: slug}}">Client Details</router-link>
         </underscore-tab>
-        <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'ClientContracts', params: {slug: slug}}">Contracts <number-label :number="contractLength"/></router-link>
+        <underscore-tab :active="$route.meta.contentTab === 'buyers'">
+          <router-link :to="{name: 'ClientBuyerContracts', params: {slug: slug}}">Buyers <number-label :number="buyers.length"/></router-link>
+        </underscore-tab>
+        <underscore-tab :active="$route.meta.contentTab === 'partners'">
+          <router-link :to="{name: 'ClientPartnerContracts', params: {slug: slug}}">Partners <number-label :number="partners.length"/></router-link>
         </underscore-tab>
       </underscore-tabs>
     </template>
@@ -46,9 +45,6 @@ export default {
     },
     partners () {
       return this.partnersByClient(this.client.id)
-    },
-    contractLength () {
-      return this.partners.length + this.buyers.length
     }
   },
   methods: {

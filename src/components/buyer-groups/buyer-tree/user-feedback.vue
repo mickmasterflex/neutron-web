@@ -2,7 +2,7 @@
   <p class="w-full pl-8 pr-2 pb-2 pt-2 border-t"
      :class="`bg-${accentColor('gray')}-100 border-${accentColor('gray')}-200 text-${accentColor('gray')}-800`">
         <span v-if="userFeedbackState.clientHasNoChildren">
-          No buyers have been created for this client, add buyers <router-link :to="{name: 'ClientContracts', params: {slug:obj.slug}}" class="text-link">here</router-link>
+          No buyers have been created for this client, add buyers <router-link :to="{name: 'ClientBuyerContracts', params: {slug:obj.slug}}" class="text-link">here</router-link>
         </span>
     <span v-if="userFeedbackState.conflictingBuyerGroup">
           Conflicting Buyer Group: Click the x icon to unassign from

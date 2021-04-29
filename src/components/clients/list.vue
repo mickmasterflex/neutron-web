@@ -18,12 +18,12 @@
           <td class="td">{{client.id}}</td>
           <td class="td">{{client.slug}}</td>
           <td class="td">
-            <table-link @table-link-click="linkToClientContracts(client)"
+            <table-link @table-link-click="linkToClientBuyers(client)"
                         :number="buyers(client.buyercontract_set).length"
             ></table-link>
           </td>
           <td class="td">
-            <table-link @table-link-click="linkToClientContracts(client)"
+            <table-link @table-link-click="linkToClientPartners(client)"
                         :number="partners(client.partnercontract_set).length"
             ></table-link>
           </td>
@@ -63,9 +63,13 @@ export default {
       this.setCurrentClientAndContracts(client)
       this.$router.push({ name: 'Client', params: { slug: client.slug } })
     },
-    linkToClientContracts (client) {
+    linkToClientBuyers (client) {
       this.setCurrentClientAndContracts(client)
-      this.$router.push({ name: 'ClientContracts', params: { slug: client.slug } })
+      this.$router.push({ name: 'ClientBuyerContracts', params: { slug: client.slug } })
+    },
+    linkToClientPartners (client) {
+      this.setCurrentClientAndContracts(client)
+      this.$router.push({ name: 'ClientPartnerContracts', params: { slug: client.slug } })
     }
   },
   computed: {
