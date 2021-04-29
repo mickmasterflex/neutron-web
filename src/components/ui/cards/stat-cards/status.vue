@@ -1,11 +1,12 @@
 <template>
-  <stat-card :data="status" title="Status" :color="statusCardColor"/>
+  <stat-card :data="status" title="Status" :color="statusCardColor" :loading="loading"/>
 </template>
 
 <script>
 export default {
   props: {
-    status: String
+    status: String,
+    loading: Boolean
   },
   computed: {
     statusCardColor () {
