@@ -39,7 +39,7 @@ export default {
   components: {
     toast: toast
   },
-  updated () {
+  created () {
     if (!this.current_active_user && this.isAuthenticated) {
       this.fetchCurrentActiveUser()
     }
