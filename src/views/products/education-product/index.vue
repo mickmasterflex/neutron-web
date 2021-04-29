@@ -1,7 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{product.name}}</h1>
+      <hud-h1 :loading="loading" :content="product.name"/>
     </template>
     <template v-slot:contentTabs>
       <underscore-tabs>
@@ -53,7 +53,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      product: 'getCurrentEducationProduct'
+      product: 'getCurrentEducationProduct',
+      loading: 'getEducationProductFetchLoading'
     })
   },
   created () {

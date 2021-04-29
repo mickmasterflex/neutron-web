@@ -1,10 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{contract.name}}</h1>
+      <hud-h1 :loading="loading" :content="contract.name"/>
       <hud-stat-cards>
         <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
-        <status-card :status="contract.status" key="statusCard"></status-card>
+        <status-card :status="contract.status" key="statusCard" :loading="loading"/>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -41,7 +41,8 @@ export default {
   mixins: [partnerContractBreadcrumbs],
   computed: {
     ...mapGetters({
-      contract: 'getCurrentPartner'
+      contract: 'getCurrentPartner',
+      loading: 'getPartnerFetchLoading'
     })
   },
   methods: {

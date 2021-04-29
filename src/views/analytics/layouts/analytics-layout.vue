@@ -3,11 +3,7 @@
     <template v-slot:hud-content>
       <slot name="hud">
         <div>
-          <h1
-            :class="loading ? 'animate__animated animate__flash animate__slower' : ''"
-            class="text-white text-4xl font-hairline mb-2">
-            {{ loading ? 'Loading...' : hudTitle }}
-          </h1>
+          <hud-h1 :loading="loading" :content="hudTitle"/>
         </div>
         <hud-stat-cards>
           <slot name="statCards"></slot>
