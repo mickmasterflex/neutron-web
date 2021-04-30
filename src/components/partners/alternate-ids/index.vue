@@ -5,7 +5,7 @@
         <div class="field-group"
              v-for="altId in currentAltIds"
              :key="`altId-` + altId.id">
-          <alt-id-toggle :altId="altId"/>
+          <alt-id-switch :altId="altId"/>
           <label class="ml-4 text-left cursor-pointer" :for="`altId-` + altId.id">{{ altId.random_id }}</label>
         </div>
       </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import altIdToggle from './alternate-id'
+import altIdSwitch from './alternate-id-switch'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -25,7 +25,7 @@ export default {
     })
   },
   components: {
-    'alt-id-toggle': altIdToggle
+    'alt-id-switch': altIdSwitch
   }
 }
 </script>
