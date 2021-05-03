@@ -36,6 +36,7 @@
       </tbody>
     </table>
     <table-empty-state v-else
+                       class="well"
                        heading="No Base Fields Exist"
                        key="empty"
                        copy="Use the 'New Field' button to get started."></table-empty-state>

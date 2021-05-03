@@ -31,6 +31,7 @@
       </tbody>
     </table>
     <table-empty-state v-else
+                       class="well"
                        heading="No Clients Exist"
                        key="empty"
                        copy="Use the 'New Client' button to get started."></table-empty-state>
