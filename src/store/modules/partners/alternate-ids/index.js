@@ -25,7 +25,7 @@ const mutations = {
     if (index !== -1) {
       state.current_alternate_ids.splice(index, 1, updatedAltId)
     }
-  },
+  }
 }
 
 export default {
