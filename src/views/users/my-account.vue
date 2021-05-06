@@ -10,16 +10,18 @@
       </hud-stat-cards>
     </template>
     <template v-slot:content>
-      <update-user :user="currentActiveUser"></update-user>
+      <base-panel-grid>
+        <update-user class="col-span-2 xl:col-span-1" :user="currentActiveUser"></update-user>
+        <set-password class="col-span-2 xl:col-span-1"></set-password>
+      </base-panel-grid>
     </template>
   </content-layout>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { setResponseErrors } from '@/mixins/set-response-errors'
-import panelFooter from '@/components/ui/panels/base/footer'
 import updateUser from '@/components/users/update'
+import setPassword from '@/components/authentication/set-password'
 
 export default {
   data () {
@@ -40,7 +42,6 @@ export default {
       currentUser: 'getCurrentUser'
     })
   },
-  mixins: [setResponseErrors],
   methods: {
     ...mapActions({ setPassword: 'resetPassword' }),
     togglePasswordUnlocked () {
@@ -66,7 +67,7 @@ export default {
     }
   },
   components: {
-    'panel-footer': panelFooter,
+    'set-password': setPassword,
     'update-user': updateUser
   }
 }
