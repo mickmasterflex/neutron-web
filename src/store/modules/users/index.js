@@ -61,13 +61,13 @@ const actions = {
       })
   },
   async resetPassword ({ commit }, password) {
-    await axios.post('/reset-password/', password)
+    await axios.post('/reset-password/', password, { showSuccessToast: false })
       .then(() => {
         commit('UPDATE_CURRENT_USER_PASS_VALID', true)
       })
   },
   async forgotPassword ({ commit }, email) {
-    await axios.post('/forgot-password/', email)
+    await axios.post('/forgot-password/', email, { showSuccessToast: false })
   }
 }
 

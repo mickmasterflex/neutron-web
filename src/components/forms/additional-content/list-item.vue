@@ -17,8 +17,8 @@
             Leadid Toggle: <span class="font-bold" :class="content.leadid_toggle ? 'text-green-600' : 'text-red-500'">{{ content.leadid_toggle }}</span>
           </span>
         <span>
-            Double Opt-in: <span class="font-bold" :class="content.double_optin ? 'text-green-600' : 'text-red-500'">{{ content.double_optin }}</span>
-          </span>
+          Double Opt-in: <span class="font-bold" :class="content.double_optin ? 'text-green-600' : 'text-red-500'">{{ content.double_optin }}</span>
+        </span>
       </div>
       <div class="well">{{ content.additional_content_block }}</div>
     </template>

@@ -16,7 +16,10 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm" class="btn btn-green btn-lg">Update</button>
+      <button @click="submitForm" class="btn btn-green btn-lg" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon>
+        <font-awesome-icon v-else icon="plus"></font-awesome-icon> Update
+      </button>
     </template>
 </modal-template>
 </template>
@@ -37,7 +40,8 @@ export default {
     ...mapGetters({
       showModal: 'getShowUpdateInjectedFieldTypeModal',
       currentInjectedFieldType: 'getCurrentInjectedFieldType',
-      fieldTypes: 'getInjectedFieldTypes'
+      fieldTypes: 'getInjectedFieldTypes',
+      loading: 'getInjectedFieldTypesPutLoading'
     }),
     unsavedChanges () {
       if (this.currentInjectedFieldType) {

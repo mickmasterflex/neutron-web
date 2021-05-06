@@ -1,8 +1,10 @@
 import axios from '@/axios'
 import visibility from './visibility'
+import loading from './loading'
 
 const modules = {
-  visibility
+  visibility,
+  loading
 }
 
 const state = {
@@ -12,27 +14,34 @@ const state = {
 const getters = {
   getCurrentInjectedFieldType: state => state.current_injected_field_type,
   getInjectedFieldTypes: state => state.injected_field_types,
+  getInjectedFieldTypeById: (state) => (id) => state.injected_field_types.find(type => type.id === id),
   getInjectedFieldTypesCount: state => state.injected_field_types.length
 }
 
 const actions = {
   async fetchInjectedFieldTypes ({ commit }) {
+    commit('SET_INJECTED_FIELD_TYPES_FETCH_LOADING')
     await axios.get('/injected-field-types/')
       .then(response => {
         commit('SET_INJECTED_FIELD_TYPES', response.data)
+        commit('RESET_INJECTED_FIELD_TYPES_FETCH_LOADING')
       })
   },
   async createInjectedFieldType ({ commit }, injectedFieldType) {
+    commit('SET_INJECTED_FIELD_TYPES_POST_LOADING')
     await axios.post('/injected-field-types/', injectedFieldType)
       .then(response => {
         commit('ADD_INJECTED_FIELD_TYPE', response.data)
+        commit('RESET_INJECTED_FIELD_TYPES_POST_LOADING')
       })
   },
   async updateInjectedFieldType ({ commit }, updatedInjectedFieldType) {
+    commit('SET_INJECTED_FIELD_TYPES_PUT_LOADING')
     await axios.put(`/injected-field-types/${updatedInjectedFieldType.id}/`, updatedInjectedFieldType)
       .then(response => {
         commit('UPDATE_INJECTED_FIELD_TYPE', response.data)
         commit('SET_CURRENT_INJECTED_FIELD_TYPE', response.data)
+        commit('RESET_INJECTED_FIELD_TYPES_PUT_LOADING')
       })
   },
   async deleteInjectedFieldType ({ commit }, id) {

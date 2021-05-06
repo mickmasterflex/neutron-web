@@ -1,10 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{client.name}}</h1>
+      <hud-h1 :loading="loading" :content="client.name"/>
       <hud-stat-cards>
-        <stat-card :data="partners.length" title="Partner Contracts" key="partnerCount"></stat-card>
-        <stat-card :data="buyers.length" title="Buyer Contracts" key="buyerCount"></stat-card>
+        <stat-card :data="partners.length" title="Partner Contracts" key="partnerCount" :loading="loading"/>
+        <stat-card :data="buyers.length" title="Buyer Contracts" key="buyerCount" :loading="loading"/>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -38,7 +38,8 @@ export default {
     ...mapGetters({
       client: 'getCurrentClient',
       buyersByClient: 'getParentlessBuyersByClient',
-      partnersByClient: 'getParentlessPartnersByClient'
+      partnersByClient: 'getParentlessPartnersByClient',
+      loading: 'getClientFetchLoading'
     }),
     buyers () {
       return this.buyersByClient(this.client.id)

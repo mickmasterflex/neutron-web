@@ -4,17 +4,20 @@
     <template v-slot:body>
       <validation-observer ref="form">
         <form @submit.prevent="submitForm" class="form-horizontal">
-          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Type" :options="fieldTypes">
+          <v-select-field v-model="type" rules="required" field_id="field_type" field_label="Type" :options="fieldTypes" :loading="loadingTypes">
             <template v-slot:option="slotProps">{{ slotProps.option.field_type }}</template>
           </v-select-field>
           <v-text-field v-model="key" field_id="field_key" field_label="Key" rules="required"></v-text-field>
-          <v-text-field v-model="value" field_id="field_value" field_label="Value" rules="required"></v-text-field>
-          <v-text-field v-model="params" field_id="posting_params" field_label="Posting Params" rules="required"></v-text-field>
+          <text-field v-model="value" field_id="field_value" field_label="Value"></text-field>
+          <text-field v-model="params" field_id="posting_params" field_label="Posting Params"></text-field>
         </form>
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-lg btn-green">Create Injected Field</button>
+      <button @click="submitForm()" class="btn btn-lg btn-green" :disabled="postLoading">
+        <font-awesome-icon v-if="postLoading" icon="spinner" pulse></font-awesome-icon>
+        <font-awesome-icon v-else icon="plus"></font-awesome-icon> Create Injected Field
+      </button>
     </template>
   </modal-template>
 </template>
@@ -37,7 +40,9 @@ export default {
     ...mapGetters({
       showModal: 'getShowCreateInjectedFieldModal',
       fieldTypes: 'getInjectedFieldTypes',
-      currentForm: 'getCurrentForm'
+      currentForm: 'getCurrentForm',
+      loadingTypes: 'getInjectedFieldTypesFetchLoading',
+      postLoading: 'getInjectedFieldsPostLoading'
     })
   },
   mixins: [enterKeyListener, setResponseErrors],
@@ -49,7 +54,6 @@ export default {
       closeModal: 'CLOSE_CREATE_INJECTED_FIELD_MODAL'
     }),
     close () {
-      this.type = ''
       this.key = ''
       this.value = ''
       this.params = ''

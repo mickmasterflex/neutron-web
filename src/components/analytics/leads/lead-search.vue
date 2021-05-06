@@ -1,7 +1,7 @@
 <template>
   <hud-panel ref="form" grid-classes="w-full">
     <template v-slot:hud-content>
-      <hud-h1>Search All Leads</hud-h1>
+      <hud-h1 content="Search All Leads"/>
       <p class="text-gray-200">Search by ID or email address, separate with commas.</p>
       <div class="flex flex-col items-start lg:flex-row lg:items-end mt-2">
         <form @submit.prevent="submitForm" class="form">

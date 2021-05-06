@@ -1,9 +1,9 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{campus.name}}</h1>
+      <hud-h1 :loading="loading" :content="campus.name"/>
       <hud-stat-cards>
-        <stat-card :data="campus.id" title="Campus" key="campusCount"></stat-card>
+        <stat-card :data="campus.id" title="Campus" key="campusCount" :loading="loading"/>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -54,7 +54,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      campus: 'getCurrentCampus'
+      campus: 'getCurrentCampus',
+      loading: 'getCampusFetchLoading'
     })
   },
   created () {
