@@ -7,9 +7,15 @@
           <v-select-field
             v-model="contentType"
             rules="required"
-            field_id="contentType"
+            field_id="additional_content_type"
             field_label="Type"
             :options="formatListForSelectOptions(contentTypes)"
+            :field_disabled="loading"/>
+          <v-textarea-field
+            v-model="contentBlock"
+            field_id="additional_content_block"
+            field_label="Content"
+            rules="required"
             :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
@@ -21,11 +27,13 @@
               :style-as-field="true"
               :disabled="loading"/>
           </div>
-          <v-textarea-field
-            v-model="contentBlock"
-            field_id="additional_content_block"
-            field_label="Content"
-            rules="required"
+          <v-select-field
+            v-if="leadIdToggle"
+            v-model="leadIdToggleField"
+            field_id="leadid_toggle_field"
+            field_label="Leadid Field"
+            :rules="leadIdToggle ? 'required' : ''"
+            :options="injectedFieldOptions"
             :field_disabled="loading"/>
           <div class="field-group ml-label-width">
             <checkbox-field
@@ -36,6 +44,14 @@
               :style-as-field="true"
               :disabled="loading"/>
           </div>
+          <v-select-field
+            v-if="doubleOptin"
+            v-model="doubleOptinField"
+            :rules="doubleOptin ? 'required' : ''"
+            field_id="leadid_toggle_field"
+            field_label="Double Optin Field"
+            :options="booleanFieldOptions"
+            :field_disabled="loading"/>
         </form>
       </validation-observer>
     </template>
@@ -61,7 +77,9 @@ export default {
       contentType: 'tcpa',
       contentBlock: '',
       leadIdToggle: false,
-      doubleOptin: false
+      leadIdToggleField: '',
+      doubleOptin: false,
+      doubleOptinField: ''
     }
   },
   props: {
@@ -80,17 +98,46 @@ export default {
       currentForm: 'getCurrentForm',
       showModal: 'getShowAdditionalFormContentModal',
       currentAdditionalFormContent: 'getCurrentAdditionalFormContent',
-      modalPurpose: 'getAdditionalFormContentModalPurpose'
+      modalPurpose: 'getAdditionalFormContentModalPurpose',
+      form: 'getCurrentForm',
+      ancestorFormsWithInjected: 'getAncestorFormsWithInjectedFields',
+      ancestorFormsWithFields: 'getAncestorFormsWithFields',
+      booleanFieldTypes: 'getBaseBooleanFieldTypes'
     }),
+    injectedFieldOptions () {
+      let fields = this.form ? this.form.injected_fields : []
+      if (this.ancestorFormsWithInjected.length > 0) {
+        const ancestorFields = this.ancestorFormsWithInjected.map(ancestor => ancestor.injected_fields)
+        fields = fields.concat(ancestorFields[0])
+      }
+      fields = fields.map(field => {
+        return { id: field.id, name: field.field_key }
+      })
+      return fields
+    },
+    booleanFieldOptions () {
+      let fields = this.form ? this.form.fields : []
+      if (this.ancestorFormsWithFields.length > 0) {
+        const ancestorFields = this.ancestorFormsWithFields.map(ancestor => ancestor.fields)
+        fields = fields.concat(ancestorFields[0])
+      }
+      fields = fields.filter(field => this.booleanFieldTypes.includes(field.type))
+      fields = fields.map(field => {
+        return { id: field.id, name: field.label }
+      })
+      return fields
+    },
     submitData () {
       const data = {
         additional_content_type: this.contentType,
         additional_content_block: this.contentBlock,
-        double_optin: this.doubleOptin,
         form: this.currentForm.id
       }
       if (this.contentType === 'tcpa') {
+        data.double_optin = this.doubleOptin
+        data.double_optin_field = this.doubleOptinField
         data.leadid_toggle = this.leadIdToggle
+        data.leadid_toggle_field = this.leadIdToggleField
       }
       if (this.currentAdditionalFormContent.id) {
         data.id = this.currentAdditionalFormContent.id
@@ -102,7 +149,9 @@ export default {
         return this.contentType !== this.currentAdditionalFormContent.additional_content_type ||
           this.contentBlock !== this.currentAdditionalFormContent.additional_content_block ||
           this.leadIdToggle !== this.currentAdditionalFormContent.leadid_toggle ||
-          this.doubleOptin !== this.currentAdditionalFormContent.double_optin
+          this.leadIdToggleField !== this.currentAdditionalFormContent.leadid_toggle_field ||
+          this.doubleOptin !== this.currentAdditionalFormContent.double_optin ||
+          this.doubleOptinField !== this.currentAdditionalFormContent.double_optin_field
       } else {
         return false
       }
@@ -129,12 +178,17 @@ export default {
         }
       })
     },
-    close () {
-      this.closeModal()
+    resetData () {
       this.contentType = 'tcpa'
       this.contentBlock = ''
       this.leadIdToggle = false
+      this.leadIdToggleField = ''
       this.doubleOptin = false
+      this.doubleOptinField = ''
+    },
+    close () {
+      this.closeModal()
+      this.resetData()
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -149,7 +203,9 @@ export default {
       this.contentType = this.currentAdditionalFormContent.additional_content_type
       this.contentBlock = this.currentAdditionalFormContent.additional_content_block
       this.leadIdToggle = this.currentAdditionalFormContent.leadid_toggle
+      this.leadIdToggleField = this.currentAdditionalFormContent.leadid_toggle_field
       this.doubleOptin = this.currentAdditionalFormContent.double_optin
+      this.doubleOptinField = this.currentAdditionalFormContent.double_optin_field
     }
   }
 }

@@ -1,10 +1,10 @@
 <template>
   <content-layout v-if="offer">
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{offer.name}}</h1>
+      <hud-h1 :loading="loading" :content="offer.name"/>
       <hud-stat-cards>
-        <stat-card :data="offer.id" title="Offer" key="offerId"></stat-card>
-        <status-card :status="offer.status" key="statusCard"></status-card>
+        <stat-card :data="offer.id" title="Offer" key="offerId" :loading="loading"></stat-card>
+        <status-card :status="offer.status" key="statusCard" :loading="loading"></status-card>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -41,7 +41,8 @@ export default {
   mixins: [offerContractBreadcrumbs],
   computed: {
     ...mapGetters({
-      offer: 'getCurrentOffer'
+      offer: 'getCurrentOffer',
+      loading: 'getOfferFetchLoading'
     })
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{brand.name}}</h1>
+      <hud-h1 :loading="loading" :content="brand.name"/>
     </template>
     <template v-slot:contentTabs>
       <underscore-tabs>
@@ -49,7 +49,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      brand: 'getCurrentBrand'
+      brand: 'getCurrentBrand',
+      loading: 'getBrandFetchLoading'
     })
   },
   created () {

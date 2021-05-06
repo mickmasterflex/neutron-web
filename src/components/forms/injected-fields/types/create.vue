@@ -20,21 +20,27 @@
       </validation-observer>
     </template>
     <template v-slot:footer-additional>
-      <button @click="submitForm()" class="btn btn-green ml-2">
-        <font-awesome-icon icon="plus"></font-awesome-icon> Create
+      <button @click="submitForm()" class="btn btn-green ml-2" :disabled="loading">
+        <font-awesome-icon v-if="loading" icon="spinner" pulse></font-awesome-icon>
+        <font-awesome-icon v-else icon="plus"></font-awesome-icon> Create
       </button>
     </template>
   </tooltip-dialog-template>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
       injectedFieldType: '',
       formVisible: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      loading: 'getInjectedFieldTypesPostLoading'
+    })
   },
   methods: {
     ...mapActions({
