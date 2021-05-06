@@ -884,12 +884,24 @@ const routes = [
     pathToRegexpOptions: { strict: true }
   },
   {
+    path: '/my-account/',
+    name: 'MyAccount',
+    component: () => import('@/views/users/my-account.vue'),
+    meta: {
+      requiresAuth: true,
+      activeApp: 'users',
+      title: 'My Account'
+    },
+    pathToRegexpOptions: { strict: true }
+  },
+  {
     path: '/users/',
     name: 'Users',
     component: () => import('@/views/users/index.vue'),
     meta: {
       requiresAuth: true,
       activeApp: 'users',
+      activeTab: 'users',
       title: 'Users'
     },
     pathToRegexpOptions: { strict: true }
@@ -900,7 +912,8 @@ const routes = [
     component: () => import('@/views/users/user.vue'),
     meta: {
       requiresAuth: true,
-      activeApp: 'users'
+      activeApp: 'users',
+      activeTab: 'users'
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
