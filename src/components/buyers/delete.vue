@@ -29,7 +29,7 @@ export default {
             })
           } else {
             this.$router.push({
-              name: 'ClientContracts',
+              name: 'ClientBuyerContracts',
               params: { slug: this.client }
             })
           }
