@@ -7,7 +7,7 @@
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
-          <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+          <date-picker v-model="activateAt" field_id="activate_at" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
     </template>
@@ -31,7 +31,7 @@ export default {
       rpl: '0.00',
       status: 'active',
       buyerGroup: undefined,
-      scheduledStart: null
+      activateAt: null
     }
   },
   props: {
@@ -59,7 +59,7 @@ export default {
       this.name = ''
       this.rpl = '0.00'
       this.status = 'active'
-      this.scheduledStart = null
+      this.activateAt = null
       this.buyerGroup = undefined
       this.$nextTick(() => {
         this.$refs.form.reset()
@@ -76,7 +76,7 @@ export default {
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
             status: this.status,
-            scheduled_start: this.scheduledStart
+            activate_at: this.activateAt
           }).then(() => {
             this.close()
           }).catch(error => {

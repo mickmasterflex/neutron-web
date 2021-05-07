@@ -8,7 +8,7 @@
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
-          <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+          <date-picker v-model="activateAt" field_id="activate_at" field_label="Scheduled Start"></date-picker>
           <select-product v-model="product_id" rules="required"></select-product>
         </form>
       </validation-observer>
@@ -29,7 +29,7 @@ export default {
       name: '',
       product_id: null,
       status: undefined,
-      scheduledStart: null
+      activateAt: null
     }
   },
   props: {
@@ -48,7 +48,7 @@ export default {
       this.name = this.offer.name
       this.product_id = this.offer.offer_data ? this.offer.offer_data.product_id : null
       this.status = this.offer.status
-      this.scheduledStart = this.offer.scheduled_start
+      this.activateAt = this.offer.activate_at
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -59,7 +59,7 @@ export default {
             parent: this.offer.parent,
             status: this.status,
             client: this.offer.client,
-            scheduled_start: this.scheduledStart,
+            activate_at: this.activateAt,
             offer_data: {
               product_id: parseInt(this.product_id)
             }
@@ -81,7 +81,7 @@ export default {
       if (this.name) {
         return this.name !== this.offer.name ||
           this.status !== this.offer.status ||
-          this.scheduledStart !== this.offer.scheduled_start ||
+          this.activateAt !== this.offer.activate_at ||
           this.product_id !== this.offer.offer_data.product_id
       } else {
         return false

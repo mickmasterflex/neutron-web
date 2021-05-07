@@ -11,7 +11,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
           <buyer-group-field :buyer="buyer"></buyer-group-field>
-          <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+          <date-picker v-model="activateAt" field_id="activate_at" field_label="Scheduled Start"></date-picker>
         </form>
       </validation-observer>
     </template>
@@ -34,7 +34,7 @@ export default {
       rpl: undefined,
       status: undefined,
       buyerGroup: undefined,
-      scheduledStart: null,
+      activateAt: null,
       client: null
     }
   },
@@ -51,7 +51,7 @@ export default {
       this.status = this.buyer.status
       this.rpl = this.buyer.rpl
       this.buyerGroup = this.buyer.buyer_group
-      this.scheduledStart = this.buyer.scheduled_start
+      this.activateAt = this.buyer.activate_at
       this.client = this.buyer.client
     },
     submitForm () {
@@ -65,7 +65,7 @@ export default {
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
             status: this.status,
-            scheduled_start: this.scheduledStart
+            activate_at: this.activateAt
           }).catch(error => {
             this.error = error
           })
@@ -88,7 +88,7 @@ export default {
           this.parent !== this.buyer.parent ||
           this.rpl !== this.buyer.rpl ||
           this.status !== this.buyer.status ||
-          this.scheduledStart !== this.buyer.scheduled_start ||
+          this.activateAt !== this.buyer.activate_at ||
           this.buyerGroup !== this.buyer.buyer_group
       } else {
         return false

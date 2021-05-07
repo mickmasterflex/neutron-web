@@ -10,7 +10,7 @@
           <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
-          <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
+          <date-picker v-model="activateAt" field_id="activate_at" field_label="Scheduled Start"></date-picker>
           <select-channel v-model="channel"/>
           <min-rpl-field v-model="minimum_rpl"/>
           <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
@@ -40,7 +40,7 @@ export default {
       status: undefined,
       channel: '',
       pricing_tier_group: '',
-      scheduledStart: null,
+      activateAt: null,
       client: null
     }
   },
@@ -64,7 +64,7 @@ export default {
       this.status = this.partner.status
       this.channel = this.partner.channel
       this.pricing_tier_group = this.partner.pricing_tier_group
-      this.scheduledStart = this.partner.scheduled_start
+      this.activateAt = this.partner.activate_at
       this.client = this.partner.client
     },
     submitForm () {
@@ -80,7 +80,7 @@ export default {
             status: this.status,
             channel: this.channel,
             pricing_tier_group: this.pricing_tier_group,
-            scheduled_start: this.scheduledStart
+            activate_at: this.activateAt
           }).catch(error => {
             this.error = error
           })
@@ -105,7 +105,7 @@ export default {
           this.channel !== this.partner.channel ||
           this.minimum_rpl !== this.partner.minimum_rpl ||
           this.pricing_tier_group !== this.partner.pricing_tier_group ||
-          this.scheduledStart !== this.partner.scheduled_start
+          this.activateAt !== this.partner.activate_at
       } else {
         return false
       }
