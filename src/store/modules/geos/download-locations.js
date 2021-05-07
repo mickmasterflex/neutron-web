@@ -19,7 +19,7 @@ const actions = {
       const url = window.URL.createObjectURL(response.data)
       const link = document.createElement('a')
       link.href = url
-      link.download = 'recruitment-locations'
+      link.download = 'recruitment-locations.csv'
       link.click()
       URL.revokeObjectURL(link.href)
     }).finally(() => {
