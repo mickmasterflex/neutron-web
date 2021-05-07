@@ -739,7 +739,7 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        name: 'PartnerContractChildren',
+        name: 'PartnerContractContracts',
         path: 'contracts/',
         component: () => import('@/views/relationships/contract-mgmt/partner/contracts'),
         meta: {
@@ -793,7 +793,7 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        name: 'BuyerContractChildren',
+        name: 'BuyerContractContracts',
         path: 'contracts/',
         component: () => import('@/views/relationships/contract-mgmt/buyer/contracts'),
         meta: {

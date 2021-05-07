@@ -4,7 +4,7 @@ export const campaignContractBreadcrumbs = {
   mixins: [baseContractBreadcrumbs],
   data () {
     return {
-      ancestorBreadcrumbRouteName: 'PartnerContract',
+      ancestorBreadcrumbRouteName: 'PartnerContractContracts',
       parentBreadcrumb: {
         name: 'PartnerContractCampaigns',
         text: 'Campaigns',

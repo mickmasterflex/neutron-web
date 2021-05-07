@@ -4,7 +4,12 @@ export const buyerContractBreadcrumbs = {
   mixins: [baseContractBreadcrumbs],
   data () {
     return {
-      ancestorBreadcrumbRouteName: 'BuyerContract',
+      clientBreadcrumb: {
+        name: 'ClientBuyerContracts',
+        text: this.$route.params.client,
+        params: { slug: this.$route.params.client }
+      },
+      ancestorBreadcrumbRouteName: 'BuyerContractContracts',
       currentBreadcrumb: {
         name: this.ancestorBreadcrumbRouteName,
         text: this.$route.params.id,
