@@ -24,7 +24,7 @@ export default {
         .then(() => {
           if (this.parent) {
             this.$router.push({
-              name: 'PartnerContractChildren',
+              name: 'PartnerContractContracts',
               params: { id: this.parent, client: this.client }
             })
           } else {
