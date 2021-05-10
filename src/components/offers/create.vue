@@ -6,8 +6,8 @@
     <form @submit.prevent="submitForm" class="form-horizontal">
       <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
       <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
+      <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
       <select-product v-model="product_id" rules="required"></select-product>
-      <date-picker v-model="activateAt" field_id="activate_at" field_label="Scheduled Start"></date-picker>
     </form>
   </validation-observer>
     </template>

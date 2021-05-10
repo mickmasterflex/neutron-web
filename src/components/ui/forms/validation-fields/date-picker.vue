@@ -7,26 +7,25 @@
     <div class="field-group">
       <label class="field-label" v-if="$attrs.field_label" :for="$attrs.field_id">{{$attrs.field_label}}</label>
       <div class="flex flex-row">
-        <v-date-picker v-model="date" :minDate="new Date()">
-          <template v-slot="{ inputEvents, togglePopover }">
+        <v-date-picker v-model="date" :minDate="new Date()" :mode="mode" @input="$emit('input', formatDate(date))">
+          <template v-slot="{ inputValue, inputEvents, togglePopover }">
             <div class="flex flex-row relative" @click="togglePopover({ placement: 'bottom-start' })">
               <span :class="`w-8 absolute top-0 left-0 bottom-0 bg-${fieldColor}-500 text-white rounded-l flex flex-column items-center justify-center cursor-pointer`">
                 <font-awesome-icon :icon="fieldIcon" class="pb-1 text-lg"></font-awesome-icon>
               </span>
               <input
                 v-on="inputEvents"
-                @input="handleInput($event.target.value)"
                 class="base-field pl-10"
-                :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500 ${finalDate ? ' w-56' : 'w-64'}`"
+                :class="`${classes} text-${fieldColor}-600 border-${fieldColor}-500 ${date ? ' w-56' : 'w-64'}`"
                 :type="$attrs.field_type ? $attrs.field_type : 'text'"
                 :id="$attrs.field_id"
-                :value="finalDate"
+                :value="inputValue"
                 disabled="disabled"
                 ref="field">
             </div>
           </template>
         </v-date-picker>
-        <span v-if="finalDate" @click="$emit('input', null)" class="w-8 flex flex-row items-center justify-center h-base-field">
+        <span v-if="date" @click="$emit('input', null)" class="w-8 flex flex-row items-center justify-center h-base-field">
           <icon-button color="red" icon="trash-alt"></icon-button>
         </span>
       </div>
@@ -41,39 +40,21 @@
 
 <script>
 import iconButton from '@/components/ui/buttons/icon-button-subtle'
+import dayjs from 'dayjs'
 
 export default {
   data () {
     return {
-      date: ''
+      date: null
     }
   },
   watch: {
-    date: function () {
-      if (this.date) {
-        this.date = this.formattedDate(new Date(this.date), 'mm-dd-yyyy')
-        this.$emit('input', this.formattedDate(new Date(this.date), 'yyyy-mm-dd'))
-      }
-    },
     value () {
-      if (this.value) {
-        this.date = this.formattedDate(new Date(this.value + 'T12:00:00Z'), 'mm-dd-yyyy')
-      } else {
-        this.date = null
-      }
+      this.setDateFromValue()
     }
   },
-  computed: {
-    finalDate () {
-      if (this.date) {
-        return this.date
-      }
-      if (this.value) {
-        // this has to have the 'T12:00:00Z' or our timezone will return the wrong day
-        return this.formattedDate(new Date(this.value + 'T12:00:00Z'), 'mm-dd-yyyy')
-      }
-      return null
-    }
+  created () {
+    this.setDateFromValue()
   },
   props: {
     value: {
@@ -82,7 +63,7 @@ export default {
     },
     rules: {
       type: [Object, String],
-      default: 'date'
+      default: ''
     },
     fieldColor: {
       type: String,
@@ -91,28 +72,29 @@ export default {
     fieldIcon: {
       type: String,
       default: 'calendar-alt'
+    },
+    mode: {
+      type: String,
+      default: 'date',
+      validator: (value) => {
+        return ['dateTime', 'date'].includes(value)
+      }
     }
   },
   methods: {
-    formattedDate (date, format) {
-      let month = '' + (date.getMonth() + 1)
-      let day = '' + date.getDate()
-      const year = date.getFullYear()
-
-      if (month.length < 2) {
-        month = '0' + month
-      }
-      if (day.length < 2) {
-        day = '0' + day
-      }
-      if (format === 'yyyy-mm-dd') {
-        return [year, month, day].join('-')
-      } else if (format === 'mm-dd-yyyy') {
-        return [month, day, year].join('-')
+    formatDate (date) {
+      if (this.mode === 'dateTime') {
+        return dayjs(date).format('YYYY-MM-DDTHH:mm:ss[Z]')
+      } else if (this.mode === 'time') {
+        return dayjs(date).format('YYYY-MM-DD')
       }
     },
-    handleInput (value) {
-      this.$emit('input', value)
+    setDateFromValue () {
+      if (this.value) {
+        this.date = this.formatDate(this.value)
+      } else {
+        this.date = null
+      }
     }
   },
   components: {
