@@ -69,7 +69,7 @@ export default {
             client: this.client,
             parent: this.buyer,
             status: this.status,
-            activate_at: this.activateAt,
+            activate_at: this.status !== 'active' ? this.activateAt : null,
             offer_data: {
               product_id: parseInt(this.product_id)
             }

@@ -76,7 +76,7 @@ export default {
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
             status: this.status,
-            activate_at: this.activateAt
+            activate_at: this.status !== 'active' ? this.activateAt : null
           }).then(() => {
             this.close()
           }).catch(error => {

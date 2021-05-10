@@ -80,7 +80,7 @@ export default {
             status: this.status,
             channel: this.channel,
             pricing_tier_group: this.pricing_tier_group,
-            activate_at: this.activateAt
+            activate_at: this.status !== 'active' ? this.activateAt : null
           }).catch(error => {
             this.error = error
           })
