@@ -19,52 +19,16 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import updateUser from '@/components/users/update'
 import setPassword from '@/components/authentication/set-password'
 
 export default {
-  data () {
-    return {
-      first_name: '',
-      last_name: '',
-      email: '',
-      new_password: '',
-      confirm_password: '',
-      password_field_type: 'password',
-      loading: false,
-      passwordUnlocked: false
-    }
-  },
   computed: {
     ...mapGetters({
       currentActiveUser: 'getCurrentActiveUser',
       currentUser: 'getCurrentUser'
     })
-  },
-  methods: {
-    ...mapActions({ setPassword: 'resetPassword' }),
-    togglePasswordUnlocked () {
-      this.passwordUnlocked = !this.passwordUnlocked
-    },
-    submitForm () {
-      this.$refs.form.validate().then(success => {
-        this.loading = true
-        if (success) {
-          this.setPassword({
-            new_password: this.new_password,
-            confirm_password: this.confirm_password
-          }).then(() => {
-            this.togglePasswordUnlocked()
-          })
-            .catch(error => {
-              this.error = error
-            }).finally(() => {
-              this.loading = false
-            })
-        }
-      })
-    }
   },
   components: {
     'set-password': setPassword,
