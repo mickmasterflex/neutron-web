@@ -13,6 +13,8 @@
 
 <script>
 import textFieldSuffixed from '@/components/ui/forms/base-fields/text-field-suffixed'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   props: {
     buyer: {
@@ -21,14 +23,29 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      buyerGroupById: 'getBuyerGroupById',
+      buyerGroups: 'getBuyerGroups'
+    }),
+    buyerGroupName () {
+      return this.buyerGroups ? this.buyerGroupById(this.buyer.buyer_group).name : null
+    },
     buyerGroup () {
       if (this.buyer.buyer_group) {
-        return this.buyer.buyer_group
+        return this.buyerGroupName ? this.buyerGroupName : this.buyer.buyer_group
       } else if (this.buyer.ancestor_buyer_group) {
         return this.buyer.ancestor_buyer_group.buyer_group_name + ' (inherited)'
       }
       return 'None Assigned'
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchBuyerGroups: 'fetchBuyerGroups'
+    })
+  },
+  created () {
+    this.fetchBuyerGroups()
   },
   components: {
     'text-field-suffixed': textFieldSuffixed
