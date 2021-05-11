@@ -890,6 +890,7 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'users',
+      activeAppTab: 'my-account',
       title: 'My Account'
     },
     pathToRegexpOptions: { strict: true }
@@ -901,7 +902,7 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'users',
-      activeTab: 'users',
+      activeAppTab: 'users',
       title: 'Users'
     },
     pathToRegexpOptions: { strict: true }
