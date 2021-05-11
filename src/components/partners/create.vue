@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
-          <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
+          <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="ping_back_url" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduled_start" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channel v-model="channel"/>
           <min-rpl-field v-model="minimum_rpl"/>

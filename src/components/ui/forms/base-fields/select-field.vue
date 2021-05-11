@@ -11,7 +11,7 @@
           :class="`${$attrs.field_class} ${field_size}`"
           :disabled="$attrs.field_disabled"
           :id="$attrs.field_id">
-          <option value="">----------</option>
+          <option value="" :selected="value === '' ? 'selected' : false">----------</option>
           <option class="capitalize" :selected="option.id === value ? 'selected' : false" v-for="option in $attrs.options" :key="option.id" :value="`${option.id}`">
             <slot name="option" :option="option">{{option.name}}</slot>
           </option>

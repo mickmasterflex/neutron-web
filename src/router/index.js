@@ -679,13 +679,24 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        path: 'contracts/',
-        name: 'ClientContracts',
-        component: () => import('@/views/relationships/contract-mgmt/client/contracts.vue'),
+        path: 'partners/',
+        name: 'ClientPartnerContracts',
+        component: () => import('@/views/relationships/contract-mgmt/client/partners.vue'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'contracts'
+          contentTab: 'partners'
+        },
+        pathToRegexpOptions: { strict: true }
+      },
+      {
+        path: 'buyers/',
+        name: 'ClientBuyerContracts',
+        component: () => import('@/views/relationships/contract-mgmt/client/buyers.vue'),
+        meta: {
+          requiresAuth: true,
+          activeApp: 'relationships',
+          contentTab: 'buyers'
         },
         pathToRegexpOptions: { strict: true }
       }
@@ -728,7 +739,7 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        name: 'PartnerContractChildren',
+        name: 'PartnerContractContracts',
         path: 'contracts/',
         component: () => import('@/views/relationships/contract-mgmt/partner/contracts'),
         meta: {
@@ -782,7 +793,7 @@ const routes = [
         pathToRegexpOptions: { strict: true }
       },
       {
-        name: 'BuyerContractChildren',
+        name: 'BuyerContractContracts',
         path: 'contracts/',
         component: () => import('@/views/relationships/contract-mgmt/buyer/contracts'),
         meta: {
