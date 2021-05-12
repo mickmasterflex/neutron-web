@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -34,16 +34,28 @@ export default {
       type: Array
     }
   },
+  computed: {
+    ...mapGetters({
+      currentActiveUser: 'getCurrentActiveUser'
+    })
+  },
   methods: {
     ...mapMutations({
       setCurrent: 'SET_CURRENT_USER'
     }),
     linkToUser (user) {
-      this.setCurrent(user)
-      this.$router.push({
-        name: 'User',
-        params: { id: user.id }
-      })
+      if (this.currentActiveUser.id === user.id) {
+        this.$router.push({
+          name: 'MyAccount',
+          params: { id: user.id }
+        })
+      } else {
+        this.setCurrent(user)
+        this.$router.push({
+          name: 'User',
+          params: { id: user.id }
+        })
+      }
     }
   }
 }
