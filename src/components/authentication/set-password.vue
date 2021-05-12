@@ -43,6 +43,17 @@ export default {
       passwordUnlocked: false
     }
   },
+  watch: {
+    passwordUnlocked () {
+      if (this.passwordUnlocked === false) {
+        this.new_password = ''
+        this.confirm_password = ''
+        this.$nextTick(() => {
+          this.$refs.form.reset()
+        })
+      }
+    }
+  },
   mixins: [setResponseErrors],
   methods: {
     ...mapActions({ setPassword: 'resetPassword' }),

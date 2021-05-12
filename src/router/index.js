@@ -902,6 +902,7 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'users',
+      activeTab: 'users',
       activeAppTab: 'users',
       title: 'Users'
     },

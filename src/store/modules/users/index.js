@@ -51,8 +51,11 @@ const actions = {
     await axios.put(`/users/${updatedUser.id}/`, updatedUser)
       .then(response => {
         commit('UPDATE_USER', response.data)
-        commit('SET_CURRENT_USER', response.data)
-        commit('SET_CURRENT_ACTIVE_USER', response.data)
+        if (getters.getCurrentActiveUser.id === updatedUser.id) {
+          commit('SET_CURRENT_ACTIVE_USER', response.data)
+        } else {
+          commit('SET_CURRENT_USER', response.data)
+        }
       })
   },
   async deleteUser ({ commit }, id) {

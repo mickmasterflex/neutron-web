@@ -34,17 +34,19 @@ export default {
       type: Array
     }
   },
+  computed: {
+    ...mapGetters({
+      currentActiveUser: 'getCurrentActiveUser'
+    })
+  },
   methods: {
     ...mapMutations({
       setCurrent: 'SET_CURRENT_USER'
     }),
-    ...mapGetters({
-      currentActiveUser: 'SET_CURRENT_ACTIVE_USER'
-    }),
     linkToUser (user) {
       if (this.currentActiveUser.id === user.id) {
         this.$router.push({
-          name: 'My Account',
+          name: 'MyAccount',
           params: { id: user.id }
         })
       } else {
