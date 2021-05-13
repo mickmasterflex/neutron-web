@@ -43,7 +43,10 @@ export default {
     ...mapGetters({
       contract: 'getCurrentPartner',
       loading: 'getPartnerFetchLoading'
-    })
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
@@ -67,6 +70,9 @@ export default {
   watch: {
     id () {
       this.setPartnerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {

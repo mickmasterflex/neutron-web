@@ -48,7 +48,10 @@ export default {
     ...mapGetters({
       contract: 'getCurrentBuyer',
       loading: 'getBuyerFetchLoading'
-    })
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
@@ -74,6 +77,9 @@ export default {
   watch: {
     id () {
       this.setBuyerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {
