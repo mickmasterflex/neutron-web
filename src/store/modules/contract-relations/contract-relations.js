@@ -7,6 +7,9 @@ const state = {
 
 const getters = {
   getCurrentContractRelation: state => state.current_contract_relation,
+  getContractRelationByCapParentId: (state) => (capParentId) => {
+    return state.contract_relations.find(relation => relation.caps.id === capParentId)
+  },
   getContractRelationsByBuyer: (state) => (buyerId) => {
     return state.contract_relations.filter(relation => relation.buyer_contract === buyerId)
   },

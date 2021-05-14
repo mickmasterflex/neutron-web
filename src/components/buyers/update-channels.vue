@@ -4,6 +4,7 @@
       <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
     </template>
     <template v-slot:content>
+      <table-empty-state v-if="available_channels.length === 0" heading="No Channels Added"></table-empty-state>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <multiselect-checkboxes v-if="buyer.channels" :options="available_channels" v-model="channels" field_id="channels"></multiselect-checkboxes>

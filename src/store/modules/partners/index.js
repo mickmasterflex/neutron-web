@@ -38,6 +38,9 @@ const getters = {
   },
   getPartnerById: (state) => (partnerId) => {
     return state.partners.filter(partner => partner.id === partnerId)[0]
+  },
+  getPartnerByCapParentId: (state) => (capParentId) => {
+    return state.partners.find(partner => partner.caps.id === capParentId)
   }
 }
 

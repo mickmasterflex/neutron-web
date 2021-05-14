@@ -94,7 +94,7 @@ export default {
     ...mapGetters({
       showModal: 'getShowUpdateDayCapModal',
       day: 'getSelectedCapDay',
-      parent: 'getCurrentCapParentId',
+      parent: 'getCurrentCapsParentId',
       loading: 'getCapsLoading',
       loadingPut: 'getCapsPutLoading'
     }),

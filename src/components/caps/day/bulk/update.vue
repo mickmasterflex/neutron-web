@@ -80,7 +80,7 @@ export default {
   computed: {
     ...mapGetters({
       showModal: 'getShowBulkDayCapModal',
-      parent: 'getCurrentCapParentId',
+      parent: 'getCurrentCapsParentId',
       selectedDates: 'getBulkUpdateDayCaps',
       loading: 'getCapsLoading',
       loadingPost: 'getCapsPostLoading'

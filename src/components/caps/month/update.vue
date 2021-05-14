@@ -93,7 +93,7 @@ export default {
     ...mapGetters({
       showModal: 'getShowUpdateMonthCapModal',
       monthCap: 'getSelectedCapMonth',
-      parent: 'getCurrentCapParentId',
+      parent: 'getCurrentCapsParentId',
       currentCapMonthFormats: 'getCurrentCapMonthFormats',
       loading: 'getCapsLoading',
       loadingPut: 'getCapsPutLoading'
