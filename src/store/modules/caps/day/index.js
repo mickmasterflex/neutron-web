@@ -27,11 +27,12 @@ const actions = {
         commit('RESET_CAPS_POST_LOADING')
       })
   },
-  async updateDayCap ({ commit }, cap) {
+  async updateDayCap ({ commit, dispatch }, cap) {
     commit('SET_CAPS_PUT_LOADING')
     await axios.put(`/day-cap/${cap.id}/`, cap)
       .then(response => {
         commit('UPDATE_DAY_CAP', response.data)
+        // dispatch('updateCapsParent')
       }).finally(() => {
         commit('RESET_CAPS_PUT_LOADING')
       })

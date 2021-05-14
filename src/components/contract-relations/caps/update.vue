@@ -13,16 +13,25 @@
 
 <script>
 import { plural } from '@/mixins/plural'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   methods: {
     ...mapMutations({
       setCurrentContractRelation: 'SET_CURRENT_CONTRACT_RELATION',
+      setCurrentCapParentObject: 'SET_CURRENT_CAPS_PARENT_OBJECT',
+      setCurrentCapParentType: 'SET_CURRENT_CAPS_PARENT_TYPE',
       showCapsModal: 'SHOW_CAPS_MODAL'
+    }),
+    ...mapActions({
+      setCapsCalendarEndpoint: 'setCapsCalendarEndpoint'
     }),
     showModalSetCurrent (relation) {
       this.setCurrentContractRelation(relation)
+      this.setCapsCalendarEndpoint({
+        id: relation.id,
+        type: 'relations'
+      })
       this.$nextTick(() => {
         this.showCapsModal()
       })

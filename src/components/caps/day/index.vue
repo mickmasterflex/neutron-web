@@ -71,8 +71,7 @@ export default {
     ...mapMutations({
       showCreate: 'SHOW_CREATE_DAY_CAP_MODAL',
       showUpdate: 'SHOW_UPDATE_DAY_CAP_MODAL',
-      setSelectedCapDay: 'SET_SELECTED_CAP_DAY',
-      setCapsCalendarParams: 'SET_CAPS_CALENDAR_PARAMS'
+      setSelectedCapDay: 'SET_SELECTED_CAP_DAY'
     }),
     addCap () {
       this.setSelectedCapDay(this.day)

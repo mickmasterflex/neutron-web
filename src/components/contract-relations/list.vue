@@ -36,12 +36,12 @@
       <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" class="well"/>
     </transition-table-state>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
-    <caps-modal v-if="currentRelation.id" :capParent="currentRelation.id" capType="relations"></caps-modal>
+    <caps-modal></caps-modal>
   </div>
 </template>
 
 <script>
-import capsModal from '@/components/contract-relations/caps/modal'
+import capsModal from '@/components/caps/modal'
 import deleteContractRelation from '@/components/contract-relations/delete'
 import pricingTierModalList from '@/components/contract-relations/pricing-tiers/modal'
 import updateCaps from '@/components/contract-relations/caps/update'

@@ -2,7 +2,7 @@
   <modal-template :show="showModal" @close="close" modalClass="modal-lg">
     <template v-slot:header>Update Caps</template>
     <template v-slot:body>
-      <lead-caps :parent="capParent" :type="capType" ref="leadCaps" class="relative"></lead-caps>
+      <lead-caps class="relative"/>
     </template>
   </modal-template>
 </template>
@@ -10,7 +10,7 @@
 <script>
 import leadCaps from '@/components/caps/index'
 
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   computed: {
@@ -20,29 +20,19 @@ export default {
   },
   methods: {
     ...mapMutations({
-      closeModal: 'CLOSE_CAPS_PARENT_MODAL',
-      resetCapsCalendarParams: 'RESET_CAPS_CALENDAR_PARAMS',
-      resetCapsCalendarEndpoint: 'RESET_CAPS_CALENDAR_ENDPOINT',
-      setCapsCalendarEndpoint: 'SET_CAPS_CALENDAR_ENDPOINT'
+      closeModal: 'CLOSE_CAPS_MODAL'
+    }),
+    ...mapActions({
+      capStateReset: 'capStateReset'
     }),
     close () {
-      this.resetCapsCalendarParams()
-      this.resetCapsCalendarEndpoint()
       this.$emit('close')
       this.closeModal()
+      this.capStateReset()
     }
   },
   components: {
     'lead-caps': leadCaps
-  },
-  props: {
-    capParent: Number,
-    capType: {
-      type: String,
-      validator: function (value) {
-        return ['buyers', 'partners', 'relations'].includes(value)
-      }
-    }
   }
 }
 </script>
