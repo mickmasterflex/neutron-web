@@ -111,8 +111,7 @@ export default {
   computed: {
     ...mapGetters({
       buyers: 'getAllBuyers',
-      partners: 'getAllPartners',
-      currentRelation: 'getCurrentContractRelation'
+      partners: 'getAllPartners'
     })
   },
   props: {

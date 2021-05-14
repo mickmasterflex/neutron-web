@@ -26,8 +26,12 @@
             </status-indicator>
           </td>
           <td class="td">{{ offer.parent_data.name }}</td>
-          <td class="td">
-            <caps-count :caps="offer.caps"></caps-count>
+          <td class="td flex flex-row">
+            <caps-modal-trigger
+              :caps-parent-id="offer.id"
+              caps-parent-type="offer-contracts"
+            />
+            <caps-count :caps="offer.caps"/>
           </td>
         </tr>
       </tbody>
@@ -43,10 +47,12 @@
 <script>
 import { mapMutations } from 'vuex'
 import capsCount from '@/components/caps/caps-count'
+import capsModalTrigger from '@/components/caps/modal/trigger'
 
 export default {
   components: {
-    'caps-count': capsCount
+    'caps-count': capsCount,
+    'caps-modal-trigger': capsModalTrigger
   },
   props: {
     offers: Array,

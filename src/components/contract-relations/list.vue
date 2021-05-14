@@ -22,8 +22,12 @@
           <td class="td">
             <update-pricing-tiers :contractRelation="relation"></update-pricing-tiers>
           </td>
-          <td class="td">
-            <update-caps :contractRelation="relation"></update-caps>
+          <td class="td flex flex-row">
+            <caps-modal-trigger
+              :caps-parent-id="relation.id"
+              caps-parent-type="relations"
+            />
+            <caps-count :caps="relation.caps"/>
           </td>
           <td class="td">
             <span class="flex flex-row justify-end">
@@ -36,18 +40,16 @@
       <table-empty-state v-else heading="No Contract Relations" copy="Use the 'New Contract Relation' to add Contract Relations" class="well"/>
     </transition-table-state>
     <pricing-tier-group-modal-list :pricing_tier_groups="pricingTierGroups"></pricing-tier-group-modal-list>
-    <caps-modal></caps-modal>
   </div>
 </template>
 
 <script>
-import capsModal from '@/components/caps/modal'
+import capsModalTrigger from '@/components/caps/modal/trigger'
+import capsCount from '@/components/caps/caps-count'
 import deleteContractRelation from '@/components/contract-relations/delete'
 import pricingTierModalList from '@/components/contract-relations/pricing-tiers/modal'
-import updateCaps from '@/components/contract-relations/caps/update'
 import updatePricingTiers from '@/components/contract-relations/pricing-tiers/update'
 import updateSuppressions from '@/components/contract-relations/suppressions/update'
-
 import { mapGetters } from 'vuex'
 
 export default {
@@ -77,16 +79,15 @@ export default {
   computed: {
     ...mapGetters({
       buyerById: 'getBuyerById',
-      currentRelation: 'getCurrentContractRelation',
       partnerById: 'getPartnerById',
       pricingTierGroups: 'getPricingTierGroups'
     })
   },
   components: {
-    'caps-modal': capsModal,
+    'caps-count': capsCount,
+    'caps-modal-trigger': capsModalTrigger,
     'delete-contract-relation': deleteContractRelation,
     'pricing-tier-group-modal-list': pricingTierModalList,
-    'update-caps': updateCaps,
     'update-pricing-tiers': updatePricingTiers,
     'update-suppressions': updateSuppressions
   },

@@ -32,8 +32,12 @@
           </td>
           <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">{{ contract.rpl }}</td>
-          <td class="td">
-            <caps-count :caps="contract.caps"></caps-count>
+          <td class="td flex flex-row">
+            <caps-modal-trigger
+              :caps-parent-id="contract.id"
+              caps-parent-type="buyers"
+            />
+            <caps-count :caps="contract.caps"/>
           </td>
           <td class="td">
             <table-link @table-link-click="linkToBuyerContracts(contract)"
@@ -60,6 +64,7 @@
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/buyer-checkbox'
 import capsCount from '@/components/caps/caps-count'
+import capsModalTrigger from '@/components/caps/modal/trigger'
 
 export default {
   props: {
@@ -106,7 +111,8 @@ export default {
   },
   components: {
     'bulk-update-checkbox': bulkUpdateCheckbox,
-    'caps-count': capsCount
+    'caps-count': capsCount,
+    'caps-modal-trigger': capsModalTrigger
   },
   destroyed () {
     this.resetShiftClickIndex()
