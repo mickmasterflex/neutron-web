@@ -13,7 +13,7 @@
           <router-link :to="{name: 'PartnerContract', params: {id:id}}">Partner Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'PartnerContractChildren', params: {id:id}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
+          <router-link :to="{name: 'PartnerContractContracts', params: {id:id}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'campaigns'">
           <router-link :to="{name: 'PartnerContractCampaigns', params: {id:id}}">Campaigns <number-label :number="contract.campaigns ? contract.campaigns.length : 0"/></router-link>
@@ -43,14 +43,18 @@ export default {
     ...mapGetters({
       contract: 'getCurrentPartner',
       loading: 'getPartnerFetchLoading'
-    })
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
       fetchCurrentPartner: 'fetchCurrentPartner'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_PARTNER'
+      resetCurrent: 'RESET_CURRENT_PARTNER',
+      resetCurrentAlternateIds: 'RESET_CURRENT_ALTERNATE_IDS'
     }),
     async setPartner () {
       if (this.contract.id !== this.id) {
@@ -67,6 +71,9 @@ export default {
   watch: {
     id () {
       this.setPartnerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {
@@ -74,6 +81,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetCurrentAlternateIds()
   }
 }
 </script>

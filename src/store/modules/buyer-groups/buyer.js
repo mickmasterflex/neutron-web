@@ -18,8 +18,8 @@ const actions = {
         if (response.data.buyer_group) {
           const buyerGroup = getters.getBuyerGroupById(response.data.buyer_group)
           buyerGroupRelationshipData = {
-            buyer_group: buyerGroup[0].id,
-            buyer_group_name: buyerGroup[0].name,
+            buyer_group: buyerGroup.id,
+            buyer_group_name: buyerGroup.name,
             contract: response.data.id
           }
         }

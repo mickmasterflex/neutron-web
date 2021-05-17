@@ -57,7 +57,7 @@ export default function useBuyer (buyerId, currentBuyerGroupId, store) {
       () => store.getters.getBuyersByParent(buyerId)
     ),
     assignedBuyerGroup: computed(
-      () => store.getters.getBuyerGroupById(state.buyer.buyer_group)[0]
+      () => store.getters.getBuyerGroupById(state.buyer.buyer_group)
     )
   })
   function saveBuyer () {
