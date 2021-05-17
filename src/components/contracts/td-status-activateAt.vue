@@ -15,7 +15,7 @@ export default {
     status: {
       type: String,
       validator: (value) => {
-        return ['terminated', 'active', 'paused', 'terminated'].includes(value)
+        return ['terminated', 'active', 'paused', 'archived'].includes(value)
       },
       required: true
     },
