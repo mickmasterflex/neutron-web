@@ -1,33 +1,42 @@
 <template>
-  <panel-template title="Active Channels" :actionTransition="true" :showLoader="loading">
-    <template v-slot:action>
-      <button @click="submitForm" class="btn btn-green" v-show="unsavedChanges">Save Changes</button>
-    </template>
+  <panel-template title="Active Channels"
+                  :action-transition="true"
+                  :show-loader="loading"
+                  :loading-text="loadingText">
     <template v-slot:content>
-      <validation-observer ref="form" class="form-horizontal">
-        <form @submit.prevent="submitForm">
-          <multiselect-checkboxes v-if="buyer.channels" :options="available_channels" v-model="channels" field_id="channels"></multiselect-checkboxes>
-        </form>
-      </validation-observer>
+      <div class="form-horizontal">
+        <table-empty-state
+          v-if="!available_channels.length"
+          heading="No channels exist"
+        >
+          <template slot="copy">Create new channels <router-link class="text-link" :to="{ name: 'Channels' }">here</router-link></template>
+        </table-empty-state>
+        <div class="field-group"
+             v-for="channel in available_channels"
+             :key="`channel-` + channel.id">
+          <check-switch :value="channels.includes(channel.id)"
+                        :field_id="`channel-` + channel.id"
+                        @input="submitForm(channel.id, $event)"/>
+          <label class="text-left ml-2 cursor-pointer" :for="`channel-` + channel.id">{{channel.name}}</label>
+        </div>
+      </div>
     </template>
   </panel-template>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { setResponseErrors } from '@/mixins/set-response-errors'
-import multiselectCheckboxes from '@/components/ui/forms/validation-fields/multi-select-switch.vue'
 
 export default {
   data () {
     return {
-      channels: []
+      channels: [],
+      updatingChannels: false
     }
   },
   props: {
     buyer: Object
   },
-  mixins: [setResponseErrors],
   methods: {
     ...mapActions({
       update: 'updateBuyer',
@@ -36,42 +45,56 @@ export default {
     setChannels () {
       this.channels = this.buyer.channels
     },
-    submitForm () {
-      this.$refs.form.validate().then(success => {
-        if (success) {
-          const updatedBuyer = this.buyer
-          updatedBuyer.channels = this.channels
-          this.update(updatedBuyer).catch(error => {
-            this.error = error
-          })
-        }
-      })
+    async submitForm (channelId, value) {
+      this.updatingChannels = true
+      let updatedChannels = [...this.channels]
+      if (value) {
+        updatedChannels = updatedChannels.concat([channelId])
+      } else {
+        updatedChannels = updatedChannels.filter(id => id !== channelId)
+      }
+      const updatedBuyer = { ...this.buyer }
+      updatedBuyer.channels = updatedChannels
+      await this.update(updatedBuyer)
+        .finally(() => {
+          this.updatingChannels = false
+        })
     }
   },
   watch: {
-    buyer: function () {
+    buyer () {
       this.setChannels()
     }
   },
   created () {
-    this.setChannels()
     this.fetchChannels()
   },
   computed: {
     ...mapGetters({
       available_channels: 'getAllChannels',
-      loading: 'getChannelsFetchLoading'
+      loadingChannels: 'getChannelsFetchLoading',
+      loadingBuyer: 'getBuyerFetchLoading',
+      loadingBuyerText: 'getBuyerFetchLoadingText',
+      loadingChannelsText: 'getChannelsFetchLoadingText'
     }),
-    unsavedChanges () {
-      if (this.channels) {
-        return this.channels !== this.buyer.channels
+    loading () {
+      if (this.loadingChannels) {
+        return this.loadingChannels
+      } else if (this.loadingBuyer) {
+        return this.loadingBuyer
       } else {
-        return false
+        return this.updatingChannels
+      }
+    },
+    loadingText () {
+      if (this.loadingChannels) {
+        return this.loadingChannelsText
+      } else if (this.loadingBuyer) {
+        return this.loadingBuyerText
+      } else {
+        return 'Updating Channels'
       }
     }
-  },
-  components: {
-    'multiselect-checkboxes': multiselectCheckboxes
   }
 }
 </script>

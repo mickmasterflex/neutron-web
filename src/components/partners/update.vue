@@ -12,8 +12,6 @@
           <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
           <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channel v-model="channel"/>
-          <min-rpl-field v-model="minimum_rpl"/>
-          <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
         </form>
       </validation-observer>
     </template>
@@ -21,9 +19,7 @@
 </template>
 
 <script>
-import minRplField from './min-rpl-text-field'
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
-import selectPricingTierGroup from '@/components/pricing-tiers/groups/select'
 import selectChannel from '@/components/channels/select'
 import parentSelect from '@/components/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
@@ -36,12 +32,9 @@ export default {
       name: '',
       parent: '',
       ping_back_url: '',
-      minimum_rpl: null,
       status: undefined,
       channel: '',
-      pricing_tier_group: '',
-      scheduledStart: null,
-      client: null
+      scheduledStart: null
     }
   },
   props: {
@@ -60,12 +53,9 @@ export default {
       this.name = this.partner.name
       this.parent = this.partner.parent
       this.ping_back_url = this.partner.ping_back_url
-      this.minimum_rpl = this.partner.minimum_rpl
       this.status = this.partner.status
       this.channel = this.partner.channel
-      this.pricing_tier_group = this.partner.pricing_tier_group
       this.scheduledStart = this.partner.scheduled_start
-      this.client = this.partner.client
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -73,13 +63,11 @@ export default {
           this.update({
             name: this.name,
             parent: this.parent,
-            client: this.client,
+            client: this.partner.client,
             id: this.partner.id,
             ping_back_url: this.ping_back_url,
-            minimum_rpl: this.minimum_rpl,
             status: this.status,
             channel: this.channel,
-            pricing_tier_group: this.pricing_tier_group,
             scheduled_start: this.scheduledStart
           }).catch(error => {
             this.error = error
@@ -103,8 +91,6 @@ export default {
           this.status !== this.partner.status ||
           this.ping_back_url !== this.partner.ping_back_url ||
           this.channel !== this.partner.channel ||
-          this.minimum_rpl !== this.partner.minimum_rpl ||
-          this.pricing_tier_group !== this.partner.pricing_tier_group ||
           this.scheduledStart !== this.partner.scheduled_start
       } else {
         return false
@@ -112,11 +98,9 @@ export default {
     }
   },
   components: {
-    'select-pricing-tier-group': selectPricingTierGroup,
     'date-picker': datePicker,
     'parent-select': parentSelect,
-    'select-channel': selectChannel,
-    'min-rpl-field': minRplField
+    'select-channel': selectChannel
   }
 }
 </script>

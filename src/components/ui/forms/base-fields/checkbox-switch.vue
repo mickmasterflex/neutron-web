@@ -10,6 +10,7 @@
       :id="field_id"
       :class="$attrs.field_class"
       class="hidden"
+      :disabled="$attrs.disabled"
       :checked="value">
   </div>
 </template>

@@ -53,7 +53,8 @@ export default {
       fetchCurrentPartner: 'fetchCurrentPartner'
     }),
     ...mapMutations({
-      resetCurrent: 'RESET_CURRENT_PARTNER'
+      resetCurrent: 'RESET_CURRENT_PARTNER',
+      resetCurrentAlternateIds: 'RESET_CURRENT_ALTERNATE_IDS'
     }),
     async setPartner () {
       if (this.contract.id !== this.id) {
@@ -80,6 +81,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetCurrentAlternateIds()
   }
 }
 </script>

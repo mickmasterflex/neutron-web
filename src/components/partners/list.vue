@@ -81,12 +81,14 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentPartner: 'SET_CURRENT_PARTNER',
+      setCurrentAltIds: 'SET_CURRENT_ALTERNATE_IDS',
       setCurrentClientData: 'SET_CURRENT_CLIENT_DATA',
       setCurrentPartnerAncestors: 'SET_CURRENT_ANCESTORS',
       resetShiftClickIndex: 'RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX'
     }),
     setCurrentPartnerWithAncestors (contract) {
       this.setCurrentPartner(contract)
+      this.setCurrentAltIds(contract.alternate_ids)
       this.setCurrentClientData(contract.client_data)
       this.setCurrentPartnerAncestors(contract.ancestors)
     },
