@@ -18,10 +18,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import deletePartner from '@/components/partners/delete'
-import updatePartner from '@/components/partners/update'
-import financialInfo from '@/components/partners/financial-update'
-import altIds from '@/components/partners/alternate-ids/index'
+import deletePartner from '@/components/contracts/partners/delete'
+import updatePartner from '@/components/contracts/partners/update'
+import financialInfo from '@/components/contracts/partners/financial-update'
+import altIds from '@/components/contracts/partners/alternate-ids/index'
 import leadCaps from '@/components/caps/'
 
 export default {

@@ -21,7 +21,7 @@
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectChannel from '@/components/channels/select'
-import parentSelect from '@/components/partners/parent-select'
+import parentSelect from '@/components/contracts/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'

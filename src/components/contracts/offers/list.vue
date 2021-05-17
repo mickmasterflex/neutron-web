@@ -18,13 +18,10 @@
           <td class="td">
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
-          <td class="td w-32">
-            <status-indicator :red="offer.status === 'terminated'"
-                              :green="offer.status === 'active'"
-                              :yellow="offer.status === 'paused'">
-              {{ offer.status }}
-            </status-indicator>
-          </td>
+          <status-td
+            :status="offer.status"
+            :activateAt="offer.activate_at"
+          />
           <td class="td">{{ offer.parent_data.name }}</td>
           <td class="td">
             <caps-count :caps="offer.caps"></caps-count>
@@ -43,10 +40,12 @@
 <script>
 import { mapMutations } from 'vuex'
 import capsCount from '@/components/caps/caps-count'
+import statusActivateTd from '@/components/contracts/td-status-activateAt'
 
 export default {
   components: {
-    'caps-count': capsCount
+    'caps-count': capsCount,
+    'status-td': statusActivateTd
   },
   props: {
     offers: Array,

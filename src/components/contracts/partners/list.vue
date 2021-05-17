@@ -23,13 +23,10 @@
           <td class="td">
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
           </td>
-          <td class="td w-32">
-            <status-indicator :red="contract.status === 'terminated'"
-                              :green="contract.status === 'active'"
-                              :yellow="contract.status === 'paused'">
-              {{ contract.status }}
-            </status-indicator>
-          </td>
+          <status-td
+            :status="contract.status"
+            :activateAt="contract.activate_at"
+          />
           <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">
             <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
@@ -63,6 +60,7 @@
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
 import capsCount from '@/components/caps/caps-count'
+import statusActivateTd from '@/components/contracts/td-status-activateAt'
 
 export default {
   props: {
@@ -107,7 +105,8 @@ export default {
   },
   components: {
     'bulk-update-checkbox': bulkUpdateCheckbox,
-    'caps-count': capsCount
+    'caps-count': capsCount,
+    'status-td': statusActivateTd
   },
   destroyed () {
     this.resetShiftClickIndex()

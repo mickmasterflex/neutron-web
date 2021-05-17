@@ -21,7 +21,7 @@
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import buyerGroupField from '@/components/buyer-groups/buyer-group-field'
-import parentSelect from '@/components/buyers/parent-select'
+import parentSelect from '@/components/contracts/buyers/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'

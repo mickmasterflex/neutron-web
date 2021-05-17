@@ -19,12 +19,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import deleteBuyer from '@/components/buyers/delete'
-import updateBuyer from '@/components/buyers/update'
+import deleteBuyer from '@/components/contracts/buyers/delete'
+import updateBuyer from '@/components/contracts/buyers/update'
 import recruitmentLocations from '@/components/geos/index'
 import deliveryIndex from '@/components/deliveries/index'
 import leadCaps from '@/components/caps/'
-import updateChannels from '@/components/buyers/update-channels'
+import updateChannels from '@/components/contracts/buyers/update-channels'
 
 export default {
   props: {
