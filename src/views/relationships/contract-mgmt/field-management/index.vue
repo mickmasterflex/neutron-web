@@ -6,13 +6,13 @@
         <span v-if="$route.name === 'BuyerContractFields'">Field Management</span>
       </h4>
       <btn-group-right>
-        <download-fpi v-if="$route.name === 'BuyerContractFPI'" :contract-id="id"></download-fpi>
+        <download-fpi :contract="buyer" :contractLoading="loadingBuyer"></download-fpi>
         <router-link v-if="$route.name === 'BuyerContractFPI'"
                      :to="{ name: 'BuyerContractFields', params: $route.params }"
                      class="btn btn-hollow-blue">Field Management <font-awesome-icon icon="arrow-right"></font-awesome-icon></router-link>
         <router-link v-if="$route.name === 'BuyerContractFields'"
                      :to="{ name: 'BuyerContractFPI', params: $route.params }"
-                     class="btn btn-hollow-blue">View FPI <font-awesome-icon icon="arrow-right"></font-awesome-icon></router-link>
+                     class="btn btn-hollow-blue">Preview FPI <font-awesome-icon icon="arrow-right"></font-awesome-icon></router-link>
       </btn-group-right>
     </div>
     <transition
@@ -25,10 +25,17 @@
 
 <script>
 import downloadFpi from '@/components/forms/fpi/download-csv'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
     id: Number
+  },
+  computed: {
+    ...mapGetters({
+      buyer: 'getCurrentBuyer',
+      loadingBuyer: 'getBuyerFetchLoading'
+    })
   },
   components: {
     'download-fpi': downloadFpi

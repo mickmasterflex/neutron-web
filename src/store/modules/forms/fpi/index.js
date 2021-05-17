@@ -23,16 +23,16 @@ const actions = {
         commit('RESET_FETCH_FPI_LOADING')
       })
   },
-  async fetchFpiCSV ({ commit, getters }, contractId) {
+  async fetchFpiCSV ({ commit, getters }, data) {
     await axios({
-      url: `/fpi-download/?contract=${contractId}&csv_download=True&`,
+      url: `/fpi-download/?contract=${data.id}&csv_download=True&`,
       responseType: 'blob',
       method: 'GET'
     }).then(response => {
       const linkUrl = window.URL.createObjectURL(response.data)
       const link = document.createElement('a')
       link.href = linkUrl
-      link.download = `fpi-${contractId}`
+      link.download = data.filename + '.csv'
       link.click()
       URL.revokeObjectURL(link.href)
     })
