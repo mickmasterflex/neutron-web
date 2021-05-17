@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import dayjs from 'dayjs'
 
 export default {
@@ -21,6 +21,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      downloading: 'getFetchFpiDownloading'
+    }),
     fpiFilename () {
       let contractSlug = this.contract.name
       contractSlug = contractSlug.toLowerCase().replace(/\s+/g, '-')
@@ -30,22 +33,14 @@ export default {
       return this.contractLoading ? this.contractLoading : this.downloading
     }
   },
-  data () {
-    return {
-      downloading: false
-    }
-  },
   methods: {
     ...mapActions({
       fetchFpiCSV: 'fetchFpiCSV'
     }),
     async downloadCSV () {
-      this.downloading = true
       await this.fetchFpiCSV({
         id: this.contract.id,
         filename: this.fpiFilename
-      }).finally(() => {
-        this.downloading = false
       })
     }
   }
