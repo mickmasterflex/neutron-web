@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import offersList from '@/components/offers/list'
+import offersList from '@/components/contracts/offers/list'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/offer-checkbox'
 import { mapMutations } from 'vuex'
 export default {

@@ -16,7 +16,7 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
-import buyerList from '@/components/buyers/list'
+import buyerList from '@/components/contracts/buyers/list'
 import bulkUpdateStatus from '@/components/bulk-update/status/buyer-tooltip'
 
 export default {

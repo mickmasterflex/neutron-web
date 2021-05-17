@@ -1,7 +1,7 @@
 <template>
   <div class="text-center py-5">
     <h4 class="h3">{{ heading }}</h4>
-    <p>{{ copy }}</p>
+    <p><slot name="copy">{{ copy }}</slot></p>
   </div>
 </template>
 

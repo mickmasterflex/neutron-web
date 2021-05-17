@@ -48,7 +48,10 @@ export default {
     ...mapGetters({
       contract: 'getCurrentBuyer',
       loading: 'getBuyerFetchLoading'
-    })
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
@@ -56,6 +59,7 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BUYER',
+      resetCurrentFpi: 'RESET_CURRENT_FPI',
       resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
       setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
@@ -66,7 +70,11 @@ export default {
     },
     setBuyerWithTitleAndBreadcrumbs () {
       this.setBuyer().then(() => {
-        document.title = this.contract.name
+        let title = this.contract.name
+        if (this.$route.meta.title) {
+          title = title + ' | ' + this.$route.meta.title
+        }
+        document.title = title
         this.setBreadcrumbsWithAncestors()
       })
     }
@@ -74,6 +82,9 @@ export default {
   watch: {
     id () {
       this.setBuyerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {
@@ -81,6 +92,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetCurrentFpi()
     this.resetBulkUpdateBuyers()
   }
 }

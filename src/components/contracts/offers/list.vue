@@ -18,13 +18,7 @@
           <td class="td">
             <span @click="linkToOffer(offer)" class="text-link">{{offer.name}}</span>
           </td>
-          <td class="td w-32">
-            <status-indicator :red="offer.status === 'terminated'"
-                              :green="offer.status === 'active'"
-                              :yellow="offer.status === 'paused'">
-              {{ offer.status }}
-            </status-indicator>
-          </td>
+          <td-status :status="offer.status"/>
           <td class="td">{{ offer.parent_data.name }}</td>
           <td class="td flex flex-row">
             <caps-modal-trigger
@@ -48,11 +42,13 @@
 import { mapMutations } from 'vuex'
 import capsCount from '@/components/caps/caps-count'
 import capsModalTrigger from '@/components/caps/modal/trigger'
+import tdContractStatus from '@/components/contracts/td-status'
 
 export default {
   components: {
     'caps-count': capsCount,
-    'caps-modal-trigger': capsModalTrigger
+    'caps-modal-trigger': capsModalTrigger,
+    'td-status': tdContractStatus
   },
   props: {
     offers: Array,
