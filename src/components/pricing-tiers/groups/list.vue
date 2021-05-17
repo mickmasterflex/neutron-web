@@ -7,7 +7,7 @@
       :copy="loadingText"></table-empty-state>
     <table-empty-state
       class="well col-span-2"
-      v-else-if="pricingTierGroups === undefined"
+      v-else-if="pricingTierGroups.length === 0"
       heading="No Pricing Tier Groups Added"
       copy="Use the 'New Group' button to add pricing tier groups."></table-empty-state>
     <panel-template v-for="pricingTierGroup in pricingTierGroups" :title="pricingTierGroup.name" :key="pricingTierGroup.id" class="col-span-2">

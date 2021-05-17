@@ -1,10 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{contract.name}}</h1>
+      <hud-h1 :loading="loading" :content="contract.name"/>
       <hud-stat-cards>
         <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
-        <status-card :status="contract.status" key="statusCard"></status-card>
+        <status-card :status="contract.status" key="statusCard" :loading="loading"/>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -13,7 +13,7 @@
           <router-link :to="{name: 'PartnerContract', params: {id:id}}">Partner Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'PartnerContractChildren', params: {id:id}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
+          <router-link :to="{name: 'PartnerContractContracts', params: {id:id}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'campaigns'">
           <router-link :to="{name: 'PartnerContractCampaigns', params: {id:id}}">Campaigns <number-label :number="contract.campaigns ? contract.campaigns.length : 0"/></router-link>
@@ -41,8 +41,12 @@ export default {
   mixins: [partnerContractBreadcrumbs],
   computed: {
     ...mapGetters({
-      contract: 'getCurrentPartner'
-    })
+      contract: 'getCurrentPartner',
+      loading: 'getPartnerFetchLoading'
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
@@ -66,6 +70,9 @@ export default {
   watch: {
     id () {
       this.setPartnerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {

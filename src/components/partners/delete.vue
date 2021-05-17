@@ -24,12 +24,12 @@ export default {
         .then(() => {
           if (this.parent) {
             this.$router.push({
-              name: 'PartnerContractChildren',
+              name: 'PartnerContractContracts',
               params: { id: this.parent, client: this.client }
             })
           } else {
             this.$router.push({
-              name: 'ClientContracts',
+              name: 'ClientPartnerContracts',
               params: { slug: this.client }
             })
           }

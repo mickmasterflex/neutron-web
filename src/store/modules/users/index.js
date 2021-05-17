@@ -47,11 +47,15 @@ const actions = {
         commit('ADD_USER', response.data)
       })
   },
-  async updateUser ({ commit }, updatedUser) {
+  async updateUser ({ commit, getters }, updatedUser) {
     await axios.put(`/users/${updatedUser.id}/`, updatedUser)
       .then(response => {
         commit('UPDATE_USER', response.data)
-        commit('SET_CURRENT_USER', response.data)
+        if (getters.getCurrentActiveUser.id === updatedUser.id) {
+          commit('SET_CURRENT_ACTIVE_USER', response.data)
+        } else {
+          commit('SET_CURRENT_USER', response.data)
+        }
       })
   },
   async deleteUser ({ commit }, id) {
@@ -61,13 +65,13 @@ const actions = {
       })
   },
   async resetPassword ({ commit }, password) {
-    await axios.post('/reset-password/', password)
+    await axios.post('/reset-password/', password, { showSuccessToast: false })
       .then(() => {
         commit('UPDATE_CURRENT_USER_PASS_VALID', true)
       })
   },
   async forgotPassword ({ commit }, email) {
-    await axios.post('/forgot-password/', email)
+    await axios.post('/forgot-password/', email, { showSuccessToast: false })
   }
 }
 

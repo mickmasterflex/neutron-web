@@ -1,10 +1,10 @@
 <template>
   <content-layout>
     <template v-slot:hud-content>
-      <h1 class="h1 text-white">{{contract.name}}</h1>
+      <hud-h1 :loading="loading" :content="contract.name"/>
       <hud-stat-cards>
-        <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId"></stat-card>
-        <status-card :status="contract.status" key="statusCard"></status-card>
+        <stat-card v-if="contract.parent" :data="contract.parent" title="Parent" key="parentId" :loading="loading"/>
+        <status-card :status="contract.status" key="statusCard" :loading="loading"/>
       </hud-stat-cards>
     </template>
     <template v-slot:contentTabs>
@@ -13,7 +13,7 @@
           <router-link :to="{name: 'BuyerContract', params: {id:id, client: client}}">Buyer Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
+          <router-link :to="{name: 'BuyerContractContracts', params: {id:id, client: client}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'offers'">
           <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers <number-label :number="contract.offer_contracts ? contract.offer_contracts.length : 0"/></router-link>
@@ -46,8 +46,12 @@ export default {
   mixins: [buyerContractBreadcrumbs],
   computed: {
     ...mapGetters({
-      contract: 'getCurrentBuyer'
-    })
+      contract: 'getCurrentBuyer',
+      loading: 'getBuyerFetchLoading'
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
@@ -78,6 +82,9 @@ export default {
   watch: {
     id () {
       this.setBuyerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {
