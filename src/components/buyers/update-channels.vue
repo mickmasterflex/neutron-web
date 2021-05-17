@@ -5,6 +5,12 @@
                   :loading-text="loadingText">
     <template v-slot:content>
       <div class="form-horizontal">
+        <table-empty-state
+          v-if="!available_channels.length"
+          heading="No channels exist"
+        >
+          <template slot="copy">Create new channels <router-link class="text-link" :to="{ name: 'Channels' }">here</router-link></template>
+        </table-empty-state>
         <div class="field-group"
              v-for="channel in available_channels"
              :key="`channel-` + channel.id">
