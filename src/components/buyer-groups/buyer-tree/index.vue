@@ -7,9 +7,9 @@
         <li class="w-24 px-3">Status</li>
         <li class="w-20 px-3">Buyers</li>
       </ul>
-      <div class="bg-white p-2 rounded-b-lg border-2 border-t-0 border-gray-200 relative" :class="{'cursor-wait': loading}">
+      <div class="bg-white p-2 rounded-b-lg border-2 border-t-0 border-gray-200 relative" :class="{'cursor-wait': loadingBuyerGroups}">
         <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster">
-          <div v-show="loading" class="absolute inset-0 flex flex-row items-center justify-center bg-white bg-opacity-75 z-50"></div>
+          <div v-show="loadingBuyerGroups" class="absolute inset-0 flex flex-row items-center justify-center bg-white bg-opacity-75 z-50"></div>
         </transition>
         <buyer-tree-node
           v-for="client in allClients"
@@ -18,7 +18,7 @@
           type="client"></buyer-tree-node>
       </div>
     </div>
-    <table-empty-state v-else heading="No clients or buyers have been created" copy="Close the modal and hit the Clients tab to get started." class="well"></table-empty-state>
+    <table-empty-state v-else :heading="emptyStateHeading" :copy="emptyStateCopy" class="well"></table-empty-state>
   </div>
 </template>
 
@@ -31,8 +31,19 @@ export default {
     ...mapGetters({
       allClients: 'getAllClients',
       allBuyers: 'getAllBuyers',
-      loading: 'getBuyerGroupsLoading'
-    })
+      loadingBuyerGroups: 'getBuyerGroupsLoading',
+      loadingBuyers: 'getBuyersFetchLoading',
+      loadingClients: 'getClientsFetchLoading'
+    }),
+    loadingClientsBuyers () {
+      return this.loadingBuyers ? this.loadingBuyers : this.loadingClients
+    },
+    emptyStateHeading () {
+      return this.loadingClientsBuyers ? 'Loading Buyer Contracts' : 'No clients or buyers have been created'
+    },
+    emptyStateCopy () {
+      return this.loadingClientsBuyers ? 'This may take a few seconds' : 'Close the modal and hit the Clients tab to get started.'
+    }
   },
   components: {
     'buyer-tree-node': buyerTreeNode

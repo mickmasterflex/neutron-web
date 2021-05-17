@@ -7,8 +7,8 @@
           <v-text-field v-model="name" rules="required" field_id="name" field_label="Education Product Name"></v-text-field>
           <textarea-field v-model="short_description" field_id="short_description" field_label="Short Description"></textarea-field>
           <textarea-field v-model="description" field_id="description" field_label="Description"></textarea-field>
-          <select-field v-model="area_of_interest" :options="areas_of_interest" field_id="area_of_interest" field_label="Area Of Interest"></select-field>
-          <select-field v-model="degree_level" :options="degree_levels" field_id="degree_level" field_label="Degree Level"></select-field>
+          <v-select-field v-model="area_of_interest" :options="areas_of_interest" field_id="area_of_interest" field_label="Area Of Interest"></v-select-field>
+          <v-select-field v-model="degree_level" :options="degree_levels" field_id="degree_level" field_label="Degree Level"></v-select-field>
         </form>
       </validation-observer>
     </template>

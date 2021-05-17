@@ -12,7 +12,7 @@ const actions = {
       const linkUrl = window.URL.createObjectURL(response.data)
       const link = document.createElement('a')
       link.href = linkUrl
-      link.download = filename + '-' + dateRange
+      link.download = filename + '-' + dateRange + '.csv'
       link.click()
       URL.revokeObjectURL(link.href)
     }).finally(() => {

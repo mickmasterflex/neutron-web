@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import fpi from '@/store/modules/forms/fpi/'
 import fields from '@/store/modules/forms/fields'
 import baseFields from '@/store/modules/forms/base-fields'
 import loading from '@/store/modules/forms/loading'
@@ -6,6 +7,7 @@ import injected from '@/store/modules/forms/injected'
 import additionalContent from '@/store/modules/forms/additional-content'
 
 const modules = {
+  fpi,
   baseFields,
   fields,
   injected,

@@ -10,7 +10,7 @@
       :title="buyerGroup.name"
       :subtitle="'id: ' + buyerGroup.id"
       :key="buyerGroup.id"
-      :show-loader="loadingBuyers"
+      :show-loader="loadingClientsBuyers"
       :loading-text="loadingBuyersText"
       class="col-span-2">
       <template v-slot:action>
@@ -36,18 +36,22 @@ export default {
     ...mapGetters({
       buyerGroups: 'getBuyerGroups',
       getBuyersByBuyerGroup: 'getBuyersByBuyerGroup',
-      loading: 'getBuyerGroupsFetchLoading',
+      loadingBuyerGroups: 'getBuyerGroupsFetchLoading',
       loadingBuyers: 'getBuyersFetchLoading',
+      loadingClients: 'getClientsFetchLoading',
       loadingBuyersText: 'getBuyersFetchLoadingText'
     }),
+    loadingClientsBuyers () {
+      return this.loadingBuyers ? this.loadingBuyers : this.loadingClients
+    },
     buyerGroupsExist () {
       return this.buyerGroups ? this.buyerGroups.length > 0 : false
     },
     emptyStateHeading () {
-      return this.loading ? 'Loading Buyer Groups' : 'No Buyer Groups Added'
+      return this.loadingBuyerGroups ? 'Loading Buyer Groups' : 'No Buyer Groups Added'
     },
     emptyStateCopy () {
-      return this.loading ? 'This may take a few seconds' : 'Use the \'New Buyer Group\' button to add buyer groups.'
+      return this.loadingBuyerGroups ? 'This may take a few seconds' : 'Use the \'New Buyer Group\' button to add buyer groups.'
     }
   },
   components: {

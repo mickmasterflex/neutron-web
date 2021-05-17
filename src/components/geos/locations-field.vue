@@ -15,7 +15,7 @@ import validation from '@/mixins/fields/validation'
 export default {
   mixins: [validation],
   data: () => ({
-    placeholder: 'Enter multiple postal codes or abbreviated states.\nSeparate with commas, ie:\n84104, UT, 90210, ny, TX'
+    placeholder: 'Enter multiple postal codes or abbreviated states.\nSeparate with commas or newlines, ie:\n84104, UT, 90210, ny, TX\nUT\nTX\nNY\nMA'
   })
 }
 </script>

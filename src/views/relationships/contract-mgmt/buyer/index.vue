@@ -13,7 +13,7 @@
           <router-link :to="{name: 'BuyerContract', params: {id:id, client: client}}">Buyer Details</router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'contracts'">
-          <router-link :to="{name: 'BuyerContractChildren', params: {id:id, client: client}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
+          <router-link :to="{name: 'BuyerContractContracts', params: {id:id, client: client}}">Contracts <number-label :number="contract.children ? contract.children.length : 0"/></router-link>
         </underscore-tab>
         <underscore-tab :active="$route.meta.contentTab === 'offers'">
           <router-link :to="{name: 'BuyerContractOffers', params: {id:id, client: client}}">Offers <number-label :number="contract.offer_contracts ? contract.offer_contracts.length : 0"/></router-link>
@@ -48,7 +48,10 @@ export default {
     ...mapGetters({
       contract: 'getCurrentBuyer',
       loading: 'getBuyerFetchLoading'
-    })
+    }),
+    parent () {
+      return this.contract.parent
+    }
   },
   methods: {
     ...mapActions({
@@ -56,6 +59,7 @@ export default {
     }),
     ...mapMutations({
       resetCurrent: 'RESET_CURRENT_BUYER',
+      resetCurrentFpi: 'RESET_CURRENT_FPI',
       resetBulkUpdateBuyers: 'RESET_BULK_UPDATE_BUYERS',
       setBreadcrumbs: 'SET_CURRENT_BREADCRUMBS'
     }),
@@ -66,7 +70,11 @@ export default {
     },
     setBuyerWithTitleAndBreadcrumbs () {
       this.setBuyer().then(() => {
-        document.title = this.contract.name
+        let title = this.contract.name
+        if (this.$route.meta.title) {
+          title = title + ' | ' + this.$route.meta.title
+        }
+        document.title = title
         this.setBreadcrumbsWithAncestors()
       })
     }
@@ -74,6 +82,9 @@ export default {
   watch: {
     id () {
       this.setBuyerWithTitleAndBreadcrumbs()
+    },
+    parent () {
+      this.setBreadcrumbsWithAncestors()
     }
   },
   created () {
@@ -81,6 +92,7 @@ export default {
   },
   destroyed () {
     this.resetCurrent()
+    this.resetCurrentFpi()
     this.resetBulkUpdateBuyers()
   }
 }

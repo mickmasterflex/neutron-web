@@ -94,7 +94,7 @@ export default {
     },
     linkToPartnerContracts (contract) {
       this.setCurrentPartnerWithAncestors(contract)
-      this.$router.push({ name: 'PartnerContractChildren', params: { client: this.client, id: contract.id } })
+      this.$router.push({ name: 'PartnerContractContracts', params: { client: this.client, id: contract.id } })
     },
     linkToPartner (contract) {
       this.setCurrentPartnerWithAncestors(contract)
