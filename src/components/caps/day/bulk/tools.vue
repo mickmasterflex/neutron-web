@@ -24,6 +24,7 @@
     </div>
     <ul class="grid grid-cols-7 gap-2 justify-center pb-0 mt-3">
       <li v-for="filter in dayFilters" :key="filter.name" class="flex flex-row flex-grow items-center">
+        <checkbox-filter :days="filter.days"/>
         <button class="w-1/2 btn btn-md btn-blue rounded-r-none border-r-0"
                 @click="removeDates(formatDates(filter.days))"
                 :disabled="loading">
@@ -42,10 +43,14 @@
 <script>
 import dayjs from 'dayjs'
 import { mapMutations, mapGetters } from 'vuex'
+import checkboxFilter from './filter'
 
 const currentMonth = dayjs(new Date()).month() + 1
 const currentDay = dayjs(new Date()).date()
 export default {
+  components: {
+    'checkbox-filter': checkboxFilter
+  },
   props: {
     days: {
       type: Array
