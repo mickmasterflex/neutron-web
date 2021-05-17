@@ -799,25 +799,58 @@ const routes = [
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'contracts'
+          contentTab: 'contracts',
+          title: 'Contracts'
         },
         pathToRegexpOptions: { strict: true }
       },
       {
         name: 'BuyerContractFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/field-management'),
-        meta: {
-          requiresAuth: true,
-          activeApp: 'relationships',
-          contentTab: 'field-management'
-        },
+        redirect: { name: 'BuyerContractFields' },
+        component: () => import('@/views/relationships/contract-mgmt/field-management/index'),
+        pathToRegexpOptions: { strict: true },
         props (route) {
           const props = { ...route.params }
           props.id = +props.id
           return props
         },
-        pathToRegexpOptions: { strict: true }
+        children: [
+          {
+            name: 'BuyerContractFields',
+            path: '',
+            component: () => import('@/views/relationships/contract-mgmt/field-management/fields'),
+            meta: {
+              requiresAuth: true,
+              activeApp: 'relationships',
+              contentTab: 'field-management',
+              title: 'Field Management'
+            },
+            props (route) {
+              const props = { ...route.params }
+              props.id = +props.id
+              return props
+            },
+            pathToRegexpOptions: { strict: true }
+          },
+          {
+            name: 'BuyerContractFPI',
+            path: 'fpi/',
+            component: () => import('@/views/relationships/contract-mgmt/field-management/fpi'),
+            meta: {
+              requiresAuth: true,
+              activeApp: 'relationships',
+              contentTab: 'field-management',
+              title: 'FPI'
+            },
+            props (route) {
+              const props = { ...route.params }
+              props.id = +props.id
+              return props
+            },
+            pathToRegexpOptions: { strict: true }
+          }
+        ]
       },
       {
         name: 'BuyerContractOffers',
@@ -826,7 +859,8 @@ const routes = [
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
-          contentTab: 'offers'
+          contentTab: 'offers',
+          title: 'Offers'
         },
         props (route) {
           const props = { ...route.params }
@@ -867,7 +901,7 @@ const routes = [
       {
         name: 'OfferFieldManagement',
         path: 'field-management/',
-        component: () => import('@/views/relationships/contract-mgmt/field-management'),
+        component: () => import('@/views/relationships/contract-mgmt/field-management/fields'),
         meta: {
           requiresAuth: true,
           activeApp: 'relationships',
