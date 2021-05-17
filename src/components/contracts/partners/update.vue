@@ -9,8 +9,8 @@
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <parent-select v-model="parent"></parent-select>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
+          <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
-          <date-picker v-model="scheduledStart" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channel v-model="channel"/>
         </form>
       </validation-observer>
@@ -21,7 +21,7 @@
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectChannel from '@/components/channels/select'
-import parentSelect from '@/components/partners/parent-select'
+import parentSelect from '@/components/contracts/partners/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
@@ -34,7 +34,7 @@ export default {
       ping_back_url: '',
       status: undefined,
       channel: '',
-      scheduledStart: null
+      activateAt: null
     }
   },
   props: {
@@ -55,7 +55,7 @@ export default {
       this.ping_back_url = this.partner.ping_back_url
       this.status = this.partner.status
       this.channel = this.partner.channel
-      this.scheduledStart = this.partner.scheduled_start
+      this.activateAt = this.partner.activate_at
     },
     submitForm () {
       this.$refs.form.validate().then(success => {
@@ -68,7 +68,7 @@ export default {
             ping_back_url: this.ping_back_url,
             status: this.status,
             channel: this.channel,
-            scheduled_start: this.scheduledStart
+            activate_at: this.status !== 'active' ? this.activateAt : null
           }).catch(error => {
             this.error = error
           })
@@ -91,7 +91,7 @@ export default {
           this.status !== this.partner.status ||
           this.ping_back_url !== this.partner.ping_back_url ||
           this.channel !== this.partner.channel ||
-          this.scheduledStart !== this.partner.scheduled_start
+          this.activateAt !== this.partner.activate_at
       } else {
         return false
       }

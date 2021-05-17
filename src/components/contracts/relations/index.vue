@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import contractRelationsList from '@/components/contract-relations/list'
-import createContractRelation from '@/components/contract-relations/create'
+import contractRelationsList from '@/components/contracts/relations/list'
+import createContractRelation from '@/components/contracts/relations/create'
 
 import { mapActions, mapGetters } from 'vuex'
 

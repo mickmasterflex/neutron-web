@@ -41,12 +41,12 @@
 </template>
 
 <script>
-import capsModal from '@/components/contract-relations/caps/modal'
-import deleteContractRelation from '@/components/contract-relations/delete'
-import pricingTierModalList from '@/components/contract-relations/pricing-tiers/modal'
-import updateCaps from '@/components/contract-relations/caps/update'
-import updatePricingTiers from '@/components/contract-relations/pricing-tiers/update'
-import updateSuppressions from '@/components/contract-relations/suppressions/update'
+import capsModal from '@/components/contracts/relations/caps/modal'
+import deleteContractRelation from '@/components/contracts/relations/delete'
+import pricingTierModalList from '@/components/contracts/relations/pricing-tiers/modal'
+import updateCaps from '@/components/contracts/relations/caps/update'
+import updatePricingTiers from '@/components/contracts/relations/pricing-tiers/update'
+import updateSuppressions from '@/components/contracts/relations/suppressions/update'
 
 import { mapGetters } from 'vuex'
 

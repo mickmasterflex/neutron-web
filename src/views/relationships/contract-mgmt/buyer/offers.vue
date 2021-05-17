@@ -9,8 +9,8 @@
   </base-panel-grid>
 </template>
 <script>
-import createOffer from '@/components/offers/create'
-import offerList from '@/components/offers/list-panel'
+import createOffer from '@/components/contracts/offers/create'
+import offerList from '@/components/contracts/offers/list-panel'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {

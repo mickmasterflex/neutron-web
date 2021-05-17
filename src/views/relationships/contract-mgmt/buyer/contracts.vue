@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import buyerList from '@/components/buyers/list-panel'
-import createBuyer from '@/components/buyers/create'
-import contractRelationsIndex from '@/components/contract-relations/index'
+import buyerList from '@/components/contracts/buyers/list-panel'
+import createBuyer from '@/components/contracts/buyers/create'
+import contractRelationsIndex from '@/components/contracts/relations/index'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {

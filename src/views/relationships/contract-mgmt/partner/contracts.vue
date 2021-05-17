@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import partnerListPanel from '@/components/partners/list-panel'
-import createPartner from '@/components/partners/create'
-import contractRelationsIndex from '@/components/contract-relations/index'
+import partnerListPanel from '@/components/contracts/partners/list-panel'
+import createPartner from '@/components/contracts/partners/create'
+import contractRelationsIndex from '@/components/contracts/relations/index'
 
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 

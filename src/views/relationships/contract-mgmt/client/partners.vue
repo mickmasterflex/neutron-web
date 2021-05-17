@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import partnerListPanel from '@/components/partners/list-panel'
-import createPartner from '@/components/partners/create'
+import partnerListPanel from '@/components/contracts/partners/list-panel'
+import createPartner from '@/components/contracts/partners/create'
 import { mapGetters } from 'vuex'
 
 export default {
