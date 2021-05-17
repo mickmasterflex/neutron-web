@@ -47,7 +47,7 @@
 import capsModalTrigger from '@/components/caps/modal/trigger'
 import capsCount from '@/components/caps/caps-count'
 import deleteContractRelation from '@/components/contracts/relations/delete'
-import pricingTierModalList from '@/components/contracts/relations/pricing-tiers/modal'\
+import pricingTierModalList from '@/components/contracts/relations/pricing-tiers/modal'
 import updatePricingTiers from '@/components/contracts/relations/pricing-tiers/update'
 import updateSuppressions from '@/components/contracts/relations/suppressions/update'
 import { mapGetters } from 'vuex'
