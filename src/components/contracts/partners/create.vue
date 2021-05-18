@@ -6,8 +6,8 @@
         <form @submit.prevent="submitForm" class="form-horizontal">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
+          <date-picker v-model="activate_at" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="ping_back_url" field_label="Pingback URL"></v-text-field>
-          <date-picker v-model="scheduled_start" field_id="scheduled_start" field_label="Scheduled Start"></date-picker>
           <select-channel v-model="channel"/>
           <min-rpl-field v-model="minimum_rpl"/>
           <select-pricing-tier-group v-model="pricing_tier_group"></select-pricing-tier-group>
@@ -39,7 +39,7 @@ export default {
       ping_back_url: '',
       minimum_rpl: null,
       status: 'active',
-      scheduled_start: null
+      activate_at: null
     }
   },
   computed: {
@@ -69,7 +69,7 @@ export default {
       this.status = 'active'
       this.ping_back_url = ''
       this.minimum_rpl = null
-      this.scheduled_start = null
+      this.activate_at = null
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -86,7 +86,8 @@ export default {
             pricing_tier_group: this.pricing_tier_group,
             status: this.status,
             ping_back_url: this.ping_back_url,
-            scheduled_start: this.scheduled_start,
+            vertical: 1,
+            activate_at: this.status !== 'active' ? this.activate_at : null,
             minimum_rpl: this.minimum_rpl
           }).then(() => {
             this.close()

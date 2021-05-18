@@ -22,10 +22,7 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      capsEndpoint: 'getCapsCalendarEndpoint',
-      parentType: 'getCurrentCapsParentType',
-      dayCaps: 'getCurrentDayCaps',
-      monthCaps: 'getCurrentMonthCaps'
+      capsEndpoint: 'getCapsCalendarEndpoint'
     })
   },
   components: {

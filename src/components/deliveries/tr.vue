@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import revenueMethodSelect from '@/components/buyers/revenue-method-switch'
+import revenueMethodSelect from '@/components/contracts/buyers/revenue-method-switch'
 
 export default {
   props: {

@@ -46,10 +46,10 @@
 <script>
 import capsModalTrigger from '@/components/caps/modal/trigger'
 import capsCount from '@/components/caps/caps-count'
-import deleteContractRelation from '@/components/contract-relations/delete'
-import pricingTierModalList from '@/components/contract-relations/pricing-tiers/modal'
-import updatePricingTiers from '@/components/contract-relations/pricing-tiers/update'
-import updateSuppressions from '@/components/contract-relations/suppressions/update'
+import deleteContractRelation from '@/components/contracts/relations/delete'
+import pricingTierModalList from '@/components/contracts/relations/pricing-tiers/modal'
+import updatePricingTiers from '@/components/contracts/relations/pricing-tiers/update'
+import updateSuppressions from '@/components/contracts/relations/suppressions/update'
 import { mapGetters } from 'vuex'
 
 export default {

@@ -23,7 +23,7 @@
 import geoPanel from '@/components/geos/geo-panel'
 import resultsList from '@/components/geos/search-locations/results-list'
 import locationField from '@/components/geos/locations-field'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 
 export default {
@@ -35,13 +35,17 @@ export default {
   computed: {
     ...mapGetters({
       geo: 'getCurrentGeo',
-      results: 'getLocationsSearchResults'
+      results: 'getLocationsSearchResults',
+      searchVisible: 'getSearchAddLocationsPanelVisible'
     })
   },
   mixins: [enterKeyListener],
   methods: {
     ...mapActions({
       search: 'searchLocations'
+    }),
+    ...mapMutations({
+      resetResults: 'RESET_LOCATIONS_SEARCH_RESULTS'
     }),
     searchLocations () {
       this.$refs.form.validate().then(success => {
@@ -56,6 +60,13 @@ export default {
     enterKeyAction () {
       if (document.activeElement === this.$refs.locationField.$refs.locationField.$refs.field.$refs.field) {
         this.searchLocations()
+      }
+    }
+  },
+  watch: {
+    searchVisible () {
+      if (!this.searchVisible) {
+        this.resetResults()
       }
     }
   },

@@ -1,3 +1,4 @@
+
 <template>
   <base-panel-grid>
     <buyer-list-panel class="col-span-2" :contracts="buyersByClient(client.id)" :client="$route.params.slug"></buyer-list-panel>
@@ -7,9 +8,9 @@
 </template>
 
 <script>
-import buyerList from '@/components/buyers/list-panel'
 import capsModal from '@/components/caps/modal/modal'
-import createBuyer from '@/components/buyers/create'
+import buyerList from '@/components/contracts/buyers/list-panel'
+import createBuyer from '@/components/contracts/buyers/create'
 import { mapGetters } from 'vuex'
 
 export default {

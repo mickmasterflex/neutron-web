@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import partnerList from '@/components/partners/list'
+import partnerList from '@/components/contracts/partners/list'
 import bulkUpdateStatus from '@/components/bulk-update/status/partner-tooltip'
 import { mapGetters, mapMutations } from 'vuex'
 

@@ -18,17 +18,17 @@ export default {
       showModal: 'getShowCapsModal',
       buyerById: 'getBuyerById',
       partnerById: 'getPartnerById',
-      buyerByCapParentId: 'getBuyerByCapParentId',
-      partnerByCapParentId: 'getPartnerByCapParentId',
-      offerByCapParentId: 'getOfferByCapParentId',
+      buyerByCapsParentId: 'getBuyerByCapsParentId',
+      partnerByCapsParentId: 'getPartnerByCapsParentId',
+      offerByCapsParentId: 'getOfferByCapsParentId',
       capsParentId: 'getCurrentCapsParentId',
       capsParentType: 'getCurrentCapsParentType'
     }),
     capParent () {
       const updatedParentOptions = {
-        buyers: this.buyerByCapParentId(this.capsParentId),
-        partners: this.partnerByCapParentId(this.capsParentId),
-        'offer-contracts': this.offerByCapParentId(this.capsParentId),
+        buyers: this.buyerByCapsParentId(this.capsParentId),
+        partners: this.partnerByCapsParentId(this.capsParentId),
+        'offer-contracts': this.offerByCapsParentId(this.capsParentId),
         relations: { name: 'Relation' }
       }
       return updatedParentOptions[this.capsParentType]

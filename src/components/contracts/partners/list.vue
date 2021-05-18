@@ -23,13 +23,7 @@
           <td class="td">
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
           </td>
-          <td class="td w-32">
-            <status-indicator :red="contract.status === 'terminated'"
-                              :green="contract.status === 'active'"
-                              :yellow="contract.status === 'paused'">
-              {{ contract.status }}
-            </status-indicator>
-          </td>
+          <td-status :status="contract.status"/>
           <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">
             <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
@@ -68,6 +62,7 @@ import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
 import capsCount from '@/components/caps/caps-count'
 import capsModalTrigger from '@/components/caps/modal/trigger'
+import tdContractStatus from '@/components/contracts/td-status'
 
 export default {
   props: {
@@ -86,12 +81,14 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentPartner: 'SET_CURRENT_PARTNER',
+      setCurrentAltIds: 'SET_CURRENT_ALTERNATE_IDS',
       setCurrentClientData: 'SET_CURRENT_CLIENT_DATA',
       setCurrentPartnerAncestors: 'SET_CURRENT_ANCESTORS',
       resetShiftClickIndex: 'RESET_BULK_UPDATE_PARTNERS_SHIFT_CLICK_INDEX'
     }),
     setCurrentPartnerWithAncestors (contract) {
       this.setCurrentPartner(contract)
+      this.setCurrentAltIds(contract.alternate_ids)
       this.setCurrentClientData(contract.client_data)
       this.setCurrentPartnerAncestors(contract.ancestors)
     },
@@ -111,7 +108,8 @@ export default {
   components: {
     'bulk-update-checkbox': bulkUpdateCheckbox,
     'caps-count': capsCount,
-    'caps-modal-trigger': capsModalTrigger
+    'caps-modal-trigger': capsModalTrigger,
+    'td-status': tdContractStatus
   },
   destroyed () {
     this.resetShiftClickIndex()

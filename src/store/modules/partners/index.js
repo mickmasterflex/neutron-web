@@ -1,9 +1,11 @@
 import axios from '@/axios'
+import alternateIds from '@/store/modules/partners/alternate-ids'
 import bulkUpdate from '@/store/modules/partners/bulk-update'
 import visibility from '@/store/modules/partners/visibility'
 import loading from '@/store/modules/partners/loading'
 
 const modules = {
+  alternateIds,
   bulkUpdate,
   loading,
   visibility
@@ -39,8 +41,8 @@ const getters = {
   getPartnerById: (state) => (partnerId) => {
     return state.partners.filter(partner => partner.id === partnerId)[0]
   },
-  getPartnerByCapParentId: (state) => (capParentId) => {
-    return state.partners.find(partner => partner.caps.id === capParentId)
+  getPartnerByCapsParentId: (state) => (capsParentId) => {
+    return state.partners.find(partner => partner.caps.id === capsParentId)
   }
 }
 
@@ -58,6 +60,7 @@ const actions = {
     await axios.get(`/partners/${id}/`)
       .then(response => {
         commit('SET_CURRENT_PARTNER', response.data)
+        commit('SET_CURRENT_ALTERNATE_IDS', response.data.alternate_ids)
         commit('SET_CURRENT_CLIENT_DATA', response.data.client_data)
         commit('SET_CURRENT_ANCESTORS', response.data.ancestors)
         commit('RESET_PARTNER_FETCH_LOADING')

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import offerList from '@/components/offers/list'
+import offerList from '@/components/contracts/offers/list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {

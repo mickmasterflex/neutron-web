@@ -14,8 +14,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import recruitmentLocations from '@/components/geos/index'
-import deleteOffer from '@/components/offers/delete'
-import updateOffer from '@/components/offers/update'
+import deleteOffer from '@/components/contracts/offers/delete'
+import updateOffer from '@/components/contracts/offers/update'
 import leadCaps from '@/components/caps/panel-template'
 
 export default {
