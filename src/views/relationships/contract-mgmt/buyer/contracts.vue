@@ -11,11 +11,13 @@
                               contractType="buyer"
                               class="col-span-2"
     ></contract-relations-index>
+    <caps-modal/>
     <create-buyer-contract v-if="!createBuyerDisabled" :client="buyer.client" :parent="buyer.id"></create-buyer-contract>
   </base-panel-grid>
 </template>
 
 <script>
+import capsModal from '@/components/caps/modal/modal'
 import buyerList from '@/components/contracts/buyers/list-panel'
 import createBuyer from '@/components/contracts/buyers/create'
 import contractRelationsIndex from '@/components/contracts/relations/index'
@@ -24,6 +26,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   components: {
     'buyer-list-panel': buyerList,
+    'caps-modal': capsModal,
     'create-buyer-contract': createBuyer,
     'contract-relations-index': contractRelationsIndex
   },

@@ -77,7 +77,7 @@ export default {
     ...mapGetters({
       showModal: 'getShowCreateDayCapModal',
       day: 'getSelectedCapDay',
-      parent: 'getCurrentCapParent',
+      parent: 'getCurrentCapsParentId',
       loading: 'getCapsLoading',
       loadingPost: 'getCapsPostLoading'
     })

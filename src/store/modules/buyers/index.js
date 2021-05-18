@@ -41,6 +41,9 @@ const getters = {
   },
   getBuyerById: (state) => (buyerId) => {
     return state.buyers.filter(buyer => buyer.id === buyerId)[0]
+  },
+  getBuyerByCapsParentId: (state) => (capsParentId) => {
+    return state.buyers.find(buyer => buyer.caps.id === capsParentId)
   }
 }
 

@@ -5,10 +5,13 @@
                       emptyStateCopy="Use the 'New Offer' button to add offers"
                       :createOfferDisabled="createOfferDisabled"
     ></offer-list-panel>
+    <caps-modal/>
     <create-offer v-if="!createOfferDisabled" :buyer="id" :client="buyer.client"></create-offer>
   </base-panel-grid>
 </template>
+
 <script>
+import capsModal from '@/components/caps/modal/modal'
 import createOffer from '@/components/contracts/offers/create'
 import offerList from '@/components/contracts/offers/list-panel'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
@@ -18,6 +21,7 @@ export default {
     id: Number
   },
   components: {
+    'caps-modal': capsModal,
     'create-offer': createOffer,
     'offer-list-panel': offerList
   },

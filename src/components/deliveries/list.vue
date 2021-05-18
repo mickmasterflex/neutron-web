@@ -33,7 +33,7 @@
         </delivery-tr>
       </tbody>
     </table>
-    <table-empty-state v-else heading="No Deliveries Added" copy="Use the 'Create Delivery' button to add deliveries to this contract."></table-empty-state>
+    <table-empty-state v-else heading="No Deliveries Added" copy="Use the 'New Delivery' button to add deliveries to this contract."></table-empty-state>
   </transition-table-state>
 </template>
 

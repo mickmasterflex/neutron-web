@@ -26,30 +26,33 @@ const getters = {
 }
 
 const actions = {
-  async createMonthCap ({ commit }, cap) {
+  async createMonthCap ({ commit, dispatch }, cap) {
     commit('SET_CAPS_POST_LOADING')
     await axios.post('/month-cap/', cap)
       .then(response => {
         commit('UPDATE_MONTH_CAP', response.data)
+        dispatch('updateCapsParent')
       }).finally(() => {
         commit('RESET_CAPS_POST_LOADING')
       })
   },
-  async updateMonthCap ({ commit }, cap) {
+  async updateMonthCap ({ commit, dispatch }, cap) {
     commit('SET_CAPS_PUT_LOADING')
     await axios.put(`/month-cap/${cap.id}/`, cap)
       .then(response => {
         commit('UPDATE_MONTH_CAP', response.data)
+        dispatch('updateCapsParent')
       }).finally(() => {
         commit('RESET_CAPS_PUT_LOADING')
       })
   },
-  async deleteMonthCap ({ commit }, id) {
+  async deleteMonthCap ({ commit, dispatch }, id) {
     commit('SET_CAPS_DELETE_LOADING')
     await axios.delete(`/month-cap/${id}/`)
       .then(() => {
         commit('CLOSE_UPDATE_MONTH_CAP_MODAL')
         commit('REMOVE_MONTH_CAP', id)
+        dispatch('updateCapsParent')
       }).finally(() => {
         commit('RESET_CAPS_DELETE_LOADING')
       })

@@ -24,6 +24,9 @@ const getters = {
   },
   getOfferById: (state) => (offerId) => {
     return state.offers.filter(offer => offer.id === offerId)[0]
+  },
+  getOfferByCapsParentId: (state) => (capsParentId) => {
+    return state.offers.find(offer => offer.caps.id === capsParentId)
   }
 }
 
