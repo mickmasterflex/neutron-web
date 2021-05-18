@@ -33,6 +33,12 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import panelModal from '@/components/ui/modals/panel-modal'
 
 export default {
+  props: {
+    showModal: {
+      default: false,
+      required: true
+    }
+  },
   data () {
     return {
       limit: ''
@@ -77,7 +83,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateMonthCapModal',
       monthCap: 'getSelectedCapMonth',
       parent: 'getCurrentCapsParentId',
       currentCapMonthFormats: 'getCurrentCapMonthFormats',

@@ -34,6 +34,12 @@ import panelModal from '@/components/ui/modals/panel-modal'
 import deleteCap from '@/components/caps/day/bulk/delete'
 
 export default {
+  props: {
+    showModal: {
+      default: false,
+      required: true
+    }
+  },
   data () {
     return {
       limit: ''
@@ -79,7 +85,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowBulkDayCapModal',
       parent: 'getCurrentCapsParentId',
       selectedDates: 'getBulkUpdateDayCaps',
       loading: 'getCapsLoading',
