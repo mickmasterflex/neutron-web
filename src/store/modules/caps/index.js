@@ -51,10 +51,10 @@ const actions = {
   },
   async updateCapsParent ({ commit, getters }) {
     const updatedParentOptions = {
-      buyers: getters.getBuyerByCapParentId(getters.getCurrentCapsParentId),
-      partners: getters.getPartnerByCapParentId(getters.getCurrentCapsParentId),
-      'offer-contracts': getters.getOfferByCapParentId(getters.getCurrentCapsParentId),
-      relations: getters.getContractRelationByCapParentId(getters.getCurrentCapsParentId)
+      buyers: getters.getBuyerByCapsParentId(getters.getCurrentCapsParentId),
+      partners: getters.getPartnerByCapsParentId(getters.getCurrentCapsParentId),
+      'offer-contracts': getters.getOfferByCapsParentId(getters.getCurrentCapsParentId),
+      relations: getters.getContractRelationByCapsParentId(getters.getCurrentCapsParentId)
     }
     const updatedParent = updatedParentOptions[getters.getCurrentCapsParentType]
     updatedParent.caps.day_caps = getters.getCurrentDayCaps.filter(cap => cap.id !== null)
