@@ -76,6 +76,7 @@ export default {
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
             status: this.status,
+            vertical: 1,
             activate_at: this.status !== 'active' ? this.activateAt : null
           }).then(() => {
             this.close()

@@ -86,6 +86,7 @@ export default {
             pricing_tier_group: this.pricing_tier_group,
             status: this.status,
             ping_back_url: this.ping_back_url,
+            vertical: 1,
             activate_at: this.status !== 'active' ? this.activate_at : null,
             minimum_rpl: this.minimum_rpl
           }).then(() => {
