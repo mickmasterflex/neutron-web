@@ -1,54 +1,71 @@
 <template>
-  <button class="w-1/2 btn btn-md btn-blue rounded-r-none border-r-0"
-          @click="toggleDates()">
-    <font-awesome-icon :icon="icon"></font-awesome-icon>
+  <button @click="toggleDates()"
+        class="btn btn-lg w-full cursor-pointer font-bold"
+        :class="btnColor"
+  >
+    <font-awesome-icon :icon="icon"></font-awesome-icon> {{ title }}
   </button>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import dayjs from 'dayjs'
+import { mapGetters, mapMutations } from 'vuex'
 
-const currentMonth = dayjs(new Date()).month() + 1
-const currentDay = dayjs(new Date()).date()
 export default {
   props: {
     days: {
       type: Array
+    },
+    title: {
+      type: String
     }
   },
   computed: {
     ...mapGetters({
       daysInBulk: 'getBulkUpdateDayCaps'
     }),
-    availableDays () {
-      const datesNotInPast = this.days.filter(date => {
-        if (date.month === currentMonth && date.day < currentDay) {
-          return
-        }
-        return date
-      })
-      return datesNotInPast.map(day => day ? day.attributes[0].customData : null)
+    daysData () {
+      if (this.days.length > 0) {
+        return this.days.map(day => day.attributes[0].customData)
+      }
+      return []
     },
     allDaysInBulk () {
-      return this.availableDays.length === this.daysInBulk.length
+      return this.daysData.every(day => this.daysInBulk.includes(day))
     },
-    noDaysInBulk () {
-      return this.daysInBulk.length === 0
+    someDaysInBulk () {
+      return this.daysData.some(day => this.daysInBulk.includes(day))
     },
     icon () {
       if (this.allDaysInBulk) {
         return 'check-square'
-      } else if (this.noDaysInBulk) {
-        return ['far', 'square']
-      } else {
+      } else if (this.someDaysInBulk) {
         return 'minus-square'
+      } else {
+        return ['far', 'square']
+      }
+    },
+    btnColor () {
+      if (this.allDaysInBulk) {
+        return 'btn-blue'
+      } else if (this.someDaysInBulk) {
+        return 'btn-yellow'
+      } else {
+        return 'btn-hollow-default'
       }
     }
   },
   methods: {
+    ...mapMutations({
+      addDays: 'ADD_DAYS_TO_BULK_UPDATE_DAY_CAPS',
+      removeDays: 'REMOVE_DAYS_FROM_BULK_UPDATE_DAY_CAPS'
+    }),
     toggleDates () {
-      console.log(this.availableDays)
+      if (this.allDaysInBulk) {
+        this.removeDays(this.days.map(day => day.attributes[0].customData))
+      } else {
+        this.addDays(this.days.map(day => day.attributes[0].customData))
+      }
+      console.log(this.days)
       console.log(this.daysInBulk)
     }
   }
