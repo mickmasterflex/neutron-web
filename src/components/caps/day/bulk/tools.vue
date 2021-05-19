@@ -8,7 +8,7 @@
       </ul>
       <transition enter-active-class="animate__animated animate__bounceIn animate__faster"
                   leave-active-class="animate__animated animate__fadeOut animate__faster">
-        <button class="btn btn-turquoise rounded-full" @click="showModal()" v-show="selectedDates.length > 0">Update Selected Day Caps</button>
+        <button class="btn btn-turquoise rounded-full" @click="showModal()" v-on:keyup.enter="showModal()" v-show="selectedDates.length > 0">Update Selected Day Caps</button>
       </transition>
     </div>
     <ul class="grid grid-cols-7 gap-2 justify-center pb-0 mt-3">

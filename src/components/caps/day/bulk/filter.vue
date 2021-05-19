@@ -1,5 +1,6 @@
 <template>
   <button @click="toggleDates()"
+          v-on:keyup.enter="toggleDates()"
         class="btn w-full cursor-pointer font-bold"
         :class="btnColor"
   >
