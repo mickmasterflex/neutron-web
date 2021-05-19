@@ -6,7 +6,10 @@
           <checkbox-filter :days="filter.days" :title="filter.name"/>
         </li>
       </ul>
-      <button class="btn btn-turquoise rounded-full" @click="showModal()" :disabled="selectedDates.length === 0">Update Selected Day Caps</button>
+      <transition enter-active-class="animate__animated animate__bounceIn animate__faster"
+                  leave-active-class="animate__animated animate__fadeOut animate__faster">
+        <button class="btn btn-turquoise rounded-full btn-lg" @click="showModal()" v-show="selectedDates.length > 0">Update Selected Day Caps</button>
+      </transition>
     </div>
     <ul class="grid grid-cols-7 gap-2 justify-center pb-0 mt-3">
       <li v-for="filter in dayFilters" :key="filter.name" class="flex flex-row flex-grow items-center">
