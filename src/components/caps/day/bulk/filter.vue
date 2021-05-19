@@ -25,7 +25,7 @@ export default {
       daysInBulk: 'getBulkUpdateDayCaps'
     }),
     daysData () {
-      if (this.days.length > 0) {
+      if (this.days[0].attributes) {
         return this.days.map(day => day.attributes[0].customData)
       }
       return []
@@ -37,18 +37,18 @@ export default {
       return this.daysData.some(day => this.daysInBulk.includes(day))
     },
     icon () {
-      if (this.allDaysInBulk) {
+      if (this.allDaysInBulk && this.daysData.length > 0) {
         return 'check-square'
-      } else if (this.someDaysInBulk) {
+      } else if (this.someDaysInBulk && this.daysData.length > 0) {
         return 'minus-square'
       } else {
         return ['far', 'square']
       }
     },
     btnColor () {
-      if (this.allDaysInBulk) {
+      if (this.allDaysInBulk && this.daysData.length > 0) {
         return 'btn-blue'
-      } else if (this.someDaysInBulk) {
+      } else if (this.someDaysInBulk && this.daysData.length > 0) {
         return 'btn-yellow'
       } else {
         return 'btn-hollow-default'
@@ -66,8 +66,6 @@ export default {
       } else {
         this.addDays(this.days.map(day => day.attributes[0].customData))
       }
-      console.log(this.days)
-      console.log(this.daysInBulk)
     }
   }
 }
