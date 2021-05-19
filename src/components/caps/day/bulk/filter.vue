@@ -1,6 +1,6 @@
 <template>
   <button @click="toggleDates()"
-        class="btn btn-lg w-full cursor-pointer font-bold"
+        class="btn w-full cursor-pointer font-bold"
         :class="btnColor"
   >
     <font-awesome-icon :icon="icon"></font-awesome-icon> {{ title }}
