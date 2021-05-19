@@ -32,6 +32,12 @@ import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
+  props: {
+    showModal: {
+      default: false,
+      required: true
+    }
+  },
   data () {
     return {
       limit: ''
@@ -75,7 +81,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateDayCapModal',
       day: 'getSelectedCapDay',
       parent: 'getCurrentCapsParentId',
       loading: 'getCapsLoading',
