@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3" v-if="!fetchLoading">
+  <div class="p-3" v-if="!fetchLoading && !monthInPast">
     <div class="flex flex-row justify-between items-center pb-1">
       <ul class="flex flex-row justify-center space-x-2">
         <li v-for="filter in massFilters" :key="filter.name" class="space-x-2">
@@ -24,6 +24,7 @@ import dayjs from 'dayjs'
 import { mapMutations, mapGetters } from 'vuex'
 import checkboxFilter from './filter'
 
+const currentMonth = dayjs(new Date()).month() + 1
 const currentDay = dayjs(new Date()).date()
 export default {
   components: {
@@ -40,8 +41,17 @@ export default {
       loading: 'getCapsLoading',
       fetchLoading: 'getCapsFetchLoading'
     }),
+    monthInPast () {
+      return this.days[0].month < currentMonth
+    },
     todayAndFutureDays () {
-      return this.days.filter(day => day.day >= currentDay)
+      function inCurrentMonth (day) {
+        return day.day >= currentDay && day.month === currentMonth
+      }
+      function inFutureMonth (day) {
+        return day.month > currentMonth
+      }
+      return this.days.filter(day => inCurrentMonth(day) || inFutureMonth(day))
     },
     weekdays () { return this.todayAndFutureDays.filter(day => [2, 3, 4, 5, 6].includes(day.weekday)) },
     weekends () { return this.todayAndFutureDays.filter(day => [1, 7].includes(day.weekday)) },
