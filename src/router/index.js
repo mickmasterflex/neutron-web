@@ -949,7 +949,8 @@ const routes = [
     meta: {
       requiresAuth: true,
       activeApp: 'users',
-      activeTab: 'users'
+      activeTab: 'users',
+      activeAppTab: 'users'
     },
     pathToRegexpOptions: { strict: true },
     props (route) {
