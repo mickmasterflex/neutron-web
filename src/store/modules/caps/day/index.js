@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import _unionBy from 'lodash/unionBy'
 import dayCapModals from '@/store/modules/caps/day/visibility'
 import bulkUpdate from '@/store/modules/caps/day/bulk'
 
@@ -52,7 +53,9 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_DAY_CAPS: (state, caps) => (state.current_day_caps = caps),
+  ADD_CURRENT_DAY_CAPS: (state, caps) => (
+    state.current_day_caps = _unionBy(state.current_day_caps, caps, 'date')
+  ),
   RESET_CURRENT_DAY_CAPS: (state) => (state.current_day_caps = []),
   UPDATE_DAY_CAP: (state, updatedCap) => {
     const index = state.current_day_caps.findIndex(cap => cap.date === updatedCap.date)
