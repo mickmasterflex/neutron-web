@@ -6,9 +6,9 @@
     <template v-slot:content>
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
-          <v-text-field v-model="first_name" rules="required" field_id="first_name" field_label="First Name"></v-text-field>
-          <v-text-field v-model="last_name" rules="required" field_id="last_name" field_label="Last Name"></v-text-field>
-          <v-text-field v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
+          <v-text-field :field_disabled="disabled" v-model="first_name" rules="required" field_id="first_name" field_label="First Name"></v-text-field>
+          <v-text-field :field_disabled="disabled" v-model="last_name" rules="required" field_id="last_name" field_label="Last Name"></v-text-field>
+          <v-text-field :field_disabled="disabled" v-model="email" rules="required|email" field_id="email" field_label="Email" field_type="email"></v-text-field>
         </form>
       </validation-observer>
     </template>
@@ -28,7 +28,11 @@ export default {
     }
   },
   props: {
-    user: Object
+    user: Object,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   watch: {
     user () {
