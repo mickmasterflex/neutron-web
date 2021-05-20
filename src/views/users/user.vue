@@ -11,7 +11,7 @@
     </template>
     <template v-slot:content>
       <base-panel-grid>
-        <update-user v-if="disabled" :user="user" class="col-span-2 xl:col-span-1"></update-user>
+        <update-user :disabled="true" :user="user" class="col-span-2 xl:col-span-1"></update-user>
         <panel-template title="Danger Zone" class="col-span-2" :showLoader="loading" :loadingText="loadingText">
           <template #content>
             <delete-user :id="user.id"></delete-user>
@@ -28,11 +28,6 @@ import deleteUser from '@/components/users/delete'
 import updateUser from '@/components/users/update'
 
 export default {
-  data () {
-    return {
-      disabled: false
-    }
-  },
   props: {
     id: {
       type: Number
