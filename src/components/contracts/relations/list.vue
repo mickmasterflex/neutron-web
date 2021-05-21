@@ -22,13 +22,7 @@
           <td class="td">
             <update-pricing-tiers :contractRelation="relation"></update-pricing-tiers>
           </td>
-          <td class="td flex flex-row">
-            <caps-modal-trigger
-              :caps-parent-id="relation.id"
-              caps-parent-type="relations"
-            />
-            <caps-count :caps="relation.caps"/>
-          </td>
+          <td-caps-preview :caps="relation.caps" :parent-id="relation.id" parent-type="relations"/>
           <td class="td">
             <span class="flex flex-row justify-end">
               <delete-contract-relation :id="relation.id"></delete-contract-relation>
@@ -44,8 +38,7 @@
 </template>
 
 <script>
-import capsModalTrigger from '@/components/caps/modal/trigger'
-import capsCount from '@/components/caps/caps-count'
+import tdCapsPreview from '@/components/caps/td-preview/td'
 import deleteContractRelation from '@/components/contracts/relations/delete'
 import pricingTierModalList from '@/components/contracts/relations/pricing-tiers/modal'
 import updatePricingTiers from '@/components/contracts/relations/pricing-tiers/update'
@@ -84,8 +77,7 @@ export default {
     })
   },
   components: {
-    'caps-count': capsCount,
-    'caps-modal-trigger': capsModalTrigger,
+    'td-caps-preview': tdCapsPreview,
     'delete-contract-relation': deleteContractRelation,
     'pricing-tier-group-modal-list': pricingTierModalList,
     'update-pricing-tiers': updatePricingTiers,
