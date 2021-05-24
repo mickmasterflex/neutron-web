@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import store from '@/store'
 import { successfulToast, failedToast } from '@/mixins/toast-messages'
 
 const development = process.env.NODE_ENV !== 'production'
@@ -29,6 +30,9 @@ axios.interceptors.response.use(response => {
         if (error.response.config && !error.response.config.__isRetryRequest) {
           this.logout()
         }
+        break
+      case 403:
+        store.dispatch('authLogout')
         break
       case 404:
         failedToast({ heading: error.message, content: error.response.config.url })
