@@ -1,5 +1,8 @@
 <template>
-  <panel-modal :show="showModal" @close="close">
+  <panel-modal
+    :show="showModal"
+    @close="close"
+    @modal-after-leave="$emit('modal-after-leave')">
     <template v-slot:header>
       <span v-if="day !== null">{{day.month}}/{{day.day}}/{{day.year}}</span>
     </template>

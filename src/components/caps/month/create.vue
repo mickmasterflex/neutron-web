@@ -1,5 +1,8 @@
 <template>
-  <panel-modal :show="showModal" @close="close">
+  <panel-modal
+    :show="showModal"
+    @close="close"
+    @modal-after-leave="$emit('modal-after-leave')">
     <template v-slot:header>
       <p v-if="monthCap">{{currentCapMonthFormats.MM_YYYY}}</p>
     </template>

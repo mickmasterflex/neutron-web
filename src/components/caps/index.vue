@@ -1,6 +1,9 @@
 <template>
   <div>
-    <component :is="currentCapsModal" :showModal="showModal"></component>
+    <component
+      :is="currentCapsModal"
+      :showModal="showModal"
+      @modal-after-leave="setModalComponent(null)"/>
     <caps-calendar class="my-3" v-if="capsEndpoint"/>
     <table-empty-state heading="Loading Caps" v-else/>
   </div>
@@ -50,17 +53,13 @@ export default {
     }
   },
   methods: {
-    setModalComponentAndVisibility (component, visibility) {
+    async setModalComponentAndVisibility (component, visibility) {
       if (visibility === true) {
         this.setModalComponent(component).then(() => {
           this.setModalVisibility(visibility)
         })
       } else {
-        this.setModalVisibility(visibility).then(() => {
-          setTimeout(() => {
-            this.setModalComponent(null)
-          }, 800)
-        })
+        this.setModalVisibility(visibility)
       }
     },
     async setModalVisibility (visibility) {
