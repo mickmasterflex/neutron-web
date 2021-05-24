@@ -16,7 +16,7 @@
 
 <script>
 import capsModalTrigger from '@/components/caps/modal/trigger'
-import capsCount from '@/components/caps/td-preview/caps-count'
+import capsCount from '@/components/caps/td-preview/caps-list'
 
 export default {
   props: {
