@@ -12,8 +12,10 @@ const state = {
 }
 
 const getters = {
-  getAllProducts: (state) =>
-    state.products
+  getAllProducts: state => state.products,
+  getProductsByProductGroup: (state) => (productGroupId) => (
+    state.products.filter(p => p.product_group === productGroupId)
+  )
 }
 
 const actions = {

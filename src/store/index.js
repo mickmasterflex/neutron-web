@@ -8,7 +8,6 @@ import buyers from './modules/buyers'
 import buyerGroups from '@/store/modules/buyer-groups'
 import brands from './modules/brands'
 import campaigns from '@/store/modules/campaigns'
-import campuses from '@/store/modules/campuses'
 import caps from '@/store/modules/caps'
 import channels from './modules/channels'
 import clients from './modules/clients'
@@ -20,6 +19,7 @@ import offers from './modules/offers'
 import partners from './modules/partners'
 import pricingTiers from './modules/pricing-tiers'
 import products from './modules/products'
+import productGroups from '@/store/modules/product-groups'
 import reasons from './modules/reasons'
 import users from './modules/users'
 
@@ -36,7 +36,6 @@ export default new Vuex.Store({
     buyers,
     buyerGroups,
     brands,
-    campuses,
     campaigns,
     caps,
     channels,
@@ -50,6 +49,7 @@ export default new Vuex.Store({
     partners,
     pricingTiers,
     products,
+    productGroups,
     reasons,
     users
   }

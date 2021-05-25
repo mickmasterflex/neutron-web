@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import loading from '@/store/modules/campuses/banners/loading'
+import loading from '@/store/modules/product-groups/campuses/banners/loading'
 
 const state = {
   current_campus_banners: []
