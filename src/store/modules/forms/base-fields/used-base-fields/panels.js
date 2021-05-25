@@ -1,5 +1,3 @@
-import loading from '@/store/modules/forms/base-fields/used-base-fields/loading'
-
 const state = {
   contract_fields_panel_visible: true,
   used_base_fields_panel_visible: false
@@ -7,11 +5,12 @@ const state = {
 
 const actions = {
   showContractFieldsPanel: ({ commit }) => {
+    commit('SET_CONTRACT_FIELDS_VISIBLE')
+    commit('UNSET_USED_BASE_FIELDS_VISIBLE')
   },
   showUsedBaseFieldsPanel: ({ commit }) => {
-    commit('RESET_USED_BASE_FIELDS')
-    commit('RESET_USED_BASE_FIELDS_FORMS')
-    commit('SET_FETCH_USED_BASE_FIELDS_LOADING')
+    commit('SET_USED_BASE_FIELDS_VISIBLE')
+    commit('UNSET_CONTRACT_FIELDS_VISIBLE')
   }
 }
 
@@ -22,17 +21,14 @@ const getters = {
 
 const mutations = {
   SET_CONTRACT_FIELDS_VISIBLE: (state) => (state.contract_fields_panel_visible = true),
-  SET_USED_BASE_FIELDS_VISIBLE: (state) => (state.used_base_fields_panel_visible = true)
-}
-
-const modules = {
-  loading
+  SET_USED_BASE_FIELDS_VISIBLE: (state) => (state.used_base_fields_panel_visible = true),
+  UNSET_CONTRACT_FIELDS_VISIBLE: state => (state.contract_field_panel_visible = false),
+  UNSET_USED_BASE_FIELDS_VISIBLE: state => (state.used_base_field_panel_visible = false)
 }
 
 export default {
   state,
   actions,
   getters,
-  mutations,
-  modules
+  mutations
 }

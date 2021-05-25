@@ -1,8 +1,10 @@
 import axios from '@/axios'
 import loading from './loading'
+import panels from './panels'
 
 const modules = {
-  loading
+  loading,
+  panels
 }
 
 const state = {
@@ -12,7 +14,8 @@ const state = {
 
 const getters = {
   getUsedBaseFields: state => state.used_base_fields,
-  getAvailableBaseFields: (state, getters) => getters.getBaseFields.filter(field => !getters.getUsedBaseFields.includes(field.id))
+  getAvailableBaseFields: (state, getters) => getters.getBaseFields.filter(field => !getters.getUsedBaseFields.includes(field.id)),
+  getUsedBaseFieldFormsByUsedField: (state) => (id) => state.used_base_fields_forms.find(form => form.used.includes(id))
 }
 
 const actions = {

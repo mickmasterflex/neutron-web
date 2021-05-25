@@ -5,6 +5,11 @@
       :loading-text="loadingText"
       :contract-name="contract.name"
       class="col-span-2"/>
+    <used-base-fields-panel-template
+      :loading="loading"
+      :loading-text="loadingText"
+      :contract-name="contract.name"
+      class="col-span-2"/>
     <injected-panel-template
       :loading="loading"
       :loading-text="loadingText"
@@ -21,6 +26,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import fieldsPanel from '@/components/forms/fields/contract-field-panel/fields'
+import usedBaseFieldsPanel from '@/components/forms/fields/contract-field-panel/used-base-fields'
 import injectedFieldsPanel from '@/components/forms/injected-fields/fields/panel-template'
 import additionalContentPanel from '@/components/forms/additional-content/panel-template'
 
@@ -96,6 +102,7 @@ export default {
   },
   components: {
     'fields-panel-template': fieldsPanel,
+    'used-base-fields-panel-template': usedBaseFieldsPanel,
     'injected-panel-template': injectedFieldsPanel,
     'additional-content-panel-template': additionalContentPanel
   },

@@ -18,8 +18,7 @@
       </underscore-tabs-inset>
     </template>
     <template v-slot:content>
-      <list-fields :contractName="contractName"></list-fields>
-      <update-field :field="currentField"/>
+      <slot name="content"></slot>
     </template>
     <template #footer>
       <panel-footer>
@@ -31,9 +30,7 @@
 </template>
 
 <script>
-import listFields from '@/components/forms/fields/list'
 import createField from '@/components/forms/fields/create'
-import updateField from '@/components/forms/fields/update'
 import panelFooter from '@/components/ui/panels/base/footer'
 import underscoreTabsInset from '@/components/ui/tabs/underscore/tabs-inset'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
@@ -55,15 +52,14 @@ export default {
     }
   },
   components: {
-    updateField,
-    'list-fields': listFields,
     'create-field': createField,
     'underscore-tabs-inset': underscoreTabsInset,
     'panel-footer': panelFooter
   },
   computed: {
     ...mapGetters({
-      currentField: 'getCurrentField'
+      currentField: 'getCurrentField',
+      usedBaseFields: 'getUsedBaseFields'
     })
   },
   watch: {
@@ -80,8 +76,7 @@ export default {
     }),
     ...mapMutations({
       showUpdateFieldModal: 'SHOW_UPDATE_FIELD_MODAL',
-      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
-      showField: 'SHOW_USED_BASE_FIELDS_LOADING'
+      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
     })
   }
 }

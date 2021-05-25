@@ -3,22 +3,17 @@
     <template #action>
     </template>
     <template #content>
-      <list-used-base-fields :contractName="contractName"></list-used-base-fields>
+      <list-used-base-fields></list-used-base-fields>
     </template>
   </contract-field-panel>
 </template>
 
 <script>
 import contractFieldPanel from '@/components/forms/fields/contract-field-panel/contract-field-panel.vue'
-import listUsedBaseFields from '@/components/forms/fields/list'
-import { enterKeyListener } from '@/mixins/enter-key-listener'
-import { setResponseErrors } from '@/mixins/set-response-errors'
+import listUsedBaseFields from '@/components/forms/fields/used-base-fields-list'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
-  props: {
-    contractName: String
-  },
   data () {
     return {
       updateComponent: null
@@ -26,7 +21,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      usedBaseFields: 'getCurrentBaseFields'
+      usedBaseFields: 'getCurrentUsedBaseFields'
     })
   },
   watch: {
@@ -36,16 +31,13 @@ export default {
       }
     }
   },
-  mixins: [enterKeyListener, setResponseErrors],
   methods: {
-    methods: {
-      ...mapActions({
-        showField: 'showContractFieldsPanel'
-      }),
-      ...mapMutations({
-        showField: 'SHOW_USED_BASE_FIELDS_LOADING'
-      })
-    }
+    ...mapActions({
+      showField: 'showContractFieldsPanel'
+    }),
+    ...mapMutations({
+      showField: 'SHOW_USED_BASE_FIELDS_LOADING'
+    })
   },
   components: {
     'list-used-base-fields': listUsedBaseFields,
