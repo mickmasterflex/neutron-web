@@ -20,7 +20,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import fieldsPanel from '@/components/forms/fields/panel-template'
+import fieldsPanel from '@/components/forms/fields/contract-field-panel/fields'
 import injectedFieldsPanel from '@/components/forms/injected-fields/fields/panel-template'
 import additionalContentPanel from '@/components/forms/additional-content/panel-template'
 

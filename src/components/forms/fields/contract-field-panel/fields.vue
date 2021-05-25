@@ -1,40 +1,28 @@
 <template>
-  <panel-template
-    title="Contract Fields"
-    :actionTransition="true"
-    :showLoader="loading"
-    :loadingText="loadingText">
-    <template v-slot:action>
-      <create-field></create-field>
+  <contract-field-panel contentTab="fields" loadingText="fields">
+    <template #action>
     </template>
-    <template v-slot:content>
+    <template #content>
       <list-fields :contractName="contractName"></list-fields>
       <update-field :field="currentField"/>
     </template>
-  </panel-template>
+  </contract-field-panel>
 </template>
 
 <script>
+import contractFieldPanel from '@/components/forms/fields/contract-field-panel/contract-field-panel.vue'
 import listFields from '@/components/forms/fields/list'
-import createField from '@/components/forms/fields/create'
 import updateField from '@/components/forms/fields/update'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    loading: Boolean,
-    loadingText: String,
     contractName: String
   },
   data () {
     return {
       updateComponent: null
     }
-  },
-  components: {
-    updateField,
-    'list-fields': listFields,
-    'create-field': createField
   },
   computed: {
     ...mapGetters({
@@ -49,10 +37,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      showField: 'showContractFieldsPanel'
+    }),
     ...mapMutations({
       showUpdateFieldModal: 'SHOW_UPDATE_FIELD_MODAL',
-      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL'
+      showUpdateOptionFieldModal: 'SHOW_UPDATE_OPTION_FIELD_MODAL',
+      showField: 'SHOW_USED_BASE_FIELDS_LOADING'
     })
+  },
+  components: {
+    'list-fields': listFields,
+    'contract-field-panel': contractFieldPanel,
+    'update-field': updateField
   }
 }
 </script>
