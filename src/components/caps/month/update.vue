@@ -1,5 +1,8 @@
 <template>
-  <panel-modal :show="showModal" @close="close">
+  <panel-modal
+    :show="showModal"
+    @close="close"
+    @modal-after-leave="$emit('modal-after-leave')">
     <template v-slot:header>{{currentCapMonthFormats.MM_YYYY}}</template>
     <template v-slot:body>
       <validation-observer ref="form">
@@ -34,6 +37,12 @@ import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
+  props: {
+    showModal: {
+      default: false,
+      required: true
+    }
+  },
   data () {
     return {
       limit: '',
@@ -91,7 +100,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateMonthCapModal',
       monthCap: 'getSelectedCapMonth',
       parent: 'getCurrentCapsParentId',
       currentCapMonthFormats: 'getCurrentCapMonthFormats',

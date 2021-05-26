@@ -1,5 +1,8 @@
 <template>
-  <panel-modal :show="showModal" @close="close">
+  <panel-modal
+    :show="showModal"
+    @close="close"
+    @modal-after-leave="$emit('modal-after-leave')">
     <template v-slot:header>
       <span v-if="day !== null">{{day.month}}/{{day.day}}/{{day.year}}</span>
     </template>
@@ -34,6 +37,12 @@ import panelModal from '@/components/ui/modals/panel-modal'
 import deleteCap from '@/components/caps/day/delete'
 
 export default {
+  props: {
+    showModal: {
+      default: false,
+      required: true
+    }
+  },
   data () {
     return {
       limit: '',
@@ -92,7 +101,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowUpdateDayCapModal',
       day: 'getSelectedCapDay',
       parent: 'getCurrentCapsParentId',
       loading: 'getCapsLoading',
