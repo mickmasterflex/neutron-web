@@ -6,6 +6,7 @@
     modalPosition="absolute"
     modalBackdropColor="bg-gray-100"
     class="rounded-b-xl"
+    @modal-after-leave="$emit('modal-after-leave')"
     :show="show" @close="close">
     <template v-slot:header>
       <slot name="header">Modal Header</slot>
