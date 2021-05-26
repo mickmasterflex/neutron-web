@@ -36,3 +36,13 @@ export default {
   }
 }
 </script>
+
+<style>
+  .vue-treeselect__control {
+    @apply h-10 border-gray-400 rounded shadow
+  }
+  .vue-treeselect__single-value,
+  .vue-treeselect__placeholder {
+    padding-top: 2px;
+  }
+</style>
