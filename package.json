@@ -24,6 +24,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.4",
+    "lodash": "^4.17.21",
     "postcss-cli": "^7.1.1",
     "tailwindcss": "^1.4.6",
     "v-calendar": "^2.2.2",

@@ -30,8 +30,8 @@ const actions = {
     await axios.get(getters.getCapsCalendarEndpoint)
       .then(response => {
         commit('SET_CURRENT_CAPS_PARENT_ID', response.data.parent)
-        commit('SET_CURRENT_DAY_CAPS', response.data.day_caps)
-        commit('SET_CURRENT_MONTH_CAPS', response.data.month_caps)
+        commit('ADD_CURRENT_DAY_CAPS', response.data.day_caps)
+        commit('ADD_CURRENT_MONTH_CAPS', response.data.month_caps)
       }).finally(() => {
         commit('RESET_CAPS_FETCH_LOADING')
       })

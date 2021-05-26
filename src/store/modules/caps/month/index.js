@@ -1,4 +1,5 @@
 import axios from '@/axios'
+import _unionBy from 'lodash/unionBy'
 import monthCapModals from '@/store/modules/caps/month/visibility'
 
 const modules = {
@@ -60,7 +61,9 @@ const actions = {
 }
 
 const mutations = {
-  SET_CURRENT_MONTH_CAPS: (state, caps) => (state.current_month_caps = caps),
+  ADD_CURRENT_MONTH_CAPS: (state, caps) => (
+    state.current_month_caps = _unionBy(state.current_month_caps, caps, 'date')
+  ),
   RESET_CURRENT_MONTH_CAPS: (state) => (state.current_month_caps = []),
   SET_CURRENT_CAP_MONTH_FORMATS: (state, month) => (state.current_cap_month_formats = month),
   RESET_CURRENT_CAP_MONTH_FORMATS: (state) => {

@@ -5,9 +5,8 @@
         <tr>
           <th class="th w-4"></th>
           <th class="th w-16">Id</th>
-          <th class="th w-64">Name</th>
+          <th class="th min-w-40">Name</th>
           <th class="th w-32">Status</th>
-          <th class="th">Client</th>
           <th class="th">RPL</th>
           <th class="th">Caps</th>
           <th class="th">Contracts</th>
@@ -15,7 +14,7 @@
         </tr>
       </thead>
       <tbody class="tbody">
-        <tr class="tr w-64" v-for="(contract, index) in contracts" :key="contract.id">
+        <tr class="tr" v-for="(contract, index) in contracts" :key="contract.id">
           <td class="td w-4">
             <bulk-update-checkbox :contract="contract.id" :contracts="contracts" :index="index"></bulk-update-checkbox>
           </td>
@@ -24,15 +23,8 @@
             <span @click="linkToBuyer(contract)" class="text-link">{{contract.name}}</span>
           </td>
           <td-status :status="contract.status"/>
-          <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">{{ contract.rpl }}</td>
-          <td class="td flex flex-row">
-            <caps-modal-trigger
-              :caps-parent-id="contract.id"
-              caps-parent-type="buyers"
-            />
-            <caps-count :caps="contract.caps"/>
-          </td>
+          <td-caps-preview :caps="contract.caps" :parent-id="contract.id" parent-type="buyers"/>
           <td class="td">
             <table-link @table-link-click="linkToBuyerContracts(contract)"
                         :number="contract.children.length"
@@ -57,8 +49,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/buyer-checkbox'
-import capsCount from '@/components/caps/caps-count'
-import capsModalTrigger from '@/components/caps/modal/trigger'
+import tdCapsPreview from '@/components/caps/td-preview/td'
 import tdContractStatus from '@/components/contracts/td-status'
 
 export default {
@@ -106,8 +97,7 @@ export default {
   },
   components: {
     'bulk-update-checkbox': bulkUpdateCheckbox,
-    'caps-count': capsCount,
-    'caps-modal-trigger': capsModalTrigger,
+    'td-caps-preview': tdCapsPreview,
     'td-status': tdContractStatus
   },
   destroyed () {

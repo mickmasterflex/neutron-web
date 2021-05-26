@@ -7,7 +7,6 @@
           <th class="th w-16">Id</th>
           <th class="th w-64">Name</th>
           <th class="th w-32">Status</th>
-          <th class="th">Client</th>
           <th class="th">Pricing Tier Group</th>
           <th class="th">Caps</th>
           <th class="th">Contracts</th>
@@ -24,19 +23,12 @@
             <span @click="linkToPartner(contract)" class="text-link">{{contract.name}}</span>
           </td>
           <td-status :status="contract.status"/>
-          <td class="td">{{ contract.client_data.name }}</td>
           <td class="td">
             <span v-if="contract.pricing_tier_group">{{ contract.pricing_tier_group }}
             </span>
             <span v-else class="italic text-gray-500">None</span>
           </td>
-          <td class="td flex flex-row">
-            <caps-modal-trigger
-              :caps-parent-id="contract.id"
-              caps-parent-type="partners"
-            />
-            <caps-count :caps="contract.caps"/>
-          </td>
+          <td-caps-preview :caps="contract.caps" :parent-id="contract.id" parent-type="partners"/>
           <td class="td">
             <table-link @table-link-click="linkToPartnerContracts(contract)"
                         :number="contract.children.length"
@@ -60,8 +52,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import bulkUpdateCheckbox from '@/components/bulk-update/status/partner-checkbox'
-import capsCount from '@/components/caps/caps-count'
-import capsModalTrigger from '@/components/caps/modal/trigger'
+import tdCapsPreview from '@/components/caps/td-preview/td'
 import tdContractStatus from '@/components/contracts/td-status'
 
 export default {
@@ -107,8 +98,7 @@ export default {
   },
   components: {
     'bulk-update-checkbox': bulkUpdateCheckbox,
-    'caps-count': capsCount,
-    'caps-modal-trigger': capsModalTrigger,
+    'td-caps-preview': tdCapsPreview,
     'td-status': tdContractStatus
   },
   destroyed () {
