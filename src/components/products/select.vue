@@ -37,7 +37,7 @@ export default {
       fetchProductGroups: 'fetchProductGroups',
       fetchBrands: 'fetchBrands'
     }),
-    async fetchItAll () {
+    async fetchBrandsGroupsProducts () {
       await this.fetchProducts()
       await this.fetchProductGroups()
       await this.fetchBrands()
@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted () {
-    this.fetchItAll().then(() => {
+    this.fetchBrandsGroupsProducts().then(() => {
       this.generateTree()
     })
   },
