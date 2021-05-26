@@ -43,6 +43,7 @@ const actions = {
     commit('RESET_CURRENT_CAP_MONTH_FORMATS')
     commit('RESET_CAPS_CALENDAR_ENDPOINT')
     commit('RESET_CAPS_CALENDAR_PARAMS')
+    commit('RESET_BULK_UPDATE_DAY_CAPS')
   },
   async setCapsCalendarEndpoint ({ commit }, parent) {
     await commit('SET_CURRENT_CAPS_PARENT_ID', parent.id)

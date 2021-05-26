@@ -161,7 +161,7 @@
 /* Default */
 
 .btn {
-    @apply text-white rounded px-3 py-2 transition duration-300 cursor-pointer border border-r-2 border-b-2;
+    @apply text-white text-center rounded px-3 py-2 transition duration-300 cursor-pointer border border-r-2 border-b-2;
     -webkit-appearance: none;
     height: 45px;
 }
