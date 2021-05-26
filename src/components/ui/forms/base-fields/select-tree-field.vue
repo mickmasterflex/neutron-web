@@ -4,6 +4,7 @@
     <div :class="$attrs.field_wrap_class">
       <div class="relative w-64">
         <tree-select
+          :value="value"
           v-bind="$attrs"
           :id="$attrs.field_id"
           @input="handleInput($event)"
@@ -19,6 +20,12 @@ import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import treeselect from '@riophae/vue-treeselect'
 
 export default {
+  props: {
+    value: {
+      type: null,
+      default: null
+    }
+  },
   methods: {
     handleInput (value) {
       this.$emit('input', value)
