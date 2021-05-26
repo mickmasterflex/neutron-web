@@ -1,15 +1,6 @@
 <template>
   <base-panel-grid>
-    <fields-panel-template
-      :loading="loading"
-      :loading-text="loadingText"
-      :contract-name="contract.name"
-      class="col-span-2"/>
-    <used-base-fields-panel-template
-      :loading="loading"
-      :loading-text="loadingText"
-      :contract-name="contract.name"
-      class="col-span-2"/>
+    <index></index>
     <injected-panel-template
       :loading="loading"
       :loading-text="loadingText"
@@ -25,10 +16,9 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import fieldsPanel from '@/components/forms/fields/contract-field-panel/fields'
-import usedBaseFieldsPanel from '@/components/forms/fields/contract-field-panel/used-base-fields'
 import injectedFieldsPanel from '@/components/forms/injected-fields/fields/panel-template'
 import additionalContentPanel from '@/components/forms/additional-content/panel-template'
+import index from '@/components/forms/fields/contract-field-panel/index.vue'
 
 export default {
   props: {
@@ -101,8 +91,7 @@ export default {
     this.fetchAncestorForms()
   },
   components: {
-    'fields-panel-template': fieldsPanel,
-    'used-base-fields-panel-template': usedBaseFieldsPanel,
+    index: index,
     'injected-panel-template': injectedFieldsPanel,
     'additional-content-panel-template': additionalContentPanel
   },

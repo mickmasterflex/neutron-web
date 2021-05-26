@@ -1,7 +1,15 @@
 <template>
   <div>
-    <contract-fields v-show="fieldsVisible"></contract-fields>
-    <used-base-fields v-show="usedBaseFieldsVisible"></used-base-fields>
+    <contract-fields  :loading="loading"
+                      :loading-text="loadingText"
+                      :contract-name="contract.name"
+                      class="col-span-2"
+                      v-show="fieldsVisible"></contract-fields>
+    <used-base-fields :loading="loading"
+                      :loading-text="loadingText"
+                      :contract-name="contract.name"
+                      class="col-span-2"
+                      v-show="usedBaseFieldsVisible"></used-base-fields>
   </div>
 </template>
 
