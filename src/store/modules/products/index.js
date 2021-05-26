@@ -13,6 +13,7 @@ const state = {
 
 const getters = {
   getAllProducts: state => state.products,
+  getProductById: state => id => state.products.find(product => product.id === id),
   getProductsByProductGroup: (state) => (productGroupId) => (
     state.products.filter(p => p.product_group === productGroupId)
   )
