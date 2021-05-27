@@ -7,7 +7,7 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <parent-select v-model="parent"></parent-select>
+          <parent-select v-model="parent" contract-type="partner"></parent-select>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="ping_back_url" mode="passive" placeholder="http://www.example.com/" rules="url" field_id="rpl" field_label="Pingback URL"></v-text-field>
@@ -21,7 +21,7 @@
 <script>
 import datePicker from '@/components/ui/forms/validation-fields/date-picker'
 import selectChannel from '@/components/channels/select'
-import parentSelect from '@/components/contracts/partners/parent-select'
+import parentSelect from '@/components/contracts/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
