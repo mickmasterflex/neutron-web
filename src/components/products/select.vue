@@ -5,6 +5,7 @@
     v-model="inner_value"
     v-bind="$attrs"
     :show-count="true"
+    :loading="loading"
     field_id="product"
     :disable-branch-nodes="true"
     field_label="Product"/>
@@ -18,13 +19,13 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      tree: []
+      tree: [],
+      loading: false
     }
   },
   mixins: [validation],
   computed: {
     ...mapGetters({
-      loading: 'getProductsFetchLoading',
       products: 'getAllProducts',
       productsByProductGroup: 'getProductsByProductGroup',
       productGroupsByBrand: 'getProductGroupsByBrand',
@@ -38,6 +39,7 @@ export default {
       fetchBrands: 'fetchBrands'
     }),
     async fetchBrandsGroupsProducts () {
+      this.loading = true
       await this.fetchProducts()
       await this.fetchProductGroups()
       await this.fetchBrands()
@@ -72,6 +74,7 @@ export default {
   mounted () {
     this.fetchBrandsGroupsProducts().then(() => {
       this.generateTree()
+      this.loading = false
     })
   },
   components: {
