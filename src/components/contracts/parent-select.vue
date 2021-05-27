@@ -139,7 +139,7 @@ export default {
         this.generateTree()
       })
     } else {
-      this.generateTree()
+      this.parentSelect()
     }
   },
   components: {

@@ -7,7 +7,7 @@
       <validation-observer ref="form" class="form-horizontal">
         <form @submit.prevent="submitForm">
           <v-text-field v-model="name" rules="required|standard_chars" field_id="name" field_label="Name"></v-text-field>
-          <parent-select v-model="parent" contract-type="buyer"></parent-select>
+          <parent-select v-model="parent" contract-type="buyer" ref="parentSelect"></parent-select>
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
@@ -66,6 +66,8 @@ export default {
             buyer_group: this.buyerGroup,
             status: this.status,
             activate_at: this.status !== 'active' ? this.activateAt : null
+          }).then(() => {
+            this.$refs.parentSelect.generateTree()
           }).catch(error => {
             this.error = error
           })
