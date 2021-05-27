@@ -4,6 +4,7 @@
     v-model="inner_value"
     v-bind="$attrs"
     :show-count="true"
+    :loading="loading"
     noChildrenText="No Contracts"
     field_id="parent"
     field_label="Parent"/>
@@ -32,7 +33,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loading: 'getBuyersFetchLoading',
+      loadingBuyers: 'getBuyersFetchLoading',
+      loadingPartners: 'getPartnersFetchLoading',
       buyers: 'getAllBuyers',
       partners: 'getAllPartners',
       buyersByParent: 'getBuyersByParent',
@@ -42,6 +44,16 @@ export default {
       parentlessBuyersByClient: 'getParentlessBuyersByClient',
       parentlessPartnersByClient: 'getParentlessPartnersByClient'
     }),
+    loading () {
+      switch (this.contractType) {
+        case 'buyer':
+          return this.loadingBuyers
+        case 'partner':
+          return this.loadingPartners
+        default:
+          return false
+      }
+    },
     contracts () {
       switch (this.contractType) {
         case 'buyer':
@@ -82,8 +94,6 @@ export default {
           return this.parentlessBuyersByClient(client)
         case 'partner':
           return this.parentlessPartnersByClient(client)
-        default:
-          return {}
       }
     },
     contractsByParent (parent) {
@@ -92,8 +102,6 @@ export default {
           return this.buyersByParent(parent)
         case 'partner':
           return this.partnersByParent(parent)
-        default:
-          return []
       }
     },
     generateTree () {
