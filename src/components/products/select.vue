@@ -44,12 +44,20 @@ export default {
     },
     mappedBrands () {
       return this.brands.map(brand => {
-        return { id: brand.id + '-brand', label: brand.name, children: this.mappedProductGroups(brand.id) }
+        return {
+          id: brand.id + '-brand',
+          label: brand.name,
+          children: this.mappedProductGroups(brand.id)
+        }
       })
     },
     mappedProductGroups (brandId) {
       return this.productGroupsByBrand(brandId).map(productGroup => {
-        return { id: productGroup.id + '-product-group', label: productGroup.name, children: this.mappedProducts(productGroup.id) }
+        return {
+          id: productGroup.id + '-product-group',
+          label: productGroup.name,
+          children: this.mappedProducts(productGroup.id)
+        }
       })
     },
     mappedProducts (productGroupId) {
