@@ -3,7 +3,8 @@
     <contract-fields :loading="loading" :loading-text="loadingText" v-show="fieldsVisible" v-if="fieldsVisible === !usedBaseFieldsVisible"></contract-fields>
     <used-base-fields :loading="loading"
                       :loading-text="loadingText"
-                      v-show="usedBaseFieldsVisible"></used-base-fields>
+                      v-show="usedBaseFieldsVisible"
+    ></used-base-fields>
   </div>
 </template>
 
