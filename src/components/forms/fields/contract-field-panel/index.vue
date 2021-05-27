@@ -1,14 +1,8 @@
 <template>
   <div>
-    <contract-fields  :loading="loading"
-                      :loading-text="loadingText"
-                      :contract-name="contract.name"
-                      class="col-span-2"
-                      v-show="fieldsVisible"></contract-fields>
+    <contract-fields :loading="loading" :loading-text="loadingText" v-show="fieldsVisible" v-if="fieldsVisible === !usedBaseFieldsVisible"></contract-fields>
     <used-base-fields :loading="loading"
                       :loading-text="loadingText"
-                      :contract-name="contract.name"
-                      class="col-span-2"
                       v-show="usedBaseFieldsVisible"></used-base-fields>
   </div>
 </template>
@@ -20,7 +14,9 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    geo: Number
+    loading: Boolean,
+    loadingText: String,
+    contractName: String
   },
   components: {
     'contract-fields': fields,
