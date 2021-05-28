@@ -1,8 +1,9 @@
 <template>
   <button @click="toggleDates()"
           v-on:keyup.enter="toggleDates()"
-        class="btn w-full cursor-pointer font-bold"
-        :class="btnColor"
+          class="btn w-full cursor-pointer font-bold"
+          :class="btnColor"
+          :disabled="!daysAvailableInFilter"
   >
     <font-awesome-icon :icon="icon"></font-awesome-icon> {{ title }}
   </button>
@@ -24,8 +25,14 @@ export default {
     ...mapGetters({
       daysInBulk: 'getBulkUpdateDayCaps'
     }),
+    daysAttributesHaveLoaded () {
+      return !!this.days[0].attributes
+    },
+    daysAvailableInFilter () {
+      return this.days.length > 0
+    },
     daysData () {
-      if (this.days[0].attributes) {
+      if (this.daysAvailableInFilter && this.daysAttributesHaveLoaded) {
         return this.days.map(day => day.attributes[0].customData)
       }
       return []
