@@ -22,8 +22,8 @@ const getters = {
 const mutations = {
   SET_CONTRACT_FIELDS_VISIBLE: (state) => (state.contract_fields_panel_visible = true),
   SET_USED_BASE_FIELDS_VISIBLE: (state) => (state.used_base_fields_panel_visible = true),
-  UNSET_CONTRACT_FIELDS_VISIBLE: state => (state.contract_field_panel_visible = false),
-  UNSET_USED_BASE_FIELDS_VISIBLE: state => (state.used_base_field_panel_visible = false)
+  UNSET_CONTRACT_FIELDS_VISIBLE: state => (state.contract_fields_panel_visible = false),
+  UNSET_USED_BASE_FIELDS_VISIBLE: state => (state.used_base_fields_panel_visible = false)
 }
 
 export default {

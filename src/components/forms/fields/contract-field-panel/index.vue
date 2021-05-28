@@ -1,6 +1,9 @@
 <template>
   <div>
-    <contract-fields :loading="loading" :loading-text="loadingText" v-show="fieldsVisible" v-if="fieldsVisible === !usedBaseFieldsVisible"></contract-fields>
+    <contract-fields :loading="loading"
+                     :loading-text="loadingText"
+                     v-show="fieldsVisible">
+    </contract-fields>
     <used-base-fields :loading="loading"
                       :loading-text="loadingText"
                       v-show="usedBaseFieldsVisible"
