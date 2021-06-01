@@ -84,7 +84,7 @@ export default {
   methods: {
     formatDate (date) {
       if (this.mode === 'dateTime') {
-        return dayjs(date).format('YYYY-MM-DDTHH:mm:ss[Z]')
+        return dayjs(date).format('YYYY-MM-DDTHH:mm:ssZ')
       } else if (this.mode === 'date') {
         return dayjs(date).format('YYYY-MM-DD')
       }

@@ -1,5 +1,8 @@
 <template>
-  <panel-modal :show="showModal" @close="close">
+  <panel-modal
+    :show="showModal"
+    @close="close"
+    @modal-after-leave="$emit('modal-after-leave')">
     <template v-slot:header>
       <p v-if="monthCap">{{currentCapMonthFormats.MM_YYYY}}</p>
     </template>
@@ -33,6 +36,12 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import panelModal from '@/components/ui/modals/panel-modal'
 
 export default {
+  props: {
+    showModal: {
+      default: false,
+      required: true
+    }
+  },
   data () {
     return {
       limit: ''
@@ -77,7 +86,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showModal: 'getShowCreateMonthCapModal',
       monthCap: 'getSelectedCapMonth',
       parent: 'getCurrentCapsParentId',
       currentCapMonthFormats: 'getCurrentCapMonthFormats',

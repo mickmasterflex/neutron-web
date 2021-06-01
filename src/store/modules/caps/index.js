@@ -30,8 +30,8 @@ const actions = {
     await axios.get(getters.getCapsCalendarEndpoint)
       .then(response => {
         commit('SET_CURRENT_CAPS_PARENT_ID', response.data.parent)
-        commit('SET_CURRENT_DAY_CAPS', response.data.day_caps)
-        commit('SET_CURRENT_MONTH_CAPS', response.data.month_caps)
+        commit('ADD_CURRENT_DAY_CAPS', response.data.day_caps)
+        commit('ADD_CURRENT_MONTH_CAPS', response.data.month_caps)
       }).finally(() => {
         commit('RESET_CAPS_FETCH_LOADING')
       })
@@ -43,6 +43,7 @@ const actions = {
     commit('RESET_CURRENT_CAP_MONTH_FORMATS')
     commit('RESET_CAPS_CALENDAR_ENDPOINT')
     commit('RESET_CAPS_CALENDAR_PARAMS')
+    commit('RESET_BULK_UPDATE_DAY_CAPS')
   },
   async setCapsCalendarEndpoint ({ commit }, parent) {
     await commit('SET_CURRENT_CAPS_PARENT_ID', parent.id)
