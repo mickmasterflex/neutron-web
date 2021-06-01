@@ -23,7 +23,6 @@
 <script>
 import { checkUnsavedChangesInModal } from '@/mixins/check-unsaved-changes-in-modal'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import fieldOptions from '@/components/forms/base-fields/options/list'
 import createOption from '@/components/forms/base-fields/options/create'
@@ -78,7 +77,6 @@ export default {
     }
   },
   mixins: [
-    enterKeyListener,
     setResponseErrors,
     checkUnsavedChangesInModal
   ],
