@@ -15,7 +15,7 @@
         <td class="td">{{baseField(usedBaseField).name}}</td>
         <td class="td">{{baseField(usedBaseField).type}}</td>
         <td class="td">
-        <display-contract :contract="contract" v-for="(contract, index) in usedBaseFieldFormsByUsedField(usedBaseField)" :key="`usedBaseField` + index"></display-contract>
+        <display-contract class="mr-2" :contract="contract" v-for="(contract, index) in usedBaseFieldFormsByUsedField(usedBaseField)" :key="`usedBaseField` + index"></display-contract>
         </td>
       </tr>
       </tbody>

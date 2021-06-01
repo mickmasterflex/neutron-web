@@ -1,5 +1,5 @@
 <template>
-  <span @click="linkToUsedContracts()" class="text-link">{{contractType}}: {{actualContract.id}}</span>
+  <span @click="linkToUsedContracts()" class="text-link">{{contractType}}:{{actualContract.name}}</span>
 </template>
 
 <script>
@@ -13,7 +13,8 @@ export default {
       usedBaseFields: 'getUsedBaseFields',
       usedBaseOptionFieldTypes: 'getBaseOptionFieldTypes',
       usedBaseFieldFormsByUsedField: 'getUsedBaseFieldFormsByUsedField',
-      baseField: 'getBaseFieldById'
+      baseField: 'getBaseFieldById',
+      clientData: 'getCurrentClientData'
     }),
     contractType () {
       if (this.contract.buyer_contract) {
@@ -39,12 +40,12 @@ export default {
       if (this.contractType === 'Buyer') {
         this.$router.push({
           name: 'BuyerContract',
-          params: { }
+          params: { id: this.actualContract.id, client: this.clientData.slug }
         })
       } else if (this.contractType === 'Offer') {
         this.$router.push({
-          name: 'OfferContract',
-          params: { }
+          name: 'OfferDetails',
+          params: { id: this.actualContract.id, buyer: this.actualContract.parent, client: this.clientData.slug }
         })
       }
     }
