@@ -14,7 +14,7 @@
         <td class="td">{{usedBaseField}}</td>
         <td class="td">{{baseField(usedBaseField).name}}</td>
         <td class="td">{{baseField(usedBaseField).type}}</td>
-        <td class="td">{{usedBaseFieldFormsByUsedField(usedBaseField)}}</td>
+        <display-contract :contract="usedBaseFieldFormsByUsedField(usedBaseField)[0]"></display-contract>
       </tr>
       </tbody>
     </table>
@@ -28,8 +28,11 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
-// {{usedBaseFieldFormsByUsedField(usedBaseField)}}
+import displayContract from '@/components/forms/fields/display-contract'
 export default {
+  components: {
+    'display-contract': displayContract
+  },
   computed: {
     ...mapGetters({
       usedBaseFields: 'getUsedBaseFields',
