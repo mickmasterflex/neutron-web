@@ -4,6 +4,7 @@
       :loading="loading"
       :loading-text="loadingText"
       :contract-name="contract.name"
+      class="col-span-2"
     ></contract-field-panel-template>
     <injected-panel-template
       :loading="loading"
