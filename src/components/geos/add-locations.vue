@@ -53,13 +53,32 @@ export default {
   },
   computed: {
     ...mapGetters({
-      geo: 'getCurrentGeo'
-    })
+      geo: 'getCurrentGeo',
+      currentGeoContractType: 'getCurrentGeoContractType',
+      currentBuyer: 'getCurrentBuyer',
+      currentOffer: 'getCurrentOffer'
+    }),
+    contract () {
+      switch (this.currentGeoContractType) {
+        case 'buyer':
+          return this.currentBuyer
+        case 'offer':
+          return this.currentOffer
+        default:
+          throw new Error('current_geo_contract_type is not set')
+      }
+    }
   },
   mixins: [enterKeyListener, setResponseErrors],
   methods: {
     ...mapActions({
-      add: 'addLocations'
+      runAddLocations: 'addLocations'
+    }),
+    ...mapMutations({
+      setCurrentBuyer: 'SET_CURRENT_BUYER',
+      updateBuyer: 'UPDATE_BUYER',
+      setCurrentOffer: 'SET_CURRENT_OFFER',
+      updateOffer: 'UPDATE_OFFER'
     }),
     check () {
       this.nuke_replace = !this.nuke_replace
@@ -74,6 +93,22 @@ export default {
         this.$refs.form.reset()
       })
     },
+    async toggleContractGeoInheritance () {
+      const updatedContract = { ...this.contract }
+      updatedContract.toggle_geo_inheritance = false
+      switch (this.currentGeoContractType) {
+        case 'buyer':
+          this.setCurrentBuyer(updatedContract)
+          this.updateBuyer(updatedContract)
+          break
+        case 'offer':
+          this.setCurrentOffer(updatedContract)
+          this.updateOffer(updatedContract)
+          break
+        default:
+          throw new Error('current_geo_contract_type is not set')
+      }
+    },
     addLocations () {
       this.$refs.form.validate().then(success => {
         if (success) {
@@ -85,7 +120,10 @@ export default {
           }
           formData.append('geos', this.geo)
           formData.append('nuke_replace', this.nuke_replace)
-          this.add(formData).then(() => {
+          this.runAddLocations(formData).then(() => {
+            if (this.nuke_replace) {
+              this.toggleContractGeoInheritance()
+            }
             this.resetForm()
           }).catch(error => {
             this.error = error
