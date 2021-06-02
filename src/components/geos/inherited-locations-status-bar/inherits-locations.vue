@@ -21,7 +21,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentGeoContractType: 'getCurrentGeoContractType',
       inheritedLocationContracts: 'getInheritedLocationContracts',
       currentClientData: 'getCurrentClientData'
     })
