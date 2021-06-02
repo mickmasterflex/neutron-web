@@ -1,7 +1,11 @@
 <template>
   <div class="">
     <h1>Sign in</h1>
-    <status-bar :show="formError.length !== 0" :copy="formError" color="red" icon="exclamation-triangle"/>
+    <status-bar :show="formError.length !== 0" color="red" icon="exclamation-triangle">
+      <template slot="content">
+        {{formError}}
+      </template>
+    </status-bar>
     <validation-observer ref="form" v-slot="{ handleSubmit }">
       <form class="login bg-gray-100 p-8 rounded-lg" @submit.prevent="handleSubmit(submitForm)">
         <v-text-field v-model="username" mode="passive" rules="required|email" field_id="username" field_label="Email" field_type="email"></v-text-field>

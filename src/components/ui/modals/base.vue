@@ -11,7 +11,11 @@
             </h3>
             <span @click="close" class="cursor-pointer text-gray-500 transition-colors duration-200 hover:text-red-500 text-4xl font-hairline leading-none px-1">&times;</span>
           </div>
-          <status-bar :show="unsavedChangesInModal" icon="exclamation-triangle" color="yellow" copy="Unsaved Changes"></status-bar>
+          <status-bar :show="unsavedChangesInModal" icon="exclamation-triangle" color="yellow">
+            <template slot="content">
+              Unsaved Changes
+            </template>
+          </status-bar>
           <slot name="tabs"></slot>
           <div :class="`modal-padding ${modalBodyBackground} border-t-2 border-b-2 border-gray-200`">
             <slot name="body">Modal Body</slot>
