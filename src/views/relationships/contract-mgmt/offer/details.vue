@@ -1,7 +1,7 @@
 <template>
   <base-panel-grid>
     <update-offer :offer="offer" class="col-span-2 xl:col-span-1"></update-offer>
-    <recruitment-locations :geo="offer.geo" class="col-span-2 xl:col-span-1"></recruitment-locations>
+    <recruitment-locations :geo="offer.geo" contract-type="offer" class="col-span-2 xl:col-span-1"></recruitment-locations>
     <lead-caps :caps-parent-id="id" caps-parent-type="offer-contracts"/>
     <panel-template title="Danger Zone" :showLoader="loading" :loadingText="loadingText" class="col-span-2">
       <template #content>

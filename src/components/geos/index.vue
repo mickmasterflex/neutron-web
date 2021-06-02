@@ -10,11 +10,17 @@
 import addLocations from '@/components/geos/add-locations'
 import removeLocations from '@/components/geos/remove-locations'
 import searchLocations from '@/components/geos/search-locations/index'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   props: {
-    geo: Number
+    geo: Number,
+    contractType: {
+      type: String,
+      validator: (value) => {
+        return ['buyer', 'offer'].includes(value)
+      }
+    }
   },
   components: {
     'add-locations': addLocations,
@@ -31,11 +37,18 @@ export default {
   methods: {
     ...mapMutations({
       setCurrentGeo: 'SET_CURRENT_GEO',
-      resetCurrentGeo: 'RESET_CURRENT_GEO'
+      resetCurrentGeo: 'RESET_CURRENT_GEO',
+      setCurrentGeoContractType: 'SET_CURRENT_GEO_CONTRACT_TYPE',
+      resetCurrentGeoContractType: 'RESET_CURRENT_GEO_CONTRACT_TYPE'
+    }),
+    ...mapActions({
+      fetchInheritedLocationContracts: 'fetchInheritedLocationContracts'
     }),
     setGeo () {
       if (this.geo) {
         this.setCurrentGeo(this.geo)
+        this.setCurrentGeoContractType(this.contractType)
+        this.fetchInheritedLocationContracts(this.geo)
       }
     }
   },
@@ -49,6 +62,7 @@ export default {
   },
   destroyed () {
     this.resetCurrentGeo()
+    this.resetCurrentGeoContractType()
   }
 }
 </script>

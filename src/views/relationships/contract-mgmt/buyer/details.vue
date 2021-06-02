@@ -1,7 +1,7 @@
 <template>
   <base-panel-grid>
     <update-buyer-contract :buyer="buyer" class="col-span-2 xl:col-span-1" :showLoader="loading" :loadingText="loadingText"></update-buyer-contract>
-    <recruitment-locations :geo="buyer.geo" class="col-span-2 xl:col-span-1"></recruitment-locations>
+    <recruitment-locations :geo="buyer.geo" contract-type="buyer" class="col-span-2 xl:col-span-1"></recruitment-locations>
     <delivery-index :buyer="buyer" class="col-span-2"></delivery-index>
     <lead-caps :caps-parent-id="id" caps-parent-type="buyers"/>
     <update-channels class="col-span-2" :buyer="buyer" ></update-channels>

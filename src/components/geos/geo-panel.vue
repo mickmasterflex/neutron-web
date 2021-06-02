@@ -62,11 +62,34 @@ export default {
     ...mapGetters({
       geoLoading: 'getGeoPanelLoading',
       buyerFetchLoading: 'getBuyerFetchLoading',
-      buyerFetchLoadingText: 'getBuyerFetchLoadingText'
+      buyerFetchLoadingText: 'getBuyerFetchLoadingText',
+      offerFetchLoading: 'getOfferFetchLoading',
+      offerFetchLoadingText: 'getOfferFetchLoadingText',
+      currentGeoContractType: 'getCurrentGeoContractType'
     }),
+    contractLoading () {
+      switch (this.currentGeoContractType) {
+        case 'buyer':
+          return this.buyerFetchLoading
+        case 'offer':
+          return this.offerFetchLoading
+        default:
+          return false
+      }
+    },
+    contractLoadingText () {
+      switch (this.currentGeoContractType) {
+        case 'buyer':
+          return this.buyerFetchLoadingText
+        case 'offer':
+          return this.offerFetchLoadingText
+        default:
+          return 'Loading'
+      }
+    },
     computedLoadingText () {
-      if (this.buyerFetchLoading) {
-        return this.buyerFetchLoadingText
+      if (this.contractLoading) {
+        return this.contractLoadingText
       } else if (this.geoLoading) {
         return this.loadingText
       }
