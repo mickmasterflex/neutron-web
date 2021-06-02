@@ -23,10 +23,9 @@
               ></checkbox-field>
             </div>
             <div v-if="nuke_replace" class="text-red-500 ml-label-width">
-              <p class="font-bold">By selecting "Nuke & Replace":</p>
               <ul class="list-disc">
-                <li>All locations will be removed from this offer.</li>
-                <li>Location inheritance will be deactivated at this level.</li>
+                <li>All recruitment locations will be removed from this {{ currentGeoContractType }}.</li>
+                <li>Recruitment location inheritance will be deactivated for this {{ currentGeoContractType }}.</li>
               </ul>
             </div>
           </form>
