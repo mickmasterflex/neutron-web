@@ -1,8 +1,6 @@
 <template>
   <div>
-    <add-locations v-show="addVisible"></add-locations>
-    <remove-locations v-show="removeVisible"></remove-locations>
-    <search-locations v-show="searchVisible"></search-locations>
+    <component :is="panelComponent"></component>
   </div>
 </template>
 
@@ -13,6 +11,11 @@ import searchLocations from '@/components/geos/search-locations/index'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      panelComponent: addLocations
+    }
+  },
   props: {
     geo: Number,
     contractType: {
@@ -23,9 +26,9 @@ export default {
     }
   },
   components: {
-    'add-locations': addLocations,
-    'remove-locations': removeLocations,
-    'search-locations': searchLocations
+    addLocations,
+    removeLocations,
+    searchLocations
   },
   computed: {
     ...mapGetters({
@@ -43,8 +46,12 @@ export default {
       resetCurrentGeoContractType: 'RESET_CURRENT_GEO_CONTRACT_TYPE'
     }),
     ...mapActions({
+      showAdd: 'showAddLocationsPanel',
       fetchInheritedLocationContracts: 'fetchInheritedLocationContracts'
     }),
+    setPanelComponent (component) {
+      this.panelComponent = component
+    },
     setGeo () {
       if (this.geo) {
         this.setCurrentGeo(this.geo)
@@ -56,9 +63,25 @@ export default {
   watch: {
     geo () {
       this.setGeo()
+    },
+    addVisible () {
+      if (this.addVisible) {
+        this.setPanelComponent(addLocations)
+      }
+    },
+    removeVisible () {
+      if (this.removeVisible) {
+        this.setPanelComponent(removeLocations)
+      }
+    },
+    searchVisible () {
+      if (this.searchVisible) {
+        this.setPanelComponent(searchLocations)
+      }
     }
   },
   created () {
+    this.showAdd()
     this.setGeo()
   },
   destroyed () {

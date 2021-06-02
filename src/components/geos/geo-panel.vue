@@ -97,9 +97,6 @@ export default {
       showRemove: 'showRemoveLocationsPanel',
       showSearch: 'showSearchLocationsPanel'
     })
-  },
-  created () {
-    this.showAdd()
   }
 }
 </script>
