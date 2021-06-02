@@ -41,7 +41,7 @@ import fileField from '@/components/ui/forms/validation-fields/file-field'
 import locationField from '@/components/geos/locations-field'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
