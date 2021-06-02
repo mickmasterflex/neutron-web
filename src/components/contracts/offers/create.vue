@@ -4,10 +4,10 @@
     <template v-slot:body>
   <validation-observer ref="form">
     <form @submit.prevent="submitForm" class="form-horizontal">
+      <select-product v-model="product_id" rules="required" @input="setOfferNameAsProductName($event)"></select-product>
       <v-text-field v-model="name" rules="required" field_id="name" field_label="Offer Name"></v-text-field>
       <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
       <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
-      <select-product v-model="product_id" rules="required"></select-product>
     </form>
   </validation-observer>
     </template>
@@ -29,14 +29,15 @@ export default {
     return {
       name: '',
       status: 'active',
-      product_id: '',
+      product_id: null,
       activateAt: null
     }
   },
   computed: {
     ...mapGetters({
       showModal: 'getShowCreateOfferModal',
-      statuses: 'getNewContractStatuses'
+      statuses: 'getNewContractStatuses',
+      productById: 'getProductById'
     })
   },
   props: {
@@ -50,11 +51,17 @@ export default {
     ...mapMutations({
       closeModal: 'CLOSE_CREATE_OFFER_MODAL'
     }),
+    setOfferNameAsProductName (id) {
+      const product = this.productById(id)
+      if (product && this.name === '') {
+        this.name = product.name
+      }
+    },
     close () {
       this.name = ''
       this.parent = ''
       this.status = 'active'
-      this.product_id = ''
+      this.product_id = null
       this.activateAt = null
       this.$nextTick(() => {
         this.$refs.form.reset()

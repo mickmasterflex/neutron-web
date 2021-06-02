@@ -1,8 +1,8 @@
 import axios from '@/axios'
-import campusLogos from '@/store/modules/campuses/logos'
-import campusBanners from '@/store/modules/campuses/banners'
-import loading from '@/store/modules/campuses/loading'
-import visibility from '@/store/modules/campuses/visibility'
+import campusLogos from '@/store/modules/product-groups/campuses/logos'
+import campusBanners from '@/store/modules/product-groups/campuses/banners'
+import loading from '@/store/modules/product-groups/campuses/loading'
+import visibility from '@/store/modules/product-groups/campuses/visibility'
 
 const state = {
   campuses: [],
