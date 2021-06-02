@@ -1,5 +1,5 @@
 <template>
-  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="contractLoading || geoLoading" :loadingText="computedLoadingText">
+  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="contractLoading ? contractLoading : geoLoading" :loadingText="computedLoadingText">
     <template #action>
       <slot name="action"></slot>
     </template>
@@ -64,28 +64,23 @@ export default {
       buyerFetchLoading: 'getBuyerFetchLoading',
       buyerFetchLoadingText: 'getBuyerFetchLoadingText',
       offerFetchLoading: 'getOfferFetchLoading',
-      offerFetchLoadingText: 'getOfferFetchLoadingText',
-      currentGeoContractType: 'getCurrentGeoContractType'
+      offerFetchLoadingText: 'getOfferFetchLoadingText'
     }),
     contractLoading () {
-      switch (this.currentGeoContractType) {
-        case 'buyer':
-          return this.buyerFetchLoading
-        case 'offer':
-          return this.offerFetchLoading
-        default:
-          return false
+      if (this.buyerFetchLoading) {
+        return this.buyerFetchLoading
+      } else if (this.offerFetchLoading) {
+        return this.offerFetchLoading
       }
+      return false
     },
     contractLoadingText () {
-      switch (this.currentGeoContractType) {
-        case 'buyer':
-          return this.buyerFetchLoadingText
-        case 'offer':
-          return this.offerFetchLoadingText
-        default:
-          return 'Loading'
+      if (this.buyerFetchLoading) {
+        return this.buyerFetchLoadingText
+      } else if (this.offerFetchLoading) {
+        return this.offerFetchLoadingText
       }
+      return 'Loading'
     },
     computedLoadingText () {
       if (this.contractLoading) {
