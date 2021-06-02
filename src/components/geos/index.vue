@@ -39,6 +39,7 @@ export default {
       setCurrentGeo: 'SET_CURRENT_GEO',
       resetCurrentGeo: 'RESET_CURRENT_GEO',
       setCurrentGeoContractType: 'SET_CURRENT_GEO_CONTRACT_TYPE',
+      resetInherited: 'RESET_INHERITED_LOCATION_CONTRACTS',
       resetCurrentGeoContractType: 'RESET_CURRENT_GEO_CONTRACT_TYPE'
     }),
     ...mapActions({
@@ -63,6 +64,7 @@ export default {
   destroyed () {
     this.resetCurrentGeo()
     this.resetCurrentGeoContractType()
+    this.resetInherited()
   }
 }
 </script>
