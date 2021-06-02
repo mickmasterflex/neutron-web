@@ -1,6 +1,6 @@
 <template>
   <transition-table-state>
-    <table v-if="usedBaseFields.length" class="table table-striped">
+    <table v-if="usedBaseFields.length" class="table table-white">
       <thead>
       <tr>
         <th class="th">ID</th>

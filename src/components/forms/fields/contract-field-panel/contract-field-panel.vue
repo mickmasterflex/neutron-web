@@ -20,18 +20,11 @@
     <template v-slot:content>
       <slot name="content"></slot>
     </template>
-    <template #footer>
-      <panel-footer>
-        <template #end>
-        </template>
-      </panel-footer>
-    </template>
   </panel-template>
 </template>
 
 <script>
 import createField from '@/components/forms/fields/create'
-import panelFooter from '@/components/ui/panels/base/footer'
 import underscoreTabsInset from '@/components/ui/tabs/underscore/tabs-inset'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
@@ -53,8 +46,7 @@ export default {
   },
   components: {
     'create-field': createField,
-    'underscore-tabs-inset': underscoreTabsInset,
-    'panel-footer': panelFooter
+    'underscore-tabs-inset': underscoreTabsInset
   },
   computed: {
     ...mapGetters({

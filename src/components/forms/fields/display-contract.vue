@@ -1,5 +1,11 @@
 <template>
-  <span @click="linkToUsedContracts()" class="text-link">{{contractType}}:{{actualContract.name}}</span>
+  <td>
+    <router-link @click="linkToUsedContracts()" class="text-link" :to="{ name: 'BuyerContract', params: { id: this.actualContract.id, client: this.clientData.slug } }">
+      {{contractType}}: {{actualContract.name}}
+    </router-link>
+    <router-link class="text-link" :to="{ name: 'OfferDetails', params: { id: this.actualContract.id, buyer: this.actualContract.parent, client: this.clientData.slug } }">
+    </router-link>
+  </td>
 </template>
 
 <script>
@@ -35,20 +41,7 @@ export default {
   methods: {
     ...mapMutations({
       setUsedBaseFieldS: 'SET_USED_BASE_FIELD'
-    }),
-    linkToUsedContracts () {
-      if (this.contractType === 'Buyer') {
-        this.$router.push({
-          name: 'BuyerContract',
-          params: { id: this.actualContract.id, client: this.clientData.slug }
-        })
-      } else if (this.contractType === 'Offer') {
-        this.$router.push({
-          name: 'OfferDetails',
-          params: { id: this.actualContract.id, buyer: this.actualContract.parent, client: this.clientData.slug }
-        })
-      }
-    }
+    })
   }
 }
 </script>

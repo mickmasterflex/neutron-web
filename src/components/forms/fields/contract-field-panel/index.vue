@@ -2,7 +2,8 @@
   <div>
     <contract-fields :loading="loading"
                      :loading-text="loadingText"
-                     v-show="fieldsVisible">
+                     v-show="fieldsVisible"
+                     :contract-name="contractName">
     </contract-fields>
     <used-base-fields :loading="loading"
                       :loading-text="loadingText"
