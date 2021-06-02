@@ -1,11 +1,10 @@
 <template>
-  <td>
-    <router-link @click="linkToUsedContracts()" class="text-link" :to="{ name: 'BuyerContract', params: { id: this.actualContract.id, client: this.clientData.slug } }">
-      {{contractType}}: {{actualContract.name}}
+  <span>
+    {{contractType}}:
+    <router-link class="text-link" :to="fieldManagementRoute">
+      {{actualContract.name}}
     </router-link>
-    <router-link class="text-link" :to="{ name: 'OfferDetails', params: { id: this.actualContract.id, buyer: this.actualContract.parent, client: this.clientData.slug } }">
-    </router-link>
-  </td>
+  </span>
 </template>
 
 <script>
@@ -22,6 +21,14 @@ export default {
       baseField: 'getBaseFieldById',
       clientData: 'getCurrentClientData'
     }),
+    fieldManagementRoute () {
+      if (this.contractType === 'Buyer') {
+        return { name: 'BuyerContractFields', params: { id: this.actualContract.id, client: this.clientData.slug } }
+      } else if (this.contractType === 'Offer') {
+        return { name: 'OfferFieldManagement', params: { id: this.actualContract.id, buyer: this.actualContract.parent, client: this.clientData.slug } }
+      }
+      return {}
+    },
     contractType () {
       if (this.contract.buyer_contract) {
         return 'Buyer'
