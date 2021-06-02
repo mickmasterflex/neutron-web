@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <component :is="panelComponent"></component>
-  </div>
+  <component :is="panelComponent"></component>
 </template>
 
 <script>
