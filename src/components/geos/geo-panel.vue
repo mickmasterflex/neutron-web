@@ -1,9 +1,10 @@
 <template>
-  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="geoLoading || buyerFetchLoading" :loadingText="computedLoadingText">
+  <panel-template title="Recruitment Locations" :actionTransition="true" :showLoader="contractLoading || geoLoading" :loadingText="computedLoadingText">
     <template #action>
       <slot name="action"></slot>
     </template>
     <template #tabs>
+      <inherited-location-status-bar/>
       <underscore-tabs-inset>
         <underscore-tab :active="contentTab === 'add'" size="sm">
           <span @click="showAdd()">Add</span>
@@ -31,12 +32,14 @@
 
 <script>
 import underscoreTabsInset from '@/components/ui/tabs/underscore/tabs-inset'
+import inheritedLocationStatusBar from '@/components/geos/inherited-locations-status-bar/index'
 import panelFooter from '@/components/ui/panels/base/footer'
 import downloadLocations from '@/components/geos/download-locations'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
+    'inherited-location-status-bar': inheritedLocationStatusBar,
     'underscore-tabs-inset': underscoreTabsInset,
     'panel-footer': panelFooter,
     'download-locations': downloadLocations
