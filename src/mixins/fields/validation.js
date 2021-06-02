@@ -2,7 +2,7 @@ export default {
   props: {
     value: {
       type: null,
-      default: ''
+      default: null
     },
     rules: {
       type: [Object, String],
@@ -14,7 +14,7 @@ export default {
     }
   },
   data: () => ({
-    inner_value: ''
+    inner_value: null
   }),
   watch: {
     // Handles internal model changes.

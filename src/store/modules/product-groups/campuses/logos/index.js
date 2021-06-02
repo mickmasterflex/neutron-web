@@ -1,5 +1,5 @@
 import axios from '@/axios'
-import loading from '@/store/modules/campuses/logos/loading'
+import loading from '@/store/modules/product-groups/campuses/logos/loading'
 
 const state = {
   current_campus_logos: []

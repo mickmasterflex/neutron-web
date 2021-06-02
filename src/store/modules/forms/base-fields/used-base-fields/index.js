@@ -1,8 +1,10 @@
 import axios from '@/axios'
 import loading from './loading'
+import panels from './panels'
 
 const modules = {
-  loading
+  loading,
+  panels
 }
 
 const state = {
@@ -12,7 +14,8 @@ const state = {
 
 const getters = {
   getUsedBaseFields: state => state.used_base_fields,
-  getAvailableBaseFields: (state, getters) => getters.getBaseFields.filter(field => !getters.getUsedBaseFields.includes(field.id))
+  getAvailableBaseFields: (state, getters) => getters.getBaseFields.filter(field => !getters.getUsedBaseFields.includes(field.id)),
+  getUsedBaseFieldFormsByUsedField: (state) => (id) => state.used_base_fields_forms.filter(form => form.used_fields.includes(id))
 }
 
 const actions = {
@@ -38,7 +41,10 @@ const actions = {
 const mutations = {
   SET_USED_BASE_FIELDS_FORMS: (state, forms) => (state.used_base_fields_forms = forms),
   RESET_USED_BASE_FIELDS_FORMS: (state, forms) => (state.used_base_fields_forms = forms),
-  ADD_USED_BASE_FIELDS: (state, fields) => (state.used_base_fields = state.used_base_fields.concat(fields)),
+  ADD_USED_BASE_FIELDS: (state, fields) => {
+    const usedBaseFields = state.used_base_fields.concat(fields)
+    state.used_base_fields = [...new Set(usedBaseFields)]
+  },
   ADD_USED_BASE_FIELD: (state, fieldId) => (state.used_base_fields = [fieldId, ...state.used_base_fields]),
   REMOVE_USED_BASE_FIELD: (state, fieldId) => (state.used_base_fields = state.used_base_fields.filter(field => field !== fieldId)),
   RESET_USED_BASE_FIELDS: (state) => (state.used_base_fields = [])

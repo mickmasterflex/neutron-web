@@ -24,7 +24,10 @@ const state = {
 const getters = {
   getBaseFields: state => state.base_fields,
   getBaseFieldCount: state => state.base_fields.length,
-  getCurrentBaseField: state => state.current_base_field
+  getCurrentBaseField: state => state.current_base_field,
+  getBaseFieldById: (state) => (baseFieldId) => {
+    return state.base_fields.find(baseField => baseField.id === baseFieldId)
+  }
 }
 
 const actions = {
