@@ -1,10 +1,11 @@
 <template>
   <base-panel-grid>
-    <fields-panel-template
+    <contract-field-panel-template
       :loading="loading"
       :loading-text="loadingText"
       :contract-name="contract.name"
-      class="col-span-2"/>
+      class="col-span-2"
+    ></contract-field-panel-template>
     <injected-panel-template
       :loading="loading"
       :loading-text="loadingText"
@@ -20,7 +21,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import fieldsPanel from '@/components/forms/fields/panel-template'
+import contractFieldPanelTemplate from '@/components/forms/fields/contract-field-panel/index'
 import injectedFieldsPanel from '@/components/forms/injected-fields/fields/panel-template'
 import additionalContentPanel from '@/components/forms/additional-content/panel-template'
 
@@ -39,7 +40,8 @@ export default {
       buyerFetchLoading: 'getBuyerFetchLoading',
       buyerFetchLoadingText: 'getBuyerFetchLoadingText',
       getCurrentOffer: 'getCurrentOffer',
-      getCurrentBuyer: 'getCurrentBuyer'
+      getCurrentBuyer: 'getCurrentBuyer',
+      fetchUsedBaseFieldsLoading: 'getFetchUsedBaseFieldsLoading'
     }),
     contractType () {
       return this.$route.name === 'OfferFieldManagement' ? 'offer' : 'buyer'
@@ -95,7 +97,7 @@ export default {
     this.fetchAncestorForms()
   },
   components: {
-    'fields-panel-template': fieldsPanel,
+    'contract-field-panel-template': contractFieldPanelTemplate,
     'injected-panel-template': injectedFieldsPanel,
     'additional-content-panel-template': additionalContentPanel
   },
