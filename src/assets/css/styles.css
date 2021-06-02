@@ -198,6 +198,11 @@
     @apply text-lg;
 }
 
+.btn-sm {
+    @apply font-normal px-2 py-0 border-r border-b;
+    height: 30px;
+}
+
 /* Standard Buttons */
 
 .btn-blue                                           { @apply bg-blue-500 border-blue-600; }
