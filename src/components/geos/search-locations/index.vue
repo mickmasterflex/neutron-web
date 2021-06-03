@@ -10,7 +10,7 @@
             <location-field rules="required" ref="locationField" v-model="locations"></location-field>
           </form>
         </validation-observer>
-        <div class="field-group" v-if="results.found">
+        <div class="field-group" v-if="results">
           <label class="field-label field-label-top">Search Results</label>
           <results-list></results-list>
         </div>
@@ -63,12 +63,8 @@ export default {
       }
     }
   },
-  watch: {
-    searchVisible () {
-      if (!this.searchVisible) {
-        this.resetResults()
-      }
-    }
+  destroyed () {
+    this.resetResults()
   },
   components: {
     'geo-panel': geoPanel,

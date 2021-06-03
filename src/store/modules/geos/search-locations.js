@@ -1,7 +1,7 @@
 import axios from '@/axios'
 
 const state = {
-  locations_search_results: {}
+  locations_search_results: null
 }
 
 const getters = {
@@ -24,7 +24,7 @@ const actions = {
 
 const mutations = {
   SET_LOCATIONS_SEARCH_RESULTS: (state, results) => (state.locations_search_results = results),
-  RESET_LOCATIONS_SEARCH_RESULTS: (state) => (state.locations_search_results = {})
+  RESET_LOCATIONS_SEARCH_RESULTS: (state) => (state.locations_search_results = null)
 }
 
 export default {
