@@ -123,19 +123,20 @@ module.exports = {
       }
     }
   },
-  future: {
-    purgeLayersByDefault: true
-  },
-  purge: {
-    // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-    enabled: process.env.NODE_ENV === 'production',
-    content: [
-      './src/components/**/*.vue',
-      './src/layouts/**/*.vue',
-      './src/plugins/**/*.js',
-      './src/views/**/*.vue'
-    ]
-  },
+  // future: {
+  //   purgeLayersByDefault: true
+  // },
+  // Need to refactor areas where we concatenate strings to generate classes. ie: text-${color}-500
+  // purge: {
+  //   // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
+  //   enabled: process.env.NODE_ENV === 'production',
+  //   content: [
+  //     './src/components/**/*.vue',
+  //     './src/layouts/**/*.vue',
+  //     './src/plugins/**/*.js',
+  //     './src/views/**/*.vue'
+  //   ]
+  // },
   variants: {},
   plugins: []
 }
