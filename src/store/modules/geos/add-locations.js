@@ -9,10 +9,10 @@ const actions = {
         if (response.data.valid_locations.length > 0) {
           successfulToast({ heading: 'Valid Locations', content: response.data.valid_locations })
         }
-        if (response.data.invalid_locationslength > 0) {
+        if (response.data.invalid_locations.length > 0) {
           failedToast({ heading: 'Invalid Location', content: response.data.invalid_locations })
         }
-        if (response.data.inherited_locationslength > 0) {
+        if (response.data.inherited_locations.length > 0) {
           failedToast({ heading: 'Location already Inherited', content: response.data.inherited_locations })
         }
       }).finally(() => {
