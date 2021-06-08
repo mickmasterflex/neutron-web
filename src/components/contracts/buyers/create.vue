@@ -8,6 +8,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
+          <v-select-field v-model="vertical" :options="verticals" field_id="vertical" field_label="Vertical"></v-select-field>
         </form>
       </validation-observer>
     </template>
@@ -31,7 +32,8 @@ export default {
       rpl: '0.00',
       status: 'active',
       buyerGroup: undefined,
-      activateAt: null
+      activateAt: null,
+      vertical: 'education'
     }
   },
   props: {
@@ -45,7 +47,8 @@ export default {
   computed: {
     ...mapGetters({
       statuses: 'getNewContractStatuses',
-      showModal: 'getShowCreateBuyerModal'
+      showModal: 'getShowCreateBuyerModal',
+      verticals: 'getAllVerticals'
     })
   },
   methods: {
@@ -53,7 +56,8 @@ export default {
       closeModal: 'CLOSE_CREATE_BUYER_MODAL'
     }),
     ...mapActions({
-      create: 'createBuyer'
+      create: 'createBuyer',
+      fetchVerticals: 'fetchVerticals'
     }),
     close () {
       this.name = ''
@@ -61,6 +65,7 @@ export default {
       this.status = 'active'
       this.activateAt = null
       this.buyerGroup = undefined
+      this.vertical = 'education'
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -76,7 +81,7 @@ export default {
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
             status: this.status,
-            vertical: 1,
+            vertical: this.vertical,
             activate_at: this.status !== 'active' ? this.activateAt : null
           }).then(() => {
             this.close()

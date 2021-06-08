@@ -22,6 +22,7 @@ import products from './modules/products'
 import productGroups from '@/store/modules/product-groups'
 import reasons from './modules/reasons'
 import users from './modules/users'
+import verticals from './modules/verticals'
 
 import constants from '@/store/constants'
 
@@ -51,6 +52,7 @@ export default new Vuex.Store({
     products,
     productGroups,
     reasons,
-    users
+    users,
+    verticals
   }
 })
