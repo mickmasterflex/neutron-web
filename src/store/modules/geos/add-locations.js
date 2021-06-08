@@ -13,7 +13,7 @@ const actions = {
           failedToast({ heading: 'Invalid Location', content: response.data.invalid_locations })
         }
         if (response.data.inherited_locations.length > 0) {
-          failedToast({ heading: 'Location already Inherited', content: response.data.inherited_locations })
+          failedToast({ heading: 'Locations Already Inherited', content: response.data.inherited_locations })
         }
       }).finally(() => {
         commit('RESET_GEO_PANEL_LOADING')
