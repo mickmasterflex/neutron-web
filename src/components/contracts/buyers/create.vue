@@ -8,7 +8,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
-          <v-select-field v-model="vertical" :options="verticals" field_id="vertical" field_label="Vertical"></v-select-field>
+          <select-vertical v-model="vertical"/>
         </form>
       </validation-observer>
     </template>
@@ -24,6 +24,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import formatList from '@/mixins/format-list-for-select-options'
+import selectVertical from '@/components/verticals/select'
 
 export default {
   data () {
@@ -47,8 +48,7 @@ export default {
   computed: {
     ...mapGetters({
       statuses: 'getNewContractStatuses',
-      showModal: 'getShowCreateBuyerModal',
-      verticals: 'getAllVerticals'
+      showModal: 'getShowCreateBuyerModal'
     })
   },
   methods: {
@@ -56,8 +56,7 @@ export default {
       closeModal: 'CLOSE_CREATE_BUYER_MODAL'
     }),
     ...mapActions({
-      create: 'createBuyer',
-      fetchVerticals: 'fetchVerticals'
+      create: 'createBuyer'
     }),
     close () {
       this.name = ''
@@ -94,7 +93,8 @@ export default {
   },
   mixins: [formatList, enterKeyListener, setResponseErrors],
   components: {
-    'date-picker': datePicker
+    'date-picker': datePicker,
+    'select-vertical': selectVertical
   }
 }
 </script>

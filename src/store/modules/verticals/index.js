@@ -1,6 +1,9 @@
 import axios from '@/axios'
 import loading from '@/store/modules/verticals/loading.js'
 
+const modules = {
+  loading
+}
 const state = {
   verticals: []
 }
@@ -26,7 +29,7 @@ const mutations = {
 export default {
   state,
   mutations,
-  loading,
+  modules,
   actions,
   getters
 }

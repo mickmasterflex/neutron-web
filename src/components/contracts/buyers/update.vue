@@ -11,7 +11,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
-          <v-select-field v-model="vertical" :options="verticals" field_id="vertical" field_label="Vertical"></v-select-field>
+          <select-vertical v-model="vertical"/>
           <buyer-group-field :buyer="buyer"></buyer-group-field>
         </form>
       </validation-observer>
@@ -26,6 +26,7 @@ import parentSelect from '@/components/contracts/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import selectVertical from '@/components/verticals/select'
 
 export default {
   data () {
@@ -45,8 +46,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      update: 'updateBuyer',
-      fetchVerticals: 'fetchVerticals'
+      update: 'updateBuyer'
     }),
     setBuyer () {
       this.name = this.buyer.name
@@ -103,15 +103,15 @@ export default {
       }
     },
     ...mapGetters({
-      statuses: 'getAllContractStatuses',
-      verticals: 'getAllVerticals'
+      statuses: 'getAllContractStatuses'
     })
   },
   mixins: [formatList, setResponseErrors],
   components: {
     'date-picker': datePicker,
     'buyer-group-field': buyerGroupField,
-    'parent-select': parentSelect
+    'parent-select': parentSelect,
+    'select-vertical': selectVertical
   }
 }
 </script>
