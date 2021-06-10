@@ -1,5 +1,4 @@
 const state = {
-  verticals_loading: false,
   verticals_fetch_loading: false
 }
 
