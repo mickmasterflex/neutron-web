@@ -11,6 +11,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
+          <select-vertical v-model="vertical" rules="required"/>
           <buyer-group-field :buyer="buyer"></buyer-group-field>
         </form>
       </validation-observer>
@@ -25,6 +26,7 @@ import parentSelect from '@/components/contracts/parent-select'
 import { mapActions, mapGetters } from 'vuex'
 import formatList from '@/mixins/format-list-for-select-options'
 import { setResponseErrors } from '@/mixins/set-response-errors'
+import selectVertical from '@/components/verticals/select'
 
 export default {
   data () {
@@ -35,7 +37,8 @@ export default {
       status: undefined,
       buyerGroup: undefined,
       activateAt: null,
-      client: null
+      client: null,
+      vertical: null
     }
   },
   props: {
@@ -51,6 +54,7 @@ export default {
       this.status = this.buyer.status
       this.rpl = this.buyer.rpl
       this.buyerGroup = this.buyer.buyer_group
+      this.vertical = this.buyer.vertical
       this.activateAt = this.buyer.activate_at
       this.client = this.buyer.client
     },
@@ -64,6 +68,7 @@ export default {
             id: this.buyer.id,
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
+            vertical: this.vertical,
             status: this.status,
             activate_at: this.status !== 'active' ? this.activateAt : null
           }).then(() => {
@@ -91,7 +96,8 @@ export default {
           this.rpl !== this.buyer.rpl ||
           this.status !== this.buyer.status ||
           this.activateAt !== this.buyer.activate_at ||
-          this.buyerGroup !== this.buyer.buyer_group
+          this.buyerGroup !== this.buyer.buyer_group ||
+          this.vertical !== this.buyer.vertical
       } else {
         return false
       }
@@ -104,7 +110,8 @@ export default {
   components: {
     'date-picker': datePicker,
     'buyer-group-field': buyerGroupField,
-    'parent-select': parentSelect
+    'parent-select': parentSelect,
+    'select-vertical': selectVertical
   }
 }
 </script>

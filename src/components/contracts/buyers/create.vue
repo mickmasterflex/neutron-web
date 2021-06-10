@@ -8,6 +8,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field placeholder="5.99" v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
+          <select-vertical v-model="vertical" rules="required"/>
         </form>
       </validation-observer>
     </template>
@@ -23,6 +24,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { enterKeyListener } from '@/mixins/enter-key-listener'
 import { setResponseErrors } from '@/mixins/set-response-errors'
 import formatList from '@/mixins/format-list-for-select-options'
+import selectVertical from '@/components/verticals/select'
 
 export default {
   data () {
@@ -31,7 +33,8 @@ export default {
       rpl: '0.00',
       status: 'active',
       buyerGroup: undefined,
-      activateAt: null
+      activateAt: null,
+      vertical: 1
     }
   },
   props: {
@@ -61,6 +64,7 @@ export default {
       this.status = 'active'
       this.activateAt = null
       this.buyerGroup = undefined
+      this.vertical = 1
       this.$nextTick(() => {
         this.$refs.form.reset()
       })
@@ -76,7 +80,7 @@ export default {
             rpl: this.rpl,
             buyer_group: this.buyerGroup,
             status: this.status,
-            vertical: 1,
+            vertical: this.vertical,
             activate_at: this.status !== 'active' ? this.activateAt : null
           }).then(() => {
             this.close()
@@ -89,7 +93,8 @@ export default {
   },
   mixins: [formatList, enterKeyListener, setResponseErrors],
   components: {
-    'date-picker': datePicker
+    'date-picker': datePicker,
+    'select-vertical': selectVertical
   }
 }
 </script>
