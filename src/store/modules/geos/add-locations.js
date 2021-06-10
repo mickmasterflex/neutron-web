@@ -7,7 +7,7 @@ const actions = {
     await axios.post('/geo-add-locations/', location, { showSuccessToast: false })
       .then(response => {
         if (response.data.valid_locations.length > 0) {
-          successfulToast({ heading: 'Valid Locations', content: response.data.valid_locations })
+          successfulToast({ heading: 'Location Added Successfully', content: response.data.valid_locations })
         }
         if (response.data.invalid_locations.length > 0) {
           failedToast({ heading: 'Invalid Location', content: response.data.invalid_locations })
