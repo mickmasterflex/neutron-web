@@ -11,7 +11,7 @@
           <v-select-field v-model="status" rules="required" :options="formatListForSelectOptions(statuses)" field_id="status" field_label="Status"></v-select-field>
           <date-picker v-model="activateAt" v-if="status !== 'active'" field_id="activate_at" field_label="Activate At" mode="dateTime"></date-picker>
           <v-text-field v-model="rpl" rules="dollar_amount|required" field_id="rpl" field_label="Revenue Per Lead"></v-text-field>
-          <select-vertical v-model="vertical"/>
+          <select-vertical v-model="vertical" rules="required"/>
           <buyer-group-field :buyer="buyer"></buyer-group-field>
         </form>
       </validation-observer>
