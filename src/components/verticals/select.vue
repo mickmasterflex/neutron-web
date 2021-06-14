@@ -1,35 +1,34 @@
 <template>
   <v-select-field
-    :options="siblings"
-    field_id="parent"
-    field_label="Parent"
     :loading="loading"
     v-model="inner_value"
+    :options="verticals"
+    field_label="Vertical"
+    field_id="vertical"
+    v-bind="$attrs"
+    :rules="rules"
   ></v-select-field>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import validation from '@/mixins/fields/validation'
 
 export default {
   mixins: [validation],
   computed: {
     ...mapGetters({
-      buyers: 'getAllBuyers',
-      loading: 'getBuyersFetchLoading',
-      siblings: 'getCurrentBuyerSiblings'
+      verticals: 'getAllVerticals',
+      loading: 'getVerticalsFetchLoading'
     })
   },
   methods: {
     ...mapActions({
-      fetchBuyers: 'fetchBuyers'
+      fetchVerticals: 'fetchVerticals'
     })
   },
   created () {
-    if (!this.buyers.length) {
-      this.fetchBuyers()
-    }
+    this.fetchVerticals()
   }
 }
 </script>
